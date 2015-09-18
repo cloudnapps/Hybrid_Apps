@@ -1,0 +1,16 @@
+<ion-view view-title="Orders">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap" href="#/tab/member/orders/{{item.order_id}}"">
+        <h2>{{item.order_id}}</h2>
+        <h2>{{item.Status}}</h2>
+        <h2>{{item.final_amount}}</h2>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="remove(item)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

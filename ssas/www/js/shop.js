@@ -1,10 +1,10 @@
 angular.module('starter.shop', [])
 
-.factory('ShopApi', function($http, shopApiEndpoint) {
-  console.log(shopApiEndpoint);
+.factory('ShopApi', function($http, apiEndpoint) {
+  console.log(apiEndpoint);
 
   var getGallery = function(){
-    return $http.get(shopApiEndpoint.url + "/gallery.html")
+    return $http.get(apiEndpoint.url + "/gallery.html")
       .then(function(result){
         console.log('got data:' + result);
         return result;
@@ -12,6 +12,6 @@ angular.module('starter.shop', [])
   }
 
   return {
-    getGallery: getGallery  
+    getGallery: getGallery
   };
 });
