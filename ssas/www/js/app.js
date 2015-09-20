@@ -88,6 +88,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             controller: 'OrdersCtrl'
           }
         }
+      })
+      .state('tab.order-detail', {
+        url: '/member/orders/:orderId',
+        views: {
+          'tab-member': {
+            templateUrl: 'templates/member/detail-order.html',
+            controller: 'OrderDetailCtrl'
+          }
+        }
       });
 
     // if none of the above states are matched, use this as the fallback

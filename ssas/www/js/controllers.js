@@ -37,7 +37,14 @@ angular.module('starter.controllers', ['starter.shop', 'starter.member'])
   .controller('OrdersCtrl', function ($scope, MemberApi) {
     $scope.items = [];
 
-    MemberApi.getOrders(function (result) {
+    MemberApi.getOrderList(function (result) {
       $scope.items = result.data;
+    })
+  })
+
+  .controller('OrderDetailCtrl', function ($scope, $stateParams, MemberApi) {
+    MemberApi.getOrderDetail($stateParams.orderId, function (result) {
+      $scope.item = result.data;
     });
   });
+

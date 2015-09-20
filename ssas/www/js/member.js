@@ -3,13 +3,7 @@ angular.module('starter.member', ['starter.services'])
   .factory('MemberApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
     console.log(apiEndpoint);
 
-    var getOrders = function (callback) {
-      var url = apiEndpoint.url + '/member-orders.html';
-      var data = {
-        member_id: 13,
-        token: '11b4f4bd44ee8814d41680dc753a75e4'
-      };
-
+    var sendRequest = function(url, data, callback) {
       var request = $http({
         method: "post",
         url: url,
@@ -24,9 +18,31 @@ angular.module('starter.member', ['starter.services'])
           callback(result);
         }
       );
+    }
+
+    var getOrderList = function (callback) {
+      var url = apiEndpoint.url + '/member-orders.html';
+      var data = {
+        member_id: 13,
+        token: '11b4f4bd44ee8814d41680dc753a75e4'
+      };
+
+      sendRequest(url, data, callback);
+    };
+
+    var getOrderDetail = function (orderId, callback) {
+      var url = apiEndpoint.url + '/member-orderdetail.html';
+      var data = {
+        member_id: 13,
+        token: '11b4f4bd44ee8814d41680dc753a75e4',
+        order_id: orderId
+      };
+
+      sendRequest(url, data, callback);
     };
 
     return {
-      getOrders: getOrders
+      getOrderList: getOrderList,
+      getOrderDetail: getOrderDetail
     };
   });
