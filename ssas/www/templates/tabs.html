@@ -5,18 +5,23 @@ navigation history that also transitions its views in and out.
 -->
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-  <!-- Dashboard Tab -->
-  <ion-tab title="{{'home'|translate}}" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/dash">
-    <ion-nav-view name="tab-dash"></ion-nav-view>
+  <!-- Home Tab -->
+  <ion-tab title="{{'home'|translate}}" icon-off="ion-ios-home" icon-on="ion-ios-home" href="#/tab/home">
+    <ion-nav-view name="tab-home"></ion-nav-view>
   </ion-tab>
 
-  <!-- Chats Tab -->
-  <ion-tab title="Chats" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" href="#/tab/chats">
-    <ion-nav-view name="tab-chats"></ion-nav-view>
+  <!-- Shop Tab -->
+  <ion-tab title="{{'shop'|translate}}" icon-off="ion-pricetags" icon-on="ion-pricetags" href="#/tab/shop">
+    <ion-nav-view name="tab-shop"></ion-nav-view>
   </ion-tab>
 
+   <!-- Cart Tab -->
+  <ion-tab title="{{'cart'|translate}}" icon-off="ion-android-cart" icon-on="ion-android-cart" href="#/tab/cart">
+    <ion-nav-view name="tab-cart"></ion-nav-view>
+  </ion-tab>
+  
   <!-- Member Tab -->
-  <ion-tab title="我的" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/member">
+  <ion-tab title="{{'my'|translate}}" icon-off="ion-android-person" icon-on="ion-android-person" href="#/tab/member">
     <ion-nav-view name="tab-member"></ion-nav-view>
   </ion-tab>
 

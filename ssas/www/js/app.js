@@ -5,11 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.translate'])
+angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.translate', 'home', 'shop', 'cart'])
   .constant("apiEndpoint", {url: "/m"})
 // For the real endpoint, we'd use this
 //  .constant("apiEndpoint", {url:"http://bbc.jooau.com/zhongshihua/index.php/m"})
-  .run(function ($ionicPlatform) {
+  .run(function ($ionicPlatform, $translate) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -22,10 +22,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.transla
         // org.apache.cordova.statusbar required
         StatusBar.styleLightContent();
       }
-    });
-  })
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+      // fetch preferredLanguage
+      if(typeof navigator.globalization !== "undefined") {
+                navigator.globalization.getPreferredLanguage(function(language) {
+                    $translate.use((language.value).split("-")[0]);
+        }, null);
+      }
+    });  
+  }) // end of run
+
+  .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -38,39 +45,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.transla
         url: '/tab',
         abstract: true,
         templateUrl: 'templates/tabs.html'
-      })
-
-      // Each tab has its own nav history stack:
-
-      .state('tab.dash', {
-        url: '/dash',
-        views: {
-          'tab-dash': {
-            templateUrl: 'templates/tab-dash.html',
-            controller: 'DashCtrl'
-          }
-        }
-      })
-
-      .state('tab.chats', {
-        url: '/chats',
-        views: {
-          'tab-chats': {
-            templateUrl: 'templates/tab-chats.html',
-            controller: 'ChatsCtrl'
-          }
-        }
-      })
-      .state('tab.chat-detail', {
-        url: '/chats/:chatId',
-        views: {
-          'tab-chats': {
-            templateUrl: 'templates/chat-detail.html',
-            controller: 'ChatDetailCtrl'
-          }
-        }
-      })
-
+      })           
       .state('tab.member', {
         url: '/member',
         views: {
@@ -89,6 +64,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.transla
           }
         }
       })
+
       .state('tab.order-detail', {
         url: '/member/orders/:orderId',
         views: {
@@ -100,24 +76,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.transla
       });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/dash');
+    $urlRouterProvider.otherwise('/tab/home');
 
-  })
-  .config(['$translateProvider', function($translateProvider) {
-        $translateProvider.translations('en', translations_en);
-        $translateProvider.translations('zh', translations_zh);
-        $translateProvider.translations('zh-TW', translations_zhTW);
+    // register language tables
+    $translateProvider.translations('en', translations_en);
+    $translateProvider.translations('zh', translations_zh);
+    $translateProvider.translations('zh-TW', translations_zh);
         
-        // console.log("$translateProvider initialized");
-        $translateProvider.determinePreferredLanguage();
-        $translateProvider.preferredLanguage('zh');
-  }])
-  .run(function($ionicPlatform, $translate){
-        $ionicPlatform.ready(function() {
-            if(typeof navigator.globalization !== "undefined") {
-                navigator.globalization.getPreferredLanguage(function(language) {
-                    $translate.use((language.value).split("-")[0]);
-                }, null);
-            }
-        });
-  });
+    // console.log("$translateProvider initialized");
+    $translateProvider.determinePreferredLanguage();
+    $translateProvider.preferredLanguage('zh');
+
+  }); // end of config
+  
