@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.translate'])
   .constant("apiEndpoint", {url: "/m"})
 // For the real endpoint, we'd use this
 //  .constant("apiEndpoint", {url:"http://bbc.jooau.com/zhongshihua/index.php/m"})
@@ -103,5 +103,21 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     $urlRouterProvider.otherwise('/tab/dash');
 
   })
-
-
+  .config(['$translateProvider', function($translateProvider) {
+        $translateProvider.translations('en', translations_en);
+        $translateProvider.translations('zh', translations_zh);
+        $translateProvider.translations('zh-TW', translations_zhTW);
+        
+        // console.log("$translateProvider initialized");
+        $translateProvider.determinePreferredLanguage();
+        $translateProvider.preferredLanguage('zh');
+  }])
+  .run(function($ionicPlatform, $translate){
+        $ionicPlatform.ready(function() {
+            if(typeof navigator.globalization !== "undefined") {
+                navigator.globalization.getPreferredLanguage(function(language) {
+                    $translate.use((language.value).split("-")[0]);
+                }, null);
+            }
+        });
+  });
