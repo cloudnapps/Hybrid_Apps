@@ -31,7 +31,8 @@ angular.module('starter.services', [])
       }
 
       var source = buffer.join("&").replace(/%20/g, "+");
+      var result = "&sign=" + md5(source).substring(0,16);
 
-      return ( source );
+      return ( source + result );
     }
   });
