@@ -10,28 +10,31 @@ angular.module('starter.services', [])
     return ( transformRequest );
 
     function serializeData(data) {
+      var source = "";
       if (!angular.isObject(data)) {
-        return ( ( data == null ) ? "" : data.toString() );
+        source = ( data == null ) ? "" : data.toString();
       }
+      else {
+        var buffer = [];
 
-      var buffer = [];
+        for (var name in data) {
+          if (!data.hasOwnProperty(name)) {
+            continue;
+          }
 
-      for (var name in data) {
-        if (!data.hasOwnProperty(name)) {
-          continue;
+          var value = data[name];
+
+          buffer.push(
+            encodeURIComponent(name) +
+            "=" +
+            encodeURIComponent(( value == null ) ? "" : value)
+          );
         }
 
-        var value = data[name];
-
-        buffer.push(
-          encodeURIComponent(name) +
-          "=" +
-          encodeURIComponent(( value == null ) ? "" : value)
-        );
+        source = buffer.join("&").replace(/%20/g, "+");
       }
 
-      var source = buffer.join("&").replace(/%20/g, "+");
-      var result = "&sign=" + md5(source).substring(0,16);
+      var result = ((source === "")? "sign=" : "&sign=") + md5(source).substring(0,16);
 
       return ( source + result );
     }
