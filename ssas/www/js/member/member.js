@@ -12,49 +12,14 @@
           url: '/member',
           views: {
             'tab-member': {
-              templateUrl: 'templates/member/tab-member.html',
+              templateUrl: 'templates/member/member-index.html',
               controller: 'MemberCtrl'
-            }
-          }
-        })
-        .state('tab.orders', {
-          url: '/member/orders',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/list-orders.html',
-              controller: 'OrdersCtrl'
-            }
-          }
-        })
-        .state('tab.order-detail', {
-          url: '/member/orders/:orderId',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/detail-order.html',
-              controller: 'OrderDetailCtrl'
             }
           }
         });
     })
 
     .controller('MemberCtrl', function ($scope) {
-      $scope.navTo = function (name) {
-        $state.go(name)
-      }
-    })
-
-    .controller('OrdersCtrl', function ($scope, MemberApi) {
-      $scope.items = [];
-
-      MemberApi.getOrderList(null, null, function (result) {
-        $scope.items = result.data;
-      })
-    })
-
-    .controller('OrderDetailCtrl', function ($scope, $stateParams, MemberApi) {
-      MemberApi.getOrderDetail($stateParams.orderId, function (result) {
-        $scope.item = result.data;
-      });
     })
 
     .factory('MemberApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
@@ -76,108 +41,6 @@
           }
         );
       }
-
-      var getOrderList = function (page, filter, callback) {
-        var url = apiEndpoint.url + '/member-orders.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
-        };
-
-        if (page) {
-          data.page = page;
-        }
-
-        if (filter) {
-          data.filter = filter;
-        }
-
-        sendRequest(url, data, callback);
-      };
-
-      var getOrderDetail = function (orderId, callback) {
-        var url = apiEndpoint.url + '/member-orderdetail.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          order_id: orderId
-        };
-
-        sendRequest(url, data, callback);
-      };
-
-      var deleteOrder = function (orderId, callback) {
-        var url = apiEndpoint.url + '/member-cancelorder.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          order_id: orderId
-        };
-
-        sendRequest(url, data, callback);
-      };
-
-      var receiveOrder = function (orderId, callback) {
-        var url = apiEndpoint.url + '/member-orderReceives.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          order_id: orderId
-        };
-
-        sendRequest(url, data, callback);
-      };
-
-      var getReceiverList = function (page, callback) {
-        var url = apiEndpoint.url + '/member-receiver.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
-        };
-
-        if (page) {
-          data.page = page;
-        }
-
-        sendRequest(url, data, callback);
-      };
-
-      var addReceiver = function (addrInfo, callback) {
-        var url = apiEndpoint.url + '/member-save_rec.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
-        };
-
-        if (addrInfo) {
-          data.addrInfo = addrInfo;
-        }
-
-        sendRequest(url, data, callback);
-      };
-
-      var deleteReceiver = function (addrId, callback) {
-        var url = apiEndpoint.url + '/member-del_receiver.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          addr_id: addrId
-        };
-
-        sendRequest(url, data, callback);
-      };
-
-      var setDefaultReceiver = function (defa, addrId, callback) {
-        var url = apiEndpoint.url + '/member-del_receiver.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          addr_id: addrId,
-          "default": defa
-        };
-
-        sendRequest(url, data, callback);
-      };
 
       var getFavoriteList = function (page, type, callback) {
         var url = apiEndpoint.url + '/member-favorite.html';
@@ -370,16 +233,6 @@
       };
 
       return {
-        getOrderList: getOrderList,
-        getOrderDetail: getOrderDetail,
-        deleteOrder: deleteOrder,
-        receiveOrder: receiveOrder,
-        getReceiverList: getReceiverList,
-        addReceiver: addReceiver,
-        deleteReceiver: deleteReceiver,
-        setDefaultReceiver: setDefaultReceiver,
-        getFavoriteList: getFavoriteList,
-        addGoodsFavorite: addGoodsFavorite
       };
     });
 })();
