@@ -5,10 +5,10 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.translate', 'home', 'shop', 'cart'])
+angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'cart', 'member'])
   .constant("apiEndpoint", {url: "/m"})
 // For the real endpoint, we'd use this
-//  .constant("apiEndpoint", {url:"http://bbc.jooau.com/zhongshihua/index.php/m"})
+//.constant("apiEndpoint", {url:"http://bbc.jooau.com/zhongshihua/index.php/m"})
   .run(function ($ionicPlatform, $translate) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -24,12 +24,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.transla
       }
 
       // fetch preferredLanguage
-      if(typeof navigator.globalization !== "undefined") {
-                navigator.globalization.getPreferredLanguage(function(language) {
-                    $translate.use((language.value).split("-")[0]);
+      if (typeof navigator.globalization !== "undefined") {
+        navigator.globalization.getPreferredLanguage(function (language) {
+          $translate.use((language.value).split("-")[0]);
         }, null);
       }
-    });  
+    });
   }) // end of run
 
   .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
@@ -45,34 +45,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.transla
         url: '/tab',
         abstract: true,
         templateUrl: 'templates/tabs.html'
-      })           
-      .state('tab.member', {
-        url: '/member',
-        views: {
-          'tab-member': {
-            templateUrl: 'templates/member/tab-member.html',
-            controller: 'MemberCtrl'
-          }
-        }
-      })
-      .state('tab.orders', {
-        url: '/member/orders',
-        views: {
-          'tab-member': {
-            templateUrl: 'templates/member/list-orders.html',
-            controller: 'OrdersCtrl'
-          }
-        }
-      })
-
-      .state('tab.order-detail', {
-        url: '/member/orders/:orderId',
-        views: {
-          'tab-member': {
-            templateUrl: 'templates/member/detail-order.html',
-            controller: 'OrderDetailCtrl'
-          }
-        }
       });
 
     // if none of the above states are matched, use this as the fallback
@@ -82,10 +54,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.transla
     $translateProvider.translations('en', translations_en);
     $translateProvider.translations('zh', translations_zh);
     $translateProvider.translations('zh-TW', translations_zh);
-        
+
     // console.log("$translateProvider initialized");
     $translateProvider.determinePreferredLanguage();
     $translateProvider.preferredLanguage('zh');
 
   }); // end of config
-  
+
+

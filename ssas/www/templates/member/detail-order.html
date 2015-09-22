@@ -1,9 +1,43 @@
 <ion-view view-title="订单详情">
   <ion-content class="padding">
-    <p>
-      <h2>{{item.order_title.id}}</h2>
-      <h2>{{item.consignee.name}}</h2>
-      <h2>{{item.order_title.seller_name}}</h2>
-    </p>
+    <div class="list card">
+      <div class="item item-divider">基本信息</div>
+      <div class="item item-body">
+        <h2>订单号：{{item.order_title.id}}   -   {{item.order_title.status}}</h2>
+        <h2>{{item.consignee.name}}</h2>
+        <ion-list>
+          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="product in item.products" type="item-text-wrap"}">
+            <img ng-src="{{product.url}}">
+            <h2>{{product.name}}</h2>
+            <h2>{{product.spec}}</h2>
+            <h2>{{product.price}} * {{product.num}}</h2>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">订单信息</div>
+      <div class="item item-body">
+        <div>
+          You ate an apple today!
+        </div>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">收货信息</div>
+      <div class="item item-body">
+        <div>
+          You have <b>29</b> meetings on your calendar tomorrow.
+        </div>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">发票和备注</div>
+      <div class="item item-body">
+        <div>
+          You have <b>29</b> meetings on your calendar tomorrow.
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
