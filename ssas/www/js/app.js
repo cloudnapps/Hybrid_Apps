@@ -5,7 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'cart', 'member', 'order', 'receiver'])
+angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'cart',
+  'member', 'order', 'receiver', 'favorite', 'return'])
   .constant("apiEndpoint", {url: "/m"})
 // For the real endpoint, we'd use this
 //.constant("apiEndpoint", {url:"http://bbc.jooau.com/zhongshihua/index.php/m"})

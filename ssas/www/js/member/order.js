@@ -28,12 +28,33 @@
         });
     })
 
-    .controller('OrdersCtrl', function ($scope, OrderApi) {
+    .controller('OrdersCtrl', function ($scope,  $ionicPopup, OrderApi) {
       $scope.items = [];
 
       OrderApi.getOrderList(null, null, function (result) {
         $scope.items = result.data;
-      })
+      });
+
+      $scope.remove = function (item) {
+        var confirmPopup = $ionicPopup.confirm({
+          title: '取消订单',
+          template: '是否真的需要取消订单?'
+        });
+
+        confirmPopup.then(function (res) {
+          if (res) {
+            OrderApi.deleteOrder(item.order_id, function (result) {
+              var alertPopup = $ionicPopup.alert({
+                title: '取消订单',
+                template: result.msg
+              });
+              alertPopup.then(function(res) {
+                console.log(res);
+              });
+            })
+          }
+        });
+      }
     })
 
     .controller('OrderDetailCtrl', function ($scope, $stateParams, OrderApi) {

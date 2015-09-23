@@ -1,14 +1,13 @@
-<ion-view view-title="Receivers">
+<ion-view view-title="商品收藏列表">
   <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap">
-        <h2>{{item.name}} - {{item.mobile}}</h2>
+        <img ng-src="{{item.url}}">
 
-        <h2>{{item.area}}</h2>
+        <h2>{{item.name}}</h2>
 
-        <h2>{{item.addr}}</h2>
+        <p>{{item.price}}</p>
 
-        <div ng-show="item.checked"><h2>默认地址</h2></div>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
         <ion-option-button class="button-assertive" ng-click="remove(item)">

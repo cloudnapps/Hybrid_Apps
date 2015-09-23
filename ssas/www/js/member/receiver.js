@@ -28,13 +28,35 @@
         });
     })
 
-    .controller('ReceiversCtrl', function ($scope, ReceiverApi) {
+    .controller('ReceiversCtrl', function ($scope, $ionicPopup, $state, ReceiverApi) {
       $scope.items = [];
 
       ReceiverApi.getReceiverList(null, function (result) {
         $scope.items = result.data.addrlist;
       });
+
+      $scope.remove = function (item) {
+        var confirmPopup = $ionicPopup.confirm({
+          title: '删除收货地址',
+          template: '是否真的需要删除收货地址?'
+        });
+
+        confirmPopup.then(function (res) {
+          if (res) {
+            ReceiverApi.deleteReceiver(item.addr_id, function (result) {
+              var alertPopup = $ionicPopup.alert({
+                title: '删除收货地址',
+                template: result.msg
+              });
+              alertPopup.then(function(res) {
+                console.log(res);
+              })
+            })
+          }
+        });
+      }
     })
+
     .controller('ReceiverAddCtrl', function ($scope, ReceiverApi) {
       $scope.addrInfo = {};
       $scope.add = function() {

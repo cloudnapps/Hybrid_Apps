@@ -1,14 +1,16 @@
-<ion-view view-title="Orders">
+<ion-view view-title="订单列表">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap" href="#/tab/member/orders/{{item.order_id}}"">
-        <h2>{{item.name}}   -   {{item.Status}}</h2>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap"
+                href="#/tab/member/orders/{{item.order_id}}">
+        <h2>{{item.name}} - {{item.Status}}</h2>
+
         <h2>共{{item.count}}个商品，合计￥{{item.final_amount}}元（含运费{{item.cost_freight}}元）</h2>
 
         <i class="icon ion-chevron-right icon-accessory"></i>
 
         <ion-option-button class="button-assertive" ng-click="remove(item)">
-          Delete
+          取消
         </ion-option-button>
       </ion-item>
     </ion-list>
