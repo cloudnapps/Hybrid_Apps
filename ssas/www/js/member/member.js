@@ -42,18 +42,6 @@
         );
       }
 
-
-      var getMemberRate = function (orderId, callback) {
-        var url = apiEndpoint.url + '/member-member_rate.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          order_id: orderId
-        };
-
-        sendRequest(url, data, callback);
-      };
-
       var addMemberRate = function (orderId, rateInfo, callback) {
         var url = apiEndpoint.url + '/member-member_rate.html';
         var data = {

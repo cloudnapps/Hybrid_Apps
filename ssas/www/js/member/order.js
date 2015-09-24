@@ -25,15 +25,28 @@
               controller: 'OrderDetailCtrl'
             }
           }
+        })
+        .state('tab.order-rate', {
+          url: '/member/orders/rate/:orderId',
+          views: {
+            'tab-member': {
+              templateUrl: 'templates/member/detail-order_rate.html',
+              controller: 'OrderRateCtrl'
+            }
+          }
         });
     })
 
-    .controller('OrdersCtrl', function ($scope,  $ionicPopup, OrderApi) {
+    .controller('OrdersCtrl', function ($scope, $state, $ionicPopup, OrderApi) {
       $scope.items = [];
 
       OrderApi.getOrderList(null, null, function (result) {
         $scope.items = result.data;
       });
+
+      $scope.getRate = function(item) {
+        $state.go("tab.order-rate",{orderId : item.order_id}, {reload: true});
+      };
 
       $scope.getReturn = function(item) {
         OrderApi.getReturnIndex(item.order_id, function(result) {
@@ -45,7 +58,7 @@
             console.log(res);
           });
         })
-      }
+      };
 
       $scope.remove = function (item) {
         var confirmPopup = $ionicPopup.confirm({
@@ -72,6 +85,14 @@
     .controller('OrderDetailCtrl', function ($scope, $stateParams, OrderApi) {
       OrderApi.getOrderDetail($stateParams.orderId, function (result) {
         $scope.item = result.data;
+      });
+    })
+
+    .controller('OrderRateCtrl', function ($scope, $stateParams, OrderApi) {
+      $scope.items = [];
+
+      OrderApi.getMemberRate($stateParams.orderId, function(result) {
+        $scope.items = result.data;
       });
     })
 
@@ -157,12 +178,24 @@
         sendRequest(url, data, callback);
       };
 
+      var getMemberRate = function (orderId, callback) {
+        var url = apiEndpoint.url + '/member-member_rate.html';
+        var data = {
+          member_id: 13,
+          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          order_id: orderId
+        };
+
+        sendRequest(url, data, callback);
+      };
+
       return {
         getOrderList: getOrderList,
         getOrderDetail: getOrderDetail,
         deleteOrder: deleteOrder,
         receiveOrder: receiveOrder,
-        getReturnIndex: getReturnIndex
+        getReturnIndex: getReturnIndex,
+        getMemberRate: getMemberRate
       };
     });
 })();
