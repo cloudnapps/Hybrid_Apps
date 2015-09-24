@@ -35,6 +35,18 @@
         $scope.items = result.data;
       });
 
+      $scope.getReturn = function(item) {
+        OrderApi.getReturnIndex(item.order_id, function(result) {
+          var alertPopup = $ionicPopup.alert({
+            title: '订单售后',
+            template: result.msg
+          });
+          alertPopup.then(function(res) {
+            console.log(res);
+          });
+        })
+      }
+
       $scope.remove = function (item) {
         var confirmPopup = $ionicPopup.confirm({
           title: '取消订单',
@@ -134,11 +146,23 @@
         sendRequest(url, data, callback);
       };
 
+      var getReturnIndex = function (orderId, callback) {
+        var url = apiEndpoint.url + '/member-return_index.html';
+        var data = {
+          member_id: 13,
+          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          order_id: orderId
+        };
+
+        sendRequest(url, data, callback);
+      };
+
       return {
         getOrderList: getOrderList,
         getOrderDetail: getOrderDetail,
         deleteOrder: deleteOrder,
         receiveOrder: receiveOrder,
+        getReturnIndex: getReturnIndex
       };
     });
 })();

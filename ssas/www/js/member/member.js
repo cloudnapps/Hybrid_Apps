@@ -42,19 +42,6 @@
         );
       }
 
-      var getCouponList = function (page, callback) {
-        var url = apiEndpoint.url + '/member-coupon_list.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-        };
-
-        if (page) {
-          data.page = page;
-        }
-
-        sendRequest(url, data, callback);
-      };
 
       var getMemberRate = function (orderId, callback) {
         var url = apiEndpoint.url + '/member-member_rate.html';

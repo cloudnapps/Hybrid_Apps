@@ -60,17 +60,6 @@
             callback(result);
           }
         );
-      }
-
-      var getReturnIndex = function (orderId, callback) {
-        var url = apiEndpoint.url + '/member-return_index.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          order_id: orderId
-        };
-
-        sendRequest(url, data, callback);
       };
 
       var addReturnRequest = function (orderId, returnInfo, callback) {
@@ -93,7 +82,7 @@
         var data = {
           member_id: 13,
           token: '11b4f4bd44ee8814d41680dc753a75e4',
-          return_id: orderId
+          return_id: returnId
         };
 
         sendRequest(url, data, callback);
@@ -103,7 +92,7 @@
         var url = apiEndpoint.url + '/member-return_list.html';
         var data = {
           member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          token: '11b4f4bd44ee8814d41680dc753a75e4'
         };
 
         if (page) {
@@ -118,10 +107,9 @@
       };
 
       return {
-        getReturnIndex : getReturnIndex,
         addReturnRequest : addReturnRequest,
         getReturnDetail : getReturnDetail,
-        getReturnList : getReturnList
+        getReturnList: getReturnList
       };
     });
 })();
