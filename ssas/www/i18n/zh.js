@@ -16,6 +16,7 @@ var translations_zh = {
     cart: '购物车',
     
     my: '我的',
-    me: '我'
+    me: '我',
+    shop: '购物',
     good_category: '商品分类'
 };
