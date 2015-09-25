@@ -14,6 +14,9 @@ var translations_zh = {
     lang_it: 'italian',
     home: '主页',
     cart: '购物车',
+    
+    my: '我的',
+
     shop: '商品',
-    my: '我的'
+    good_category: '商品分类'
 };

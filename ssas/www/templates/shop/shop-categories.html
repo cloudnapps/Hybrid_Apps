@@ -1,0 +1,21 @@
+<ion-view view-title="{{'good_category'|translate}}">
+	<ion-pane class="row">
+		<div class="col col-25 view">
+			<ion-content>
+				<ion-list>
+					<ion-item 	class="item item-thumbnail-top" 
+								ng-repeat="cate in categories" 
+								type="item-text-wrap">
+						<img ng-src="{{cate.image}}">
+						<h2>{{cate.cat_name}}</h2>
+					</ion-item>
+				</ion-list>
+	    	</ion-content>
+		</div>
+		<div class="col col-75 view" style="margin-left:25%">
+			<ion-content class="has-header has-tabs">
+	    	123
+			</ion-content>
+		</div>	    
+	</ion-pane>
+</ion-view>
