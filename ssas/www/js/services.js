@@ -24,17 +24,27 @@ angular.module('starter.services', [])
 
           var value = data[name];
 
-          buffer.push(
-            encodeURIComponent(name) +
-            "=" +
-            encodeURIComponent(( value == null ) ? "" : value)
-          );
+          if (angular.isObject(value)) {
+            value = angular.toJson(value);
+
+            buffer.push(
+              encodeURIComponent(name) +
+              "=" +
+              value);
+          }
+          else {
+            buffer.push(
+              encodeURIComponent(name) +
+              "=" +
+              encodeURIComponent(( value == null ) ? "" : value)
+            );
+          }
         }
 
         source = buffer.join("&").replace(/%20/g, "+");
       }
 
-      var result = ((source === "")? "sign=" : "&sign=") + md5(source).substring(0,16);
+      var result = ((source === "") ? "sign=" : "&sign=") + md5(source).substring(0, 16);
 
       return ( source + result );
     }

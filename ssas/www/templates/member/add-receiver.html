@@ -1,0 +1,34 @@
+<ion-view view-title="订单详情">
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">收货人姓名</span>
+        <input type="text" ng-model="addrInfo.name">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">手机</span>
+        <input type="text" ng-model="addrInfo.mobile">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">详细地址</span>
+        <input type="text" ng-model="addrInfo.addr">
+      </label>
+      <label class="item item-toggle">
+        是否默认地址
+        <label class="toggle">
+          <input type="checkbox" ng-model="addrInfo.default">
+
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </label>
+      <button class="button button-full button-positive" ng-click="add()">
+        提交收货地址
+      </button>
+      <label class="item item-input">
+        <span class="input-label">{{message}}</span>
+      </label>
+    </div>
+  </ion-content>
+</ion-view>
