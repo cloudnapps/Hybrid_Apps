@@ -1,0 +1,25 @@
+<ion-view view-title="个人信息">
+  <ion-content class="padding">
+    <div class="list card">
+      <div class="item item-divider">会员信息</div>
+      <div class="item item-body">
+        <h2>{{item.image}} - {{item.full_name}}</h2>
+
+        <p>{{item.email}}</p>
+
+        <p>{{item.sex}}</p>
+
+        <p>{{item.id_card}}</p>
+
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="modifySetting()">
+          修改信息
+        </ion-option-button>
+        <ion-option-button class="button-assertive" ng-click="modifyPassword()">
+          修改密码
+        </ion-option-button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,7 +1,7 @@
 var translations_zh = {
     search: 'Search',
     cancel: 'Cancel',
-    about: 'About',    
+    about: 'About',
     books: 'Books',
     media: 'Media',
     places: 'Places',
@@ -15,5 +15,6 @@ var translations_zh = {
     home: '主页',
     cart: '购物车',
     shop: '商品',
-    my: '我的'
+    my: '我的',
+    me: '我'
 };

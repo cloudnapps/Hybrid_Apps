@@ -1,16 +1,86 @@
-<ion-view view-title="会员中心">
+<ion-view view-title="{{'me'|translate}}">
   <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">我的订单</div>
-      <div class="item item-body">
-        <div class="row">
-          <div class="col">
-            <a class="button button-stable" href="#/tab/member/orders">
-              订单列表
-            </a>
-          </div>
+
+    <div class="button-bar">
+      <a class="button button-full button-light" style="font-size:10px;" href="#/tab/member/favorite_goods">
+        关注的商品
+      </a>
+      <a class="button button-full button-light" style="font-size:10px;" href="#/tab/member/favorite_sellers">
+        关注的店铺
+      </a>
+      <a class="button button-full button-light" style="font-size:10px;" href="">
+        我的足迹
+      </a>
+    </div>
+
+    <div class="button-bar">
+      <a class="button button-full button-light" style="font-size:12px;" href="#/tab/member/orders?type=1">
+        待付款
+      </a>
+      <a class="button button-full button-light" style="font-size:12px;" href="#/tab/member/orders?type=2">
+        待发货
+      </a>
+      <a class="button button-full button-light" style="font-size:12px;" href="#/tab/member/orders?type=3">
+        待收货
+      </a>
+      <a class="button button-full button-light" style="font-size:12px;" href="#/tab/member/orders?type=4">
+        待评价
+      </a>
+      <a class="button button-full button-light" style="font-size:12px;" href="#/tab/member/orders">
+        售后
+      </a>
+    </div>
+    <div class="button-bar">
+      <div class="row">
+        <div class="col col-90">
+          <a style="font-size:16px;" href="#/tab/member/orders">
+            全部订单
+          </a>
+        </div>
+        <div class="col col-75">
+          <i class="icon ion-chevron-right icon-accessory"></i>
         </div>
       </div>
+    </div>
+    <div class="button-clear">
+    </div>
+    <div class="button-bar">
+      <div class="row">
+        <div class="col col-90">
+          <a style="font-size:16px;" href="#/tab/member/orders">
+            我的积分
+          </a>
+        </div>
+        <div class="col col-75">
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </div>
+      </div>
+    </div>
+    <div class="button-bar">
+      <div class="row">
+        <div class="col col-90">
+          <a style="font-size:16px;" href="#/tab/member/orders">
+            我的收藏
+          </a>
+        </div>
+        <div class="col col-75">
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </div>
+      </div>
+    </div>
+    <div class="button-bar">
+      <div class="row">
+        <div class="col col-90">
+          <a style="font-size:16px;" href="#/tab/member/receivers">
+            收货地址管理
+          </a>
+        </div>
+        <div class="col col-75">
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </div>
+      </div>
+    </div>
+    <div class="list card">
       <div class="item item-divider">收货地址</div>
       <div class="item item-body">
         <div class="row">
@@ -26,8 +96,8 @@
           </div>
         </div>
       </div>
-      <div class="item item-divider">收藏列表</div>
-      <div class="item item-body">
+      <div class="item item-divider" ng-show="false">收藏列表</div>
+      <div class="item item-body" ng-show="false">
         <div class="row">
           <div class="col">
             <a class="button button-stable" href="#/tab/member/favorite_goods">
@@ -76,9 +146,9 @@
     <div class="item item-body">
       <div class="row">
         <div class="col">
-          <button class="button button-stable">
+          <a class="button button-stable" href="#/tab/member/settings">
             个人信息
-          </button>
+          </a>
         </div>
       </div>
     </div>

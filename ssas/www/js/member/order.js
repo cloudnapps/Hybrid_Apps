@@ -37,11 +37,58 @@
         });
     })
 
-    .controller('OrdersCtrl', function ($scope, $state, $ionicPopup, OrderApi) {
+    .controller('OrdersCtrl', function ($scope, $state, $location, $ionicPopup, OrderApi) {
       $scope.items = [];
 
-      OrderApi.getOrderList(null, null, function (result) {
+      var type = $location.search().type;
+      if(type === '1') {
+        //待付款
+        $scope.filter = {
+          pay_status: 0
+        }
+      }
+      else if(type === '2') {
+        //待发货
+        $scope.filter = {
+          ship_status: 0
+        }
+      }
+      else if(type === '3') {
+        //待收货
+        $scope.filter = {
+          ship_status: 1
+        }
+      }
+      else if(type === '4') {
+        //待评价
+        $scope.filter = {
+          comment_status: 0
+        }
+      }
+
+      $scope.page = 1;
+
+      OrderApi.getOrderList($scope.page, $scope.filter, function (result) {
         $scope.items = result.data;
+      });
+
+      $scope.hasMore = true;
+
+      $scope.loadMore = function() {
+        OrderApi.getOrderList($scope.page + 1, $scope.filter, function (result) {
+          if(result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.items = $scope.items.concat(result.data);
+            $scope.page += 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }
+        });
+      };
+
+      $scope.$on('$stateChangeSuccess', function() {
+        $scope.loadMore();
       });
 
       $scope.getRate = function(item) {
