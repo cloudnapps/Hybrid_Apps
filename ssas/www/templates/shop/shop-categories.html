@@ -1,20 +1,25 @@
 <ion-view view-title="{{'good_category'|translate}}">
 	<ion-pane class="row">
+		<!-- left category list -->
 		<div class="col col-25 view">
 			<ion-content>
 				<ion-list>
 					<ion-item 	class="item item-thumbnail-top" 
 								ng-repeat="cate in categories" 
-								type="item-text-wrap">
+								type="item-text-wrap"
+								ng-click="populateSubCategories({{cate.cat_id}})">
 						<img ng-src="{{cate.image}}">
 						<h2>{{cate.cat_name}}</h2>
 					</ion-item>
 				</ion-list>
 	    	</ion-content>
 		</div>
-		<div class="col col-75 view" style="margin-left:25%">
+		<!-- right sub-category grid -->
+		<div class="col col-75 col-offset-25 view" style="">
 			<ion-content class="has-header has-tabs">
-	    	123
+	    		<div class="row" style="flex-wrap:wrap">
+	    			<div class="col col-33" ng-repeat="sub in subCategories" ng-click="navToProductList(sub.cat_id)">{{sub.cat_name}}</div>
+	    		</div>
 			</ion-content>
 		</div>	    
 	</ion-pane>

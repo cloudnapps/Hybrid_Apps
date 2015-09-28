@@ -9,7 +9,7 @@ angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'c
   'member', 'order', 'receiver', 'favorite', 'return', 'coupon', 'setting'])
   .constant("apiEndpoint", {url: "/m"})
 // For the real endpoint, we'd use this
-//.constant("apiEndpoint", {url:"http://bbc.jooau.com/zhongshihua/index.php/m"})
+// .constant("apiEndpoint", {url:"http://bbc.jooau.com/zhongshihua/index.php/m"})
   .run(function ($ionicPlatform, $translate) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -64,6 +64,20 @@ angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'c
     $translateProvider.determinePreferredLanguage();
     $translateProvider.preferredLanguage('zh');
 
-  }); // end of config
+    $ionicConfigProvider.platform.ios.tabs.style('standard'); 
+    $ionicConfigProvider.platform.ios.tabs.position('bottom');
+    $ionicConfigProvider.platform.android.tabs.style('standard');
+    $ionicConfigProvider.platform.android.tabs.position('bottom');
+
+    $ionicConfigProvider.platform.ios.navBar.alignTitle('center'); 
+    $ionicConfigProvider.platform.android.navBar.alignTitle('center');
+
+    $ionicConfigProvider.platform.ios.backButton.previousTitleText('').icon('ion-ios-arrow-thin-left');
+    $ionicConfigProvider.platform.android.backButton.previousTitleText('').icon('ion-android-arrow-back');        
+
+    $ionicConfigProvider.platform.ios.views.transition('ios'); 
+    $ionicConfigProvider.platform.android.views.transition('android');
+
+  }]); // end of config
 
 

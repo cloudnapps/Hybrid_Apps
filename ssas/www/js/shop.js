@@ -3,24 +3,25 @@
   
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-    .state('tab.shop', {
-      url: '/shop',
-      views: {
-        'tab-shop': {
-          templateUrl: 'templates/shop/shop-index.html',
-          controller: 'ShopController'
-        }
-      }
-    })
+    
     .state('tab.categories', {
       url: '/categories',
       views : {
-        'tab-categories': {
+        'tab-shop': {
           templateUrl: 'templates/shop/shop-categories.html',
           controller: 'CategoryController'
         }
       }
     }) 
+    .state('tab.products', {
+      url: '/products?categoryId',
+      views: {
+        'tab-shop': {
+          templateUrl: 'templates/shop/shop-products.html',
+          controller: 'ShopController'
+        }
+      }
+    })
     // .state('tab.chat-detail', {
     //   url: '/chats/:chatId',
     //   views: {
@@ -32,19 +33,42 @@
     // })
   })
 
-  .controller('CategoryController', ['$scope', 'shopApi', function($scope, shopApi){
+  .controller('CategoryController', ['$scope', '$state', 'shopApi',
+    function($scope, $state, shopApi){
+    $scope.categoryObj = {};
     $scope.categories = [];
+    $scope.subCategories = [];
 
     shopApi.getCategories().then(function(result) {
       $scope.categories = [];
-      var categories = result.data.data;
-      for(var firstLv in categories) {
-        $scope.categories.push(categories[firstLv])
+      $scope.categoryObj = result.data.data;
+      for(var firstLv in $scope.categoryObj) {
+        $scope.categories.push($scope.categoryObj[firstLv])
+      }
+
+      if($scope.categories.length > 0) {
+        $scope.populateSubCategories($scope.categories[0].cat_id);
       }      
     });
+
+    $scope.populateSubCategories = function(categoryId) {
+      $scope.subCategories = [];
+      var category = $scope.categoryObj[categoryId];
+      if (category.lv2 !== undefined) {
+        var cateListObj = category.lv2;
+        for(var name in cateListObj) {
+          $scope.subCategories.push(cateListObj[name]);
+        }  
+      };      
+    }
+
+    $scope.navToProductList = function(categoryId) {
+      $state.go('tab.products', {categoryId: categoryId});
+    }
   }]) // end of CategoryController
 
-  .controller('ShopController', ['$scope', 'shopApi', function ($scope, shopApi) {
+  .controller('ShopController', ['$scope', '$state', 'shopApi', 
+    function ($scope, $state, shopApi) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
