@@ -45,8 +45,12 @@ angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'c
       .state('tab', {
         url: '/tab',
         abstract: true,
-        templateUrl: 'templates/tabs.html'
-      });
+        views: {
+          'main-view': {
+            templateUrl: 'templates/tab-main.html'
+          }
+        }
+      })
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/home');

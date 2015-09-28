@@ -4263,7 +4263,7 @@ IonicModule
  *         url: "/tab",
  *         abstract: true,
  *         prefetchTemplate: false,
- *         templateUrl: "tabs-templates/tabs.html"
+ *         templateUrl: "tabs-templates/tab-main.html"
  *       })
  *       .state('tabs.home', {
  *         url: "/home",

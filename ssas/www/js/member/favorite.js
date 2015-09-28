@@ -8,40 +8,33 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('tab.favorite_goods', {
-          url: '/member/favorite_goods',
+        .state('viewfavorite', {
+          url: '/member/favorites',
           views: {
-            'tab-member': {
-              templateUrl: 'templates/member/list-favorite_goods.html',
-              controller: 'FavGoodsCtrl'
+            'main-view': {
+              templateUrl: 'templates/member/favorite-index.html',
+              controller: 'FavoritesCtrl'
             }
           }
         })
-        .state('tab.favorite_sellers', {
-          url: '/member/favorite_sellers',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/list-favorite_sellers.html',
-              controller: 'FavSellersCtrl'
-            }
-          }
+    })
+
+    .controller('FavoritesCtrl', function ($scope, FavoriteApi) {
+      $scope.selectType = "goods";
+
+      var reload = function() {
+        $scope.items = [];
+        FavoriteApi.getFavoriteList(null, $scope.selectType, function (result) {
+          $scope.items = result.data;
         });
-    })
+      };
 
-    .controller('FavGoodsCtrl', function ($scope, FavoriteApi) {
-      $scope.items = [];
+      reload();
 
-      FavoriteApi.getFavoriteList(null, "goods", function (result) {
-        $scope.items = result.data;
-      });
-    })
-
-    .controller('FavSellersCtrl', function ($scope, FavoriteApi) {
-      $scope.items = [];
-
-      FavoriteApi.getFavoriteList(null, "sellers", function (result) {
-        $scope.items = result.data;
-      });
+      $scope.selectTab = function(tabType) {
+        $scope.selectType = tabType;
+        reload();
+      }
     })
 
     .factory('FavoriteApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
