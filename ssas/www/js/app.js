@@ -33,7 +33,7 @@ angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'c
     });
   }) // end of run
 
-  .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -78,6 +78,6 @@ angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'c
     $ionicConfigProvider.platform.ios.views.transition('ios'); 
     $ionicConfigProvider.platform.android.views.transition('android');
 
-  }]); // end of config
+  }); // end of config
 
 
