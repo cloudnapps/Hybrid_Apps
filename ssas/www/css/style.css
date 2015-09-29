@@ -1,1 +1,8 @@
 /* Empty. Add your own CSS if you like */
+
+.pic {
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  height: 100%;
+}

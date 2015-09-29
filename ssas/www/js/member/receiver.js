@@ -95,15 +95,11 @@
 
       $scope.saveAddress = function () {
         $scope.addrInfo.address.region = $scope.addrInfo.address.province.value + $scope.addrInfo.address.city.value;
+        $scope.addrInfo.address.regionId = $scope.addrInfo.address.province.id + ',' + $scope.addrInfo.address.city.id;
 
         if ($scope.addrInfo.address.area !== "") {
-          $scope.addrInfo.address.regionId = $scope.addrInfo.address.area.id;
-
-
+          $scope.addrInfo.address.regionId = $scope.addrInfo.address.regionId + ',' + $scope.addrInfo.address.area.id;
           $scope.addrInfo.address.region = $scope.addrInfo.address.region + $scope.addrInfo.address.area.value;
-        }
-        else if ($scope.addrInfo.address.city !== "") {
-          $scope.addrInfo.address.regionId = $scope.addrInfo.address.city.id;
         }
 
         $scope.addrInfo.showChoose = false;

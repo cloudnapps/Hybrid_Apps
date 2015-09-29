@@ -8,11 +8,11 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('tab.orders', {
+        .state('vieworders', {
           url: '/member/orders',
           views: {
-            'tab-member': {
-              templateUrl: 'templates/member/list-orders.html',
+            'main-view': {
+              templateUrl: 'templates/member/order-index.html',
               controller: 'OrdersCtrl'
             }
           }
