@@ -13,6 +13,10 @@ var translations_zh = {
     lang_fr: 'french',
     lang_it: 'italian',
 
+    //common
+    save: '保存',
+    close: '关闭',
+
     //main tabs
     home: '主页',
     cart: '购物车',
@@ -26,6 +30,11 @@ var translations_zh = {
     fav_title: '我的收藏',
     fav_goods: '商品',
     fav_sellers: '店铺',
+
+    //receiver
+    rec_title: '地址管理',
+    rec_addbtn: '添加新地址',
+    rec_addtitle: '新建收货地址',
 
     good_category: '商品分类'
 };

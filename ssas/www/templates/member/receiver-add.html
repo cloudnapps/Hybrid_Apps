@@ -1,0 +1,85 @@
+<ion-view view-title="{{'rec_addtitle'|translate}}">
+  <ion-nav-buttons side="right">
+    <div>
+      <button class="button button-icon icon ion-ios-upload" ng-click="add()">
+      </button>
+    </div>
+  </ion-nav-buttons>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">收货人：</span>
+        <input type="text" ng-model="addrInfo.name" placeholder="收件人姓名">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">手机：</span>
+        <input type="text" ng-model="addrInfo.mobile" placeholder="手机号码">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">邮编：</span>
+        <input type="text" ng-model="addrInfo.zipcode" placeholder="邮政编码">
+      </label>
+      <label class="item item-input" ng-click="addrInfo.showChoose=true">
+        <span class="input-label">省市区：</span>
+        <input type="text" ng-model="addrInfo.address.region" placeholder="省市区县" readonly="readonly"></label>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">详细地址：</span>
+        <input type="text" ng-model="addrInfo.address.detail" placeholder="详细地址">
+      </label>
+      <label class="item item-toggle">
+        是否默认地址
+        <label class="toggle">
+          <input type="checkbox" ng-model="addrInfo.default">
+
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </label>
+    </div>
+    <div ng-show="addrInfo.showChoose">
+      <div class="button-bar">
+        <div class="row">
+          <div class="col col-50">
+            <button style="font-size:16px;" ng-click="addrInfo.showChoose=false">
+              关闭
+            </button>
+          </div>
+          <div class="col col-50" align="right">
+            <button style="font-size:16px;" ng-click="saveAddress()">
+              完成
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="list">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            省/直辖市
+          </div>
+          <select ng-model="addrInfo.address.province" ng-options="s.value for s in provinces" ng-change="onProvinceChanged()">
+            <option value="">--请选择--</option>
+          </select>
+        </label>
+        <label class="item item-input item-select" ng-show="addrInfo.address.province.children.length">
+          <div class="input-label">
+            市/区
+          </div>
+          <select ng-model="addrInfo.address.city" ng-options="sh.value for sh in addrInfo.address.province.children"
+                  ng-change="onCityChanged()">
+            <option value="">--请选择--</option>
+          </select>
+        </label>
+        <label class="item item-input item-select" ng-show="addrInfo.address.city.children.length">
+          <div class="input-label">
+            县/镇
+          </div>
+          <select ng-model="addrInfo.address.area" ng-options="ar.value for ar in addrInfo.address.city.children">
+            <option value="">--请选择--</option>
+          </select>
+        </label>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

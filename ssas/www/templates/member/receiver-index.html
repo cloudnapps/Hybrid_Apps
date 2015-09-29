@@ -1,0 +1,18 @@
+<ion-view view-title="{{'rec_title'|translate}}">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap">
+        <h2>收件人：{{item.name}} ----------------- 电话：{{item.mobile}}</h2>
+
+        <p>{{item.area}}{{item.addr}}</p>
+
+        <div ng-show="item.checked"><h2>默认地址</h2></div>
+      </ion-item>
+    </ion-list>
+    <div class="button-bar">
+      <a class="button button-full button-light" style="font-size:20px;" href="#/member/receivers/add">
+        {{'rec_addbtn'|translate}}
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

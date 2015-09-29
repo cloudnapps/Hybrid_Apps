@@ -1,5 +1,5 @@
 (function () {
-  angular.module('receiver', ['starter.services'])
+  angular.module('receiver', ['starter.services', 'region'])
     .config(function ($stateProvider) {
 
       // Ionic uses AngularUI Router which uses the concept of states
@@ -8,20 +8,20 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('tab.receivers', {
+        .state('viewreceiver', {
           url: '/member/receivers',
           views: {
-            'tab-member': {
-              templateUrl: 'templates/member/list-receivers.html',
+            'main-view': {
+              templateUrl: 'templates/member/receiver-index.html',
               controller: 'ReceiversCtrl'
             }
           }
         })
-        .state('tab.receiver-add', {
+        .state('addreceiver', {
           url: '/member/receivers/add',
           views: {
-            'tab-member': {
-              templateUrl: 'templates/member/add-receiver.html',
+            'main-view': {
+              templateUrl: 'templates/member/receiver-add.html',
               controller: 'ReceiverAddCtrl'
             }
           }
@@ -48,7 +48,7 @@
                 title: '删除收货地址',
                 template: result.msg
               });
-              alertPopup.then(function(res) {
+              alertPopup.then(function (res) {
                 console.log(res);
               })
             })
@@ -57,17 +57,20 @@
       }
     })
 
-    .controller('ReceiverAddCtrl', function ($scope, ReceiverApi) {
+    .controller('ReceiverAddCtrl', function ($scope, $state, $http, ReceiverApi) {
       $scope.addrInfo = {};
-      $scope.add = function() {
+      $scope.addrInfo.showChoose = false;
+      $scope.addrInfo.address = {};
+
+      $scope.add = function () {
         var addrInfo = {
-          "region_id": "最下级地区的标识",
-          "addr": $scope.addrInfo.addr,
+          "region_id": $scope.addrInfo.address.regionId,
+          "addr": $scope.addrInfo.address.detail,
           "name": $scope.addrInfo.name,
           "mobile": $scope.addrInfo.mobile,
           "tel": "",
           "default": $scope.addrInfo.default ? 1 : 0,
-          "zipcode": "1234566",
+          "zipcode": $scope.addrInfo.zipcode
         }
 
         console.log(addrInfo);
@@ -76,9 +79,39 @@
           $scope.message = result.msg;
         });
       }
+
+      ReceiverApi.getRegionInfo(function (result) {
+        $scope.provinces = result;
+      });
+
+      $scope.onProvinceChanged = function () {
+        $scope.addrInfo.address.city = "";
+        $scope.addrInfo.address.area = "";
+      };
+
+      $scope.onCityChanged = function () {
+        $scope.addrInfo.address.area = "";
+      }
+
+      $scope.saveAddress = function () {
+        $scope.addrInfo.address.region = $scope.addrInfo.address.province.value + $scope.addrInfo.address.city.value;
+
+        if ($scope.addrInfo.address.area !== "") {
+          $scope.addrInfo.address.regionId = $scope.addrInfo.address.area.id;
+
+
+          $scope.addrInfo.address.region = $scope.addrInfo.address.region + $scope.addrInfo.address.area.value;
+        }
+        else if ($scope.addrInfo.address.city !== "") {
+          $scope.addrInfo.address.regionId = $scope.addrInfo.address.city.id;
+        }
+
+        $scope.addrInfo.showChoose = false;
+        $state.reload();
+      }
     })
 
-    .factory('ReceiverApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
+    .factory('ReceiverApi', function ($http, apiEndpoint, jsonEndpoint, RegionApi, transformRequestAsFormPost) {
       console.log(apiEndpoint);
 
       var sendRequest = function (url, data, callback) {
@@ -96,7 +129,18 @@
             callback(result);
           }
         );
-      }
+      };
+
+      var getRegionInfo = function (callback) {
+        RegionApi.initRegion('02f09323e533c375e2270e0dbf5736ae', function (result) {
+          $http.get(jsonEndpoint.url + '/misc/region.json')
+            .success(function (data) {
+              callback(data);
+            }).error(function (data) {
+              callback(data);
+            })
+        });
+      };
 
       var getReceiverList = function (page, callback) {
         var url = apiEndpoint.url + '/member-receiver.html';
@@ -147,6 +191,7 @@
       };
 
       return {
+        getRegionInfo: getRegionInfo,
         getReceiverList: getReceiverList,
         addReceiver: addReceiver,
         deleteReceiver: deleteReceiver,

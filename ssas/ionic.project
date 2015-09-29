@@ -5,6 +5,10 @@
   	{
   		"path": "/m",
   		"proxyUrl": "http://bbc.jooau.com/zhongshihua/index.php/m"
-  	}
+  	},
+  	{
+      "path": "/data",
+      "proxyUrl": "http://bbc.jooau.com/zhongshihua/data"
+    }
   ]
 }
