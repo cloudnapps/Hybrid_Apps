@@ -12,7 +12,7 @@
           url: '/member',
           views: {
             'tab-member': {
-              templateUrl: 'templates/member/member-index.html'
+              templateUrl: 'templates/member/member-login.html'
             }
           }
         });

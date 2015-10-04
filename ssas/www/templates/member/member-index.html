@@ -13,36 +13,30 @@
       </a>
     </div>
 
-    <div class="button-bar">
-      <a class="button button-full button-light" style="font-size:12px;" href="#/member/orders?type=1">
-        待付款
-      </a>
-      <a class="button button-full button-light" style="font-size:12px;" href="#/member/orders?type=2">
-        待发货
-      </a>
-      <a class="button button-full button-light" style="font-size:12px;" href="#/member/orders?type=3">
-        待收货
-      </a>
-      <a class="button button-full button-light" style="font-size:12px;" href="#/member/orders?type=4">
-        待评价
-      </a>
-      <a class="button button-full button-light" style="font-size:12px;" href="#/member/returns">
-        售后
-      </a>
-    </div>
-    <div class="button-bar">
-      <div class="row">
-        <div class="col col-90">
-          <a style="font-size:16px;" href="#/member/orders">
-            全部订单
-          </a>
-        </div>
-        <div class="col">
-          <i class="icon ion-chevron-right icon-accessory"></i>
+    <div class="list card">
+      <div class="item item-divider" style="padding-left: 5px" ng-click="goDetail(item)">
+        <h2 style="float: left">我的订单</h2>
+        <div style="float: right">
+          <a href="#/orders/all">查看所有订单<i class="icon ion-chevron-right icon-accessory"></i></a>
         </div>
       </div>
-    </div>
-    <div class="button-clear">
+      <div class="button-bar">
+        <a class="button button-full button-light" style="font-size:12px;" href="#/orders/nopay">
+          待付款
+        </a>
+        <a class="button button-full button-light" style="font-size:12px;" href="#/orders/noship">
+          待发货
+        </a>
+        <a class="button button-full button-light" style="font-size:12px;" href="#/orders/shipped">
+          待收货
+        </a>
+        <a class="button button-full button-light" style="font-size:12px;" href="#/orders/nocomment">
+          待评价
+        </a>
+        <a class="button button-full button-light" style="font-size:12px;" href="#/member/returns">
+          售后
+        </a>
+      </div>
     </div>
     <div class="button-bar">
       <div class="row">

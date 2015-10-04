@@ -1,0 +1,35 @@
+<ion-view view-title="订单列表" enter="onViewEnter()" leave="onViewLeave()">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="item in items">
+        <div class="list card">
+          <div class="item item-divider" style="padding-left: 5px" ng-click="goDetail(item)">
+            <h2 style="float: left">订单号：{{item.order_id}}</h2>
+
+            <i style="float: right" class="icon ion-chevron-right icon-accessory"></i>
+          </div>
+          <div class="item item-divider" style="padding-left: 5px">
+            <h2 style="float: left">{{item.name}}</h2>
+
+            <p style="float:right" align="right">{{item.status}}</p>
+          </div>
+          <div class="item item-body" style="padding-left: 5px">
+            <div class="row">
+              <div class="col col-20" ng-repeat="product in item.products">
+                <img class="pic" ng-src="{{product.url}}">
+              </div>
+            </div>
+          </div>
+          <div class="item item-divider">
+            <p align="right">实付款：{{item.final_amount | currency:'￥'}}</p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll
+      ng-if="hasMore"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

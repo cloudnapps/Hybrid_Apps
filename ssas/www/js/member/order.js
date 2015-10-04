@@ -8,12 +8,57 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('vieworders', {
-          url: '/member/orders',
+        .state('orders', {
+          url: '/orders',
+          abstract: true,
           views: {
             'main-view': {
-              templateUrl: 'templates/member/order-index.html',
-              controller: 'OrdersCtrl'
+              templateUrl: 'templates/member/order-index.html'
+            }
+          }
+        })
+        .state('orders.all', {
+          url: '/all',
+          views: {
+            'tab-orders-all': {
+              templateUrl: 'templates/member/order-list.html',
+              controller: 'OrdersAllCtrl'
+            }
+          }
+        })
+        .state('orders.nopay', {
+          url: '/nopay',
+          views: {
+            'tab-orders-nopay': {
+              templateUrl: 'templates/member/order-list.html',
+              controller: 'OrdersNopayCtrl'
+            }
+          }
+        })
+        .state('orders.noship', {
+          url: '/noship',
+          views: {
+            'tab-orders-noship': {
+              templateUrl: 'templates/member/order-list.html',
+              controller: 'OrdersNoshipCtrl'
+            }
+          }
+        })
+        .state('orders.shipped', {
+          url: '/shipped',
+          views: {
+            'tab-orders-shipped': {
+              templateUrl: 'templates/member/order-list.html',
+              controller: 'OrderShippedCtrl'
+            }
+          }
+        })
+        .state('orders.nocomment', {
+          url: '/nocomment',
+          views: {
+            'tab-orders-nocomment': {
+              templateUrl: 'templates/member/order-list.html',
+              controller: 'OrdersNocommentCtrl'
             }
           }
         })
@@ -37,46 +82,21 @@
         });
     })
 
-    .controller('OrdersCtrl', function ($scope, $state, $location, $ionicPopup, OrderApi) {
+    .controller('OrdersAllCtrl', function ($scope, $state, $ionicPopup, OrderApi) {
+
       $scope.items = [];
 
-      var type = $location.search().type;
-      if(type === '1') {
-        //待付款
-        $scope.filter = {
-          pay_status: 0
+      $scope.init = function () {
+        if ($scope.items.length === 0) {
+          $scope.items = [];
+          $scope.page = 0;
+          $scope.hasMore = true;
         }
-      }
-      else if(type === '2') {
-        //待发货
-        $scope.filter = {
-          ship_status: 0
-        }
-      }
-      else if(type === '3') {
-        //待收货
-        $scope.filter = {
-          ship_status: 1
-        }
-      }
-      else if(type === '4') {
-        //待评价
-        $scope.filter = {
-          comment_status: 0
-        }
-      }
+      };
 
-      $scope.page = 1;
-
-      OrderApi.getOrderList($scope.page, $scope.filter, function (result) {
-        $scope.items = result.data;
-      });
-
-      $scope.hasMore = true;
-
-      $scope.loadMore = function() {
-        OrderApi.getOrderList($scope.page + 1, $scope.filter, function (result) {
-          if(result.status === 1) {
+      $scope.loadMore = function () {
+        OrderApi.getOrderList($scope.page + 1, null, function (result) {
+          if (result.status === 1) {
             $scope.hasMore = false;
           }
           else {
@@ -87,21 +107,31 @@
         });
       };
 
-      $scope.$on('$stateChangeSuccess', function() {
-        $scope.loadMore();
+      $scope.$on('$ionicView.enter', function () {
+        $scope.isActtive = true;
+        $scope.init();
       });
 
-      $scope.getRate = function(item) {
-        $state.go("tab.order-rate",{orderId : item.order_id}, {reload: true});
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.isActtive = false;
+      });
+
+      $scope.$on('$stateChangeSuccess', function () {
+        if ($scope.isActtive)
+          $scope.loadMore();
+      });
+
+      $scope.getRate = function (item) {
+        $state.go("tab.order-rate", {orderId: item.order_id}, {reload: true});
       };
 
-      $scope.getReturn = function(item) {
-        OrderApi.getReturnIndex(item.order_id, function(result) {
+      $scope.getReturn = function (item) {
+        OrderApi.getReturnIndex(item.order_id, function (result) {
           var alertPopup = $ionicPopup.alert({
             title: '订单售后',
             template: result.msg
           });
-          alertPopup.then(function(res) {
+          alertPopup.then(function (res) {
             console.log(res);
           });
         })
@@ -120,13 +150,194 @@
                 title: '取消订单',
                 template: result.msg
               });
-              alertPopup.then(function(res) {
+              alertPopup.then(function (res) {
                 console.log(res);
               });
             })
           }
         });
       }
+    })
+
+    .controller('OrdersNopayCtrl', function ($scope, $state, $ionicPopup, OrderApi) {
+      $scope.items = [];
+
+      //待付款
+      $scope.filter = {
+        pay_status: 0
+      };
+
+      $scope.init = function () {
+        if ($scope.items.length === 0) {
+          $scope.items = [];
+          $scope.page = 0;
+          $scope.hasMore = true;
+        }
+      };
+
+      $scope.loadMore = function () {
+        OrderApi.getOrderList($scope.page + 1, $scope.filter, function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.items = $scope.items.concat(result.data);
+            $scope.page += 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }
+        });
+      };
+
+      $scope.$on('$ionicView.enter', function () {
+        $scope.isActtive = true;
+        $scope.init();
+      });
+
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.isActtive = false;
+      });
+
+      $scope.$on('$stateChangeSuccess', function () {
+        if ($scope.isActtive)
+          $scope.loadMore();
+      });
+    })
+
+    .controller('OrdersNoshipCtrl', function ($scope, $state, $ionicPopup, OrderApi) {
+      $scope.items = [];
+
+      //待发货
+      $scope.filter = {
+        ship_status: 0
+      };
+
+      $scope.init = function () {
+        if ($scope.items.length === 0) {
+          $scope.items = [];
+          $scope.page = 0;
+          $scope.hasMore = true;
+        }
+      };
+
+      $scope.loadMore = function () {
+        OrderApi.getOrderList($scope.page + 1, $scope.filter, function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.items = $scope.items.concat(result.data);
+            $scope.page += 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }
+        });
+      };
+
+      $scope.$on('$ionicView.enter', function () {
+        $scope.isActtive = true;
+        $scope.init();
+      });
+
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.isActtive = false;
+      });
+
+      $scope.$on('$stateChangeSuccess', function () {
+        if ($scope.isActtive)
+          $scope.loadMore();
+      });
+    })
+
+    .controller('OrderShippedCtrl', function ($scope, $state, $ionicPopup, OrderApi) {
+      $scope.items = [];
+
+      //待发货
+      $scope.filter = {
+        ship_status: 1
+      };
+
+      $scope.init = function () {
+        if ($scope.items.length === 0) {
+          $scope.items = [];
+          $scope.page = 0;
+          $scope.hasMore = true;
+        }
+      };
+
+      $scope.loadMore = function () {
+        OrderApi.getOrderList($scope.page + 1, $scope.filter, function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.items = $scope.items.concat(result.data);
+            $scope.page += 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }
+        });
+      };
+
+      $scope.$on('$ionicView.enter', function () {
+        $scope.isActtive = true;
+        $scope.init();
+      });
+
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.isActtive = false;
+      });
+
+      $scope.$on('$stateChangeSuccess', function () {
+        if ($scope.isActtive)
+          $scope.loadMore();
+      });
+    })
+
+    .controller('OrdersNocommentCtrl', function ($scope, $state, $ionicPopup, OrderApi) {
+      $scope.items = [];
+
+      //待评价
+      $scope.filter = {
+        comment_status: 0
+      };
+
+      $scope.init = function () {
+        if ($scope.items.length === 0) {
+          $scope.items = [];
+          $scope.page = 0;
+          $scope.hasMore = true;
+        }
+
+        //待发货
+        $scope.filter = {
+          ship_status: 0
+        };
+      };
+
+      $scope.loadMore = function () {
+        OrderApi.getOrderList($scope.page + 1, $scope.filter, function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.items = $scope.items.concat(result.data);
+            $scope.page += 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }
+        });
+      };
+
+      $scope.$on('$ionicView.enter', function () {
+        $scope.isActtive = true;
+        $scope.init();
+      });
+
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.isActtive = false;
+      });
+
+      $scope.$on('$stateChangeSuccess', function () {
+        if ($scope.isActtive)
+          $scope.loadMore();
+      });
     })
 
     .controller('OrderDetailCtrl', function ($scope, $stateParams, OrderApi) {
@@ -138,7 +349,7 @@
     .controller('OrderRateCtrl', function ($scope, $stateParams, OrderApi) {
       $scope.items = [];
 
-      OrderApi.getMemberRate($stateParams.orderId, function(result) {
+      OrderApi.getMemberRate($stateParams.orderId, function (result) {
         $scope.items = result.data;
       });
     })

@@ -1,0 +1,56 @@
+<ion-view view-title="{{'login_title'|translate}}">
+  <ion-content class="padding">
+
+    <div class="list card">
+
+      <div class="item item-body">
+        <img src="img/ionic.png" align="center">
+
+
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">账号：</span>
+            <input type="text" ng-model="addrInfo.name" placeholder="请输入用户名（手机号）">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">密码：</span>
+            <input type="text" ng-model="addrInfo.mobile" placeholder="请输入密码">
+          </label>
+
+
+          <div class="row">
+            <div class="col col-100">
+              <div class="button-bar">
+                <button class="button button-full" ng-click="saveAddress()">
+                  登录
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-50">
+              <label class="toggle">
+                <input type="checkbox">
+
+                <div class="track">
+                  <div class="handle"></div>
+                </div>
+              </label>
+
+              <label style="position: relative">记住密码</label>
+            </div>
+
+            <div class="col col-50" align="right">
+              <label>忘记密码</label>
+              <label>新用户注册</label>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+  </ion-content>
+</ion-view>
+

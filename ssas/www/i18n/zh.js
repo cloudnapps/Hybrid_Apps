@@ -26,8 +26,11 @@ var translations_zh = {
     //my
     me: '我',
 
+    //login
+    login_title: '登录',
+
     //order
-    ord_alltitle:'全部订单',
+    ord_alltitle:'全部',
     ord_nopaytitle: '待付款',
     ord_noshiptitle: '待发货',
     ord_shippedtitle: '待收货',

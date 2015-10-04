@@ -1,36 +1,28 @@
-<ion-view view-title="{{'ord_alltitle'|translate}}">
-  <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="item in items">
-        <div class="list card">
-          <div class="item item-divider" style="padding-left: 5px" ng-click="goDetail(item)">
-            <h2 style="float: left">订单号：{{item.order_id}}</h2>
+<ion-tabs class="tabs-color-active-positive tabs-top">
 
-            <i style="float: right" class="icon ion-chevron-right icon-accessory"></i>
-          </div>
-          <div class="item item-divider" style="padding-left: 5px">
-            <h2 style="float: left">{{item.name}}</h2>
+  <!-- All Orders Tab -->
+  <ion-tab title="{{'ord_alltitle'|translate}}" href="#/orders/all">
+    <ion-nav-view name="tab-orders-all"></ion-nav-view>
+  </ion-tab>
 
-            <p style="float:right" align="right">{{item.status}}</p>
-          </div>
-          <div class="item item-body" style="padding-left: 5px">
-            <div class="row">
-              <div class="col col-20" ng-repeat="product in item.products">
-                <img class="pic" ng-src="{{product.url}}">
-              </div>
-            </div>
-          </div>
-          <div class="item item-divider">
-            <p align="right">实付款：{{item.final_amount | currency:'￥'}}</p>
-          </div>
-        </div>
-      </ion-item>
-    </ion-list>
+  <!-- Nopay Orders Tab -->
+  <ion-tab title="{{'ord_nopaytitle'|translate}}" href="#/orders/nopay">
+    <ion-nav-view name="tab-orders-nopay"></ion-nav-view>
+  </ion-tab>
 
-    <ion-infinite-scroll
-      ng-if="hasMore"
-      on-infinite="loadMore()"
-      distance="1%">
-    </ion-infinite-scroll>
-  </ion-content>
-</ion-view>
+  <!-- Noship Orders Tab -->
+  <ion-tab title="{{'ord_noshiptitle'|translate}}" href="#/orders/noship">
+    <ion-nav-view name="tab-orders-noship"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Shipped Orders Tab -->
+  <ion-tab title="{{'ord_shippedtitle'|translate}}" href="#/orders/shipped">
+    <ion-nav-view name="tab-orders-shipped"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Nocomment Orders Tab -->
+  <ion-tab title="{{'ord_nocommenttitle'|translate}}" href="#/orders/nocomment">
+    <ion-nav-view name="tab-orders-nocomment"></ion-nav-view>
+  </ion-tab>
+
+</ion-tabs>
