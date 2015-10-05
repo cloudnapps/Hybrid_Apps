@@ -16,6 +16,7 @@
     <div class="list card">
       <div class="item item-divider" style="padding-left: 5px" ng-click="goDetail(item)">
         <h2 style="float: left">我的订单</h2>
+
         <div style="float: right">
           <a href="#/orders/all">查看所有订单<i class="icon ion-chevron-right icon-accessory"></i></a>
         </div>
@@ -35,6 +36,26 @@
         </a>
         <a class="button button-full button-light" style="font-size:12px;" href="#/member/returns">
           售后
+        </a>
+      </div>
+    </div>
+
+    <div class="list card">
+      <div class="item item-divider" style="padding-left: 5px" ng-click="goDetail(item)">
+        <h2 style="float: left">我的账户</h2>
+      </div>
+      <div class="button-bar">
+        <a class="button button-full button-light" style="font-size:12px;" href="#/receivers/index">
+          地址管理
+        </a>
+        <a class="button button-full button-light" style="font-size:12px;" href="#/orders/noship">
+          账户安全
+        </a>
+        <a class="button button-full button-light" style="font-size:12px;" href="#/points/index">
+          积分金币
+        </a>
+        <a class="button button-full button-light" style="font-size:12px;" href="#/favorites/goods">
+          我的收藏
         </a>
       </div>
     </div>
@@ -65,7 +86,7 @@
     <div class="button-bar">
       <div class="row">
         <div class="col col-90">
-          <a style="font-size:16px;" href="#/member/receivers">
+          <a style="font-size:16px;" href="#/receivers/index">
             收货地址管理
           </a>
         </div>

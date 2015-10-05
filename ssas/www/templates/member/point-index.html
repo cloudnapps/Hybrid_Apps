@@ -1,0 +1,33 @@
+<ion-view view-title="{{'point_title'|translate}}">
+  <ion-content>
+    <div class="list card">
+      <div class="item item-body" style="padding-left: 5px">
+        <div class="row">
+          <div class="col col-100">
+            <h1 class="title">{{pointInfo.total}}分</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-50">
+            <p>活动型积分：{{pointInfo.actTotal}}分</p>
+          </div>
+          <div class="col col-50" align="right">
+            <p>消费型积分：{{pointInfo.salesTotal}}分</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button-bar">
+      <div class="row">
+        <div class="col col-90">
+          <a style="font-size:16px;" href="#/points/list">
+            积分账单
+          </a>
+        </div>
+        <div class="col col-75">
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

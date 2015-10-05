@@ -8,8 +8,8 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('viewreceiver', {
-          url: '/member/receivers',
+        .state('receivers_index', {
+          url: '/receivers/index',
           views: {
             'main-view': {
               templateUrl: 'templates/member/receiver-index.html',
@@ -17,8 +17,8 @@
             }
           }
         })
-        .state('addreceiver', {
-          url: '/member/receivers/add',
+        .state('receivers_add', {
+          url: '/receivers/add',
           views: {
             'main-view': {
               templateUrl: 'templates/member/receiver-add.html',
@@ -28,7 +28,7 @@
         });
     })
 
-    .controller('ReceiversCtrl', function ($scope, $ionicPopup, $state, ReceiverApi) {
+    .controller('ReceiversCtrl', function ($scope, $ionicPopup, ReceiverApi) {
       $scope.items = [];
 
       ReceiverApi.getReceiverList(null, function (result) {
@@ -57,7 +57,7 @@
       }
     })
 
-    .controller('ReceiverAddCtrl', function ($scope, $state, $http, ReceiverApi) {
+    .controller('ReceiverAddCtrl', function ($scope, $state, ReceiverApi) {
       $scope.addrInfo = {};
       $scope.addrInfo.showChoose = false;
       $scope.addrInfo.address = {};
@@ -71,14 +71,14 @@
           "tel": "",
           "default": $scope.addrInfo.default ? 1 : 0,
           "zipcode": $scope.addrInfo.zipcode
-        }
+        };
 
         console.log(addrInfo);
 
         ReceiverApi.addReceiver(addrInfo, function (result) {
           $scope.message = result.msg;
         });
-      }
+      };
 
       ReceiverApi.getRegionInfo(function (result) {
         $scope.provinces = result;
@@ -91,7 +91,7 @@
 
       $scope.onCityChanged = function () {
         $scope.addrInfo.address.area = "";
-      }
+      };
 
       $scope.saveAddress = function () {
         $scope.addrInfo.address.region = $scope.addrInfo.address.province.value + $scope.addrInfo.address.city.value;

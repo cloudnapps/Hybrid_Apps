@@ -47,5 +47,9 @@ var translations_zh = {
     rec_addbtn: '添加新地址',
     rec_addtitle: '新建收货地址',
 
+    //point
+    point_title: '我的积分',
+    point_list: '积分记录',
+
     good_category: '商品分类'
 };
