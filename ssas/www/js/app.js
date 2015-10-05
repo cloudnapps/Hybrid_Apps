@@ -5,8 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+
+var currentUser = {};
+
 angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'cart',
-  'member', 'order', 'receiver', 'favorite', 'return', 'coupon', 'setting'])
+  'member', 'order', 'receiver', 'favorite', 'return', 'coupon', 'setting', 'login'])
   .constant("apiEndpoint", {url: "/m"})
   .constant("jsonEndpoint", {url: "/data"})
 // For the real endpoint, we'd use this
@@ -65,18 +68,18 @@ angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'c
     $translateProvider.determinePreferredLanguage();
     $translateProvider.preferredLanguage('zh');
 
-    $ionicConfigProvider.platform.ios.tabs.style('standard'); 
+    $ionicConfigProvider.platform.ios.tabs.style('standard');
     $ionicConfigProvider.platform.ios.tabs.position('bottom');
     $ionicConfigProvider.platform.android.tabs.style('standard');
     $ionicConfigProvider.platform.android.tabs.position('bottom');
 
-    $ionicConfigProvider.platform.ios.navBar.alignTitle('center'); 
+    $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
     $ionicConfigProvider.platform.android.navBar.alignTitle('center');
 
     $ionicConfigProvider.platform.ios.backButton.previousTitleText('').icon('ion-ios-arrow-thin-left');
-    $ionicConfigProvider.platform.android.backButton.previousTitleText('').icon('ion-android-arrow-back');        
+    $ionicConfigProvider.platform.android.backButton.previousTitleText('').icon('ion-android-arrow-back');
 
-    $ionicConfigProvider.platform.ios.views.transition('ios'); 
+    $ionicConfigProvider.platform.ios.views.transition('ios');
     $ionicConfigProvider.platform.android.views.transition('android');
 
   }); // end of config

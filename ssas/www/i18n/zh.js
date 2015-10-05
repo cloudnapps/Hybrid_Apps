@@ -28,6 +28,7 @@ var translations_zh = {
 
     //login
     login_title: '登录',
+    register_title: '新用户注册',
 
     //order
     ord_alltitle:'全部',

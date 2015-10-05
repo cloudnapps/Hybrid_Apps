@@ -159,7 +159,7 @@
       }
     })
 
-    .controller('OrdersNopayCtrl', function ($scope, $state, $ionicPopup, OrderApi) {
+    .controller('OrdersNopayCtrl', function ($scope, $state, OrderApi) {
       $scope.items = [];
 
       //待付款
@@ -203,7 +203,7 @@
       });
     })
 
-    .controller('OrdersNoshipCtrl', function ($scope, $state, $ionicPopup, OrderApi) {
+    .controller('OrdersNoshipCtrl', function ($scope, $state, OrderApi) {
       $scope.items = [];
 
       //待发货
@@ -247,7 +247,7 @@
       });
     })
 
-    .controller('OrderShippedCtrl', function ($scope, $state, $ionicPopup, OrderApi) {
+    .controller('OrderShippedCtrl', function ($scope, $state, OrderApi) {
       $scope.items = [];
 
       //待发货
@@ -291,7 +291,7 @@
       });
     })
 
-    .controller('OrdersNocommentCtrl', function ($scope, $state, $ionicPopup, OrderApi) {
+    .controller('OrdersNocommentCtrl', function ($scope, $state, OrderApi) {
       $scope.items = [];
 
       //待评价

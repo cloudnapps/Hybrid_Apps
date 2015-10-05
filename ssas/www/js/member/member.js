@@ -1,5 +1,5 @@
 (function () {
-  angular.module('member', ['starter.services', 'favorite'])
+  angular.module('member', ['starter.services', 'login'])
     .config(function ($stateProvider) {
 
       // Ionic uses AngularUI Router which uses the concept of states
@@ -12,9 +12,15 @@
           url: '/member',
           views: {
             'tab-member': {
-              templateUrl: 'templates/member/member-login.html'
+              templateUrl: 'templates/member/member-index.html',
+              controller: 'MemberCtrl'
             }
           }
         });
     })
+    .controller('MemberCtrl', function ($scope, $ionicPopup, $state) {
+      if(true) {
+        $state.go('login');
+      }
+    });
 })();

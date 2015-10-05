@@ -36,7 +36,7 @@ angular.module('starter.services', [])
             buffer.push(
               encodeURIComponent(name) +
               "=" +
-              encodeURIComponent(( value == null ) ? "" : value)
+              (( value == null ) ? "" : value)
             );
           }
         }

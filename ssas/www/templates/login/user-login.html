@@ -10,18 +10,17 @@
         <div class="list">
           <label class="item item-input">
             <span class="input-label">账号：</span>
-            <input type="text" ng-model="addrInfo.name" placeholder="请输入用户名（手机号）">
+            <input type="text" ng-model="userInfo.name" placeholder="请输入用户名（手机号）">
           </label>
           <label class="item item-input">
             <span class="input-label">密码：</span>
-            <input type="text" ng-model="addrInfo.mobile" placeholder="请输入密码">
+            <input type="password" ng-model="userInfo.password" placeholder="请输入密码">
           </label>
-
 
           <div class="row">
             <div class="col col-100">
               <div class="button-bar">
-                <button class="button button-full" ng-click="saveAddress()">
+                <button class="button button-full" ng-click="login()">
                   登录
                 </button>
               </div>
@@ -42,8 +41,8 @@
             </div>
 
             <div class="col col-50" align="right">
-              <label>忘记密码</label>
-              <label>新用户注册</label>
+              <p><a>忘记密码</a></p>
+              </p><a href="#/register">新用户注册</a></p>
             </div>
           </div>
 
