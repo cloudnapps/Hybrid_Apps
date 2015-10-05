@@ -1,43 +1,15 @@
-<ion-view view-title="{{'fav_title'|translate}}">
-  <ion-content class="padding">
-    <div class="button-bar">
-      <button class="button button-full button-light" style="font-size:16px;" ng-click="selectTab('goods')">
-        {{'fav_goods' | translate}}
-      </button>
-      <button class="button button-full button-light" style="font-size:16px;" ng-click="selectTab('sellers')">
-        {{'fav_sellers' | translate}}
-      </button>
-    </div>
-    <div ng-show="selectType === 'goods'">
-      <ion-list>
-        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap">
-          <img ng-src="{{item.image}}">
+<ion-tabs class="tabs-color-active-positive tabs-top">
 
-          <h2>{{item.name}}</h2>
+  <!-- Goods Tab -->
+  <ion-tab title="{{'fav_goods'|translate}}" href="#/favorites/goods">
+    <ion-nav-view name="tab-favorites-goods"></ion-nav-view>
+  </ion-tab>
 
-          <p>{{item.price}}</p>
+  <!-- Sellers Tab -->
+  <ion-tab title="{{'fav_sellers'|translate}}" href="#/favorites/sellers">
+    <ion-nav-view name="tab-favorites-sellers"></ion-nav-view>
+  </ion-tab>
 
-          <i class="icon ion-chevron-right icon-accessory"></i>
+</ion-tabs>
 
-          <ion-option-button class="button-assertive" ng-click="remove(item)">
-            删除
-          </ion-option-button>
-        </ion-item>
-      </ion-list>
-    </div>
-    <div ng-show="selectType === 'sellers'">
-      <ion-list>
-        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap">
-          <h2>{{item.name}}</h2>
-
-          <i class="icon ion-chevron-right icon-accessory"></i>
-
-          <ion-option-button class="button-assertive" ng-click="remove(item)">
-            删除
-          </ion-option-button>
-        </ion-item>
-      </ion-list>
-    </div>
-  </ion-content>
-</ion-view>
 

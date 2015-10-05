@@ -8,33 +8,115 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('viewfavorite', {
-          url: '/member/favorites',
+        .state('favorites', {
+          url: '/favorites',
+          abstract: true,
           views: {
             'main-view': {
-              templateUrl: 'templates/member/favorite-index.html',
-              controller: 'FavoritesCtrl'
+              templateUrl: 'templates/member/favorite-index.html'
+            }
+          }
+        })
+        .state('favorites.goods', {
+          url: '/goods',
+          views: {
+            'tab-favorites-goods': {
+              templateUrl: 'templates/member/favorite-list.html',
+              controller: 'FavoritesGoodsCtrl'
+            }
+          }
+        })
+        .state('favorites.sellers', {
+          url: '/sellers',
+          views: {
+            'tab-favorites-sellers': {
+              templateUrl: 'templates/member/favorite-list.html',
+              controller: 'FavoritesSellersCtrl'
             }
           }
         })
     })
 
-    .controller('FavoritesCtrl', function ($scope, FavoriteApi) {
+    .controller('FavoritesGoodsCtrl', function ($scope, FavoriteApi) {
+      $scope.items = [];
+
       $scope.selectType = "goods";
 
-      var reload = function() {
-        $scope.items = [];
-        FavoriteApi.getFavoriteList(null, $scope.selectType, function (result) {
-          $scope.items = result.data;
+      $scope.init = function () {
+        if ($scope.items.length === 0) {
+          $scope.items = [];
+          $scope.page = 0;
+          $scope.hasMore = true;
+        }
+      };
+
+      $scope.loadMore = function () {
+        FavoriteApi.getFavoriteList($scope.page + 1, $scope.selectType, function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.items = $scope.items.concat(result.data);
+            $scope.page += 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }
         });
       };
 
-      reload();
+      $scope.$on('$ionicView.enter', function () {
+        $scope.isActtive = true;
+        $scope.init();
+      });
 
-      $scope.selectTab = function(tabType) {
-        $scope.selectType = tabType;
-        reload();
-      }
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.isActtive = false;
+      });
+
+      $scope.$on('$stateChangeSuccess', function () {
+        if ($scope.isActtive)
+          $scope.loadMore();
+      });
+    })
+
+    .controller('FavoritesSellersCtrl', function ($scope, FavoriteApi) {
+      $scope.items = [];
+
+      $scope.selectType = "sellers";
+
+      $scope.init = function () {
+        if ($scope.items.length === 0) {
+          $scope.items = [];
+          $scope.page = 0;
+          $scope.hasMore = true;
+        }
+      };
+
+      $scope.loadMore = function () {
+        FavoriteApi.getFavoriteList($scope.page + 1, $scope.selectType, function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.items = $scope.items.concat(result.data);
+            $scope.page += 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }
+        });
+      };
+
+      $scope.$on('$ionicView.enter', function () {
+        $scope.isActtive = true;
+        $scope.init();
+      });
+
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.isActtive = false;
+      });
+
+      $scope.$on('$stateChangeSuccess', function () {
+        if ($scope.isActtive)
+          $scope.loadMore();
+      });
     })
 
     .factory('FavoriteApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
@@ -120,11 +202,11 @@
       };
 
       return {
-        getFavoriteList : getFavoriteList,
-        addGoodsFavorite : addGoodsFavorite,
-        deleteGoodsFavorite : deleteGoodsFavorite,
-        addSellerFavorite : addSellerFavorite,
-        deleteSellerFavorite : deleteSellerFavorite
+        getFavoriteList: getFavoriteList,
+        addGoodsFavorite: addGoodsFavorite,
+        deleteGoodsFavorite: deleteGoodsFavorite,
+        addSellerFavorite: addSellerFavorite,
+        deleteSellerFavorite: deleteSellerFavorite
       };
     });
 })();

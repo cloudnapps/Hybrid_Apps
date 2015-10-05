@@ -19,8 +19,8 @@
         });
     })
     .controller('MemberCtrl', function ($scope, $ionicPopup, $state) {
-      if(true) {
+      /*if(true) {
         $state.go('login');
-      }
+      }*/
     });
 })();
