@@ -1,0 +1,57 @@
+<ion-view view-title="{{'settng_title'|translate}}">
+  <ion-content class="padding">
+    <div class="list card">
+      <div class="item item-divider">我的信息</div>
+      <div class="item item-body">
+        <div class="row">
+          <div class="col col-20">
+            <h2>头像</h2>
+          </div>
+          <div class="col col-80" align="right">
+            <img ng-src="{{item.image}}">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-20">
+            <h2>用户名</h2>
+          </div>
+          <div class="col col-80" align="right">
+            <h2>{{item.name}}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-20">
+            <h2>性别</h2>
+          </div>
+          <div class="col col-80" align="right">
+            <h2>{{item.sex}}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-20">
+            <h2>邮箱</h2>
+          </div>
+          <div class="col col-80" align="right">
+            <h2>{{item.email}}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-20">
+            <h2>身份证</h2>
+          </div>
+          <div class="col col-80" align="right">
+            <h2>{{item.id_card}}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-30">
+            <h2>修改密码</h2>
+          </div>
+          <div class="col col-70" align="right" ng-click="modifyPassword()">
+            <i class="icon ion-chevron-right icon-accessory"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

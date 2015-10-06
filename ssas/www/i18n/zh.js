@@ -51,5 +51,8 @@ var translations_zh = {
     point_title: '我的积分',
     point_list: '积分记录',
 
+    //setting
+    settng_title: '我的信息',
+
     good_category: '商品分类'
 };

@@ -8,11 +8,11 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('tab.setting', {
-          url: '/member/settings',
+        .state('settings_index', {
+          url: '/settings/index',
           views: {
-            'tab-member': {
-              templateUrl: 'templates/member/detail-setting.html',
+            'main-view': {
+              templateUrl: 'templates/member/setting-index.html',
               controller: 'SettingCtrl'
             }
           }
@@ -20,11 +20,13 @@
     })
 
     .controller('SettingCtrl', function ($scope, SettingApi) {
+      $scope.item = {};
+
       SettingApi.getMemberSetting(function (result) {
         $scope.item = result.data;
       });
 
-      
+
     })
 
     .factory('SettingApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
@@ -45,7 +47,7 @@
             callback(result);
           }
         );
-      }
+      };
 
       var getMemberSetting = function (callback) {
         var url = apiEndpoint.url + '/member-setting.html';
