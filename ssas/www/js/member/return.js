@@ -8,12 +8,12 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('tab.return', {
-          url: '/member/returns',
+        .state('return_request', {
+          url: '/returns/request/:orderId',
           views: {
-            'tab-member': {
-              templateUrl: 'templates/member/list-returns.html',
-              controller: 'ReturnsCtrl'
+            'main-view': {
+              templateUrl: 'templates/member/return-request.html',
+              controller: 'ReturnsRequestCtrl'
             }
           }
         })
@@ -28,17 +28,38 @@
         });
     })
 
+    .controller('ReturnsRequestCtrl', function ($scope, $stateParams, ReturnApi) {
+      ReturnApi.getReturnIndex($stateParams.orderId, function (result) {
+        if(result.status === 0) {
+          $scope.orderInfo = result.data;
+        }
+      });
+    })
+
     .controller('ReturnsCtrl', function ($scope, ReturnApi) {
       $scope.items = [];
 
       ReturnApi.getReturnList(null, null, function (result) {
         $scope.items = result.data;
       });
+
+
+      ReturnApi.getReturnIndex(item.order_id, function (result) {
+        var alertPopup = $ionicPopup.alert({
+          title: '订单售后',
+          template: result.msg
+        });
+        alertPopup.then(function (res) {
+          console.log(res);
+        });
+      })
     })
 
     .controller('ReturnDetailCtrl', function ($scope, $stateParams, ReturnApi) {
       ReturnApi.getReturnDetail($stateParams.returnId, function (result) {
-        $scope.item = result.data;
+        if(result.status === 0) {
+          $scope.item = result.data;
+        }
       });
     })
 
@@ -88,6 +109,17 @@
         sendRequest(url, data, callback);
       };
 
+      var getReturnIndex = function (orderId, callback) {
+        var url = apiEndpoint.url + '/member-return_index.html';
+        var data = {
+          member_id: 13,
+          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          order_id: orderId
+        };
+
+        sendRequest(url, data, callback);
+      };
+
       var getReturnList = function (page, filter, callback) {
         var url = apiEndpoint.url + '/member-return_list.html';
         var data = {
@@ -107,6 +139,7 @@
       };
 
       return {
+        getReturnIndex: getReturnIndex,
         addReturnRequest : addReturnRequest,
         getReturnDetail : getReturnDetail,
         getReturnList: getReturnList

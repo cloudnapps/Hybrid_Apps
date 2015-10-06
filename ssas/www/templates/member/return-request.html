@@ -1,0 +1,27 @@
+<ion-view view-title="申请售后">
+  <ion-content>
+    <div class="list card">
+      <div class="item item-divider" style="padding-left: 5px">
+        <h2 style="float: left">订单号：{{orderInfo.order_id}}</h2>
+      </div>
+
+      <div class="item" style="padding-left: 5px" ng-repeat="item in orderInfo.product">
+        <div class="row">
+          <div class="col col-5">
+            <img class="pic" ng-src="{{item.url}}">
+          </div>
+          <div class="col col-70">
+            <div class="row">
+              <p style="float:right">{{item.name}}</p>
+            </div>
+            <div class="row">
+              <p style="float: left">{{item.price | currency: '￥'}}数量:{{item.num}}</p>
+            </div>
+          </div>
+          <div class="col col-15 item-input">
+            <input type="text" ng-model="orderInfo.product.requestNum">
+          </div>
+        </div>
+      </div>
+  </ion-content>
+</ion-view>

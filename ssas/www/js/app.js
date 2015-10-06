@@ -12,8 +12,8 @@ angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'c
   'member', 'order', 'receiver', 'favorite', 'return', 'coupon', 'setting', 'login', 'point'])
   .constant("apiEndpoint", {url: "/m"})
   .constant("jsonEndpoint", {url: "/data"})
-// For the real endpoint, we'd use this
-// .constant("apiEndpoint", {url:"http://bbc.jooau.com/zhongshihua/index.php/m"})
+  // For the real endpoint, we'd use this
+  //.constant("apiEndpoint", {url:"http://bbc.jooau.com/zhongshihua/index.php/m"})
   .run(function ($ionicPlatform, $translate) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -54,7 +54,7 @@ angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'c
             templateUrl: 'templates/tab-main.html'
           }
         }
-      })
+      });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/home');

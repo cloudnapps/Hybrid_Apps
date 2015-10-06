@@ -37,7 +37,7 @@
         })
     })
 
-    .controller('FavoritesGoodsCtrl', function ($scope, FavoriteApi) {
+    .controller('FavoritesGoodsCtrl', function ($scope, $ionicPopup, FavoriteApi) {
       $scope.items = [];
 
       $scope.selectType = "goods";
@@ -76,9 +76,30 @@
         if ($scope.isActtive)
           $scope.loadMore();
       });
+
+      $scope.remove = function (item) {
+        var confirmPopup = $ionicPopup.confirm({
+          title: '删除收藏',
+          template: '是否真的需要删除收藏?'
+        });
+
+        confirmPopup.then(function (res) {
+          if (res) {
+            FavoriteApi.deleteGoodsFavorite(item.goods_id, function (result) {
+              var alertPopup = $ionicPopup.alert({
+                title: '删除收藏',
+                template: result.msg
+              });
+              alertPopup.then(function (res) {
+                console.log(res);
+              });
+            })
+          }
+        });
+      }
     })
 
-    .controller('FavoritesSellersCtrl', function ($scope, FavoriteApi) {
+    .controller('FavoritesSellersCtrl', function ($scope, $ionicPopup, FavoriteApi) {
       $scope.items = [];
 
       $scope.selectType = "sellers";
@@ -117,6 +138,27 @@
         if ($scope.isActtive)
           $scope.loadMore();
       });
+
+      $scope.remove = function (item) {
+        var confirmPopup = $ionicPopup.confirm({
+          title: '删除收藏',
+          template: '是否真的需要删除收藏?'
+        });
+
+        confirmPopup.then(function (res) {
+          if (res) {
+            FavoriteApi.deleteSellerFavorite(item.seller_id, function (result) {
+              var alertPopup = $ionicPopup.alert({
+                title: '删除收藏',
+                template: result.msg
+              });
+              alertPopup.then(function (res) {
+                console.log(res);
+              });
+            })
+          }
+        });
+      }
     })
 
     .factory('FavoriteApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
@@ -137,7 +179,7 @@
             callback(result);
           }
         );
-      }
+      };
 
       var getFavoriteList = function (page, type, callback) {
         var url = apiEndpoint.url + '/member-favorite.html';

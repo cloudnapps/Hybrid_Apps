@@ -62,12 +62,21 @@
             }
           }
         })
-        .state('tab.order-detail', {
-          url: '/member/orders/:orderId',
+        .state('order_detail', {
+          url: 'order/:orderId',
           views: {
-            'tab-member': {
-              templateUrl: 'templates/member/detail-order.html',
+            'main-view': {
+              templateUrl: 'templates/member/order-detail.html',
               controller: 'OrderDetailCtrl'
+            }
+          }
+        })
+        .state('order_return', {
+          url: '/returns',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/order-return.html',
+              controller: 'OrderReturnCtrl'
             }
           }
         })
@@ -121,20 +130,8 @@
           $scope.loadMore();
       });
 
-      $scope.getRate = function (item) {
-        $state.go("tab.order-rate", {orderId: item.order_id}, {reload: true});
-      };
-
-      $scope.getReturn = function (item) {
-        OrderApi.getReturnIndex(item.order_id, function (result) {
-          var alertPopup = $ionicPopup.alert({
-            title: '订单售后',
-            template: result.msg
-          });
-          alertPopup.then(function (res) {
-            console.log(res);
-          });
-        })
+      $scope.goDetail = function (item) {
+        $state.go("order_detail", {orderId: item.order_id}, {reload: true});
       };
 
       $scope.remove = function (item) {
@@ -250,7 +247,7 @@
     .controller('OrderShippedCtrl', function ($scope, $state, OrderApi) {
       $scope.items = [];
 
-      //待发货
+      //待收货
       $scope.filter = {
         ship_status: 1
       };
@@ -346,6 +343,49 @@
       });
     })
 
+    .controller('OrderReturnCtrl', function ($scope, $state, OrderApi) {
+      $scope.items = [];
+
+      $scope.init = function () {
+        if ($scope.items.length === 0) {
+          $scope.items = [];
+          $scope.page = 0;
+          $scope.hasMore = true;
+        }
+      };
+
+      $scope.loadMore = function () {
+        OrderApi.getOrderList($scope.page + 1, null, function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.items = $scope.items.concat(result.data);
+            $scope.page += 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }
+        });
+      };
+
+      $scope.$on('$ionicView.enter', function () {
+        $scope.isActtive = true;
+        $scope.init();
+      });
+
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.isActtive = false;
+      });
+
+      $scope.$on('$stateChangeSuccess', function () {
+        if ($scope.isActtive)
+          $scope.loadMore();
+      });
+
+      $scope.getReturn = function (item) {
+        $state.go('return_request', {orderId: item.order_id}, {reload: true});
+      };
+    })
+
     .controller('OrderRateCtrl', function ($scope, $stateParams, OrderApi) {
       $scope.items = [];
 
@@ -372,7 +412,7 @@
             callback(result);
           }
         );
-      }
+      };
 
       var getOrderList = function (page, filter, callback) {
         var url = apiEndpoint.url + '/member-orders.html';
@@ -425,17 +465,6 @@
         sendRequest(url, data, callback);
       };
 
-      var getReturnIndex = function (orderId, callback) {
-        var url = apiEndpoint.url + '/member-return_index.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          order_id: orderId
-        };
-
-        sendRequest(url, data, callback);
-      };
-
       var getMemberRate = function (orderId, callback) {
         var url = apiEndpoint.url + '/member-member_rate.html';
         var data = {
@@ -452,7 +481,6 @@
         getOrderDetail: getOrderDetail,
         deleteOrder: deleteOrder,
         receiveOrder: receiveOrder,
-        getReturnIndex: getReturnIndex,
         getMemberRate: getMemberRate
       };
     });
