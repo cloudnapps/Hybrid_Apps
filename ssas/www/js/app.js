@@ -9,7 +9,8 @@
 var currentUser = {};
 
 angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'cart',
-  'member', 'order', 'receiver', 'favorite', 'return', 'coupon', 'setting', 'login', 'point'])
+  'member', 'order', 'receiver', 'favorite', 'return', 'coupon', 'setting',
+  'login', 'point', 'seller'])
   .constant("apiEndpoint", {url: "/m"})
   .constant("jsonEndpoint", {url: "/data"})
   // For the real endpoint, we'd use this

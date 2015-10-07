@@ -30,6 +30,10 @@ var translations_zh = {
     login_title: '登录',
     register_title: '新用户注册',
 
+    //seller
+    seller_title:'商户列表',
+    seller_detail: '商戸详情',
+
     //order
     ord_alltitle:'全部',
     ord_nopaytitle: '待付款',
