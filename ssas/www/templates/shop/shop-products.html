@@ -1,5 +1,21 @@
-<ion-view view-title="{{'shop'|translate}}">
-  <ion-content>
+<div class="bar bar-subheader">
+  <div class="button-bar">
+    <button class="button button-light button-small" ng-click="changeOrder()">默认</button>
+    <button class="button button-light button-small icon-right" ng-class="{'ion-arrow-up-c': orderBy === 'buy_count asc', 'ion-arrow-down-c': orderBy === 'buy_count desc'}" ng-click="changeOrder('buy_count')">销量</button>
+    <button class="button button-light button-small icon-right" ng-class="{'ion-arrow-up-c': orderBy === 'price asc', 'ion-arrow-down-c': orderBy === 'price desc'}" ng-click="changeOrder('price')">价格</button>
+    <button class="button button-light button-small">筛选</button>
+  </div>
+</div>
+<ion-view view-title="">
+  <ion-nav-title>
+   <form ng-submit="search(true)">
+    <label class="item item-input">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" placeholder="Search" ng-model="keywords.value">
+    </label>
+    </form>
+  </ion-nav-title>
+  <ion-content class="has-subheader">
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="product in products" type="item-text-wrap" href="#/tab/products/{{product.product_id}}">
         <img ng-src="{{product.image}}">
