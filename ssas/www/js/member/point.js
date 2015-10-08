@@ -25,11 +25,28 @@
               controller: 'PointsCtrl'
             }
           }
+        })
+        .state('golds_index', {
+          url: '/golds/index',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/gold-index.html',
+              controller: 'GoldsCtrl'
+            }
+          }
+        })
+        .state('golds_list', {
+          url: '/golds/list',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/gold-list.html',
+              controller: 'GoldsCtrl'
+            }
+          }
         });
     })
     .controller('PointsCtrl', function ($scope, PointApi) {
       $scope.pointInfo = {};
-      $scope.goldInfo = {};
 
       PointApi.getPointInfo(null, 'point', function (result) {
         if(result.status === 0) {
@@ -37,6 +54,9 @@
           $scope.pointInfo.items = result.data.log;
         }
       });
+    })
+    .controller('GoldsCtrl', function ($scope, PointApi) {
+      $scope.goldInfo = {};
 
       PointApi.getPointInfo(null, 'gold', function (result) {
         if(result.status === 0) {
