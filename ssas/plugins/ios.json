@@ -21,11 +21,15 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"Globalization\"><param name=\"ios-package\" value=\"CDVGlobalization\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Globalization\"><param name=\"ios-package\" value=\"CDVGlobalization\" /></feature>",
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -36,7 +40,7 @@
                     "CoreGraphics.framework": [
                         {
                             "xml": false,
-                            "count": 1
+                            "count": 2
                         }
                     ]
                 }
@@ -53,13 +57,16 @@
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.ionicframework.ssas835659"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.ionicframework.ssas835659"
+        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
-        "cordova-plugin-globalization": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         }
     },

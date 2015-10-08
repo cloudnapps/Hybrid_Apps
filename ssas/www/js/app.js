@@ -8,10 +8,10 @@
 angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home', 'shop', 'cart',
   'member', 'order', 'receiver', 'favorite', 'return', 'coupon', 'setting',
   'login', 'point', 'seller'])
-  .constant("apiEndpoint", {url: "/m"})
+  //.constant("apiEndpoint", {url: "/m"})
   .constant("jsonEndpoint", {url: "/data"})
   // For the real endpoint, we'd use this
-  //.constant("apiEndpoint", {url:"http://bbc.jooau.com/zhongshihua/index.php/m"})
+  .constant("apiEndpoint", {url:"http://bbc.jooau.com/zhongshihua/index.php/m"})
   .run(function ($ionicPlatform, $translate) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
