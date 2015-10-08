@@ -150,6 +150,13 @@
 
          navi.showMapNavigator("07550002F0110050", "1");
       }
+
+      $scope.shake = function()
+      {
+        alert("shake");
+
+        shake.shakeByBeacon();
+      }
     }) // end of SellersListController
 
     .controller('SellerDetailController', function ($scope, $stateParams, $timeout, $ionicSlideBoxDelegate, SellerApi) {

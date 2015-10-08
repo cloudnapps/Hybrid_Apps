@@ -29,6 +29,10 @@
     {
       "locator": "https://github.com/cloudnapps/cordova-qdc-wxpay.git",
       "id": "com.qdc.plugins.wxpay"
+    },
+    {
+      "locator": "https://github.com/cloudnapps/cordova-beacon-shake.git",
+      "id": "com.cloudnapps.plugins.beacon.shake"
     }
   ],
   "cordovaPlatforms": [
