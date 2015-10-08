@@ -14,5 +14,9 @@ function puts(error, stdout, stderr) {
  
 plugins.forEach(function(plugin) {
   console.log('installing ionic plugin', plugin);
-  exec("ionic plugin add " + plugin, puts);
+  if(typeof(plugin) === "string") {
+    exec("ionic plugin add " + plugin, puts);
+  } else if(typeof(plugin) === "object" && plugin.locator !== undefined) {
+    exec("ionic plugin add " + plugin.locator, puts);
+  }
 });
