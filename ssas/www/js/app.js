@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home', 'shop', 'cart',
+angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'components', 'home', 'shop', 'cart',
   'member', 'order', 'receiver', 'favorite', 'return', 'setting',
   'login', 'point', 'seller'])
   .constant("apiEndpoint", {url: "/m"})
