@@ -58,8 +58,10 @@ var translations_zh = {
     rec_addtitle: '新建收货地址',
 
     //point
-    point_title: '积分金币',
+    point_title: '我的积分',
     point_list: '积分记录',
+    gold_title: '我的金币',
+    gold_list: '金币记录',
 
     //setting
     settng_title: '我的信息',

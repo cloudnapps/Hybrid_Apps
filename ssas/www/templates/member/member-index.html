@@ -1,42 +1,123 @@
 <ion-view view-title="{{'me'|translate}}">
   <ion-content class="padding">
 
-    <div class="button-bar">
-      <a class="button button-full button-light" style="font-size:10px;" href="#/favorites/goods">
-        关注的商品
-      </a>
-      <a class="button button-full button-light" style="font-size:10px;" href="#/favorites/sellers">
-        关注的店铺
-      </a>
-      <a class="button button-full button-light" style="font-size:10px;" href="">
-        我的足迹
-      </a>
+    <div class="row" style="padding: 0px;">
+      <div class="col col-50" style="padding: 0px;">
+      </div>
+      <div class="col col-25" style="padding: 0px;">
+        <a class="button button-clear" style="font-size:12px;" href="#/favorites/goods">
+          <p>关注的商品</p>
+        </a>
+      </div>
+      <div class="col col-25" style="padding: 0px;">
+        <a class="button button-clear " style="font-size:12px;" href="#/favorites/sellers">
+          <p>关注的店铺</p>
+        </a>
+      </div>
     </div>
 
-    <div class="list card">
-      <div class="item item-divider" style="padding-left: 5px" ng-click="goDetail(item)">
-        <h2 style="float: left">我的订单</h2>
+    <hr style="height:1px;border:none;border-top:1px solid #bbbbbb;"/>
 
-        <div style="float: right">
-          <a href="#/orders/all">查看所有订单<i class="icon ion-chevron-right icon-accessory"></i></a>
-        </div>
+    <div class="row" style="padding: 0px;">
+      <div class="col col-20 col-center" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/orders/nopay">
+          <p>待付款</p>
+        </a>
       </div>
-      <div class="button-bar">
-        <a class="button button-full button-light" style="font-size:12px;" href="#/orders/nopay">
-          待付款
+      <div class="col col-center">
+        |
+      </div>
+      <div class="col col-20 col-center" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/orders/noship">
+          <p>待发货</p>
         </a>
-        <a class="button button-full button-light" style="font-size:12px;" href="#/orders/noship">
-          待发货
+      </div>
+      <div class="col col-center">
+        |
+      </div>
+      <div class="col col-20" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/orders/shipped">
+          <p>待收货</p>
         </a>
-        <a class="button button-full button-light" style="font-size:12px;" href="#/orders/shipped">
-          待收货
+      </div>
+      <div class="col col-center">
+        |
+      </div>
+      <div class="col col-20" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/returns">
+          <p>售后</p>
         </a>
-        <a class="button button-full button-light" style="font-size:12px;" href="#/orders/nocomment">
-          待评价
-        </a>
-        <a class="button button-full button-light" style="font-size:12px;" href="#/returns">
-          售后
-        </a>
+      </div>
+    </div>
+
+    <hr style="height:1px;border:none;border-top:1px solid #bbbbbb;"/>
+
+    <div class="row" style="padding: 0px;">
+      <div class="col col-90 col-center" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/orders/all">全部订单</a>
+      </div>
+      <div class="col col-10 col-center" style="padding: 0px;">
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+    </div>
+
+    <hr style="height:10px;border:none;border-top:10px solid #dddddd;"/>
+
+    <div class="row" style="padding: 0px;">
+      <div class="col col-90 col-center" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/points/index">我的积分</a>
+      </div>
+      <div class="col col-10 col-center" style="padding: 0px;">
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+    </div>
+    <hr style="height:1px;border:none;border-top:1px solid #bbbbbb;"/>
+    <div class="row" style="padding: 0px;">
+      <div class="col col-90 col-center" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/golds/index">我的金币</a>
+      </div>
+      <div class="col col-10 col-center" style="padding: 0px;">
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+    </div>
+
+    <hr style="height:10px;border:none;border-top:10px solid #dddddd;"/>
+
+    <div class="row" style="padding: 0px;">
+      <div class="col col-90 col-center" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/receivers/index">收货地址管理</a>
+      </div>
+      <div class="col col-10 col-center" style="padding: 0px;">
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+    </div>
+    <hr style="height:1px;border:none;border-top:1px solid #bbbbbb;"/>
+    <div class="row" style="padding: 0px;">
+      <div class="col col-90 col-center" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/idcards/list">身份信息管理</a>
+      </div>
+      <div class="col col-10 col-center" style="padding: 0px;">
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+    </div>
+
+    <hr style="height:10px;border:none;border-top:10px solid #dddddd;"/>
+
+    <div class="row" style="padding: 0px;">
+      <div class="col col-90 col-center" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/favorites/goods">我的收藏</a>
+      </div>
+      <div class="col col-10 col-center" style="padding: 0px;">
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+    </div>
+    <hr style="height:1px;border:none;border-top:1px solid #bbbbbb;"/>
+    <div class="row" style="padding: 0px;">
+      <div class="col col-90 col-center" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/">投诉与建议</a>
+      </div>
+      <div class="col col-10 col-center" style="padding: 0px;">
+        <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
 
@@ -57,42 +138,6 @@
         <a class="button button-full button-light" style="font-size:12px;" href="#/favorites/goods">
           我的收藏
         </a>
-      </div>
-    </div>
-    <div class="button-bar">
-      <div class="row">
-        <div class="col col-90">
-          <a style="font-size:16px;" href="#/tab/member/orders">
-            我的积分
-          </a>
-        </div>
-        <div class="col col-75">
-          <i class="icon ion-chevron-right icon-accessory"></i>
-        </div>
-      </div>
-    </div>
-    <div class="button-bar">
-      <div class="row">
-        <div class="col col-90">
-          <a style="font-size:16px;" href="#/favorites/goods">
-            我的收藏
-          </a>
-        </div>
-        <div class="col">
-          <i class="icon ion-chevron-right icon-accessory"></i>
-        </div>
-      </div>
-    </div>
-    <div class="button-bar">
-      <div class="row">
-        <div class="col col-90">
-          <a style="font-size:16px;" href="#/tab/member/returns">
-            收货地址管理
-          </a>
-        </div>
-        <div>
-          <i class="icon ion-chevron-right icon-accessory"></i>
-        </div>
       </div>
     </div>
   </ion-content>
