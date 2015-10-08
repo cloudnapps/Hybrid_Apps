@@ -60,5 +60,9 @@ var translations_zh = {
     idcard_title: '身份证列表',
     idcard_addbtn: '添加新身份证',
 
+    //return
+    return_title: '售后申请',
+    return_addbtn: '提交申请',
+
     good_category: '商品分类'
 };

@@ -13,51 +13,88 @@
           views: {
             'main-view': {
               templateUrl: 'templates/member/return-request.html',
-              controller: 'ReturnsRequestCtrl'
+              controller: 'ReturnRequestCtrl'
             }
           }
         })
-        .state('tab.return-detail', {
-          url: '/member/returns/:returnId',
+        .state('return_list', {
+          url: '/returns/list',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/return-list.html',
+              controller: 'ReturnListCtrl'
+            }
+          }
+        })
+        .state('return_detail', {
+          url: '/returns/:returnId',
           views: {
             'tab-member': {
-              templateUrl: 'templates/member/detail-return.html',
+              templateUrl: 'templates/member/return-detail.html',
               controller: 'ReturnDetailCtrl'
             }
           }
         });
     })
 
-    .controller('ReturnsRequestCtrl', function ($scope, $stateParams, ReturnApi) {
+    .controller('ReturnRequestCtrl', function ($scope, $stateParams, $state, ReturnApi) {
+      $scope.returnInfo = {};
+      $scope.returnInfo.product = {};
+
       ReturnApi.getReturnIndex($stateParams.orderId, function (result) {
-        if(result.status === 0) {
+        if (result.status === 0) {
           $scope.orderInfo = result.data;
         }
       });
+
+      $scope.select = function (item) {
+        item.selected = true;
+      };
+
+      $scope.submitRequest = function () {
+        if ($scope.returnInfo.isShip) {
+          $scope.returnInfo.returnType = 'reship';
+        }
+        else {
+          $scope.returnInfo.returnType = 'refund';
+        }
+
+        var i;
+        for (i in $scope.orderInfo.product) {
+          if ($scope.orderInfo.product[i].selected) {
+            $scope.returnInfo.product.id = $scope.orderInfo.products[i].product_id;
+            $scope.returnInfo.product.num = $scope.orderInfo.products[i].num;
+          }
+        }
+
+        $scope.returnInfo.products = [
+          {
+            product_id: '542',
+            num: '1'
+          }
+        ];
+
+        ReturnApi.addReturnRequest($scope.orderInfo.order_id, $scope.returnInfo.returnType,
+          $scope.returnInfo.title, $scope.returnInfo.content, $scope.returnInfo.products,
+          function (result) {
+            if (result.status === 0) {
+              $state.go("return_list", {}, {reload: true});
+            }
+          });
+      }
     })
 
-    .controller('ReturnsCtrl', function ($scope, ReturnApi) {
+    .controller('ReturnListCtrl', function ($scope, ReturnApi) {
       $scope.items = [];
 
       ReturnApi.getReturnList(null, null, function (result) {
         $scope.items = result.data;
       });
-
-
-      ReturnApi.getReturnIndex(item.order_id, function (result) {
-        var alertPopup = $ionicPopup.alert({
-          title: '订单售后',
-          template: result.msg
-        });
-        alertPopup.then(function (res) {
-          console.log(res);
-        });
-      })
     })
 
     .controller('ReturnDetailCtrl', function ($scope, $stateParams, ReturnApi) {
       ReturnApi.getReturnDetail($stateParams.returnId, function (result) {
-        if(result.status === 0) {
+        if (result.status === 0) {
           $scope.item = result.data;
         }
       });
@@ -83,16 +120,16 @@
         );
       };
 
-      var addReturnRequest = function (orderId, returnInfo, callback) {
+      var addReturnRequest = function (orderId, type, title, content, products, callback) {
         var url = apiEndpoint.url + '/member-return_save.html';
         var data = {
           member_id: 13,
           token: '11b4f4bd44ee8814d41680dc753a75e4',
           order_id: orderId,
-          return_type: returnInfo.type,
-          title: returnInfo.title,
-          content: returnInfo.content,
-          product_bn: returnInfo.product
+          return_type: type,
+          title: title,
+          content: content,
+          product_bn: products
         };
 
         sendRequest(url, data, callback);
@@ -140,8 +177,8 @@
 
       return {
         getReturnIndex: getReturnIndex,
-        addReturnRequest : addReturnRequest,
-        getReturnDetail : getReturnDetail,
+        addReturnRequest: addReturnRequest,
+        getReturnDetail: getReturnDetail,
         getReturnList: getReturnList
       };
     });
