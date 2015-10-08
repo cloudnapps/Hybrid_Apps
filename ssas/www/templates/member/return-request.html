@@ -37,18 +37,16 @@
             详细描述：
           </div>
           <div class="col col-70">
-            <textarea  placeholder="请输入描述" ng-model="returnInfo.content"></textarea>
+            <textarea placeholder="请输入描述" ng-model="returnInfo.content"></textarea>
           </div>
         </div>
       </div>
 
       <div class="row" ng-repeat="item in orderInfo.product">
         <div class="col col-10">
-          <input type="radio" name="good" ng-checked="item.selected" ng-change="select(item)">
+          <input type="radio" name="good" ng-model="item.selected">
         </div>
         <div class="col col-80">
-          <input type="hidden" value="{{item.product_id}}">
-
           <p>{{item.name}}</p>
 
           <p>数量:{{item.num}}</p>

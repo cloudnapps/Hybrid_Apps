@@ -1,68 +1,149 @@
 <ion-view view-title="">
   <ion-nav-buttons side="left">
-    <div class="row-center">
-      <a class="button button-light" href="#/sellers/index">
-        商户
-      </a>
+    <div class="row row-center" style="padding: 0px;">
+      <div class="col col-center" style="padding: 0px;">
+        <a class="button button-clear" href="#/sellers/index">
+          商户
+        </a>
+      </div>
     </div>
   </ion-nav-buttons>
-  <ion-content class="padding">
-    <ion-list>
-      <ion-item>
-        <div class="row">
-          <div class="col">
-            <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox"
-                           auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
-              <ion-slide ng-repeat="item in slideimgs">
-                <a href="#">
-                  <img style="width: 100%;height: 100%;" ng-src="{{item.image}}">
-                </a>
-              </ion-slide>
-            </ion-slide-box>
-          </div>
-        </div>
-      </ion-item>
-    </ion-list>
-    <div class="list card">
-      <div class="item item-divider" style="padding-left: 5px" ng-click="goDetail(item)">
-        <h2 style="float: left">商品分类</h2>
+  <ion-nav-buttons side="right">
+    <div class="row row-center" style="padding: 0px;">
+      <div class="col col-center" style="padding: 0px;">
+        <button class="button button-clear" ng-click="openPopover($event)">
+          发现
+        </button>
       </div>
-      <div class="item item-body" style="padding-left: 5px">
-        <div class="button-bar">
-          <div style="padding: 0px" class="row">
-            <div style="padding: 0px" class="col col-20" ng-repeat="category in homeInfo.third">
-              <button style="padding: 1px">
-                <img style="width: 100%;height: 80%;" ng-src="{{category.image}}">
-
-                <p style="width: 100%;height: 20%;">{{category.name}}</p>
-              </button>
+    </div>
+    <script id="findPopover.html" type="text/ng-template">
+      <ion-popover-view style="width: 80px; height: 100px;">
+        <ion-content>
+          <div class="row row-center" style="padding: 0px;">
+            <div class="col col-center" style="padding: 0px;">
+              <a class="button button-clear" href="#/sellers/index">
+                摇一摇
+              </a>
             </div>
           </div>
-        </div>
+          <div class="row row-center" style="padding: 0px;">
+            <div class="col col-center" style="padding: 0px;">
+              <a class="button button-clear" href="#/sellers/index">
+                签个到
+              </a>
+            </div>
+          </div>
+        </ion-content>
+      </ion-popover-view>
+    </script>
+  </ion-nav-buttons>
+  <ion-content class="padding">
+    <div class="row" style="padding: 0px; width: 100%; height: 200px">
+      <div class="col col-center" style="padding: 0px; width: 100%; height: 100%">
+        <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox" style="width: 100%; height: 100%"
+                       auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
+          <ion-slide ng-repeat="item in slideimgs" style="width: 100%; height: 100%">
+            <a href="#">
+              <img style="width:100%; height:100%" ng-src="{{item.image}}">
+            </a>
+          </ion-slide>
+        </ion-slide-box>
       </div>
     </div>
-    <div class="list card">
-      <div class="item item-divider" style="padding-left: 5px" ng-click="goDetail(item)">
-        <h2 style="float: left">热门商品</h2>
-      </div>
-      <div class="item item-body" style="padding-left: 5px">
-        <div class="row" ng-repeat="product in homeInfo.fourth" ng-if="$index % 2 === 0">
-          <div class="col col-50">
-            <button class="button-light button-full" style="height: 100%;">
-              <img style="width: 100%;height: 70%;" ng-src="{{homeInfo.fourth[$index].image}}">
 
-              <p style="width: 100%;">{{homeInfo.fourth[$index].name}}</p>
-            </button>
-          </div>
-          <div class="col col-50">
-            <button class="button-light button-full" style="height: 100%">
-              <img style="width: 100%;height: 70%;" ng-src="{{homeInfo.fourth[$index+1].image}}">
+    <hr style="height:2px;border:none;border-top:2px solid #eeeeee;"/>
 
-              <p style="width: 100%;">{{homeInfo.fourth[$index+1].name}}</p>
-            </button>
-          </div>
-        </div>
+    <div class="row" style="padding: 0px;width: 100%; height: 50px">
+      <div class="col col-25 col-center" style="padding: 0px; width: 100%; height: 100%"
+           ng-repeat="category in homeInfo.third">
+        <a class="button button-clear" style="padding: 1px; width: 100%; height: 100%">
+          <img style="width: 80%; height: 100%" ng-src="{{category.image}}">
+          <!--<p style="width: 80%;height: 30%;">{{category.name}}</p>-->
+        </a>
       </div>
     </div>
+
+    <hr style="height:2px;border:none;border-top:15px solid #eeeeee;"/>
+
+    <div class="row" style="padding: 0px;">
+      <div class="col col-80 col-center" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/orders/all">推荐商户</a>
+      </div>
+      <div class="col col-20 col-center" style="padding: 0px;" align="right">
+        <p>更多>></p>
+      </div>
+    </div>
+    <div class="row" style="padding: 0px; width: 100%; height: 50px"
+         ng-repeat="item in sellerInfo.items" ng-if="$index % 4 === 0">
+      <div class="col col-25" style="height: 100%; padding: 0px">
+        <button class="button button-light button-full" style="padding: 0px; height: 100%;">
+          <img style="width:90%; height:70%;" ng-src="{{sellerInfo.items[$index].image}}">
+
+          <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
+        </button>
+      </div>
+
+      <div class="col col-25" style="height: 100%; padding: 0px">
+        <button class="button button-light button-full" style="padding: 0px; height: 100%;">
+          <img style="width: 90%;height: 70%;" ng-src="{{sellerInfo.items[$index+1].image}}">
+
+          <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
+        </button>
+      </div>
+
+      <div class="col col-25" style="height: 100%; padding: 0px">
+        <button class="button button-light button-full" style="padding: 0px; height: 100%;">
+          <img style="width: 90%;height: 70%;" ng-src="{{sellerInfo.items[$index+2].image}}">
+
+          <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
+        </button>
+      </div>
+
+      <div class="col col-25" style="height: 100%; padding: 0px">
+        <button class="button button-light button-full" style="padding: 0px; height: 100%;">
+          <img style="width: 90%;height: 70%;" ng-src="{{sellerInfo.items[$index+3].image}}">
+
+          <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
+        </button>
+      </div>
+    </div>
+
+    <hr style="height:2px;border:none;border-top:15px solid #eeeeee;"/>
+
+    <div class="row" style="padding: 0px;">
+      <div class="col col-80 col-center" style="padding: 0px;">
+        <a class="button button-clear" style="color: #333333" href="#/orders/all">热门商品</a>
+      </div>
+      <div class="col col-20 col-center" style="padding: 0px;" align="right">
+        <p>更多>></p>
+      </div>
+    </div>
+    <div class="row" style="padding: 0px; width: 100%; height: 100px"
+         ng-repeat="product in homeInfo.fourth" ng-if="$index % 3 === 0">
+      <div class="col col-33" style="height: 100%; padding: 0px">
+        <button class="button button-light button-full" style="padding: 0px; height: 100%;">
+          <img style="width:90%; height:70%;" ng-src="{{homeInfo.fourth[$index].image}}">
+
+          <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
+        </button>
+      </div>
+
+      <div class="col col-33" style="height: 100%; padding: 0px">
+        <button class="button button-light button-full" style="padding: 0px; height: 100%;">
+          <img style="width: 90%;height: 70%;" ng-src="{{homeInfo.fourth[$index+1].image}}">
+
+          <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
+        </button>
+      </div>
+
+      <div class="col col-33" style="height: 100%; padding: 0px">
+        <button class="button button-light button-full" style="padding: 0px; height: 100%;">
+          <img style="width: 90%;height: 70%;" ng-src="{{homeInfo.fourth[$index+2].image}}">
+
+          <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
+        </button>
+      </div>
+    </div>
+
   </ion-content>
 </ion-view>
