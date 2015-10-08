@@ -46,6 +46,12 @@ var translations_zh = {
     fav_goods: '商品',
     fav_sellers: '店铺',
 
+    good_category: '商品分类',
+    rec_title: '地址管理',
+    product_detail: '商品详情',
+    mkt_price: '市场价格',
+
+    comment: '评论',
     //receiver
     rec_title: '地址管理',
     rec_addbtn: '添加新地址',

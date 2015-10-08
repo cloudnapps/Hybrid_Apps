@@ -6,8 +6,6 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-var currentUser = {};
-
 angular.module('starter', ['ionic', 'pascalprecht.translate', 'home', 'shop', 'cart',
   'member', 'order', 'receiver', 'favorite', 'return', 'coupon', 'setting',
   'login', 'point', 'seller'])

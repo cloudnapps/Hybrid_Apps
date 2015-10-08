@@ -28,7 +28,7 @@
         });
     })
 
-    .controller('LoginCtrl', function ($scope, $ionicPopup, LoginApi) {
+    .controller('LoginCtrl', function ($scope, $ionicPopup, userService, LoginApi) {
       $scope.userInfo = {};
 
       $scope.login = function () {
@@ -43,9 +43,16 @@
             });
           }
           else {
+            var currentUser = {};
             currentUser.memberId = result.data.member_id;
             currentUser.name = result.data.login_name;
             currentUser.token = result.data.token;
+
+            userService.saveUser(currentUser);
+            console.log(userService.get());
+            console.log(userService.get('memberId'));
+            console.log(userService.get('name'));
+            console.log(userService.get('token'));
           }
         });
       };
