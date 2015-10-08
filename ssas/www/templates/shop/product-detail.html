@@ -1,0 +1,23 @@
+<ion-view view-title="{{'product_detail'|translate}}" class="product">
+  <ion-content>
+    <ion-slide-box show-pager="true" does-continue="true" auto-play="true">
+        <ion-slide ng-repeat="image in product.urls">
+          <img ng-src="{{image}}"/>          
+        </ion-slide>
+    </ion-slide-box>
+    <section class="padding">
+      <h4>{{product.name}} {{product.brief}}</h4>
+      <label class="assertive">{{product.price|currency:'￥'}}</label><br/>
+      <label class="stroke">{{'mkt_price'|translate}}:{{product.mktprice|currency:'￥'}}</label>      
+    </section>    
+    <hr></hr>
+    <section class="padding">
+      <h4 class>规格</h4>
+    </section> 
+    <hr></hr>
+    <section class="padding">
+      <h4 class="title">{{'comment'|translate}}</h4>
+    </section>
+  </ion-content>  
+  
+</ion-view>

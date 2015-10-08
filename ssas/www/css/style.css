@@ -1,4 +1,22 @@
 /* Empty. Add your own CSS if you like */
+hr {
+  border-width: 0 0 1px 0;
+}
+
+.stroke {
+  text-decoration: line-through;
+}
+
+.product .slider {
+  height: 200px;
+}
+.product .slider-slide {
+  text-align: center;
+}
+
+.product .slider-slide img {
+  height: 100%;
+}
 
 .pic {
   max-width: 40px;
