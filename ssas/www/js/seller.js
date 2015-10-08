@@ -23,7 +23,7 @@
         })
     }) // end of config
 
-    .controller('SellerListController', function ($scope, $state, SellerApi) {
+    .controller('SellerListController', function ($scope, $state, $cordovaInAppBrowser, SellerApi) {
       $scope.items = [];
 
       $scope.init = function () {
@@ -64,6 +64,32 @@
       $scope.goDetail = function (item) {
         $state.go("seller_detail", {sellerId: item.seller_id}, {reload: true});
       };
+
+      //test plugin features
+      $scope.openWeb = function()
+      {
+          alert("web");
+          var options = {
+              location: 'yes',
+              clearcache: 'yes',
+              toolbar: 'no'
+          };
+          $cordovaInAppBrowser.open('http://map.baidu.com/mobile/webapp/index/index/qt=s&\
+            wd=深圳前海自贸区&wd2=深圳市南山区&c=340&searchFlag=bigBox&version=5&\
+            exptype=dep/vt=map/?fromhash=1#search/search/foo=bar&qt=s&wd=深圳前海自贸区临海大道59号&\
+            c=340&searchFlag=more_cate&nb_x=12677951.18&nb_y=2555982&center_rank=1&center_name=海运中心/nb_x=12677951.18&\
+            nb_y=2555982&center_name=海运中心&type=searchnearby&from=searchnearby&vt=map&ecom=0', '_self', options)
+
+          //$cordovaInAppBrowser.open('http://www.baidu.com', '_self', options)
+
+          .then(function(event) {
+                                          // success
+                                      })
+          .catch(function(event) {
+                                     // error
+                                       });
+          //$cordovaInAppBrowser.close();
+      }
     }) // end of SellersListController
 
     .controller('SellerDetailController', function ($scope, $stateParams, $timeout, $ionicSlideBoxDelegate, SellerApi) {

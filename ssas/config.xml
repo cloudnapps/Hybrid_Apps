@@ -16,6 +16,16 @@
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
+  <preference name="deployment-target" value="8.0" />
+  <preference name="serverURL" value="http://demo.k11.cloudnapps.com" />
+  <preference name="appKey" value="55acbc244c5d009b0659184f" />
+  <preference name="appSecret" value="c76e5dc6-059a-4dbf-b096-f16ed24aee46" />
+  <preference name="beaconUUID" value="1397E5D0-E1C7-472F-A1B4-8A2078014CED" />
+  <preference name="cityID" value="0755" />
+  <preference name="buildingID" value="07550002" />
+  <preference name="userID" value="ty4e13f85911a44a75" />
+  <preference name="licenseID" value="f2dd57111c0g31di60dcanffdddb2c32" />
+  <preference name="beaconMajor" value="1" />
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
