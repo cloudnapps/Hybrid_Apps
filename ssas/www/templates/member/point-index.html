@@ -1,6 +1,9 @@
 <ion-view view-title="{{'point_title'|translate}}">
   <ion-content>
     <div class="list card">
+      <div class="item item-divider" style="padding-left: 5px">
+        <h2 style="float: left">我的积分</h2>
+      </div>
       <div class="item item-body" style="padding-left: 5px">
         <div class="row">
           <div class="col col-100">
@@ -13,6 +16,26 @@
           </div>
           <div class="col col-50" align="right">
             <p>消费型积分：{{pointInfo.salesTotal}}分</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider" style="padding-left: 5px">
+        <h2 style="float: left">我的金币</h2>
+      </div>
+      <div class="item item-body" style="padding-left: 5px">
+        <div class="row">
+          <div class="col col-100">
+            <h1 class="title">{{pointInfo.total * 3}}个</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-50">
+            <p>活动型金币：{{pointInfo.actTotal * 3}}个</p>
+          </div>
+          <div class="col col-50" align="right">
+            <p>消费型金币：{{pointInfo.salesTotal * 3}}个</p>
           </div>
         </div>
       </div>

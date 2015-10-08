@@ -5,23 +5,50 @@
         <h2 style="float: left">订单号：{{orderInfo.order_id}}</h2>
       </div>
 
-      <div class="item" style="padding-left: 5px" ng-repeat="item in orderInfo.product">
+      <div class="item item-body" style="padding-left: 5px">
         <div class="row">
-          <div class="col col-5">
-            <img class="pic" ng-src="{{item.url}}">
+          <div class="col col-33">
+            申请标题：
           </div>
           <div class="col col-70">
-            <div class="row">
-              <p style="float:right">{{item.name}}</p>
-            </div>
-            <div class="row">
-              <p style="float: left">{{item.price | currency: '￥'}}数量:{{item.num}}</p>
-            </div>
+            <input type="text" placeholder="请输入标题">
           </div>
-          <div class="col col-15 item-input">
-            <input type="text" ng-model="orderInfo.product.requestNum">
+        </div>
+        <div class="row">
+          <div class="col col-33">
+            申请类型：
+          </div>
+          <div class="col">
+            <input type="radio" name="group"> 退货
+          </div>
+          <div class="col">
+            <input type="radio" name="group"> 退款
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-33">
+            详细描述：
+          </div>
+          <div class="col col-70">
+            <input type="text" placeholder="请输入描述">
           </div>
         </div>
       </div>
+
+      <div class="row" ng-repeat="item in orderInfo.product">
+        <div class="col col-10">
+          <input type="radio" name="group">
+        </div>
+        <div class="col col-80">
+          <p>{{item.name}}</p>
+
+          <p>数量:{{item.num}}</p>
+        </div>
+        <div class="col col-10">
+          <input type="text" ng-model="orderInfo.product.requestNum">
+        </div>
+      </div>
+    </div>
+    </div>
   </ion-content>
 </ion-view>

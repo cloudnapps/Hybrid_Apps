@@ -1,0 +1,30 @@
+<ion-view view-title="{{'rec_addtitle'|translate}}">
+  <ion-nav-buttons side="right">
+    <div>
+      <button class="button button-icon icon ion-ios-upload" ng-click="add()">
+      </button>
+    </div>
+  </ion-nav-buttons>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">姓名：</span>
+        <input type="text" ng-model="idCardInfo.name" placeholder="姓名">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">身份证号：</span>
+        <input type="text" ng-model="idCardInfo.number" placeholder="手机号码">
+      </label>
+      <label class="item item-toggle">
+        是否默认
+        <label class="toggle">
+          <input type="checkbox" ng-model="idCardInfo.default">
+
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </label>
+    </div>
+  </ion-content>
+</ion-view>

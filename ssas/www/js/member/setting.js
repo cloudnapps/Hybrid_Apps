@@ -16,17 +16,67 @@
               controller: 'SettingCtrl'
             }
           }
+        })
+        .state('idcards_list', {
+          url: '/idcards/list',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/idcard-list.html',
+              controller: 'IdCardsCtrl'
+            }
+          }
+        })
+        .state('idcards_add', {
+          url: '/idcards/add',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/idcard-add.html',
+              controller: 'IdCardAddCtrl'
+            }
+          }
         });
     })
 
-    .controller('SettingCtrl', function ($scope, SettingApi) {
+    .controller('SettingCtrl', function ($scope, $state, SettingApi) {
       $scope.item = {};
 
       SettingApi.getMemberSetting(function (result) {
         $scope.item = result.data;
       });
 
+      $scope.getIdCardList = function () {
+        $state.go("idcards_list", {}, {reload: true});
+      }
+    })
 
+    .controller('IdCardsCtrl', function ($scope, SettingApi) {
+      $scope.items = {};
+
+      SettingApi.getIdCardList(function (result) {
+        $scope.items = result.data;
+      });
+    })
+
+    .controller('IdCardAddCtrl', function ($scope, $ionicPopup, SettingApi) {
+      $scope.idCardInfo = {};
+
+      $scope.add = function () {
+        var data = {
+          full_name: $scope.idCardInfo.name,
+          number: $scope.idCardInfo.number,
+          is_default: $scope.idCardInfo.default
+        };
+
+        SettingApi.addIdCard(data, function (result) {
+          var alertPopup = $ionicPopup.alert({
+            title: '添加身份信息',
+            template: result.msg
+          });
+          alertPopup.then(function (res) {
+            console.log(res);
+          });
+        })
+      };
     })
 
     .factory('SettingApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
@@ -83,10 +133,33 @@
         sendRequest(url, data, callback);
       };
 
+      var getIdCardList = function (callback) {
+        var url = apiEndpoint.url + '/member-idcard_list.html';
+        var data = {
+          member_id: 13,
+          token: '11b4f4bd44ee8814d41680dc753a75e4'
+        };
+
+        sendRequest(url, data, callback);
+      };
+
+      var addIdCard = function (params, callback) {
+        var url = apiEndpoint.url + '/member-add_idcart.html';
+        var data = {
+          member_id: 13,
+          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          params: params
+        };
+
+        sendRequest(url, data, callback);
+      };
+
       return {
         getMemberSetting: getMemberSetting,
         modifyMemberSetting: modifyMemberSetting,
-        modifyMemberPassword: modifyMemberPassword
+        modifyMemberPassword: modifyMemberPassword,
+        getIdCardList: getIdCardList,
+        addIdCard: addIdCard
       };
     });
 })();

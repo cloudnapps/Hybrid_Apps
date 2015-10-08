@@ -52,11 +52,13 @@ var translations_zh = {
     rec_addtitle: '新建收货地址',
 
     //point
-    point_title: '我的积分',
+    point_title: '积分金币',
     point_list: '积分记录',
 
     //setting
     settng_title: '我的信息',
+    idcard_title: '身份证列表',
+    idcard_addbtn: '添加新身份证',
 
     good_category: '商品分类'
 };
