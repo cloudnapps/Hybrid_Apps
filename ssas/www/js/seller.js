@@ -70,7 +70,7 @@
       {
           alert("web");
           var options = {
-              location: 'yes',
+              location: 'no',
               clearcache: 'yes',
               toolbar: 'no'
           };
@@ -142,6 +142,13 @@
         {
            alert(cb_failure);
         });
+      }
+
+      $scope.showMap = function()
+      {
+         alert("navi");
+
+         navi.showMapNavigator("07550002F0110050", "1");
       }
     }) // end of SellersListController
 

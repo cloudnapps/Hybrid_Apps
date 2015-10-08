@@ -72,5 +72,14 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.plugins.beacon.navi": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cloudnapps/cordova-beacon-navi.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
