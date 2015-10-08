@@ -21,7 +21,11 @@
     "cordova-plugin-splashscreen",
     "com.ionic.keyboard",
     "cordova-plugin-inappbrowser",
-    "cordova-plugin-globalization"
+    "cordova-plugin-globalization",
+    {
+      "locator": "https://github.com/cloudnapps/cordova-qdc-alipay.git",
+      "id": "com.qdc.plugins.alipay"
+    }
   ],
   "cordovaPlatforms": [
     "ios",

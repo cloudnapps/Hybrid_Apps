@@ -1,0 +1,134 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', '-g', 'install', 'weinre' ]
+2 info using npm@2.9.1
+3 info using node@v0.12.3
+4 verbose install initial load of /usr/local/lib/package.json
+5 verbose readDependencies loading dependencies from /usr/local/lib/package.json
+6 silly cache add args [ 'weinre', null ]
+7 verbose cache add spec weinre
+8 silly cache add parsed spec { raw: 'weinre',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'weinre',
+8 silly cache add   rawSpec: '',
+8 silly cache add   spec: '*',
+8 silly cache add   type: 'range' }
+9 silly addNamed weinre@*
+10 verbose addNamed "*" is a valid semver range for weinre
+11 silly addNameRange { name: 'weinre', range: '*', hasData: false }
+12 silly mapToRegistry name weinre
+13 silly mapToRegistry using default registry
+14 silly mapToRegistry registry https://registry.npmjs.org/
+15 silly mapToRegistry uri https://registry.npmjs.org/weinre
+16 verbose addNameRange registry:https://registry.npmjs.org/weinre not in flight; fetching
+17 verbose request uri https://registry.npmjs.org/weinre
+18 verbose request no auth needed
+19 info attempt registry request try #1 at 4:13:10 PM
+20 verbose request id 117348e02cac8a1e
+21 http request GET https://registry.npmjs.org/weinre
+22 http 200 https://registry.npmjs.org/weinre
+23 silly get cb [ 200,
+23 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+23 silly get     etag: '"9QCJHHFES350KGT627Y19ZKB8"',
+23 silly get     'content-type': 'application/json',
+23 silly get     'cache-control': 'max-age=60',
+23 silly get     'content-length': '18594',
+23 silly get     'accept-ranges': 'bytes',
+23 silly get     date: 'Thu, 08 Oct 2015 08:13:11 GMT',
+23 silly get     via: '1.1 varnish',
+23 silly get     age: '0',
+23 silly get     connection: 'keep-alive',
+23 silly get     'x-served-by': 'cache-itm7426-ITM',
+23 silly get     'x-cache': 'HIT',
+23 silly get     'x-cache-hits': '1',
+23 silly get     'x-timer': 'S1444291991.264988,VS0,VE177',
+23 silly get     vary: 'Accept' } ]
+24 verbose get saving weinre to /Users/leonfu/.npm/registry.npmjs.org/weinre/.cache.json
+25 silly addNameRange number 2 { name: 'weinre', range: '*', hasData: true }
+26 silly addNameRange versions [ 'weinre',
+26 silly addNameRange   [ '2.0.0-pre-H0WTHDO5-incubating',
+26 silly addNameRange     '2.0.0-pre-H1GCS73N-incubating',
+26 silly addNameRange     '2.0.0-pre-H3FWTQKQ-incubating',
+26 silly addNameRange     '2.0.0-pre-H41DGW8S-incubating',
+26 silly addNameRange     '2.0.0-pre-H8EOSCLN-incubating',
+26 silly addNameRange     '2.0.0-pre-H9PU2WST-incubating',
+26 silly addNameRange     '2.0.0-pre-HA5N9T49',
+26 silly addNameRange     '2.0.0-pre-HG9PLCRF',
+26 silly addNameRange     '2.0.0-pre-HH0SN197',
+26 silly addNameRange     '2.0.0-pre-HYFXM3QM',
+26 silly addNameRange     '2.0.0-pre-HZ79PDUK',
+26 silly addNameRange     '2.0.0-pre-HZO3BMNG',
+26 silly addNameRange     '2.0.0-pre-I0Z7U9OV' ] ]
+27 silly addNamed weinre@2.0.0-pre-I0Z7U9OV
+28 verbose addNamed "2.0.0-pre-I0Z7U9OV" is a plain semver version for weinre
+29 silly mapToRegistry name weinre
+30 silly mapToRegistry using default registry
+31 silly mapToRegistry registry https://registry.npmjs.org/
+32 silly mapToRegistry uri https://registry.npmjs.org/weinre
+33 verbose addRemoteTarball https://registry.npmjs.org/weinre/-/weinre-2.0.0-pre-I0Z7U9OV.tgz not in flight; adding
+34 verbose addRemoteTarball [ 'https://registry.npmjs.org/weinre/-/weinre-2.0.0-pre-I0Z7U9OV.tgz',
+34 verbose addRemoteTarball   'fef8aa223921f7b40bbbbd4c3ed4302f6fd0a813' ]
+35 info retry fetch attempt 1 at 4:13:11 PM
+36 info attempt registry request try #1 at 4:13:11 PM
+37 http fetch GET https://registry.npmjs.org/weinre/-/weinre-2.0.0-pre-I0Z7U9OV.tgz
+38 http fetch 200 https://registry.npmjs.org/weinre/-/weinre-2.0.0-pre-I0Z7U9OV.tgz
+39 silly fetchAndShaCheck shasum fef8aa223921f7b40bbbbd4c3ed4302f6fd0a813
+40 verbose addTmpTarball /var/folders/9h/q3spv_hs0w9_6__rslplk16h0000gp/T/npm-24885-1b060cbb/registry.npmjs.org/weinre/-/weinre-2.0.0-pre-I0Z7U9OV.tgz not in flight; adding
+41 verbose addTmpTarball already have metadata; skipping unpack for weinre@2.0.0-pre-I0Z7U9OV
+42 silly cache afterAdd weinre@2.0.0-pre-I0Z7U9OV
+43 verbose afterAdd /Users/leonfu/.npm/weinre/2.0.0-pre-I0Z7U9OV/package/package.json not in flight; writing
+44 verbose afterAdd /Users/leonfu/.npm/weinre/2.0.0-pre-I0Z7U9OV/package/package.json written
+45 silly install resolved [ { name: 'weinre',
+45 silly install resolved     description: 'WEb INspector REmote',
+45 silly install resolved     author: { name: 'apache.org' },
+45 silly install resolved     version: '2.0.0-pre-I0Z7U9OV',
+45 silly install resolved     tags: [ 'debug' ],
+45 silly install resolved     licenses: [ [Object] ],
+45 silly install resolved     engines: { node: '>=0.6.0' },
+45 silly install resolved     directories: { lib: './lib' },
+45 silly install resolved     dependencies: { express: '2.5.x', nopt: '3.0.x', underscore: '1.7.x' },
+45 silly install resolved     devDependencies: { 'coffee-script': '1.8.x' },
+45 silly install resolved     main: './lib/weinre',
+45 silly install resolved     bin: { weinre: './weinre' },
+45 silly install resolved     homepage: 'http://people.apache.org/~pmuellr/weinre/',
+45 silly install resolved     bugs: { url: 'https://issues.apache.org/jira/secure/IssueNavigator!executeAdvanced.jspa?jqlQuery=project%3DCB+and+component%3Dweinre&runQuery=true&clear=true' },
+45 silly install resolved     repository:
+45 silly install resolved      { type: 'git',
+45 silly install resolved        url: 'https://git-wip-us.apache.org/repos/asf/cordova-weinre.git' },
+45 silly install resolved     _id: 'weinre@2.0.0-pre-I0Z7U9OV',
+45 silly install resolved     scripts: {},
+45 silly install resolved     _shasum: 'fef8aa223921f7b40bbbbd4c3ed4302f6fd0a813',
+45 silly install resolved     _from: 'weinre@*',
+45 silly install resolved     _npmVersion: '2.1.2',
+45 silly install resolved     _nodeVersion: '0.10.31',
+45 silly install resolved     _npmUser: { name: 'pmuellr', email: 'pmuellr@apache.org' },
+45 silly install resolved     maintainers: [ [Object] ],
+45 silly install resolved     dist:
+45 silly install resolved      { shasum: 'fef8aa223921f7b40bbbbd4c3ed4302f6fd0a813',
+45 silly install resolved        tarball: 'http://registry.npmjs.org/weinre/-/weinre-2.0.0-pre-I0Z7U9OV.tgz' },
+45 silly install resolved     _resolved: 'https://registry.npmjs.org/weinre/-/weinre-2.0.0-pre-I0Z7U9OV.tgz' } ]
+46 info install weinre@2.0.0-pre-I0Z7U9OV into /usr/local/lib
+47 info installOne weinre@2.0.0-pre-I0Z7U9OV
+48 verbose installOne of weinre to /usr/local/lib not in flight; installing
+49 warn locking Error: EACCES, open '/Users/leonfu/.npm/_locks/weinre-09366353381adbca.lock'
+49 warn locking     at Error (native)
+49 warn locking  /Users/leonfu/.npm/_locks/weinre-09366353381adbca.lock failed { [Error: EACCES, open '/Users/leonfu/.npm/_locks/weinre-09366353381adbca.lock']
+49 warn locking   errno: -13,
+49 warn locking   code: 'EACCES',
+49 warn locking   path: '/Users/leonfu/.npm/_locks/weinre-09366353381adbca.lock' }
+50 verbose stack Error: Attempt to unlock /usr/local/lib/node_modules/weinre, which hasn't been locked
+50 verbose stack     at unlock (/usr/local/lib/node_modules/npm/lib/utils/locker.js:66:11)
+50 verbose stack     at cb (/usr/local/lib/node_modules/npm/lib/install.js:1015:5)
+50 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:1019:20
+50 verbose stack     at /usr/local/lib/node_modules/npm/lib/utils/locker.js:40:9
+50 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:149:38)
+50 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:177:38
+50 verbose stack     at FSReqWrap.oncomplete (fs.js:95:15)
+51 verbose cwd /Users/leonfu/Workspace/Hybrid_Apps/ssas
+52 error Darwin 15.0.0
+53 error argv "node" "/usr/local/bin/npm" "-g" "install" "weinre"
+54 error node v0.12.3
+55 error npm  v2.9.1
+56 error Attempt to unlock /usr/local/lib/node_modules/weinre, which hasn't been locked
+57 error If you need help, you may report this error at:
+57 error     <https://github.com/npm/npm/issues>
+58 verbose exit [ 1, true ]

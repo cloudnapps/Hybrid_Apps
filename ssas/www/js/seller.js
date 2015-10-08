@@ -90,6 +90,36 @@
                                        });
           //$cordovaInAppBrowser.close();
       }
+
+      $scope.payByAlipay = function()
+      {
+        alert("alipay");
+        var payObj = {};
+        payObj["pay_info"] = 
+        "partner=\"2088101568353491\"&"
+        +"seller_id=\"2088101568353491\"&"
+        +"out_trade_no=\"YR2VGG3G1I31XDZ\"&"
+        +"subject=\"1\"&"
+        +"body=\"我是测试数据\"&"
+        +"total_fee=\"0.02\"&"
+        +"notify_url=\"http://www.xxx.com\"&"
+        +"service=\"mobile.securitypay.pay\"&"
+        +"payment_type=\"1\"&"
+        +"_input_charset=\"utf-8\"&"
+        +"it_b_pay=\"30m\"&"
+        +"show_url=\"m.alipay.com\"&"
+        +"sign=\"GsSZgPloF1vn52XAItRAldwQAbzIgkDyByCxMfTZG%2FMapRoyrNIJo4U1LUGjHp6gdBZ7U8jA1kljLPqkeGv8MZigd3kH25V0UK3Jc3C94Ngxm5S%2Fz5QsNr6wnqNY9sx%2Bw6DqNdEQnnks7PKvvU0zgsynip50lAhJmflmfHvp%2Bgk%3D\"&sign_type=\"RSA\"";
+        var paymentString = JSON.stringify(payObj);
+
+        alipay.payment(paymentString, function(cb_success)
+        {
+           alert(cb_success);
+        },
+        function(cb_failure)
+        {
+           alert(cb_failure);
+        });
+      }
     }) // end of SellersListController
 
     .controller('SellerDetailController', function ($scope, $stateParams, $timeout, $ionicSlideBoxDelegate, SellerApi) {
