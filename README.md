@@ -2,6 +2,11 @@
 
     $ npm install -g cordova ionic 
 
+# Install all plugins
+    
+    //It will iterate all cordova plugin in package.json and install each
+    $ node install-plugins.js
+
 # Launch app in browser
 
     $ ionic serve
