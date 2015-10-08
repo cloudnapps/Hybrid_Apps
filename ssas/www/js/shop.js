@@ -21,6 +21,15 @@
           }
         }
       })
+      .state('tab.search', {
+        url: '/search?keywords&categoryId',
+        views: {
+          'tab-shop': {
+            templateUrl: 'templates/shop/shop-products-search.html',
+            controller: 'ShopController'
+          }
+        }
+      })
       .state('tab.product', {
         url: '/products/:productId',
         views: {
@@ -88,15 +97,24 @@
     $scope.products = [];
     $scope.page = 1;
     $scope.categoryId = $stateParams.categoryId;
+    $scope.keywords = {value: ''};
     $scope.filter = {};
+    if($stateParams.keywords) {
+      $scope.filter.keywords = $stateParams.keywords;
+      $scope.keywords.value = $stateParams.keywords;
+    }
     $scope.filter.cat_id = $scope.categoryId;
     $scope.hasMore = false;
 
     $scope.getProducts = function() {
-      shopApi.getGallery({   
-          page: $scope.page, 
+      var query = {   
+        page: $scope.page, 
         filter: $scope.filter
-      }).then(function (result) {
+      };
+      if ($scope.orderBy) {
+        query.orderBy = $scope.orderBy
+      }
+      shopApi.getGallery(query).then(function (result) {
         if (result.data.data != undefined && result.data.data.length > 0) {
           for(var i = 0; i < result.data.data.length; i++) {
             $scope.products.push(result.data.data[i]);  
@@ -113,6 +131,49 @@
       $scope.page ++;
       $scope.getProducts();
     };  
+
+    $scope.search = function(isPage){
+      if (isPage) {
+        $state.go('tab.search', {
+          keywords: $scope.keywords.value,
+          categoryId: $stateParams.categoryId
+        });
+      }
+      else {
+        $scope.filter.keywords = $scope.keywords.value;
+        clearData();
+        $scope.getProducts();  
+      }
+    };
+
+    $scope.changeOrder = function(type){
+      if (type === 'price') {
+        if ($scope.orderBy === 'price asc') {
+          $scope.orderBy = 'price desc';
+        }
+        else {
+          $scope.orderBy = 'price asc';
+        }
+      }
+      else if(type === 'buy_count'){
+        if ($scope.orderBy === 'buy_count asc') {
+          $scope.orderBy = 'buy_count desc';
+        }
+        else {
+          $scope.orderBy = 'buy_count asc';
+        }
+      }
+      else {
+        $scope.orderBy = '';
+      }
+      clearData();
+      $scope.getProducts();    
+    };
+
+    function clearData(){
+      $scope.page = 1;
+      $scope.products.length = 0;
+    }
 
     $scope.getProducts();    
     // $scope.chats = Chats.all();
