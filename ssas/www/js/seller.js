@@ -120,6 +120,29 @@
            alert(cb_failure);
         });
       }
+
+      $scope.payByWechat = function()
+      {
+        alert("wxPay");
+        var payObj = {};
+        payObj["appid"] = "1234";
+        payObj["noncestr"] = "asdaseraerasdfasdf";
+        payObj["package"] = "pakdage";
+        payObj["partnerid"] = "4321";
+        payObj["prepayid"] = "12414124";
+        payObj["timestamp"] = "20151005";
+        payObj["sign"] = "dfasldfoasifasdfas";
+        var paymentString = JSON.stringify(payObj);
+
+        wxpay.payment(paymentString, function(cb_success)
+        {
+           alert(cb_success);
+        },
+        function(cb_failure)
+        {
+           alert(cb_failure);
+        });
+      }
     }) // end of SellersListController
 
     .controller('SellerDetailController', function ($scope, $stateParams, $timeout, $ionicSlideBoxDelegate, SellerApi) {
