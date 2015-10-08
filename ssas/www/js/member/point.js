@@ -29,16 +29,21 @@
     })
     .controller('PointsCtrl', function ($scope, PointApi) {
       $scope.pointInfo = {};
+      $scope.goldInfo = {};
 
-      PointApi.getPointInfo(null, function (result) {
+      PointApi.getPointInfo(null, 'point', function (result) {
         if(result.status === 0) {
           $scope.pointInfo.total = result.data.total;
-          $scope.pointInfo.actTotal = result.data.act_total;
-          $scope.pointInfo.salesTotal = result.data.sales_total;
           $scope.pointInfo.items = result.data.log;
         }
       });
 
+      PointApi.getPointInfo(null, 'gold', function (result) {
+        if(result.status === 0) {
+          $scope.goldInfo.total = result.data.total;
+          $scope.goldInfo.items = result.data.log;
+        }
+      });
     })
     .factory('PointApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
       console.log(apiEndpoint);
@@ -60,11 +65,12 @@
         );
       };
 
-      var getPointInfo = function (page, callback) {
+      var getPointInfo = function (page, type, callback) {
         var url = apiEndpoint.url + '/member-point_log.html';
         var data = {
           member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
+          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          type: type
         };
 
         if (page) {
