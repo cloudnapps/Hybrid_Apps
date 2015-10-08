@@ -48,4 +48,43 @@ angular.module('starter.services', [])
 
       return ( source + result );
     }
+  })
+  .service('userService', function(){
+    var currentUser = {};
+    // 存在 key 获取此属性值, 不存在key返回 currentUser对象
+    this.get = function(key){
+      if (key) {
+        return currentUser[key];
+      }
+      return currentUser;
+    };
+    // 保存整个 currentUser对象
+    this.saveUser = function(userObj){
+      if (typeof userObj !== 'object') {
+        return;
+      }
+
+      currentUser = userObj;
+      localStargeSave();
+    };
+    // 保存 属性值
+    this.saveItem = function(key, value){
+      currentUser[key] = value;
+      localStargeSave();
+    };
+    // 从localStorage获取 currentUser对象, 用于app退出重新进入时
+    this.localStorageGet = function(){
+      try{
+        currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      }
+      catch(e) {
+        console.log(e);
+        currentUser = {};
+        localStargeSave();
+      }
+    }
+
+    function localStargeSave(){
+      localStorage.setItem('currentUser', currentUser);
+    }
   });
