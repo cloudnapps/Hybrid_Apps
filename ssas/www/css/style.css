@@ -38,3 +38,12 @@ hr {
 .gallery-filter .text-center {
   text-align: center;
 }
+
+.product-spec.modal {
+  top: 25% !important;
+}
+
+.modal-backdrop.active {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+

@@ -1,0 +1,15 @@
+<ion-modal-view class="product-spec">
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">选择规格</h1>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div ng-repeat="spec in specsCopy" style="padding-left: 10px">
+        <h5>{{spec.type}}</h5>
+        <div class="row" style="flex-wrap:wrap">
+          <a class="col col-33 text-center button button-clear" ng-repeat="value in spec.value" ng-class="{'button-positive': value.is_default}" ng-click="value.is_default || getProductGoods(value.product_id, true)">{{value.name}}
+          </a>
+        </div>
+    </div>
+    <button ng-click="addCart(true)">add</button>
+  </ion-content>
+</ion-modal-view>
