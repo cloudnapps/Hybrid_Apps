@@ -33,6 +33,10 @@
     {
       "locator": "https://github.com/cloudnapps/cordova-beacon-shake.git",
       "id": "com.cloudnapps.plugins.beacon.shake"
+    },
+    {
+      "locator": "https://github.com/cloudnapps/cordova-beacon-monitor.git",
+      "id": "com.cloudnapps.plugins.beacon.monitor"
     }
   ],
   "cordovaPlatforms": [

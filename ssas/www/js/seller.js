@@ -157,6 +157,12 @@
 
         shake.shakeByBeacon();
       }
+
+      $scope.monitor = function()
+      {
+        alert("monitor");
+        beaconMonitor.monitorByBeacon();
+      }
     }) // end of SellersListController
 
     .controller('SellerDetailController', function ($scope, $stateParams, $timeout, $ionicSlideBoxDelegate, SellerApi) {
