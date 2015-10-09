@@ -2,32 +2,65 @@
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="item in items">
-        <div class="list card">
-          <div class="item item-divider" style="padding-left: 5px" ng-click="goDetail(item)">
-            <h2 style="float: left">订单号：{{item.order_id}}</h2>
+        <div class="row">
+          <div class="col col-75" style="height: 100%; padding: 0px">
+            <p style="padding: 0px; height: 100%;">
+              订单号：{{item.order_id}}
+            </p>
+          </div>
 
-            <i style="float: right" class="icon ion-chevron-right icon-accessory"></i>
+          <div class="col col-25" style="height: 100%; padding: 0px" align="right">
+            <p style="padding: 0px; height: 100%;">
+              {{item.start_time}}
+            </p>
           </div>
-          <div class="item item-divider" style="padding-left: 5px">
-            <h2 style="float: left">{{item.name}}</h2>
+        </div>
 
-            <p style="float:right" align="right">{{item.status}}</p>
+        <div class="row">
+          <div class="col col-50" style="height: 100%; padding: 0px">
+            <p style="padding: 0px; height: 100%;">
+              {{item.seller_name}}
+            </p>
           </div>
-          <div class="item item-body" style="padding-left: 5px">
-            <div class="row">
-              （本处录入物流信息）
-            </div>
+
+          <div class="col col-50" style="height: 100%; padding: 0px" align="right">
+            <p style="padding: 0px; height: 100%;">
+              {{item.status}}
+            </p>
           </div>
-          <div class="item item-body" style="padding-left: 5px">
-            <div class="row">
-              <div class="col col-20" ng-repeat="product in item.products">
-                <img class="pic" ng-src="{{product.url}}">
-              </div>
-            </div>
+        </div>
+
+        <div class="row" ng-repeat="product in item.products">
+          <div class="col col-20">
+            <img class="pic" ng-src="{{product.url}}">
           </div>
-          <div class="item item-divider">
-            <p align="right">实付款：{{item.final_amount | currency:'￥'}}</p>
+          <div class="col col-80">
+            <p style="padding: 0px; height: 100%;">{{product.name}}</p>
+
+            <p>{{product.price | currency:'￥'}} {{product.spec}} {{product.num}}</p>
           </div>
+        </div>
+
+        <div class="row">
+          <button style="float:right" align="right" style="font-size:12px;" ng-click="viewDetail(item)">
+            订单详情
+          </button>
+          <button style="float:right" align="right" style="font-size:12px;"
+                  ng-show="item.return_value === '1'" ng-click="requestOrder(item)">
+            申请售后
+          </button>
+          <button style="float:right" align="right" style="font-size:12px;"
+                  ng-show="item.is_track" ng-click="trackOrder(item)">
+            查看物流
+          </button>
+          <button style="float:right" align="right" style="font-size:12px;"
+                  ng-show="item.pay_status === 0" ng-click="cancelOrder(item)">
+            取消订单
+          </button>
+          <button style="float:right" align="right" style="font-size:12px;"
+                  ng-show="item.pay_status === 0" ng-click="payOrder(item)">
+            去支付
+          </button>
         </div>
       </ion-item>
     </ion-list>
