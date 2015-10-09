@@ -18,9 +18,9 @@
           }
         });
     })
-    .controller('MemberCtrl', function ($scope, $ionicPopup, $state) {
-/*      if(true) {
-        $state.go('login');
-      }*/
+    .controller('MemberCtrl', function ($scope, $state) {
+      $scope.gotoPage = function (url) {
+        $state.go(url, {}, {reload: true});
+      };
     });
 })();
