@@ -2,21 +2,21 @@
   var home = angular.module('seller', [])
     .config(function ($stateProvider, $urlRouterProvider) {
       $stateProvider
-        .state('seller_index', {
-          url: '/sellers/index',
+        .state('tab.sellers', {
+          url: '/sellers',
           views: {
-            'main-view': {
-              templateUrl: 'templates/shop/seller-list.html',
+            'tab-home': {
+              templateUrl: 'templates/home/seller-list.html',
               controller: 'SellerListController'
             }
           }
         })
 
-        .state('seller_detail', {
-          url: '/seller/:sellerId',
+        .state('tab.seller_detail', {
+          url: '/sellers/:sellerId',
           views: {
-            'main-view': {
-              templateUrl: 'templates/shop/seller-detail.html',
+            'tab-home': {
+              templateUrl: 'templates/home/seller-detail.html',
               controller: 'SellerDetailController'
             }
           }
@@ -62,63 +62,58 @@
       });
 
       $scope.goDetail = function (item) {
-        $state.go("seller_detail", {sellerId: item.seller_id}, {reload: true});
+        $state.go("tab.seller_detail", {sellerId: item.seller_id}, {reload: true});
       };
 
       //test plugin features
-      $scope.openWeb = function()
-      {
-          alert("web");
-          var options = {
-              location: 'no',
-              clearcache: 'yes',
-              toolbar: 'no'
-          };
-          $cordovaInAppBrowser.open('http://map.baidu.com/mobile/webapp/search/search/qt=s&wd=深圳前海自贸区临海大道59号&vt=map', '_self', options)
+      $scope.openWeb = function () {
+        alert("web");
+        var options = {
+          location: 'no',
+          clearcache: 'yes',
+          toolbar: 'no'
+        };
+        $cordovaInAppBrowser.open('http://map.baidu.com/mobile/webapp/search/search/qt=s&wd=深圳前海自贸区临海大道59号&vt=map', '_self', options)
 
           //$cordovaInAppBrowser.open('http://www.baidu.com', '_self', options)
 
-          .then(function(event) {
-                                          // success
-                                      })
-          .catch(function(event) {
-                                     // error
-                                       });
-          //$cordovaInAppBrowser.close();
-      }
+          .then(function (event) {
+            // success
+          })
+          .catch(function (event) {
+            // error
+          });
+        //$cordovaInAppBrowser.close();
+      };
 
-      $scope.payByAlipay = function()
-      {
+      $scope.payByAlipay = function () {
         alert("alipay");
         var payObj = {};
-        payObj["pay_info"] = 
-        "partner=\"2088101568353491\"&"
-        +"seller_id=\"2088101568353491\"&"
-        +"out_trade_no=\"YR2VGG3G1I31XDZ\"&"
-        +"subject=\"1\"&"
-        +"body=\"我是测试数据\"&"
-        +"total_fee=\"0.02\"&"
-        +"notify_url=\"http://www.xxx.com\"&"
-        +"service=\"mobile.securitypay.pay\"&"
-        +"payment_type=\"1\"&"
-        +"_input_charset=\"utf-8\"&"
-        +"it_b_pay=\"30m\"&"
-        +"show_url=\"m.alipay.com\"&"
-        +"sign=\"GsSZgPloF1vn52XAItRAldwQAbzIgkDyByCxMfTZG%2FMapRoyrNIJo4U1LUGjHp6gdBZ7U8jA1kljLPqkeGv8MZigd3kH25V0UK3Jc3C94Ngxm5S%2Fz5QsNr6wnqNY9sx%2Bw6DqNdEQnnks7PKvvU0zgsynip50lAhJmflmfHvp%2Bgk%3D\"&sign_type=\"RSA\"";
+        payObj["pay_info"] =
+          "partner=\"2088101568353491\"&"
+          + "seller_id=\"2088101568353491\"&"
+          + "out_trade_no=\"YR2VGG3G1I31XDZ\"&"
+          + "subject=\"1\"&"
+          + "body=\"我是测试数据\"&"
+          + "total_fee=\"0.02\"&"
+          + "notify_url=\"http://www.xxx.com\"&"
+          + "service=\"mobile.securitypay.pay\"&"
+          + "payment_type=\"1\"&"
+          + "_input_charset=\"utf-8\"&"
+          + "it_b_pay=\"30m\"&"
+          + "show_url=\"m.alipay.com\"&"
+          + "sign=\"GsSZgPloF1vn52XAItRAldwQAbzIgkDyByCxMfTZG%2FMapRoyrNIJo4U1LUGjHp6gdBZ7U8jA1kljLPqkeGv8MZigd3kH25V0UK3Jc3C94Ngxm5S%2Fz5QsNr6wnqNY9sx%2Bw6DqNdEQnnks7PKvvU0zgsynip50lAhJmflmfHvp%2Bgk%3D\"&sign_type=\"RSA\"";
         var paymentString = JSON.stringify(payObj);
 
-        alipay.payment(paymentString, function(cb_success)
-        {
-           alert(cb_success);
-        },
-        function(cb_failure)
-        {
-           alert(cb_failure);
-        });
-      }
+        alipay.payment(paymentString, function (cb_success) {
+            alert(cb_success);
+          },
+          function (cb_failure) {
+            alert(cb_failure);
+          });
+      };
 
-      $scope.payByWechat = function()
-      {
+      $scope.payByWechat = function () {
         alert("wxPay");
         var payObj = {};
         payObj["appid"] = "1234";
@@ -130,32 +125,27 @@
         payObj["sign"] = "dfasldfoasifasdfas";
         var paymentString = JSON.stringify(payObj);
 
-        wxpay.payment(paymentString, function(cb_success)
-        {
-           alert(cb_success);
-        },
-        function(cb_failure)
-        {
-           alert(cb_failure);
-        });
+        wxpay.payment(paymentString, function (cb_success) {
+            alert(cb_success);
+          },
+          function (cb_failure) {
+            alert(cb_failure);
+          });
       }
 
-      $scope.showMap = function()
-      {
-         alert("navi");
+      $scope.showMap = function () {
+        alert("navi");
 
-         navi.showMapNavigator("07550002F0110050", "1");
+        navi.showMapNavigator("07550002F0110050", "1");
       }
 
-      $scope.shake = function()
-      {
+      $scope.shake = function () {
         alert("shake");
 
         shake.shakeByBeacon();
       }
 
-      $scope.monitor = function()
-      {
+      $scope.monitor = function () {
         alert("monitor");
         beaconMonitor.monitorByBeacon();
       }
@@ -164,15 +154,15 @@
     .controller('SellerDetailController', function ($scope, $stateParams, $timeout, $ionicSlideBoxDelegate, SellerApi) {
       $scope.products = [];
 
-      $scope.showAdvertise = function() {
+      $scope.showAdvertise = function () {
         $scope.products = $scope.item.second;
       };
 
-      $scope.showRecommend = function() {
+      $scope.showRecommend = function () {
         $scope.products = $scope.item.third;
       };
 
-      $scope.showItem = function() {
+      $scope.showItem = function () {
         $scope.products = $scope.item.fourth;
       };
 

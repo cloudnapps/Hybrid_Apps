@@ -2,7 +2,7 @@
   <ion-nav-buttons side="left">
     <div class="row row-center" style="padding: 0px;">
       <div class="col col-center" style="padding: 0px;">
-        <a class="button button-clear" href="#/sellers/index">
+        <a class="button button-clear" href="#/tab/sellers">
           商户
         </a>
       </div>
@@ -70,13 +70,13 @@
       <a class="button" style="border-bottom: none;background-color: #fff;padding:0;"><img style="height:40px;" ng-src="{{sellerInfo.items[0].image}}"></a>
       <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"><img style="height:40px;" ng-src="{{sellerInfo.items[1].image}}"></a>
       <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"><img style="height:40px;" ng-src="{{sellerInfo.items[2].image}}"></a>
-      <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"><img style="height:40px;" ng-src="{{sellerInfo.items[3].image}}"></a>     
+      <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"><img style="height:40px;" ng-src="{{sellerInfo.items[3].image}}"></a>
     </div>
     <div class="row button-bar" style="background-color: #fff;padding: 0 0 10px 0;">
       <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;" ng-src="{{sellerInfo.items[4].image}}"></a>
       <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;" ng-src="{{sellerInfo.items[5].image}}"></a>
       <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;" ng-src="{{sellerInfo.items[6].image}}"></a>
-      <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;" ng-src="{{sellerInfo.items[7].image}}"></a>     
+      <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;" ng-src="{{sellerInfo.items[7].image}}"></a>
     </div>
 
     <div class="row" style="padding: 0;margin: 6px 0 0;background-color: #fff;">
@@ -86,7 +86,7 @@
       <div class="col col-50 col-center" style="padding: 0px;margin: 10px 5px;" align="right">
         <a href="#/orders/all" style="margin-right: 25px;text-decoration: none;">更多>></a>
       </div>
-    </div>    
+    </div>
     <div style="padding: 0 0 0 6px;background-color: #fff;">
       <div class="row"
            ng-repeat="product in homeInfo.fourth" ng-if="$index % 3 === 0">
