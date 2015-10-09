@@ -40,6 +40,7 @@ var translations_zh = {
     ord_noshiptitle: '待发货',
     ord_shippedtitle: '待收货',
     ord_nocommenttitle: '待评价',
+    ord_returntitle: '售后',
 
     //favorite
     fav_title: '我的收藏',
