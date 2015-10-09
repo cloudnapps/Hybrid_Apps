@@ -77,5 +77,10 @@ var translations_zh = {
 
     product_cart: '加入购物车',
     product_goto_shop: '进入店铺',
-    product_fav_shop: '收藏店铺'
+    product_fav_shop: '收藏店铺',
+
+    //complaint
+    complaint_title: '投诉建议',
+    complaint_addbtn: '提交'
+
 };
