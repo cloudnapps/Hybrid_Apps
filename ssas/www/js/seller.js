@@ -74,11 +74,7 @@
               clearcache: 'yes',
               toolbar: 'no'
           };
-          $cordovaInAppBrowser.open('http://map.baidu.com/mobile/webapp/index/index/qt=s&'
-            +'wd=深圳前海自贸区&wd2=深圳市南山区&c=340&searchFlag=bigBox&version=5&'
-            +'exptype=dep/vt=map/?fromhash=1#search/search/foo=bar&qt=s&wd=深圳前海自贸区临海大道59号&'
-            +'c=340&searchFlag=more_cate&nb_x=12677951.18&nb_y=2555982&center_rank=1&center_name=海运中心/nb_x=12677951.18&'
-            +'nb_y=2555982&center_name=海运中心&type=searchnearby&from=searchnearby&vt=map&ecom=0', '_self', options)
+          $cordovaInAppBrowser.open('http://map.baidu.com/mobile/webapp/search/search/qt=s&wd=深圳前海自贸区临海大道59号&vt=map', '_self', options)
 
           //$cordovaInAppBrowser.open('http://www.baidu.com', '_self', options)
 
