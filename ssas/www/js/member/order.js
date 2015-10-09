@@ -57,17 +57,26 @@
           url: '/return',
           views: {
             'tab-orders-return': {
-              templateUrl: 'templates/member/order-return.html',
+              templateUrl: 'templates/member/order-list.html',
               controller: 'OrderReturnCtrl'
             }
           }
         })
         .state('order_detail', {
-          url: 'order/:orderId',
+          url: '/order/:orderId',
           views: {
             'main-view': {
               templateUrl: 'templates/member/order-detail.html',
               controller: 'OrderDetailCtrl'
+            }
+          }
+        })
+        .state('order_track', {
+          url: '/track/:orderId',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/order-track.html',
+              controller: 'OrderTrackCtrl'
             }
           }
         });
@@ -137,7 +146,7 @@
       };
 
       $scope.trackOrder = function (item) {
-
+        $state.go("order_track", {orderId: item.order_id}, {reload: true});
       };
 
       $scope.payOrder = function (item) {
@@ -334,6 +343,12 @@
       });
     })
 
+    .controller('OrderTrackCtrl', function ($scope, $stateParams, OrderApi) {
+      OrderApi.getOrderTrack($stateParams.orderId, function (result) {
+        $scope.items = result.data;
+      });
+    })
+
     .factory('OrderApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
       console.log(apiEndpoint);
 
@@ -416,12 +431,24 @@
         sendRequest(url, data, callback);
       };
 
+      var getOrderTrack = function (orderId, callback) {
+        var url = apiEndpoint.url + '/member-getOrderTrack.html';
+        var data = {
+          member_id: 13,
+          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          order_id: orderId
+        };
+
+        sendRequest(url, data, callback);
+      };
+
       return {
         getOrderList: getOrderList,
         getOrderDetail: getOrderDetail,
         deleteOrder: deleteOrder,
         receiveOrder: receiveOrder,
-        getMemberRate: getMemberRate
+        getMemberRate: getMemberRate,
+        getOrderTrack: getOrderTrack
       };
     });
 })();
