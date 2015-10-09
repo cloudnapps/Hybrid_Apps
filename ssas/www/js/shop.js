@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  var shop = angular.module('shop', []);
+  var shop = angular.module('shop', ['components']);
   
   shop.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('tab.categories', {
@@ -223,10 +223,11 @@
    * ProductDetailController
    */
   .controller('ProductDetailController', 
-              ['$scope', '$stateParams', '$ionicSlideBoxDelegate', 'shopApi',                              
-    function($scope, $stateParams, $ionicSlideBoxDelegate, shopApi){
+              ['$scope', '$stateParams', '$ionicSlideBoxDelegate', 'shopApi', 'cartApi', '$state',
+    function($scope, $stateParams, $ionicSlideBoxDelegate, shopApi, cartApi, $state){
       $scope.productId = $stateParams.productId;
       $scope.product = {};  
+      
       shopApi.getProduct($scope.productId).success(function(responseData){
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
@@ -238,8 +239,11 @@
       shopApi.getProductGoods($scope.productId).success(function(responseData){
       });
 
-  }]) // end of ProductDetailController
+      $scope.addToCart = function (product) {
+        cartApi.addToCart(product);
+      };
 
+  }]) // end of ProductDetailController
   .factory('shopApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost',
     function($http, apiEndpoint, transformRequestAsFormPost) {
      

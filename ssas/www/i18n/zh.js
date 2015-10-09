@@ -73,5 +73,9 @@ var translations_zh = {
     return_title: '售后申请',
     return_addbtn: '提交申请',
 
-    good_category: '商品分类'
+    good_category: '商品分类',
+
+    product_cart: '加入购物车',
+    product_goto_shop: '进入店铺',
+    product_fav_shop: '收藏店铺'
 };
