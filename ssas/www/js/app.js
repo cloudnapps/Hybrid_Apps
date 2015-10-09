@@ -80,6 +80,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home
     $ionicConfigProvider.platform.ios.views.transition('ios');
     $ionicConfigProvider.platform.android.views.transition('android');
 
+    $ionicConfigProvider.backButton.text('').icon('ion-chevron-left').previousTitleText(false);
   }); // end of config
 
 
