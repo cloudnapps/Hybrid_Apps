@@ -18,10 +18,10 @@ var translations_zh = {
     close: '关闭',
 
     //main tabs
-    home: '主页',
+    home: '商城',
     cart: '购物车',
-    shop: '购物',
-    my: '我的',
+    shop: '商品',
+    my: '我',
 
     //my
     me: '我',
@@ -40,6 +40,7 @@ var translations_zh = {
     ord_noshiptitle: '待发货',
     ord_shippedtitle: '待收货',
     ord_nocommenttitle: '待评价',
+    ord_returntitle: '售后',
 
     //favorite
     fav_title: '我的收藏',
@@ -72,5 +73,9 @@ var translations_zh = {
     return_title: '售后申请',
     return_addbtn: '提交申请',
 
-    good_category: '商品分类'
+    good_category: '商品分类',
+
+    product_cart: '加入购物车',
+    product_goto_shop: '进入店铺',
+    product_fav_shop: '收藏店铺'
 };

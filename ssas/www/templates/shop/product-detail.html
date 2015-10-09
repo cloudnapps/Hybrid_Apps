@@ -1,4 +1,4 @@
-<ion-view view-title="{{'product_detail'|translate}}" class="product">
+<ion-view view-title="{{'product_detail'|translate}}" class="product" hide-tabs="true">
   <ion-content>
     <ion-slide-box show-pager="true" does-continue="true" auto-play="true">
         <ion-slide ng-repeat="image in product.urls">
@@ -18,6 +18,12 @@
     <section class="padding">
       <h4 class="title">{{'comment'|translate}}</h4>
     </section>
-  </ion-content>  
-  
+  </ion-content>
+  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
+    <div class="button-bar">
+      <button class="button">{{'product_goto_shop' | translate}}</button>
+      <button class="button">{{'product_fav_shop' | translate}}</button>
+      <button class="button button-energized" ng-click="addToCart(product)">{{'product_cart' | translate}}</button>
+    </div>
+  </ion-footer-bar>
 </ion-view>

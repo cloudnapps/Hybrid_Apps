@@ -2,13 +2,21 @@
   "name": "ssas",
   "app_id": "608e6e24",
   "proxies": [
-   {
+    {
       "path": "/m",
       "proxyUrl": "http://bbc.jooau.com/zhongshihua/index.php/m"
-   },
-   {
+    },
+    {
       "path": "/data",
       "proxyUrl": "http://bbc.jooau.com/zhongshihua/data"
     }
+  ],
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
   ]
 }

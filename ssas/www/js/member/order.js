@@ -53,12 +53,12 @@
             }
           }
         })
-        .state('orders.nocomment', {
-          url: '/nocomment',
+        .state('orders.return', {
+          url: '/return',
           views: {
-            'tab-orders-nocomment': {
-              templateUrl: 'templates/member/order-list.html',
-              controller: 'OrdersNocommentCtrl'
+            'tab-orders-return': {
+              templateUrl: 'templates/member/order-return.html',
+              controller: 'OrderReturnCtrl'
             }
           }
         })
@@ -70,29 +70,10 @@
               controller: 'OrderDetailCtrl'
             }
           }
-        })
-        .state('order_return', {
-          url: '/returns',
-          views: {
-            'main-view': {
-              templateUrl: 'templates/member/order-return.html',
-              controller: 'OrderReturnCtrl'
-            }
-          }
-        })
-        .state('tab.order-rate', {
-          url: '/member/orders/rate/:orderId',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/detail-order_rate.html',
-              controller: 'OrderRateCtrl'
-            }
-          }
         });
     })
 
     .controller('OrdersAllCtrl', function ($scope, $state, $ionicPopup, OrderApi) {
-
       $scope.items = [];
 
       $scope.init = function () {
@@ -117,24 +98,24 @@
       };
 
       $scope.$on('$ionicView.enter', function () {
-        $scope.isActtive = true;
+        $scope.isActive = true;
         $scope.init();
       });
 
       $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.isActtive = false;
+        $scope.isActive = false;
       });
 
       $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActtive)
+        if ($scope.isActive)
           $scope.loadMore();
       });
 
-      $scope.goDetail = function (item) {
+      $scope.viewDetail = function (item) {
         $state.go("order_detail", {orderId: item.order_id}, {reload: true});
       };
 
-      $scope.remove = function (item) {
+      $scope.cancelOrder = function (item) {
         var confirmPopup = $ionicPopup.confirm({
           title: '取消订单',
           template: '是否真的需要取消订单?'
@@ -153,7 +134,19 @@
             })
           }
         });
-      }
+      };
+
+      $scope.trackOrder = function (item) {
+
+      };
+
+      $scope.payOrder = function (item) {
+
+      };
+
+      $scope.requestOrder = function (item) {
+        $state.go('return_request', {orderId: item.order_id}, {reload: true});
+      };
     })
 
     .controller('OrdersNopayCtrl', function ($scope, $state, OrderApi) {
@@ -186,16 +179,16 @@
       };
 
       $scope.$on('$ionicView.enter', function () {
-        $scope.isActtive = true;
+        $scope.isActive = true;
         $scope.init();
       });
 
       $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.isActtive = false;
+        $scope.isActive = false;
       });
 
       $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActtive)
+        if ($scope.isActive)
           $scope.loadMore();
       });
     })
@@ -274,26 +267,25 @@
       };
 
       $scope.$on('$ionicView.enter', function () {
-        $scope.isActtive = true;
+        $scope.isActive = true;
         $scope.init();
       });
 
       $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.isActtive = false;
+        $scope.isActive = false;
       });
 
       $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActtive)
+        if ($scope.isActive)
           $scope.loadMore();
       });
     })
 
-    .controller('OrdersNocommentCtrl', function ($scope, $state, OrderApi) {
+    .controller('OrderReturnCtrl', function ($scope, $state, OrderApi) {
       $scope.items = [];
 
-      //待评价
       $scope.filter = {
-        comment_status: 0
+        ship_status: 1
       };
 
       $scope.init = function () {
@@ -302,11 +294,6 @@
           $scope.page = 0;
           $scope.hasMore = true;
         }
-
-        //待发货
-        $scope.filter = {
-          ship_status: 0
-        };
       };
 
       $scope.loadMore = function () {
@@ -323,61 +310,16 @@
       };
 
       $scope.$on('$ionicView.enter', function () {
-        $scope.isActtive = true;
+        $scope.isActive = true;
         $scope.init();
       });
 
       $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.isActtive = false;
+        $scope.isActive = false;
       });
 
       $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActtive)
-          $scope.loadMore();
-      });
-    })
-
-    .controller('OrderDetailCtrl', function ($scope, $stateParams, OrderApi) {
-      OrderApi.getOrderDetail($stateParams.orderId, function (result) {
-        $scope.item = result.data;
-      });
-    })
-
-    .controller('OrderReturnCtrl', function ($scope, $state, OrderApi) {
-      $scope.items = [];
-
-      $scope.init = function () {
-        if ($scope.items.length === 0) {
-          $scope.items = [];
-          $scope.page = 0;
-          $scope.hasMore = true;
-        }
-      };
-
-      $scope.loadMore = function () {
-        OrderApi.getOrderList($scope.page + 1, null, function (result) {
-          if (result.status === 1) {
-            $scope.hasMore = false;
-          }
-          else {
-            $scope.items = $scope.items.concat(result.data);
-            $scope.page += 1;
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-          }
-        });
-      };
-
-      $scope.$on('$ionicView.enter', function () {
-        $scope.isActtive = true;
-        $scope.init();
-      });
-
-      $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.isActtive = false;
-      });
-
-      $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActtive)
+        if ($scope.isActive)
           $scope.loadMore();
       });
 
@@ -386,11 +328,9 @@
       };
     })
 
-    .controller('OrderRateCtrl', function ($scope, $stateParams, OrderApi) {
-      $scope.items = [];
-
-      OrderApi.getMemberRate($stateParams.orderId, function (result) {
-        $scope.items = result.data;
+    .controller('OrderDetailCtrl', function ($scope, $stateParams, OrderApi) {
+      OrderApi.getOrderDetail($stateParams.orderId, function (result) {
+        $scope.item = result.data;
       });
     })
 

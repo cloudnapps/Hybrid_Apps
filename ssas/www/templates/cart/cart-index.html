@@ -1,3 +1,22 @@
 <ion-view view-title="{{'cart'|translate}}">
-
+  <ion-content>
+    <ion-list>
+      <div ng-repeat="seller in cart.aSelCart">
+        <div class="item item-divider">
+          <a href="#/tab/seller/{{seller.seller_info.seller_id}}">{{seller.seller_info.seller_name}}</a>
+        </div>
+        <ion-item class="item item-thumbnail-left" ng-repeat="good in seller.goods_list" type="item-text-wrap">
+          <a class="item-thumbnail-left" href="#/tab/products/{{good.product_id}}"><img ng-src="{{good.thumbnail}}"></a>
+          <div>
+            <h2>{{good.name}}</h2>
+            <div class="row">
+              <div class="col assertive">{{good.buy_price|currency:'￥'}}</div>
+              <div class="col">{{good.spec}}</div>
+              <div class="col assertive text-right">x{{good.quantity}}</div>
+            </div>
+          </div>
+        </ion-item>
+      </div>
+    </ion-list>
+  </ion-content>
 </ion-view>

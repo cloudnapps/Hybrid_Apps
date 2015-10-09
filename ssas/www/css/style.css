@@ -25,3 +25,16 @@ hr {
   height: 100%;
 }
 
+.clear-search {
+  position: absolute;
+  top: 0; 
+  right: 10px;
+  z-index: 999;
+}
+
+.gallery-filter .active {
+  background-color: #BD252C;
+}
+.gallery-filter .text-center {
+  text-align: center;
+}
