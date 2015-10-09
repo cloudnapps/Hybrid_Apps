@@ -4,13 +4,13 @@
 
 $light:                           #fff !default;
 $stable:                          #f8f8f8 !default;
-$positive:                        #387ef5 !default;
+$positive:                        #BD252C !default;
 $calm:                            #11c1f3 !default;
 $balanced:                        #33cd5f !default;
 $energized:                       #ffc900 !default;
 $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
-$dark:                            #444 !default;
+$dark:                            #9B9B9B !default;
 
 
 // Base
@@ -142,7 +142,7 @@ $button-royal-active-border:      darken($royal, 8%) !default;
 
 $button-dark-bg:                  $dark !default;
 $button-dark-text:                #fff !default;
-$button-dark-border:              #111 !default;
+$button-dark-border:              #9B9B9B !default;
 $button-dark-active-bg:           #262626 !default;
 $button-dark-active-border:       #000 !default;
 

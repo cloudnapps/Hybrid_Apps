@@ -77,12 +77,12 @@
           for (var name in cateListObj) {
             $scope.subCategories.push(cateListObj[name]);
           }  
-        };      
-      }
+        }  
+      };
 
       $scope.navToProductList = function(categoryId) {
         $state.go('tab.products', {categoryId: categoryId});
-      }
+      };
   }]) // end of CategoryController
 
   .controller('ShopController', ['$scope', '$state', '$stateParams', 'shopApi', 
@@ -99,12 +99,9 @@
     $scope.categoryId = $stateParams.categoryId;
     $scope.keywords = {value: ''};
     $scope.filter = {};
-    if($stateParams.keywords) {
-      $scope.filter.keywords = $stateParams.keywords;
-      $scope.keywords.value = $stateParams.keywords;
-    }
     $scope.filter.cat_id = $scope.categoryId;
     $scope.hasMore = false;
+    $scope.isShowGalleryFilter = false;
 
     $scope.getProducts = function() {
       var query = {   
@@ -112,10 +109,10 @@
         filter: $scope.filter
       };
       if ($scope.orderBy) {
-        query.orderBy = $scope.orderBy
+        query.orderBy = $scope.orderBy;
       }
       shopApi.getGallery(query).then(function (result) {
-        if (result.data.data != undefined && result.data.data.length > 0) {
+        if (result.data.data !== undefined && result.data.data.length > 0) {
           for(var i = 0; i < result.data.data.length; i++) {
             $scope.products.push(result.data.data[i]);  
           }  
@@ -123,8 +120,8 @@
         } else {
           $scope.hasMore = false;
         }
-        $scope.$broadcast('scroll.infiniteScrollComplete');        
-      })
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      });
     };
 
     $scope.loadMore = function() {
@@ -132,18 +129,18 @@
       $scope.getProducts();
     };  
 
-    $scope.search = function(isPage){
-      if (isPage) {
-        $state.go('tab.search', {
-          keywords: $scope.keywords.value,
-          categoryId: $stateParams.categoryId
-        });
-      }
-      else {
-        $scope.filter.keywords = $scope.keywords.value;
-        clearData();
-        $scope.getProducts();  
-      }
+    $scope.search = function(){
+      $scope.filter.keywords = $scope.keywords.value;
+      clearData();
+      $scope.getProducts();
+    };
+
+    $scope.clearSearch = function(event){
+      $scope.filter.keywords = '';
+      $scope.keywords.value = '';
+      clearData();
+      $scope.getProducts();
+      event.stopPropagation();
     };
 
     $scope.changeOrder = function(type){
@@ -170,10 +167,50 @@
       $scope.getProducts();    
     };
 
+    
+
+    $scope.setBrandId = function(brandId){
+      $scope.brandId = brandId;
+    };
+
+    $scope.setPropIndex = function(propIndex){
+      $scope.propIndex = propIndex;
+    };
+
+    $scope.galleryFilterSave = function(isClear){
+      $scope.isShowGalleryFilter = false;
+      if (isClear) {
+        $scope.brandId = '';
+        $scope.propIndex = '';
+        delete $scope.filter.brand;
+        delete $scope.filter.prop_index;
+        clearData();
+        return $scope.getProducts();
+      }
+      $scope.filter.brand = $scope.brandId;
+      $scope.filter.prop_index = $scope.propIndex;
+      clearData();
+      return $scope.getProducts();
+    };
+
     function clearData(){
       $scope.page = 1;
       $scope.products.length = 0;
     }
+
+    function getGalleryFilter(){
+      shopApi
+        .getGalleryFilter($scope.filter.cat_id)
+        .then(function(data){
+          $scope.galleryFilter = (data && data.data && data.data.data) || [];
+          console.log($scope.galleryFilter);
+        })
+        .catch(function(e){
+          console.log(e);
+        });
+    }
+
+    getGalleryFilter();
 
     $scope.getProducts();    
     // $scope.chats = Chats.all();
@@ -218,8 +255,8 @@
         return request.success(function(result){
             console.log('got data:' + result);
             return result;
-        })        
-      }
+        });        
+      };
 
       var getCategories = function(data) {        
         var request = $http({
@@ -232,8 +269,8 @@
 
         return request.success(function(result){
           return result;
-        })
-      }
+        });
+      };
 
       var getProduct = function(productId) {
         var data = {"product_id": productId};
@@ -246,7 +283,7 @@
         });
 
         return request;
-      }
+      };
       
       var getProductGoods = function(productId) {
         var data = {"product_id": productId};
@@ -259,16 +296,28 @@
         });
         
         return request;
-      }
-      
-      
+      };
 
+      var getGalleryFilter = function(catId){
+        var data = {"cat_id": catId};
+        var request = $http({
+          method: 'post',
+          url: apiEndpoint.url + '/gallery-filter.html',
+          transformRequest: transformRequestAsFormPost,
+          data: data,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}          
+        });
+        
+        return request;
+      };
+      
       return {
+        getGalleryFilter: getGalleryFilter,
         getGallery : getGallery,
         getCategories: getCategories,
         getProduct: getProduct,
         getProductGoods: getProductGoods
-      }
+      };
 
   } // end of anonymous function
   ]

@@ -25,9 +25,16 @@ hr {
   height: 100%;
 }
 
-.search {
-  padding: 0 0 0 16px;
-  margin: 3px 0;
-  border: none;
-  border-radius: 10px;
+.clear-search {
+  position: absolute;
+  top: 0; 
+  right: 10px;
+  z-index: 999;
+}
+
+.gallery-filter .active {
+  background-color: #BD252C;
+}
+.gallery-filter .text-center {
+  text-align: center;
 }
