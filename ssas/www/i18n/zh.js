@@ -18,10 +18,10 @@ var translations_zh = {
     close: '关闭',
 
     //main tabs
-    home: '主页',
+    home: '商城',
     cart: '购物车',
-    shop: '购物',
-    my: '我的',
+    shop: '商品',
+    my: '我',
 
     //my
     me: '我',
