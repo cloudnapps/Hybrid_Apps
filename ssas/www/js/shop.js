@@ -38,6 +38,15 @@
             controller: 'ProductDetailController'
           }
         }
+      })
+      .state('tab.comments', {
+        url: '/goods/:id/comments',
+        views: {
+          'tab-shop': {
+            templateUrl: 'templates/shop/product-comment.html',
+            controller: 'ProductCommentController'
+          }
+        }
       });
     // .state('tab.chat-detail', {
     //   url: '/chats/:chatId',
@@ -223,11 +232,29 @@
    * ProductDetailController
    */
   .controller('ProductDetailController', 
-              ['$scope', '$stateParams', '$ionicSlideBoxDelegate', 'shopApi', 'cartApi', '$state',
-    function($scope, $stateParams, $ionicSlideBoxDelegate, shopApi, cartApi, $state){
+              ['$scope', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', 'shopApi',  'cartApi', '$state',                             
+    function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicModal, shopApi, cartApi, $state){
       $scope.productId = $stateParams.productId;
       $scope.product = {};  
-      
+      $scope.showSpecModal = showSpecModal;
+      $scope.getProductGoods = getProductGoods;
+      $scope.addCart = addCart;
+
+      getProductGoods($scope.productId);
+
+      function showSpecModal(){
+        $ionicModal.fromTemplateUrl('templates/shop/shop-product-spec.html', {
+          scope: $scope
+        }).then(function(modal) {
+          $scope.modal = modal;
+          $scope.modal.show();
+          $scope.hideModal = function(){
+            $scope.modal.hide();
+            $scope.modal.remove();
+          };
+        });
+      }
+
       shopApi.getProduct($scope.productId).success(function(responseData){
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
@@ -235,15 +262,58 @@
           $ionicSlideBoxDelegate.update();
         }       
       });
+
+
+      function addCart(isModal){
+        if (isModal) {
+          alert($scope.productIdCopy);
+        }
+        else{
+
+        }
+      }
       
-      shopApi.getProductGoods($scope.productId).success(function(responseData){
-      });
+
+      function getProductGoods(productId, isCopy){
+        // modal框中 对应的 productId
+        $scope.productIdCopy = productId;
+
+        shopApi
+        .getProductGoods(productId)
+        .success(function(responseData){
+          if (isCopy) {
+            $scope.specsCopy = responseData && responseData.data && responseData.data.spec || [];
+            console.log('$scope.specsCopy', $scope.specsCopy);
+            return;
+          }
+          $scope.specs = responseData && responseData.data && responseData.data.spec || [];
+          $scope.specsCopy = angular.copy($scope.specs);
+          console.log($scope.specs);
+        })
+        .error(function(e){
+          console.log(e);
+        });
+      }
 
       $scope.addToCart = function (product) {
         cartApi.addToCart(product);
       };
 
   }]) // end of ProductDetailController
+
+  .controller('ProductCommentController', function($scope, $stateParams, shopApi){
+    console.log($stateParams.id);
+    shopApi
+      .getProductComment(16, 1)
+      .success(function(data){
+        $scope.comments = data && data.data || [];
+        console.log('comments', $scope.comments);
+      })
+      .error(function(e){
+        console.log(e);
+      });
+  }) // end of ProductCommentController
+
   .factory('shopApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost',
     function($http, apiEndpoint, transformRequestAsFormPost) {
      
@@ -314,8 +384,22 @@
         
         return request;
       };
+
+      var getProductComment = function(goods_id, page){
+        var data = {"goods_id": goods_id, page: page || 1};
+        var request = $http({
+          method: 'post',
+          url: apiEndpoint.url + '/product-comment.html',
+          transformRequest: transformRequestAsFormPost,
+          data: data,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}          
+        });
+        
+        return request;
+      };
       
       return {
+        getProductComment: getProductComment,
         getGalleryFilter: getGalleryFilter,
         getGallery : getGallery,
         getCategories: getCategories,

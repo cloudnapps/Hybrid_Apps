@@ -11,11 +11,9 @@
       <label class="stroke">{{'mkt_price'|translate}}:{{product.mktprice|currency:'￥'}}</label>      
     </section>    
     <hr></hr>
-    <section class="padding">
-      <h4 class>规格</h4>
-    </section> 
+    <a class="button button-clear  button-full button-small icon ion-chevron-right icon-right" ng-click="showSpecModal()" style="text-align: left;">选择规格</a>
     <hr></hr>
-    <section class="padding">
+    <section class="padding" ui-sref="tab.comments({id:product.goods_id})">
       <h4 class="title">{{'comment'|translate}}</h4>
     </section>
   </ion-content>

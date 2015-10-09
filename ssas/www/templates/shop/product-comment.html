@@ -1,0 +1,14 @@
+<ion-view view-title="评论" class="product">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="comment in comments" type="item-text-wrap">
+        <h2>{{comment.name}}</h2>
+        <p>{{comment.content}}</p>
+        <div ng-repeat="reply in comment.reply" style="padding-left: 40px; padding-top: 5px;">
+          <h3>{{reply.op_name}}</h3>
+          <p>{{reply.content}}</p>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
