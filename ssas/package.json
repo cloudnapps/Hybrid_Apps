@@ -36,7 +36,7 @@
     },
     {
       "locator": "https://github.com/cloudnapps/cordova-beacon-monitor.git",
-      "id": "com.cloudnapps.plugins.beacon.monitor"
+      "id": "com.cloudnapps.plugins.beacon.camonitor"
     }
   ],
   "cordovaPlatforms": [

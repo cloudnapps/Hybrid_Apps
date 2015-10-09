@@ -205,7 +205,7 @@
         "com.cloudnapps.plugins.beacon.shake": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         },
-        "com.cloudnapps.plugins.beacon.monitor": {
+        "com.cloudnapps.plugins.beacon.camonitor": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         }
     },

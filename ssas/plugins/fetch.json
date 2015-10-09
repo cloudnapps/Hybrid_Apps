@@ -91,7 +91,7 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.cloudnapps.plugins.beacon.monitor": {
+    "com.cloudnapps.plugins.beacon.camonitor": {
         "source": {
             "type": "git",
             "url": "https://github.com/cloudnapps/cordova-beacon-monitor.git",
