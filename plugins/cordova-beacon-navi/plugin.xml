@@ -11,6 +11,58 @@
     
     <!-- android -->
     <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Device" >
+                <param name="android-package" value="org.apache.cordova.device.Device"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+            <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+          <activity android:name="com.cloudnapps.plugins.map.MapActivity">
+          </activity>
+        </config-file>
+
+        <config-file target="res/values/strings.xml" parent="/resources">
+            <string name="navi">带我去</string>
+        </config-file>
+
+        <source-file src="src/android/MapActivity.java" target-dir="src/com/cloudnapps/plugins/map" />
+        <source-file src="src/android/MapNavigator.java" target-dir="src/com/cloudnapps/plugins/map" />
+        <source-file src="src/android/FileHelper.java" target-dir="src/com/cloudnapps/plugins/map" />
+        <source-file src="src/android/build-extras.gradle" target-dir="./" />
+
+        <source-file src="libs/android/android-support-v4.jar" target-dir="libs" />
+        <source-file src="libs/android/arcgis-android-api.jar" target-dir="libs" />
+        <source-file src="libs/android/jackson-core-lgpl-1.9.5.jar" target-dir="libs" />
+        <source-file src="libs/android/jackson-mapper-lgpl-1.9.5.jar" target-dir="libs" />
+        <source-file src="libs/android/jcifs-1.3.17.jar" target-dir="libs" />
+        <source-file src="libs/android/TYAndroidBeacon.jar" target-dir="libs" />
+        <source-file src="libs/android/TYBLELocationEngine.jar" target-dir="libs" />
+        <source-file src="libs/android/TYMapData.jar" target-dir="libs" />
+        <source-file src="libs/android/TYMapSDK.jar" target-dir="libs" />
+
+        <source-file src="libs/android/x86/libruntimecore_java.so" target-dir="libs/x86" />
+        <source-file src="libs/android/x86/libTYLocationEngine.so" target-dir="libs/x86" />
+        <source-file src="libs/android/x86/libTYMapSDK.so" target-dir="libs/x86" />
+        <source-file src="libs/android/armeabi/libruntimecore_java.so" target-dir="libs/armeabi" />
+        <source-file src="libs/android/armeabi/libTYLocationEngine.so" target-dir="libs/armeabi" />
+        <source-file src="libs/android/armeabi/libTYMapSDK.so" target-dir="libs/armeabi" />
+        <source-file src="libs/android/armeabi-v7a/libruntimecore_java.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="libs/android/armeabi-v7a/libTYLocationEngine.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="libs/android/armeabi-v7a/libTYMapSDK.so" target-dir="libs/armeabi-v7a" /> 
+
+        <source-file src="src/android/res/drawable-hdpi/start.png" target-dir="./res/drawable-hdpi"/>      
+        <source-file src="src/android/res/drawable-hdpi/end.png" target-dir="./res/drawable-hdpi"/>      
+        <source-file src="src/android/res/drawable-hdpi/nav_exit.png" target-dir="./res/drawable-hdpi"/>      
+        <source-file src="src/android/res/menu/map_menu.xml" target-dir="./res/menu"/>      
+        <source-file src="src/android/res/layout/activity_map.xml" target-dir="./res/layout"/>     
     </platform>
     
     <!-- ios -->
