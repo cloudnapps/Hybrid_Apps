@@ -11,11 +11,19 @@
       <label class="stroke">{{'mkt_price'|translate}}:{{product.mktprice|currency:'￥'}}</label>      
     </section>    
     <hr></hr>
-    <a class="button button-clear  button-full button-small icon ion-chevron-right icon-right" ng-click="showSpecModal()" style="text-align: left;">选择规格</a>
+    <a class="button button-clear  button-full button-small icon ion-chevron-right icon-right" ng-click="showSpecModal()" style="text-align: left; color: #000">选择规格</a>
     <hr></hr>
-    <section class="padding" ui-sref="tab.comments({id:product.goods_id})">
-      <h4 class="title">{{'comment'|translate}}</h4>
-    </section>
+    <div ui-sref="tab.comments({id:product.goods_id})">
+      <a class="button button-clear button-full button-small icon ion-chevron-right icon-right" style="text-align: left; color: #000">{{'comment'|translate}}
+      </a>
+      <div style="padding-left: 10px; font-size: 5px;">好评{{product.high_point}}% 已有{{product.count}}人购买</div>
+      <br>
+      <div style="padding-left: 10px; font-size: 10px; color: #cccccc">{{comment.name}}</div>
+      <div style="padding-left: 10px; font-size: 10px; color: #cccccc">{{comment.content}}</div>
+    </div>
+    <hr></hr>
+    <a class="button button-clear  button-full button-small icon ion-chevron-right icon-right" style="text-align: left; color: #000" ui-sref="tab.intro({id: product.goods_id})">查看产品图文详情</a>
+    <hr></hr>
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
     <div class="button-bar">
