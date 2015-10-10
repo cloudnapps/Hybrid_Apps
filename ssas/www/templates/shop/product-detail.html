@@ -22,14 +22,12 @@
       <div style="padding-left: 10px; font-size: 10px; color: #cccccc">{{comment.content}}</div>
     </div>
     <hr></hr>
-    <a class="button button-clear  button-full button-small icon ion-chevron-right icon-right" style="text-align: left; color: #000" ui-sref="tab.intro({id: product.goods_id})">查看产品图文详情</a>
+    <a class="button button-clear  button-full button-small icon ion-chevron-right icon-right" style="text-align: left; color: #000" ui-sref="tab.intro({id: product.goods_id, productId: productId})">查看产品图文详情</a>
     <hr></hr>
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
     <div class="button-bar">
-      <button class="button">{{'product_goto_shop' | translate}}</button>
-      <button class="button">{{'product_fav_shop' | translate}}</button>
-      <button class="button button-energized" ng-click="addToCart(product)">{{'product_cart' | translate}}</button>
+      <div add-to-cart="product"></div>
     </div>
   </ion-footer-bar>
 </ion-view>
