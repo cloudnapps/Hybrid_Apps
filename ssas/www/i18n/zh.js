@@ -26,6 +26,10 @@ var translations_zh = {
     //my
     me: '我',
 
+    // business
+    direct_mail: "海外直邮",
+    bond: "保税仓直邮",
+
     //login
     login_title: '登录',
     register_title: '新用户注册',
@@ -81,6 +85,8 @@ var translations_zh = {
 
     //complaint
     complaint_title: '投诉建议',
-    complaint_addbtn: '提交'
+    complaint_addbtn: '提交',
 
+    // cart
+    submit_order: '提交订单'
 };

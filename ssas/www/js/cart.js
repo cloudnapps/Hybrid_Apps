@@ -20,5 +20,22 @@
         $scope.cart = responseData.data;
       }
     });
+    $scope.toggleSeller = function (seller) {
+      angular.forEach(seller.goods_list, function (item) {
+        item.selected = seller.selected;
+      });
+    };
+
+    $scope.orderTotal = function (channel) {
+      var total = 0;
+      angular.forEach(channel.aSelCart, function (seller) {
+        angular.forEach(seller.goods_list, function (good) {
+          if(good.selected === true) {
+            total += (good.buy_price * good.quantity);
+          }
+        });
+      });
+      return total;
+    };
 	}]) // end of CartController
 })();
