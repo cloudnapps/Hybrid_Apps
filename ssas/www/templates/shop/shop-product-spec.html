@@ -3,13 +3,18 @@
     <h1 class="title">选择规格</h1>
   </ion-header-bar>
   <ion-content class="padding">
-    <div ng-repeat="spec in specsCopy" style="padding-left: 10px">
-        <h5>{{spec.type}}</h5>
-        <div class="row" style="flex-wrap:wrap">
-          <a class="col col-33 text-center button button-clear" ng-repeat="value in spec.value" ng-class="{'button-positive': value.is_default}" ng-click="value.is_default || getProductGoods(value.product_id, true)">{{value.name}}
-          </a>
-        </div>
+    <div ng-repeat="spec in goodsSpec.spec" style="padding-left: 10px">
+      <h5>{{spec.type}}</h5>
+      <div class="row" style="flex-wrap:wrap">
+        <a class="col col-33 text-center button button-clear" ng-repeat="value in spec.value" ng-class="{'button-positive': value.is_default}" ng-click="value.is_default || getProductGoodsSpec(value.product_id, true)">{{value.name}}
+        </a>
+      </div>
     </div>
-    <button ng-click="addCart(true)">add</button>
   </ion-content>
+  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
+    <div class="button-bar">
+      <button class="button button-dark" ng-click="hideModal()">返回</button>
+      <button class="button button-energized" ng-click="addToCart(goodsSpec.product_info)">{{'product_cart' | translate}}</button>
+    </div>
+  </ion-footer-bar>
 </ion-modal-view>

@@ -47,6 +47,15 @@
             controller: 'ProductCommentController'
           }
         }
+      })
+      .state('tab.intro', {
+        url: '/goods/:id/intro',
+        views: {
+          'tab-shop': {
+            templateUrl: 'templates/shop/product-intro.html',
+            controller: 'ProductIntroController'
+          }
+        }
       });
     // .state('tab.chat-detail', {
     //   url: '/chats/:chatId',
@@ -232,15 +241,23 @@
    * ProductDetailController
    */
   .controller('ProductDetailController', 
-              ['$scope', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', 'shopApi',  'cartApi', '$state',                             
-    function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicModal, shopApi, cartApi, $state){
+              ['$scope', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading','shopApi',  'cartApi', '$state',                             
+    function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading,shopApi, cartApi, $state){
       $scope.productId = $stateParams.productId;
-      $scope.product = {};  
+      $scope.product = {};
       $scope.showSpecModal = showSpecModal;
-      $scope.getProductGoods = getProductGoods;
-      $scope.addCart = addCart;
+      $scope.getProductGoodsSpec = getProductGoodsSpec;
 
-      getProductGoods($scope.productId);
+      getProductGoodsSpec($scope.productId);
+
+      shopApi.getProduct($scope.productId).success(function(responseData){
+        var dataStatus = responseData.status;
+        if (dataStatus === 0) {
+          $scope.product = responseData.data.product;
+          $ionicSlideBoxDelegate.update();
+          getProductComment($scope.product.goods_id);
+        }       
+      });
 
       function showSpecModal(){
         $ionicModal.fromTemplateUrl('templates/shop/shop-product-spec.html', {
@@ -255,44 +272,34 @@
         });
       }
 
-      shopApi.getProduct($scope.productId).success(function(responseData){
-        var dataStatus = responseData.status;
-        if (dataStatus === 0) {
-          $scope.product = responseData.data.product;
-          $ionicSlideBoxDelegate.update();
-        }       
-      });
-
-
-      function addCart(isModal){
-        if (isModal) {
-          alert($scope.productIdCopy);
-        }
-        else{
-
-        }
-      }
-      
-
-      function getProductGoods(productId, isCopy){
-        // modal框中 对应的 productId
-        $scope.productIdCopy = productId;
-
+      function getProductGoodsSpec(productId, isSpecState){
+        $ionicLoading.show();
         shopApi
-        .getProductGoods(productId)
-        .success(function(responseData){
-          if (isCopy) {
-            $scope.specsCopy = responseData && responseData.data && responseData.data.spec || [];
-            console.log('$scope.specsCopy', $scope.specsCopy);
-            return;
-          }
-          $scope.specs = responseData && responseData.data && responseData.data.spec || [];
-          $scope.specsCopy = angular.copy($scope.specs);
-          console.log($scope.specs);
-        })
-        .error(function(e){
-          console.log(e);
-        });
+          .getProductGoodsSpec(productId)
+          .success(function(responseData){
+            $ionicLoading.hide();
+            $scope.goodsSpec = responseData && responseData.data || {};
+            // // 非 选择规格框中的数据, 即商品详情页的数据
+            // if (!isSpecState) {
+            //   $scope.specs = $scope.goodsSpec.spec || [];
+            // }
+          })
+          .error(function(e){
+            $ionicLoading.hide();
+            console.log(e);
+          });
+      }
+
+      function getProductComment(goods_id){
+        goods_id = 16;
+        shopApi
+          .getProductComment(goods_id, 1)
+          .success(function(data){
+            $scope.comment = data && data.data && data.data[0] || {};
+          })
+          .error(function(e){
+            console.log(e);
+          });
       }
 
       $scope.addToCart = function (product) {
@@ -301,10 +308,19 @@
 
   }]) // end of ProductDetailController
 
+  .controller('ProductIntroController', function($scope, $stateParams, shopApi){
+    console.log($stateParams.id);
+    $stateParams.id = 60;
+    shopApi.getProductIntro($stateParams.id).success(function(responseData){
+      $scope.html = responseData && responseData.data && responseData.data.html || '';
+    });
+  }) 
+
   .controller('ProductCommentController', function($scope, $stateParams, shopApi){
     console.log($stateParams.id);
+    $stateParams.id = 16;
     shopApi
-      .getProductComment(16, 1)
+      .getProductComment($stateParams.id, 1)
       .success(function(data){
         $scope.comments = data && data.data || [];
         console.log('comments', $scope.comments);
@@ -359,7 +375,7 @@
         return request;
       };
       
-      var getProductGoods = function(productId) {
+      var getProductGoodsSpec = function(productId) {
         var data = {"product_id": productId};
         var request = $http({
           method: 'post',
@@ -397,14 +413,27 @@
         
         return request;
       };
+
+      var getProductIntro = function(goods_id){
+        var data = {"goods_id": goods_id};
+        var request = $http({
+          method: 'post',
+          url: apiEndpoint.url + '/product-intro.html',
+          transformRequest: transformRequestAsFormPost,
+          data: data,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}          
+        });
+        return request;
+      };
       
       return {
+        getProductIntro: getProductIntro,
         getProductComment: getProductComment,
         getGalleryFilter: getGalleryFilter,
         getGallery : getGallery,
         getCategories: getCategories,
         getProduct: getProduct,
-        getProductGoods: getProductGoods
+        getProductGoodsSpec: getProductGoodsSpec
       };
 
   } // end of anonymous function
