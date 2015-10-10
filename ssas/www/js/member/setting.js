@@ -64,13 +64,13 @@
         var data = {
           full_name: $scope.idCardInfo.name,
           number: $scope.idCardInfo.number,
-          is_default: $scope.idCardInfo.default
+          is_default: $scope.idCardInfo.default ? '1':'0'
         };
 
         SettingApi.addIdCard(data, function (result) {
           var alertPopup = $ionicPopup.alert({
             title: '添加身份信息',
-            template: result.msg
+            template: result.msg ? result.msg : '添加成功'
           });
           alertPopup.then(function (res) {
             console.log(res);

@@ -71,7 +71,8 @@ var translations_zh = {
     //setting
     settng_title: '我的信息',
     idcard_title: '身份证列表',
-    idcard_addbtn: '添加新身份证',
+    idcard_addbtn: '添加身份证',
+    idcard_addtitle: '新建身份证',
 
     //return
     return_title: '售后申请',

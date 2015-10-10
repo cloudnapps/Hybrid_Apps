@@ -1,10 +1,4 @@
 <ion-view view-title="{{'rec_addtitle'|translate}}">
-  <ion-nav-buttons side="right">
-    <div>
-      <button class="button button-icon icon ion-ios-upload" ng-click="add()">
-      </button>
-    </div>
-  </ion-nav-buttons>
   <ion-content class="padding">
     <div class="list">
       <label class="item item-input">
@@ -38,6 +32,13 @@
         </label>
       </label>
     </div>
+
+    <div class="button-bar">
+      <button class="button button-full button-light" style="font-size:20px;" ng-click="add()">
+        确定
+      </button>
+    </div>
+
     <div ng-show="addrInfo.showChoose">
       <div class="button-bar">
         <div class="row">
@@ -58,7 +59,8 @@
           <div class="input-label">
             省/直辖市
           </div>
-          <select ng-model="addrInfo.address.province" ng-options="s.value for s in provinces" ng-change="onProvinceChanged()">
+          <select ng-model="addrInfo.address.province" ng-options="s.value for s in provinces"
+                  ng-change="onProvinceChanged()">
             <option value="">--请选择--</option>
           </select>
         </label>
