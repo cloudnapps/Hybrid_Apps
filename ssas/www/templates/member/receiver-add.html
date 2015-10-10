@@ -21,16 +21,16 @@
       </label>
       <label class="item item-input" ng-click="addrInfo.showChoose=true">
         <span class="input-label">省市区：</span>
-        <input type="text" ng-model="addrInfo.address.region" placeholder="省市区县" readonly="readonly"></label>
+        <input type="text" ng-model="addrInfo.area" placeholder="省市区县" readonly="readonly"></label>
       </label>
       <label class="item item-input">
         <span class="input-label">详细地址：</span>
-        <input type="text" ng-model="addrInfo.address.detail" placeholder="详细地址">
+        <input type="text" ng-model="addrInfo.addr" placeholder="详细地址">
       </label>
       <label class="item item-toggle">
         是否默认地址
         <label class="toggle">
-          <input type="checkbox" ng-model="addrInfo.default">
+          <input type="checkbox" ng-model="addrInfo.checked">
 
           <div class="track">
             <div class="handle"></div>

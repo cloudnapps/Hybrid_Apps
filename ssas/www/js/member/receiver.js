@@ -17,8 +17,8 @@
             }
           }
         })
-        .state('receivers_add', {
-          url: '/receivers/add',
+        .state('receivers_change', {
+          url: '/receivers/change/:addrInfo',
           views: {
             'main-view': {
               templateUrl: 'templates/member/receiver-add.html',
@@ -28,12 +28,16 @@
         });
     })
 
-    .controller('ReceiversCtrl', function ($scope, $ionicPopup, ReceiverApi) {
+    .controller('ReceiversCtrl', function ($scope, $state, $ionicPopup, ReceiverApi) {
       $scope.items = [];
 
       ReceiverApi.getReceiverList(null, function (result) {
         $scope.items = result.data.addrlist;
       });
+
+      $scope.edit = function (item) {
+        $state.go('receivers_change', {addrInfo: JSON.stringify(item)}, {reload: true});
+      };
 
       $scope.remove = function (item) {
         var confirmPopup = $ionicPopup.confirm({
@@ -57,19 +61,27 @@
       }
     })
 
-    .controller('ReceiverAddCtrl', function ($scope, $state, ReceiverApi) {
-      $scope.addrInfo = {};
+    .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, ReceiverApi) {
+      $scope.addrInfo = JSON.parse($stateParams.addrInfo);
+
+      if (!$scope.addrInfo) {
+        $scope.addrInfo = {};
+      }
+
       $scope.addrInfo.showChoose = false;
-      $scope.addrInfo.address = {};
+      if (!$scope.addrInfo.address) {
+        $scope.addrInfo.address = {};
+      }
 
       $scope.add = function () {
         var addrInfo = {
-          "region_id": $scope.addrInfo.address.regionId,
-          "addr": $scope.addrInfo.address.detail,
+          "addr_id" : $scope.addrInfo.addr_id,
+          "region_id": $scope.addrInfo.region_id,
+          "addr": $scope.addrInfo.addr,
           "name": $scope.addrInfo.name,
           "mobile": $scope.addrInfo.mobile,
           "tel": "",
-          "default": $scope.addrInfo.default ? 1 : 0,
+          "default": $scope.addrInfo.checked ? '1' : '0',
           "zipcode": $scope.addrInfo.zipcode
         };
 
@@ -86,20 +98,20 @@
 
       $scope.onProvinceChanged = function () {
         $scope.addrInfo.address.city = "";
-        $scope.addrInfo.address.area = "";
+        $scope.addrInfo.address.district = "";
       };
 
       $scope.onCityChanged = function () {
-        $scope.addrInfo.address.area = "";
+        $scope.addrInfo.address.district = "";
       };
 
       $scope.saveAddress = function () {
-        $scope.addrInfo.address.region = $scope.addrInfo.address.province.value + $scope.addrInfo.address.city.value;
-        $scope.addrInfo.address.regionId = $scope.addrInfo.address.province.id + ',' + $scope.addrInfo.address.city.id;
+        $scope.addrInfo.area = $scope.addrInfo.address.province.value + $scope.addrInfo.address.city.value;
+        $scope.addrInfo.region_id = $scope.addrInfo.address.province.id + ',' + $scope.addrInfo.address.city.id;
 
-        if ($scope.addrInfo.address.area !== "") {
-          $scope.addrInfo.address.regionId = $scope.addrInfo.address.regionId + ',' + $scope.addrInfo.address.area.id;
-          $scope.addrInfo.address.region = $scope.addrInfo.address.region + $scope.addrInfo.address.area.value;
+        if ($scope.addrInfo.address!== "") {
+          $scope.addrInfo.region_id = $scope.addrInfo.region_id + ',' + $scope.addrInfo.address.district.id;
+          $scope.addrInfo.area = $scope.addrInfo.area + $scope.addrInfo.address.district.value;
         }
 
         $scope.addrInfo.showChoose = false;

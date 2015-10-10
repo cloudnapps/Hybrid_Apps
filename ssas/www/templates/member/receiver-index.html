@@ -1,7 +1,14 @@
 <ion-view view-title="{{'rec_title'|translate}}">
   <ion-content>
+    <div class="row">
+      <h2>默认地址</h2>
+    </div>
+
+    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #f1f1f1;"/>
+
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" type="item-text-wrap">
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" ng-if="item.checked"
+                type="item-text-wrap" ng-click="edit(item)">
         <div class="row">
           <div class="col col-50">
             <h2>收件人：{{item.name}}</h2>
@@ -15,9 +22,30 @@
             <p>收件地址：{{item.area}}{{item.addr}}</p>
           </div>
         </div>
-        <ion-option-button class="button-assertive" ng-click="edit(item)">
-          编辑
+        <ion-option-button class="button-assertive" ng-click="remove(item)">
+          删除
         </ion-option-button>
+      </ion-item>
+    </ion-list>
+
+    <hr style="margin: 10px;height:1px;border:none;border-top:10px solid #f1f1f1;"/>
+
+    <ion-list>
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" ng-if="!item.checked"
+                type="item-text-wrap" ng-click="edit(item)">
+        <div class="row">
+          <div class="col col-50">
+            <h2>收件人：{{item.name}}</h2>
+          </div>
+          <div class="col col-50" align="right">
+            <h2>电话：{{item.mobile}}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-100">
+            <p>收件地址：{{item.area}}{{item.addr}}</p>
+          </div>
+        </div>
         <ion-option-button class="button-assertive" ng-click="remove(item)">
           删除
         </ion-option-button>
