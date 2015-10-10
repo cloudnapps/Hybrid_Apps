@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.cloudnapps.plugins.beacon.shake"
+    version="1.0.0">
+    <name>Shake</name>
+    
+    <js-module src="www/shake.js" name="shake">
+        <clobbers target="shake" />
+    </js-module>
+    
+    <!-- android -->
+    <platform name="android">
+    </platform>
+    
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+            <string>始终利用位置服务检测周边的iBeacon，提醒用户关心的内容。</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+            </dict>
+        </config-file>
+        
+        <config-file target="config.xml" parent="/*">
+            <feature name="Shake">
+                <param name="ios-package" value="CDVShake" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        
+        <header-file src="src/ios/CDVShake.h" />
+        <source-file src="src/ios/CDVShake.m" />
+        <header-file src="src/ios/svGifView.h" />
+        <source-file src="src/ios/svGifView.m" />
+        <header-file src="src/ios/WebViewController.h" />
+        <source-file src="src/ios/WebViewController.m" />
+        <resource-file src="src/ios/shaking.gif" />
+        <resource-file src="src/ios/shaking.wav" />
+        
+        <framework src="libs/ios/CAProximityKit.framework" custom="true" />
+        <framework src="CoreMotion.framework" />
+        <framework src="libsqlite3.0.tbd" />
+        <framework src="libz.tbd" />
+        <framework src="ImageIO.framework" />
+    </platform>
+</plugin>

@@ -23,24 +23,24 @@
     "cordova-plugin-inappbrowser",
     "cordova-plugin-globalization",
     {
-      "locator": "https://github.com/cloudnapps/cordova-qdc-alipay.git",
-      "id": "com.qdc.plugins.alipay"
+      "locator": "../plugins/cordova-beacon-navi",
+      "id": "com.plugins.beacon.navi"
     },
     {
-      "locator": "https://github.com/cloudnapps/cordova-qdc-wxpay.git",
-      "id": "com.qdc.plugins.wxpay"
-    },
-    {
-      "locator": "https://github.com/cloudnapps/cordova-beacon-shake.git",
-      "id": "com.cloudnapps.plugins.beacon.shake"
-    },
-    {
-      "locator": "https://github.com/cloudnapps/cordova-beacon-monitor.git",
+      "locator": "../plugins/cordova-beacon-monitor",
       "id": "com.cloudnapps.plugins.beacon.camonitor"
     },
     {
-      "locator": "https://github.com/cloudnapps/cordova-beacon-navi.git",
-      "id": "com.plugins.beacon.navi"
+      "locator": "../plugins/cordova-beacon-shake",
+      "id": "com.cloudnapps.plugins.beacon.shake"
+    },
+    {
+      "locator": "../plugins/cordova-qdc-alipay",
+      "id": "com.qdc.plugins.alipay"
+    },
+    {
+      "locator": "../plugins/cordova-qdc-wxpay",
+      "id": "com.qdc.plugins.wxpay"
     }
   ],
   "cordovaPlatforms": [

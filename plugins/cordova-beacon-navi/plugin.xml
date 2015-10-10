@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.plugins.beacon.navi"
+    version="1.0.0">
+    <name>Navi</name>
+    
+    <js-module src="www/navi.js" name="navi">
+        <clobbers target="navi" />
+    </js-module>
+    
+    <!-- android -->
+    <platform name="android">
+    </platform>
+    
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+            <string>>始终利用位置服务检测周边的iBeacon，提醒用户关心的内容。</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+            </dict>
+        </config-file>
+        
+        <config-file target="config.xml" parent="/*">
+            <feature name="Navi">
+                <param name="ios-package" value="CDVMapNavigator" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        
+        <header-file src="src/ios/CDVMapNavigator.h" />
+        <source-file src="src/ios/CDVMapNavigator.m" />
+        <header-file src="src/ios/NaviTYMapViewController.h" />
+        <source-file src="src/ios/NaviTYMapViewController.m" />
+        <header-file src="src/ios/ShopTYMapViewController.h" />
+        <source-file src="src/ios/ShopTYMapViewController.m" />
+        <header-file src="src/ios/dropDownList/DropDownChooseProtocol.h" />
+        <header-file src="src/ios/dropDownList/DropDownListView.h" />
+        <source-file src="src/ios/dropDownList/DropDownListView.m" />
+        <resource-file src="src/ios/dropDownList/down_dark.png" />
+        <header-file src="src/ios/sphereMenu/SphereMenu.h" />
+        <source-file src="src/ios/sphereMenu/SphereMenu.m" />
+        <resource-file src="src/ios/MapResource.bundle" />
+        <resource-file src="src/ios/locationArrow.png" />
+        <resource-file src="src/ios/nav_exit.png" />
+        <resource-file src="src/ios/start.png" />
+        <resource-file src="src/ios/end.png" />
+        <resource-file src="src/ios/start_left.png" />
+        <resource-file src="src/ios/end_right.png" />
+        <!--framework src="libs/ios/ArcGIS.framework" custom="true" / -->
+        <framework src="libs/ios/TYLocationEngine.framework" custom="true" />
+        <framework src="libs/ios/TYMapData.framework" custom="true" />
+        <framework src="libs/ios/TYMapSDK.framework" custom="true" />
+        <framework src="lib/ios/libc++.1.dylib" />
+    </platform>
+</plugin>
