@@ -31,7 +31,7 @@
                 </div>
                 <div class="row">
                   <div class="col assertive">{{good.buy_price|currency:'￥'}}</div>
-                  <div class="col assertive text-right">x{{good.quantity}}</div>
+                  <quantity-input class="col-60" ng-model="good.quantity"></quantity-input>
                 </div>
               </div>
             </div>
