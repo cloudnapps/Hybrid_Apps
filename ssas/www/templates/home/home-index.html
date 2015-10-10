@@ -8,6 +8,17 @@
       </div>
     </div>
   </ion-nav-buttons>
+
+  <ion-nav-title>
+    <form ng-submit="search()">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="search" placeholder="Search" ng-model="keywords.value" style="height: 28px;">
+      </label>
+      <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
+    </form>
+  </ion-nav-title>
+
   <ion-nav-buttons side="right">
     <div class="row row-center" style="padding: 0px;">
       <div class="col col-center" style="padding: 0px;">
@@ -33,6 +44,7 @@
       </ion-popover-view>
     </script>
   </ion-nav-buttons>
+
   <ion-content style="background-color: #eee;">
     <div class="row" style="padding: 0px;margin-bottom: 6px;width: 100%; height: 200px">
       <div class="col col-center" style="padding: 0px; width: 100%; height: 100%">
@@ -58,6 +70,48 @@
     </div>
 
     <div class="row" style="padding: 0;margin: 6px 0 0;background-color: #fff;">
+      <div class="col col-50 col-center" style="padding: 0px;margin: 0 0 10px 0;">
+        <img src="img/hotproduct.jpg" style="height: 30px;">
+      </div>
+      <div class="col col-50 col-center" style="padding: 0px;margin: 10px 5px;" align="right">
+        <a href="#/orders/all" style="margin-right: 25px;text-decoration: none;">更多>></a>
+      </div>
+    </div>
+    <div style="padding: 0 0 0 6px;background-color: #fff;">
+      <div class="row"
+           ng-repeat="activity in activityInfo" ng-if="$index % 3 === 0">
+        <div class="col col-30" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
+          <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
+            <img style="width:90px;" ng-src="{{activityInfo[$index].image}}">
+            <p>{{activityInfo[$index].price}}</p>
+            <p>{{activityInfo[$index].activity_price}}</p>
+
+            <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
+          </a>
+        </div>
+
+        <div class="col col-30" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
+          <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
+            <img style="width:90px;" ng-src="{{activityInfo[$index+1].image}}">
+            <p>{{activityInfo[$index].price}}</p>
+            <p>{{activityInfo[$index].activity_price}}</p>
+
+            <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
+          </a>
+        </div>
+
+        <div class="col col-30" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
+          <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
+            <img style="width:90px;" ng-src="{{activityInfo[$index+2].image}}">
+            <p>{{activityInfo[$index].price}}</p>
+            <p>{{activityInfo[$index].activity_price}}</p>
+            <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="padding: 0;margin: 6px 0 0;background-color: #fff;">
       <div class="col col-50 col-center" style="padding: 0px;margin:0 0 10px 0;">
         <img src="img/hotseller.jpg" style="height: 30px;">
       </div>
@@ -67,16 +121,24 @@
     </div>
 
     <div class="row button-bar" style="padding: 0;">
-      <a class="button" style="border-bottom: none;background-color: #fff;padding:0;"><img style="height:40px;" ng-src="{{sellerInfo.items[0].image}}"></a>
-      <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"><img style="height:40px;" ng-src="{{sellerInfo.items[1].image}}"></a>
-      <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"><img style="height:40px;" ng-src="{{sellerInfo.items[2].image}}"></a>
-      <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"><img style="height:40px;" ng-src="{{sellerInfo.items[3].image}}"></a>
+      <a class="button" style="border-bottom: none;background-color: #fff;padding:0;"><img style="height:40px;"
+                                                                                           ng-src="{{sellerInfo.items[0].image}}"></a>
+      <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"><img style="height:40px;"
+                                                                                            ng-src="{{sellerInfo.items[1].image}}"></a>
+      <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"><img style="height:40px;"
+                                                                                            ng-src="{{sellerInfo.items[2].image}}"></a>
+      <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"><img style="height:40px;"
+                                                                                            ng-src="{{sellerInfo.items[3].image}}"></a>
     </div>
     <div class="row button-bar" style="background-color: #fff;padding: 0 0 10px 0;">
-      <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;" ng-src="{{sellerInfo.items[4].image}}"></a>
-      <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;" ng-src="{{sellerInfo.items[5].image}}"></a>
-      <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;" ng-src="{{sellerInfo.items[6].image}}"></a>
-      <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;" ng-src="{{sellerInfo.items[7].image}}"></a>
+      <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;"
+                                                                       ng-src="{{sellerInfo.items[4].image}}"></a>
+      <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;"
+                                                                       ng-src="{{sellerInfo.items[5].image}}"></a>
+      <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;"
+                                                                       ng-src="{{sellerInfo.items[6].image}}"></a>
+      <a class="button" style="background-color: #fff;padding:0;"><img style="height:40px;"
+                                                                       ng-src="{{sellerInfo.items[7].image}}"></a>
     </div>
 
     <div class="row" style="padding: 0;margin: 6px 0 0;background-color: #fff;">
