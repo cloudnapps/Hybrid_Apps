@@ -1,60 +1,58 @@
 <ion-view view-title="{{'rec_title'|translate}}">
   <ion-content>
     <div class="row">
-      <h4>默认地址</h4>
+      <h4 style="padding-left: 17px;font-size: 16px;font-weight: normal;color: #4a4b4d;">默认地址</h4>
     </div>
 
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #f1f1f1;"/>
-    
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" ng-if="item.checked"
-                type="item-text-wrap" ng-click="edit(item)">
-        <div class="row">
-          <div class="col col-50">
-            <h2>收件人：{{item.name}}</h2>
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" ng-if="item.checked" type="item-text-wrap" ng-click="edit(item)" style="border-bottom: none; border-top-style: dashed;padding: 10px 5px 10px 15px;">
+        <div class="row" style="padding: 0;">
+          <div class="col col-90">
+            <p style="margin-bottom: 13px;color: #4a4b4d;">收件人：{{item.name}}<span style="float: right;">电话：{{item.mobile}}</span></p>
+            <div class="row" style="padding: 0;">
+              <div class="col col-20" style="padding: 0;">
+                <span style="font-size: 14px;color: #4a4b4d;">收件地址：</span>
+              </div>
+              <div class="col col-80" style="padding: 0 0 0 7px;word-break: break-all;max-width: 16em;white-space: normal;">
+                <span style="font-size: 14px;">{{item.area}}{{item.addr}}</span>
+              </div>
+            </div>
           </div>
-          <div class="col col-50" align="right">
-            <h2>电话：{{item.mobile}}</h2>
+          <div class="col col-10">
+            <a href="" title="">
+              <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
           </div>
         </div>
-        <div class="row">
-          <div class="col col-100">
-            <p>收件地址：{{item.area}}{{item.addr}}</p>
-          </div>
-        </div>
-        <ion-option-button class="button-assertive" ng-click="remove(item)">
-          删除
-        </ion-option-button>
       </ion-item>
     </ion-list>
 
-    <hr style="margin: 10px;height:1px;border:none;border-top:10px solid #f1f1f1;"/>
+    <hr style="margin: 5px 0;height:1px;border:none;border-top:10px solid #f1f1f1;"/>
 
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" ng-if="!item.checked"
-                type="item-text-wrap" ng-click="edit(item)">
-        <div class="row">
-          <div class="col col-50">
-            <h2>收件人：{{item.name}}</h2>
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" ng-if="!item.checked" type="item-text-wrap" ng-click="edit(item)" style="padding: 10px 5px 10px 15px;border-top: none;border-bottom-color: #ddd;border-bottom-style: solid;margin-bottom: 2px;">
+        <div class="row" style="padding: 0;">
+          <div class="col col-90">
+            <p style="margin-bottom: 13px;color: #4a4b4d;">收件人：{{item.name}}<span style="float: right;">电话：{{item.mobile}}</span></p>
+            <div class="row" style="padding: 0;">
+              <div class="col col-20" style="padding: 0;">
+                <span style="font-size: 14px;color: #4a4b4d;">收件地址：</span>
+              </div>
+              <div class="col col-80" style="padding: 0 0 0 7px;word-break: break-all;max-width: 16em;white-space: normal;">
+                <span style="font-size: 14px;">{{item.area}}{{item.addr}}</span>
+              </div>
+            </div>
           </div>
-          <div class="col col-50" align="right">
-            <h2>电话：{{item.mobile}}</h2>
+          <div class="col col-10">
+            <a href="" title="">
+              <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
           </div>
         </div>
-        <div class="row">
-          <div class="col col-100">
-            <p>收件地址：{{item.area}}{{item.addr}}</p>
-          </div>
-        </div>
-        <ion-option-button class="button-assertive" ng-click="remove(item)">
-          删除
-        </ion-option-button>
       </ion-item>
     </ion-list>
     <div class="button-bar">
-      <a class="button button-full button-light" style="font-size:20px;" href="#/receivers/add">
-        {{'rec_addbtn'|translate}}
-      </a>
+      <a class="button button-full button-light" style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;" href="#/receivers/add">{{'rec_addbtn'|translate}}</a>
     </div>
   </ion-content>
 </ion-view>
