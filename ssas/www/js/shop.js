@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  var shop = angular.module('shop', ['components']);
+  var shop = angular.module('shop', ['components', 'seller']);
   
   shop.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('tab.categories', {
@@ -49,11 +49,29 @@
         }
       })
       .state('tab.intro', {
-        url: '/goods/:id/intro?productId',
+        url: '/goods/:id/intro?productId&sellerId',
         views: {
           'tab-shop': {
             templateUrl: 'templates/shop/product-intro.html',
             controller: 'ProductIntroController'
+          }
+        }
+      })
+      .state('tab.product_shadow', {
+        url: '/product_shadow',
+        abstract: true,
+        views: {
+          'tab-shop': {
+            template: '<ion-nav-view name="tab-shop-shadow"></ion-nav-view>'
+          }
+        }
+      })
+      .state('tab.product_shadow.seller_detail', {
+        url: '/sellers/:sellerId',
+        views: {
+          'tab-shop-shadow': {
+            templateUrl: 'templates/home/seller-detail.html',
+            controller: 'SellerDetailController'
           }
         }
       });
@@ -253,9 +271,12 @@
       shopApi.getProduct($scope.productId).success(function(responseData){
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
+          $scope.point = responseData.data.point || {};
           $scope.product = responseData.data.product;
           $ionicSlideBoxDelegate.update();
           getProductComment($scope.product.goods_id);
+          console.log('product', $scope.product);
+          console.log(' $scope.point',  $scope.point);
         }       
       });
 
@@ -312,7 +333,8 @@
 
     $scope.product = {
       goods_id: $stateParams.id,
-      product_id: $stateParams.productId
+      product_id: $stateParams.productId,
+      seller_id: $stateParams.sellerId
     };
 
     $scope.product.goods_id = 60;
@@ -452,7 +474,7 @@
         });
         return request;
       };
-      
+
       return {
         getProductIntro: getProductIntro,
         getProductComment: getProductComment,
