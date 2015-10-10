@@ -8,16 +8,16 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('orders', {
+        .state('tab.orders', {
           url: '/orders',
           abstract: true,
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/order-index.html'
             }
           }
         })
-        .state('orders.all', {
+        .state('tab.orders.all', {
           url: '/all',
           views: {
             'tab-orders-all': {
@@ -26,7 +26,7 @@
             }
           }
         })
-        .state('orders.nopay', {
+        .state('tab.orders.nopay', {
           url: '/nopay',
           views: {
             'tab-orders-nopay': {
@@ -35,7 +35,7 @@
             }
           }
         })
-        .state('orders.noship', {
+        .state('tab.orders.noship', {
           url: '/noship',
           views: {
             'tab-orders-noship': {
@@ -44,7 +44,7 @@
             }
           }
         })
-        .state('orders.shipped', {
+        .state('tab.orders.shipped', {
           url: '/shipped',
           views: {
             'tab-orders-shipped': {
@@ -53,7 +53,7 @@
             }
           }
         })
-        .state('orders.return', {
+        .state('tab.orders.return', {
           url: '/return',
           views: {
             'tab-orders-return': {
