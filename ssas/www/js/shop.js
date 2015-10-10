@@ -49,7 +49,7 @@
         }
       })
       .state('tab.intro', {
-        url: '/goods/:id/intro',
+        url: '/goods/:id/intro?productId',
         views: {
           'tab-shop': {
             templateUrl: 'templates/shop/product-intro.html',
@@ -308,26 +308,53 @@
 
   }]) // end of ProductDetailController
 
-  .controller('ProductIntroController', function($scope, $stateParams, shopApi){
-    console.log($stateParams.id);
-    $stateParams.id = 60;
-    shopApi.getProductIntro($stateParams.id).success(function(responseData){
-      $scope.html = responseData && responseData.data && responseData.data.html || '';
-    });
-  }) 
+  .controller('ProductIntroController', function($scope, $stateParams, shopApi) {
+
+    $scope.product = {
+      goods_id: $stateParams.id,
+      product_id: $stateParams.productId
+    };
+
+    $scope.product.goods_id = 60;
+
+    shopApi
+      .getProductIntro($scope.product.goods_id)
+      .success(function(responseData){
+        $scope.html = responseData && responseData.data && responseData.data.html || '';
+      });
+  }) // end of ProductIntroController
 
   .controller('ProductCommentController', function($scope, $stateParams, shopApi){
     console.log($stateParams.id);
     $stateParams.id = 16;
-    shopApi
-      .getProductComment($stateParams.id, 1)
-      .success(function(data){
-        $scope.comments = data && data.data || [];
-        console.log('comments', $scope.comments);
-      })
-      .error(function(e){
-        console.log(e);
-      });
+    $scope.page = 0;
+    $scope.comments = [];
+
+    $scope.hasMore = true;
+    $scope.loadMore = function() {
+      $scope.page++;
+      getProductComment($stateParams.id);
+    };
+
+    function getProductComment(goodsId){
+      shopApi
+        .getProductComment(goodsId, $scope.page)
+        .success(function(data){
+          var comments = data && data.data || [];
+          console.log('comments/page', comments, $scope.page);
+          if (!comments.length) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.comments.push.apply($scope.comments, comments);
+          }
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        })
+        .error(function(e){
+          console.log(e);
+        });
+    }
+
   }) // end of ProductCommentController
 
   .factory('shopApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost',
