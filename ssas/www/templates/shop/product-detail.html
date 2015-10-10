@@ -12,8 +12,8 @@
     </section>    
     <hr></hr>
     <a class="button button-clear  button-full button-small icon ion-chevron-right icon-right" ng-click="showSpecModal()" style="text-align: left; color: #000">选择规格</a>
-    <hr></hr>
-    <div ui-sref="tab.comments({id:product.goods_id})">
+    <hr ng-hide="true" >
+    <div ng-hide="true" ui-sref="tab.comments({id:product.goods_id})">
       <a class="button button-clear button-full button-small icon ion-chevron-right icon-right" style="text-align: left; color: #000">{{'comment'|translate}}
       </a>
       <div style="padding-left: 10px; font-size: 5px;">好评{{product.high_point}}% 已有{{product.count}}人购买</div>
@@ -22,8 +22,20 @@
       <div style="padding-left: 10px; font-size: 10px; color: #cccccc">{{comment.content}}</div>
     </div>
     <hr></hr>
-    <a class="button button-clear  button-full button-small icon ion-chevron-right icon-right" style="text-align: left; color: #000" ui-sref="tab.intro({id: product.goods_id, productId: productId})">查看产品图文详情</a>
-    <hr></hr>
+    <a class="button button-clear  button-full button-small icon ion-chevron-right icon-right" style="text-align: left; color: #000" ui-sref="tab.intro({id: product.goods_id, productId: productId, sellerId: product.seller_id})">查看产品图文详情</a>
+    <hr style="margin: 0;height:10px;border:none;border-top:10px solid #f1f1f1;">
+    <div class="list">
+      <div class="item item-thumbnail-left" style="border: none">
+        <img ng-src="{{point.url}}">
+        <div style="font-size: 20px; padding-top: 10px">{{point.name}}</div>
+        <div class="row" style="flex-wrap:wrap">
+          <div class="col col-33" ng-repeat="value in point.value">
+            {{value.type_name}} &nbsp;
+            {{value.point}}
+          </div>
+        </div>
+      </div>
+    </div>
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
     <div class="button-bar">

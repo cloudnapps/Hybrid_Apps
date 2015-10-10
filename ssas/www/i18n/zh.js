@@ -74,6 +74,7 @@ var translations_zh = {
     return_addbtn: '提交申请',
 
     good_category: '商品分类',
+    good_fav: '收藏商品',
 
     product_cart: '加入购物车',
     product_goto_shop: '进入店铺',

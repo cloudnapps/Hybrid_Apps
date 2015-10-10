@@ -4,6 +4,7 @@ angular.module('components')
     function($http, apiEndpoint, transformRequestAsFormPost) {
 
       var addToCart = function (product) {
+        console.log(product);
         var data = {
           product_id: product.product_id,
           goods_id: product.goods_id,

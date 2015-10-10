@@ -8,9 +8,14 @@ angular
         product: '=addToCart'
       },
       replace: true,
-      controller: function($scope, cartApi) {
-        $scope.addToCart = function(product) {
-          cartApi.addToCart(product);
+      controller: function($scope, cartApi, FavoriteApi) {
+        $scope.addGoodsFavorite = function(){
+          FavoriteApi.addGoodsFavorite([$scope.product.goods_id], function(){
+            console.log(arguments);
+          });
+        };
+        $scope.addToCart = function() {
+          cartApi.addToCart($scope.product);
         };
       }
     };
