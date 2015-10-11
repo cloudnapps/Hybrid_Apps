@@ -17,17 +17,17 @@
             }
           }
         })
-        .state('complaint_list', {
-          url: '/complaints/list',
+        .state('tab.complaints', {
+          url: '/complaints',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/complaint-list.html',
               controller: 'ComplaintListCtrl'
             }
           }
         })
-        .state('complaints_detail', {
-          url: '/complaints/:oId',
+        .state('tab.complaint_detail', {
+          url: '/complaint/:oId',
           views: {
             'tab-member': {
               templateUrl: 'templates/member/complaint-detail.html',
