@@ -1,28 +1,23 @@
 <ion-view view-title="{{'rec_addtitle'|translate}}" hide-tabs="true">
-  <ion-content class="padding">
+  <ion-content>
     <div class="list">
       <label class="item item-input">
-        <span class="input-label">收货人：</span>
         <input type="text" ng-model="addrInfo.name" placeholder="收件人姓名">
       </label>
       <label class="item item-input">
-        <span class="input-label">手机：</span>
         <input type="text" ng-model="addrInfo.mobile" placeholder="手机号码">
       </label>
       <label class="item item-input">
-        <span class="input-label">邮编：</span>
         <input type="text" ng-model="addrInfo.zipcode" placeholder="邮政编码">
       </label>
       <label class="item item-input" ng-click="addrInfo.showChoose=true">
-        <span class="input-label">省市区：</span>
-        <input type="text" ng-model="addrInfo.area" placeholder="省市区县" readonly="readonly"></label>
+        <input type="text" ng-model="addrInfo.area" placeholder="省市区县" readonly="readonly" style="background-color: #fff;"></label>
       </label>
       <label class="item item-input">
-        <span class="input-label">详细地址：</span>
         <input type="text" ng-model="addrInfo.addr" placeholder="详细地址">
       </label>
-      <label class="item item-toggle">
-        是否默认地址
+      <label class="item item-toggle" style="font-size: 14px;">
+        设置为默认地址
         <label class="toggle">
           <input type="checkbox" ng-model="addrInfo.checked">
 
@@ -34,21 +29,19 @@
     </div>
 
     <div class="button-bar">
-      <button class="button button-full button-light" style="font-size:20px;" ng-click="add()">
-        确定
-      </button>
+      <button class="button button-full button-light" style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;" ng-click="add()">确定</button>
     </div>
 
     <div ng-show="addrInfo.showChoose">
       <div class="button-bar">
         <div class="row">
           <div class="col col-50">
-            <button style="font-size:16px;" ng-click="addrInfo.showChoose=false">
+            <button class="button button-clear button-positive" style="font-size:16px;" ng-click="addrInfo.showChoose=false">
               关闭
             </button>
           </div>
           <div class="col col-50" align="right">
-            <button style="font-size:16px;" ng-click="saveAddress()">
+            <button class="button button-clear button-positive" style="font-size:16px;" ng-click="saveAddress()">
               完成
             </button>
           </div>
