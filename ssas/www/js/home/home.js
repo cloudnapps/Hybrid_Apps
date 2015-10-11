@@ -1,5 +1,5 @@
 (function () {
-  var home = angular.module('home', ['seller'])
+  var home = angular.module('home', ['seller', 'point'])
     .config(function ($stateProvider) {
       $stateProvider
         .state('tab.home', {
@@ -11,6 +11,15 @@
             }
           }
         })
+        .state('tab.signin', {
+          url: '/signin',
+          views: {
+            'tab-home': {
+              templateUrl: 'templates/home/home-signin.html',
+              controller: 'SigninController'
+            }
+          }
+        });
     }) // end of config
 
     .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate, $ionicPopover,
@@ -30,7 +39,7 @@
       });
 
       $ionicPopover.fromTemplateUrl('findPopover.html', {
-        scope: $scope,
+        scope: $scope
       }).then(function (popover) {
         $scope.popover = popover;
       });
@@ -63,6 +72,22 @@
         $scope.activityInfo = result.data.data;
       })
 
+    }) // end of HomeController
+
+    .controller('SigninController', function ($scope, $ionicPopup, PointApi) {
+      $scope.signedIn = function() {
+        PointApi.addGold(10, '签到送积分', function(result) {
+          if (result.status === 0) {
+            var alertPopup = $ionicPopup.alert({
+              title: '签到成功',
+              template: '恭喜你获得10个金币，请到会员中心查看'
+            });
+            alertPopup.then(function (res) {
+              console.log(res);
+            });
+          }
+        });
+      }
     }) // end of HomeController
 
     .factory('HomeApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost',
