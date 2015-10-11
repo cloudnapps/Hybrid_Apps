@@ -1,16 +1,14 @@
 <ion-view view-title="{{'idcard_addtitle'|translate}}">
-  <ion-content class="padding">
+  <ion-content>
     <div class="list">
       <label class="item item-input">
-        <span class="input-label">姓名：</span>
-        <input type="text" ng-model="idCardInfo.name" placeholder="姓名">
+        <input type="text" placeholder="姓名" ng-model="idCardInfo.name">
       </label>
       <label class="item item-input">
-        <span class="input-label">身份证号：</span>
-        <input type="text" ng-model="idCardInfo.number" placeholder="手机号码">
+        <input type="text" placeholder="身份证号" ng-model="idCardInfo.number">
       </label>
-      <label class="item item-toggle">
-        是否默认
+      <label class="item item-toggle" style="font-size: 14px;">
+        设置为默认身份证
         <label class="toggle">
           <input type="checkbox" ng-model="idCardInfo.default">
 
@@ -19,9 +17,12 @@
           </div>
         </label>
       </label>
+      <label class="item item-input">
+        <span style="font-size: 14px;">身份证一旦申请后将无法进行更改或删除, 请确认信息的正确</span>
+      </label>
     </div>
     <div class="button-bar">
-      <button class="button button-full button-light" style="font-size:20px;" ng-click="add()">
+      <button class="button button-full button-light" style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;" ng-click="add()">
         确定
       </button>
     </div>
