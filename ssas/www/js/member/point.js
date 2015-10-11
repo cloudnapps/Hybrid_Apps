@@ -8,37 +8,37 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('points_index', {
-          url: '/points/index',
+        .state('tab.points', {
+          url: '/points',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/point-index.html',
               controller: 'PointsCtrl'
             }
           }
         })
-        .state('points_list', {
-          url: '/points/list',
+        .state('tab.points_list', {
+          url: '/point/list',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/point-list.html',
               controller: 'PointsCtrl'
             }
           }
         })
-        .state('golds_index', {
-          url: '/golds/index',
+        .state('tab.golds', {
+          url: '/golds',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/gold-index.html',
               controller: 'GoldsCtrl'
             }
           }
         })
-        .state('golds_list', {
-          url: '/golds/list',
+        .state('tab.golds_list', {
+          url: '/gold/list',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/gold-list.html',
               controller: 'GoldsCtrl'
             }
