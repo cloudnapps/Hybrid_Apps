@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.plugins.beacon.navi"
+    version="1.0.0">
+    <name>Navi</name>
+    
+    <js-module src="www/navi.js" name="navi">
+        <clobbers target="navi" />
+    </js-module>
+    
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Device" >
+                <param name="android-package" value="org.apache.cordova.device.Device"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+            <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+          <activity android:name="com.cloudnapps.plugins.map.MapActivity">
+          </activity>
+        </config-file>
+
+        <config-file target="res/values/strings.xml" parent="/resources">
+            <string name="navi">带我去</string>
+        </config-file>
+
+        <source-file src="src/android/MapActivity.java" target-dir="src/com/cloudnapps/plugins/map" />
+        <source-file src="src/android/MapNavigator.java" target-dir="src/com/cloudnapps/plugins/map" />
+        <source-file src="src/android/FileHelper.java" target-dir="src/com/cloudnapps/plugins/map" />
+        <source-file src="src/android/build-extras.gradle" target-dir="./" />
+
+        <source-file src="libs/android/android-support-v4.jar" target-dir="libs" />
+        <source-file src="libs/android/arcgis-android-api.jar" target-dir="libs" />
+        <source-file src="libs/android/jackson-core-lgpl-1.9.5.jar" target-dir="libs" />
+        <source-file src="libs/android/jackson-mapper-lgpl-1.9.5.jar" target-dir="libs" />
+        <source-file src="libs/android/jcifs-1.3.17.jar" target-dir="libs" />
+        <source-file src="libs/android/TYAndroidBeacon.jar" target-dir="libs" />
+        <source-file src="libs/android/TYBLELocationEngine.jar" target-dir="libs" />
+        <source-file src="libs/android/TYMapData.jar" target-dir="libs" />
+        <source-file src="libs/android/TYMapSDK.jar" target-dir="libs" />
+
+        <source-file src="libs/android/x86/libruntimecore_java.so" target-dir="libs/x86" />
+        <source-file src="libs/android/x86/libTYLocationEngine.so" target-dir="libs/x86" />
+        <source-file src="libs/android/x86/libTYMapSDK.so" target-dir="libs/x86" />
+        <source-file src="libs/android/armeabi/libruntimecore_java.so" target-dir="libs/armeabi" />
+        <source-file src="libs/android/armeabi/libTYLocationEngine.so" target-dir="libs/armeabi" />
+        <source-file src="libs/android/armeabi/libTYMapSDK.so" target-dir="libs/armeabi" />
+        <source-file src="libs/android/armeabi-v7a/libruntimecore_java.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="libs/android/armeabi-v7a/libTYLocationEngine.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="libs/android/armeabi-v7a/libTYMapSDK.so" target-dir="libs/armeabi-v7a" /> 
+
+        <source-file src="src/android/res/drawable-hdpi/start.png" target-dir="./res/drawable-hdpi"/>      
+        <source-file src="src/android/res/drawable-hdpi/end.png" target-dir="./res/drawable-hdpi"/>      
+        <source-file src="src/android/res/drawable-hdpi/nav_exit.png" target-dir="./res/drawable-hdpi"/>      
+        <source-file src="src/android/res/menu/map_menu.xml" target-dir="./res/menu"/>      
+        <source-file src="src/android/res/layout/activity_map.xml" target-dir="./res/layout"/>     
+    </platform>
+    
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+            <string>>始终利用位置服务检测周边的iBeacon，提醒用户关心的内容。</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+            </dict>
+        </config-file>
+        
+        <config-file target="config.xml" parent="/*">
+            <feature name="Navi">
+                <param name="ios-package" value="CDVMapNavigator" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        
+        <header-file src="src/ios/CDVMapNavigator.h" />
+        <source-file src="src/ios/CDVMapNavigator.m" />
+        <header-file src="src/ios/NaviTYMapViewController.h" />
+        <source-file src="src/ios/NaviTYMapViewController.m" />
+        <header-file src="src/ios/ShopTYMapViewController.h" />
+        <source-file src="src/ios/ShopTYMapViewController.m" />
+        <header-file src="src/ios/dropDownList/DropDownChooseProtocol.h" />
+        <header-file src="src/ios/dropDownList/DropDownListView.h" />
+        <source-file src="src/ios/dropDownList/DropDownListView.m" />
+        <resource-file src="src/ios/dropDownList/down_dark.png" />
+        <header-file src="src/ios/sphereMenu/SphereMenu.h" />
+        <source-file src="src/ios/sphereMenu/SphereMenu.m" />
+        <resource-file src="src/ios/MapResource.bundle" />
+        <resource-file src="src/ios/locationArrow.png" />
+        <resource-file src="src/ios/nav_exit.png" />
+        <resource-file src="src/ios/start.png" />
+        <resource-file src="src/ios/end.png" />
+        <resource-file src="src/ios/start_left.png" />
+        <resource-file src="src/ios/end_right.png" />
+        <!--framework src="libs/ios/ArcGIS.framework" custom="true" / -->
+        <framework src="libs/ios/TYLocationEngine.framework" custom="true" />
+        <framework src="libs/ios/TYMapData.framework" custom="true" />
+        <framework src="libs/ios/TYMapSDK.framework" custom="true" />
+        <framework src="lib/ios/libc++.1.dylib" />
+    </platform>
+</plugin>

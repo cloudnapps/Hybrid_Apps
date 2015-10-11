@@ -1,0 +1,17 @@
+{
+    "Buildings": [
+                  {
+                  "cityID": "0452",
+                  "id": "04520001",
+                  "name": "齐齐哈尔百货大楼",
+                  "longitude": "116.362551",
+                  "latitude": "39.958951",
+                  "address": "龙沙区卜奎大街106号",
+                  "initAngle": "-70.0",
+                  "routeURL": "http://123.56.41.94:6080/arcgis/rest/services/04520001/NAServer/Route",
+                  "offsetX": "200",
+                  "offsetY": "0",
+                  "status": "0"
+                  }
+                  ]
+}

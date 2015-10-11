@@ -1,0 +1,233 @@
+{
+    "RenderingScheme": {
+        "DefaultSymbol": {
+            "DefaultFillSymbol": {
+                "colorID": 9999,
+                "fillColor": "#FFCCCCCC",
+                "outlineColor": "#FFFFFFFF",
+                "lineWidth": 1
+            },
+            
+            "DefaultHighlightFillSymbol": {
+                "colorID": 9998,
+                "fillColor": "#FF00FFFF",
+                "outlineColor": "#FFFFFFFF",
+                "lineWidth": 1
+            },
+            
+            "DefaultLineSymbol": {
+                "colorID": 9997,
+                "fillColor": "",
+                "outlineColor": "",
+                "lineWidth": 1
+            },
+            "DefaultHighlightLineSymbol": {
+                "colorID": 9996,
+                "fillColor": "",
+                "outlineColor": "",
+                "lineWidth": 1
+            }
+        },
+        
+        "FillSymbol": [
+                       {
+                       "colorID": 1002,
+                       "fillColor": "#FFB4E164",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 3000,
+                       "fillColor": "#FF7AB6F5",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       }
+                       ,
+                       {
+                       "colorID": 25000,
+                       "fillColor": "#FFFFFFFF",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       }
+                       ,
+                       {
+                       "colorID": 25001,
+                       "fillColor": "#FFFFFFFF",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       }
+                       ,
+                       {
+                       "colorID": 12001,
+                       "fillColor": "#FF7AB6F5",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       
+                       {
+                       "colorID": "000200",
+                       "fillColor": "#FFCCCCCC",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": "000100",
+                       "fillColor": "#FFFFFFFF",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": "000300",
+                       "fillColor": "#FFE6E7E9",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": "000500",
+                       "fillColor": "#FFE6E7E9",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": "000600",
+                       "fillColor": "#FF9C9C9C",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": "000700",
+                       "fillColor": "#FF9C9C9C",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       
+                       
+                       {
+                       "colorID": 1,
+                       "fillColor": "#FFB4E164",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       
+                       {
+                       "colorID": 2,
+                       "fillColor": "#FFFCDDC1",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       
+                       {
+                       "colorID": 3,
+                       "fillColor": "#FFBFE7E7",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       
+                       {
+                       "colorID": 4,
+                       "fillColor": "#FFE4A3C1",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 5,
+                       "fillColor": "#FFD3FFBE",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 6,
+                       "fillColor": "#FFBFD2EA",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       }
+                       ,
+                       {
+                       "colorID": 7,
+                       "fillColor": "#FFB2B2B2",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       }
+                       ,
+                       {
+                       "colorID": 8,
+                       "fillColor": "#FFBED2FF",
+                       "outlineColor": "#FFBED2FF",
+                       "lineWidth": 1
+                       }
+                       
+                       ],
+        
+        "IconSymbol": [
+                       {
+                       "colorID": 150012,
+                       "icon": "icon_stair"
+                       },
+                       {
+                       "colorID": 150013,
+                       "icon": "icon_lift"
+                       },
+                       {
+                       "colorID": 160012,
+                       "icon": "icon_mens_room"
+                       },
+                       {
+                       "colorID": 160013,
+                       "icon": "icon_womens_room"
+                       },
+                       {
+                       "colorID": 150001,
+                       "icon": "icon_exit"
+                       },
+                       {
+                       "colorID": 150014,
+                       "icon": "icon_staircase"
+                       },
+                       {
+                       "colorID": 25000,
+                       "icon": "icon_exit"
+                       },
+                       {
+                       "colorID": 25140,
+                       "icon": "icon_exit"
+                       },
+                       {
+                       "colorID": 1,
+                       "icon": "icon_exit"
+                       },
+                       {
+                       "colorID": 2,
+                       "icon": "icon_exit"
+                       },
+                       {
+                       "colorID": 25135,
+                       "icon": "icon_staircase"
+                       },
+                       {
+                       "colorID": 25118,
+                       "icon": "icon_toilet"
+                       },
+                       {
+                       "colorID": 25020,
+                       "icon": "icon_atm"
+                       },
+                       {
+                       "colorID": 25025,
+                       "icon": "icon_childroom"
+                       },
+                       {
+                       "colorID": 25015,
+                       "icon": "icon_sick"
+                       },
+                       {
+                       "colorID": 25065,
+                       "icon": "icon_consultant"
+                       },
+                       {
+                       "colorID": 25031,
+                       "icon": "icon_exchange_money"
+                       }
+                       
+                       ]
+    }
+}

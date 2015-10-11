@@ -7709,3 +7709,21 @@ a.button {
   transition: all linear 0.2s;
   bottom: -49px;
   display: flex; }
+
+.quantity-input {
+  width: 100%;
+  padding: 1px; }
+  .quantity-input .inc-button, .quantity-input .dec-button {
+    width: 40px;
+    height: 32px;
+    float: left;
+    margin: 0px; }
+  .quantity-input input[type="number"] {
+    width: 40px;
+    height: 32px;
+    float: left;
+    border: solid #b2b2b2 1px;
+    border-right: 0;
+    border-left: 0;
+    padding: 5px;
+    text-align: right; }
