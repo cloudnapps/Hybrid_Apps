@@ -16,6 +16,7 @@ var translations_zh = {
     //common
     save: '保存',
     close: '关闭',
+    remove: '删除',
 
     //main tabs
     home: '商城',

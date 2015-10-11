@@ -46,7 +46,15 @@
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
-          console.log(responseData.data);
+        }
+      });
+    };
+
+    $scope.removeGood = function (good) {
+      cartApi.remove([good]).success(function (responseData){
+        var dataStatus = responseData.status;
+        if (dataStatus === 0) {
+          $scope.cart = responseData.data;
         }
       });
     };
