@@ -16,7 +16,7 @@
           </ion-item>
           <ion-item class="item item-checkbox" ng-repeat="good in seller.goods_list" type="item-text-wrap">
             <label class="checkbox" style="width: 50px;">
-              <input type="checkbox" ng-model="good.selected">
+              <input type="checkbox" ng-model="good.selected" ng-change="toggleGood(good)">
             </label>
             <div>
               <div>
@@ -31,14 +31,14 @@
                 </div>
                 <div class="row">
                   <div class="col assertive">{{good.buy_price|currency:'￥'}}</div>
-                  <quantity-input class="col-60" ng-model="good.quantity"></quantity-input>
+                  <quantity-input class="col-60" ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
                 </div>
               </div>
             </div>
           </ion-item>
         </div>
         <ion-item class="item item-button-right">
-          <div class="assertive">共计: {{orderTotal(channel) |currency:'￥'}} (不含税 不含运费)</div>
+          <div class="assertive">共计: {{channel.total_item_amount |currency:'￥'}} (不含税 不含运费)</div>
           <button class="button button-energized">{{'submit_order'|translate}}</button>
         </ion-item>
       </div>

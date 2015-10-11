@@ -3,8 +3,17 @@ angular.module('components')
     return {
       restrict: 'EA',
       templateUrl: 'templates/components/quantity-input.tpl.html',
-      scope: {
-        ngModel: '='
+      require: 'ngModel',
+      link : function(scope, element, attrs, ctrl){
+        scope.updateModel = function () {
+          ctrl.$setViewValue(scope.ngModel);
+        };
+        ctrl.$viewChangeListeners.push(function() {
+          scope.$eval(attrs.ngChange);
+        });
+        ctrl.$render = function () {
+            scope.ngModel = ctrl.$viewValue;
+        };
       }
     };
   });
