@@ -8,16 +8,16 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('favorites', {
+        .state('tab.favorites', {
           url: '/favorites',
           abstract: true,
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/favorite-index.html'
             }
           }
         })
-        .state('favorites.goods', {
+        .state('tab.favorites.goods', {
           url: '/goods',
           views: {
             'tab-favorites-goods': {
@@ -26,7 +26,7 @@
             }
           }
         })
-        .state('favorites.sellers', {
+        .state('tab.favorites.sellers', {
           url: '/sellers',
           views: {
             'tab-favorites-sellers': {
