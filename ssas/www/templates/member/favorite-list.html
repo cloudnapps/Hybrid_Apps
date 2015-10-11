@@ -1,19 +1,24 @@
-<ion-view view-title="{{'fav_title'|translate}}">
-  <ion-content>
+    <ion-view view-title="{{'fav_title'|translate}}">
+      <ion-content>
+        <div class="bar bar-header item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" placeholder="Search">
+      </label>
+    </div>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items"
-                type="item-text-wrap">
-        <img ng-src="{{item.image}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap">
+        <img style="border-radius: 0;" ng-src="{{item.image}}">
 
-        <h2>{{item.name}}</h2>
+        <h2 style="color:#666c70;font-size: 14px;margin-bottom: 5px;">{{item.name}}</h2>
 
-        <p>{{item.price}}</p>
+        <p style="color: #c9000b;">￥{{item.price}}</p>
 
         <i class="icon ion-chevron-right icon-accessory"></i>
 
-        <ion-option-button class="button-assertive" ng-click="remove(item)">
+        <!-- <ion-option-button class="button-assertive" ng-click="remove(item)">
           删除
-        </ion-option-button>
+        </ion-option-button> -->
       </ion-item>
     </ion-list>
     <ion-infinite-scroll
