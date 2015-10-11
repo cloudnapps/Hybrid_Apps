@@ -8,19 +8,19 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('receivers_index', {
-          url: '/receivers/index',
+        .state('tab.receivers', {
+          url: '/receivers',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/receiver-index.html',
               controller: 'ReceiversCtrl'
             }
           }
         })
-        .state('receivers_change', {
-          url: '/receivers/change/:addrInfo',
+        .state('tab.receiver_change', {
+          url: '/receiverchange/:addrInfo',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/receiver-add.html',
               controller: 'ReceiverAddCtrl'
             }
@@ -36,7 +36,7 @@
       });
 
       $scope.edit = function (item) {
-        $state.go('receivers_change', {addrInfo: JSON.stringify(item)}, {reload: true});
+        $state.go('tab.receiver_change', {addrInfo: JSON.stringify(item)}, {reload: true});
       };
 
       $scope.remove = function (item) {
@@ -75,7 +75,7 @@
 
       $scope.add = function () {
         var addrInfo = {
-          "addr_id" : $scope.addrInfo.addr_id,
+          "addr_id": $scope.addrInfo.addr_id,
           "region_id": $scope.addrInfo.region_id,
           "addr": $scope.addrInfo.addr,
           "name": $scope.addrInfo.name,
@@ -109,7 +109,7 @@
         $scope.addrInfo.area = $scope.addrInfo.address.province.value + $scope.addrInfo.address.city.value;
         $scope.addrInfo.region_id = $scope.addrInfo.address.province.id + ',' + $scope.addrInfo.address.city.id;
 
-        if ($scope.addrInfo.address!== "") {
+        if ($scope.addrInfo.address !== "") {
           $scope.addrInfo.region_id = $scope.addrInfo.region_id + ',' + $scope.addrInfo.address.district.id;
           $scope.addrInfo.area = $scope.addrInfo.area + $scope.addrInfo.address.district.value;
         }
