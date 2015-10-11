@@ -50,10 +50,41 @@
     })
 
     .controller('IdCardsCtrl', function ($scope, $state, SettingApi) {
-      $scope.items = {};
+      $scope.items = [];
 
-      SettingApi.getIdCardList(function (result) {
-        $scope.items = result.data;
+      $scope.init = function () {
+        if ($scope.items.length === 0) {
+          $scope.items = [];
+          $scope.page = 0;
+          $scope.hasMore = true;
+        }
+      };
+
+      $scope.loadMore = function () {
+        SettingApi.getIdCardList($scope.page + 1, function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.items = $scope.items.concat(result.data);
+            $scope.page += 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }
+        });
+      };
+
+      $scope.$on('$ionicView.enter', function () {
+        $scope.isActtive = true;
+        $scope.init();
+      });
+
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.isActtive = false;
+      });
+
+      $scope.$on('$stateChangeSuccess', function () {
+        if ($scope.isActtive)
+          $scope.loadMore();
       });
 
       $scope.setDefault = function (item) {
@@ -156,12 +187,16 @@
         sendRequest(url, data, callback);
       };
 
-      var getIdCardList = function (callback) {
+      var getIdCardList = function (page, callback) {
         var url = apiEndpoint.url + '/member-idcard_list.html';
         var data = {
           member_id: 13,
           token: '11b4f4bd44ee8814d41680dc753a75e4'
         };
+
+        if (page) {
+          data.page = page;
+        }
 
         sendRequest(url, data, callback);
       };

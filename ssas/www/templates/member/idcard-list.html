@@ -43,6 +43,11 @@
         </div>
       </ion-item>
     </ion-list>
+    <ion-infinite-scroll
+      ng-if="hasMore"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
     <div class="button-bar">
       <a class="button button-full button-light"
          style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;" href="#/tab/idcardchange/">
