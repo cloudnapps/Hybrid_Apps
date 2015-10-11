@@ -14,24 +14,26 @@
             </label>
             <a class="item-content" href="#/tab/seller/{{seller.seller_info.seller_id}}">{{seller.seller_info.seller_name}}<i class="icon ion-chevron-right icon-accessory"></i></a>
           </ion-item>
-          <ion-item class="item item-checkbox" ng-repeat="good in seller.goods_list" type="item-text-wrap">
-            <label class="checkbox" style="width: 50px;">
-              <input type="checkbox" ng-model="good.selected" ng-change="toggleGood(good)">
-            </label>
-            <div>
+          <ion-item class="item" ng-repeat="good in seller.goods_list">
+            <div class="item-checkbox">
+              <label class="checkbox" style="width: 50px;">
+                <input type="checkbox" ng-model="good.selected" ng-change="toggleGood(good)">
+              </label>
               <div>
-                <a class="item-thumbnail-left" href="#/tab/products/{{good.product_id}}">
-                  <img style="margin-left:60px;" ng-src="{{good.thumbnail}}">
-                </a>
-              </div>
-              <div style="padding-left:120px;">
-                <h2>{{good.name}}</h2>
-                <div class="row">
-                  <div class="col">{{good.spec}}</div>
+                <div>
+                  <a class="item-thumbnail-left" href="#/tab/products/{{good.product_id}}">
+                    <img style="margin-left:60px;" ng-src="{{good.thumbnail}}">
+                  </a>
                 </div>
-                <div class="row">
-                  <div class="col assertive">{{good.buy_price|currency:'￥'}}</div>
-                  <quantity-input class="col-60" ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
+                <div style="padding-left:120px;">
+                  <h2>{{good.name}}</h2>
+                  <div class="row">
+                    <div class="col">{{good.spec}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col assertive">{{good.buy_price|currency:'￥'}}</div>
+                    <quantity-input class="col-60" ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
+                  </div>
                 </div>
               </div>
             </div>
