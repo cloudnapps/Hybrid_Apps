@@ -1,16 +1,16 @@
-<ion-view view-title="{{'idcard_addtitle'|translate}}">
+<ion-view view-title="{{'idcard_addtitle'|translate}}" hide-tabs="true">
   <ion-content>
     <div class="list">
       <label class="item item-input">
-        <input type="text" placeholder="姓名" ng-model="idCardInfo.name">
+        <input type="text" placeholder="姓名" ng-model="idCardInfo.full_name" ng-disabled="idCardInfo.card_id">
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="身份证号" ng-model="idCardInfo.number">
+        <input type="text" placeholder="身份证号" ng-model="idCardInfo.number" ng-disabled="idCardInfo.card_id">
       </label>
       <label class="item item-toggle" style="font-size: 14px;">
         设置为默认身份证
         <label class="toggle">
-          <input type="checkbox" ng-model="idCardInfo.default">
+          <input type="checkbox" ng-model="idCardInfo.is_default">
 
           <div class="track">
             <div class="handle"></div>

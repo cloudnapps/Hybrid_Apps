@@ -17,19 +17,19 @@
             }
           }
         })
-        .state('idcards_list', {
-          url: '/idcards/list',
+        .state('tab.idcards', {
+          url: '/idcards',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/idcard-list.html',
               controller: 'IdCardsCtrl'
             }
           }
         })
-        .state('idcards_add', {
-          url: '/idcards/add',
+        .state('tab.idcard_change', {
+          url: '/idcardchange/:cardInfo',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/idcard-add.html',
               controller: 'IdCardAddCtrl'
             }
@@ -45,37 +45,60 @@
       });
 
       $scope.getIdCardList = function () {
-        $state.go("idcards_list", {}, {reload: true});
+        $state.go('tab.idcards', {}, {reload: true});
       }
     })
 
-    .controller('IdCardsCtrl', function ($scope, SettingApi) {
+    .controller('IdCardsCtrl', function ($scope, $state, SettingApi) {
       $scope.items = {};
 
       SettingApi.getIdCardList(function (result) {
         $scope.items = result.data;
       });
+
+      $scope.setDefault = function (item) {
+        $state.go('tab.idcard_change', {cardInfo: JSON.stringify(item)}, {reload: true});
+      }
     })
 
-    .controller('IdCardAddCtrl', function ($scope, $ionicPopup, SettingApi) {
-      $scope.idCardInfo = {};
+    .controller('IdCardAddCtrl', function ($scope, $stateParams, $ionicPopup, SettingApi) {
+      if ($stateParams.cardInfo) {
+        $scope.idCardInfo = JSON.parse($stateParams.cardInfo);
+      }
+      else {
+        $scope.idCardInfo = {};
+      }
+
 
       $scope.add = function () {
-        var data = {
-          full_name: $scope.idCardInfo.name,
-          number: $scope.idCardInfo.number,
-          is_default: $scope.idCardInfo.default ? '1':'0'
-        };
+        if ($scope.idCardInfo.card_id) {
+          SettingApi.setDefaultIdCard($scope.idCardInfo.card_id, function (result) {
+            var alertPopup = $ionicPopup.alert({
+              title: '设置身份信息',
+              template: result.msg ? result.msg : '设置成功'
+            });
+            alertPopup.then(function (res) {
+              console.log(res);
+            });
+          })
+        }
+        else {
+          var data = {
+            full_name: $scope.idCardInfo.full_name,
+            number: $scope.idCardInfo.number,
+            is_default: $scope.idCardInfo.is_default ? '1' : '0'
+          };
 
-        SettingApi.addIdCard(data, function (result) {
-          var alertPopup = $ionicPopup.alert({
-            title: '添加身份信息',
-            template: result.msg ? result.msg : '添加成功'
-          });
-          alertPopup.then(function (res) {
-            console.log(res);
-          });
-        })
+          SettingApi.addIdCard(data, function (result) {
+            var alertPopup = $ionicPopup.alert({
+              title: '添加身份信息',
+              template: result.msg ? result.msg : '添加成功'
+            });
+            alertPopup.then(function (res) {
+              console.log(res);
+            });
+          })
+        }
       };
     })
 
@@ -154,12 +177,24 @@
         sendRequest(url, data, callback);
       };
 
+      var setDefaultIdCard = function (cardId, callback) {
+        var url = apiEndpoint.url + '/member-default_idcard.html';
+        var data = {
+          member_id: 13,
+          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          card_id: cardId
+        };
+
+        sendRequest(url, data, callback);
+      };
+
       return {
         getMemberSetting: getMemberSetting,
         modifyMemberSetting: modifyMemberSetting,
         modifyMemberPassword: modifyMemberPassword,
         getIdCardList: getIdCardList,
-        addIdCard: addIdCard
+        addIdCard: addIdCard,
+        setDefaultIdCard: setDefaultIdCard
       };
     });
 })();
