@@ -433,7 +433,7 @@ $input-color:                     #111 !default;
 $input-border:                    $item-default-border !default;
 $input-border-width:              $item-border-width !default;
 $input-label-color:               $dark !default;
-$input-color-placeholder:         lighten($dark, 40%) !default;
+$input-color-placeholder:         lighten($dark, 4%) !default;
 
 
 // Progress

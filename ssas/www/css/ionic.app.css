@@ -5848,11 +5848,11 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 textarea {
   padding-left: 0; }
   textarea::-moz-placeholder {
-    color: white; }
+    color: #a5a5a5; }
   textarea:-ms-input-placeholder {
-    color: white; }
+    color: #a5a5a5; }
   textarea::-webkit-input-placeholder {
-    color: white;
+    color: #a5a5a5;
     text-indent: -3px; }
 
 textarea {
@@ -5877,11 +5877,11 @@ input[type="file"] {
   width: 200px; }
 
 input::-moz-placeholder, textarea::-moz-placeholder {
-  color: white; }
+  color: #a5a5a5; }
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  color: white; }
+  color: #a5a5a5; }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  color: white;
+  color: #a5a5a5;
   text-indent: 0; }
 
 input[disabled], select[disabled], textarea[disabled], input[readonly]:not(.cloned-text-input), textarea[readonly]:not(.cloned-text-input), select[readonly] {
@@ -7727,3 +7727,8 @@ a.button {
     border-left: 0;
     padding: 5px;
     text-align: right; }
+
+.shipping-select.modal {
+  bottom: 0;
+  top: 20%;
+  min-height: auto; }
