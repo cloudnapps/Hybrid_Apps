@@ -22,7 +22,8 @@
         });
     }) // end of config
 
-    .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate, $ionicPopover,
+    .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate,
+                                            $state, $ionicPopover, $window,
                                             HomeApi, SellerApi, ActivityApi) {
       $scope.homeInfo = {};
 
@@ -62,6 +63,15 @@
         // Execute action
       });
 
+      $scope.openItem = function (item) {
+        if (item.type === 'seller') {
+          $state.go('tab.seller_detail', {sellerId: item.id}, {reload: true});
+        }
+        else if (item.type === 'url') {
+          $window.location.href = item.outurl;
+        }
+      };
+
       SellerApi.getSellerList(null, null, null, function (result) {
         if (result.status === 0) {
           $scope.sellerInfo.items = result.data;
@@ -75,8 +85,8 @@
     }) // end of HomeController
 
     .controller('SigninController', function ($scope, $ionicPopup, PointApi) {
-      $scope.signedIn = function() {
-        PointApi.addGold(10, '签到送积分', function(result) {
+      $scope.signedIn = function () {
+        PointApi.addGold(10, '签到送积分', function (result) {
           if (result.status === 0) {
             var alertPopup = $ionicPopup.alert({
               title: '签到成功',
