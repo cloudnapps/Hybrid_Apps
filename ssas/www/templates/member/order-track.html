@@ -1,15 +1,25 @@
 <ion-view view-title="物流信息" hide-tabs="true">
   <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="item in items">
-        <div class="list card">
-          <div class="item item-divider" style="padding-left: 5px">
-            <h2 style="float: left">{{item.location}} {{item.status}}</h2>
 
-            <p style="float:right" align="right">时间：{{item.add_time}}</p>
-          </div>
-        </div>
-      </ion-item>
-    </ion-list>
+    <div class="row">
+      <div class="col">
+        收件人：{{orderInfo.consignee.name}} 电话：{{orderInfo.consignee.mobile}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        地址：{{orderInfo.consignee.addr}}
+      </div>
+    </div>
+
+    <div class="list card">
+      <div class="item item-divider" ng-repeat="item in items" style="padding-left: 5px">
+        <h2 style="float: left">{{item.location}} {{item.status}}</h2>
+
+        <p style="float:right" align="right">时间：{{item.add_time}}</p>
+      </div>
+    </div>
+
   </ion-content>
 </ion-view>

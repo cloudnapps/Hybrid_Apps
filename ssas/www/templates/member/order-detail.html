@@ -41,10 +41,7 @@
 
     <div class="row">
       <div class="col">
-        配送：{{item.order_info.shipping}}
-      </div>
-      <div class="col">
-        运费：{{item.order_info.express_amount | currency:'￥'}}
+        运费：{{item.order_info.shipping}} {{item.order_info.express_amount | currency:'￥'}}
       </div>
     </div>
     <div class="row">
@@ -54,17 +51,23 @@
     </div>
     <div class="row">
       <div class="col">
-        税费：{{item.order_info.taxation_amount | currency:'￥'}}
+        贷款总计：{{item.order_info.item_amount | currency:'￥'}}
       </div>
     </div>
     <div class="row">
       <div class="col">
-        积分抵扣：{{item.order_info.coupon_amount | currency:'￥'}}
+        行邮税计：{{item.order_info.taxation_amount | currency:'￥'}}
       </div>
     </div>
     <div class="row">
       <div class="col">
-        实际支付：{{item.order_info.final_amount | currency:'￥'}}
+        运费总计：{{item.order_info.express_amount | currency:'￥'}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        订单实际支付：{{item.order_info.final_amount | currency:'￥'}}
       </div>
     </div>
   </ion-content>

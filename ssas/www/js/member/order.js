@@ -344,6 +344,10 @@
     })
 
     .controller('OrderTrackCtrl', function ($scope, $stateParams, OrderApi) {
+      OrderApi.getOrderDetail($stateParams.orderId, function (result) {
+        $scope.orderInfo = result.data;
+      });
+
       OrderApi.getOrderTrack($stateParams.orderId, function (result) {
         $scope.items = result.data;
       });
