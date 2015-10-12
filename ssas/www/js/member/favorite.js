@@ -10,7 +10,6 @@
 
         .state('tab.favorites', {
           url: '/favorites',
-          abstract: true,
           views: {
             'tab-member': {
               templateUrl: 'templates/member/favorite-index.html'
@@ -20,7 +19,7 @@
         .state('tab.favorites.goods', {
           url: '/goods',
           views: {
-            'tab-favorites-goods': {
+            'tab-favorites': {
               templateUrl: 'templates/member/favorite-list.html',
               controller: 'FavoritesGoodsCtrl'
             }
@@ -29,7 +28,7 @@
         .state('tab.favorites.sellers', {
           url: '/sellers',
           views: {
-            'tab-favorites-sellers': {
+            'tab-favorites': {
               templateUrl: 'templates/member/favorite-list.html',
               controller: 'FavoritesSellersCtrl'
             }

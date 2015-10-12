@@ -1,13 +1,16 @@
-<ion-tabs class="tabs-color-active-positive tabs-top">
-
-  <!-- Sellers Tab -->
-  <ion-tab title="{{'fav_sellers'|translate}}" href="#/tab/favorites/sellers">
-    <ion-nav-view name="tab-favorites-sellers"></ion-nav-view>
-  </ion-tab>
-
-  <!-- Goods Tab -->
-  <ion-tab title="{{'fav_goods'|translate}}" href="#/tab/favorites/goods">
-    <ion-nav-view name="tab-favorites-goods"></ion-nav-view>
-  </ion-tab>
-
-</ion-tabs>
+<ion-nav-view name="tab-favorites">
+  <div class="bar bar-subheader">
+    <div class="button-bar">
+      <button class="button button-light" ui-sref="tab.favorites.goods">{{'fav_goods'|translate}}</button>
+      <button class="button button-light" ui-sref="tab.favorites.sellers">{{'fav_sellers' | translate}}</button>
+    </div>
+  </div>
+  <ion-view>
+    <div class="bar bar-subheader">
+      <a title="{{'fav_sellers'|translate}}" href="#/tab/favorites/sellers"></a>
+      <a title="{{'fav_goods'|translate}}" href="#/tab/favorites/goods"></a>
+    </div>
+    <ion-content class="has-subheader">
+    </ion-content>
+  </ion-view>
+</ion-nav-view>
