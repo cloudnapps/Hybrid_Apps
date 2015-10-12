@@ -1,5 +1,4 @@
 /* Empty. Add your own CSS if you like */
-
 hr {
   border-width: 0 0 1px 0;
 }
@@ -11,7 +10,6 @@ hr {
 .product .slider {
   height: 200px;
 }
-
 .product .slider-slide {
   text-align: center;
 }
@@ -27,31 +25,24 @@ hr {
   height: 100%;
 }
 
-.clear-search {
-  position: absolute;
-  top: 0;
-  right: 10px;
-  z-index: 999;
+h2{
+	text-align:center;
+	margin-top: 
 }
 
-.gallery-filter .active {
-  background-color: #BD252C;
+img{
+	width: 100%;
 }
 
-.gallery-filter .text-center {
-  text-align: center;
+.col-style{
+	text-align:center;
+	margin:1em 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
-
-.product-spec.modal {
-  bottom: 0;
-  top: 20%;
-  min-height: auto;
-}
-
-.modal-backdrop.active {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-
-.product-intro * {
-  max-width: 100%;
+.click-assertive{
+	border-color: #e42112;
+    background-color: #ef473a;
+    color: #fff; }
 }

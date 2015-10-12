@@ -1,15 +1,15 @@
 <ion-view view-title="{{'good_category'|translate}}">
 	<ion-pane class="row">
 		<!-- left category list -->
-		<div class="col col-25 view">
+		<div class="col col-25 view" style="width:84%;">
 			<ion-content>
 				<ion-list>
-					<ion-item class="item item-thumbnail-top" 
+					<ion-item 	class="item item-thumbnail-top" 
 								ng-repeat="cate in categories" 
 								type="item-text-wrap"
-								ng-click="populateSubCategories({{cate.cat_id}})">
-						<img ng-src="{{cate.image}}">
-						<h2>{{cate.cat_name}}</h2>
+								ng-click="populateSubCategories(cate.cat_id, $index)">
+						<img ng-src="{{cate.image.replace(' ', '') || 'img/3.pic.jpg'}}">
+						<h2 style="margin-top: 0.5em;font-size:15px;" ng-class="{'click-assertive': $index === index}">{{cate.cat_name}}</h2>
 					</ion-item>
 				</ion-list>
 	    	</ion-content>
@@ -18,7 +18,7 @@
 		<div class="col col-75 col-offset-25 view" style="">
 			<ion-content class="has-header has-tabs">
 	    		<div class="row" style="flex-wrap:wrap">
-	    			<div class="col col-33" ng-repeat="sub in subCategories" ng-click="navToProductList(sub.cat_id)">{{sub.cat_name}}</div>
+	    			<div  class="col col-33 col-style" ng-repeat="sub in subCategories" ng-click="navToProductList(sub.cat_id)">{{sub.cat_name}}</div>
 	    		</div>
 			</ion-content>
 		</div>	    
