@@ -11,27 +11,28 @@
     
     <!-- android -->
     <platform name="android">
-        <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="Device" >
-                <param name="android-package" value="org.apache.cordova.device.Device"/>
-            </feature>
-        </config-file>
+      <config-file target="res/xml/config.xml" parent="/*">
+        <feature name="Navi">
+          <param name="android-package" value="com.cloudnapps.plugins.map.MapNavigator" />
+        </feature>
+      </config-file>            
+      
+      <config-file target="AndroidManifest.xml" parent="/*">
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.BLUETOOTH" />
+        <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />            
+      </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/*">
-            <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-            <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
-            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
-        </config-file>
+      <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <activity android:name="com.cloudnapps.plugins.map.MapActivity"
+          android:screenOrientation="sensorPortrait"></activity>          
+        <service android:name="com.ty.locationengine.ibeacon.BeaconService"></service>
+      </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-          <activity android:name="com.cloudnapps.plugins.map.MapActivity">
-          </activity>
-        </config-file>
-
-        <config-file target="res/values/strings.xml" parent="/resources">
-            <string name="navi">带我去</string>
-        </config-file>
+      <config-file target="res/values/strings.xml" parent="/resources">
+        <string name="navi">带我去</string>
+      </config-file>
 
         <source-file src="src/android/MapActivity.java" target-dir="src/com/cloudnapps/plugins/map" />
         <source-file src="src/android/MapNavigator.java" target-dir="src/com/cloudnapps/plugins/map" />
@@ -58,11 +59,53 @@
         <source-file src="libs/android/armeabi-v7a/libTYLocationEngine.so" target-dir="libs/armeabi-v7a" />
         <source-file src="libs/android/armeabi-v7a/libTYMapSDK.so" target-dir="libs/armeabi-v7a" /> 
 
-        <source-file src="src/android/res/drawable-hdpi/start.png" target-dir="./res/drawable-hdpi"/>      
-        <source-file src="src/android/res/drawable-hdpi/end.png" target-dir="./res/drawable-hdpi"/>      
-        <source-file src="src/android/res/drawable-hdpi/nav_exit.png" target-dir="./res/drawable-hdpi"/>      
-        <source-file src="src/android/res/menu/map_menu.xml" target-dir="./res/menu"/>      
-        <source-file src="src/android/res/layout/activity_map.xml" target-dir="./res/layout"/>     
+        <source-file src="src/android/res/menu/map_menu.xml" target-dir="res/menu"/>      
+        <source-file src="src/android/res/layout/activity_map.xml" target-dir="res/layout"/>
+        
+      <source-file src="src/android/res/drawable-hdpi/end.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/green_pushpin.png" target-dir="res/drawable-hdpi"/>    
+      <source-file src="src/android/res/drawable-hdpi/icon_atm_highlighted.png" target-dir="res/drawable-hdpi"/>  
+      <source-file src="src/android/res/drawable-hdpi/icon_atm_normal.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_childroom_highlighted.png" target-dir="res/drawable-hdpi"/>  
+      <source-file src="src/android/res/drawable-hdpi/icon_childroom_normal.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_consultant_highlighted.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_consultant_normal.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_exchange_money_highlighted.png" target-dir="res/drawable-hdpi"/>    
+      <source-file src="src/android/res/drawable-hdpi/icon_exchange_money_normal.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_exit.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_exit_highlighted.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_exit_normal.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_lift.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_lift_highlighted.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_lift_normal.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_mens_room.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_mens_room_highlighted.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_mens_room_normal.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_sick_highlighted.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_sick_normal.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_stair.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_stair_highlighted.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_stair_normal.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_staircase_highlighted.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_staircase_normal.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_toilet_highlighted.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_toilet_normal.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_womens_room.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/icon_womens_room_highlighted.png" target-dir="res/drawable-hdpi"/>    
+      <source-file src="src/android/res/drawable-hdpi/icon_womens_room_normal.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/l7.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/location.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/location_arrow.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/logo_mcdonalds.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/logo_rolex.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/logo_starbuck.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/nav_exit.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/red_pushpin.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/route_arrow.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/route_hint_arrow.png" target-dir="res/drawable-hdpi"/>      
+      <source-file src="src/android/res/drawable-hdpi/start.png" target-dir="res/drawable-hdpi"/>    
+      
+      <source-file src="src/MapResource.bundle/MapResource" target-dir="assets"></source-file>
     </platform>
     
     <!-- ios -->
@@ -96,14 +139,14 @@
         <resource-file src="src/ios/dropDownList/down_dark.png" />
         <header-file src="src/ios/sphereMenu/SphereMenu.h" />
         <source-file src="src/ios/sphereMenu/SphereMenu.m" />
-        <resource-file src="src/ios/MapResource.bundle" />
+        <resource-file src="src/MapResource.bundle" />
         <resource-file src="src/ios/locationArrow.png" />
         <resource-file src="src/ios/nav_exit.png" />
         <resource-file src="src/ios/start.png" />
         <resource-file src="src/ios/end.png" />
         <resource-file src="src/ios/start_left.png" />
         <resource-file src="src/ios/end_right.png" />
-        <!--framework src="libs/ios/ArcGIS.framework" custom="true" / -->
+<!--        <framework src="libs/ios/ArcGIS.framework" custom="true" />-->
         <framework src="libs/ios/TYLocationEngine.framework" custom="true" />
         <framework src="libs/ios/TYMapData.framework" custom="true" />
         <framework src="libs/ios/TYMapSDK.framework" custom="true" />
