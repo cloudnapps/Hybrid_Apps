@@ -49,7 +49,7 @@
       $scope.pointInfo = {};
 
       PointApi.getPointInfo(null, 'point', function (result) {
-        if(result.status === 0) {
+        if (result.status === 0) {
           $scope.pointInfo.total = result.data.total;
           $scope.pointInfo.items = result.data.log;
         }
@@ -59,7 +59,7 @@
       $scope.goldInfo = {};
 
       PointApi.getPointInfo(null, 'gold', function (result) {
-        if(result.status === 0) {
+        if (result.status === 0) {
           $scope.goldInfo.total = result.data.total;
           $scope.goldInfo.items = result.data.log;
         }

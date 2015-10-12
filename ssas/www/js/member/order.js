@@ -62,19 +62,19 @@
             }
           }
         })
-        .state('order_detail', {
+        .state('tab.order_detail', {
           url: '/order/:orderId',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/order-detail.html',
               controller: 'OrderDetailCtrl'
             }
           }
         })
-        .state('order_track', {
+        .state('tab.order_track', {
           url: '/track/:orderId',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/order-track.html',
               controller: 'OrderTrackCtrl'
             }
@@ -121,7 +121,7 @@
       });
 
       $scope.viewDetail = function (item) {
-        $state.go("order_detail", {orderId: item.order_id}, {reload: true});
+        $state.go("tab.order_detail", {orderId: item.order_id}, {reload: true});
       };
 
       $scope.cancelOrder = function (item) {
@@ -146,7 +146,7 @@
       };
 
       $scope.trackOrder = function (item) {
-        $state.go("order_track", {orderId: item.order_id}, {reload: true});
+        $state.go("tab.order_track", {orderId: item.order_id}, {reload: true});
       };
 
       $scope.payOrder = function (item) {
@@ -332,8 +332,8 @@
           $scope.loadMore();
       });
 
-      $scope.getReturn = function (item) {
-        $state.go('return_request', {orderId: item.order_id}, {reload: true});
+      $scope.requestOrder = function (item) {
+        $state.go('tab.return_request', {orderId: item.order_id}, {reload: true});
       };
     })
 

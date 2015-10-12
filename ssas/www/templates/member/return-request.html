@@ -8,53 +8,48 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="list card">
-      <div class="item item-divider" style="padding-left: 5px">
-        <h2 style="float: left">订单号：{{orderInfo.order_id}}</h2>
-      </div>
-
       <div class="item item-body" style="padding-left: 5px">
         <div class="row">
           <div class="col col-33">
-            申请标题：
+            类型：
           </div>
-          <div class="col col-70">
+          <div class="col col-67">
+            <select ng-model="returnInfo.type" ng-change="onTypeChanged()">
+              <option value="reship">退货</option>
+              <option value="refund">退款</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-33">
+            标题：
+          </div>
+          <div class="col col-67">
             <input type="text" placeholder="请输入标题" ng-model="returnInfo.title">
           </div>
         </div>
-        <div class="row">
-          <div class="col col-33">
-            申请类型：
-          </div>
-          <div class="col">
-            <input type="radio" name="returnType" ng-checked="true" value="true" ng-model="returnInfo.isShip"> 退货
-          </div>
-          <div class="col">
-            <input type="radio" name="returnType" value="false" ng-model="returnInfo.isShip"> 退款
-          </div>
+        <div class="col col-33">
+          描述：
         </div>
-        <div class="row">
-          <div class="col col-33">
-            详细描述：
-          </div>
-          <div class="col col-70">
-            <textarea placeholder="请输入描述" ng-model="returnInfo.content"></textarea>
-          </div>
+        <div class="col col-67">
+          <textarea placeholder="请输入描述" ng-model="returnInfo.content"></textarea>
         </div>
       </div>
+    </div>
 
-      <div class="row" ng-repeat="item in orderInfo.product">
-        <div class="col col-10">
-          <input type="radio" name="good" ng-model="item.selected">
-        </div>
-        <div class="col col-80">
-          <p>{{item.name}}</p>
-
-          <p>数量:{{item.num}}</p>
-        </div>
-        <div class="col col-10">
-          <input type="text" placeholder="{{item.num}}" ng-model="item.requestNum">
-        </div>
+    <div class="row" ng-repeat="item in orderInfo.product">
+      <div class="col col-10">
+        <input type="radio" name="good" ng-model="item.selected">
       </div>
+      <div class="col col-30">
+        <p>{{item.name}}</p>
+
+        <p>数量:{{item.num}}</p>
+      </div>
+      <div class="col col-50">
+        <quantity-input class="col-50" ng-model="item.requestNum" ng-change=""></quantity-input>
+      </div>
+    </div>
     </div>
     <div class="button-bar">
       <a class="button button-full button-light" style="font-size:20px;" ng-click="submitRequest()">
