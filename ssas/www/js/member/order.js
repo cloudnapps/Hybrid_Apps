@@ -154,7 +154,7 @@
       };
 
       $scope.requestOrder = function (item) {
-        $state.go('return_request', {orderId: item.order_id}, {reload: true});
+        $state.go('tab.return_request', {orderId: item.order_id}, {reload: true});
       };
     })
 

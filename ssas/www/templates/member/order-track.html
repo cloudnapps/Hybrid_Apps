@@ -1,10 +1,10 @@
-<ion-view view-title="物流信息">
+<ion-view view-title="物流信息" hide-tabs="true">
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="item in items">
         <div class="list card">
           <div class="item item-divider" style="padding-left: 5px">
-            <h2 style="float: left">地点：{{item.location}}</h2>
+            <h2 style="float: left">{{item.location}} {{item.status}}</h2>
 
             <p style="float:right" align="right">时间：{{item.add_time}}</p>
           </div>

@@ -8,10 +8,10 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('settings_index', {
-          url: '/settings/index',
+        .state('tab.settings', {
+          url: '/settings',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/setting-index.html',
               controller: 'SettingCtrl'
             }

@@ -8,26 +8,26 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('return_request', {
-          url: '/returns/request/:orderId',
+        .state('tab.return_request', {
+          url: '/returnrequest/:orderId',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/return-request.html',
               controller: 'ReturnRequestCtrl'
             }
           }
         })
-        .state('return_list', {
-          url: '/returns/list',
+        .state('tab.returns', {
+          url: '/returns',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/return-list.html',
               controller: 'ReturnListCtrl'
             }
           }
         })
-        .state('return_detail', {
-          url: '/returns/:returnId',
+        .state('tab.return_detail', {
+          url: '/return/:returnId',
           views: {
             'tab-member': {
               templateUrl: 'templates/member/return-detail.html',
@@ -37,13 +37,22 @@
         });
     })
 
-    .controller('ReturnRequestCtrl', function ($scope, $stateParams, $state, ReturnApi) {
+    .controller('ReturnRequestCtrl', function ($scope, $stateParams, $ionicPopup, $state, ReturnApi) {
       $scope.returnInfo = {};
       $scope.returnInfo.product = {};
 
       ReturnApi.getReturnIndex($stateParams.orderId, function (result) {
         if (result.status === 0) {
           $scope.orderInfo = result.data;
+        }
+        else {
+          var alertPopup = $ionicPopup.alert({
+            title: '申请售后',
+            template: result.msg
+          });
+          alertPopup.then(function (res) {
+            console.log(res);
+          });
         }
       });
 
