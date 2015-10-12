@@ -69,3 +69,55 @@ hr {
 .product-intro * {
   max-width: 100%;
 }
+
+.user-order-track {
+  margin: 20px 20px 20px 30px;
+}
+
+.user-order-track ul li {
+  position: relative;
+  width: 100%;
+  border-left: 1px solid #e3e3e3;
+  padding: 0 0 0 30px;
+}
+
+.user-order-track .track-radius {
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  background-color: #cfcfcf;
+  border-radius: 50%;
+  top: 0;
+  left: -10px;
+}
+
+.user-order-track ul li:first-child .track-radius {
+  background-color: #578dad;
+}
+
+.user-order-track ul li:first-child .track-location {
+  color: #578dad;
+}
+
+.user-order-track ul li:first-child .track-time {
+  color: #578dad;
+}
+
+.user-order-track ul li:last-child {
+  border-left: none;
+}
+
+.user-order-track .track-location {
+  margin: 0;
+  font-size: 16px;
+  color: #4a4b4d;
+}
+
+.user-order-track .track-time {
+  margin: 3px 0 0;
+  padding-bottom: 20px;
+  font-size: 16px;
+  color: #4a4b4d;
+}
