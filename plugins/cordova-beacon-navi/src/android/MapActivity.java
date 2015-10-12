@@ -4,12 +4,15 @@ import java.io.File;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import android.support.v4.app.ActivityCompat;
 
 import com.esri.android.map.GraphicsLayer;
 import com.esri.core.geometry.Envelope;
@@ -49,13 +52,14 @@ public class MapActivity extends Activity
     protected TYMapInfo currentMapInfo;
     protected List<TYMapInfo> allMapInfos;
 
-    protected String cityId = "0021";
-    protected String buildingId = "00210005";
-    protected String userId = "ty4e13f85911a44a75";
-    protected String license = "8277436d742ab<g>0`aa0ce68572f3d1";
-    protected String poi_id = "21000005F0110009";
+    protected String cityId;
+    protected String buildingId;
+    protected String userId;
+    protected String license;
+    protected String poi_id;
 
-    private String beaconUUID = "9195B3AD-A9D0-4500-85FF-9FB0F65A5200";
+    protected String beaconUUID;
+    protected String floorNum;
 
     private TYLocationManager locationManager;
     private TYRouteManager routeManager;
@@ -80,6 +84,15 @@ public class MapActivity extends Activity
 
         copyMapFiles();
 
+        Intent intent = getIntent();
+        cityId = getIntent().getStringExtra("cityID");
+        buildingId = intent.getStringExtra("buildingID");
+        userId = intent.getStringExtra("userID");
+        license = intent.getStringExtra("licenseID");
+        beaconUUID = intent.getStringExtra("beaconUUID");
+        poi_id = intent.getStringExtra("poiID");
+        floorNum = intent.getStringExtra("floorNum");
+
         mapView = (TYMapView) findViewById(getResources().getIdentifier("map", "id", getPackageName()));
 
         initMapView();
@@ -98,7 +111,7 @@ public class MapActivity extends Activity
 
     private void initSymbols() {
         TYPictureMarkerSymbol startSymbol = new TYPictureMarkerSymbol(
-          getDrawable(getResources().getIdentifier("start", "drawable", getPackageName())));
+          ActivityCompat.getDrawable(this, getResources().getIdentifier("start", "drawable", getPackageName())));
         startSymbol.setWidth(34);
         startSymbol.setHeight(43);
         startSymbol.setOffsetX(0);
@@ -106,7 +119,7 @@ public class MapActivity extends Activity
         mapView.setStartSymbol(startSymbol);
 
         TYPictureMarkerSymbol endSymbol = new TYPictureMarkerSymbol(
-          getDrawable(getResources().getIdentifier("end", "drawable", getPackageName())));
+          ActivityCompat.getDrawable(this, getResources().getIdentifier("end", "drawable", getPackageName())));
         endSymbol.setWidth(34);
         endSymbol.setHeight(43);
         endSymbol.setOffsetX(0);
@@ -114,7 +127,7 @@ public class MapActivity extends Activity
         mapView.setEndSymbol(endSymbol);
 
         TYPictureMarkerSymbol switchSymbol = new TYPictureMarkerSymbol(
-          getDrawable(getResources().getIdentifier("nav_exit", "drawable", getPackageName())));
+          ActivityCompat.getDrawable(this, getResources().getIdentifier("nav_exit", "drawable", getPackageName())));
         switchSymbol.setWidth(37);
         switchSymbol.setHeight(37);
         mapView.setSwitchSymbol(switchSymbol);
@@ -135,7 +148,12 @@ public class MapActivity extends Activity
         currentBuilding = TYBuildingManager.parseBuildingFromFilesById(this,
                 cityId, buildingId);
         allMapInfos = TYMapInfo.parseMapInfoFromFiles(this, cityId, buildingId);
-        currentMapInfo = allMapInfos.get(1);
+        try {
+            currentMapInfo = TYMapInfo.searchMapInfoFromArray(allMapInfos,
+                    Integer.parseInt(floorNum));
+        } catch (Exception ex) {
+            currentMapInfo = allMapInfos.get(0);
+        }
 
         mapView.init(currentBuilding, userId, license);
         mapView.setFloor(currentMapInfo);
@@ -293,13 +311,13 @@ public class MapActivity extends Activity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        
+
         int navi = getResources().getIdentifier("navi", "id", getPackageName());
         if (item.getItemId() == navi) {
           requestRoute();
           return true;
         }
-        return super.onOptionsItemSelected(item);        
+        return super.onOptionsItemSelected(item);
     }
 
     private void requestRoute() {
@@ -317,7 +335,6 @@ public class MapActivity extends Activity
 //        mapView.showRouteEndSymbolOnCurrentFloor(mRouteTargetPoint);
 //        mapView.showRouteStartSymbolOnCurrentFloor(mRouteBeginPoint);
 
-        routeManager.requestRoute(mRouteTargetPoint, mRouteBeginPoint);
+        routeManager.requestRoute(mRouteBeginPoint, mRouteTargetPoint);
     }
 }
-
