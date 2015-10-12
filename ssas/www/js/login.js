@@ -8,28 +8,28 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('login', {
+        .state('tab.login', {
           url: '/login',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/login/user-login.html',
               controller: 'LoginCtrl'
             }
           }
         })
-        .state('register', {
+        .state('tab.register', {
           url: '/register',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/login/user-register.html',
               controller: 'LoginCtrl'
             }
           }
         }) // 找回密码
-        .state('retrieve', {
+        .state('tab.retrieve', {
           url: '/retrieve',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/login/user-retrieve-password.html',
               controller: 'RetrieveCtrl'
             }
@@ -142,7 +142,7 @@
             }
           });
       }
- 
+
       function lostPasswd(){
         LoginApi
           .lostPasswd($scope.userInfo.mobile, $scope.userInfo.password, $scope.userInfo.confirmPwd, function(data){
@@ -221,7 +221,7 @@
       };
 
       var sendCode = function (mobile, callback) {
-        var url = apiEndpoint.url + '/passport-send_code.html';        
+        var url = apiEndpoint.url + '/passport-send_code.html';
         var data = {
           mobile: mobile
         };
@@ -238,7 +238,7 @@
       };
 
       var lostPasswd = function(login_name, password, psw_confirm, callback){
-        var url = apiEndpoint.url + '/passport-lost_passwd.html';        
+        var url = apiEndpoint.url + '/passport-lost_passwd.html';
         var data = {
           login_name: login_name,
           password: btoa(password),
