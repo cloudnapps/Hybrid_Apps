@@ -1,14 +1,17 @@
-<ion-view view-title="投诉与建议" hide-tabs="true">
+<ion-view view-title="{{'complaint_title'|translate}}" hide-tabs="true">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap"
-                href="#/tab/complaint/{{item.oid}}">
-        <h2>{{item.time}}</h2>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap" style="padding: 10px 40px 15px 20px;">
+        <h2 style="font-size: 18px;color: #4c4b4d;">{{item.time}}</h2>
 
-        <h2>{{item.complaints_type}}</h2>
-
-        <i class="icon ion-chevron-right icon-accessory"></i>
+        <h2 style="font-size: 18px;margin-top: 10px;color: #4c4b4d;">{{item.complaints_type}}</h2>
+        <a href="#/tab/complaint/{{item.oid}}" title="">
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
       </ion-item>
     </ion-list>
+    <div class="button-bar">
+      <a class="button button-full button-light" style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;border: none;" href="">{{'complaint_newbtn'|translate}}</a>
+    </div>
   </ion-content>
 </ion-view>
