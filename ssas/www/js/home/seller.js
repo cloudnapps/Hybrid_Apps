@@ -13,7 +13,7 @@
         })
 
         .state('tab.seller_detail', {
-          url: '/sellers/:sellerId',
+          url: '/seller/:sellerId',
           views: {
             'tab-home': {
               templateUrl: 'templates/home/seller-detail.html',
