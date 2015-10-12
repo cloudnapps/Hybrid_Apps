@@ -3,6 +3,16 @@
     <h1 class="title">筛选</h1>
   </ion-header-bar>
   <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">最低价</span>
+        <input type="number" ng-model="priceSection.min">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">最高价</span>
+        <input type="number" ng-model="priceSection.max">
+      </label>
+    </div>
     <div>
       <h4>品牌</h4>
       <div class="row" style="flex-wrap:wrap">
