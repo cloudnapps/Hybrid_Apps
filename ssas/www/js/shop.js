@@ -3,15 +3,17 @@
   var shop = angular.module('shop', ['components', 'seller']);
   
   shop.config(function ($stateProvider, $urlRouterProvider) {
-    $stateProvider.state('tab.categories', {
-      url: '/categories',
-      views : {
-        'tab-shop': {
-          templateUrl: 'templates/shop/shop-categories.html',
-          controller: 'CategoryController'
+    $stateProvider
+      // 商品分类
+      .state('tab.categories', {
+        url: '/categories',
+        views : {
+          'tab-shop': {
+            templateUrl: 'templates/shop/shop-categories.html',
+            controller: 'CategoryController'
+          }
         }
-      }
-    })
+      }) // 商品列表
       .state('tab.products', {
         url: '/products?categoryId',
         views: {
@@ -20,7 +22,7 @@
             controller: 'ShopController'
           }
         }
-      })
+      }) // 商品搜索列表 no used
       .state('tab.search', {
         url: '/search?keywords&categoryId',
         views: {
@@ -29,7 +31,7 @@
             controller: 'ShopController'
           }
         }
-      })
+      }) // 商品详情页
       .state('tab.product', {
         url: '/products/:productId',
         views: {
@@ -38,7 +40,7 @@
             controller: 'ProductDetailController'
           }
         }
-      })
+      }) // no used
       .state('tab.comments', {
         url: '/goods/:id/comments',
         views: {
@@ -47,7 +49,7 @@
             controller: 'ProductCommentController'
           }
         }
-      })
+      }) // 产品图文详情
       .state('tab.intro', {
         url: '/goods/:id/intro?productId&sellerId',
         views: {
@@ -56,7 +58,7 @@
             controller: 'ProductIntroController'
           }
         }
-      })// abstract 状态, 为跳转 其他 tab做 历史
+      })// 抽象状态, 为跳转 其他 tab做 历史
       .state('tab.product_shadow', {
         url: '/product_shadow',
         abstract: true,
@@ -65,7 +67,7 @@
             template: '<ion-nav-view name="tab-shop-shadow"></ion-nav-view>'
           }
         }
-      })// seller_detail 做历史记录
+      })// seller_detail 做历史记录, 从 seller_detail 中拷贝过来
       .state('tab.product_shadow.seller_detail', {
         url: '/sellers/:sellerId',
         views: {
@@ -123,8 +125,8 @@
       };
   }]) // end of CategoryController
 
-  .controller('ShopController', ['$scope', '$state', '$stateParams', 'shopApi', 
-    function ($scope, $state, $stateParams, shopApi) {
+  .controller('ShopController', ['$scope', '$state', '$stateParams', '$ionicModal', 'shopApi', 
+    function ($scope, $state, $stateParams, $ionicModal, shopApi) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -205,6 +207,20 @@
       $scope.getProducts();    
     };
 
+
+    $scope.showSpecModal = function showSpecModal(){
+      $ionicModal.fromTemplateUrl('templates/shop/product-gallery-filter.html', {
+        scope: $scope
+      }).then(function(modal) {
+        $scope.modal = modal;
+        $scope.modal.show();
+        $scope.hideModal = function(){
+          $scope.modal.hide();
+          $scope.modal.remove();
+        };
+      });
+    }
+
     
 
     $scope.setBrandId = function(brandId){
@@ -217,6 +233,7 @@
 
     $scope.galleryFilterSave = function(isClear){
       $scope.isShowGalleryFilter = false;
+      $scope.hideModal();
       if (isClear) {
         $scope.brandId = '';
         $scope.propIndex = '';
