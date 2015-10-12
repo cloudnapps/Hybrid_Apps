@@ -5,6 +5,7 @@ hr {
 
 .stroke {
   text-decoration: line-through;
+  -webkit-text-decoration-color: #ef473a;
 }
 
 .product .slider {
@@ -44,5 +45,34 @@ img{
 .click-assertive{
 	border-color: #e42112;
     background-color: #ef473a;
-    color: #fff; }
+    color: #fff; 
+}
+
+.clear-search {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  z-index: 999;
+}
+
+.gallery-filter .active {
+  background-color: #BD252C;
+}
+
+.gallery-filter .text-center {
+  text-align: center;
+}
+
+.product-spec.modal {
+  bottom: 0;
+  top: 20%;
+  min-height: auto;
+}
+
+.modal-backdrop.active {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.product-intro * {
+  max-width: 100%;
 }
