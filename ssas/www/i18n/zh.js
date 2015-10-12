@@ -93,5 +93,9 @@ var translations_zh = {
     complaint_newbtn: '新建投诉与建议',
 
     // cart
-    submit_order: '提交订单'
+    submit_order: '提交订单',
+    cart_checkout: '结算',
+    cart_order_confirm: '订单核对',
+    pay_now: '立刻支付',
+    shipping: '配送方式'
 };

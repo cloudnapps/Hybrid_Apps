@@ -1,0 +1,21 @@
+<ion-modal-view class="shipping-select">
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">选择配送方式</h1>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list>
+      <label class="item item-radio radio" ng-repeat="item in shippingList">
+        <input type="radio" name="group" ng-click="hideModal();" ng-change="updateModel();" ng-model="model.selected" ng-value="item">
+        <div class="item-content">
+          {{item.name}}
+        </div>
+        <i class="radio-icon ion-checkmark"></i>
+      </label>
+    </ion-list>
+  </ion-content>
+  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
+    <div class="button-bar">
+      <button class="button button-dark" ng-click="hideModal()">关闭</button>
+    </div>
+  </ion-footer-bar>
+</ion-modal-view>

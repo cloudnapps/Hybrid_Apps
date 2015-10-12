@@ -21,6 +21,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-@import "hide-tabs.scss";
-@import "quantity-input.scss";
-@import "components.scss";
+@import "hide-tabs";
+@import "quantity-input";
+@import "components";
+@import "shipping-select";

@@ -1,0 +1,41 @@
+<ion-view view-title="{{'cart_order_confirm'|translate}}" hide-tabs="true">
+  <ion-content>
+    <ion-list>
+      <div ng-repeat="seller in cart.aSelCart">
+        <ion-item class="item item-complex">
+          <div class="item-content item-button-right">
+            <h2>{{seller.seller_info.seller_name}}</h2>
+            <a class="button button-clear button-small button-assertive" shipping-select="seller.shipping_list" ng-model="seller.def_shipping" ng-change="checkout()">{{seller.def_shipping.name}} <i class="icon ion-chevron-right"></i></a>
+          </div>
+        </ion-item>
+        <ion-item class="item item-thumbnail-left" ng-repeat="good in seller.goods_list">
+          <img ng-src="{{good.image}}">
+          <h2>{{good.name}}</h2>
+          <div class="row">
+            <div class="col">{{good.spec}}</div>
+          </div>
+          <div class="row">
+            <div class="col">{{good.buy_price|currency:'￥'}}</div>
+            <div class="col text-right">x{{good.quantity}}</div>
+          </div>
+        </ion-item>
+        <ion-item class="item">
+          <div class="row">
+            <div class="col"><span>运费: </span><span class="assertive">{{seller.def_shipping.price |currency:'￥'}}</span></div>
+            <div class="col-40 assertive" style="float:right;">共计: {{seller.total_amount |currency:'￥'}}</div>
+          </div>
+          <div class="row item-input">
+            <label class="item-input-wrapper text-stable">
+              <input type="text" ng-model="seller.memo" placeholder="留言">
+            </label>
+          </div>
+        </ion-item>
+      </div>
+    </ion-list>
+  </ion-content>
+  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
+    <div class="button-bar">
+      <button class="button button-energized" href="">{{'pay_now' | translate}}</button>
+    </div>
+  </ion-footer-bar>
+</ion-view>

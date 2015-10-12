@@ -1,6 +1,6 @@
 
 angular.module('components')
-  .factory('cartApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost',
+  .factory('orderApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost',
     function($http, apiEndpoint, transformRequestAsFormPost) {
 
       var addToCart = function (product) {
@@ -101,37 +101,12 @@ angular.module('components')
         return request;
       };
 
-      var checkout = function (cart) {
-        var shipping;
-        if(cart) {
-          shipping = [];
-          angular.forEach(cart.aSelCart, function (seller) {
-            shipping.push({seller_id: seller.seller_info.seller_id, shipping_id: seller.def_shipping.id});
-          });
-        }
-        var data = {
-          shipping: shipping,
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
-        };
-
-        var request = $http({
-          method: 'post',
-          url: apiEndpoint.url + '/cart-checkout.html',
-          transformRequest: transformRequestAsFormPost,
-          data: data,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        });
-
-        return request;
-      };
       return {
         addToCart : addToCart,
         getCart: getCart,
         updateCart: updateCart,
         nocheck: nocheck,
-        remove: remove,
-        checkout: checkout
+        remove: remove
       };
 
     }]);

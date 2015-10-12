@@ -11,6 +11,15 @@
           }
         }
       })
+      .state('tab.cart-checkout', {
+        url: '/cart-checkout',
+        views: {
+          'tab-cart': {
+            templateUrl: 'templates/cart/cart-checkout.html',
+            controller: 'CartCheckoutController'
+          }
+        }
+      })
 	}) // end of config
 
 	.controller('CartController', ['$scope', 'cartApi', function ($scope, cartApi) {
@@ -59,4 +68,15 @@
       });
     };
 	}]) // end of CartController
+  .controller('CartCheckoutController', ['$scope', '$ionicModal', 'cartApi', function ($scope, $ionicModal, cartApi) {
+    $scope.checkout = function () {
+      cartApi.checkout($scope.cart).success(function (responseData){
+        var dataStatus = responseData.status;
+        if (dataStatus === 0) {
+          $scope.cart = responseData.data;
+        }
+      });
+    };
+    $scope.checkout();
+  }])
 })();
