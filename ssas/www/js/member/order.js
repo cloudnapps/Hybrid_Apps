@@ -10,7 +10,6 @@
 
         .state('tab.orders', {
           url: '/orders',
-          abstract: true,
           views: {
             'tab-member': {
               templateUrl: 'templates/member/order-index.html'
@@ -20,7 +19,7 @@
         .state('tab.orders.all', {
           url: '/all',
           views: {
-            'tab-orders-all': {
+            'tab-orders': {
               templateUrl: 'templates/member/order-list.html',
               controller: 'OrdersAllCtrl'
             }
@@ -29,7 +28,7 @@
         .state('tab.orders.nopay', {
           url: '/nopay',
           views: {
-            'tab-orders-nopay': {
+            'tab-orders': {
               templateUrl: 'templates/member/order-list.html',
               controller: 'OrdersNopayCtrl'
             }
@@ -38,7 +37,7 @@
         .state('tab.orders.noship', {
           url: '/noship',
           views: {
-            'tab-orders-noship': {
+            'tab-orders': {
               templateUrl: 'templates/member/order-list.html',
               controller: 'OrdersNoshipCtrl'
             }
@@ -47,7 +46,7 @@
         .state('tab.orders.shipped', {
           url: '/shipped',
           views: {
-            'tab-orders-shipped': {
+            'tab-orders': {
               templateUrl: 'templates/member/order-list.html',
               controller: 'OrderShippedCtrl'
             }
@@ -56,7 +55,7 @@
         .state('tab.orders.return', {
           url: '/return',
           views: {
-            'tab-orders-return': {
+            'tab-orders': {
               templateUrl: 'templates/member/order-list.html',
               controller: 'OrderReturnCtrl'
             }

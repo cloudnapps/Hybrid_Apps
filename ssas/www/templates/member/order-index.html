@@ -1,28 +1,37 @@
-<ion-tabs class="tabs-color-active-positive tabs-top">
+<ion-nav-view name="tab-orders">
+  <div class="bar bar-subheader">
+    <div class="button-bar">
+      <button class="button button-light" ui-sref="tab.orders.all">{{'ord_alltitle'|translate}}</button>
+      <button class="button button-light" ui-sref="tab.orders.nopay">{{'ord_nopaytitle'|translate}}</button>
+      <button class="button button-light" ui-sref="tab.orders.noship">{{'ord_noshiptitle'|translate}}</button>
+      <button class="button button-light" ui-sref="tab.orders.shipped">{{'ord_shippedtitle'|translate}}</button>
+      <button class="button button-light" ui-sref="tab.orders.return">{{'ord_returntitle'|translate}}</button>
+    </div>
+  </div>
+  <ion-view>
+    <div class="bar bar-subheader">
+      <!-- All Orders Tab -->
+      <a title="{{'ord_alltitle'|translate}}" href="#/tab/orders/all">
+      </a>
 
-  <!-- All Orders Tab -->
-  <ion-tab title="{{'ord_alltitle'|translate}}" href="#/tab/orders/all">
-    <ion-nav-view name="tab-orders-all"></ion-nav-view>
-  </ion-tab>
+      <!-- Nopay Orders Tab -->
+      <a title="{{'ord_nopaytitle'|translate}}" href="#/tab/orders/nopay">
+      </a>
 
-  <!-- Nopay Orders Tab -->
-  <ion-tab title="{{'ord_nopaytitle'|translate}}" href="#/tab/orders/nopay">
-    <ion-nav-view name="tab-orders-nopay"></ion-nav-view>
-  </ion-tab>
+      <!-- Noship Orders Tab -->
+      <a title="{{'ord_noshiptitle'|translate}}" href="#/tab/orders/noship">
+      </a>
 
-  <!-- Noship Orders Tab -->
-  <ion-tab title="{{'ord_noshiptitle'|translate}}" href="#/tab/orders/noship">
-    <ion-nav-view name="tab-orders-noship"></ion-nav-view>
-  </ion-tab>
+      <!-- Shipped Orders Tab -->
+      <a title="{{'ord_shippedtitle'|translate}}" href="#/tab/orders/shipped">
+      </a>
 
-  <!-- Shipped Orders Tab -->
-  <ion-tab title="{{'ord_shippedtitle'|translate}}" href="#/tab/orders/shipped">
-    <ion-nav-view name="tab-orders-shipped"></ion-nav-view>
-  </ion-tab>
+      <!-- Return Orders Tab -->
+      <a title="{{'ord_returntitle'|translate}}" href="#/tab/orders/return">
+      </a>
+    </div>
+    <ion-content class="has-subheader">
+    </ion-content>
+  </ion-view>
+</ion-nav-view>
 
-  <!-- Return Orders Tab -->
-  <ion-tab title="{{'ord_returntitle'|translate}}" href="#/tab/orders/return">
-    <ion-nav-view name="tab-orders-return"></ion-nav-view>
-  </ion-tab>
-
-</ion-tabs>
