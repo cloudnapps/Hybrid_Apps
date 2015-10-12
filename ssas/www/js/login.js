@@ -25,7 +25,7 @@
               controller: 'LoginCtrl'
             }
           }
-        })
+        }) // 找回密码
         .state('retrieve', {
           url: '/retrieve',
           views: {

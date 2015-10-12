@@ -48,6 +48,7 @@ hr {
 
 .gallery-filter .active {
   background-color: #BD252C;
+  color: white;
 }
 
 .gallery-filter .text-center {
@@ -59,6 +60,7 @@ hr {
   top: 20%;
   min-height: auto;
 }
+
 
 .modal-backdrop.active {
   background-color: rgba(0, 0, 0, 0.5) !important;
