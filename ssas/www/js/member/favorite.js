@@ -178,7 +178,9 @@
             console.log(result);
             callback(result);
           }
-        );
+        ).error(function(err){
+            callback(null, err);
+        });
       };
 
       var getFavoriteList = function (page, type, callback) {

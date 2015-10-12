@@ -6,6 +6,7 @@ hr {
 
 .stroke {
   text-decoration: line-through;
+  -webkit-text-decoration-color: #ef473a;
 }
 
 .product .slider {

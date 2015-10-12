@@ -56,16 +56,16 @@
             controller: 'ProductIntroController'
           }
         }
-      })
+      })// abstract 状态, 为跳转 其他 tab做 历史
       .state('tab.product_shadow', {
         url: '/product_shadow',
         abstract: true,
         views: {
-          'tab-shop': {
+          'tab-shop': { // name="tab-shop-shadow" 和 下面的 state name相同
             template: '<ion-nav-view name="tab-shop-shadow"></ion-nav-view>'
           }
         }
-      })
+      })// seller_detail 做历史记录
       .state('tab.product_shadow.seller_detail', {
         url: '/sellers/:sellerId',
         views: {
@@ -273,11 +273,11 @@
         if (dataStatus === 0) {
           $scope.point = responseData.data.point || {};
           $scope.product = responseData.data.product;
+          $scope.comment = (responseData.comment || [])[0];
           $ionicSlideBoxDelegate.update();
-          getProductComment($scope.product.goods_id);
-          console.log('product', $scope.product);
-          console.log(' $scope.point',  $scope.point);
-        }       
+          
+          console.log('getProduct', responseData);
+        }
       });
 
       function showSpecModal(){
@@ -311,18 +311,6 @@
           });
       }
 
-      function getProductComment(goods_id){
-        goods_id = 16;
-        shopApi
-          .getProductComment(goods_id, 1)
-          .success(function(data){
-            $scope.comment = data && data.data && data.data[0] || {};
-          })
-          .error(function(e){
-            console.log(e);
-          });
-      }
-
       $scope.addToCart = function (product) {
         cartApi.addToCart(product);
       };
@@ -348,11 +336,12 @@
 
   .controller('ProductCommentController', function($scope, $stateParams, shopApi){
     console.log($stateParams.id);
-    $stateParams.id = 16;
+    $stateParams.id = 16;  // goodsId 16为测试
+
     $scope.page = 0;
     $scope.comments = [];
-
     $scope.hasMore = true;
+
     $scope.loadMore = function() {
       $scope.page++;
       getProductComment($stateParams.id);
