@@ -8,8 +8,8 @@
 								ng-repeat="cate in categories" 
 								type="item-text-wrap"
 								ng-click="populateSubCategories(cate.cat_id, $index)">
-						<img ng-src="{{cate.image.replace(' ', '') || 'img/3.pic.jpg'}}">
-						<h2 style="margin-top: 0.5em;font-size:15px;" ng-class="{'click-assertive': $index === index}">{{cate.cat_name}}</h2>
+						<img style="width:100%;"ng-src="{{cate.image.replace(' ', '') || 'img/3.pic.jpg'}}">
+						<h2 style="margin-top: 0.5em;font-size:15px;text-align:center;" ng-class="{'click-assertive': $index === index}">{{cate.cat_name}}</h2>
 					</ion-item>
 				</ion-list>
 	    	</ion-content>
