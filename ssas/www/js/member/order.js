@@ -154,7 +154,7 @@
       };
 
       $scope.requestOrder = function (item) {
-        $state.go('return_request', {orderId: item.order_id}, {reload: true});
+        $state.go('tab.return_request', {orderId: item.order_id}, {reload: true});
       };
     })
 
@@ -344,6 +344,10 @@
     })
 
     .controller('OrderTrackCtrl', function ($scope, $stateParams, OrderApi) {
+      OrderApi.getOrderDetail($stateParams.orderId, function (result) {
+        $scope.orderInfo = result.data;
+      });
+
       OrderApi.getOrderTrack($stateParams.orderId, function (result) {
         $scope.items = result.data;
       });

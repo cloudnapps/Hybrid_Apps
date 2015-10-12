@@ -3,13 +3,13 @@
     <button class="button button-light" ng-click="changeOrder()">默认</button>
     <button class="button button-light icon-right" ng-class="{'ion-arrow-up-c': orderBy === 'buy_count asc', 'ion-arrow-down-c': orderBy === 'buy_count desc'}" ng-click="changeOrder('buy_count')">销量</button>
     <button class="button button-light icon-right" ng-class="{'ion-arrow-up-c': orderBy === 'price asc', 'ion-arrow-down-c': orderBy === 'price desc'}" ng-click="changeOrder('price')">价格</button>
-    <button class="button button-light" ng-click="isShowGalleryFilter=!isShowGalleryFilter">筛选</button>
+    <button class="button button-light" ng-click="showSpecModal()">筛选</button>
   </div>
 </div>
 <ion-view view-title="">
   <ion-nav-title>
     <form ng-submit="search()">
-      <label class="item item-input">
+      <label class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
         <i class="icon ion-search placeholder-icon"></i>
         <input type="search" placeholder="Search" ng-model="keywords.value" style="height: 28px;">
       </label>
@@ -17,25 +17,6 @@
     </form>
   </ion-nav-title>
   <ion-content class="has-subheader">
-    <div ng-show="isShowGalleryFilter" class="gallery-filter">
-      <div>
-        <h4>品牌</h4>
-        <div class="row" style="flex-wrap:wrap">
-          <div class="col col-33 text-center" ng-repeat="brand in galleryFilter.brand" ng-class="{active: brand.brand_id === brandId}" ng-click="setBrandId(brand.brand_id)">{{brand.brand_name}}</div>
-        </div>
-      </div>
-      <div ng-repeat="props in galleryFilter.props">
-        <h4>{{props.prop_name}}</h4>
-        <div class="row" style="flex-wrap:wrap">
-          <div class="col col-33 text-center" ng-repeat="propValue in props.prop_value"  ng-class="{active: propValue.prop_index === propIndex}" ng-click="setPropIndex(propValue.prop_index)">{{propValue.prop_value_name}}
-          </div>
-        </div>
-      </div>
-      <div class="row" style="flex-wrap:wrap">
-        <button class="col col-50 button button-small button-positive" ng-click="galleryFilterSave()">确认</button>
-        <button class="col col-50 button button-small button-dark" ng-click="galleryFilterSave(true)">清空</button>
-      </div>
-    </div>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="product in products" type="item-text-wrap" href="#/tab/products/{{product.product_id}}">
         <img ng-src="{{product.image}}">

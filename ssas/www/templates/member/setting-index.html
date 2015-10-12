@@ -1,4 +1,4 @@
-<ion-view view-title="{{'settng_title'|translate}}">
+<ion-view view-title="{{'settng_title'|translate}}" hide-tabs="true">
   <ion-content class="padding">
     <div class="list card">
       <div class="item item-divider">我的信息</div>
@@ -43,20 +43,12 @@
             <h2>{{item.email}}</h2>
           </div>
         </div>
-        <div class="row">
+        <div class="row" ng-click="modifyPassword()">
           <div class="col col-30">
             <h2>修改密码</h2>
           </div>
-          <div class="col col-70" align="right" ng-click="modifyPassword()">
+          <div class="col col-70" align="right">
             <p>可修改密码<i class="icon ion-chevron-right icon-accessory"></i></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col col-30">
-            <h2>身份信息</h2>
-          </div>
-          <div class="col col-70" align="right" ng-click="getIdCardList()">
-            <p>可添加新的身份信息<i class="icon ion-chevron-right icon-accessory"></i></p>
           </div>
         </div>
       </div>

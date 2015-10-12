@@ -8,12 +8,21 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('settings_index', {
-          url: '/settings/index',
+        .state('tab.settings', {
+          url: '/settings',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/setting-index.html',
               controller: 'SettingCtrl'
+            }
+          }
+        })
+        .state('tab.settings_changepwd', {
+          url: '/setting/changepwd',
+          views: {
+            'tab-member': {
+              templateUrl: 'templates/member/setting-changepwd.html',
+              controller: 'ChangePwdCtrl'
             }
           }
         })
@@ -44,9 +53,23 @@
         $scope.item = result.data;
       });
 
-      $scope.getIdCardList = function () {
-        $state.go('tab.idcards', {}, {reload: true});
+      $scope.modifyPassword = function () {
+        $state.go('tab.settings_changepwd', {}, {reload: true});
       }
+    })
+
+    .controller('ChangePwdCtrl', function ($scope, $state, $ionicPopup, SettingApi) {
+      var data = {};
+
+      SettingApi.modifyMemberPassword(data, function (result) {
+        var alertPopup = $ionicPopup.alert({
+          title: '修改密码',
+          template: result.msg
+        });
+        alertPopup.then(function (res) {
+          console.log(res);
+        });
+      });
     })
 
     .controller('IdCardsCtrl', function ($scope, $state, SettingApi) {

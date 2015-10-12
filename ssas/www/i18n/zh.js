@@ -34,6 +34,7 @@ var translations_zh = {
     //login
     login_title: '登录',
     register_title: '新用户注册',
+    retrieve_password: '找回密码',
 
     //seller
     seller_title:'商户列表',
@@ -89,6 +90,7 @@ var translations_zh = {
     //complaint
     complaint_title: '投诉建议',
     complaint_addbtn: '提交',
+    complaint_newbtn: '新建投诉与建议',
 
     // cart
     submit_order: '提交订单'

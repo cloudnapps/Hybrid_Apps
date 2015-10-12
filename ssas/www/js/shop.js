@@ -3,15 +3,17 @@
   var shop = angular.module('shop', ['components', 'seller']);
   
   shop.config(function ($stateProvider, $urlRouterProvider) {
-    $stateProvider.state('tab.categories', {
-      url: '/categories',
-      views : {
-        'tab-shop': {
-          templateUrl: 'templates/shop/shop-categories.html',
-          controller: 'CategoryController'
+    $stateProvider
+      // 商品分类
+      .state('tab.categories', {
+        url: '/categories',
+        views : {
+          'tab-shop': {
+            templateUrl: 'templates/shop/shop-categories.html',
+            controller: 'CategoryController'
+          }
         }
-      }
-    })
+      }) // 商品列表
       .state('tab.products', {
         url: '/products?categoryId',
         views: {
@@ -20,7 +22,7 @@
             controller: 'ShopController'
           }
         }
-      })
+      }) // 商品搜索列表 no used
       .state('tab.search', {
         url: '/search?keywords&categoryId',
         views: {
@@ -29,7 +31,7 @@
             controller: 'ShopController'
           }
         }
-      })
+      }) // 商品详情页
       .state('tab.product', {
         url: '/products/:productId',
         views: {
@@ -38,7 +40,7 @@
             controller: 'ProductDetailController'
           }
         }
-      })
+      }) // no used
       .state('tab.comments', {
         url: '/goods/:id/comments',
         views: {
@@ -47,7 +49,7 @@
             controller: 'ProductCommentController'
           }
         }
-      })
+      }) // 产品图文详情
       .state('tab.intro', {
         url: '/goods/:id/intro?productId&sellerId',
         views: {
@@ -56,16 +58,16 @@
             controller: 'ProductIntroController'
           }
         }
-      })
+      })// 抽象状态, 为跳转 其他 tab做 历史
       .state('tab.product_shadow', {
         url: '/product_shadow',
         abstract: true,
         views: {
-          'tab-shop': {
+          'tab-shop': { // name="tab-shop-shadow" 和 下面的 state name相同
             template: '<ion-nav-view name="tab-shop-shadow"></ion-nav-view>'
           }
         }
-      })
+      })// seller_detail 做历史记录, 从 seller_detail 中拷贝过来
       .state('tab.product_shadow.seller_detail', {
         url: '/sellers/:sellerId',
         views: {
@@ -104,8 +106,10 @@
           $scope.populateSubCategories($scope.categories[0].cat_id);
         }
       });
-
-      $scope.populateSubCategories = function (categoryId) {
+      $scope.populateSubCategories = function (categoryId, index) {
+        if (index !== undefined) {
+          $scope.index = index;
+        }
         $scope.subCategories = [];
         var category = $scope.categoryObj[categoryId];
         if (category.lv2 !== undefined) {
@@ -121,8 +125,8 @@
       };
   }]) // end of CategoryController
 
-  .controller('ShopController', ['$scope', '$state', '$stateParams', 'shopApi', 
-    function ($scope, $state, $stateParams, shopApi) {
+  .controller('ShopController', ['$scope', '$state', '$stateParams', '$ionicModal', 'shopApi', 
+    function ($scope, $state, $stateParams, $ionicModal, shopApi) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -203,6 +207,20 @@
       $scope.getProducts();    
     };
 
+
+    $scope.showSpecModal = function showSpecModal(){
+      $ionicModal.fromTemplateUrl('templates/shop/product-gallery-filter.html', {
+        scope: $scope
+      }).then(function(modal) {
+        $scope.modal = modal;
+        $scope.modal.show();
+        $scope.hideModal = function(){
+          $scope.modal.hide();
+          $scope.modal.remove();
+        };
+      });
+    }
+
     
 
     $scope.setBrandId = function(brandId){
@@ -215,6 +233,7 @@
 
     $scope.galleryFilterSave = function(isClear){
       $scope.isShowGalleryFilter = false;
+      $scope.hideModal();
       if (isClear) {
         $scope.brandId = '';
         $scope.propIndex = '';
@@ -273,11 +292,11 @@
         if (dataStatus === 0) {
           $scope.point = responseData.data.point || {};
           $scope.product = responseData.data.product;
+          $scope.comment = (responseData.comment || [])[0];
           $ionicSlideBoxDelegate.update();
-          getProductComment($scope.product.goods_id);
-          console.log('product', $scope.product);
-          console.log(' $scope.point',  $scope.point);
-        }       
+          
+          console.log('getProduct', responseData);
+        }
       });
 
       function showSpecModal(){
@@ -311,18 +330,6 @@
           });
       }
 
-      function getProductComment(goods_id){
-        goods_id = 16;
-        shopApi
-          .getProductComment(goods_id, 1)
-          .success(function(data){
-            $scope.comment = data && data.data && data.data[0] || {};
-          })
-          .error(function(e){
-            console.log(e);
-          });
-      }
-
       $scope.addToCart = function (product) {
         cartApi.addToCart(product);
       };
@@ -348,11 +355,12 @@
 
   .controller('ProductCommentController', function($scope, $stateParams, shopApi){
     console.log($stateParams.id);
-    $stateParams.id = 16;
+    $stateParams.id = 16;  // goodsId 16为测试
+
     $scope.page = 0;
     $scope.comments = [];
-
     $scope.hasMore = true;
+
     $scope.loadMore = function() {
       $scope.page++;
       getProductComment($stateParams.id);

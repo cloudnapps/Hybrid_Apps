@@ -1,20 +1,23 @@
 <ion-view view-title="投诉与建议" hide-tabs="true">
-  <ion-content class="padding">
-    <div class="list card">
+  <ion-content>
+    <div class="list card" style="margin: 0;box-shadow: none;">
       <div class="item item-body">
-        <p>投诉时间：{{item.time}}</p>
+        <p style="margin: 10px 0;color: #4c4b4d;">投诉时间：{{item.time}}</p>
 
-        <p>投诉关于：{{item.complaints_type}}</p>
+        <p style="margin: 10px 0;color: #4c4b4d;">投诉关于：{{item.complaints_type}}</p>
 
-        <p>订单号：{{item.order_id}}</p>
+        <p style="margin: 10px 0 0;color: #4c4b4d;">订单号：{{item.order_id}}</p>
 
-        <p>投诉说明：{{item.content}}</p>
+        <div class="row" style="padding: 0;">
+          <p style="min-width: 5em;margin: 10px 0;color: #4c4b4d;">投诉说明：</p>
+          <p style="margin: 10px 0;color: #4c4b4d;">{{item.content}}</p>
+        </div>
       </div>
 
-      <div class="item item-body">
-        <p>客服解释</p>
+      <div class="item item-body" style="border-bottom: 1px solid #ddd;">
+        <p style="margin: 0;color: #4c4b4d;">客服解释</p>
 
-        <p>实在抱歉，对您提出的问题表示感谢，我们会严格规范发货流程减少此类事情的发生，抱歉给你带来不必要的麻烦</p>
+        <p style="color: #4c4b4d;">实在抱歉，对您提出的问题表示感谢，我们会严格规范发货流程减少此类事情的发生，抱歉给你带来不必要的麻烦</p>
       </div>
     </div>
   </ion-content>
