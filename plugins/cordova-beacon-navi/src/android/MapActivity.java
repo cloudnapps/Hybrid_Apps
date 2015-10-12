@@ -335,6 +335,6 @@ public class MapActivity extends Activity
 //        mapView.showRouteEndSymbolOnCurrentFloor(mRouteTargetPoint);
 //        mapView.showRouteStartSymbolOnCurrentFloor(mRouteBeginPoint);
 
-        routeManager.requestRoute(mRouteTargetPoint, mRouteBeginPoint);
+        routeManager.requestRoute(mRouteBeginPoint, mRouteTargetPoint);
     }
 }
