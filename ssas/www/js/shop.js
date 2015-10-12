@@ -142,6 +142,8 @@
     $scope.filter.cat_id = $scope.categoryId;
     $scope.hasMore = false;
     $scope.isShowGalleryFilter = false;
+    $scope.priceSection = {};
+
 
     $scope.getProducts = function() {
       var query = {   
@@ -170,15 +172,21 @@
     };  
 
     $scope.search = function(){
+      $scope.filter = {
+        cat_id: $scope.filter.cat_id 
+      };
       $scope.filter.keywords = $scope.keywords.value;
-      clearData();
+      clearData(true);
       $scope.getProducts();
     };
 
     $scope.clearSearch = function(event){
+      $scope.filter = {
+        cat_id: $scope.filter.cat_id 
+      };
       $scope.filter.keywords = '';
       $scope.keywords.value = '';
-      clearData();
+      clearData(true);
       $scope.getProducts();
       event.stopPropagation();
     };
@@ -221,8 +229,6 @@
       });
     }
 
-    
-
     $scope.setBrandId = function(brandId){
       $scope.brandId = brandId;
     };
@@ -235,20 +241,38 @@
       $scope.isShowGalleryFilter = false;
       $scope.hideModal();
       if (isClear) {
-        $scope.brandId = '';
-        $scope.propIndex = '';
-        delete $scope.filter.brand;
-        delete $scope.filter.prop_index;
-        clearData();
+        clearData(true);
         return $scope.getProducts();
       }
       $scope.filter.brand = $scope.brandId;
       $scope.filter.prop_index = $scope.propIndex;
+      if ($scope.priceSection.min) {
+        $scope.filter.min_price = parseFloat($scope.priceSection.min);
+      }
+      else {
+        delete $scope.filter.min_price;
+      }
+      if ($scope.priceSection.max) {
+        $scope.filter.max_price = parseFloat($scope.priceSection.max);
+      }
+      else {
+        delete $scope.filter.max_price;
+      }
       clearData();
       return $scope.getProducts();
     };
 
-    function clearData(){
+    function clearData(isClearModel){
+      if (isClearModel) {
+        $scope.brandId = '';
+        $scope.propIndex = '';
+        delete $scope.filter.brand;
+        delete $scope.filter.prop_index;
+        delete $scope.filter.min_price;
+        delete $scope.filter.max_price;
+        $scope.priceSection = {};
+      }
+      
       $scope.page = 1;
       $scope.products.length = 0;
     }
