@@ -58,7 +58,7 @@
       }
     })
 
-    .controller('ChangePwdCtrl', function ($scope, $state, SettingApi) {
+    .controller('ChangePwdCtrl', function ($scope, $state, $ionicPopup, SettingApi) {
       var data = {};
 
       SettingApi.modifyMemberPassword(data, function (result) {
