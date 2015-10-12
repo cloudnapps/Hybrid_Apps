@@ -25,6 +25,15 @@
               controller: 'LoginCtrl'
             }
           }
+        })
+        .state('retrieve', {
+          url: '/retrieve',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/login/user-retrieve-password.html',
+              controller: 'RetrieveCtrl'
+            }
+          }
         });
     })
 
@@ -102,6 +111,52 @@
           })
       };
     })
+    .controller('RetrieveCtrl', function($scope, $state, LoginApi, toastService){
+      $scope.userInfo = {};
+      $scope.verified = false;
+      $scope.sendCode = sendCode;
+      $scope.mobileValide = mobileValide;
+      $scope.lostPasswd = lostPasswd;
+
+      function sendCode(){
+        if (!$scope.userInfo.mobile) {
+          toastService.setToast('手机号~');
+          return;
+        }
+        LoginApi
+          .sendCode($scope.userInfo.mobile, function(data){
+            toastService.setToast(data.msg);
+          }, {
+            type: 'lost'
+          });
+      }
+
+      function mobileValide(){
+        LoginApi
+          .mobileValide($scope.userInfo.mobile, $scope.userInfo.mobile, $scope.userInfo.signCode, function(data){
+            if (data && data.status === 0) {
+              $scope.verified = true;
+            }
+            else {
+              toastService.setToast(data && data.msg || '验证失败');
+            }
+          });
+      }
+ 
+      function lostPasswd(){
+        LoginApi
+          .lostPasswd($scope.userInfo.mobile, $scope.userInfo.password, $scope.userInfo.confirmPwd, function(data){
+             if (data && data.status === 0) {
+                toastService.setToast(data && data.msg || '修改成功');
+                return $state.go('login');
+             }
+             else {
+              toastService.setToast(data && data.msg || '修改失败');
+              $scope.verified = false;
+             }
+          });
+      }
+    })
 
     .factory('LoginApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
       console.log(apiEndpoint);
@@ -154,16 +209,47 @@
         sendRequest(url, data, callback);
       };
 
-      var sendCode = function (mobile, callback) {
-        var url = apiEndpoint.url + '/passport-send_code.html';
+      var mobileValide = function (mobile, login_name, sign_code, callback) {
+        var url = apiEndpoint.url + '/passport-mobile_valide.html';
         var data = {
-          mobile: mobile
+          mobile: mobile,
+          sign_code: sign_code,
+          login_name: login_name || mobile
         };
 
         sendRequest(url, data, callback);
       };
 
+      var sendCode = function (mobile, callback) {
+        var url = apiEndpoint.url + '/passport-send_code.html';        
+        var data = {
+          mobile: mobile
+        };
+        var extra = arguments[2];
+        if (extra) {
+          for(var f in extra) {
+            if (extra.hasOwnProperty(f)) {
+              data[f] = extra[f];
+            }
+          }
+        }
+
+        sendRequest(url, data, callback);
+      };
+
+      var lostPasswd = function(login_name, password, psw_confirm, callback){
+        var url = apiEndpoint.url + '/passport-lost_passwd.html';        
+        var data = {
+          login_name: login_name,
+          password: btoa(password),
+          psw_confirm: btoa(psw_confirm)
+        };
+        sendRequest(url, data, callback);
+      }
+
       return {
+        lostPasswd: lostPasswd,
+        mobileValide: mobileValide,
         validateUser: validateUser,
         submitUser: submitUser,
         loginUser: loginUser,
