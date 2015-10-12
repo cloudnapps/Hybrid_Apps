@@ -104,8 +104,10 @@
           $scope.populateSubCategories($scope.categories[0].cat_id);
         }
       });
-
-      $scope.populateSubCategories = function (categoryId) {
+      $scope.populateSubCategories = function (categoryId, index) {
+        if (index !== undefined) {
+          $scope.index = index;
+        }
         $scope.subCategories = [];
         var category = $scope.categoryObj[categoryId];
         if (category.lv2 !== undefined) {
