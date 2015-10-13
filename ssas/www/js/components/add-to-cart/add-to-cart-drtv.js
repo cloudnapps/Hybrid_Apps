@@ -8,7 +8,10 @@ angular
         product: '=addToCart'
       },
       replace: true,
-      controller: function($scope, cartApi, FavoriteApi, toastService) {
+      controller: function($scope, cartApi, FavoriteApi, toastService, tabStateService) {
+        // 跨tab之间的跳转
+        $scope.tabIndex = tabStateService.tabIndex;
+        $scope.tabStateGo = tabStateService.go;
         $scope.addGoodsFavorite = function() {
           FavoriteApi
             .addGoodsFavorite([$scope.product.goods_id], function(data, errReason) {

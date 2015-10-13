@@ -18,8 +18,13 @@
           }
         });
     })
-    .controller('MemberCtrl', function ($scope, $ionicPopover, $state) {
-      //$state.go('tab.login', {}, {reload: true});
+    .controller('MemberCtrl', function ($scope, $ionicPopover, $state, $ionicHistory, userService) {
+      
+      $scope.$on('$ionicView.beforeEnter', function(){
+        if(!userService.isLogin()) {
+          $scope.tabStateGo($scope.tabIndex.member, 'tab.login');
+        }
+      });
 
       $ionicPopover.fromTemplateUrl('findPopover.html', {
         scope: $scope

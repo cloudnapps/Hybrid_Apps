@@ -46,9 +46,15 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home
         abstract: true,
         views: {
           'main-view': {
-            templateUrl: 'templates/tab-main.html'
+            templateUrl: 'templates/tab-main.html',
+            controller: function($scope, tabStateService){
+              // 跨tab之间的跳转
+              $scope.tabIndex = tabStateService.tabIndex;
+              $scope.tabStateGo = tabStateService.go;
+            }
           }
-        }
+        },
+        
       });
 
     // if none of the above states are matched, use this as the fallback
