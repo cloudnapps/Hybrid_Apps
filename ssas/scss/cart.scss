@@ -1,0 +1,36 @@
+.cart {
+  .seller.item {
+    label.checkbox {
+      width: 42px;
+    }
+  }
+  .good.item {
+    label.checkbox {
+      width: 42px;
+    }
+    .item-checkbox {
+      padding-left: 40px;
+    }
+    .item-content {
+      padding-right: 15px;
+    }
+    .good-thumbnail {
+      display: block;
+      height: 80px;
+      img {
+        max-width: 80px;
+        max-height: 80px;
+      }
+    }
+    .good-info {
+      display: inline-block;
+      padding: 0px;
+    }
+    .row.good-price {
+      padding-left: 0px;
+      .price,.quanity {
+        padding-left: 0px;
+      }
+    }
+  }
+}

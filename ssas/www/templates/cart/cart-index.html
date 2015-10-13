@@ -1,4 +1,4 @@
-<ion-view view-title="{{'cart'|translate}}">
+<ion-view class="cart" view-title="{{'cart'|translate}}">
   <ion-content>
     <ion-list>
       <div ng-repeat="(channelKey, channel) in cart.natureCart">
@@ -8,30 +8,29 @@
         </ion-item>
 
         <div ng-repeat="seller in channel.aSelCart">
-          <ion-item class="item item-checkbox item-icon-right item-complex">
-            <label class="checkbox" style="width: 50px;">
+          <ion-item class="seller item item-checkbox item-icon-right item-complex">
+            <label class="checkbox">
               <input type="checkbox" ng-model="seller.selected" ng-change="toggleSeller(seller)">
             </label>
             <a class="item-content" href="#/tab/seller/{{seller.seller_info.seller_id}}">{{seller.seller_info.seller_name}}<i class="icon ion-chevron-right icon-accessory"></i></a>
           </ion-item>
-          <ion-item class="item" ng-repeat="good in seller.goods_list">
+          <ion-item class="good item" ng-repeat="good in seller.goods_list">
             <div class="item-checkbox">
-              <label class="checkbox" style="width: 50px;">
+              <label class="checkbox">
                 <input type="checkbox" ng-model="good.selected" ng-change="toggleGood(good)">
               </label>
-              <div>
-                <div>
-                  <a class="item-thumbnail-left" href="#/tab/products/{{good.product_id}}">
-                    <img style="margin-left:60px;" ng-src="{{good.thumbnail}}">
-                  </a>
-                </div>
-                <div style="padding-left:120px;">
+              <div class="row">
+                <a class="good-thumbnail vertical-align-middle-container" href="#/tab/products/{{good.product_id}}">
+                  <img class="vertical-align-middle" ng-src="{{good.thumbnail}}">
+                  <!-- <div class="vertical-align-middle" style="border:solid 1px; width:80px;height:80px;">test</div> -->
+                </a>
+
+                <div class="good-info col">
                   <h2>{{good.name}}</h2>
-                  <div class="row">
-                    <div class="col">{{good.spec}}</div>
-                  </div>
-                  <div class="row">
-                    <div class="col assertive">{{good.buy_price|currency:'￥'}}</div>
+                  <p>{{good.spec}}</p>
+
+                  <div class="good-price row">
+                    <div class="col price assertive">{{good.buy_price|currency:'￥'}}</div>
                     <quantity-input class="col-60" ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
                   </div>
                 </div>

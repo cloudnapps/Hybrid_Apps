@@ -1,0 +1,19 @@
+.vertical-align-middle-container {
+  overflow: none;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+  &:before {
+    height: 100%;
+    width: 0px;
+    margin-left: -4px;
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .vertical-align-middle {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
