@@ -3,7 +3,7 @@
 
     <div class="row" style="padding:30px 20px 10px;">
       <div class="col col-center" style="padding: 0px;">
-        <p style="font-size: 12px">可用积分:</p>
+        <p style="font-size: 16px;margin: 0;">可用积分:</p>
       </div>
     </div>
 
@@ -15,7 +15,7 @@
 
     <div class="row" style="padding: 5px 20px;background-color: #c11123;" ng-click="showHistory()">
       <div class="col col-90 col-center" style="padding: 0px;">
-        <a class="button button-clear" style="color: #fff;padding: 0;">积分账单</a>
+        <a class="button button-clear" style="color: #fff;padding: 0;font-size: 20px;">积分账单</a>
       </div>
       <div class="col col-10 col-center" style="padding: 0px;color: #fff;text-align: right;">
         <i class="icon ion-chevron-right icon-accessory" ng-show="!pointInfo.isShow"></i>
@@ -24,14 +24,14 @@
     </div>
 
     <ion-list ng-show="pointInfo.isShow">
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in pointInfo.items" type="item-text-wrap">
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in pointInfo.items" type="item-text-wrap" style="padding: 10px;">
         <div class="row">
-          <div class="col col-50">
-            {{item.behavior}}
-            <p>{{item.time}}</p>
+          <div class="col col-67 col-center">
+            <p style="font-size: 20px;margin-bottom: 10px;">{{item.behavior}}</p>
+            <p style="font-size: 18px;font-weight: 300;">{{item.time}}</p>
           </div>
-          <div class="col col-50" align="right">
-            <h1>+{{item.point}}</h1>
+          <div class="col col-33 col-center" align="right">
+            <span style="font-size: 28px;color: #c11123;">+{{item.point}}</span>
           </div>
         </div>
       </ion-item>
