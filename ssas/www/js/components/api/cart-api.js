@@ -102,15 +102,17 @@ angular.module('components')
       };
 
       var checkout = function (cart) {
-        var shipping;
+        var shipping, addr_id;
         if(cart) {
           shipping = [];
           angular.forEach(cart.aSelCart, function (seller) {
             shipping.push({seller_id: seller.seller_info.seller_id, shipping_id: seller.def_shipping.id});
           });
+          addr_id = cart.def_addr.addr_id;
         }
         var data = {
           shipping: shipping,
+          addr_id: addr_id,
           member_id: 13,
           token: '11b4f4bd44ee8814d41680dc753a75e4'
         };

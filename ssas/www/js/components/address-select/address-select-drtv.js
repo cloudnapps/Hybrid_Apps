@@ -1,5 +1,5 @@
 angular.module('components')
-  .directive('shippingSelect', function($rootScope, $ionicModal) {
+  .directive('addressSelect', function($rootScope, $ionicModal) {
     return {
       restrict: 'A',
       require: 'ngModel',
@@ -13,15 +13,15 @@ angular.module('components')
         };
 
         scope.pick = function (){
-          var items = scope.$parent.$eval(attrs.shippingSelect);
+          var items = scope.$parent.$eval(attrs.addressSelect);
           var ngModel = ctrl.$viewValue;
           angular.forEach(items, function (item) {
-            if(item.id === ngModel.id) {
+            if(item.addr_id === ngModel.addr_id) {
               ngModel = item;
             }
           });
 
-          $ionicModal.fromTemplateUrl('templates/components/shipping-select-modal.tpl.html', {
+          $ionicModal.fromTemplateUrl('templates/components/address-select-modal.tpl.html', {
             scope: angular.extend(scope.$new(true), {model: {selected: ngModel}, items: items})
           }).then(function (modal) {
             modal.show();
