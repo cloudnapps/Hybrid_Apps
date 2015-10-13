@@ -2,32 +2,37 @@
   <ion-content class="padding">
     <div class="row">
       <div class="col col-33">
-        原密码：
+        输入旧密码：
       </div>
       <div class="col col-70">
-        <input type="text" placeholder="原密码" ng-model="pwdInfo.old">
+        <input type="password" ng-model="pwdInfo.old">
       </div>
     </div>
     <div class="row">
       <div class="col col-33">
-        新密码：
+        输入新密码：
       </div>
       <div class="col col-70">
-        <input type="text" placeholder="新密码" ng-model="pwdInfo.new">
+        <input type="password" ng-model="pwdInfo.new">
       </div>
     </div>
     <div class="row">
       <div class="col col-33">
-        确定密码：
+        再次输入密码：
       </div>
       <div class="col col-70">
-        <input type="text" placeholder="确定密码" ng-model="pwdInfo.confirm">
+        <input type="password" ng-model="pwdInfo.confirm">
       </div>
     </div>
     <div class="button-bar">
       <button class="button button-full button-light"
-              style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;" ng-click="add()">确定
+              style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;" ng-click="modify()">确定
       </button>
+    </div>
+    <div class="row">
+      <div class="col col-center">
+        <p>修改后请重新登录</p>
+      </div>
     </div>
   </ion-content>
 </ion-view>

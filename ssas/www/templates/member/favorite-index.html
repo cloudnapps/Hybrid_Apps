@@ -1,8 +1,14 @@
 <ion-nav-view name="tab-favorites">
   <div class="bar bar-subheader">
-    <div class="button-bar">
-      <button class="button button-light" ui-sref="tab.favorites.sellers">{{'fav_sellers' | translate}}</button>
-      <button class="button button-light" ui-sref="tab.favorites.goods">{{'fav_goods'|translate}}</button>
+    <div class="tabs-striped tabs-color-assertive">
+      <div class="tabs">
+        <a class="tab-item active" ui-sref="tab.favorites.sellers">
+          {{'fav_sellers' | translate}}
+        </a>
+        <a class="tab-item" ui-sref="tab.favorites.goods">
+          {{'fav_goods'|translate}}
+        </a>
+      </div>
     </div>
   </div>
   <ion-view>
