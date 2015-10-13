@@ -34,3 +34,17 @@
     }
   }
 }
+.cart-checkout {
+  .summary {
+    font-size: 14px;
+  }
+  .total-amount {
+    background: green;
+    display: inline-block;
+    font-size: 1.5em;
+    &::first-letter {
+      font-size: 5px;
+      font-weight: 100;
+    }
+  }
+}
