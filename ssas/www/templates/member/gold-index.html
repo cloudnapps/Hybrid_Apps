@@ -13,14 +13,29 @@
       </div>
     </div>
 
-    <div class="row" style="padding: 5px 20px;background-color: #c11123;">
-      <div class="col col-90 col-center" style="padding: 0px;" >
-        <a class="button button-clear" style="color: #fff;padding: 0;" href="#/tab/gold/list">金币账单</a>
+    <div class="row" style="padding: 5px 20px;background-color: #c11123;" ng-click="showHistory()">
+      <div class="col col-90 col-center" style="padding: 0px;">
+        <a class="button button-clear" style="color: #fff;padding: 0;">金币账单</a>
       </div>
       <div class="col col-10 col-center" style="padding: 0px;color: #fff;text-align: right;">
-        <i class="icon ion-chevron-right icon-accessory"></i>
+        <i class="icon ion-chevron-right icon-accessory" ng-show="!goldInfo.isShow"></i>
+        <i class="icon ion-chevron-down icon-accessory" ng-show="goldInfo.isShow"></i>
       </div>
     </div>
+
+    <ion-list ng-show="goldInfo.isShow">
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in goldInfo.items" type="item-text-wrap">
+        <div class="row">
+          <div class="col col-50">
+            {{item.behavior}}
+            <p>{{item.time}}</p>
+          </div>
+          <div class="col col-50" align="right">
+            <h1>+{{item.point}}</h1>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
 
   </ion-content>
 </ion-view>

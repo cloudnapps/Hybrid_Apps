@@ -17,15 +17,6 @@
             }
           }
         })
-        .state('tab.points_list', {
-          url: '/point/list',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/point-list.html',
-              controller: 'PointsCtrl'
-            }
-          }
-        })
         .state('tab.golds', {
           url: '/golds',
           views: {
@@ -34,36 +25,105 @@
               controller: 'GoldsCtrl'
             }
           }
-        })
-        .state('tab.golds_list', {
-          url: '/gold/list',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/gold-list.html',
-              controller: 'GoldsCtrl'
-            }
-          }
         });
     })
     .controller('PointsCtrl', function ($scope, PointApi) {
       $scope.pointInfo = {};
 
-      PointApi.getPointInfo(null, 'point', function (result) {
-        if (result.status === 0) {
-          $scope.pointInfo.total = result.data.total;
-          $scope.pointInfo.items = result.data.log;
+      $scope.pointInfo.isShow = false;
+
+      $scope.pointInfo.items = [];
+
+      $scope.init = function () {
+        if ($scope.pointInfo.items.length === 0) {
+          $scope.pointInfo.items = [];
+          $scope.pointInfo.page = 0;
+          $scope.pointInfo.hasMore = true;
         }
+      };
+
+      $scope.loadMore = function () {
+        PointApi.getPointInfo($scope.page + 1, 'point', function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.pointInfo.total = result.data.total;
+            $scope.pointInfo.items = $scope.pointInfo.items.concat(result.data.log);
+            $scope.pointInfo.page += 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }
+        });
+      };
+
+      $scope.$on('$ionicView.enter', function () {
+        $scope.isActive = true;
+        $scope.init();
       });
+
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.isActive = false;
+      });
+
+      $scope.$on('$stateChangeSuccess', function () {
+        if ($scope.isActive)
+          $scope.loadMore();
+      });
+
+      $scope.loadMore();
+
+      $scope.showHistory = function () {
+        $scope.pointInfo.isShow = !$scope.pointInfo.isShow;
+      }
     })
     .controller('GoldsCtrl', function ($scope, PointApi) {
       $scope.goldInfo = {};
 
-      PointApi.getPointInfo(null, 'gold', function (result) {
-        if (result.status === 0) {
-          $scope.goldInfo.total = result.data.total;
-          $scope.goldInfo.items = result.data.log;
+      $scope.goldInfo.isShow = false;
+
+      $scope.goldInfo.items = [];
+
+      $scope.init = function () {
+        if ($scope.goldInfo.items.length === 0) {
+          $scope.goldInfo.items = [];
+          $scope.goldInfo.page = 0;
+          $scope.goldInfo.hasMore = true;
         }
+      };
+
+      $scope.loadMore = function () {
+        PointApi.getPointInfo($scope.page + 1, 'gold', function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.goldInfo.total = result.data.total;
+            $scope.goldInfo.items = $scope.goldInfo.items.concat(result.data.log);
+            $scope.goldInfo.page += 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }
+        });
+      };
+
+      $scope.$on('$ionicView.enter', function () {
+        $scope.isActive = true;
+        $scope.init();
       });
+
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.isActive = false;
+      });
+
+      $scope.$on('$stateChangeSuccess', function () {
+        if ($scope.isActive)
+          $scope.loadMore();
+      });
+
+      $scope.loadMore();
+
+      $scope.showHistory = function () {
+        $scope.goldInfo.isShow = !$scope.goldInfo.isShow;
+      }
     })
     .factory('PointApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
       console.log(apiEndpoint);
