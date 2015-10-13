@@ -40,6 +40,18 @@
     .controller('LoginCtrl', function ($scope, $state, $ionicPopup, userService, LoginApi) {
       $scope.userInfo = {};
 
+      $scope.goBack = function(){
+        if ([undefined, -1, $scope.tabIndex.cart, $scope.tabIndex.member].indexOf(userService.backIndex) !== -1) {
+          $scope.tabStateGo($scope.tabIndex.home);
+          userService.backIndex = -1;
+        }
+        else {
+          console.log('userService.backIndex', userService.backIndex);
+          $scope.tabStateGo(userService.backIndex);
+          userService.backIndex = -1;
+        }
+      };
+
       $scope.login = function () {
         LoginApi.loginUser($scope.userInfo.name, $scope.userInfo.password, function (result) {
           if (result.status === 1) {
@@ -57,8 +69,16 @@
             currentUser.name = result.data.login_name;
             currentUser.token = result.data.token;
 
-            userService.saveUser(currentUser);
-            $state.go('tab.home', {}, {location: "replace"});
+            userService.set(currentUser);
+            if (userService.backIndex === -1) {
+              $scope.tabStateGo($scope.tabIndex.member);
+              userService.backIndex = -1;
+            }
+            else {
+              $scope.tabStateGo(userService.backIndex);
+              userService.backIndex = -1;
+            }
+
           }
         });
       };

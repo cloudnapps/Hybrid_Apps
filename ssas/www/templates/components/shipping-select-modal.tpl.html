@@ -4,7 +4,7 @@
   </ion-header-bar>
   <ion-content>
     <ion-list>
-      <label class="item item-radio radio" ng-repeat="item in shippingList">
+      <label class="item item-radio radio" ng-repeat="item in items">
         <input type="radio" name="group" ng-click="hideModal();" ng-change="updateModel();" ng-model="model.selected" ng-value="item">
         <div class="item-content">
           {{item.name}}

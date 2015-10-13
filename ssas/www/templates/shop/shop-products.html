@@ -18,7 +18,7 @@
   </ion-nav-title>
   <ion-content class="has-subheader">
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="product in products" type="item-text-wrap" href="#/tab/products/{{product.product_id}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="product in products" type="item-text-wrap" ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: product.product_id})">
         <img ng-src="{{product.image}}">
         <h2>{{product.name}}</h2>
         <p>{{product.price}}</p>

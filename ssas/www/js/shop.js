@@ -58,7 +58,7 @@
             controller: 'ProductIntroController'
           }
         }
-      })// 抽象状态, 为跳转 其他 tab做 历史
+      })// 抽象状态, 为跳转 其他 tab做 历史 no used
       .state('tab.product_shadow', {
         url: '/product_shadow',
         abstract: true,
@@ -67,7 +67,7 @@
             template: '<ion-nav-view name="tab-shop-shadow"></ion-nav-view>'
           }
         }
-      })// seller_detail 做历史记录, 从 seller_detail 中拷贝过来
+      })// seller_detail 做历史记录, 从 seller_detail 中拷贝过来 no used
       .state('tab.product_shadow.seller_detail', {
         url: '/sellers/:sellerId',
         views: {
@@ -88,8 +88,7 @@
     // })
   });
 
-  shop.controller('CategoryController', ['$scope', '$state', 'shopApi',
-    function ($scope, $state, shopApi) {
+  shop.controller('CategoryController', function ($scope, $state, shopApi) {
       $scope.categoryObj = {};
       $scope.categories = [];
       $scope.subCategories = [];
@@ -123,10 +122,9 @@
       $scope.navToProductList = function(categoryId) {
         $state.go('tab.products', {categoryId: categoryId});
       };
-  }]) // end of CategoryController
+  }) // end of CategoryController
 
-  .controller('ShopController', ['$scope', '$state', '$stateParams', '$ionicModal', 'shopApi', 
-    function ($scope, $state, $stateParams, $ionicModal, shopApi) {
+  .controller('ShopController', function ($scope, $state, $stateParams, $ionicModal, shopApi) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -134,6 +132,8 @@
     //
     //$scope.$on('$ionicView.enter', function(e) {
     //});
+    
+
     $scope.products = [];
     $scope.page = 1;
     $scope.categoryId = $stateParams.categoryId;
@@ -296,14 +296,15 @@
     // $scope.remove = function(chat) {
     //   Chats.remove(chat);
     // };
-  }]) // end of ShopController
+  }) // end of ShopController
   
   /*
    * ProductDetailController
    */
   .controller('ProductDetailController', 
-              ['$scope', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading','shopApi',  'cartApi', '$state',                             
+              ['$scope', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading','shopApi',  'cartApi', '$state', 'tabStateService',                            
     function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading,shopApi, cartApi, $state){
+
       $scope.productId = $stateParams.productId;
       $scope.product = {};
       $scope.showSpecModal = showSpecModal;

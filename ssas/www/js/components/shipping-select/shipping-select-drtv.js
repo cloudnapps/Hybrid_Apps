@@ -12,17 +12,17 @@ angular.module('components')
           scope.ngModel = ctrl.$viewValue;
         };
 
-        scope.showShippingListModal = function (){
-          var shippingList = scope.$parent.$eval(attrs.shippingSelect);
+        scope.pick = function (){
+          var items = scope.$parent.$eval(attrs.shippingSelect);
           var ngModel = ctrl.$viewValue;
-          angular.forEach(shippingList, function (shipping) {
-            if(shipping.id === ngModel.id) {
-              ngModel = shipping;
+          angular.forEach(items, function (item) {
+            if(item.id === ngModel.id) {
+              ngModel = item;
             }
           });
 
           $ionicModal.fromTemplateUrl('templates/components/shipping-select-modal.tpl.html', {
-            scope: angular.extend(scope.$new(true), {model: {selected: ngModel}, shippingList: shippingList})
+            scope: angular.extend(scope.$new(true), {model: {selected: ngModel}, items: items})
           }).then(function (modal) {
             modal.show();
             modal.scope.hideModal = function (){
@@ -37,7 +37,7 @@ angular.module('components')
           });
         };
 
-        element.on('click', scope.showShippingListModal);
+        element.on('click', scope.pick);
 
       }
     };

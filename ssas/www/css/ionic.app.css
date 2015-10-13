@@ -7712,7 +7712,7 @@ a.button {
 
 .quantity-input {
   width: 100%;
-  padding: 1px; }
+  padding: 2px 5px; }
   .quantity-input .inc-button, .quantity-input .dec-button {
     width: 40px;
     height: 32px;
@@ -7728,7 +7728,45 @@ a.button {
     padding: 5px;
     text-align: right; }
 
+.vertical-align-middle-container {
+  overflow: none;
+  text-decoration: none; }
+  .vertical-align-middle-container:hover {
+    text-decoration: none; }
+  .vertical-align-middle-container:before {
+    height: 100%;
+    width: 0px;
+    margin-left: -4px;
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle; }
+  .vertical-align-middle-container .vertical-align-middle {
+    display: inline-block;
+    vertical-align: middle; }
+
 .shipping-select.modal {
   bottom: 0;
   top: 20%;
   min-height: auto; }
+
+.cart .seller.item label.checkbox {
+  width: 42px; }
+.cart .good.item label.checkbox {
+  width: 42px; }
+.cart .good.item .item-checkbox {
+  padding-left: 40px; }
+.cart .good.item .item-content {
+  padding-right: 15px; }
+.cart .good.item .good-thumbnail {
+  display: block;
+  height: 80px; }
+  .cart .good.item .good-thumbnail img {
+    max-width: 80px;
+    max-height: 80px; }
+.cart .good.item .good-info {
+  display: inline-block;
+  padding: 0px; }
+.cart .good.item .row.good-price {
+  padding-left: 0px; }
+  .cart .good.item .row.good-price .price, .cart .good.item .row.good-price .quanity {
+    padding-left: 0px; }
