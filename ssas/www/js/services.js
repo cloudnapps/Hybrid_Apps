@@ -51,40 +51,85 @@ angular.module('starter.services', [])
   })
   .service('userService', function(){
     var currentUser = {};
+
     // 存在 key 获取此属性值, 不存在key返回 currentUser对象
     this.get = function(key){
       if (key) {
-        return currentUser[key];
+        return getItem(key);
       }
       return currentUser;
     };
-    // 保存整个 currentUser对象
-    this.saveUser = function(userObj){
-      if (typeof userObj !== 'object') {
-        return;
+    // 保存整个 currentUser对象 或 保存 属性值
+    this.set = function(key, value){
+      if (angular.isObject(key)) {
+        return setObj(key);
       }
+      setItem(key, value);
+    };
 
-      currentUser = userObj;
-      localStargeSave();
-    };
-    // 保存 属性值
-    this.saveItem = function(key, value){
-      currentUser[key] = value;
-      localStargeSave();
-    };
+    this.isLogin = function(){
+      return !!currentUser.token;
+    }
+
     // 从localStorage获取 currentUser对象, 用于app退出重新进入时
-    this.localStorageGet = function(){
+    this.initFromLocal = function(){
       try{
-        currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
       }
       catch(e) {
         console.log(e);
         currentUser = {};
-        localStargeSave();
+        saveToLocal();
       }
+      return currentUser;
     }
 
-    function localStargeSave(){
-      localStorage.setItem('currentUser', currentUser);
+    function getItem(key){
+      return currentUser[key];
     }
+
+    function setItem(key, value){
+      currentUser[key] = value;
+      saveToLocal();
+    }
+
+    function setObj(obj){
+      currentUser = obj;
+      saveToLocal();
+    }
+
+    function saveToLocal(){
+      try {
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      }
+      catch(e) {
+        console.log(e);
+        currentUser = {};
+        localStorage.setItem('currentUser', '');
+      }
+    }
+  })
+  .service('tabStateService', function($timeout, $ionicTabsDelegate, $state){
+    this.go = function(selectIndex, stateName, params, options){
+
+      if ($ionicTabsDelegate.selectedIndex() !== selectIndex) {
+        $ionicTabsDelegate.select(selectIndex);
+      }
+
+      if (!stateName) {
+        return $ionicTabsDelegate.select(selectIndex);
+      }
+      
+      $timeout(function(){
+        $state.go(stateName, params || {}, options || {});
+      }, 0);
+    };
+
+    this.tabIndex = {
+      home: 0,
+      shop: 1,
+      cart: 2,
+      member: 3
+    };
+    this.backIndex = -1;
   });

@@ -20,7 +20,7 @@
                 <input type="checkbox" ng-model="good.selected" ng-change="toggleGood(good)">
               </label>
               <div class="row">
-                <a class="good-thumbnail vertical-align-middle-container" href="#/tab/products/{{good.product_id}}">
+                <a class="good-thumbnail vertical-align-middle-container" ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: good.product_id})">
                   <img class="vertical-align-middle" ng-src="{{good.thumbnail}}">
                   <!-- <div class="vertical-align-middle" style="border:solid 1px; width:80px;height:80px;">test</div> -->
                 </a>

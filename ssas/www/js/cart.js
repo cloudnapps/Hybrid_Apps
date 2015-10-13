@@ -22,7 +22,15 @@
       })
 	}) // end of config
 
-	.controller('CartController', ['$scope', 'cartApi', function ($scope, cartApi) {
+	.controller('CartController', ['$scope', 'cartApi', 'tabStateService', 'userService', function ($scope, cartApi, tabStateService, userService) {
+
+    $scope.$on('$ionicView.beforeEnter', function(){
+      if(!userService.isLogin()) {
+        userService.backIndex =$scope.tabIndex.cart;
+        $scope.tabStateGo($scope.tabIndex.member);
+      }
+    });
+
     cartApi.getCart().success(function (responseData){
       var dataStatus = responseData.status;
       if (dataStatus === 0) {

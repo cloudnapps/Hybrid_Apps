@@ -1,5 +1,5 @@
 <div class="button-bar">
-  <button class="button" ui-sref="tab.product_shadow.seller_detail({sellerId: product.seller_id})">{{'product_goto_shop' | translate}}</button>
+  <button class="button" ng-click="tabStateGo(tabIndex.home, 'tab.seller_detail', {sellerId: product.seller_id})">{{'product_goto_shop' | translate}}</button>
   <button class="button" ng-click="addGoodsFavorite()">{{'good_fav' | translate}}</button>
   <button class="button button-energized" ng-click="addToCart()">{{'product_cart' | translate}}</button>
 </div>
