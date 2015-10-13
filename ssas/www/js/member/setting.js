@@ -59,17 +59,38 @@
     })
 
     .controller('ChangePwdCtrl', function ($scope, $state, $ionicPopup, SettingApi) {
-      var data = {};
+      $scope.pwdInfo = {};
 
-      SettingApi.modifyMemberPassword(data, function (result) {
-        var alertPopup = $ionicPopup.alert({
-          title: '修改密码',
-          template: result.msg
+      $scope.modify = function () {
+
+        if ($scope.pwdInfo.new !== $scope.pwdInfo.confirm) {
+          var errorPopup = $ionicPopup.alert({
+            title: '修改密码',
+            template: '两次输入的密码不一致'
+          });
+
+          errorPopup.then(function (res) {
+            console.log(res);
+          });
+        }
+
+        var data = {
+          newPassword: $scope.pwdInfo.new,
+          oldPassword: $scope.pwdInfo.old,
+          confirmPassword: $scope.pwdInfo.confirm
+        };
+
+        SettingApi.modifyMemberPassword(data, function (result) {
+          var alertPopup = $ionicPopup.alert({
+            title: '修改密码',
+            template: result.msg
+          });
+          
+          alertPopup.then(function (res) {
+            console.log(res);
+          });
         });
-        alertPopup.then(function (res) {
-          console.log(res);
-        });
-      });
+      };
     })
 
     .controller('IdCardsCtrl', function ($scope, $state, SettingApi) {

@@ -1,4 +1,30 @@
 <ion-view view-title="{{'me'|translate}}" hide-tabs="false">
+  <ion-nav-buttons side="right">
+    <div class="row row-center" style="padding: 0px;margin-right: 10px;" ng-click="openPopover($event)">
+      <div class="col col-center" style="padding: 0px;">
+        <a class="button button-clear">
+          <i class="icon ion-settings"></i>
+        </a>
+      </div>
+    </div>
+    <script id="findPopover.html" type="text/ng-template">
+      <ion-popover-view style="width: 80px; height: 100px;background:#ad1222;">
+        <ion-content>
+          <div class="row row-center" style="padding: 0px;">
+            <div class="col col-center" style="padding: 0px;text-align:center;">
+              <a class="button button-clear" style="color:#fff;" href="#/tab/setting/changepwd">修改密码</a>
+            </div>
+          </div>
+          <div class="row row-center" style="padding: 0px;">
+            <div class="col col-center" style="padding: 0px;text-align:center;">
+              <a class="button button-clear" style="color:#fff;" href="#/tab/signin">退出登录</a>
+            </div>
+          </div>
+        </ion-content>
+      </ion-popover-view>
+    </script>
+  </ion-nav-buttons>
+
   <ion-content>
     <div class="row"
          style="padding: 0;background-color: #fff;background-image: url('img/me.jpg');background-position: 5% 50%;background-repeat: no-repeat;background-size: cover;background-origin:content-box;width: 100%;height:100px;position: relative;">
