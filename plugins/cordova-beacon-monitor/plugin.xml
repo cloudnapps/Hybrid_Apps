@@ -11,6 +11,56 @@
     
     <!-- android -->
     <platform name="android">
+      <config-file target="config.xml" parent="/*">
+        <feature name="Monitor">
+          <param name="android-package" value="com.cloudnapps.plugins.BeaconMonitor" />
+        </feature>
+      </config-file>
+      
+      <config-file target="AndroidManifest.xml" parent="/*">
+        <uses-permission android:name="android.permission.INTERNET" />        
+        <uses-permission android:name="android.permission.BLUETOOTH" />
+        <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />            
+        <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+      </config-file>
+      
+      <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <activity android:name="com.cloudnapps.plugins.CampaignActivity"
+                  android:screenOrientation="sensorPortrait"
+                  android:parentActivityName=".MainActivity">
+          <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>
+        <service android:name="com.cloudnapps.plugins.BeaconMonitorService"></service>
+        <service
+            android:name="org.altbeacon.beacon.service.BeaconService"
+            android:enabled="true"
+            android:exported="false"
+            android:isolatedProcess="false"
+            android:label="beacon" />
+        <service
+            android:name="org.altbeacon.beacon.BeaconIntentProcessor"
+            android:enabled="true"
+            android:exported="false" />
+        <service android:name="com.cloudnapps.beacon.OpenUDID.OpenUDIDService">
+            <intent-filter>
+                <action android:name="org.OpenUDID.GETUDID" />
+            </intent-filter>
+        </service>
+      </config-file>
+      
+      
+      <source-file src="src/android/BeaconMonitor.java" target-dir="src/com/cloudnapps/plugins" />
+      <source-file src="src/android/BeaconMonitorService.java" target-dir="src/com/cloudnapps/plugins" />
+      <source-file src="src/android/CampaignActivity.java" target-dir="src/com/cloudnapps/plugins" />
+      <source-file src="src/android/CampaignFragment.java" target-dir="src/com/cloudnapps/plugins" />
+      <source-file src="src/android/res/layout/activity_campaign.xml" target-dir="res/layout" />
+      <source-file src="src/android/res/layout/fragment_campaign.xml" target-dir="res/layout" />
+      <source-file src="libs/android/android-async-http-1.4.6.jar" target-dir="libs"/>
+      <source-file src="libs/android/android-beacon-library-2.1.4.jar" target-dir="libs"/>
+      <source-file src="libs/android/beacon-library-1.1.10.jar" target-dir="libs"/>
+      <source-file src="libs/android/gson-2.3.1.jar" target-dir="libs"/>
     </platform>
     
     <!-- ios -->
