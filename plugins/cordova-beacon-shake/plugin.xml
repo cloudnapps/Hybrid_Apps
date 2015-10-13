@@ -8,9 +8,43 @@
     <js-module src="www/shake.js" name="shake">
         <clobbers target="shake" />
     </js-module>
+  
+  <dependency id="com.cloudnapps.plugins.beacon.monitor"
+              url="."
+              subdir="plugins/cordova-beacon-monitor"></dependency>
     
     <!-- android -->
     <platform name="android">
+      <config-file target="config.xml" parent="/*">
+        <feature name="Shake">
+          <param name="android-package" value="com.cloudnapps.plugins.Shake" />
+        </feature>
+      </config-file>
+      
+      <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <activity android:name="com.cloudnapps.plugins.ShakeActivity"
+                  android:screenOrientation="sensorPortrait"
+                  android:parentActivityName=".MainActivity">
+          <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>
+      </config-file>
+      
+      <config-file target="res/values/strings.xml" parent="/resources">
+        <string name="shaking">摇一摇</string>
+      </config-file>
+      
+      <source-file src="src/android/Shake.java" target-dir="src/com/cloudnapps/plugins"></source-file>
+      <source-file src="src/android/ShakeActivity.java" target-dir="src/com/cloudnapps/plugins"></source-file>
+      <source-file src="src/android/ShakeDetectingFragment.java" target-dir="src/com/cloudnapps/plugins"></source-file>      
+      
+      <source-file src="src/android/res/layout/activity_shake.xml" target-dir="res/layout"></source-file>
+      <source-file src="src/android/res/layout/fragment_shake.xml" target-dir="res/layout"></source-file>
+      <source-file src="src/android/res/drawable/animation_shaking.xml" target-dir="res/drawable"></source-file>
+      <source-file src="src/android/res/drawable/shaking_1.png" target-dir="res/drawable-hdpi"></source-file>
+      <source-file src="src/android/res/drawable/shaking_2.png" target-dir="res/drawable-hdpi"></source-file>
+      <source-file src="src/android/res/raw/shaking.m4a" target-dir="res/raw"></source-file>      
     </platform>
     
     <!-- ios -->
