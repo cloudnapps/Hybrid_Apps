@@ -62,7 +62,6 @@
       $scope.pwdInfo = {};
 
       $scope.modify = function () {
-
         if ($scope.pwdInfo.new !== $scope.pwdInfo.confirm) {
           var errorPopup = $ionicPopup.alert({
             title: '修改密码',
@@ -85,7 +84,7 @@
             title: '修改密码',
             template: result.msg
           });
-          
+
           alertPopup.then(function (res) {
             console.log(res);
           });
