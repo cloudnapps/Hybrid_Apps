@@ -19,7 +19,7 @@
         });
     })
     .controller('MemberCtrl', function ($scope, $state) {
-      $state.go('tab.login', {}, {reload: true});
+      //$state.go('tab.login', {}, {reload: true});
 
       $scope.gotoPage = function (url) {
         $state.go(url, {}, {reload: true});
