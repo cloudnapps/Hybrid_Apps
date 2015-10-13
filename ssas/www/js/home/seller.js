@@ -66,6 +66,21 @@
       };
 
       //test plugin features
+      $scope.scanBarcode = function ()
+      {
+          alert("test");
+          $cordovaBarcodeScanner.scan().then(function(imageData)
+          {
+           alert(imageData.text);
+           console.log("barcode format " + imageData.format);
+       },
+       function(error)
+       {
+           alert(error);
+           console.log("an error " + error);
+       });
+      }
+      
       $scope.openWeb = function () {
         alert("web");
         var options = {

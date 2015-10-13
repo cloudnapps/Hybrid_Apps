@@ -55,6 +55,10 @@
                         {
                             "xml": "<feature name=\"WeixinPay\"><param name=\"ios-package\" value=\"CDVWxpay\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -116,7 +120,7 @@
                     "AssetsLibrary.framework": [
                         {
                             "xml": false,
-                            "count": 1
+                            "count": 2
                         }
                     ],
                     "libz.dylib": [
@@ -140,7 +144,7 @@
                     "CoreGraphics.framework": [
                         {
                             "xml": false,
-                            "count": 2
+                            "count": 3
                         }
                     ],
                     "CoreMotion.framework": [
@@ -168,6 +172,42 @@
                         }
                     ],
                     "lib/ios/libc++.1.dylib": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "libiconv.dylib": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "AVFoundation.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "CoreVideo.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "QuartzCore.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "CoreImage.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "AudioToolbox.framework": [
                         {
                             "xml": false,
                             "count": 1
@@ -212,6 +252,9 @@
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         },
         "com.qdc.plugins.wxpay": {
+            "PACKAGE_NAME": "com.ionicframework.ssas835659"
+        },
+        "phonegap-plugin-barcodescanner": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         }
     },

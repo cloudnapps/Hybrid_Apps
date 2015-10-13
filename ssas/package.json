@@ -41,7 +41,8 @@
     {
       "locator": "../plugins/cordova-qdc-wxpay",
       "id": "com.qdc.plugins.wxpay"
-    }
+    },
+    "phonegap-plugin-barcodescanner"
   ],
   "cordovaPlatforms": [
     "ios",
