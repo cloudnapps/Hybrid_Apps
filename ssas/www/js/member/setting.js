@@ -17,8 +17,26 @@
             }
           }
         })
-        .state('tab.settings_changepwd', {
-          url: '/setting/changepwd',
+        .state('tab.settings.gender', {
+          url: '/gender',
+          views: {
+            'tab-member': {
+              templateUrl: 'templates/member/setting-gender.html',
+              controller: 'SettingCtrl'
+            }
+          }
+        })
+        .state('tab.settings.birthday', {
+          url: '/birthday',
+          views: {
+            'tab-member': {
+              templateUrl: 'templates/member/setting-birthday.html',
+              controller: 'SettingCtrl'
+            }
+          }
+        })
+        .state('tab.settings.changepwd', {
+          url: '/changepwd',
           views: {
             'tab-member': {
               templateUrl: 'templates/member/setting-changepwd.html',
@@ -46,15 +64,31 @@
         });
     })
 
-    .controller('SettingCtrl', function ($scope, $state, SettingApi) {
+    .controller('SettingCtrl', function ($scope, $state, $ionicActionSheet, SettingApi) {
       $scope.item = {};
 
       SettingApi.getMemberSetting(function (result) {
         $scope.item = result.data;
       });
 
-      $scope.modifyPassword = function () {
-        $state.go('tab.settings_changepwd', {}, {reload: true});
+      $scope.goPage = function (url) {
+        $state.go(url, {}, {reload: true});
+      };
+
+      $scope.birthdayInfo = {};
+      $scope.birthdayInfo.years = [];
+      for (var i = 1900; i < 2010; i++) {
+        $scope.birthdayInfo.years.push(i);
+      }
+
+      $scope.birthdayInfo.months = [];
+      for (var i = 1; i < 13; i++) {
+        $scope.birthdayInfo.months.push(i);
+      }
+
+      $scope.birthdayInfo.days = [];
+      for (var i = 1; i < 32; i++) {
+        $scope.birthdayInfo.days.push(i);
       }
     })
 

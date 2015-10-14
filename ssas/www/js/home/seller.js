@@ -23,7 +23,7 @@
         })
     }) // end of config
 
-    .controller('SellerListController', function ($scope, $state, $cordovaInAppBrowser, SellerApi) {
+    .controller('SellerListController', function ($scope, $state, $stateParams, $cordovaInAppBrowser, SellerApi) {
       $scope.items = [];
 
       $scope.init = function () {
@@ -65,22 +65,28 @@
         $state.go("tab.seller_detail", {sellerId: item.seller_id}, {reload: true});
       };
 
+      $scope.search = function(){
+        $scope.filter = {
+          keywords: $stateParams.keywords
+        };
+        $scope.filter.keywords = $scope.keywords.value;
+        clearData(true);
+        $scope.getProducts();
+      };
+
       //test plugin features
-      $scope.scanBarcode = function ()
-      {
-          alert("test");
-          $cordovaBarcodeScanner.scan().then(function(imageData)
-          {
-           alert(imageData.text);
-           console.log("barcode format " + imageData.format);
-       },
-       function(error)
-       {
-           alert(error);
-           console.log("an error " + error);
-       });
-      }
-      
+      $scope.scanBarcode = function () {
+        alert("test");
+        $cordovaBarcodeScanner.scan().then(function (imageData) {
+            alert(imageData.text);
+            console.log("barcode format " + imageData.format);
+          },
+          function (error) {
+            alert(error);
+            console.log("an error " + error);
+          });
+      };
+
       $scope.openWeb = function () {
         alert("web");
         var options = {
@@ -146,19 +152,19 @@
           function (cb_failure) {
             alert(cb_failure);
           });
-      }
+      };
 
       $scope.showMap = function () {
         alert("navi");
 
         navi.showMapNavigator("07550002F0110050", "1");
-      }
+      };
 
       $scope.shake = function () {
         alert("shake");
 
         shake.shakeByBeacon();
-      }
+      };
 
       $scope.monitor = function () {
         alert("monitor");

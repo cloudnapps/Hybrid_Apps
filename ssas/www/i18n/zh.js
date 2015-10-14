@@ -71,7 +71,7 @@ var translations_zh = {
     gold_list: '金币记录',
 
     //setting
-    settng_title: '我的信息',
+    settng_title: '个人资料',
     idcard_title: '身份证列表',
     idcard_addbtn: '添加身份证',
     idcard_addtitle: '新建身份证',
