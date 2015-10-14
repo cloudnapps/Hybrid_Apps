@@ -1,4 +1,5 @@
 /* Empty. Add your own CSS if you like */
+
 hr {
   border-width: 0 0 1px 0;
 }
@@ -11,6 +12,7 @@ hr {
 .product .slider {
   height: 200px;
 }
+
 .product .slider-slide {
   text-align: center;
 }
@@ -26,17 +28,18 @@ hr {
   height: 100%;
 }
 
-.col-style{
-	text-align:center;
-	margin:1em 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+.col-style {
+  text-align: center;
+  margin: 1em 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.click-assertive{
-	border-color: #e42112;
+
+.click-assertive {
+  border-color: #e42112;
   background-color: #ef473a;
-  color: #fff; 
+  color: #fff;
 }
 
 .clear-search {
@@ -60,7 +63,6 @@ hr {
   top: 20%;
   min-height: auto;
 }
-
 
 .modal-backdrop.active {
   background-color: rgba(0, 0, 0, 0.5) !important;
@@ -120,4 +122,24 @@ hr {
   padding-bottom: 20px;
   font-size: 16px;
   color: #4a4b4d;
+}
+
+.col-30 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 30%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 30%;
+  -ms-flex: 0 0 30%;
+  flex: 0 0 30%;
+  max-width: 30%;
+}
+
+.col-40 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 40%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 40%;
+  -ms-flex: 0 0 40%;
+  flex: 0 0 40%;
+  max-width: 40%;
 }

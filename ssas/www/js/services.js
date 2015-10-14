@@ -110,6 +110,14 @@ angular.module('starter.services', [])
     }
   })
   .service('tabStateService', function($timeout, $ionicTabsDelegate, $state){
+    /**
+     * 跨tab页面跳转
+     * @param  {[type]} selectIndex [tabIndex.home, tabIndex.shop, tabIndex.cart, tabIndex.member]
+     * @param  {[type]} stateName   [ui.router的 stateName]
+     * @param  {[type]} params      [ui.router的 params]
+     * @param  {[type]} options     [ui.router的 options]
+     * @return {[type]}             [undefined]
+     */
     this.go = function(selectIndex, stateName, params, options){     
       if ($ionicTabsDelegate.selectedIndex() !== selectIndex) {
         $timeout(function(){

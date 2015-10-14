@@ -71,13 +71,13 @@
 
             userService.set(currentUser);
             if (userService.backIndex === -1) {
-              $scope.tabStateGo($scope.tabIndex.member);
               $ionicHistory.goBack();
+              $scope.tabStateGo($scope.tabIndex.member);
               userService.backIndex = -1;
             }
             else {
-              $scope.tabStateGo(userService.backIndex);
               $ionicHistory.goBack();
+              $scope.tabStateGo(userService.backIndex);
               userService.backIndex = -1;
             }
           }
