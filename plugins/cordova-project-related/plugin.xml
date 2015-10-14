@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.cloudnapps.project.related"
+    version="1.0.0">
+    <name>Settings</name>
+    
+    <!-- android -->
+    <platform name="android">
+        
+    </platform>
+    
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="*-Info.plist" parent="CFBundleDisplayName">
+            前海周大福
+        </config-file>
+        <resource-file src="src/MapResource.bundle" />
+    </platform>
+</plugin>

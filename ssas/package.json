@@ -23,10 +23,6 @@
     "cordova-plugin-inappbrowser",
     "cordova-plugin-globalization",
     {
-      "locator": "../plugins/cordova-beacon-navi",
-      "id": "com.plugins.beacon.navi"
-    },
-    {
       "locator": "../plugins/cordova-beacon-monitor",
       "id": "com.cloudnapps.plugins.beacon.camonitor"
     },
@@ -42,10 +38,18 @@
       "locator": "../plugins/cordova-qdc-wxpay",
       "id": "com.qdc.plugins.wxpay"
     },
-    "phonegap-plugin-barcodescanner"
+    "phonegap-plugin-barcodescanner",
+    {
+      "locator": "../plugins/cordova-beacon-navi",
+      "id": "com.plugins.beacon.navi"
+    },
+    {
+      "locator": "../plugins/cordova-project-related",
+      "id": "com.cloudnapps.project.related"
+    }
   ],
   "cordovaPlatforms": [
-    "ios",
-    "android"
+    "android",
+    "ios"
   ]
 }

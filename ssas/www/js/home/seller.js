@@ -23,7 +23,7 @@
         })
     }) // end of config
 
-    .controller('SellerListController', function ($scope, $state, $stateParams, $cordovaInAppBrowser, SellerApi) {
+    .controller('SellerListController', function ($scope, $state, $stateParams, $cordovaInAppBrowser, $cordovaBarcodeScanner, SellerApi) {
       $scope.items = [];
 
       $scope.init = function () {
@@ -76,7 +76,7 @@
 
       //test plugin features
       $scope.scanBarcode = function () {
-        alert("test");
+        alert("barcode");
         $cordovaBarcodeScanner.scan().then(function (imageData) {
             alert(imageData.text);
             console.log("barcode format " + imageData.format);

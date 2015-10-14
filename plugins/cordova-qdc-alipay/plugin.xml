@@ -52,7 +52,7 @@
           <string>alipay</string>
           <key>CFBundleURLSchemes</key>
           <array>
-            <string>qdcalipay</string>
+            <string>zdfalipay</string>
           </array>
         </dict>
       </array>

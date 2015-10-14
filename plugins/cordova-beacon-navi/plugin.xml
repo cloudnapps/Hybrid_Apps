@@ -26,7 +26,12 @@
 
       <config-file target="AndroidManifest.xml" parent="/manifest/application">
         <activity android:name="com.cloudnapps.plugins.map.MapActivity"
-          android:screenOrientation="sensorPortrait"></activity>          
+                  android:screenOrientation="sensorPortrait"
+                  android:parentActivityName=".MainActivity">
+          <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>      
         <service android:name="com.ty.locationengine.ibeacon.BeaconService"></service>
       </config-file>
 
@@ -139,16 +144,12 @@
         <resource-file src="src/ios/dropDownList/down_dark.png" />
         <header-file src="src/ios/sphereMenu/SphereMenu.h" />
         <source-file src="src/ios/sphereMenu/SphereMenu.m" />
-        <resource-file src="src/MapResource.bundle" />
-        <resource-file src="src/ios/locationArrow.png" />
-        <resource-file src="src/ios/nav_exit.png" />
-        <resource-file src="src/ios/start.png" />
-        <resource-file src="src/ios/end.png" />
+        <resource-file src="src/navi.xcassets" />
         <resource-file src="src/ios/start_left.png" />
         <resource-file src="src/ios/end_right.png" />
 
-        <!--framework src="libs/ios/ArcGIS.framework" custom="true" />
-        <framework src="libs/ios/libgeos.a" custom="true" / -->
+        <framework src="libs/ios/ArcGIS.framework" custom="true" />
+        <source-file src="libs/ios/libgeos.a" framework="true" />
         <framework src="libs/ios/TYLocationEngine.framework" custom="true" />
         <framework src="libs/ios/TYMapData.framework" custom="true" />
         <framework src="libs/ios/TYMapSDK.framework" custom="true" />

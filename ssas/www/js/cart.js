@@ -4,6 +4,7 @@
     $stateProvider
       .state('tab.cart', {
         url: '/cart',
+        cache: false,
         views: {
           'tab-cart': {
             templateUrl: 'templates/cart/cart-index.html',
@@ -29,6 +30,16 @@
           }
         }
       })
+      .state('tab.order-payed', {
+        url: '/order-payed',
+        views: {
+          'tab-cart': {
+            templateUrl: 'templates/cart/order-payed.html',
+            controller: 'OrderPayedController'
+          }
+        }
+      })
+
 	}) // end of config
 
 	.controller('CartController', ['$scope', 'cartApi', 'tabStateService', 'userService', function ($scope, cartApi, tabStateService, userService) {
@@ -44,6 +55,7 @@
       var dataStatus = responseData.status;
       if (dataStatus === 0) {
         $scope.cart = responseData.data;
+        $scope.cartLoaded = true;
       }
     });
     $scope.toggleSeller = function (seller) {
@@ -99,14 +111,59 @@
       $rootScope.confirmedCart = $scope.cart;
     };
   }])
-  .controller('CartPaymentController', ['$scope', '$ionicModal', 'cartApi', function ($scope, $ionicModal, cartApi) {
+  .controller('CartPaymentController', ['$rootScope', '$scope', '$state', '$ionicModal', '$ionicPopup', 'cartApi', 'orderApi', 'paymentApi', function ($rootScope, $scope, $state, $ionicModal, $ionicPopup, cartApi, orderApi, paymentApi) {
+    $scope.cart = $rootScope.confirmedCart;
+    delete $rootScope.confirmedCart;
+
     $scope.pay = function (payment) {
-      cartApi.createOrder($scope.confirmedCart).success(function (responseData){
-        var dataStatus = responseData.status;
-        if (dataStatus === 0) {
-          console.log(responseData.data);
+      cartApi.createOrder($scope.cart)
+      .success(function (responseData){
+        if (responseData.status !== 0) {
+          $ionicPopup.alert({
+            title: '未能创建订单',
+            template: responseData.msg
+          });
+
+          return;
         }
+
+        var order = responseData.data;
+        $rootScope.justCreatedOrder = order;
+        orderApi.getPayInfo(order)
+        .success(function (responseData){
+          if (responseData.status !== 0) {
+            $ionicPopup.alert({
+              title: '未能获取支付信息',
+              template: responseData.msg
+            });
+
+            return;
+          }
+
+          paymentApi.pay(responseData.data)
+          .then(function (data) {
+            alert(data);
+            $state.go('tab.order-payed');
+          }, function (err) {
+            $ionicPopup.alert({
+              title: '支付失败',
+              template: err
+            });
+          });
+        });
       });
     };
+  }])
+  .controller('OrderPayedController', ['$rootScope', '$scope', 'orderApi', function ($rootScope, $scope, orderApi) {
+    var justCreatedOrder = [$rootScope.justCreatedOrder];
+    delete $rootScope.justCreatedOrder;
+
+    // orderApi.query({page: 1, filter: {}}).success(function (responseData){
+    //   var dataStatus = responseData.status;
+    //   if (dataStatus === 0) {
+    //     $scope.cart = responseData.data;
+    //     $scope.cartLoaded = true;
+    //   }
+    // });
   }])
 })();

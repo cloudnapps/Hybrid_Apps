@@ -3,16 +3,23 @@ package com.cloudnapps.plugins.map;
 import java.io.File;
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import android.support.v4.app.ActivityCompat;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.esri.android.map.GraphicsLayer;
 import com.esri.core.geometry.Envelope;
@@ -34,9 +41,8 @@ import com.ty.mapsdk.TYRouteManager;
 import com.ty.mapsdk.TYRoutePart;
 import com.ty.mapsdk.TYRouteResult;
 
-
 public class MapActivity extends Activity
-        implements TYLocationManager.TYLocationManagerListener, TYMapView.TYMapViewListenser, TYRouteManager.TYRouteManagerListener {
+        implements TYLocationManager.TYLocationManagerListener, TYMapView.TYMapViewListenser, TYRouteManager.TYRouteManagerListener, ActionBar.OnNavigationListener {
 
     private static final String TAG = "MapActivity";
 
@@ -71,6 +77,8 @@ public class MapActivity extends Activity
     private boolean mIsRouting = false;
     private TYRoutePart mCurrentRoutePart;
     private List<TYDirectionalHint> mRouteGuides;
+    private ActionBar mActionBar;
+    private FloorAdapter mActionBarFloorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +92,23 @@ public class MapActivity extends Activity
 
         copyMapFiles();
 
+        initParams();
+
+        mapView = (TYMapView) findViewById(getResources().getIdentifier("map", "id", getPackageName()));
+
+        initMapView();
+        initSymbols();
+        initLocationManager();
+        initRouteManager();
+
+        mActionBar = getActionBar();
+        mActionBar.setDisplayShowTitleEnabled(false);
+        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        mActionBarFloorAdapter = new FloorAdapter(this);
+        mActionBar.setListNavigationCallbacks(mActionBarFloorAdapter, this);
+    }
+
+    private void initParams() {
         Intent intent = getIntent();
         cityId = getIntent().getStringExtra("cityID");
         buildingId = intent.getStringExtra("buildingID");
@@ -92,15 +117,6 @@ public class MapActivity extends Activity
         beaconUUID = intent.getStringExtra("beaconUUID");
         poi_id = intent.getStringExtra("poiID");
         floorNum = intent.getStringExtra("floorNum");
-
-        mapView = (TYMapView) findViewById(getResources().getIdentifier("map", "id", getPackageName()));
-
-        initMapView();
-        initSymbols();
-
-        initLocationManager();
-
-        initRouteManager();
     }
 
     private void initRouteManager() {
@@ -336,5 +352,51 @@ public class MapActivity extends Activity
 //        mapView.showRouteStartSymbolOnCurrentFloor(mRouteBeginPoint);
 
         routeManager.requestRoute(mRouteBeginPoint, mRouteTargetPoint);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+        currentMapInfo = allMapInfos.get(itemPosition);
+        mapView.setFloor(currentMapInfo);
+        return true;
+    }
+
+    protected class FloorAdapter extends ArrayAdapter<TYMapInfo> {
+        public FloorAdapter(Context context) {
+            super(context, android.R.layout.simple_spinner_item, android.R.id.text1);
+        }
+
+        @Override
+        public TYMapInfo getItem(int position) {
+            return allMapInfos.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            if (allMapInfos == null) {
+                return 0;
+            }
+            return allMapInfos.size();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View v =  super.getView(position, convertView, parent);
+            TextView tv = (TextView) v.findViewById(android.R.id.text1);
+            tv.setText(getItem(position).getFloorName());
+            return v;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            View v = convertView;
+            if (v == null) {
+                v = LayoutInflater.from(parent.getContext())
+                        .inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
+            }
+            TextView tv = (TextView) v.findViewById(android.R.id.text1);
+            tv.setText(getItem(position).getFloorName());
+            return v;
+        }
     }
 }
