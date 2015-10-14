@@ -13,7 +13,7 @@
 #import "DropDownListView.h"
 #import "ShopTYMapViewController.h"
 
-@interface NaviTYMapViewController () <TYLocationManagerDelegate, TYRouteManagerDelegate, TYMapViewDelegate, DropDownChooseDelegate,DropDownChooseDataSource, SphereMenuDelegate>
+@interface NaviTYMapViewController () <TYLocationManagerDelegate, TYOfflineRouteManagerDelegate, TYMapViewDelegate, DropDownChooseDelegate,DropDownChooseDataSource, SphereMenuDelegate>
 {
     DropDownListView *_menu;
     
@@ -23,7 +23,7 @@
     TYPictureMarkerSymbol *locationSymbol;
     
     // 路径管理器
-    TYRouteManager *routeManager;
+    TYOfflineRouteManager *routeManager;
     
     TYPoint *currentPoint;
     
@@ -292,7 +292,8 @@
 - (void) initRouteSettings
 {
     // 初始化路径管理器，并设置代理
-    routeManager = [TYRouteManager routeManagerWithBuilding:self.currentBuilding credential:[TYMapEnvironment defaultCredential] MapInfos:self.allMapInfos];
+    //routeManager = [TYRouteManager routeManagerWithBuilding:self.currentBuilding credential:[TYMapEnvironment defaultCredential] MapInfos:self.allMapInfos];
+    routeManager = [TYOfflineRouteManager routeManagerWithBuilding:self.currentBuilding MapInfos:self.allMapInfos];
     routeManager.delegate = self;
     
     startSymbol = [TYPictureMarkerSymbol pictureMarkerSymbolWithImageNamed:@"start.png"];
@@ -369,6 +370,8 @@
 - (void)TYLocationManagerdidFailUpdateLocation:(TYLocationManager *)manager
 {
     [self.mapView removeLocation];
+    if(endPoi == nil || startPoi == nil)
+        self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 - (void)TYLocationManager:(TYLocationManager *)manager didUpdateDeviceHeading:(double)newHeading
@@ -470,16 +473,7 @@
     }
 }
 
-- (void)routeManagerDidRetrieveDefaultRouteTaskParameters:(TYRouteManager *)xManager
-{
-    
-}
-
-- (void)routeManager:(TYRouteManager *)routeManager didFailRetrieveDefaultRouteTaskParametersWithError:(NSError *)error
-{
-}
-
-- (void)routeManager:(TYRouteManager *)routeManager didSolveRouteWithResult:(TYRouteResult *)rs
+- (void)offlineRouteManager:(TYOfflineRouteManager *)routeManager didSolveRouteWithResult:(TYRouteResult *)rs OriginalLine:(AGSPolyline *)line
 {
     routeResult = rs;
     
@@ -493,7 +487,7 @@
     [self.mapView showRouteResultOnCurrentFloor];
 }
 
-- (void) routeManager:(TYRouteManager *)routeManager didFailSolveRouteWithError:(NSError *)error
+- (void)offlineRouteManager:(TYOfflineRouteManager *)routeManager didFailSolveRouteWithError:(NSError *)error
 {
     NSLog(@"================%@", error.description);
 }

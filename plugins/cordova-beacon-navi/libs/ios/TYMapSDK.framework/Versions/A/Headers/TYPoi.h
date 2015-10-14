@@ -19,7 +19,7 @@ typedef enum
 } POI_LAYER;
 
 /**
- *  @brief POI类：用于表示POI相关数据，主要包含POI地理信息，及相应POI ID
+ *  POI类：用于表示POI相关数据，主要包含POI地理信息，及相应POI ID
  */
 @interface TYPoi : NSObject
 

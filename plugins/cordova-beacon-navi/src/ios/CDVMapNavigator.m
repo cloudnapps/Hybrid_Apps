@@ -27,8 +27,7 @@
 - (void) pluginInitialize
 {
     NSString *resourceBundle = [[NSBundle mainBundle] pathForResource:@"MapResource" ofType:@"bundle"];
-    NSString *rootDir = [[NSBundle bundleWithPath:resourceBundle] pathForResource:@"MapResource" ofType:nil];
-    [TYMapEnvironment setRootDirectoryForMapFiles:rootDir];
+    [TYMapEnvironment setRootDirectoryForMapFiles:resourceBundle];
     
     [TYMapEnvironment initMapEnvironment];
 }

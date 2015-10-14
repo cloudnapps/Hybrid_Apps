@@ -32,7 +32,8 @@
 #import <TYMapSDK/TYGeometryEngine.h>
 
 #import <TYMapSDK/TYRouteManager.h>
-//#import <TYMapSDK/TYRoutePointConverter.h>
+#import <TYMapSDK/TYOfflineRouteManager.h>
+
 #import <TYMapSDK/TYRouteResult.h>
 #import <TYMapSDK/TYDirectionalHint.h>
 

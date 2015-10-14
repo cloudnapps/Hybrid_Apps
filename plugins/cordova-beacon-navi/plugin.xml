@@ -111,7 +111,7 @@
     <!-- ios -->
     <platform name="ios">
         <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-            <string>>始终利用位置服务检测周边的iBeacon，提醒用户关心的内容。</string>
+            <string>始终利用位置服务检测周边的iBeacon，提醒用户关心的内容。</string>
         </config-file>
         <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
             <dict>
@@ -146,7 +146,9 @@
         <resource-file src="src/ios/end.png" />
         <resource-file src="src/ios/start_left.png" />
         <resource-file src="src/ios/end_right.png" />
-<!--        <framework src="libs/ios/ArcGIS.framework" custom="true" />-->
+
+        <!--framework src="libs/ios/ArcGIS.framework" custom="true" />
+        <framework src="libs/ios/libgeos.a" custom="true" / -->
         <framework src="libs/ios/TYLocationEngine.framework" custom="true" />
         <framework src="libs/ios/TYMapData.framework" custom="true" />
         <framework src="libs/ios/TYMapSDK.framework" custom="true" />
