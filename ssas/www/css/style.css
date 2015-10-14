@@ -124,6 +124,48 @@ hr {
   color: #4a4b4d;
 }
 
+.products-list {
+  float: left;
+  padding: 10px 2px 10px 10px;
+  border: none;
+}
+
+.products-list .detail {
+  border: 1px solid #ccc;
+}
+
+.products-list img {
+  height: 200px;
+}
+
+.products-list .name {
+  font-size: 14px;
+  height: 2.7em;
+  overflow: hidden;
+}
+
+.products-list .price {
+  position: relative;
+}
+
+.products-list .nature {
+  color: white;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  font-size: 10px;
+  padding: 0 3px;
+}
+
+.products-list .nature.energized {
+  background-color: #FD8B24;
+}
+
+.products-list .nature.calm {
+  background-color: #689FBC;
+}
+
 .col-30 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 30%;
