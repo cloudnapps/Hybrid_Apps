@@ -1,72 +1,92 @@
 <ion-view view-title="订单详情" hide-tabs="true">
-  <ion-content class="padding">
-    <div class="row">
-      <div class="col">
+  <ion-content>
+    <div class="row" style="padding: 10px 5px 10px 15px;">
+      <div class="col" style="color: #4a4b4d;">
         {{item.order_title.status}}
       </div>
     </div>
 
-    <div class="row">
+    <hr style="margin: 0;height:1px;border:none;border-top:10px solid #f2f2f2;"/>
+
+    <div class="row" style="padding: 10px 5px 10px 15px;">
       <div class="col">
-        收件人：{{item.consignee.name}} 电话：{{item.consignee.mobile}}
+        <p style="margin-bottom: 13px;color: #4a4b4d;">收件人：{{item.consignee.name}}<span style="float: right;" ng-if="item.mobile">电话：{{item.consignee.mobile}}</span></p>
+        <div class="row" style="padding: 0;">
+          <div class="col col-25 col-center" style="padding: 0;">
+            <span style="font-size: 14px;color: #4a4b4d;">收件地址：</span>
+          </div>
+          <div class="col col-75 col-center" style="word-break: break-all;max-width: 18em;white-space: normal;">
+            <span style="font-size: 14px;color: #4a4b4d;">{{item.consignee.addr}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <hr style="margin: 0;height:1px;border:none;border-top:10px solid #f2f2f2;"/>
+    <div class="row" style="padding:10px;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #f2f2f2;">
+      <div class="col col-75 col-center" style="height: 100%; padding: 0px">
+        <p style="padding: 0px;color: #4a4b4d;margin: 0;">{{item.order_title.seller_name}}</p>
+      </div>
+      <!-- <div class="col col-25" style="height: 100%; padding: 0px" align="right">
+        <p style="padding: 0px; height: 100%;">{{item.status}}</p>
+      </div> -->
+    </div>
+
+    <ion-list style="border: 1px solid #ddd;">
+      <ion-item ng-repeat="product in item.products" style="border-top: none;padding: 10px 16px;">
+        <div class="row" style="margin:0;padding: 0 15px 10px 0;">
+          <div class="col col-20" style="padding: 0;">
+            <img style="width: 100%;height: 100%;" ng-src="{{product.url}}">
+          </div>
+          <div class="col col-80" style="padding: 0 0 0 10px;">
+            <p style="padding: 0px;margin-bottom: 25px;">{{product.name}}</p>
+            <p>
+              <span style="float: left;">{{product.price | currency:'￥'}}</span>
+              <span style="float: right;">x{{product.num}}</span>
+            </p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    
+    <div class="row" style="padding:10px;">
+      <div class="col col-75 col-center" style="color: #4a4b4d;padding: 0px">
+        运费：{{item.order_info.shipping}}
+      </div>
+      <div class="col col-25" style="color: #4a4b4d; padding: 0px;text-align: right;">
+        {{item.order_info.express_amount | currency:'￥'}}
+      </div>
+    </div>
+    
+    <div class="row" style="padding: 10px;">
+      <div class="col col-20 col-center" style="padding: 0;">
+        <span style="font-size: 14px;color: #4a4b4d;">留言：</span>
+      </div>
+      <div class="col col-80 col-center" style="word-break: break-all;max-width: 20em;white-space: normal;">
+        <span style="font-size: 14px;">{{item.order_tax.order_mark}}</span>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col">
-        地址：{{item.consignee.addr}}
-      </div>
-    </div>
+    <hr style="margin: 0;height:1px;border:none;border-top:10px solid #f2f2f2;"/>
 
     <div class="row">
-      <div class="col">
-        {{item.order_title.seller_name}}
-      </div>
-    </div>
-
-    <div class="list card">
-      <div class="item item-body">
-        <ion-list>
-          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="product in item.products"
-                    type="item-text-wrap">
-            <img ng-src="{{product.url}}">
-
-            <h2>{{product.name}}</h2>
-
-            <h2>{{product.price}} * {{product.num}}</h2>
-          </ion-item>
-        </ion-list>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        运费：{{item.order_info.shipping}} {{item.order_info.express_amount | currency:'￥'}}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        留言：{{item.order_tax.order_mark}}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
+      <div class="col" style="color: #4a4b4d;">
         贷款总计：{{item.order_info.item_amount | currency:'￥'}}
       </div>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col" style="color: #4a4b4d;">
         行邮税计：{{item.order_info.taxation_amount | currency:'￥'}}
       </div>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col" style="color: #4a4b4d;">
         运费总计：{{item.order_info.express_amount | currency:'￥'}}
       </div>
     </div>
 
     <div class="row">
-      <div class="col">
+      <div class="col" style="color: #4a4b4d;">
         订单实际支付：{{item.order_info.final_amount | currency:'￥'}}
       </div>
     </div>
