@@ -127,7 +127,7 @@
         }
         var order = responseData.data;
         $rootScope.justCreatedOrder = order;
-        orderApi.pay(order)
+        orderApi.getPayInfo(order)
         .success(function (responseData){
           if (responseData.status !== 0) {
             $ionicPopup.alert({
@@ -152,8 +152,16 @@
       });
     };
   }])
-  .controller('OrderPayedController', ['$rootScope', '$scope', function ($rootScope, $scope) {
-    $scope.orders = [$rootScope.justCreatedOrder];
+  .controller('OrderPayedController', ['$rootScope', '$scope', 'orderApi', function ($rootScope, $scope, orderApi) {
+    var justCreatedOrder = [$rootScope.justCreatedOrder];
     delete $rootScope.justCreatedOrder;
+
+    // orderApi.query({page: 1, filter: {}}).success(function (responseData){
+    //   var dataStatus = responseData.status;
+    //   if (dataStatus === 0) {
+    //     $scope.cart = responseData.data;
+    //     $scope.cartLoaded = true;
+    //   }
+    // });
   }])
 })();

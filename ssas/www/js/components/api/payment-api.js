@@ -57,12 +57,12 @@ angular.module('components')
           return payMethod(payment);
         }
         return $q.reject('不支持的支付方式');
-      }
+      };
 
       return {
         payByAlipay: payByAlipay,
         payByWechat: payByWechat,
-        pay
+        pay: pay
       };
 
     }]);
