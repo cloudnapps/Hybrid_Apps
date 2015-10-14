@@ -70,6 +70,9 @@
         else if (item.type === 'url') {
           $window.location.href = item.outurl;
         }
+        else if (item.type === 'product') {
+          $scope.tabStateGo($scope.tabIndex.shop, 'tab.product', {productId: item.id});
+        }
       };
 
       SellerApi.getSellerList(null, null, null, function (result) {
@@ -81,7 +84,6 @@
       ActivityApi.getActivityContent().then(function (result) {
         $scope.activityInfo = result.data.data;
       })
-
     }) // end of HomeController
 
     .controller('SigninController', function ($scope, $ionicPopup, PointApi) {
