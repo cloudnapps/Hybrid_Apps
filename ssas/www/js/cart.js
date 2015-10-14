@@ -12,11 +12,20 @@
         }
       })
       .state('tab.cart-checkout', {
-        url: '/cart-checkout',
+        url: '/cart-checkout?nature',
         views: {
           'tab-cart': {
             templateUrl: 'templates/cart/cart-checkout.html',
             controller: 'CartCheckoutController'
+          }
+        }
+      })
+      .state('tab.cart-payment', {
+        url: '/cart-payment',
+        views: {
+          'tab-cart': {
+            templateUrl: 'templates/cart/cart-payment.html',
+            controller: 'CartPaymentController'
           }
         }
       })
@@ -76,9 +85,9 @@
       });
     };
 	}]) // end of CartController
-  .controller('CartCheckoutController', ['$scope', '$ionicModal', 'cartApi', function ($scope, $ionicModal, cartApi) {
+  .controller('CartCheckoutController', ['$rootScope', '$scope', '$stateParams', '$ionicModal', 'cartApi', function ($rootScope, $scope, $stateParams, $ionicModal, cartApi) {
     $scope.checkout = function () {
-      cartApi.checkout($scope.cart).success(function (responseData){
+      cartApi.checkout($scope.cart, $stateParams.nature).success(function (responseData){
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
@@ -86,5 +95,18 @@
       });
     };
     $scope.checkout();
+    $scope.confirm = function () {
+      $rootScope.confirmedCart = $scope.cart;
+    };
+  }])
+  .controller('CartPaymentController', ['$scope', '$ionicModal', 'cartApi', function ($scope, $ionicModal, cartApi) {
+    $scope.pay = function (payment) {
+      cartApi.createOrder($scope.confirmedCart).success(function (responseData){
+        var dataStatus = responseData.status;
+        if (dataStatus === 0) {
+          console.log(responseData.data);
+        }
+      });
+    };
   }])
 })();

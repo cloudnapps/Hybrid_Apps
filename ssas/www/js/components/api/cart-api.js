@@ -8,6 +8,7 @@ angular.module('components')
         var data = {
           product_id: product.product_id,
           goods_id: product.goods_id,
+          num: 1,
           member_id: 13,
           token: '11b4f4bd44ee8814d41680dc753a75e4'
         };
@@ -101,7 +102,7 @@ angular.module('components')
         return request;
       };
 
-      var checkout = function (cart) {
+      var checkout = function (cart, nature) {
         var shipping, addr_id;
         if(cart) {
           shipping = [];
@@ -114,6 +115,7 @@ angular.module('components')
           shipping: shipping,
           addr_id: addr_id,
           member_id: 13,
+          nature: nature,
           token: '11b4f4bd44ee8814d41680dc753a75e4'
         };
 
@@ -127,13 +129,52 @@ angular.module('components')
 
         return request;
       };
+
+      var createOrder = function (cart) {
+        var shipping, addr_id, nature;
+
+        shipping = [];
+        angular.forEach(cart.aSelCart, function (seller) {
+          shipping.push({
+            seller_id: seller.seller_info.seller_id,
+            shipping_id: seller.def_shipping.id,
+            is_tax:false,
+            tax_company: '',
+            memo: seller.memo
+          });
+        });
+        addr_id = cart.def_addr.addr_id;
+        nature = cart.nature;
+
+        var data = {
+          shipping: shipping,
+          addr_id: addr_id,
+          payment: cart.def_payment.app_id,
+          card_id: cart.def_cardlist.card_id,
+          nature: cart.nature,
+          member_id: 13,
+          token: '11b4f4bd44ee8814d41680dc753a75e4'
+        };
+
+        var request = $http({
+          method: 'post',
+          url: apiEndpoint.url + '/order-create.html',
+          transformRequest: transformRequestAsFormPost,
+          data: data,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        });
+
+        return request;
+      };
+
       return {
         addToCart : addToCart,
         getCart: getCart,
         updateCart: updateCart,
         nocheck: nocheck,
         remove: remove,
-        checkout: checkout
+        checkout: checkout,
+        createOrder: createOrder
       };
 
     }]);
