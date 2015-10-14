@@ -18,12 +18,16 @@
   </ion-nav-title>
   <ion-content class="has-subheader">
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="product in products" type="item-text-wrap" ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: product.product_id})">
-        <img ng-src="{{product.image}}">
-        <h2>{{product.name}}</h2>
-        <p>{{product.price}}</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>        
-      </ion-item>
+     <div class="item item-body col-50 products-list" ng-repeat="product in products" type="item-text-wrap" ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: product.product_id})">
+        <div class="detail">
+          <img class="full-image" ng-src="{{product.image}}">
+          <div class="name padding-left">{{product.name}}</div>
+          <div class="price">
+            <span class="positive padding-left">{{product.price|currency:'￥'}}</span>
+            <span class="nature" ng-class="{calm: product.nature === 'bond', energized: product.nature !== 'bond'}">{{product.nature === 'bond' ? '保' : '直'}}</span>
+          </div>
+        </div>
+    </div>
     </ion-list>
     <ion-infinite-scroll
       ng-if="hasMore"
