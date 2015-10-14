@@ -99,12 +99,17 @@
       $rootScope.confirmedCart = $scope.cart;
     };
   }])
-  .controller('CartPaymentController', ['$scope', '$ionicModal', 'cartApi', function ($scope, $ionicModal, cartApi) {
+  .controller('CartPaymentController', ['$scope', '$ionicModal', 'cartApi', 'orderApi', function ($scope, $ionicModal, cartApi, orderApi) {
     $scope.pay = function (payment) {
       cartApi.createOrder($scope.confirmedCart).success(function (responseData){
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
-          console.log(responseData.data);
+          orderApi.pay(responseData.data).success(function (responseData){
+            var dataStatus = responseData.status;
+            if (dataStatus === 0) {
+              console.log(responseData.data);
+            }
+          });
         }
       });
     };
