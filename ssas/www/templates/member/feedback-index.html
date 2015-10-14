@@ -1,0 +1,22 @@
+<ion-nav-view name="tab-feedbacks">
+  <div class="bar bar-subheader">
+    <div class="tabs-striped tabs-color-assertive">
+      <div class="tabs">
+        <a class="tab-item" ui-sref="tab.feedbacks.returns">
+          {{'return_title' | translate}}
+        </a>
+        <a class="tab-item" ui-sref="tab.feedbacks.complaints">
+          {{'complaint_title'|translate}}
+        </a>
+      </div>
+    </div>
+  </div>
+  <ion-view>
+    <div class="bar bar-subheader">
+      <a title="{{'return_title' | translate}}" href="#/tab/feedbacks/returns"></a>
+      <a title="{{'complaint_title'|translate}}" href="#/tab/feedbacks/complaints"></a>
+    </div>
+    <ion-content class="has-subheader">
+    </ion-content>
+  </ion-view>
+</ion-nav-view>

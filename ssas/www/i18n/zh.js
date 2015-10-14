@@ -77,8 +77,9 @@ var translations_zh = {
     idcard_addtitle: '新建身份证',
 
     //return
-    return_title: '售后申请',
+    return_title: '退款退货',
     return_addbtn: '提交申请',
+    return_newbtn: '新建退款退货',
 
     good_category: '商品分类',
     good_fav: '收藏商品',
@@ -88,11 +89,11 @@ var translations_zh = {
     product_fav_shop: '收藏店铺',
 
     //complaint
-    complaint_title: '投诉建议',
+    complaint_title: '投诉与建议',
     complaint_addbtn: '提交',
     complaint_newbtn: '新建投诉与建议',
 
-    // cart
+    //cart
     submit_order: '提交订单',
     cart_checkout: '结算',
     cart_order_confirm: '订单核对',

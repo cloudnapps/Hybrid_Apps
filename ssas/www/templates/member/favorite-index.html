@@ -2,7 +2,7 @@
   <div class="bar bar-subheader">
     <div class="tabs-striped tabs-color-assertive">
       <div class="tabs">
-        <a class="tab-item active" ui-sref="tab.favorites.sellers">
+        <a class="tab-item" ui-sref="tab.favorites.sellers">
           {{'fav_sellers' | translate}}
         </a>
         <a class="tab-item" ui-sref="tab.favorites.goods">
@@ -12,6 +12,16 @@
     </div>
   </div>
   <ion-view>
+    <ion-nav-title>
+      <form ng-submit="search()">
+        <label class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="search" placeholder="Search" ng-model="keywords.value" style="height: 28px;">
+        </label>
+        <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
+      </form>
+    </ion-nav-title>
+
     <div class="bar bar-subheader">
       <a title="{{'fav_sellers'|translate}}" href="#/tab/favorites/sellers"></a>
       <a title="{{'fav_goods'|translate}}" href="#/tab/favorites/goods"></a>

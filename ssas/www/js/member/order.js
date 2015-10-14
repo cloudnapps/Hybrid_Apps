@@ -153,7 +153,7 @@
       };
 
       $scope.requestOrder = function (item) {
-        $state.go('tab.return_request', {orderId: item.order_id}, {reload: true});
+        $state.go('tab.feedbacks.returns', {orderId: item.order_id}, {reload: true});
       };
     })
 
@@ -332,7 +332,7 @@
       });
 
       $scope.requestOrder = function (item) {
-        $state.go('tab.return_request', {orderId: item.order_id}, {reload: true});
+        $state.go('tab.feedbacks.returns', {orderId: item.order_id}, {reload: true});
       };
     })
 

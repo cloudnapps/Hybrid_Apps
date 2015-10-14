@@ -8,28 +8,28 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('complaint_request', {
-          url: '/complaints/request',
+        .state('tab.feedbacks.complaint_request', {
+          url: '/complaint/request',
           views: {
-            'main-view': {
+            'tab-member': {
               templateUrl: 'templates/member/complaint-request.html',
               controller: 'ComplaintRequestCtrl'
             }
           }
         })
-        .state('tab.complaints', {
+        .state('tab.feedbacks.complaints', {
           url: '/complaints',
           views: {
-            'tab-member': {
+            'tab-feedbacks': {
               templateUrl: 'templates/member/complaint-list.html',
               controller: 'ComplaintListCtrl'
             }
           }
         })
-        .state('tab.complaint_detail', {
+        .state('tab.feedbacks.complaint_detail', {
           url: '/complaint/:oId',
           views: {
-            'tab-member': {
+            'tab-feedbacks': {
               templateUrl: 'templates/member/complaint-detail.html',
               controller: 'ComplaintDetailCtrl'
             }
@@ -83,12 +83,20 @@
       }
     })
 
-    .controller('ComplaintListCtrl', function ($scope, ComplaintApi) {
+    .controller('ComplaintListCtrl', function ($scope, $state, ComplaintApi) {
       $scope.items = [];
 
       ComplaintApi.getComplaintList(null, null, function (result) {
         $scope.items = result.data;
       });
+
+      $scope.goDetail = function (item) {
+        $state.go('tab.feedbacks.complaint_detail', {oId: item.oid}, {reload: true})
+      }
+
+      $scope.goRequest = function () {
+        $state.go('tab.feedbacks.return_request', {orderId: $stateParams.orderId}, {reload: true})
+      }
     })
 
     .controller('ComplaintDetailCtrl', function ($scope, $stateParams, ComplaintApi) {

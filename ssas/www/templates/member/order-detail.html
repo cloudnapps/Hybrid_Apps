@@ -70,5 +70,26 @@
         订单实际支付：{{item.order_info.final_amount | currency:'￥'}}
       </div>
     </div>
+
+    <div class="row" style="padding:10px;">
+      <div style="width: 100%;">
+        <button class="button button-energized"
+                style="font-size:12px;float:right;margin: 0 2px;min-height: 27px;line-height: 30px;padding: 0 18px;"
+                ng-if="item.pay_status_value" ng-click="payOrder(item)">去支付
+        </button>
+        <button class="button button-light"
+                style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
+                ng-if="item.return_value === '1'" ng-click="requestOrder(item)">申请售后
+        </button>
+        <button class="button button-light"
+                style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
+                ng-if="item.is_track" ng-click="trackOrder(item)">查看物流
+        </button>
+        <button class="button button-light"
+                style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
+                ng-if="item.pay_status_value" ng-click="cancelOrder(item)">取消订单
+        </button>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

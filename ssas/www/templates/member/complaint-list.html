@@ -1,17 +1,21 @@
-<ion-view view-title="{{'complaint_title'|translate}}" hide-tabs="true">
+<ion-view view-title="售后列表" hide-tabs="true">
   <ion-content>
+    <div style="height: 44px">
+    </div>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap" style="padding: 10px 40px 15px 20px;">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap"
+                style="padding: 10px 40px 15px 20px;" ng-click="goDetail(item)">
         <h2 style="font-size: 18px;color: #4c4b4d;">{{item.time}}</h2>
 
         <h2 style="font-size: 18px;margin-top: 10px;color: #4c4b4d;">{{item.complaints_type}}</h2>
-        <a href="#/tab/complaint/{{item.oid}}" title="">
+        <a>
           <i class="icon ion-chevron-right icon-accessory"></i>
         </a>
       </ion-item>
     </ion-list>
     <div class="button-bar">
-      <a class="button button-full button-light" style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;border: none;" href="">{{'complaint_newbtn'|translate}}</a>
+      <a class="button button-full button-light"
+         style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;border: none;" href="">{{'complaint_newbtn'|translate}}</a>
     </div>
   </ion-content>
 </ion-view>

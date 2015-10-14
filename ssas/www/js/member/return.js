@@ -8,7 +8,15 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('tab.return_request', {
+        .state('tab.feedbacks', {
+          url: '/feedbacks',
+          views: {
+            'tab-member': {
+              templateUrl: 'templates/member/feedback-index.html'
+            }
+          }
+        })
+        .state('tab.feedbacks.return_request', {
           url: '/returnrequest/:orderId',
           views: {
             'tab-member': {
@@ -17,19 +25,19 @@
             }
           }
         })
-        .state('tab.returns', {
-          url: '/returns',
+        .state('tab.feedbacks.returns', {
+          url: '/returns/:orderId',
           views: {
-            'tab-member': {
+            'tab-feedbacks': {
               templateUrl: 'templates/member/return-list.html',
               controller: 'ReturnListCtrl'
             }
           }
         })
-        .state('tab.return_detail', {
+        .state('tab.feedbacks.return_detail', {
           url: '/return/:returnId',
           views: {
-            'tab-member': {
+            'tab-feedbacks': {
               templateUrl: 'templates/member/return-detail.html',
               controller: 'ReturnDetailCtrl'
             }
@@ -93,12 +101,20 @@
       }
     })
 
-    .controller('ReturnListCtrl', function ($scope, ReturnApi) {
+    .controller('ReturnListCtrl', function ($scope, $state, ReturnApi) {
       $scope.items = [];
 
       ReturnApi.getReturnList(null, null, function (result) {
         $scope.items = result.data;
       });
+
+      $scope.goDetail = function (item) {
+        $state.go('tab.feedbacks.return_detail', {returnId: item.return_id}, {reload: true})
+      };
+
+      $scope.goRequest = function () {
+        $state.go('tab.feedbacks.return_request', {orderId: $stateParams.orderId}, {reload: true})
+      }
     })
 
     .controller('ReturnDetailCtrl', function ($scope, $stateParams, ReturnApi) {

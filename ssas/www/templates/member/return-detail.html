@@ -1,11 +1,24 @@
 <ion-view view-title="售后详情" hide-tabs="true">
-  <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">基本信息</div>
+  <ion-content>
+    <div style="height: 44px">
+    </div>
+    <div class="list card" style="margin: 0;box-shadow: none;">
       <div class="item item-body">
-        <h2>{{item.title.time}} - {{item.title.type}}</h2>
+        <p style="margin: 10px 0;color: #4c4b4d;">{{item.title.status}}</p>
 
-        <p>{{item.title.status}}</p>
+        <p style="margin: 10px 0;color: #4c4b4d;">{{item.title.time}}</p>
+      </div>
+      <div class="item item-body">
+        <p style="margin: 10px 0;color: #4c4b4d;">退款类型：{{item.title.type}}</p>
+
+        <p style="margin: 10px 0;color: #4c4b4d;">退款原因：{{item.title.type}}</p>
+
+        <p style="margin: 10px 0;color: #4c4b4d;">退款说明：{{item.title.type}}</p>
+      </div>
+      <div class="item item-body">
+        <div class="row" ng-repeat="pro in item.product">
+          <p style="margin: 10px 0;color: #4c4b4d;">退款类型：{{item.title.type}}</p>
+        </div>
       </div>
     </div>
   </ion-content>
