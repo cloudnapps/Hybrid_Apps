@@ -99,18 +99,34 @@
       $rootScope.confirmedCart = $scope.cart;
     };
   }])
-  .controller('CartPaymentController', ['$scope', '$ionicModal', 'cartApi', 'orderApi', function ($scope, $ionicModal, cartApi, orderApi) {
+  .controller('CartPaymentController', ['$scope', '$ionicModal', '$q', '$ionicPopup', 'cartApi', 'orderApi', function ($scope, $ionicModal, $q, $ionicPopup, cartApi, orderApi, paymentApi) {
     $scope.pay = function (payment) {
-      cartApi.createOrder($scope.confirmedCart).success(function (responseData){
-        var dataStatus = responseData.status;
-        if (dataStatus === 0) {
-          orderApi.pay(responseData.data).success(function (responseData){
-            var dataStatus = responseData.status;
-            if (dataStatus === 0) {
-              console.log(responseData.data);
-            }
-          });
+      var promise = cartApi.createOrder($scope.confirmedCart)
+      .then(function (responseData){
+        if (responseData.status === 0) {
+          return orderApi.pay(responseData.data);
         }
+        $ionicPopup.alert({
+          template: responseData.msg
+        });
+        return $q.reject(reason);
+      })
+      .then(function (responseData){
+        if (responseData.status === 0) {
+          return paymentApi.pay(responseData.data);
+        }
+        $ionicPopup.alert({
+          template: responseData.msg
+        });
+        return $q.reject(responseData.msg);
+      })
+      .then(function (responseData) {
+        var dataStatus = responseData.status;
+        // if (dataStatus === 0) {
+
+        // }
+      }).catch(function (err) {
+        alert(err);
       });
     };
   }])
