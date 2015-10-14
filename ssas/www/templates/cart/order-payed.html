@@ -1,0 +1,14 @@
+<ion-view class="cart" view-title="{{'cart'|translate}}">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item" ng-repeat="item in orders">
+        <h2>订单号: {{item.order_id}}</h2>
+        <h2>商品数量: {{item.num}}</h2>
+        <h2>金额: {{item.total_amount}}</h2>
+      </ion-item>
+      <div>
+        感谢惠顾，我们将竭诚为您服务哦～
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>
