@@ -1,4 +1,4 @@
-<ion-view view-title="{{'cart_order_confirm'|translate}}" hide-tabs="true">
+<ion-view class="cart-checkout" view-title="{{'cart_order_confirm'|translate}}" hide-tabs="true">
   <ion-content>
     <ion-list>
       <a class="item item-icon-right" href="#" address-select="cart.addrlist" ng-model="cart.def_addr" ng-change="checkout()">
@@ -38,11 +38,21 @@
           </div>
         </ion-item>
       </div>
+      <div class="item item-divider">
+      </div>
+      <ion-item class="item item-complex summary" style="padding:10px 30px;">
+        <div>货款总计: {{cart.total_item_amount |currency:'￥'}}</div>
+        <div>税费总计: {{cart.total_taxation_amount |currency:'￥'}}</div>
+        <div class="row row-no-padding">
+          <div class="col"><div>运费总计: {{cart.total_freight |currency:'￥'}}</div></div>
+          <div class="col"><div style="overflow:visible">订单总计: <div class="assertive total-amount" style="line-height:0;font-weight:200;">{{cart.total_amount |currency:'￥'}}</div></div></div>
+        </div>
+      </ion-item>
     </ion-list>
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
     <div class="button-bar">
-      <button class="button button-energized" href="">{{'pay_now' | translate}}</button>
+      <a class="button button-energized" href="#/tab/cart-payment" ng-click="confirm()">{{'pay_now' | translate}}</a>
     </div>
   </ion-footer-bar>
 </ion-view>

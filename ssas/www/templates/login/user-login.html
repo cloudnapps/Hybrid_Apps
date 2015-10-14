@@ -7,39 +7,41 @@
 </ion-nav-bar>
   <ion-content class="padding">
 
-    <div class="list card">
+    <div class="list card" style="box-shadow: none;">
 
-      <div class="item item-body">
-        <img src="img/ionic.png">
+      <div class="item item-body" style="text-align: center;margin: 16px 30px;">
+        <img src="img/ctf.png" style="width: 100%;height: 200px;">
 
-        <div class="list">
-          <label class="item item-input">
-            <span class="input-label">账号：</span>
-            <input type="text" ng-model="userInfo.name" placeholder="请输入用户名（手机号）">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">密码：</span>
-            <input type="password" ng-model="userInfo.password" placeholder="请输入密码">
-          </label>
+        <div class="list" style="margin-top:20px;">
+          <div style="border-radius: 10px;border: 1px solid #cecece;">
+            <div class="row" style="border-bottom: 1px solid #cecece;margin-top: 5px;">
+              <i class="col col-20 col-center ion-person"></i>
+              <input class="col col-80 col-center" type="text" ng-model="userInfo.name" placeholder="请输入用户名（手机号）">
+            </div>
+            <div class="row" style="margin-top:6px;">
+              <i class="col col-20 col-center ion-locked"></i>
+              <input class="col col-80 col-center" type="password" ng-model="userInfo.password" placeholder="请输入密码">
+            </div>
+          </div>
+          <div class="row" style="padding: 0;height: 50px;">
+            <div class="col col-50 col-center" style="text-align: left;">
+              <input type="checkbox">
+              <a href="" style="text-decoration: none;color: #666;">记住密码</a>
+            </div>
+            <div class="col col-50 col-center" style="text-align: right;">
+              <a href="#/tab/register" style="text-decoration: none;color: #666;">新用户注册</a>
+            </div>
+          </div>
+          <div class="row" style="padding: 0;margin-top: 20px;">
+              <button class="button button-light" style="width: 100%;background-color: #568baa;color: #fff;border-radius: 10px;" ng-click="login()">登录</button>
+          </div>
 
-          <div class="row">
-            <div class="col col-100">
-              <div class="button-bar">
-                <button class="button button-full" ng-click="login()">
-                  登录
-                </button>
-              </div>
+          <div class="row" style="margin-top: 5px;">
+            <div class="col col-center" style="text-align: center;">
+              <a href="#/tab/retrieve" style="text-decoration: none;color: #666;">忘记密码</a>
             </div>
           </div>
 
-          <div class="row">
-            <div class="col col-50" align="right">
-              <p><a href="#/tab/retrieve">忘记密码</a></p>
-              <p><a href="#/tab/register">新用户注册</a></p>
-            </div>
-          </div>
-
-        </div>
       </div>
     </div>
   </ion-content>

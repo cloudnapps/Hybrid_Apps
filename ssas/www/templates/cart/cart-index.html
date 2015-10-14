@@ -1,13 +1,13 @@
 <ion-view class="cart" view-title="{{'cart'|translate}}">
   <ion-content>
     <ion-list>
-      <div ng-repeat="(channelKey, channel) in cart.natureCart">
+      <div ng-repeat="(natureKey, nature) in cart.natureCart">
         <ion-item class="item item-divider" ng-if="!$first"></ion-item>
         <ion-item class="item">
-          <h2>{{channelKey|translate}}</h2>
+          <h2>{{natureKey|translate}}</h2>
         </ion-item>
 
-        <div ng-repeat="seller in channel.aSelCart">
+        <div ng-repeat="seller in nature.aSelCart">
           <ion-item class="seller item item-checkbox item-icon-right item-complex">
             <label class="checkbox">
               <input type="checkbox" ng-model="seller.selected" ng-change="toggleSeller(seller)">
@@ -43,14 +43,10 @@
           </ion-item>
         </div>
         <ion-item class="item item-button-right">
-          <div class="assertive">共计: {{channel.total_item_amount |currency:'￥'}} (不含税 不含运费)</div>
+          <div class="assertive">共计: {{nature.total_item_amount |currency:'￥'}} (不含税 不含运费)</div>
+          <button class="button button-energized" ui-sref="tab.cart-checkout({nature: natureKey})">{{'cart_checkout'|translate}}</button>
         </ion-item>
       </div>
     </ion-list>
   </ion-content>
-  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
-    <div class="button-bar">
-      <a class="button button-energized" href="#/tab/cart-checkout">{{'cart_checkout' | translate}}</a>
-    </div>
-  </ion-footer-bar>
 </ion-view>

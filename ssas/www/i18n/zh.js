@@ -98,5 +98,7 @@ var translations_zh = {
     cart_checkout: '结算',
     cart_order_confirm: '订单核对',
     pay_now: '立刻支付',
-    shipping: '配送方式'
+    shipping: '配送方式',
+
+    cart_payment: '选择支付方式'
 };

@@ -110,19 +110,17 @@ angular.module('starter.services', [])
     }
   })
   .service('tabStateService', function($timeout, $ionicTabsDelegate, $state){
-    this.go = function(selectIndex, stateName, params, options){
-
+    this.go = function(selectIndex, stateName, params, options){     
       if ($ionicTabsDelegate.selectedIndex() !== selectIndex) {
-        $ionicTabsDelegate.select(selectIndex);
+        $timeout(function(){
+          $ionicTabsDelegate.select(selectIndex);
+        }, 0);        
       }
-
-      if (!stateName) {
-        return $ionicTabsDelegate.select(selectIndex);
+      if (stateName) {
+        $timeout(function(){
+          $state.go(stateName, params || {}, options || {});
+        }, 10);
       }
-      
-      $timeout(function(){
-        $state.go(stateName, params || {}, options || {});
-      }, 0);
     };
 
     this.tabIndex = {
