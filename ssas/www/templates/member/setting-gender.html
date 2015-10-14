@@ -1,0 +1,24 @@
+<ion-view view-title="{{'settng_title'|translate}}" hide-tabs="true">
+  <ion-content>
+    <div class="col col-20">
+      <p>性别</p>
+    </div>
+    <div class="col col-80">
+      <label class="item item-input item-select">
+        <select ng-model="birthdayInfo.selectedYear" ng-options="s.value for s in birthdayInfo.years">
+          <option value="">--请选择--</option>
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <select ng-model="birthdayInfo.selectedMonth" ng-options="sh.value for sh in birthdayInfo.months">
+          <option value="">--请选择--</option>
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <select ng-model="birthdayInfo.selectedDay" ng-options="ar.value for ar in birthdayInfo.days">
+          <option value="">--请选择--</option>
+        </select>
+      </label>
+    </div>
+  </ion-content>
+</ion-view>

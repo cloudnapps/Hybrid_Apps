@@ -19,7 +19,7 @@
         .state('tab.feedbacks.return_request', {
           url: '/returnrequest/:orderId',
           views: {
-            'tab-member': {
+            'tab-feedbacks': {
               templateUrl: 'templates/member/return-request.html',
               controller: 'ReturnRequestCtrl'
             }
@@ -101,7 +101,7 @@
       }
     })
 
-    .controller('ReturnListCtrl', function ($scope, $state, ReturnApi) {
+    .controller('ReturnListCtrl', function ($scope, $stateParams, $state, ReturnApi) {
       $scope.items = [];
 
       ReturnApi.getReturnList(null, null, function (result) {

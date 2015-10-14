@@ -1,38 +1,26 @@
-<ion-view view-title="{{'settng_title'|translate}}" hide-tabs="true">
-  <ion-content class="padding">
-    <div class="row">
-      <div class="col col-33">
-        输入旧密码：
-      </div>
-      <div class="col col-70">
+<ion-view view-title="修改密码" hide-tabs="true">
+  <ion-content>
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label" style="color: #333333;">输入旧密码：</span>
         <input type="password" ng-model="pwdInfo.old">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col col-33">
-        输入新密码：
-      </div>
-      <div class="col col-70">
+      </label>
+      <label class="item item-input">
+        <span class="input-label" style="color: #333333;">输入新密码：</span>
         <input type="password" ng-model="pwdInfo.new">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col col-33">
-        再次输入密码：
-      </div>
-      <div class="col col-70">
+      </label>
+      <label class="item item-input">
+        <span class="input-label" style="color: #333333;">再次输入密码：</span>
         <input type="password" ng-model="pwdInfo.confirm">
+      </label>
+    </div>
+    <div class="row" style="padding: 0;margin-top: 40px;">
+      <div class="col col-center" style="padding: 0;">
+        <button class="button button-full" style="background-color: #568baa;color: #fff;" ng-click="modify()">确定</button>
       </div>
     </div>
-    <div class="button-bar">
-      <button class="button button-full button-light"
-              style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;" ng-click="modify()">确定
-      </button>
-    </div>
-    <div class="row">
-      <div class="col col-center">
-        <p>修改后请重新登录</p>
-      </div>
+    <div class="row" style="padding: 0;">
+      <div class="col col-center" style="text-align: center;padding: 0;color: #333333;">修改后请重新登录</div>
     </div>
   </ion-content>
 </ion-view>
