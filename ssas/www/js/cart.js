@@ -158,12 +158,23 @@
     var justCreatedOrder = [$rootScope.justCreatedOrder];
     delete $rootScope.justCreatedOrder;
 
-    // orderApi.query({page: 1, filter: {}}).success(function (responseData){
-    //   var dataStatus = responseData.status;
-    //   if (dataStatus === 0) {
-    //     $scope.cart = responseData.data;
-    //     $scope.cartLoaded = true;
-    //   }
-    // });
+    $scope.load = function () {
+      var promises = [];
+      angular.forEach((justCreatedOrder || {}).order_id, function (order_id) {
+        promises.push(orderApi.getOrderDetail(order_id));
+      });
+
+      $q.all(promises)
+      .then(function (responses) {
+        $scope.orders = [];
+        angular.forEach(responses, function (responseData) {
+          if(responseData.status === 0) {
+            $scope.orders.push(responseData.data);
+          }
+        });
+      });
+    };
+
+    $scope.load();
   }])
 })();
