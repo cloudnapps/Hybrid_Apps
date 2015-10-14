@@ -4,6 +4,7 @@
     $stateProvider
       .state('tab.cart', {
         url: '/cart',
+        cache: false,
         views: {
           'tab-cart': {
             templateUrl: 'templates/cart/cart-index.html',
@@ -125,6 +126,7 @@
 
           return;
         }
+
         var order = responseData.data;
         $rootScope.justCreatedOrder = order;
         orderApi.getPayInfo(order)

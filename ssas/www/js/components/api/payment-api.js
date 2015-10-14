@@ -52,7 +52,7 @@ angular.module('components')
           alipay: payByAlipay,
           weixin: payByWechat
         };
-        var payMethod = payMethod[payment.pay_app_id];
+        var payMethod = payMetods[payment.pay_app_id];
         if(payMethod) {
           return payMethod(payment);
         }
