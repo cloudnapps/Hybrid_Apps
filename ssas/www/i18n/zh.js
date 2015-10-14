@@ -101,5 +101,6 @@ var translations_zh = {
     pay_now: '立刻支付',
     shipping: '配送方式',
 
-    cart_payment: '选择支付方式'
+    cart_payment: '选择支付方式',
+    order_payed: '订单支付成功'
 };
