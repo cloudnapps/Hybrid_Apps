@@ -17,26 +17,26 @@
             }
           }
         })
-        .state('tab.settings.gender', {
-          url: '/gender',
+        .state('tab.setting_gender', {
+          url: '/setting/gender?params',
           views: {
             'tab-member': {
               templateUrl: 'templates/member/setting-gender.html',
-              controller: 'SettingCtrl'
+              controller: 'SettingGenderCtrl'
             }
           }
         })
-        .state('tab.settings.birthday', {
-          url: '/birthday',
+        .state('tab.setting_birthday', {
+          url: '/setting/birthday?params',
           views: {
             'tab-member': {
               templateUrl: 'templates/member/setting-birthday.html',
-              controller: 'SettingCtrl'
+              controller: 'SettingBirthdayCtrl'
             }
           }
         })
-        .state('tab.settings.changepwd', {
-          url: '/changepwd',
+        .state('tab.setting_changepwd', {
+          url: '/setting/changepwd',
           views: {
             'tab-member': {
               templateUrl: 'templates/member/setting-changepwd.html',
@@ -64,17 +64,30 @@
         });
     })
 
-    .controller('SettingCtrl', function ($scope, $state, $ionicActionSheet, SettingApi) {
-      $scope.item = {};
+    .controller('SettingCtrl', function ($scope, $state, $stateParams, $ionicActionSheet, SettingApi) {
+      $scope.init = function () {
+        $scope.item = {};
 
-      SettingApi.getMemberSetting(function (result) {
-        $scope.item = result.data;
+        SettingApi.getMemberSetting(function (result) {
+          $scope.item = result.data;
+        });
+      };
+
+      $scope.$on('$ionicView.enter', function () {
+        $scope.init();
       });
 
       $scope.goPage = function (url) {
-        $state.go(url, {}, {reload: true});
+        if (url === 'tab.setting_birthday') {
+          $state.go(url, {params: $scope.item.birthday}, {reload: true});
+        }
+        else if (url === 'tab.setting_gender') {
+          $state.go(url, {params: $scope.item.sex}, {reload: true});
+        }
       };
+    })
 
+    .controller('SettingBirthdayCtrl', function ($scope, $state, $ionicPopup, SettingApi) {
       $scope.birthdayInfo = {};
       $scope.birthdayInfo.years = [];
       for (var i = 1900; i < 2010; i++) {
@@ -89,6 +102,59 @@
       $scope.birthdayInfo.days = [];
       for (var i = 1; i < 32; i++) {
         $scope.birthdayInfo.days.push(i);
+      }
+
+      $scope.changeBirthday = function () {
+        var memberInfo = {
+          birthday: $scope.birthdayInfo.selectedYear +
+          '-' + $scope.birthdayInfo.selectedMonth +
+          '-' + $scope.birthdayInfo.selectedDay
+        };
+
+        SettingApi.modifyMemberSetting(memberInfo, function (result) {
+          if (result.status === 1) {
+            var alertPopup = $ionicPopup.alert({
+              title: '修改个人信息',
+              template: result.msg
+            });
+
+            alertPopup.then(function (res) {
+              console.log(res);
+            });
+          }
+          else {
+            $state.go('tab.settings', {}, {reload: true});
+          }
+        });
+      }
+    })
+
+    .controller('SettingGenderCtrl', function ($scope, $state, $stateParams, SettingApi) {
+      $scope.genderInfo = {};
+      $scope.genderInfo.gentle = $stateParams.params === 'gentle';
+      $scope.genderInfo.lady = !$scope.genderInfo.gentle;
+
+
+      $scope.changeGender = function () {
+        var memberInfo = {
+          sex: $scope.genderInfo.gentle ? 'gentle' : 'lady'
+        };
+
+        SettingApi.modifyMemberSetting(memberInfo, function (result) {
+          if (result.status === 1) {
+            var alertPopup = $ionicPopup.alert({
+              title: '修改个人信息',
+              template: result.msg
+            });
+
+            alertPopup.then(function (res) {
+              console.log(res);
+            });
+          }
+          else {
+            $state.go('tab.settings', {}, {reload: true});
+          }
+        });
       }
     })
 
@@ -240,7 +306,7 @@
         sendRequest(url, data, callback);
       };
 
-      var modifyMemberSetting = function (memeberInfo, callback) {
+      var modifyMemberSetting = function (memberInfo, callback) {
         var url = apiEndpoint.url + '/member-save_setting.html';
         var data = {
           member_id: 13,
