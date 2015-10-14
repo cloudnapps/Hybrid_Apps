@@ -76,7 +76,7 @@
                     "CoreGraphics.framework": [
                         {
                             "xml": false,
-                            "count": 3
+                            "count": 2
                         }
                     ],
                     "libiconv.dylib": [
@@ -103,18 +103,8 @@
                             "count": 1
                         }
                     ],
-                    "CoreImage.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
-                    "AudioToolbox.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ]
+                    "CoreImage.framework": [],
+                    "AudioToolbox.framework": []
                 }
             },
             "*-Info.plist": {
@@ -250,10 +240,10 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         },
-        "phonegap-plugin-barcodescanner": {
+        "com.cloudnapps.project.related": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         },
-        "com.cloudnapps.project.related": {
+        "cordova-plugin-barcodescanner": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         }
     },
