@@ -139,7 +139,6 @@
         <resource-file src="src/ios/dropDownList/down_dark.png" />
         <header-file src="src/ios/sphereMenu/SphereMenu.h" />
         <source-file src="src/ios/sphereMenu/SphereMenu.m" />
-        <resource-file src="src/MapResource.bundle" />
         <resource-file src="src/navi.xcassets" />
         <resource-file src="src/ios/start_left.png" />
         <resource-file src="src/ios/end_right.png" />

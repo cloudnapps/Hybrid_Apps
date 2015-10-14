@@ -42,6 +42,10 @@
     {
       "locator": "../plugins/cordova-beacon-navi",
       "id": "com.plugins.beacon.navi"
+    },
+    {
+      "locator": "../plugins/cordova-project-related",
+      "id": "com.cloudnapps.project.related"
     }
   ],
   "cordovaPlatforms": [

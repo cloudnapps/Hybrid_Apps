@@ -2,10 +2,10 @@
 <widget id="com.ionicframework.ssas835659" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>ssas</name>
   <description>
-        An Ionic Framework and Cordova project.
+        前海周大福商城应用
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="support@cloudnapps.com" href="http://cloudnapps.com/">
+      云加科技
     </author>
   <content src="index.html"/>
   <access origin="*"/>

@@ -252,6 +252,9 @@
         },
         "phonegap-plugin-barcodescanner": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
+        },
+        "com.cloudnapps.project.related": {
+            "PACKAGE_NAME": "com.ionicframework.ssas835659"
         }
     },
     "dependent_plugins": {}
