@@ -29,6 +29,16 @@
           }
         }
       })
+      .state('tab.order-payed', {
+        url: '/order-payed',
+        views: {
+          'tab-cart': {
+            templateUrl: 'templates/cart/order-payed.html',
+            controller: 'OrderPayedController'
+          }
+        }
+      })
+
 	}) // end of config
 
 	.controller('CartController', ['$scope', 'cartApi', 'tabStateService', 'userService', function ($scope, cartApi, tabStateService, userService) {
@@ -44,6 +54,7 @@
       var dataStatus = responseData.status;
       if (dataStatus === 0) {
         $scope.cart = responseData.data;
+        $scope.cartLoaded = true;
       }
     });
     $scope.toggleSeller = function (seller) {
@@ -99,35 +110,50 @@
       $rootScope.confirmedCart = $scope.cart;
     };
   }])
-  .controller('CartPaymentController', ['$scope', '$ionicModal', '$q', '$ionicPopup', 'cartApi', 'orderApi', function ($scope, $ionicModal, $q, $ionicPopup, cartApi, orderApi, paymentApi) {
-    $scope.pay = function (payment) {
-      var promise = cartApi.createOrder($scope.confirmedCart)
-      .then(function (responseData){
-        if (responseData.status === 0) {
-          return orderApi.pay(responseData.data);
-        }
-        $ionicPopup.alert({
-          template: responseData.msg
-        });
-        return $q.reject(reason);
-      })
-      .then(function (responseData){
-        if (responseData.status === 0) {
-          return paymentApi.pay(responseData.data);
-        }
-        $ionicPopup.alert({
-          template: responseData.msg
-        });
-        return $q.reject(responseData.msg);
-      })
-      .then(function (responseData) {
-        var dataStatus = responseData.status;
-        // if (dataStatus === 0) {
+  .controller('CartPaymentController', ['$rootScope', '$scope', '$state', '$ionicModal', '$ionicPopup', 'cartApi', 'orderApi', 'paymentApi', function ($rootScope, $scope, $state, $ionicModal, $ionicPopup, cartApi, orderApi, paymentApi) {
+    $scope.cart = $rootScope.confirmedCart;
+    delete $rootScope.confirmedCart;
 
-        // }
-      }).catch(function (err) {
-        alert(err);
+    $scope.pay = function (payment) {
+      cartApi.createOrder($scope.cart)
+      .success(function (responseData){
+        if (responseData.status !== 0) {
+          $ionicPopup.alert({
+            title: '未能创建订单',
+            template: responseData.msg
+          });
+
+          return;
+        }
+        var order = responseData.data;
+        $rootScope.justCreatedOrder = order;
+        orderApi.pay(order)
+        .success(function (responseData){
+          if (responseData.status !== 0) {
+            $ionicPopup.alert({
+              title: '未能获取支付信息',
+              template: responseData.msg
+            });
+
+            return;
+          }
+
+          paymentApi.pay(responseData.data)
+          .then(function (data) {
+            alert(data);
+            $state.go('tab.order-payed');
+          }, function (err) {
+            $ionicPopup.alert({
+              title: '支付失败',
+              template: err
+            });
+          });
+        });
       });
     };
+  }])
+  .controller('OrderPayedController', ['$rootScope', '$scope', function ($rootScope, $scope) {
+    $scope.orders = [$rootScope.justCreatedOrder];
+    delete $rootScope.justCreatedOrder;
   }])
 })();

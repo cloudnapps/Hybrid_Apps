@@ -1,6 +1,7 @@
 <ion-view class="cart" view-title="{{'cart'|translate}}">
   <ion-content>
-    <ion-list>
+    <div ng-if="cartLoaded && !cart">{{'cart_empty'|translate}}</div>
+    <ion-list ng-if="!!cart">
       <div ng-repeat="(natureKey, nature) in cart.natureCart">
         <ion-item class="item item-divider" ng-if="!$first"></ion-item>
         <ion-item class="item">

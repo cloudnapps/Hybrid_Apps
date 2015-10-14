@@ -45,7 +45,9 @@ angular.module('components')
       };
 
       var pay = function (payment) {
-        var deferred = $q.defer();
+        // var deferred = $q.defer();
+        // deferred.resolve();
+        // return deferred.promise;
         var payMetods = {
           alipay: payByAlipay,
           weixin: payByWechat
@@ -54,8 +56,7 @@ angular.module('components')
         if(payMethod) {
           return payMethod(payment);
         }
-        deferred.reject('不支持的支付方式');
-        return deferred.promise;
+        return $q.reject('不支持的支付方式');
       }
 
       return {
