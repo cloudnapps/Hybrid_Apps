@@ -37,16 +37,16 @@
         });
     })
 
-    .controller('LoginCtrl', function ($scope, $state, $ionicPopup, userService, LoginApi) {
+    .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $ionicHistory, userService, LoginApi) {
       $scope.userInfo = {};
 
       $scope.goBack = function(){
+        console.log('userService.backIndex', userService.backIndex);
         if ([undefined, -1, $scope.tabIndex.cart, $scope.tabIndex.member].indexOf(userService.backIndex) !== -1) {
           $scope.tabStateGo($scope.tabIndex.home);
           userService.backIndex = -1;
         }
         else {
-          console.log('userService.backIndex', userService.backIndex);
           $scope.tabStateGo(userService.backIndex);
           userService.backIndex = -1;
         }
@@ -72,13 +72,14 @@
             userService.set(currentUser);
             if (userService.backIndex === -1) {
               $scope.tabStateGo($scope.tabIndex.member);
+              $ionicHistory.goBack();
               userService.backIndex = -1;
             }
             else {
               $scope.tabStateGo(userService.backIndex);
+              $ionicHistory.goBack();
               userService.backIndex = -1;
             }
-
           }
         });
       };
