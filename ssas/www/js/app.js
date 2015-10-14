@@ -9,7 +9,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home
   'member', 'order', 'receiver', 'favorite', 'return', 'setting', 'login', 'point', 'seller', 'complaint', 'ngIOS9UIWebViewPatch'])
   .constant("jsonEndpoint", {url: "/data"})
   //For the real endpoint, we'd use this
-  .run(function ($ionicPlatform, $translate) {
+  .run(function ($ionicPlatform, $translate, userService) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -30,6 +30,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home
         }, null);
       }
     });
+
+    userService.initFromLocal();
   }) // end of run
 
   .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
