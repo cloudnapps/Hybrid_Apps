@@ -71,18 +71,18 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.plugins.beacon.navi": {
-        "source": {
-            "type": "local",
-            "path": "../plugins/cordova-beacon-navi"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "com.qdc.plugins.alipay": {
         "source": {
             "type": "local",
             "path": "../plugins/cordova-qdc-alipay"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "phonegap-plugin-barcodescanner": {
+        "source": {
+            "type": "registry",
+            "id": "phonegap-plugin-barcodescanner"
         },
         "is_top_level": true,
         "variables": {}
@@ -95,10 +95,10 @@
         "is_top_level": true,
         "variables": {}
     },
-    "phonegap-plugin-barcodescanner": {
+    "com.plugins.beacon.navi": {
         "source": {
-            "type": "registry",
-            "id": "phonegap-plugin-barcodescanner"
+            "type": "local",
+            "path": "../plugins/cordova-beacon-navi"
         },
         "is_top_level": true,
         "variables": {}
