@@ -154,16 +154,26 @@
       });
     };
   }])
-  .controller('OrderPayedController', ['$rootScope', '$scope', 'orderApi', function ($rootScope, $scope, orderApi) {
-    var justCreatedOrder = [$rootScope.justCreatedOrder];
+  .controller('OrderPayedController', ['$rootScope', '$scope', '$q', 'orderApi', function ($rootScope, $scope, $q, orderApi) {
+    var justCreatedOrder = $rootScope.justCreatedOrder;
     delete $rootScope.justCreatedOrder;
 
-    // orderApi.query({page: 1, filter: {}}).success(function (responseData){
-    //   var dataStatus = responseData.status;
-    //   if (dataStatus === 0) {
-    //     $scope.cart = responseData.data;
-    //     $scope.cartLoaded = true;
-    //   }
-    // });
+    $scope.load = function () {
+      var promises = [];
+      angular.forEach((justCreatedOrder || {}).order_id, function (order_id) {
+        promises.push($q(function (resolve, reject) {
+          orderApi.getOrderDetail(order_id).success(function (responseData) {
+            resolve(responseData.data);
+          });
+        }));
+      });
+
+      $q.all(promises)
+      .then(function (responses) {
+        $scope.orders = responses;
+      });
+    };
+
+    $scope.load();
   }])
 })();

@@ -1,24 +1,36 @@
 <ion-view view-title="{{'settng_title'|translate}}" hide-tabs="true">
   <ion-content>
-    <div class="col col-20">
-      <p>性别</p>
+    <div class="row">
+      <div class="col col-20 col-center">
+        性别
+      </div>
+      <div class="col col-40">
+        <label class="item item-radio">
+          <input type="radio" name="group" ng-model="genderInfo.gentle">
+
+          <div class="item-content">
+            男
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+      </div>
+      <div class="col col-40">
+        <label class="item item-radio">
+          <input type="radio" name="group" ng-model="genderInfo.lady">
+
+          <div class="item-content">
+            女
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+      </div>
     </div>
-    <div class="col col-80">
-      <label class="item item-input item-select">
-        <select ng-model="birthdayInfo.selectedYear" ng-options="s.value for s in birthdayInfo.years">
-          <option value="">--请选择--</option>
-        </select>
-      </label>
-      <label class="item item-input item-select">
-        <select ng-model="birthdayInfo.selectedMonth" ng-options="sh.value for sh in birthdayInfo.months">
-          <option value="">--请选择--</option>
-        </select>
-      </label>
-      <label class="item item-input item-select">
-        <select ng-model="birthdayInfo.selectedDay" ng-options="ar.value for ar in birthdayInfo.days">
-          <option value="">--请选择--</option>
-        </select>
-      </label>
+
+    <div class="button-bar">
+      <button class="button button-full button-light"
+              style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;"
+              ng-click="changeGender()">确定
+      </button>
     </div>
   </ion-content>
 </ion-view>
