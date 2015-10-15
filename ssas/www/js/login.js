@@ -28,6 +28,7 @@
         }) // 找回密码
         .state('tab.retrieve', {
           url: '/retrieve',
+          cache: false,
           views: {
             'tab-member': {
               templateUrl: 'templates/login/user-retrieve-password.html',
@@ -139,9 +140,9 @@
       $scope.mobileValide = mobileValide;
       $scope.lostPasswd = lostPasswd;
 
-      function sendCode(){
+      function sendCode() {
         if (!$scope.userInfo.mobile) {
-          toastService.setToast('手机号~');
+          toastService.setToast('手机号~');  
           return;
         }
         LoginApi

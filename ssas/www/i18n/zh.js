@@ -29,7 +29,7 @@ var translations_zh = {
 
     // business
     direct_mail: "海外直邮",
-    bond: "保税仓直邮",
+    bond: "保税仓发货",
 
     //login
     login_title: '登录',

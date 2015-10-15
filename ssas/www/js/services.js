@@ -115,14 +115,15 @@ angular.module('starter.services', [])
      * @param  {[type]} selectIndex [tabIndex.home, tabIndex.shop, tabIndex.cart, tabIndex.member]
      * @param  {[type]} stateName   [ui.router的 stateName]
      * @param  {[type]} params      [ui.router的 params]
-     * @param  {[type]} options     [ui.router的 options]
+     * @param  {[type]} options     [ui.router的 options, 其中 isForce 是否强制选择某个tab]
      * @return {[type]}             [undefined]
      */
-    this.go = function(selectIndex, stateName, params, options){     
-      if ($ionicTabsDelegate.selectedIndex() !== selectIndex) {
+    this.go = function(selectIndex, stateName, params, options){  
+
+      if((options && options.isForce) || ($ionicTabsDelegate.selectedIndex() !== selectIndex)) {
         $timeout(function(){
           $ionicTabsDelegate.select(selectIndex);
-        }, 0);        
+        }, 0);
       }
       if (stateName) {
         $timeout(function(){
