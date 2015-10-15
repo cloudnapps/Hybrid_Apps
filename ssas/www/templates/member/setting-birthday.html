@@ -1,39 +1,38 @@
 <ion-view view-title="{{'settng_title'|translate}}" hide-tabs="true">
   <ion-content>
     <div class="row">
-      <div class="col col-100" style="height: 50px">
-        <div class="row">
-          <div class="col col-15">
-            <label class="item item-input item-select">
-              生日
-            </label>
-          </div>
-          <div class="col col-25">
-            <select ng-model="birthdayInfo.selectedYear" style="padding:0px; width: 100%; height: 100%"
-                    ng-options="s for s in birthdayInfo.years">
-              <option value="">--请选择--</option>
-            </select>
-          </div>
-          <div class="col col-25">
-            <select ng-model="birthdayInfo.selectedMonth" style="padding:0px; width: 100%; height: 100%"
-                    ng-options="sh for sh in birthdayInfo.months">
-              <option value="">--请选择--</option>
-            </select>
-          </div>
-          <div class="col col-25">
-            <select ng-model="birthdayInfo.selectedDay" style="padding:0px; width: 100%; height: 100%"
-                    ng-options="ar for ar in birthdayInfo.days">
-              <option value="">--请选择--</option>
-            </select>
-          </div>
-        </div>
+      <div class="col col-center" align="center" style="font-size: 18px;">
+        出生日期
       </div>
     </div>
-    <div class="button-bar">
-      <button class="button button-full button-light"
-              style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;"
-              ng-click="changeBirthday()">确定
-      </button>
+    <div class="list">
+      <label class="item item-input item-select">
+        <div class="input-label" style="color: #000;">
+          年
+        </div>
+        <select ng-model="birthdayInfo.selectedYear">
+          <option ng-repeat="s in birthdayInfo.years">{{s}}</option>
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label" style="color: #000;">
+          月
+        </div>
+        <select ng-model="birthdayInfo.selectedMonth">
+          <option ng-repeat="sh in birthdayInfo.months">{{sh}}</option>
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label" style="color: #000;">
+          日
+        </div>
+        <select ng-model="birthdayInfo.selectedDay">
+          <option ng-repeat="ar in birthdayInfo.days">{{ar}}</option>
+        </select>
+      </label>
     </div>
+
+    <button class="button button-full button-stable" style="font-size:20px;background-color: #568baa;color: #fff;margin-top: 100px;" ng-click="changeBirthday()">确定
+    </button>
   </ion-content>
 </ion-view>

@@ -87,10 +87,15 @@
       };
     })
 
-    .controller('SettingBirthdayCtrl', function ($scope, $state, $ionicPopup, SettingApi) {
+    .controller('SettingBirthdayCtrl', function ($scope, $stateParams, $state, $ionicPopup, SettingApi) {
+      var userBirthday = ($stateParams.params || '1900-1-1').split('-');
       $scope.birthdayInfo = {};
+      $scope.birthdayInfo.selectedYear = userBirthday[0];
+      $scope.birthdayInfo.selectedMonth = userBirthday[1];
+      $scope.birthdayInfo.selectedDay = userBirthday[2];
+
       $scope.birthdayInfo.years = [];
-      for (var i = 1900; i < 2010; i++) {
+      for (var i = 1900; i < 2020; i++) {
         $scope.birthdayInfo.years.push(i);
       }
 
