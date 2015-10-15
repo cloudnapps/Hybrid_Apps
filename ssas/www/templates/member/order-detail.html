@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    
+
     <hr style="margin: 0;height:1px;border:none;border-top:10px solid #f2f2f2;"/>
     <div class="row" style="padding:10px;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #f2f2f2;">
       <div class="col col-75 col-center" style="height: 100%; padding: 0px">
@@ -48,7 +48,7 @@
         </div>
       </ion-item>
     </div>
-    
+
     <div class="row" style="padding:10px;">
       <div class="col col-75 col-center" style="color: #4a4b4d;padding: 0px">
         运费：{{item.order_info.shipping}}
@@ -57,7 +57,7 @@
         {{item.order_info.express_amount | currency:'￥'}}
       </div>
     </div>
-    
+
     <div class="row" style="padding: 10px;">
       <div class="col col-20 col-center" style="padding: 0;">
         <span style="font-size: 14px;color: #4a4b4d;">留言：</span>
@@ -99,7 +99,7 @@
         </button>
         <button class="button button-light"
                 style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
-                ng-if="item.return_value === '1'" ng-click="requestOrder(item)">申请售后
+                ng-if="item.is_rate" ng-click="commentOrder(item)">去评论
         </button>
         <button class="button button-light"
                 style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"

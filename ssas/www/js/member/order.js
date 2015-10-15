@@ -161,7 +161,7 @@
               type: 'button-positive',
               onTap: function (e) {
                 OrderApi.deleteOrder(item.order_id, function (result) {
-                  if(result.status === 1) {
+                  if (result.status === 1) {
                     var alertPopup = $ionicPopup.alert({
                       title: '取消订单',
                       template: result.msg

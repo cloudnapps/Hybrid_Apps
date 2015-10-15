@@ -1,9 +1,16 @@
-<ion-view view-title="{{'seller_title'|translate}}" hide-tabs="true">
+<ion-view view-title="优惠活动" hide-tabs="true">
   <ion-content>
-
     <div class="row">
       <div class="col col-33"><h3>活动名称</h3></div>
       <div class="col col-67"><h1>{{activityInfo.act_info.act_name}}</h1></div>
+    </div>
+    <div class="row">
+      <div class="col col-33"><p>开始时间</p></div>
+      <div class="col col-67"><p>{{activityInfo.act_info.start_time}}</p></div>
+    </div>
+    <div class="row">
+      <div class="col col-33"><p>结束时间</p></div>
+      <div class="col col-67"><p>{{activityInfo.act_info.end_time}}</p></div>
     </div>
 
     <div class="row" style="padding: 0;border-bottom: 1px solid #a9a9a9;" ng-repeat="item in activityInfo.product_info"
