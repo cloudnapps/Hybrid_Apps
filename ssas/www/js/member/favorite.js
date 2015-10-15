@@ -20,7 +20,7 @@
           url: '/goods',
           views: {
             'tab-favorites': {
-              templateUrl: 'templates/member/favorite-list.html',
+              templateUrl: 'templates/member/favorite-goods.html',
               controller: 'FavoritesGoodsCtrl'
             }
           }
@@ -29,7 +29,7 @@
           url: '/sellers',
           views: {
             'tab-favorites': {
-              templateUrl: 'templates/member/favorite-list.html',
+              templateUrl: 'templates/member/favorite-sellers.html',
               controller: 'FavoritesSellersCtrl'
             }
           }

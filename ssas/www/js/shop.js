@@ -1,4 +1,4 @@
-(function () {
+  (function () {
   'use strict';
   var shop = angular.module('shop', ['components', 'seller']);
   
@@ -88,7 +88,7 @@
     // })
   });
 
-  shop.controller('CategoryController', function ($scope, $state, shopApi) {
+  shop.controller('CategoryController', function ($scope, $state, shopApi, toastService) {
       $scope.categoryObj = {};
       $scope.categories = [];
       $scope.subCategories = [];
@@ -105,6 +105,7 @@
           $scope.populateSubCategories($scope.categories[0].cat_id);
         }
       });
+      $scope.index = 0;
       $scope.populateSubCategories = function (categoryId, index) {
         if (index !== undefined) {
           $scope.index = index;
@@ -115,6 +116,11 @@
           var cateListObj = category.lv2;
           for (var name in cateListObj) {
             $scope.subCategories.push(cateListObj[name]);
+            var lv3Obj = cateListObj[name].lv3;
+            cateListObj[name].lv3Arr = [];
+            for (var i in lv3Obj) {
+              cateListObj[name].lv3Arr.push(lv3Obj[i]);
+            }
           }  
         }  
       };
@@ -122,6 +128,34 @@
       $scope.navToProductList = function(categoryId) {
         $state.go('tab.products', {categoryId: categoryId});
       };
+    
+    $scope.scan = function(){      
+      cordova.plugins.barcodeScanner.scan(
+        function (result) {          
+          if (!result.cancelled 
+              && result.text !== undefined && result.text !== null) {
+            shopApi.getProductIdByBarcode(result.text).success(
+              function(response){
+                var result = response.data;
+                var status = response.status;
+                if (status === 0) {
+                  var productId = result["product_id"];
+                  if (productId !== undefined) {
+                    $scope.tabStateGo($scope.tabIndex.shop, 'tab.product', {productId: productId});
+                  }
+                } else {
+                  toastService.setToast(response.msg);  
+                }            
+              }); // end of getProductIdByBarcode success
+          } else {
+            toastService.setToast('没有找到商品');  
+          }// end of if
+        }, // end of scan success 
+        function (error) {
+          toastService.setToast('扫码失败');  
+        } // end of scan error
+      );
+    }
   }) // end of CategoryController
 
   .controller('ShopController', function ($scope, $state, $stateParams, $ionicModal, shopApi) {
@@ -507,6 +541,18 @@
         });
         return request;
       };
+      
+      var getProductIdByBarcode = function(barcode) {
+        var data = {"value":barcode};
+        var request = $http({
+          method: 'post',
+          url: apiEndpoint.url + '/product-get_productId.html',
+          transformRequest: transformRequestAsFormPost,
+          data: data,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+        });
+        return request;
+      }; // end of getProductByBarcode
 
       return {
         getProductIntro: getProductIntro,
@@ -515,7 +561,8 @@
         getGallery : getGallery,
         getCategories: getCategories,
         getProduct: getProduct,
-        getProductGoodsSpec: getProductGoodsSpec
+        getProductGoodsSpec: getProductGoodsSpec,
+        getProductIdByBarcode: getProductIdByBarcode
       };
 
   } // end of anonymous function

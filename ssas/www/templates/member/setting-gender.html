@@ -1,24 +1,20 @@
 <ion-view view-title="{{'settng_title'|translate}}" hide-tabs="true">
   <ion-content>
-    <div class="col col-20">
-      <p>性别</p>
+    <div class="button-bar">
+      <a class="button button-clear" style="border: none;color: #000;">性别:</a>
+      <a class="button button-clear" style="border: none;padding: 0; color: #000;" ng-click="setGender('gentle')">
+        <span ng-class="{'set-gender': userGender === 'gentle'}">男</span>
+      </a>
+      <a class="button button-clear" style="border: none;padding: 0;color: #000;" ng-click="setGender('lady')">
+        <span ng-class="{'set-gender': userGender === 'lady'}">女</span>
+      </a>
     </div>
-    <div class="col col-80">
-      <label class="item item-input item-select">
-        <select ng-model="birthdayInfo.selectedYear" ng-options="s.value for s in birthdayInfo.years">
-          <option value="">--请选择--</option>
-        </select>
-      </label>
-      <label class="item item-input item-select">
-        <select ng-model="birthdayInfo.selectedMonth" ng-options="sh.value for sh in birthdayInfo.months">
-          <option value="">--请选择--</option>
-        </select>
-      </label>
-      <label class="item item-input item-select">
-        <select ng-model="birthdayInfo.selectedDay" ng-options="ar.value for ar in birthdayInfo.days">
-          <option value="">--请选择--</option>
-        </select>
-      </label>
+    <hr style="margin-top: -5px;height:1px;border:none;border-top:1px solid #ccc;">
+    <div class="button-bar" style="margin-top: 150px;">
+      <button class="button button-full button-light"
+              style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;"
+              ng-click="changeGender()">确定
+      </button>
     </div>
   </ion-content>
 </ion-view>

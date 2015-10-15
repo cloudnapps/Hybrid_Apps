@@ -29,7 +29,7 @@ var translations_zh = {
 
     // business
     direct_mail: "海外直邮",
-    bond: "保税仓直邮",
+    bond: "保税仓发货",
 
     //login
     login_title: '登录',
@@ -81,6 +81,9 @@ var translations_zh = {
     return_addbtn: '提交申请',
     return_newbtn: '新建退款退货',
 
+    //comment
+    comment_title: '订单评论',
+
     good_category: '商品分类',
     good_fav: '收藏商品',
 
@@ -101,5 +104,6 @@ var translations_zh = {
     pay_now: '立刻支付',
     shipping: '配送方式',
 
-    cart_payment: '选择支付方式'
+    cart_payment: '选择支付方式',
+    order_payed: '订单支付成功'
 };

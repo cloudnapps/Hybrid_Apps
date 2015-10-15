@@ -1,37 +1,49 @@
 <ion-view view-title="{{'settng_title'|translate}}" hide-tabs="true">
   <ion-content>
-    <div class="row">
-      <div class="col col-20">
-        <p>头像</p>
+    <div class="row" style="padding: 0 20px;">
+      <div class="col col-90 col-center" style="padding: 0;font-size: 16px;">
+        <div class="row" style="padding: 0;line-height: 60px;height: 60px;">
+          <span class="col col-50 col-center" style="padding: 0;">头像</span>
+          <span class="col col-50 col-center" style="padding: 0;height: 60px;text-align: right;">
+            <img style="width: 50px;height: 50px;margin-top: 5px;border-radius: 50%;" src="img/ctf.png">
+            <!-- <img ng-src="{{item.logo}}"> -->
+          </span>
+        </div>
       </div>
-      <div class="col col-80" align="right">
-        <img ng-src="{{item.logo}}">
+      <div class="col col-10 col-center" style="padding: 0;line-height: 60px;height: 60px;text-align: right;" align="right">
         <a>
           <i class="icon ion-chevron-right icon-accessory"></i>
         </a>
       </div>
     </div>
-    <div class="row">
-      <div class="col col-20">
-        <p>性别</p>
+    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
+    <div class="row" style="padding: 0 20px;" ng-click="goPage('tab.setting_gender')">
+      <div class="col col-90 col-center" style="padding: 0;height: 60px;line-height: 60px;font-size: 16px;">
+        <div class="row" style="padding: 0;">
+          <span class="col col-50 col-center" style="padding: 0;">性别</span>
+          <span class="col col-50 col-center" style="padding: 0;text-align: right;">{{item.sex}}</span>
+        </div>
       </div>
-      <div class="col col-80" align="right" ng-click="goPage('tab.settings.gender')">
-        <p>{{item.sex}}</p>
+      <div class="col col-10 col-center" style="padding: 0;height: 60px;line-height: 60px;text-align: right;" align="right">
         <a>
           <i class="icon ion-chevron-right icon-accessory"></i>
         </a>
       </div>
     </div>
-    <div class="row">
-      <div class="col col-20">
-        <p>生日</p>
+    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
+    <div class="row" style="padding: 0 20px;" ng-click="goPage('tab.setting_birthday')">
+      <div class="col col-90 col-center" style="padding: 0;height: 60px;line-height: 60px;font-size: 16px;">
+        <div class="row" style="padding: 0;">
+          <span class="col col-50 col-center" style="padding: 0;">生日</span>
+          <span class="col col-50 col-center" style="padding: 0;text-align: right;">{{item.birthday}}</span>
+        </div>
       </div>
-      <div class="col col-80" align="right" ng-click="goPage('tab.settings.birthday')">
-        <p>{{item.birthday}}</p>
+      <div class="col col-10 col-center" style="padding: 0;height: 60px;line-height: 60px;text-align: right;" align="right">
         <a>
           <i class="icon ion-chevron-right icon-accessory"></i>
         </a>
       </div>
     </div>
+    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
   </ion-content>
 </ion-view>

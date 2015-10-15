@@ -1,12 +1,20 @@
-<ion-view class="cart" view-title="{{'cart'|translate}}">
+<ion-view class="cart" view-title="{{'order_payed'|translate}}" hide-tabs="true" hide-back-button="true">
+  <ion-nav-buttons side="right">
+    <div class="row row-center" style="padding: 0px;margin-right: 10px;">
+      <div class="col col-center" style="padding: 0px;">
+        <button class="button button-clear icon ion-ios-home" ng-click="tabStateGo(tabIndex.cart, null, null, {isForce: true});tabStateGo(tabIndex.home, null, null, {isForce: true})">
+        </button>
+      </div>
+    </div>
+  </ion-nav-buttons>
   <ion-content>
     <ion-list>
       <ion-item class="item" ng-repeat="item in orders">
-        <h2>订单号: {{item.order_id}}</h2>
-        <h2>商品数量: {{item.num}}</h2>
-        <h2>金额: {{item.total_amount}}</h2>
+        <div>订单号: {{item.order_title.order_id}}</div>
+        <div>商品数量: {{item.products | sum: 'num'}}个</div>
+        <div>金额: <span class="assertive">{{item.order_info.final_amount | currency:'￥'}}</span></div>
       </ion-item>
-      <div>
+      <div class="text-center padding">
         感谢惠顾，我们将竭诚为您服务哦～
       </div>
     </ion-list>

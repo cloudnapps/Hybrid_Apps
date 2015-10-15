@@ -22,18 +22,16 @@ angular.module('components')
         return request;
       };
 
-      var query = function (page, filter) {
+      var getOrderDetail = function (orderId) {
         var data = {
-          page: page,
-          filter: filter,
-          pay_app_id: order.pay_app_id,
+          order_id: orderId,
           member_id: 13,
           token: '11b4f4bd44ee8814d41680dc753a75e4'
         };
 
         var request = $http({
           method: 'post',
-          url: apiEndpoint.url + '/paycenter-dopayment.html',
+          url: apiEndpoint.url + '/member-orderdetail.html',
           transformRequest: transformRequestAsFormPost,
           data: data,
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -44,7 +42,7 @@ angular.module('components')
 
       return {
         getPayInfo: getPayInfo,
-        query: query,
+        getOrderDetail: getOrderDetail
       };
 
     }]);

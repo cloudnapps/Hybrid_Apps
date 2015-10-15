@@ -1,10 +1,13 @@
 <ion-view view-title="{{'good_category'|translate}}">
-	<ion-pane class="row">
+  <ion-nav-buttons side="right">
+      <a class="button button-icon ion-ios-barcode-outline" ng-click="scan()"></a>
+    </ion-nav-buttons>
+  <ion-pane class="row">
 		<!-- left category list -->
-		<div class="col col-25 view" style="width:84%;">
+		<div class="col col-25 view" style="width:84%;border-right: 1px solid #ddd;">
 			<ion-content>
 				<ion-list>
-					<ion-item 	class="item item-thumbnail-top" 
+					<ion-item class="item item-thumbnail-top" 
 								ng-repeat="cate in categories" 
 								type="item-text-wrap"
 								ng-click="populateSubCategories(cate.cat_id, $index)">
@@ -17,8 +20,11 @@
 		<!-- right sub-category grid -->
 		<div class="col col-75 col-offset-25 view" style="">
 			<ion-content class="has-header has-tabs">
-	    		<div class="row" style="flex-wrap:wrap">
-	    			<div  class="col col-33 col-style" ng-repeat="sub in subCategories" ng-click="navToProductList(sub.cat_id)">{{sub.cat_name}}</div>
+	    		<div ng-repeat="sub in subCategories">
+	    			<h5 ng-click="navToProductList(sub.cat_id)" class="sub-categories">{{sub.cat_name}}</h5>
+	    			<div class="row">
+	    				<div class="col col-33 col-style" ng-repeat="sub3 in sub.lv3Arr" ng-click="navToProductList(sub3.cat_id)">{{sub3.cat_name}}</div>
+	    			</div>
 	    		</div>
 			</ion-content>
 		</div>	    
