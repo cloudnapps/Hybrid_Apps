@@ -1,4 +1,4 @@
-(function () {
+  (function () {
   'use strict';
   var shop = angular.module('shop', ['components', 'seller']);
   
@@ -105,6 +105,7 @@
           $scope.populateSubCategories($scope.categories[0].cat_id);
         }
       });
+      $scope.index = 0;
       $scope.populateSubCategories = function (categoryId, index) {
         if (index !== undefined) {
           $scope.index = index;
