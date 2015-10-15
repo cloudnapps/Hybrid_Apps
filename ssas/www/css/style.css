@@ -49,15 +49,6 @@ hr {
   z-index: 999;
 }
 
-.gallery-filter .active {
-  background-color: #BD252C;
-  color: white;
-}
-
-.gallery-filter .text-center {
-  text-align: center;
-}
-
 .product-spec.modal {
   bottom: 0;
   top: 20%;
@@ -166,6 +157,52 @@ hr {
   background-color: #689FBC;
 }
 
+.sub-categories {
+  color: #689FBC;
+}
+
+.gallery-filter .prop {
+  line-height: 1em;
+  padding: 10px 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gallery-filter .active {
+  background-color: #BD252C;
+  color: white;
+  border-color: #BD252C;
+}
+
+.gallery-filter .text-center {
+  text-align: center;
+}
+
+.gallery-filter .price .description {
+  float: left;
+  min-width: 6em;
+  width: 15%;
+  line-height: 2em;
+}
+
+.gallery-filter .price input {
+  border: 1px solid #ccc;
+  float: left;
+  width: 40%;
+  height: 2em;
+  border-radius: 5px;
+  padding-left: 5px;
+}
+
+.gallery-filter .price .separator {
+  float: left;
+  width: 5%;
+  line-height: 2em;
+  text-align: center;
+}
+
 .col-30 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 30%;
@@ -184,4 +221,14 @@ hr {
   -ms-flex: 0 0 40%;
   flex: 0 0 40%;
   max-width: 40%;
+}
+
+.col-60 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 60%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 60%;
+  -ms-flex: 0 0 60%;
+  flex: 0 0 60%;
+  max-width: 60%;
 }
