@@ -3,7 +3,6 @@ angular.module('components')
     return {
       restrict: 'A',
       link: function(scope, element, attributes) {
-        
         $rootScope.justHideTabs = false;
         scope.$on('$ionicView.beforeEnter', function() {
           var value = scope.$eval(attributes.hideTabs);

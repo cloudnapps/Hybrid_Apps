@@ -7765,7 +7765,7 @@ a.button {
     max-height: 80px; }
 .cart .good.item .good-info {
   display: inline-block;
-  padding: 0px; }
+  padding: 0px 0px 0px 10px; }
 .cart .good.item .row.good-price {
   padding-left: 0px; }
   .cart .good.item .row.good-price .price, .cart .good.item .row.good-price .quanity {
