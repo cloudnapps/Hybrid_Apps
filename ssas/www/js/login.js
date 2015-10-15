@@ -133,18 +133,28 @@
           })
       };
     })
-    .controller('RetrieveCtrl', function($scope, $state, LoginApi, toastService){
+    .controller('RetrieveCtrl', function($scope, $state, $interval, LoginApi, toastService){
       $scope.userInfo = {};
       $scope.verified = false;
       $scope.sendCode = sendCode;
       $scope.mobileValide = mobileValide;
       $scope.lostPasswd = lostPasswd;
+      $scope.reSendCodeTime = 0;
+
+      var timer = null;
 
       function sendCode() {
         if (!$scope.userInfo.mobile) {
-          toastService.setToast('手机号~');  
+          toastService.setToast('请填写手机号~');  
           return;
         }
+        $scope.reSendCodeTime = 30;
+        timer = $interval(function(){
+          $scope.reSendCodeTime--;
+          if ($scope.reSendCodeTime === 0) {
+            $interval.cancel(timer);
+          }
+        }, 1000);
         LoginApi
           .sendCode($scope.userInfo.mobile, function(data){
             toastService.setToast(data.msg);
@@ -154,6 +164,10 @@
       }
 
       function mobileValide(){
+        if (!$scope.userInfo.mobile) {
+          toastService.setToast('请填写手机号~');  
+          return;
+        }
         LoginApi
           .mobileValide($scope.userInfo.mobile, $scope.userInfo.mobile, $scope.userInfo.signCode, function(data){
             if (data && data.status === 0) {
@@ -170,7 +184,7 @@
           .lostPasswd($scope.userInfo.mobile, $scope.userInfo.password, $scope.userInfo.confirmPwd, function(data){
              if (data && data.status === 0) {
                 toastService.setToast(data && data.msg || '修改成功');
-                return $state.go('login');
+                $scope.tabStateGo($scope.tabIndex.member, null, null, {isForce: true});
              }
              else {
               toastService.setToast(data && data.msg || '修改失败');
