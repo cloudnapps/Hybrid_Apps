@@ -13,6 +13,7 @@
   ],
   "gulpStartupTasks": [
     "sass",
+    "lint",
     "watch"
   ],
   "watchPatterns": [

@@ -1,6 +1,6 @@
 <ion-view class="cart" view-title="{{'cart'|translate}}">
   <ion-content>
-    <div ng-if="cartLoaded && !cart">{{'cart_empty'|translate}}</div>
+    <div class="text-center padding" ng-if="cartLoaded && !cart">{{'cart_empty'|translate}}</div>
     <ion-list ng-if="!!cart">
       <div ng-repeat="(natureKey, nature) in cart.natureCart">
         <ion-item class="item item-divider" ng-if="!$first"></ion-item>
@@ -20,7 +20,7 @@
               <label class="checkbox">
                 <input type="checkbox" ng-model="good.selected" ng-change="toggleGood(good)">
               </label>
-              <div class="row">
+              <div class="row row-no-padding">
                 <a class="good-thumbnail vertical-align-middle-container" ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: good.product_id})">
                   <img class="vertical-align-middle" ng-src="{{good.thumbnail}}">
                   <!-- <div class="vertical-align-middle" style="border:solid 1px; width:80px;height:80px;">test</div> -->

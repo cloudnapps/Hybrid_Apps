@@ -1,179 +1,217 @@
-(function(){
-  var cart = angular.module('cart', ['components'])
-  .config(function ($stateProvider, $urlRouterProvider) {
-    $stateProvider
-      .state('tab.cart', {
-        url: '/cart',
-        cache: false,
-        views: {
-          'tab-cart': {
-            templateUrl: 'templates/cart/cart-index.html',
-            controller: 'CartController'
-          }
+angular.module('cart', ['components'])
+.config(function ($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('tab.cart', {
+      url: '/cart',
+      cache: false,
+      views: {
+        'tab-cart': {
+          templateUrl: 'templates/cart/cart-index.html',
+          controller: 'CartController'
         }
-      })
-      .state('tab.cart-checkout', {
-        url: '/cart-checkout?nature',
-        views: {
-          'tab-cart': {
-            templateUrl: 'templates/cart/cart-checkout.html',
-            controller: 'CartCheckoutController'
-          }
+      }
+    })
+    .state('tab.cart-checkout', {
+      url: '/cart-checkout?nature',
+      views: {
+        'tab-cart': {
+          templateUrl: 'templates/cart/cart-checkout.html',
+          controller: 'CartCheckoutController'
         }
-      })
-      .state('tab.cart-payment', {
-        url: '/cart-payment',
-        views: {
-          'tab-cart': {
-            templateUrl: 'templates/cart/cart-payment.html',
-            controller: 'CartPaymentController'
-          }
+      }
+    })
+    .state('tab.cart-payment', {
+      url: '/cart-payment',
+      views: {
+        'tab-cart': {
+          templateUrl: 'templates/cart/cart-payment.html',
+          controller: 'CartPaymentController'
         }
-      })
-      .state('tab.order-payed', {
-        url: '/order-payed',
-        views: {
-          'tab-cart': {
-            templateUrl: 'templates/cart/order-payed.html',
-            controller: 'OrderPayedController'
-          }
+      }
+    })
+    .state('tab.order-payed', {
+      url: '/order-payed',
+      views: {
+        'tab-cart': {
+          templateUrl: 'templates/cart/order-payed.html',
+          controller: 'OrderPayedController'
         }
-      })
-
-	}) // end of config
-
-	.controller('CartController', ['$scope', 'cartApi', 'tabStateService', 'userService', function ($scope, cartApi, tabStateService, userService) {
-
-    $scope.$on('$ionicView.beforeEnter', function(){
-      if(!userService.isLogin()) {
-        userService.backIndex =$scope.tabIndex.cart;
-        $scope.tabStateGo($scope.tabIndex.member);
       }
     });
 
+}) // end of config
+
+.controller('CartController', function ($scope, $ionicLoading, cartApi, tabStateService, userService) {
+
+  $scope.$on('$ionicView.beforeEnter', function(){
+    if(!userService.isLogin()) {
+      userService.backIndex =$scope.tabIndex.cart;
+      $scope.tabStateGo($scope.tabIndex.member);
+    }
+  });
+
+  $scope.load = function () {
+    $ionicLoading.show();
     cartApi.getCart().success(function (responseData){
       var dataStatus = responseData.status;
       if (dataStatus === 0) {
         $scope.cart = responseData.data;
-        $scope.cartLoaded = true;
       }
+    })
+    .finally(function () {
+      $scope.cartLoaded = true;
+      $ionicLoading.hide();
     });
-    $scope.toggleSeller = function (seller) {
-      angular.forEach(seller.goods_list, function (item) {
-        item.selected = seller.selected;
-      });
-      cartApi.nocheck(seller.goods_list).success(function (responseData){
-        var dataStatus = responseData.status;
-        if (dataStatus === 0) {
-          $scope.cart = responseData.data;
-        }
-      });
-    };
+  };
 
-    $scope.toggleGood = function (good) {
-      cartApi.nocheck([good]).success(function (responseData){
-        var dataStatus = responseData.status;
-        if (dataStatus === 0) {
-          $scope.cart = responseData.data;
-        }
-      });
-    };
+  $scope.load();
 
-    $scope.updateGoodQuantity = function (good) {
-      cartApi.updateCart(good).success(function (responseData){
-        var dataStatus = responseData.status;
-        if (dataStatus === 0) {
-          $scope.cart = responseData.data;
-        }
-      });
-    };
+  $scope.toggleSeller = function (seller) {
+    angular.forEach(seller.goods_list, function (item) {
+      item.selected = seller.selected;
+    });
+    $ionicLoading.show();
+    cartApi.nocheck(seller.goods_list).success(function (responseData){
+      var dataStatus = responseData.status;
+      if (dataStatus === 0) {
+        $scope.cart = responseData.data;
+      }
+    })
+    .finally(function () {
+      $ionicLoading.hide();
+    });
+  };
 
-    $scope.removeGood = function (good) {
-      cartApi.remove([good]).success(function (responseData){
-        var dataStatus = responseData.status;
-        if (dataStatus === 0) {
-          $scope.cart = responseData.data;
-        }
-      });
-    };
-	}]) // end of CartController
-  .controller('CartCheckoutController', ['$rootScope', '$scope', '$stateParams', '$ionicModal', 'cartApi', function ($rootScope, $scope, $stateParams, $ionicModal, cartApi) {
-    $scope.checkout = function () {
-      cartApi.checkout($scope.cart, $stateParams.nature).success(function (responseData){
-        var dataStatus = responseData.status;
-        if (dataStatus === 0) {
-          $scope.cart = responseData.data;
-        }
-      });
-    };
-    $scope.checkout();
-    $scope.confirm = function () {
-      $rootScope.confirmedCart = $scope.cart;
-    };
-  }])
-  .controller('CartPaymentController', ['$rootScope', '$scope', '$state', '$ionicModal', '$ionicPopup', 'cartApi', 'orderApi', 'paymentApi', function ($rootScope, $scope, $state, $ionicModal, $ionicPopup, cartApi, orderApi, paymentApi) {
-    $scope.cart = $rootScope.confirmedCart;
-    delete $rootScope.confirmedCart;
+  $scope.toggleGood = function (good) {
+    $ionicLoading.show();
+    cartApi.nocheck([good]).success(function (responseData){
+      var dataStatus = responseData.status;
+      if (dataStatus === 0) {
+        $scope.cart = responseData.data;
+      }
+    })
+    .finally(function () {
+      $ionicLoading.hide();
+    });
+  };
 
-    $scope.pay = function (payment) {
-      cartApi.createOrder($scope.cart)
-      .success(function (responseData){
-        if (responseData.status !== 0) {
+  $scope.updateGoodQuantity = function (good) {
+    $ionicLoading.show();
+    cartApi.updateCart(good).success(function (responseData){
+      var dataStatus = responseData.status;
+      if (dataStatus === 0) {
+        $scope.cart = responseData.data;
+      }
+    })
+    .finally(function () {
+      $ionicLoading.hide();
+    });
+  };
+
+  $scope.removeGood = function (good) {
+    $ionicLoading.show();
+    cartApi.remove([good]).success(function (responseData){
+      var dataStatus = responseData.status;
+      if (dataStatus === 0) {
+        $scope.cart = responseData.data;
+      }
+    })
+    .finally(function () {
+      $ionicLoading.hide();
+    });
+  };
+}) // end of CartController
+.controller('CartCheckoutController', function ($rootScope, $scope, $stateParams, $ionicModal, $ionicLoading, cartApi) {
+  $scope.checkout = function () {
+    $ionicLoading.show();
+    cartApi.checkout($scope.cart, $stateParams.nature).success(function (responseData){
+      var dataStatus = responseData.status;
+      if (dataStatus === 0) {
+        $scope.cart = responseData.data;
+      }
+    })
+    .finally(function () {
+      $ionicLoading.hide();
+    });
+  };
+  $scope.checkout();
+  $scope.confirm = function () {
+    $rootScope.confirmedCart = $scope.cart;
+  };
+})
+.controller('CartPaymentController', function ($rootScope, $scope, $state, $ionicModal, $ionicPopup, $ionicLoading, cartApi, orderApi, paymentApi) {
+  $scope.cart = $rootScope.confirmedCart;
+  delete $rootScope.confirmedCart;
+
+  $scope.pay = function (payment) {
+    $ionicLoading.show();
+    cartApi.createOrder($scope.cart)
+    .then(function (response){
+      if (response.data.status !== 0) {
+        $ionicPopup.alert({
+          title: '未能创建订单',
+          template: response.data.msg
+        });
+
+        return $q.reject();
+      }
+
+      var order = response.data.data;
+      $rootScope.justCreatedOrder = order;
+
+      return orderApi.getPayInfo(order)
+      .then(function (response){
+        if (response.data.status !== 0) {
           $ionicPopup.alert({
-            title: '未能创建订单',
-            template: responseData.msg
+            title: '未能获取支付信息',
+            template: response.data.msg
           });
 
-          return;
+          return $q.reject();
         }
 
-        var order = responseData.data;
-        $rootScope.justCreatedOrder = order;
-        orderApi.getPayInfo(order)
-        .success(function (responseData){
-          if (responseData.status !== 0) {
-            $ionicPopup.alert({
-              title: '未能获取支付信息',
-              template: responseData.msg
-            });
-
-            return;
-          }
-
-          paymentApi.pay(responseData.data)
-          .then(function (data) {
-            alert(data);
-            $state.go('tab.order-payed');
-          }, function (err) {
-            $ionicPopup.alert({
-              title: '支付失败',
-              template: err
-            });
+        return paymentApi.pay(response.data.data)
+        .then(function (data) {
+          alert(data);
+          $state.go('tab.order-payed');
+        }, function (err) {
+          $ionicPopup.alert({
+            title: '支付失败',
+            template: err
           });
+          return $q.reject();
         });
       });
-    };
-  }])
-  .controller('OrderPayedController', ['$rootScope', '$scope', '$q', 'orderApi', function ($rootScope, $scope, $q, orderApi) {
-    var justCreatedOrder = $rootScope.justCreatedOrder;
-    delete $rootScope.justCreatedOrder;
+    })
+    .finally(function () {
+      $ionicLoading.hide();
+    });
+  };
+})
+.controller('OrderPayedController', function ($rootScope, $scope, $q, $ionicLoading, orderApi) {
+  var justCreatedOrder = $rootScope.justCreatedOrder;
+  delete $rootScope.justCreatedOrder;
 
-    $scope.load = function () {
-      var promises = [];
-      angular.forEach((justCreatedOrder || {}).order_id, function (order_id) {
-        promises.push($q(function (resolve, reject) {
-          orderApi.getOrderDetail(order_id).success(function (responseData) {
-            resolve(responseData.data);
-          });
-        }));
+  $scope.load = function () {
+    $ionicLoading.show();
+    var promises = [];
+    angular.forEach((justCreatedOrder || {}).order_id, function (order_id) {
+      promises.push(orderApi.getOrderDetail(order_id));
+    });
+
+    $q.all(promises)
+    .then(function (responses) {
+      $scope.orders = [];
+      angular.forEach(responses, function (response) {
+        if(response.data.status === 0) {
+          $scope.orders.push(response.data.data);
+        }
       });
+    })
+    .finally(function () {
+      $ionicLoading.hide();
+    });
+  };
 
-      $q.all(promises)
-      .then(function (responses) {
-        $scope.orders = responses;
-      });
-    };
-
-    $scope.load();
-  }])
-})();
+  $scope.load();
+});
