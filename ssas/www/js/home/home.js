@@ -19,6 +19,15 @@
               controller: 'SigninController'
             }
           }
+        })
+        .state('tab.activity', {
+          url: '/activity',
+          views: {
+            'tab-home': {
+              templateUrl: 'templates/home/activity-list.html',
+              controller: 'ActivityController'
+            }
+          }
         });
     }) // end of config
 
@@ -85,6 +94,14 @@
         $scope.activityInfo = result.data.data;
       })
     }) // end of HomeController
+
+    .controller('ActivityController', function ($scope, ActivityApi) {
+      $scope.activityInfo = {};
+
+      ActivityApi.getActivityContent().then(function (result) {
+        $scope.activityInfo = result.data.data;
+      })
+    }) // end of ActivityController
 
     .controller('SigninController', function ($scope, $ionicPopup, PointApi) {
       $scope.signedIn = function () {

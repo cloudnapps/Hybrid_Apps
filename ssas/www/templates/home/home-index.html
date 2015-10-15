@@ -74,50 +74,57 @@
 
     <!--活动-->
     <div class="row" style="padding: 0;margin: 6px 0 0;background-color: #fff;">
-      <div class="col col-50 col-center" style="padding: 0px;margin: 0 0 10px 0;">
+      <div class="col col-80 col-center" style="padding: 0px;margin: 0 0 10px 0;">
         <img src="img/newproduct.jpg" style="height: 30px;">
+        {{activityInfo.act_info.end_time}}
       </div>
-      <div class="col col-50 col-center" style="padding: 0px;margin: 10px 5px;" align="right">
-        <a href="#/orders/all" style="margin-right: 25px;text-decoration: none;color: #666c70;">更多<span
+      <div class="col col-20 col-center" style="padding: 0px;margin: 10px 5px;" align="right">
+        <a href="#/tab/activity" style="margin-right: 25px;text-decoration: none;color: #666c70;">更多<span
           style="margin-left: 5px;">>></span></a>
       </div>
     </div>
     <div style="padding: 0 0 0 6px;background-color: #fff;">
-      <div class="row" ng-repeat="activity in activityInfo" ng-if="$index % 3 === 0">
+      <div class="row" ng-repeat="activity in activityInfo.product_info" ng-if="$index % 3 === 0">
         <div class="col col-30" style="padding: 0px;">
           <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
-            <img style="width:90px;" ng-src="{{activityInfo[$index].image}}">
+            <img style="width:90px;" ng-src="{{activityInfo.product_info[$index].image}}">
             <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
           </a>
 
-          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">￥{{activityInfo[$index].activity_price}}</p>
+          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+            {{activityInfo.product_info[$index].activity_price | currency: '￥'}}</p>
 
           <p style="text-align: center;margin-bottom: 0;font-size: 12px;text-decoration: line-through;color: #666c70;">
-            ￥{{activityInfo[$index].price}}</p>
+            {{activityInfo.product_info[$index].price | currency: '￥'}}
+          </p>
         </div>
 
         <div class="col col-30" style="padding: 0px;">
           <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
-            <img style="width:90px;" ng-src="{{activityInfo[$index+1].image}}">
+            <img style="width:90px;" ng-src="{{activityInfo.product_info[$index+1].image}}">
             <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
           </a>
 
-          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">￥{{activityInfo[$index+1].activity_price}}</p>
+          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+            {{activityInfo.product_info[$index+1].activity_price | currency: '￥'}}</p>
 
           <p style="text-align: center;margin-bottom: 0;font-size: 12px;text-decoration: line-through;color: #666c70;">
-            ￥{{activityInfo[$index+1].price}}</p>
+            {{activityInfo.product_info[$index+1].price | currency: '￥'}}
+          </p>
         </div>
 
         <div class="col col-30" style="padding: 0px;">
           <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
-            <img style="width:90px;" ng-src="{{activityInfo[$index+2].image}}">
+            <img style="width:90px;" ng-src="{{activityInfo.product_info[$index+2].image}}">
             <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
           </a>
 
-          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">￥{{activityInfo[$index+2].activity_price}}</p>
+          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+            {{activityInfo.product_info[$index+2].activity_price | currency: '￥'}}</p>
 
           <p style="text-align: center;margin-bottom: 0;font-size: 12px;text-decoration: line-through;color: #666c70;">
-            ￥{{activityInfo[$index+2].price}}</p>
+            {{activityInfo.product_info[$index+2].price | currency: '￥'}}
+          </p>
         </div>
       </div>
     </div>
