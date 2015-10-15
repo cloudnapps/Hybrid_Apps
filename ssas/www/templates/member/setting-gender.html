@@ -1,32 +1,16 @@
 <ion-view view-title="{{'settng_title'|translate}}" hide-tabs="true">
   <ion-content>
-    <div class="row">
-      <div class="col col-20 col-center">
-        性别
-      </div>
-      <div class="col col-40">
-        <label class="item item-radio">
-          <input type="radio" name="group" ng-model="genderInfo.gentle">
-
-          <div class="item-content">
-            男
-          </div>
-          <i class="radio-icon ion-checkmark"></i>
-        </label>
-      </div>
-      <div class="col col-40">
-        <label class="item item-radio">
-          <input type="radio" name="group" ng-model="genderInfo.lady">
-
-          <div class="item-content">
-            女
-          </div>
-          <i class="radio-icon ion-checkmark"></i>
-        </label>
-      </div>
-    </div>
-
     <div class="button-bar">
+      <a class="button button-clear" style="border: none;color: #000;">性别:</a>
+      <a class="button button-clear" style="border: none;padding: 0; color: #000;" ng-click="setGender('gentle')">
+        <span ng-class="{'set-gender': userGender === 'gentle'}">男</span>
+      </a>
+      <a class="button button-clear" style="border: none;padding: 0;color: #000;" ng-click="setGender('lady')">
+        <span ng-class="{'set-gender': userGender === 'lady'}">女</span>
+      </a>
+    </div>
+    <hr style="margin-top: -5px;height:1px;border:none;border-top:1px solid #ccc;">
+    <div class="button-bar" style="margin-top: 150px;">
       <button class="button button-full button-light"
               style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;"
               ng-click="changeGender()">确定

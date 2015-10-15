@@ -130,14 +130,15 @@
     })
 
     .controller('SettingGenderCtrl', function ($scope, $state, $stateParams, SettingApi) {
-      $scope.genderInfo = {};
-      $scope.genderInfo.gentle = $stateParams.params === 'gentle';
-      $scope.genderInfo.lady = !$scope.genderInfo.gentle;
+      $scope.userGender = $stateParams.params || 'gentle';
 
+      $scope.setGender = function (gender) {
+        $scope.userGender = gender;
+      }
 
       $scope.changeGender = function () {
         var memberInfo = {
-          sex: $scope.genderInfo.gentle ? 'gentle' : 'lady'
+          sex: $scope.userGender
         };
 
         SettingApi.modifyMemberSetting(memberInfo, function (result) {

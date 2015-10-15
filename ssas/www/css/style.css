@@ -232,3 +232,8 @@ hr {
   flex: 0 0 60%;
   max-width: 60%;
 }
+.set-gender {
+  background-color: #568baa;
+  color: #fff;
+  display: block;
+}
