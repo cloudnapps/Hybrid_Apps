@@ -13,7 +13,7 @@
     <!-- ios -->
     <platform name="ios">
         <config-file target="*-Info.plist" parent="CFBundleDisplayName">
-            前海周大福
+            好酷
         </config-file>
         <resource-file src="src/MapResource.bundle" />
     </platform>
