@@ -121,7 +121,7 @@ angular.module('cart', ['components'])
     });
   };
 }) // end of CartController
-.controller('CartCheckoutController', function ($rootScope, $scope, $stateParams, $ionicModal, $ionicLoading, cartApi) {
+.controller('CartCheckoutController', function ($rootScope, $scope, $state, $stateParams, $ionicModal, $ionicLoading, cartApi) {
   $scope.checkout = function () {
     $ionicLoading.show();
     cartApi.checkout($scope.cart, $stateParams.nature).success(function (responseData){
@@ -137,6 +137,7 @@ angular.module('cart', ['components'])
   $scope.checkout();
   $scope.confirm = function () {
     $rootScope.confirmedCart = $scope.cart;
+    $state.go('tab.cart-payment');
   };
 })
 .controller('CartPaymentController', function ($rootScope, $scope, $state, $ionicModal, $ionicPopup, $ionicLoading, cartApi, orderApi, paymentApi) {
