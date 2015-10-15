@@ -1,0 +1,23 @@
+<ion-view view-title="{{'comment_title'|translate}}" hide-tabs="true">
+  <ion-content>
+    <div style="height: 44px">
+    </div>
+    <div class="row">
+      <div class="col col-100">
+        {{item.seller_name}}
+        <img ng-src="{{item.seller_logo}}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-100">
+        {{item.order_id}}
+        {{item.name}}
+      </div>
+    </div>
+    <div class="button-bar">
+      <a class="button button-full button-light" style="font-size:20px;" ng-click="submitRequest()">
+        {{'return_addbtn'|translate}}
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

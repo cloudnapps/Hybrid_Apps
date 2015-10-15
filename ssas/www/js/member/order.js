@@ -52,6 +52,15 @@
             }
           }
         })
+        .state('tab.orders.commenting', {
+          url: '/commenting',
+          views: {
+            'tab-orders': {
+              templateUrl: 'templates/member/order-list.html',
+              controller: 'OrderCommentCtrl'
+            }
+          }
+        })
         .state('tab.orders.return', {
           url: '/return',
           views: {
@@ -76,6 +85,15 @@
             'tab-member': {
               templateUrl: 'templates/member/order-track.html',
               controller: 'OrderTrackCtrl'
+            }
+          }
+        })
+        .state('tab.order_comment', {
+          url: '/comment/:orderId',
+          views: {
+            'tab-member': {
+              templateUrl: 'templates/member/comment-request.html',
+              controller: 'CommentRequestCtrl'
             }
           }
         });
@@ -132,7 +150,7 @@
         confirmPopup.then(function (res) {
           if (res) {
             OrderApi.deleteOrder(item.order_id, function (result) {
-              var alertPopup = $ionicPopup.alert({
+              var alertPopup = $ionicPopup.confirm({
                 title: '取消订单',
                 template: result.msg
               });
@@ -154,6 +172,10 @@
 
       $scope.requestOrder = function (item) {
         $state.go('tab.feedbacks.returns', {orderId: item.order_id}, {reload: true});
+      };
+
+      $scope.commentOrder = function (item) {
+        $state.go('tab.order_comment', {orderId: item.order_id}, {reload: true});
       };
     })
 
@@ -289,6 +311,57 @@
       });
     })
 
+    .controller('OrderCommentCtrl', function ($scope, $state, OrderApi) {
+      $scope.items = [];
+
+      $scope.filter = {
+        ship_status: 1
+      };
+
+      $scope.init = function () {
+        if ($scope.items.length === 0) {
+          $scope.items = [];
+          $scope.page = 0;
+          $scope.hasMore = true;
+        }
+      };
+
+      $scope.loadMore = function () {
+        OrderApi.getOrderList($scope.page + 1, $scope.filter, function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.items = $scope.items.concat(result.data);
+            $scope.page += 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          }
+        });
+      };
+
+      $scope.$on('$ionicView.enter', function () {
+        $scope.isActive = true;
+        $scope.init();
+      });
+
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.isActive = false;
+      });
+
+      $scope.$on('$stateChangeSuccess', function () {
+        if ($scope.isActive)
+          $scope.loadMore();
+      });
+
+      $scope.trackOrder = function (item) {
+        $state.go("tab.order_track", {orderId: item.order_id}, {reload: true});
+      };
+
+      $scope.commentOrder = function (item) {
+        $state.go('tab.order_comment', {orderId: item.order_id}, {reload: true});
+      };
+    })
+
     .controller('OrderReturnCtrl', function ($scope, $state, OrderApi) {
       $scope.items = [];
 
@@ -337,18 +410,30 @@
     })
 
     .controller('OrderDetailCtrl', function ($scope, $stateParams, OrderApi) {
+      $scope.showOrderTabs = false;
+
       OrderApi.getOrderDetail($stateParams.orderId, function (result) {
         $scope.item = result.data;
       });
     })
 
     .controller('OrderTrackCtrl', function ($scope, $stateParams, OrderApi) {
+      $scope.showOrderTabs = false;
+
       OrderApi.getOrderDetail($stateParams.orderId, function (result) {
         $scope.orderInfo = result.data;
       });
 
       OrderApi.getOrderTrack($stateParams.orderId, function (result) {
         $scope.items = result.data;
+      });
+    })
+
+    .controller('CommentRequestCtrl', function ($scope, $stateParams, OrderApi) {
+      $scope.showOrderTabs = false;
+
+      OrderApi.getMemberRate($stateParams.orderId, function (result) {
+        $scope.item = result.data;
       });
     })
 
@@ -434,6 +519,17 @@
         sendRequest(url, data, callback);
       };
 
+      var saveMemberRate = function (orderId, callback) {
+        var url = apiEndpoint.url + '/member-save_rate.html';
+        var data = {
+          member_id: 13,
+          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          order_id: orderId
+        };
+
+        sendRequest(url, data, callback);
+      };
+
       var getOrderTrack = function (orderId, callback) {
         var url = apiEndpoint.url + '/member-getOrderTrack.html';
         var data = {
@@ -451,6 +547,7 @@
         deleteOrder: deleteOrder,
         receiveOrder: receiveOrder,
         getMemberRate: getMemberRate,
+        saveMemberRate: saveMemberRate,
         getOrderTrack: getOrderTrack
       };
     });

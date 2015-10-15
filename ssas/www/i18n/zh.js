@@ -81,6 +81,9 @@ var translations_zh = {
     return_addbtn: '提交申请',
     return_newbtn: '新建退款退货',
 
+    //comment
+    comment_title: '订单评论',
+
     good_category: '商品分类',
     good_fav: '收藏商品',
 
