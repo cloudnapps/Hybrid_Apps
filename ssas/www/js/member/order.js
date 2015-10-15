@@ -151,23 +151,29 @@
       };
 
       $scope.cancelOrder = function (item) {
-        var confirmPopup = $ionicPopup.confirm({
+        var myPopup = $ionicPopup.show({
           title: '取消订单',
-          template: '是否真的需要取消订单?'
-        });
-
-        confirmPopup.then(function (res) {
-          if (res) {
-            OrderApi.deleteOrder(item.order_id, function (result) {
-              var alertPopup = $ionicPopup.confirm({
-                title: '取消订单',
-                template: result.msg
-              });
-              alertPopup.then(function (res) {
-                console.log(res);
-              });
-            })
-          }
+          template: '您确定取消此订单吗？取消后，如您想购买需再次生成订单后方可购买哦~~',
+          buttons: [
+            {text: '我后悔了'},
+            {
+              text: '<b>确定</b>',
+              type: 'button-positive',
+              onTap: function (e) {
+                OrderApi.deleteOrder(item.order_id, function (result) {
+                  if(result.status === 1) {
+                    var alertPopup = $ionicPopup.alert({
+                      title: '取消订单',
+                      template: result.msg
+                    });
+                    alertPopup.then(function (res) {
+                      console.log(res);
+                    });
+                  }
+                })
+              }
+            }
+          ]
         });
       };
 
@@ -384,8 +390,6 @@
     })
 
     .controller('CommentRequestCtrl', function ($scope, $stateParams, OrderApi) {
-      $scope.showOrderTabs = false;
-
       OrderApi.getMemberRate($stateParams.orderId, function (result) {
         $scope.item = result.data;
       });
@@ -486,8 +490,6 @@
     })
 
     .factory('OrderApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
-      console.log(apiEndpoint);
-
       var sendRequest = function (url, data, callback) {
         var request = $http({
           method: "post",
