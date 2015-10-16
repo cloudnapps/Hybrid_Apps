@@ -24,7 +24,6 @@ angular.module('components')
         alert("wxPay");
         var deferred = $q.defer();
         var payObj = {};
-        payObj["appid"] = payment.appid;
         payObj["noncestr"] = payment.noncestr;
         payObj["package"] = payment.package;
         payObj["partnerid"] = payment.partnerid;

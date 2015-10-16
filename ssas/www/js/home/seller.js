@@ -137,7 +137,6 @@
       $scope.payByWechat = function () {
         alert("wxPay");
         var payObj = {};
-        payObj["appid"] = "1234";
         payObj["noncestr"] = "asdaseraerasdfasdf";
         payObj["package"] = "pakdage";
         payObj["partnerid"] = "4321";

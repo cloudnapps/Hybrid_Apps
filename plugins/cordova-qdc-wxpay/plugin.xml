@@ -56,21 +56,6 @@
         <param name="onload" value="true" />
       </feature>
     </config-file>
-
-    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
-      <array>
-        <dict>
-          <key>CFBundleTypeRole</key>
-          <string>Editor</string>
-          <key>CFBundleURLName</key>
-          <string>wechat</string>
-          <key>CFBundleURLSchemes</key>
-          <array>
-            <string>wxbc45c870bddd35df</string>
-          </array>
-        </dict>
-      </array>
-    </config-file>
     
     <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
         <array>

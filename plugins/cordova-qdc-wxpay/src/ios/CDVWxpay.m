@@ -7,6 +7,7 @@
 //
 
 #import "CDVWxpay.h"
+#import "AppDelegate.h"
 
 @implementation CDVWxpay
 
@@ -33,12 +34,13 @@
         NSString *sign = nil;
         
         // check the params
-        if (![params objectForKey:@"appid"])
+        AppDelegate* delegate = self.appDelegate;
+        appid = [delegate.viewController.settings objectForKey:@"wechat_app_id"];
+        if (!appid)
         {
             [self failWithCallbackID:command.callbackId withMessage:@"appid参数错误"];
             return ;
         }
-        appid = [params objectForKey:@"appid"];
 
         if (![params objectForKey:@"noncestr"])
         {

@@ -41,7 +41,7 @@ angular.module('cart', ['components'])
 
 }) // end of config
 
-.controller('CartController', function ($scope, $ionicLoading, cartApi, tabStateService, userService) {
+.controller('CartController', function ($scope, $state, $ionicLoading, cartApi, tabStateService, userService) {
 
   $scope.$on('$ionicView.beforeEnter', function(){
     if(!userService.isLogin()) {
@@ -79,6 +79,14 @@ angular.module('cart', ['components'])
     })
     .finally(function () {
       $ionicLoading.hide();
+    });
+  };
+
+  $scope.canCheckout = function (nature) {
+    return (nature.aSelCart || []).some(function (seller) {
+      return (seller.goods_list || []).some(function (good) {
+        return good.selected;
+      });
     });
   };
 

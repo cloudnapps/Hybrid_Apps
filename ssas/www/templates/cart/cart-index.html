@@ -45,7 +45,7 @@
         </div>
         <ion-item class="item item-button-right">
           <div class="assertive">共计: {{nature.total_item_amount |currency:'￥'}} (不含税 不含运费)</div>
-          <button class="button button-energized" ui-sref="tab.cart-checkout({nature: natureKey})">{{'cart_checkout'|translate}}</button>
+          <button class="button button-energized" ng-disabled="!canCheckout(nature)" ui-sref="tab.cart-checkout({nature: natureKey})">{{'cart_checkout'|translate}}</button>
         </ion-item>
       </div>
     </ion-list>
