@@ -4,7 +4,7 @@
     </div>
     <div class="list card" style="margin: 0;box-shadow: none;">
       <div class="item item-body">
-        <p style="margin: 10px 0;color: #4c4b4d;">{{item.title.status}}</p>
+        <p style="margin: 10px 0;color: #4c4b4d;">{{item.title.status}} {{item.title.type}}</p>
 
         <p style="margin: 10px 0;color: #4c4b4d;">{{item.title.time}}</p>
       </div>
@@ -16,9 +16,16 @@
         <p style="margin: 10px 0;color: #4c4b4d;">退款说明：{{item.title.type}}</p>
       </div>
       <div class="item item-body">
-        <div class="row" ng-repeat="pro in item.product">
-          <p style="margin: 10px 0;color: #4c4b4d;">退款类型：{{item.title.type}}</p>
-        </div>
+        <ion-list>
+          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="pro in item.product"
+                    type="item-text-wrap">
+            <img style="border-radius: 0;" ng-src="{{item.image}}">
+
+            <h2 style="color:#666c70;font-size: 14px;margin-bottom: 5px;">{{pro.name}}</h2>
+
+            <p style="color: #c9000b;">{{pro.price | currency: '￥'}}</p>
+          </ion-item>
+        </ion-list>
       </div>
     </div>
   </ion-content>

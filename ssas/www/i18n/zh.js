@@ -63,7 +63,7 @@ var translations_zh = {
     rec_title: '地址管理',
     rec_addbtn: '添加新地址',
     rec_addtitle: '新建收货地址',
-    idcard_title: '身份证列表',
+    idcard_title: '身份证管理',
     idcard_addbtn: '添加身份证',
     idcard_addtitle: '新建身份证',
 

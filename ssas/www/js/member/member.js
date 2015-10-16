@@ -19,9 +19,9 @@
         });
     })
     .controller('MemberCtrl', function ($scope, $ionicPopover, $state, $ionicHistory, userService) {
-      
-      $scope.$on('$ionicView.beforeEnter', function(){
-        if(!userService.isLogin()) {
+
+      $scope.$on('$ionicView.beforeEnter', function () {
+        if (!userService.isLogin()) {
           $scope.tabStateGo($scope.tabIndex.member, 'tab.login');
         }
       });
@@ -52,6 +52,8 @@
 
       $scope.gotoPage = function (url) {
         $state.go(url, {}, {reload: true});
+
+        $scope.closePopover();
       };
     });
 })();

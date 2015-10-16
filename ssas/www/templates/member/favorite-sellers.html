@@ -5,13 +5,13 @@
 
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap">
-        <img style="border-radius: 0;" ng-src="{{item.image}}">
-
-        <h2 style="color:#666c70;font-size: 14px;margin-bottom: 5px;">{{item.name}}</h2>
-
-        <p style="color: #c9000b;">￥{{item.price}}</p>
-
-        <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
+        <div class="col col-25 col-center" style="padding:0;">
+          <img style="height: 75px;width: 75px;margin: 15px 10px 10px;padding: 5px;border: 1px solid #a9a9a9;"
+               ng-src="{{item.image}}">
+        </div>
+        <div class="col col-75 col-center" style="padding-left: 15px;">
+          <p style="margin: 0;color: #3b3a3a;font-size: 18px;font-weight: 400;">{{item.name}}</p>
+        </div>
 
         <ion-option-button class="button-assertive" ng-click="remove(item)">
           删除
