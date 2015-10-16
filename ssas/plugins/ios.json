@@ -40,13 +40,13 @@
                     "Security.framework": [
                         {
                             "xml": false,
-                            "count": 2
+                            "count": 1
                         }
                     ],
                     "SystemConfiguration.framework": [
                         {
                             "xml": false,
-                            "count": 2
+                            "count": 1
                         }
                     ],
                     "AssetsLibrary.framework": [
@@ -139,6 +139,14 @@
                         {
                             "xml": "<array><dict><key>CFBundleTypeRole</key><string>Editor</string><key>CFBundleURLName</key><string>wechat</string><key>CFBundleURLSchemes</key><array><string>wxbc45c870bddd35df</string></array></dict></array>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<array><dict><key>CFBundleTypeRole</key><string>Editor</string><key>CFBundleURLName</key><string>wechat</string><key>CFBundleURLSchemes</key><array><string>wx169f5e5b9d07599c</string></array></dict></array>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<array><dict><key>CFBundleTypeRole</key><string>Editor</string><key>CFBundleURLIconFile</key><string>icon-50@2x</string><key>CFBundleURLName</key><string>alipay</string><key>CFBundleURLSchemes</key><array><string>zdfalipay</string></array></dict></array>",
+                            "count": 1
                         }
                     ],
                     "LSApplicationQueriesSchemes": [
@@ -181,10 +189,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"WeixinPay\"><param name=\"ios-package\" value=\"CDVWxpay\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
                             "count": 1
                         },
@@ -206,6 +210,10 @@
                         },
                         {
                             "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WeixinPay\"><param name=\"ios-package\" value=\"CDVWxpay\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -229,9 +237,6 @@
         "com.qdc.plugins.alipay": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         },
-        "com.qdc.plugins.wxpay": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         },
@@ -250,10 +255,13 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         },
-        "com.cloudnapps.project.related": {
+        "phonegap-plugin-barcodescanner": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         },
-        "phonegap-plugin-barcodescanner": {
+        "com.qdc.plugins.wxpay": {
+            "PACKAGE_NAME": "com.ionicframework.ssas835659"
+        },
+        "com.cloudnapps.project.related": {
             "PACKAGE_NAME": "com.ionicframework.ssas835659"
         }
     },
