@@ -17,7 +17,7 @@
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name="deployment-target" value="8.0" />
-  <preference name="serverURL" value="http://k11.cloudnapps.com/" />
+  <preference name="serverURL" value="https://demo.ibeacon.cloudnapps.com" />
   <preference name="appKey" value="55e556e837b5268c0565a077" />
   <preference name="appSecret" value="fbb45ff6-7441-4e9c-8522-06c4ee3fe5f0" />  
   <preference name="beaconUUID" value="1397E5D0-E1C7-472F-A1B4-8A2078014CED" />
