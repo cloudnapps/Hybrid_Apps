@@ -19,10 +19,14 @@
         });
     })
     .controller('MemberCtrl', function ($scope, $ionicPopover, $state, $ionicHistory, userService) {
+      $scope.currentUser = {};
 
       $scope.$on('$ionicView.beforeEnter', function () {
         if (!userService.isLogin()) {
           $scope.tabStateGo($scope.tabIndex.member, 'tab.login');
+        }
+        else {
+          $scope.currentUser = userService.get();
         }
       });
 

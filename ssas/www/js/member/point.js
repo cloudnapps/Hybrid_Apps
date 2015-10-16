@@ -125,9 +125,7 @@
         $scope.goldInfo.isShow = !$scope.goldInfo.isShow;
       }
     })
-    .factory('PointApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
-      console.log(apiEndpoint);
-
+    .factory('PointApi', function ($http, apiEndpoint, userService, transformRequestAsFormPost) {
       var sendRequest = function (url, data, callback) {
         var request = $http({
           method: "post",
@@ -145,13 +143,25 @@
         );
       };
 
+
+      var currentUser = userService.get();
+
+      var init = function () {
+        if (!currentUser) {
+          currentUser = userService.get();
+        }
+
+        return data = {
+          member_id: currentUser.memberId,
+          token: currentUser.token
+        }
+      };
+
       var getPointInfo = function (page, type, callback) {
         var url = apiEndpoint.url + '/member-point_log.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          type: type
-        };
+        var data = init();
+
+        data.type = type;
 
         if (page) {
           data.page = page;
@@ -162,12 +172,10 @@
 
       var addGold = function (value, reason, callback) {
         var url = apiEndpoint.url + '/member-add_gold.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          add_value: value,
-          reason: reason
-        };
+        var data = init();
+
+        data.add_value = value;
+        data.reason = reason;
 
         sendRequest(url, data, callback);
       };

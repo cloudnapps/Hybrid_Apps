@@ -160,9 +160,7 @@
       }
     })
 
-    .factory('FavoriteApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
-      console.log(apiEndpoint);
-
+    .factory('FavoriteApi', function ($http, apiEndpoint, userService, transformRequestAsFormPost) {
       var sendRequest = function (url, data, callback) {
         var request = $http({
           method: "post",
@@ -182,12 +180,23 @@
           });
       };
 
+      var currentUser = userService.get();
+
+      var init = function () {
+        if (!currentUser) {
+          currentUser = userService.get();
+        }
+
+        return data = {
+          member_id: currentUser.memberId,
+          token: currentUser.token
+        }
+      };
+
+
       var getFavoriteList = function (page, type, callback) {
         var url = apiEndpoint.url + '/member-favorite.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
-        };
+        var data = init();
 
         if (page) {
           data.page = page;
@@ -202,44 +211,36 @@
 
       var addGoodsFavorite = function (goodsId, callback) {
         var url = apiEndpoint.url + '/member-add_favorite.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          goods_id: goodsId
-        };
+        var data = init();
+
+        data.goods_id = goodsId;
 
         sendRequest(url, data, callback);
       };
 
       var deleteGoodsFavorite = function (goodsId, callback) {
         var url = apiEndpoint.url + '/member-ajax_del_fav.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          goods_id: goodsId
-        };
+        var data = init();
+
+        data.goods_id = goodsId;
 
         sendRequest(url, data, callback);
       };
 
       var addSellerFavorite = function (sellerId, callback) {
         var url = apiEndpoint.url + '/member-seller_fav.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          seller_id: goodsId
-        };
+        var data = init();
+
+        data.seller_id = sellerId;
 
         sendRequest(url, data, callback);
       };
 
       var deleteSellerFavorite = function (sellerId, callback) {
         var url = apiEndpoint.url + '/member-del_seller_fav.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          seller_id: goodsId
-        };
+        var data = init();
+
+        data.seller_id = sellerId;
 
         sendRequest(url, data, callback);
       };

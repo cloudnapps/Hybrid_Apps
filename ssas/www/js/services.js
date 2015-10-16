@@ -69,7 +69,7 @@ angular.module('starter.services', [])
 
     this.isLogin = function(){
       return !!currentUser.token;
-    }
+    };
 
     // 从localStorage获取 currentUser对象, 用于app退出重新进入时
     this.initFromLocal = function(){
@@ -82,7 +82,7 @@ angular.module('starter.services', [])
         saveToLocal();
       }
       return currentUser;
-    }
+    };
 
     function getItem(key){
       return currentUser[key];
@@ -118,7 +118,7 @@ angular.module('starter.services', [])
      * @param  {[type]} options     [ui.router的 options, 其中 isForce 是否强制选择某个tab]
      * @return {[type]}             [undefined]
      */
-    this.go = function(selectIndex, stateName, params, options){  
+    this.go = function(selectIndex, stateName, params, options){
 
       if((options && options.isForce) || ($ionicTabsDelegate.selectedIndex() !== selectIndex)) {
         $timeout(function(){

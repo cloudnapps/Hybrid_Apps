@@ -123,13 +123,33 @@
 
         LoginApi.submitUser($scope.userInfo.mobile, $scope.userInfo.password,
           $scope.userInfo.mobile, $scope.userInfo.signCode, function (result) {
-            var alertPopup = $ionicPopup.alert({
-              title: '用户注册',
-              template: result.msg
-            });
-            alertPopup.then(function (res) {
-              console.log(res);
-            });
+            if (result.status === 1) {
+              var alertPopup = $ionicPopup.alert({
+                title: '用户注册',
+                template: result.msg
+              });
+              alertPopup.then(function (res) {
+                console.log(res);
+              });
+            }
+            else {
+              var currentUser = {};
+              currentUser.memberId = result.data.member_id;
+              currentUser.name = result.data.login_name;
+              currentUser.token = result.data.token;
+
+              userService.set(currentUser);
+              if (userService.backIndex === -1) {
+                $ionicHistory.goBack();
+                $scope.tabStateGo($scope.tabIndex.member);
+                userService.backIndex = -1;
+              }
+              else {
+                $ionicHistory.goBack();
+                $scope.tabStateGo(userService.backIndex);
+                userService.backIndex = -1;
+              }
+            }
           })
       };
     })
@@ -145,7 +165,7 @@
 
       function sendCode() {
         if (!$scope.userInfo.mobile) {
-          toastService.setToast('请填写手机号~');  
+          toastService.setToast('请填写手机号~');
           return;
         }
         $scope.reSendCodeTime = 30;
@@ -165,7 +185,7 @@
 
       function mobileValide(){
         if (!$scope.userInfo.mobile) {
-          toastService.setToast('请填写手机号~');  
+          toastService.setToast('请填写手机号~');
           return;
         }
         LoginApi
