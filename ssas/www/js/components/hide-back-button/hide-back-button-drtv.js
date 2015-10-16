@@ -1,5 +1,5 @@
 angular.module('components')
-  .directive('hideBackButton', function($ionicNavBarDelegate) {
+  .directive('hideBackButton', function($rootScope, $ionicNavBarDelegate) {
     return {
       restrict: 'A',
       link: function(scope, element, attributes) {

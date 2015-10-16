@@ -1,0 +1,36 @@
+<ion-view view-title="优惠活动" hide-tabs="true">
+  <ion-content>
+    <div class="row">
+      <div class="col col-33"><h3>活动名称</h3></div>
+      <div class="col col-67"><h1>{{activityInfo.act_info.act_name}}</h1></div>
+    </div>
+    <div class="row">
+      <div class="col col-33"><p>开始时间</p></div>
+      <div class="col col-67"><p>{{activityInfo.act_info.start_time}}</p></div>
+    </div>
+    <div class="row">
+      <div class="col col-33"><p>结束时间</p></div>
+      <div class="col col-67"><p>{{activityInfo.act_info.end_time}}</p></div>
+    </div>
+
+    <div class="row" style="padding: 0;border-bottom: 1px solid #a9a9a9;" ng-repeat="item in activityInfo.product_info"
+         ng-click="goDetail(item)">
+      <div class="col col-25 col-center" style="padding:0;">
+        <img style="height: 75px;width: 75px;margin: 15px 10px 10px;padding: 5px;border: 1px solid #a9a9a9;"
+             ng-src="{{item.image}}">
+      </div>
+      <div class="col col-75 col-center" style="padding-left: 15px;">
+        <p style="margin: 0;color: #3b3a3a;font-size: 18px;font-weight: 400;">{{item.name}}</p>
+
+        <p style="margin: 0;color: #3b3a3a;font-size: 18px;font-weight: 400;">{{item.activity_price}}</p>
+
+        <p style="margin: 0;color: #3b3a3a;font-size: 18px;font-weight: 400;">{{item.price}}</p>
+      </div>
+    </div>
+    <ion-infinite-scroll
+      ng-if="hasMore"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

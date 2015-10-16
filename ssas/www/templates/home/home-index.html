@@ -74,50 +74,44 @@
 
     <!--活动-->
     <div class="row" style="padding: 0;margin: 6px 0 0;background-color: #fff;">
-      <div class="col col-50 col-center" style="padding: 0px;margin: 0 0 10px 0;">
+      <div class="col col-80 col-center" style="padding: 0px;margin: 0 0 10px 0;">
         <img src="img/newproduct.jpg" style="height: 30px;">
+        {{activityInfo.act_info.end_time}}
       </div>
-      <div class="col col-50 col-center" style="padding: 0px;margin: 10px 5px;" align="right">
-        <a href="#/orders/all" style="margin-right: 25px;text-decoration: none;color: #666c70;">更多<span
+      <div class="col col-20 col-center" style="padding: 0px;margin: 10px 5px;" align="right">
+        <a href="#/tab/activity" style="margin-right: 25px;text-decoration: none;color: #666c70;">更多<span
           style="margin-left: 5px;">>></span></a>
       </div>
     </div>
     <div style="padding: 0 0 0 6px;background-color: #fff;">
-      <div class="row" ng-repeat="activity in activityInfo" ng-if="$index % 3 === 0">
-        <div class="col col-30" style="padding: 0px;">
+      <div class="row">
+        <div class="col col-50" style="padding: 0px; border: 1px solid #eee;margin: 0 4px 0 0;">
           <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
-            <img style="width:90px;" ng-src="{{activityInfo[$index].image}}">
+            <img style="width:90px;" ng-src="{{activityInfo.product_info[0].image}}">
             <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
           </a>
 
-          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">￥{{activityInfo[$index].activity_price}}</p>
+          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+            {{activityInfo.product_info[0].activity_price | currency: '￥'}}
+          </p>
 
           <p style="text-align: center;margin-bottom: 0;font-size: 12px;text-decoration: line-through;color: #666c70;">
-            ￥{{activityInfo[$index].price}}</p>
+            {{activityInfo.product_info[0].price | currency: '￥'}}
+          </p>
         </div>
 
-        <div class="col col-30" style="padding: 0px;">
+        <div class="col col-50" style="padding: 0px; border: 1px solid #eee;">
           <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
-            <img style="width:90px;" ng-src="{{activityInfo[$index+1].image}}">
+            <img style="width:90px;" ng-src="{{activityInfo.product_info[1].image}}">
             <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
           </a>
 
-          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">￥{{activityInfo[$index+1].activity_price}}</p>
+          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+            {{activityInfo.product_info[1].activity_price | currency: '￥'}}</p>
 
           <p style="text-align: center;margin-bottom: 0;font-size: 12px;text-decoration: line-through;color: #666c70;">
-            ￥{{activityInfo[$index+1].price}}</p>
-        </div>
-
-        <div class="col col-30" style="padding: 0px;">
-          <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
-            <img style="width:90px;" ng-src="{{activityInfo[$index+2].image}}">
-            <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
-          </a>
-
-          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">￥{{activityInfo[$index+2].activity_price}}</p>
-
-          <p style="text-align: center;margin-bottom: 0;font-size: 12px;text-decoration: line-through;color: #666c70;">
-            ￥{{activityInfo[$index+2].price}}</p>
+            {{activityInfo.product_info[1].price | currency: '￥'}}
+          </p>
         </div>
       </div>
     </div>
@@ -189,32 +183,35 @@
     </div>
     <div style="padding: 0 0 0 6px;background-color: #fff;">
       <div class="row"
-           ng-repeat="product in homeInfo.fourth" ng-if="$index % 3 === 0">
-        <div class="col col-30" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
+           ng-repeat="product in homeInfo.fourth" ng-if="$index % 2 === 0">
+        <div class="col col-50" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
           <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;"
              ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.fourth[$index].product_id})">
-            <img style="width:90px;" ng-src="{{homeInfo.fourth[$index].image}}">
-
-            <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
+            <img style="width:90px; height:60%;" ng-src="{{homeInfo.fourth[$index].image}}">
           </a>
+
+          <p style="text-align: center;margin-bottom: 0;color: #c9000b; height: 20%">
+            {{homeInfo.fourth[$index].name}}
+          </p>
+
+          <p style="text-align: center;margin-bottom: 0;font-size: 10px;color: #666c70; height: 20%">
+            优惠价：{{homeInfo.fourth[$index].price}}
+          </p>
         </div>
 
-        <div class="col col-30" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
+        <div class="col col-50" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
           <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;"
              ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.fourth[$index+1].product_id})">
-            <img style="width:90px;" ng-src="{{homeInfo.fourth[$index+1].image}}">
-
-            <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
+            <img style="width:90px; height:60%;" ng-src="{{homeInfo.fourth[$index+1].image}}">
           </a>
-        </div>
 
-        <div class="col col-30" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
-          <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;"
-             ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.fourth[$index+2].product_id})">
-            <img style="width:90px;" ng-src="{{homeInfo.fourth[$index+2].image}}">
+          <p style="text-align: center;margin-bottom: 0;color: #c9000b; height: 20%">
+            {{homeInfo.fourth[$index+1].name}}
+          </p>
 
-            <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
-          </a>
+          <p style="text-align: center;margin-bottom: 0;font-size: 12px;color: #666c70; height: 20%">
+            优惠价：{{homeInfo.fourth[$index+1].price}}
+          </p>
         </div>
       </div>
     </div>

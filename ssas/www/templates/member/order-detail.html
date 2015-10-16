@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    
+
     <hr style="margin: 0;height:1px;border:none;border-top:10px solid #f2f2f2;"/>
     <div class="row" style="padding:10px;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #f2f2f2;">
       <div class="col col-75 col-center" style="height: 100%; padding: 0px">
@@ -32,13 +32,13 @@
       </div> -->
     </div>
 
-    <ion-list style="border: 1px solid #ddd;">
+    <div ng-class="list" style="border: 1px solid #ddd;">
       <ion-item ng-repeat="product in item.products" style="border-top: none;padding: 10px 16px;">
         <div class="row" style="margin:0;padding: 0 15px 10px 0;">
-          <div class="col col-20" style="padding: 0;">
-            <img style="width: 100%;height: 100%;" ng-src="{{product.url}}">
+          <div class="col col-20" style="padding: 0;height: 60px;">
+            <img style="width: 65px;height: 65px;" ng-src="{{product.url}}">
           </div>
-          <div class="col col-80" style="padding: 0 0 0 10px;">
+          <div class="col col-80" style="padding: 0 0 0 10px;height: 65px;">
             <p style="padding: 0px;margin-bottom: 25px;">{{product.name}}</p>
             <p>
               <span style="float: left;">{{product.price | currency:'￥'}}</span>
@@ -47,8 +47,8 @@
           </div>
         </div>
       </ion-item>
-    </ion-list>
-    
+    </div>
+
     <div class="row" style="padding:10px;">
       <div class="col col-75 col-center" style="color: #4a4b4d;padding: 0px">
         运费：{{item.order_info.shipping}}
@@ -57,7 +57,7 @@
         {{item.order_info.express_amount | currency:'￥'}}
       </div>
     </div>
-    
+
     <div class="row" style="padding: 10px;">
       <div class="col col-20 col-center" style="padding: 0;">
         <span style="font-size: 14px;color: #4a4b4d;">留言：</span>
@@ -99,7 +99,7 @@
         </button>
         <button class="button button-light"
                 style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
-                ng-if="item.return_value === '1'" ng-click="requestOrder(item)">申请售后
+                ng-if="item.is_rate" ng-click="commentOrder(item)">去评论
         </button>
         <button class="button button-light"
                 style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"

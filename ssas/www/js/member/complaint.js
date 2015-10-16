@@ -8,8 +8,8 @@
       // Each state's controller can be found in controllers.js
       $stateProvider
 
-        .state('tab.feedbacks.complaint_request', {
-          url: '/complaint/request',
+        .state('tab.complaint_request', {
+          url: '/complaintrequest/:orderId',
           views: {
             'tab-member': {
               templateUrl: 'templates/member/complaint-request.html',
@@ -92,10 +92,10 @@
 
       $scope.goDetail = function (item) {
         $state.go('tab.feedbacks.complaint_detail', {oId: item.oid}, {reload: true})
-      }
+      };
 
-      $scope.goRequest = function () {
-        $state.go('tab.feedbacks.return_request', {orderId: $stateParams.orderId}, {reload: true})
+      $scope.request = function () {
+        $state.go('tab.complaint_orders', {}, {reload: true})
       }
     })
 

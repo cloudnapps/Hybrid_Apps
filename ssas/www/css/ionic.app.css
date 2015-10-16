@@ -7711,16 +7711,15 @@ a.button {
   display: flex; }
 
 .quantity-input {
-  width: 100%;
   padding: 2px 5px; }
   .quantity-input .inc-button, .quantity-input .dec-button {
-    width: 40px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     float: left;
     margin: 0px; }
   .quantity-input input[type="number"] {
     width: 40px;
-    height: 32px;
+    height: 30px;
     float: left;
     border: solid #b2b2b2 1px;
     border-right: 0;
@@ -7766,8 +7765,11 @@ a.button {
 .cart .good.item .good-info {
   display: inline-block;
   padding: 0px 0px 0px 10px; }
+.cart .good.item .quantity-input {
+  float: right; }
 .cart .good.item .row.good-price {
-  padding-left: 0px; }
+  padding-left: 0px;
+  padding-right: 0px; }
   .cart .good.item .row.good-price .price, .cart .good.item .row.good-price .quanity {
     padding-left: 0px; }
 

@@ -21,11 +21,8 @@ var translations_zh = {
     //main tabs
     home: '商城',
     cart: '购物车',
-    shop: '商品',
+    shop: '分类',
     my: '我',
-
-    //my
-    me: '我',
 
     // business
     direct_mail: "海外直邮",
@@ -48,6 +45,8 @@ var translations_zh = {
     ord_nocommenttitle: '待评价',
     ord_returntitle: '售后',
 
+    comment_title: '订单评论',
+
     //favorite
     fav_title: '我的收藏',
     fav_goods: '商品',
@@ -59,12 +58,16 @@ var translations_zh = {
     mkt_price: '市场价格',
 
     comment: '评论',
-    //receiver
+
+    //receiver & idcard
     rec_title: '地址管理',
     rec_addbtn: '添加新地址',
     rec_addtitle: '新建收货地址',
+    idcard_title: '身份证列表',
+    idcard_addbtn: '添加身份证',
+    idcard_addtitle: '新建身份证',
 
-    //point
+    //point & gold
     point_title: '我的积分',
     point_list: '积分记录',
     gold_title: '我的金币',
@@ -72,29 +75,22 @@ var translations_zh = {
 
     //setting
     settng_title: '个人资料',
-    idcard_title: '身份证列表',
-    idcard_addbtn: '添加身份证',
-    idcard_addtitle: '新建身份证',
 
-    //return
+    //return & complaint
     return_title: '退款退货',
     return_addbtn: '提交申请',
     return_newbtn: '新建退款退货',
+    complaint_title: '投诉与建议',
+    complaint_addbtn: '提交',
+    complaint_newbtn: '新建投诉与建议',
 
-    //comment
-    comment_title: '订单评论',
-
+    //good
     good_category: '商品分类',
     good_fav: '收藏商品',
 
     product_cart: '加入购物车',
     product_goto_shop: '进入店铺',
     product_fav_shop: '收藏店铺',
-
-    //complaint
-    complaint_title: '投诉与建议',
-    complaint_addbtn: '提交',
-    complaint_newbtn: '新建投诉与建议',
 
     //cart
     cart_empty: '购物车空空如也～～～',

@@ -1,7 +1,5 @@
-<ion-view view-title="订单列表" hide-tabs="true">
+<ion-view view-title="售后订单列表" hide-tabs="true">
   <ion-content>
-    <div style="height: 44px">
-    </div>
     <ion-list>
       <ion-item ng-repeat="item in items" style="margin: -1px 0 0 0;padding: 0;border: none;">
         <div class="row" style="background-color: #f2f2f2;padding: 10px 15px 10px 10px;">
@@ -43,23 +41,7 @@
           <div style="width: 100%;">
             <button class="button button-energized"
                     style="font-size:12px;float:right;margin: 0 2px;min-height: 27px;line-height: 30px;padding: 0 18px;"
-                    ng-if="item.pay_status_value" ng-click="payOrder(item)">去支付
-            </button>
-            <button class="button button-light"
-                    style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
-                    ng-if="item.is_rate" ng-click="commentOrder(item)">去评论
-            </button>
-            <button class="button button-light"
-                    style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
-                    ng-if="item.is_track" ng-click="trackOrder(item)">查看物流
-            </button>
-            <button class="button button-light"
-                    style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
-                    ng-if="item.pay_status_value" ng-click="cancelOrder(item)">取消订单
-            </button>
-            <button class="button button-light"
-                    style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
-                    ng-click="viewDetail(item)">订单详情
+                    ng-click="requestReturn(item)">退款退货
             </button>
           </div>
         </div>
