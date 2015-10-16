@@ -40,13 +40,13 @@
                     "Security.framework": [
                         {
                             "xml": false,
-                            "count": 1
+                            "count": 2
                         }
                     ],
                     "SystemConfiguration.framework": [
                         {
                             "xml": false,
-                            "count": 1
+                            "count": 2
                         }
                     ],
                     "AssetsLibrary.framework": [
@@ -133,19 +133,15 @@
                     ],
                     "CFBundleURLTypes": [
                         {
-                            "xml": "<array><dict><key>CFBundleTypeRole</key><string>Editor</string><key>CFBundleURLIconFile</key><string>icon-50@2x</string><key>CFBundleURLName</key><string>alipay</string><key>CFBundleURLSchemes</key><array><string>qdcalipay</string></array></dict></array>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<array><dict><key>CFBundleTypeRole</key><string>Editor</string><key>CFBundleURLName</key><string>wechat</string><key>CFBundleURLSchemes</key><array><string>wxbc45c870bddd35df</string></array></dict></array>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<array><dict><key>CFBundleTypeRole</key><string>Editor</string><key>CFBundleURLName</key><string>wechat</string><key>CFBundleURLSchemes</key><array><string>wx169f5e5b9d07599c</string></array></dict></array>",
                             "count": 1
                         },
                         {
                             "xml": "<array><dict><key>CFBundleTypeRole</key><string>Editor</string><key>CFBundleURLIconFile</key><string>icon-50@2x</string><key>CFBundleURLName</key><string>alipay</string><key>CFBundleURLSchemes</key><array><string>zdfalipay</string></array></dict></array>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<array><dict><key>CFBundleTypeRole</key><string>Editor</string><key>CFBundleURLIconFile</key><string>icon-50@2x</string><key>CFBundleURLName</key><string>alipay</string><key>CFBundleURLSchemes</key><array><string>qdcalipay</string></array></dict></array>",
                             "count": 1
                         }
                     ],
@@ -189,6 +185,10 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"WeixinPay\"><param name=\"ios-package\" value=\"CDVWxpay\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
                             "count": 1
                         },
@@ -211,10 +211,6 @@
                         {
                             "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
                             "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"WeixinPay\"><param name=\"ios-package\" value=\"CDVWxpay\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
                         }
                     ]
                 }
@@ -223,46 +219,46 @@
     },
     "installed_plugins": {
         "com.cloudnapps.plugins.beacon.camonitor": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         },
         "com.cloudnapps.plugins.beacon.shake": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
-        "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
-        "com.plugins.beacon.navi": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
-        "com.qdc.plugins.alipay": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
-        "cordova-plugin-globalization": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
-        "phonegap-plugin-barcodescanner": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
-        },
-        "com.qdc.plugins.wxpay": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         },
         "com.cloudnapps.project.related": {
-            "PACKAGE_NAME": "com.ionicframework.ssas835659"
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "com.ionic.keyboard": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "com.plugins.beacon.navi": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "com.qdc.plugins.alipay": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "com.qdc.plugins.wxpay": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "phonegap-plugin-barcodescanner": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         }
     },
     "dependent_plugins": {}
