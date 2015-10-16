@@ -15,6 +15,22 @@
         <config-file target="*-Info.plist" parent="CFBundleDisplayName">
             好酷
         </config-file>
+        
         <resource-file src="src/MapResource.bundle" />
+
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+          <array>
+            <dict>
+              <key>CFBundleTypeRole</key>
+              <string>Editor</string>
+              <key>CFBundleURLName</key>
+              <string>wechat</string>
+              <key>CFBundleURLSchemes</key>
+              <array>
+                <string>wx169f5e5b9d07599c</string>
+              </array>
+            </dict>
+          </array>
+        </config-file>
     </platform>
 </plugin>
