@@ -180,23 +180,9 @@
           });
       };
 
-      var currentUser = userService.get();
-
-      var init = function () {
-        if (!currentUser) {
-          currentUser = userService.get();
-        }
-
-        return data = {
-          member_id: currentUser.memberId,
-          token: currentUser.token
-        }
-      };
-
-
       var getFavoriteList = function (page, type, callback) {
         var url = apiEndpoint.url + '/member-favorite.html';
-        var data = init();
+        var data = userService.getMember();
 
         if (page) {
           data.page = page;
@@ -211,7 +197,7 @@
 
       var addGoodsFavorite = function (goodsId, callback) {
         var url = apiEndpoint.url + '/member-add_favorite.html';
-        var data = init();
+        var data = userService.getMember();
 
         data.goods_id = goodsId;
 
@@ -220,7 +206,7 @@
 
       var deleteGoodsFavorite = function (goodsId, callback) {
         var url = apiEndpoint.url + '/member-ajax_del_fav.html';
-        var data = init();
+        var data = userService.getMember();
 
         data.goods_id = goodsId;
 
@@ -229,7 +215,7 @@
 
       var addSellerFavorite = function (sellerId, callback) {
         var url = apiEndpoint.url + '/member-seller_fav.html';
-        var data = init();
+        var data = userService.getMember();
 
         data.seller_id = sellerId;
 
@@ -238,7 +224,7 @@
 
       var deleteSellerFavorite = function (sellerId, callback) {
         var url = apiEndpoint.url + '/member-del_seller_fav.html';
-        var data = init();
+        var data = userService.getMember();
 
         data.seller_id = sellerId;
 

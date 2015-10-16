@@ -49,34 +49,42 @@ angular.module('starter.services', [])
       return ( source + result );
     }
   })
-  .service('userService', function(){
+  .service('userService', function () {
     var currentUser = {};
 
     // 存在 key 获取此属性值, 不存在key返回 currentUser对象
-    this.get = function(key){
+    this.get = function (key) {
       if (key) {
         return getItem(key);
       }
       return currentUser;
     };
+
     // 保存整个 currentUser对象 或 保存 属性值
-    this.set = function(key, value){
+    this.set = function (key, value) {
       if (angular.isObject(key)) {
         return setObj(key);
       }
       setItem(key, value);
     };
 
-    this.isLogin = function(){
+    this.isLogin = function () {
       return !!currentUser.token;
     };
 
+    this.getMember = function () {
+      return data = {
+        member_id: currentUser.memberId,
+        token: currentUser.token
+      }
+    };
+
     // 从localStorage获取 currentUser对象, 用于app退出重新进入时
-    this.initFromLocal = function(){
-      try{
+    this.initFromLocal = function () {
+      try {
         currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
       }
-      catch(e) {
+      catch (e) {
         console.log(e);
         currentUser = {};
         saveToLocal();
@@ -84,32 +92,32 @@ angular.module('starter.services', [])
       return currentUser;
     };
 
-    function getItem(key){
+    function getItem(key) {
       return currentUser[key];
     }
 
-    function setItem(key, value){
+    function setItem(key, value) {
       currentUser[key] = value;
       saveToLocal();
     }
 
-    function setObj(obj){
+    function setObj(obj) {
       currentUser = obj;
       saveToLocal();
     }
 
-    function saveToLocal(){
+    function saveToLocal() {
       try {
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
       }
-      catch(e) {
+      catch (e) {
         console.log(e);
         currentUser = {};
         localStorage.setItem('currentUser', '');
       }
     }
   })
-  .service('tabStateService', function($timeout, $ionicTabsDelegate, $state){
+  .service('tabStateService', function ($timeout, $ionicTabsDelegate, $state) {
     /**
      * 跨tab页面跳转
      * @param  {[type]} selectIndex [tabIndex.home, tabIndex.shop, tabIndex.cart, tabIndex.member]
@@ -118,15 +126,15 @@ angular.module('starter.services', [])
      * @param  {[type]} options     [ui.router的 options, 其中 isForce 是否强制选择某个tab]
      * @return {[type]}             [undefined]
      */
-    this.go = function(selectIndex, stateName, params, options){
+    this.go = function (selectIndex, stateName, params, options) {
 
-      if((options && options.isForce) || ($ionicTabsDelegate.selectedIndex() !== selectIndex)) {
-        $timeout(function(){
+      if ((options && options.isForce) || ($ionicTabsDelegate.selectedIndex() !== selectIndex)) {
+        $timeout(function () {
           $ionicTabsDelegate.select(selectIndex);
         }, 0);
       }
       if (stateName) {
-        $timeout(function(){
+        $timeout(function () {
           $state.go(stateName, params || {}, options || {});
         }, 10);
       }

@@ -107,9 +107,7 @@
       });
     })
 
-    .factory('ComplaintApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
-      console.log(apiEndpoint);
-
+    .factory('ComplaintApi', function ($http, apiEndpoint, userService, transformRequestAsFormPost) {
       var sendRequest = function (url, data, callback) {
         var request = $http({
           method: "post",
@@ -129,35 +127,28 @@
 
       var addComplaintRequest = function (oId, type, tel, content, callback) {
         var url = apiEndpoint.url + '/member-complaints.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          oid: oId,
-          tel: tel,
-          complaints_type: type,
-          content: content
-        };
+        var data = userService.getMember();
+
+        data.oid = oId;
+        data.tel = tel;
+        data.complaints_type = type;
+        data.content = content;
 
         sendRequest(url, data, callback);
       };
 
       var getComplaintDetail = function (oId, callback) {
         var url = apiEndpoint.url + '/member-complaints_index.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          oid: oId
-        };
+        var data = userService.getMember();
+
+        data.oid = oId;
 
         sendRequest(url, data, callback);
       };
 
       var getComplaintList = function (page, filter, callback) {
         var url = apiEndpoint.url + '/member-complaints_list.html  ';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
-        };
+        var data = userService.getMember();
 
         if (page) {
           data.page = page;
@@ -176,4 +167,5 @@
         getComplaintList: getComplaintList
       };
     });
-})();
+})
+();

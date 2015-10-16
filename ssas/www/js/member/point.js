@@ -143,23 +143,9 @@
         );
       };
 
-
-      var currentUser = userService.get();
-
-      var init = function () {
-        if (!currentUser) {
-          currentUser = userService.get();
-        }
-
-        return data = {
-          member_id: currentUser.memberId,
-          token: currentUser.token
-        }
-      };
-
       var getPointInfo = function (page, type, callback) {
         var url = apiEndpoint.url + '/member-point_log.html';
-        var data = init();
+        var data = userService.getMember();
 
         data.type = type;
 

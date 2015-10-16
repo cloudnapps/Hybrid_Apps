@@ -139,7 +139,7 @@
 
       $scope.setGender = function (gender) {
         $scope.userGender = gender;
-      }
+      };
 
       $scope.changeGender = function () {
         var memberInfo = {
@@ -282,7 +282,7 @@
       };
     })
 
-    .factory('SettingApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
+    .factory('SettingApi', function ($http, apiEndpoint, userService, transformRequestAsFormPost) {
       console.log(apiEndpoint);
 
       var sendRequest = function (url, data, callback) {
@@ -304,44 +304,34 @@
 
       var getMemberSetting = function (callback) {
         var url = apiEndpoint.url + '/member-setting.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
-        };
+        var data = userService.getMember();
 
         sendRequest(url, data, callback);
       };
 
       var modifyMemberSetting = function (memberInfo, callback) {
         var url = apiEndpoint.url + '/member-save_setting.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          params: memberInfo
-        };
+        var data = userService.getMember();
+
+        data.params = memberInfo;
 
         sendRequest(url, data, callback);
       };
 
       var modifyMemberPassword = function (passwordInfo, callback) {
         var url = apiEndpoint.url + '/member-security.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          new_passwd: passwordInfo.newPassword,
-          old_passwd: passwordInfo.oldPassword,
-          re_passwd: passwordInfo.confirmPassword
-        };
+        var data = userService.getMember();
+
+        data.new_passwd = passwordInfo.newPassword;
+        data.old_passwd = passwordInfo.oldPassword;
+        data.re_passwd = passwordInfo.confirmPassword;
 
         sendRequest(url, data, callback);
       };
 
       var getIdCardList = function (page, callback) {
         var url = apiEndpoint.url + '/member-idcard_list.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
-        };
+        var data = userService.getMember();
 
         if (page) {
           data.page = page;
@@ -352,22 +342,18 @@
 
       var addIdCard = function (params, callback) {
         var url = apiEndpoint.url + '/member-add_idcart.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          params: params
-        };
+        var data = userService.getMember();
+
+        data.params = params;
 
         sendRequest(url, data, callback);
       };
 
       var setDefaultIdCard = function (cardId, callback) {
         var url = apiEndpoint.url + '/member-default_idcard.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          card_id: cardId
-        };
+        var data = userService.getMember();
+
+        data.card_id = cardId;
 
         sendRequest(url, data, callback);
       };

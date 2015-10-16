@@ -119,7 +119,7 @@
       }
     })
 
-    .factory('ReceiverApi', function ($http, apiEndpoint, jsonEndpoint, RegionApi, transformRequestAsFormPost) {
+    .factory('ReceiverApi', function ($http, apiEndpoint, jsonEndpoint, userService, RegionApi, transformRequestAsFormPost) {
       console.log(apiEndpoint);
 
       var sendRequest = function (url, data, callback) {
@@ -152,10 +152,7 @@
 
       var getReceiverList = function (page, callback) {
         var url = apiEndpoint.url + '/member-receiver.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
-        };
+        var data = userService.getMember();
 
         if (page) {
           data.page = page;
@@ -166,34 +163,28 @@
 
       var addReceiver = function (addrInfo, callback) {
         var url = apiEndpoint.url + '/member-save_rec.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          addrInfo: addrInfo
-        };
+        var data = userService.getMember();
+
+        data.addrInfo = addrInfo;
 
         sendRequest(url, data, callback);
       };
 
       var deleteReceiver = function (addrId, callback) {
         var url = apiEndpoint.url + '/member-del_receiver.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          addr_id: addrId
-        };
+        var data = userService.getMember();
+
+        data.addr_id = addrId;
 
         sendRequest(url, data, callback);
       };
 
       var setDefaultReceiver = function (defa, addrId, callback) {
         var url = apiEndpoint.url + '/member-del_receiver.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          addr_id: addrId,
-          "default": defa
-        };
+        var data = userService.getMember();
+
+        data.addr_id = addrId;
+        data.default = defa;
 
         sendRequest(url, data, callback);
       };

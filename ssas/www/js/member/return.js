@@ -125,9 +125,7 @@
       });
     })
 
-    .factory('ReturnApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
-      console.log(apiEndpoint);
-
+    .factory('ReturnApi', function ($http, apiEndpoint, userService, transformRequestAsFormPost) {
       var sendRequest = function (url, data, callback) {
         var request = $http({
           method: "post",
@@ -147,47 +145,38 @@
 
       var addReturnRequest = function (orderId, type, title, content, products, callback) {
         var url = apiEndpoint.url + '/member-return_save.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          order_id: orderId,
-          return_type: type,
-          title: title,
-          content: content,
-          product_bn: products
-        };
+        var data = userService.getMember();
+
+        data.order_id = orderId;
+        data.return_type = type;
+        data.title = title;
+        data.content = content;
+        data.product_bn = products;
 
         sendRequest(url, data, callback);
       };
 
       var getReturnDetail = function (returnId, callback) {
         var url = apiEndpoint.url + '/member-return_info.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          return_id: returnId
-        };
+        var data = userService.getMember();
+
+        data.return_id = returnId;
 
         sendRequest(url, data, callback);
       };
 
       var getReturnIndex = function (orderId, callback) {
         var url = apiEndpoint.url + '/member-return_index.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
-          order_id: orderId
-        };
+        var data = userService.getMember();
+
+        data.order_id = orderId;
 
         sendRequest(url, data, callback);
       };
 
       var getReturnList = function (page, filter, callback) {
         var url = apiEndpoint.url + '/member-return_list.html';
-        var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
-        };
+        var data = userService.getMember();
 
         if (page) {
           data.page = page;
