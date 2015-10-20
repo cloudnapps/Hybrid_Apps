@@ -30,16 +30,15 @@ hr {
 
 .col-style {
   text-align: center;
-  margin: 1em 0;
+  margin-top: 1em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .click-assertive {
-  border-color: #e42112;
-  background-color: #ef473a;
-  color: #fff;
+  border-color: #BD252C;
+  color: #BD252C;
 }
 
 .clear-search {
@@ -119,6 +118,7 @@ hr {
   float: left;
   padding: 10px 2px 10px 10px;
   border: none;
+  width: 50%;
 }
 
 .products-list .detail {
@@ -159,6 +159,7 @@ hr {
 
 .sub-categories {
   color: #689FBC;
+  padding: 15px 0 0 15px;
 }
 
 .gallery-filter .prop {
