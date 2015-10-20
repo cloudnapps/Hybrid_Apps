@@ -11,7 +11,7 @@
         <div ng-repeat="seller in nature.aSelCart">
           <ion-item class="seller item item-checkbox item-icon-right item-complex">
             <label class="checkbox">
-              <input type="checkbox" ng-model="seller.selected" ng-change="toggleSeller(seller)">
+              <input type="checkbox" ng-model="seller.seller_info.selected" ng-change="toggleSeller(seller)">
             </label>
             <a class="item-content" href="#/tab/seller/{{seller.seller_info.seller_id}}">{{seller.seller_info.seller_name}}<i class="icon ion-chevron-right icon-accessory"></i></a>
           </ion-item>
