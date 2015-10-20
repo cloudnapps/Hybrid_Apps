@@ -33,7 +33,7 @@
 
     .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate,
                                             $state, $ionicPopover, $window,
-                                            HomeApi, SellerApi, ActivityApi) {
+                                            HomeApi, SellerApi) {
       $scope.homeInfo = {};
 
       $scope.sellerInfo = {};
@@ -42,9 +42,26 @@
 
       HomeApi.getHomeContent().then(function (result) {
         $scope.homeInfo = result.data.data;
+
         $scope.slideimgs = $scope.homeInfo.once;
+        $scope.activityInfo = $scope.homeInfo.act_info;
+
+        $scope.activityInfo.updateDiff = function () {
+
+          var end_time = new Date($scope.activityInfo.end_time);
+          var now_time = new Date($scope.activityInfo.now_time);
+
+          var diff_time = end_time.getTime() - now_time.getTime();
+
+          $scope.activityInfo.diff_time = diff_time/1000;
+        };
+
         $timeout(function () {
           $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
+        }, 1000);
+
+        $timeout(function () {
+          $scope.activityInfo.updateDiff();
         }, 1000);
       });
 
@@ -89,10 +106,6 @@
           $scope.sellerInfo.items = result.data;
         }
       });
-
-      ActivityApi.getActivityContent().then(function (result) {
-        $scope.activityInfo = result.data.data;
-      })
     }) // end of HomeController
 
     .controller('ActivityController', function ($scope, ActivityApi) {

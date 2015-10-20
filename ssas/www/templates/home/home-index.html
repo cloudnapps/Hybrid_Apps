@@ -9,7 +9,7 @@
     </div>
   </ion-nav-buttons>
   <ion-nav-title>
-    <form ng-submit="search(">
+    <form ng-submit="search()">
       <label class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
         <i class="icon ion-search placeholder-icon"></i>
         <input type="search" placeholder="Search" ng-model="keywords.value" style="height: 28px;">
@@ -61,12 +61,15 @@
     <!--热门分类-->
     <div class="row" style="padding: 0;margin: 6px 0;background-color: #fff;">
       <div class="col col-20 col-center" style="padding: 0px;height: 90px;"
-           ng-repeat="category in homeInfo.third"
+           ng-repeat="category in homeInfo.cat_info"
            ng-click="tabStateGo(tabIndex.shop, 'tab.products', {categoryId: category.cat_id})">
         <a class="button button-clear" style="padding: 1px;">
           <img style="width: 80%;" ng-src="{{category.image}}">
-          <!--<p style="width: 80%;height: 30%;">{{category.name}}</p>-->
         </a>
+
+        <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+          {{category.cat_name}}
+        </p>
       </div>
     </div>
 
@@ -75,39 +78,88 @@
       <div class="col col-80 col-center" style="padding: 0px;margin: 0 0 5px 0;max-width:50%;">
         <img src="img/newproduct.jpg" style="height: 30px;">
       </div>
-      <span style="margin-top:7px;">{{activityInfo.act_info.end_time}}</span>
+      <span style="margin-top:7px;">距活动结束还有{{activityInfo.diff_time}}</span>
     </div>
     <div style="padding: 0 0 0 6px;background-color: #fff;">
-      <div class="row">
-        <div class="col col-50" style="padding: 0px; border: 1px solid #eee;margin: 0 4px 0 0;">
-          <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
-            <img style="width:90px;" ng-src="{{activityInfo.product_info[0].image}}">
-            <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
-          </a>
+      <ion-scroll direction="x">
+        <div class="row">
+          <div class="col col-33" style="padding: 0px; border: 1px solid #eee;margin: 0 4px 0 0;">
+            <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
+              <img style="width:90px;" ng-src="{{activityInfo.product_info[0].image}}">
+            </a>
 
-          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
-            {{activityInfo.product_info[0].activity_price | currency: '￥'}}
-          </p>
+            <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+              {{activityInfo.product_info[0].name}}
+            </p>
 
-          <p style="text-align: center;margin-bottom: 0;font-size: 12px;text-decoration: line-through;color: #666c70;">
-            {{activityInfo.product_info[0].price | currency: '￥'}}
-          </p>
+            <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+              {{activityInfo.product_info[0].activity_price | currency: '￥'}}
+            </p>
+
+            <p
+              style="align: right; text-align: center; margin-bottom: 0;font-size: 12px;text-decoration: line-through;color: #666c70;">
+              {{activityInfo.product_info[0].price | currency: '￥'}}
+            </p>
+          </div>
+
+          <div class="col col-33" style="padding: 0px; border: 1px solid #eee;">
+            <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
+              <img style="width:90px;" ng-src="{{activityInfo.product_info[0].image}}">
+            </a>
+
+            <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+              {{activityInfo.product_info[0].name}}
+            </p>
+
+            <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+              {{activityInfo.product_info[0].activity_price | currency: '￥'}}
+            </p>
+
+            <p
+              style="align: right; text-align: center; margin-bottom: 0;font-size: 12px;text-decoration: line-through;color: #666c70;">
+              {{activityInfo.product_info[0].price | currency: '￥'}}
+            </p>
+          </div>
+
+          <div class="col col-33" style="padding: 0px; border: 1px solid #eee;">
+            <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
+              <img style="width:90px;" ng-src="{{activityInfo.product_info[0].image}}">
+            </a>
+
+            <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+              {{activityInfo.product_info[0].name}}
+            </p>
+
+            <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+              {{activityInfo.product_info[0].activity_price | currency: '￥'}}
+            </p>
+
+            <p
+              style="align: right; text-align: center; margin-bottom: 0;font-size: 12px;text-decoration: line-through;color: #666c70;">
+              {{activityInfo.product_info[0].price | currency: '￥'}}
+            </p>
+          </div>
+
+          <div class="col col-33" style="padding: 0px; border: 1px solid #eee;">
+            <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
+              <img style="width:90px;" ng-src="{{activityInfo.product_info[1].image}}">
+            </a>
+
+            <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+              {{activityInfo.product_info[0].name}}
+            </p>
+
+            <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+              {{activityInfo.product_info[0].activity_price | currency: '￥'}}
+            </p>
+
+            <p
+              style="align: right; text-align: center; margin-bottom: 0;font-size: 12px;text-decoration: line-through;color: #666c70;">
+              {{activityInfo.product_info[0].price | currency: '￥'}}
+            </p>
+          </div>
         </div>
-
-        <div class="col col-50" style="padding: 0px; border: 1px solid #eee;">
-          <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
-            <img style="width:90px;" ng-src="{{activityInfo.product_info[1].image}}">
-            <!--<p style="width: 100%; height: 30%; font-size: 8px">{{homeInfo.fourth[$index+1].name}}</p>-->
-          </a>
-
-          <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
-            {{activityInfo.product_info[1].activity_price | currency: '￥'}}</p>
-
-          <p style="text-align: center;margin-bottom: 0;font-size: 12px;text-decoration: line-through;color: #666c70;">
-            {{activityInfo.product_info[1].price | currency: '￥'}}
-          </p>
-        </div>
-      </div>
+      </ion-scroll>
     </div>
 
     <!--商户-->
@@ -124,43 +176,43 @@
     <div class="row button-bar" style="padding: 0;">
       <a class="button" style="border-bottom: none;background-color: #fff;padding:0;"
          ng-href="#/tab/seller/{{sellerInfo.items[0].seller_id}}">
-        <img style="height:40px;" ng-src="{{sellerInfo.items[0].image}}">
+        <img style="width:100%; height:100%;" ng-src="{{sellerInfo.items[0].image}}">
       </a>
 
       <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"
          ng-href="#/tab/seller/{{sellerInfos.items[1].seller_id}}">
-        <img style="height:40px;" ng-src="{{sellerInfo.items[1].image}}">
+        <img style="width:100%; height:50px;" ng-src="{{sellerInfo.items[1].image}}">
       </a>
 
       <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"
          ng-href="#/tab/seller/{{sellerInfo.items[2].seller_id}}">
-        <img style="height:40px;" ng-src="{{sellerInfo.items[2].image}}">
+        <img style="hwidth:100%; height:50px;" ng-src="{{sellerInfo.items[2].image}}">
       </a>
 
       <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"
          ng-href="#/tab/seller/{{sellerInfo.items[3].seller_id}}">
-        <img style="height:40px;" ng-src="{{sellerInfo.items[3].image}}">
+        <img style="width:100%; height:50px;" ng-src="{{sellerInfo.items[3].image}}">
       </a>
     </div>
     <div class="row button-bar" style="background-color: #fff;padding: 0 0 10px 0;">
       <a class="button" style="background-color: #fff;padding:0;"
          ng-href="#/tab/seller/{{sellerInfo.items[4].seller_id}}">
-        <img style="height:40px;" ng-src="{{sellerInfo.items[4].image}}">
+        <img style="width:100%; height:50px;" ng-src="{{sellerInfo.items[4].image}}">
       </a>
 
       <a class="button" style="background-color: #fff;padding:0;"
          ng-href="#/tab/seller/{{sellerInfo.items[5].seller_id}}">
-        <img style="height:40px;" ng-src="{{sellerInfo.items[5].image}}">
+        <img style="width:100%; height:50px" ng-src="{{sellerInfo.items[5].image}}">
       </a>
 
       <a class="button" style="background-color: #fff;padding:0;"
          ng-href="#/tab/seller/{{sellerInfo.items[6].seller_id}}">
-        <img style="height:40px;" ng-src="{{sellerInfo.items[6].image}}">
+        <img style="width:100%; height:50px" ng-src="{{sellerInfo.items[6].image}}">
       </a>
 
       <a class="button" style="background-color: #fff;padding:0;"
          ng-href="#/tab/seller/{{sellerInfo.items[7].seller_id}}">
-        <img style="height:40px;" ng-src="{{sellerInfo.items[7].image}}">
+        <img style="width:100%; height:50px" ng-src="{{sellerInfo.items[7].image}}">
       </a>
     </div>
 
