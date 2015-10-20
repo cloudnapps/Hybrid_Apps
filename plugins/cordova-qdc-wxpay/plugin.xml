@@ -9,6 +9,10 @@
     <clobbers target="wxpay" />
   </js-module>
 
+  <dependency id="com.cloudnapps.plugins.wechat"
+              url="."
+              subdir="plugins/cordova-plugin-wechat"></dependency>
+
   <!-- android -->
   <platform name="android">
     <hook type="after_plugin_add" src="scripts/android-install.js" />
@@ -28,6 +32,8 @@
       <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     </config-file>
 
+    <!-- following config is added by dependency cordova-plugin-wechat -->
+    <!--
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
       <activity
         android:name=".wxapi.WXPayEntryActivity"
@@ -40,12 +46,14 @@
         </intent-filter>
       </activity>
     </config-file>
+    -->
 
     <source-file src="src/android/WeixinPay.java" target-dir="src/com/qdc/plugins/weixin" />
     <source-file src="src/android/AppRegister.java" target-dir="src/com/qdc/plugins/weixin" />
     <!--<source-file src="src/android/WXPayEntryActivity.java" target-dir="src/com/qdc/plugins/weixin/wxapi" />-->
     <source-file src="src/android/Constants.java" target-dir="src/com/qdc/plugins/weixin" />
-    <source-file src="libs/android/libammsdk.jar" target-dir="libs" />
+    <!-- folling lib libammsdk is added by dependency cordova-plugin-wechat -->
+    <!-- <source-file src="libs/android/libammsdk.jar" target-dir="libs" /> -->
   </platform>
 
   <!-- ios -->
