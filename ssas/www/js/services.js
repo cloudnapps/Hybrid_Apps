@@ -72,6 +72,10 @@ angular.module('starter.services', [])
       return !!currentUser.token;
     };
 
+    this.logOut = function(){
+      setObj({});
+    };
+
     this.getMember = function () {
       return data = {
         member_id: currentUser.memberId,

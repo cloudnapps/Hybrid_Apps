@@ -59,5 +59,10 @@
 
         $scope.closePopover();
       };
+
+      $scope.logOut = function(){
+        userService.logOut();
+        $scope.tabStateGo($scope.tabIndex.home, 'tab.home');
+      }
     });
 })();
