@@ -86,6 +86,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home
     $ionicConfigProvider.platform.android.views.transition('android');
 
     $ionicConfigProvider.backButton.text('').icon('ion-chevron-left').previousTitleText(false);
+    $ionicConfigProvider.views.swipeBackEnabled(false);
   }); // end of config
 
 
