@@ -13,7 +13,8 @@
             <label class="checkbox">
               <input type="checkbox" ng-model="seller.seller_info.selected" ng-change="toggleSeller(seller)">
             </label>
-            <a class="item-content" href="#/tab/seller/{{seller.seller_info.seller_id}}">{{seller.seller_info.seller_name}}<i class="icon ion-chevron-right icon-accessory"></i></a>
+<!--             <a class="item-content" href="#/tab/seller/{{seller.seller_info.seller_id}}">{{seller.seller_info.seller_name}}<i class="icon ion-chevron-right icon-accessory"></i></a> -->
+            <div class="item-content">{{seller.seller_info.seller_name}}</div>
           </ion-item>
           <ion-item class="good item" ng-repeat="good in seller.goods_list">
             <div class="item-checkbox">
