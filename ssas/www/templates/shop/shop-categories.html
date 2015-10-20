@@ -7,12 +7,13 @@
 		<div class="col col-25 view" style="width:84%;border-right: 1px solid #ddd;">
 			<ion-content>
 				<ion-list>
-					<ion-item class="item item-thumbnail-top" 
+					<ion-item 	class="item item-thumbnail-top" 
 								ng-repeat="cate in categories" 
 								type="item-text-wrap"
+								style="padding:11px;"
 								ng-click="populateSubCategories(cate.cat_id, $index)">
 						<img style="width:100%;"ng-src="{{cate.image.replace(' ', '') || 'img/3.pic.jpg'}}">
-						<h2 style="margin-top: 0.5em;font-size:15px;text-align:center;" ng-class="{'click-assertive': $index === index}">{{cate.cat_name}}</h2>
+						<h2 style="margin-top: 0.5em;font-size:13px;text-align:center;" ng-class="{'click-assertive': $index === index }">{{cate.cat_name}}</h2>
 					</ion-item>
 				</ion-list>
 	    	</ion-content>
