@@ -108,9 +108,7 @@
       <source-file src="src/android/res/drawable-hdpi/red_pushpin.png" target-dir="res/drawable-hdpi"/>      
       <source-file src="src/android/res/drawable-hdpi/route_arrow.png" target-dir="res/drawable-hdpi"/>      
       <source-file src="src/android/res/drawable-hdpi/route_hint_arrow.png" target-dir="res/drawable-hdpi"/>      
-      <source-file src="src/android/res/drawable-hdpi/start.png" target-dir="res/drawable-hdpi"/>    
-      
-      <source-file src="src/MapResource.bundle/MapResource" target-dir="assets"></source-file>
+      <source-file src="src/android/res/drawable-hdpi/start.png" target-dir="res/drawable-hdpi"/>             
     </platform>
     
     <!-- ios -->

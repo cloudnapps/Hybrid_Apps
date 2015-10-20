@@ -6,8 +6,13 @@
     <name>Settings</name>
     
     <!-- android -->
-    <platform name="android">
-        
+    <platform name="android">        
+        <source-file src="src/MapResource.bundle/0021" target-dir="assets/MapResource"></source-file>
+        <source-file src="src/MapResource.bundle/0452" target-dir="assets/MapResource"></source-file>
+        <source-file src="src/MapResource.bundle/0755" target-dir="assets/MapResource"></source-file>
+        <source-file src="src/MapResource.bundle/Cities.json" target-dir="assets/MapResource"></source-file>
+        <source-file src="src/MapResource.bundle/Licenses.json" target-dir="assets/MapResource"></source-file>
+        <source-file src="src/MapResource.bundle/RenderingScheme.json" target-dir="assets/MapResource"></source-file>
     </platform>
     
     <!-- ios -->
