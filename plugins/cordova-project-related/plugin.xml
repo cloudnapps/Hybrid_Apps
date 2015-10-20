@@ -6,7 +6,14 @@
     <name>Settings</name>
     
     <!-- android -->
-    <platform name="android">        
+    <platform name="android">
+      <config-file target="res/values-zh-rCN/strings.xml" parent="/resources">
+        <string name="app_name">好酷</string>
+      </config-file>        
+      <config-file target="res/values-zh-rTW/strings.xml" parent="/resources">
+        <string name="app_name">好酷</string>
+      </config-file>        
+      
         <source-file src="src/MapResource.bundle/0021" target-dir="assets/MapResource"></source-file>
         <source-file src="src/MapResource.bundle/0452" target-dir="assets/MapResource"></source-file>
         <source-file src="src/MapResource.bundle/0755" target-dir="assets/MapResource"></source-file>
