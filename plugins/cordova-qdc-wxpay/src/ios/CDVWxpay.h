@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *wechatAppId;
 
 - (void)payment:(CDVInvokedUrlCommand *)command;
+- (void)logon: (CDVInvokedUrlCommand *)command;
 - (void)registerApp:(NSString *)wechatAppId;
 
 @end

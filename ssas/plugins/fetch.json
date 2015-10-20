@@ -110,5 +110,13 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.cloudnapps.plugins.wechat": {
+        "source": {
+            "type": "local",
+            "path": "../plugins/cordova-plugin-wechat"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

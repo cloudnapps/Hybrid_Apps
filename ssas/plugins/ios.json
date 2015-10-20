@@ -40,13 +40,13 @@
                     "Security.framework": [
                         {
                             "xml": false,
-                            "count": 2
+                            "count": 3
                         }
                     ],
                     "SystemConfiguration.framework": [
                         {
                             "xml": false,
-                            "count": 2
+                            "count": 3
                         }
                     ],
                     "AssetsLibrary.framework": [
@@ -58,19 +58,19 @@
                     "libz.dylib": [
                         {
                             "xml": false,
-                            "count": 1
+                            "count": 2
                         }
                     ],
                     "libsqlite3.0.dylib": [
                         {
                             "xml": false,
-                            "count": 1
+                            "count": 2
                         }
                     ],
                     "libstdc++.6.dylib": [
                         {
                             "xml": false,
-                            "count": 1
+                            "count": 2
                         }
                     ],
                     "CoreGraphics.framework": [
@@ -114,6 +114,12 @@
                             "xml": false,
                             "count": 1
                         }
+                    ],
+                    "CoreTelephony.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
                     ]
                 }
             },
@@ -128,7 +134,7 @@
                     "NSAppTransportSecurity": [
                         {
                             "xml": "<dict><key>NSAllowsArbitraryLoads</key><true /></dict>",
-                            "count": 3
+                            "count": 4
                         }
                     ],
                     "CFBundleURLTypes": [
@@ -152,6 +158,10 @@
                         },
                         {
                             "xml": "<array><string>wechat</string><string>weixin</string></array>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<array><string>weixin</string><string>wechat</string></array>",
                             "count": 1
                         }
                     ]
@@ -211,6 +221,10 @@
                         {
                             "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Wechat\"><param name=\"ios-package\" value=\"CDVWechat\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -258,6 +272,9 @@
             "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         },
         "phonegap-plugin-barcodescanner": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "com.cloudnapps.plugins.wechat": {
             "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         }
     },

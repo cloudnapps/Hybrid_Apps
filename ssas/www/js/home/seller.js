@@ -153,6 +153,17 @@
           });
       };
 
+      $scope.logonByWechat = function () {
+        alert("wxLogon");
+        var scope = "snsapi_userinfo";
+        wechat.auth(scope, function (cb_success) {
+          alert(JSON.stringify(cb_success));
+        },
+        function (cb_failure){
+          alert(cb_failure);
+        });
+      };
+
       $scope.showMap = function () {
         alert("navi");
 

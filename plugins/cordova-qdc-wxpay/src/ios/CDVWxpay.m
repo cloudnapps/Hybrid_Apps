@@ -13,6 +13,53 @@
 
 #pragma mark "API"
 
+- (void)pluginInitialize {
+    NSString* appId = [[self.commandDelegate settings] objectForKey:@"wechat_app_id"];
+    if(appId)
+    {
+        self.wechatAppId = appId;
+        if (![WXApi isWXAppInstalled]) 
+            [WXApi registerApp: appId];
+    }   
+}
+
+- (void)logon:(CDVInvokedUrlCommand *)command
+{
+    SendAuthReq* req =[[SendAuthReq alloc] init];
+    
+    // scope
+    if ([command.arguments count] > 0)
+    {
+        req.scope = [command.arguments objectAtIndex:0];
+    }
+    else
+    {
+        req.scope = @"snsapi_userinfo";
+    }
+    
+    // state
+    if ([command.arguments count] > 1)
+    {
+        req.state = [command.arguments objectAtIndex:1];
+    }
+
+    if (![WXApi isWXAppInstalled]) 
+    {
+        [self failWithCallbackID:command.callbackId withMessage:@"未安装微信"];
+        return;
+    }
+    
+    if ([WXApi sendReq:req])
+    {
+        // save the callback id
+        self.currentCallbackId = command.callbackId;
+    }
+    else
+    {
+        [self failWithCallbackID:command.callbackId withMessage:@"参数错误"];
+    }
+}
+
 - (void)payment:(CDVInvokedUrlCommand *)command
 {
     [self.commandDelegate runInBackground:^{
@@ -83,10 +130,7 @@
             return ;
         }
         sign = [params objectForKey:@"sign"];
-
-        // 向微信注册
-        [WXApi registerApp:appid];
-        
+   
         if (![WXApi isWXAppInstalled]) {
             [self failWithCallbackID:command.callbackId withMessage:@"未安装微信"];
             return;
@@ -181,6 +225,21 @@
             {
                 commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:strMsg];
             }
+            
+            [self.commandDelegate sendPluginResult:commandResult callbackId:self.currentCallbackId];
+        }
+        else if ([resp isKindOfClass:[SendAuthResp class]])
+        {
+            // fix issue that lang and country could be nil for iPhone 6 which caused crash.
+            SendAuthResp* authResp = (SendAuthResp*)resp;
+            response = @{
+                         @"code": authResp.code != nil ? authResp.code : @"",
+                         @"state": authResp.state != nil ? authResp.state : @"",
+                         @"lang": authResp.lang != nil ? authResp.lang : @"",
+                         @"country": authResp.country != nil ? authResp.country : @"",
+                         };
+            
+            CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:response];
             
             [self.commandDelegate sendPluginResult:commandResult callbackId:self.currentCallbackId];
         }
