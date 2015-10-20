@@ -77,7 +77,7 @@ angular.module('cart', ['components'])
 
   $scope.toggleSeller = function (seller) {
     angular.forEach(seller.goods_list, function (item) {
-      item.selected = seller.selected;
+      item.selected = seller.seller_info.selected;
     });
     $ionicLoading.show();
     cartApi.nocheck(seller.goods_list).success(function (responseData){
