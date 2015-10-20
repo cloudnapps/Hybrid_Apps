@@ -4,8 +4,11 @@
     <ion-list ng-if="!!cart">
       <div ng-repeat="(natureKey, nature) in cart.natureCart">
         <ion-item class="item item-divider" ng-if="!$first"></ion-item>
-        <ion-item class="item">
-          <h2>{{natureKey|translate}}</h2>
+        <ion-item class="nature item item-checkbox item-complex item-icon-right {{natureKey}}">
+          <label class="checkbox">
+            <input type="checkbox" ng-model="nature.selected" ng-change="toggleNature(nature)">
+          </label>
+          <div class="item-content">{{natureKey|translate}}</div>
         </ion-item>
 
         <div ng-repeat="seller in nature.aSelCart">

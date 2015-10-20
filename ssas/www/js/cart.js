@@ -75,6 +75,28 @@ angular.module('cart', ['components'])
 
   $scope.load();
 
+
+  $scope.toggleNature = function (nature) {
+    var goods = [];
+    angular.forEach(nature.aSelCart, function (seller) {
+      seller.seller_info.selected = nature.selected;
+      angular.forEach(seller.goods_list, function (item) {
+        item.selected = seller.seller_info.selected;
+        goods.push(item);
+      });
+    });
+    $ionicLoading.show();
+    cartApi.nocheck(goods).success(function (responseData){
+      var dataStatus = responseData.status;
+      if (dataStatus === 0) {
+        $scope.cart = responseData.data;
+      }
+    })
+    .finally(function () {
+      $ionicLoading.hide();
+    });
+  };
+
   $scope.toggleSeller = function (seller) {
     angular.forEach(seller.goods_list, function (item) {
       item.selected = seller.seller_info.selected;

@@ -7711,9 +7711,9 @@ a.button {
   display: flex; }
 
 .quantity-input {
-  padding: 2px 5px; }
+  padding: 0px; }
   .quantity-input .inc-button, .quantity-input .dec-button {
-    width: 30px;
+    width: 35px;
     height: 30px;
     float: left;
     margin: 0px;
@@ -7724,7 +7724,7 @@ a.button {
     .quantity-input .inc-button:hover, .quantity-input .dec-button:hover {
       cursor: pointer; }
   .quantity-input input[type="number"] {
-    width: 50px;
+    width: 40px;
     height: 30px;
     float: left;
     border: solid #b2b2b2 1px;
@@ -7757,6 +7757,17 @@ a.button {
 
 .cart .seller.item label.checkbox {
   width: 42px; }
+.cart .nature.item {
+  padding-left: 50px; }
+  .cart .nature.item label.checkbox {
+    width: 42px;
+    margin-left: -8px; }
+.cart .nature.item.direct_mail .item-content {
+  color: white;
+  background: #fd8b24; }
+.cart .nature.item.bond .item-content {
+  color: white;
+  background: #689fbc; }
 .cart .good.item label.checkbox {
   width: 42px; }
 .cart .good.item .item-checkbox {
@@ -7775,6 +7786,7 @@ a.button {
 .cart .good.item .quantity-input {
   float: right; }
 .cart .good.item .row.good-price {
+  margin-left: -5px;
   padding-left: 0px;
   padding-right: 0px; }
   .cart .good.item .row.good-price .price, .cart .good.item .row.good-price .quanity {

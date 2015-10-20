@@ -1,7 +1,7 @@
 .quantity-input {
-  padding: 2px 5px;
+  padding: 0px;
   .inc-button, .dec-button {
-    width: 30px;
+    width: 35px;
     height: 30px;
     float: left;
     margin: 0px;
@@ -14,7 +14,7 @@
     }
   }
   input[type="number"] {
-    width: 50px;
+    width: 40px;
     height: 30px;
     float: left;
     border: solid $button-stable-border 1px;

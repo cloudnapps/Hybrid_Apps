@@ -4,6 +4,29 @@
       width: 42px;
     }
   }
+  .nature.item {
+    label.checkbox {
+      width: 42px;
+      margin-left: -8px;
+    }
+
+
+    padding-left: 50px;
+  }
+  .nature.item.direct_mail {
+    .item-content {
+      color: white;
+      background: #fd8b24;
+    }
+  }
+
+  .nature.item.bond {
+    .item-content {
+      color: white;
+      background: #689fbc;
+    }
+  }
+
   .good.item {
     label.checkbox {
       width: 42px;
@@ -30,6 +53,7 @@
       float: right;
     }
     .row.good-price {
+      margin-left: -5px;
       padding-left: 0px;
       padding-right: 0px;
       .price,.quanity {
