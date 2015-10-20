@@ -6,6 +6,13 @@
         <h2>{{payment.payment_name}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
+
+      <ion-item class="item-remove-animate item-icon-left item-icon-right" ng-click="tabStateGo(tabIndex.cart, 'tab.iframe')">
+        <img class="icon" ng-src="{{payment.image}}">
+        <h2>工行测试</h2>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+      
     </ion-list>
   </ion-content>
 </ion-view>
