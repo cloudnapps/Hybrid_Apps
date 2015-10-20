@@ -20,7 +20,7 @@
     <ion-list>
      <div class="item item-body col-50 products-list" ng-repeat="product in products" type="item-text-wrap" ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: product.product_id})">
         <div class="detail">
-          <img class="full-image" ng-src="{{product.image}}">
+          <img class="full-image" ng-src="{{product.image || 'img/3.pic.jpg'}}">
           <div class="name padding-left">{{product.name}}</div>
           <div class="price">
             <span class="positive padding-left">{{product.price|currency:'￥'}}</span>

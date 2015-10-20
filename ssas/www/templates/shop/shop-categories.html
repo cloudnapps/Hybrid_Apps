@@ -21,10 +21,11 @@
 		<div class="col col-75 col-offset-25 view" style="">
 			<ion-content class="has-header has-tabs">
 	    		<div ng-repeat="sub in subCategories">
-	    			<h5 ng-click="navToProductList(sub.cat_id)" class="sub-categories">{{sub.cat_name}}</h5>
+	    			<h5 ng-click="false && navToProductList(sub.cat_id)" class="sub-categories">{{sub.cat_name}}</h5>
 	    			<div class="row">
 	    				<div class="col col-33 col-style" ng-repeat="sub3 in sub.lv3Arr" ng-click="navToProductList(sub3.cat_id)">{{sub3.cat_name}}</div>
 	    			</div>
+	    			<hr>
 	    		</div>
 			</ion-content>
 		</div>	    
