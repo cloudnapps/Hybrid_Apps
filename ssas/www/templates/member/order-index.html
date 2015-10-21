@@ -1,39 +1,89 @@
-<ion-nav-view name="tab-orders">
-  <div class="bar bar-subheader">
-    <div class="tabs-striped tabs-color-assertive">
-      <div class="tabs">
-        <a class="tab-item active" ui-sref="tab.orders.all">{{'ord_alltitle'|translate}}</a>
-        <a class="tab-item active" ui-sref="tab.orders.nopay">{{'ord_nopaytitle'|translate}}</a>
-        <a class="tab-item active" ui-sref="tab.orders.noship">{{'ord_noshiptitle'|translate}}</a>
-        <a class="tab-item active" ui-sref="tab.orders.shipped">{{'ord_shippedtitle'|translate}}</a>
-        <a class="tab-item active" ui-sref="tab.orders.commenting">{{'ord_nocommenttitle'|translate}}</a>
-      </div>
-    </div>
+<div class="bar bar-subheader">
+  <div class="button-bar">
+    <button class="button button-light" ng-click="switchOrder('all')" style="font-size: 10px;">
+      <span style="width: 100%">{{'ord_alltitle'|translate}}</span>
+    </button>
+    <button class="button button-light" ng-click="switchOrder('nopay')" style="font-size: 10px">
+      <span style="width: 100%">{{'ord_nopaytitle'|translate}}</span>
+    </button>
+    <button class="button button-light" ng-click="switchOrder('noship')" style="font-size: 10px">{{'ord_noshiptitle'|translate}}</button>
+    <button class="button button-light" ng-click="switchOrder('shipped')" style="font-size: 10px">{{'ord_shippedtitle'|translate}}</button>
+    <button class="button button-light" ng-click="switchOrder('commenting')" style="font-size: 10px">{{'ord_nocommenttitle'|translate}}</button>
   </div>
-  <ion-view>
-    <div class="bar bar-subheader">
-      <!-- All Orders Tab -->
-      <a title="{{'ord_alltitle'|translate}}" ui-sref="tab.orders.all">
-      </a>
-
-      <!-- Nopay Orders Tab -->
-      <a title="{{'ord_nopaytitle'|translate}}" ui-sref="tab.orders.nopay">
-      </a>
-
-      <!-- Noship Orders Tab -->
-      <a title="{{'ord_noshiptitle'|translate}}" ui-sref="tab.orders.noship">
-      </a>
-
-      <!-- Shipped Orders Tab -->
-      <a title="{{'ord_shippedtitle'|translate}}" ui-sref="tab.orders.shipped">
-      </a>
-
-      <!-- Return Orders Tab -->
-      <a title="{{'ord_nocommenttitle'|translate}}" ui-sref="tab.orders.commenting">
-      </a>
+</div>
+<ion-view view-title="订单列表" hide-tabs="true">
+  <ion-content>
+    <div style="height: 44px">
     </div>
-    <ion-content class="has-subheader">
-    </ion-content>
-  </ion-view>
-</ion-nav-view>
+    <ion-list>
+      <ion-item ng-repeat="item in items" style="margin: -1px 0 0 0;padding: 0;border: none;">
+        <div class="row" style="background-color: #f2f2f2;padding: 10px 15px 10px 10px;">
+          <div class="col col-75" style="height: 100%; padding: 0px">
+            <p style="padding: 0px; height: 100%;">订单号：{{item.order_id}}</p>
+          </div>
+
+          <div class="col col-25" style="height: 100%; padding: 0px" align="right">
+            <p style="padding: 0px; height: 100%;">{{item.time.substr(0, 10)}}</p>
+          </div>
+        </div>
+
+        <div class="row" style="padding:10px;">
+          <div class="col col-75" style="height: 100%; padding: 0px">
+            <p style="padding: 0px; height: 100%;">{{item.seller_name}}</p>
+          </div>
+
+          <div class="col col-25" style="height: 100%; padding: 0px" align="right">
+            <p style="padding: 0px; height: 100%;">{{item.status}}</p>
+          </div>
+        </div>
+
+        <div class="row" ng-repeat="product in item.products" style="margin:0;padding: 0 15px 10px 10px;">
+          <div class="col col-20">
+            <img class="pic" ng-src="{{product.url}}">
+          </div>
+          <div class="col col-80" style="padding: 0;">
+            <p style="padding: 0px;margin-bottom: 10px;">{{product.name}}</p>
+
+            <p>
+              <span style="float: left;">{{product.price | currency:'￥'}}</span>
+              <span>{{product.spec}}</span>
+              <span style="float: right;">x{{product.num}}</span>
+            </p>
+          </div>
+        </div>
+        <hr style="margin: 0;height:1px;border:none;border-top:3px solid #f2f2f2;"/>
+        <div class="row" style="padding:10px;">
+          <div style="width: 100%;">
+            <button class="button button-energized"
+                    style="font-size:12px;float:right;margin: 0 2px;min-height: 27px;line-height: 30px;padding: 0 18px;"
+                    ng-if="item.pay_status_value" ng-click="payOrder(item)">去支付
+            </button>
+            <button class="button button-light"
+                    style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
+                    ng-if="item.is_rate" ng-click="commentOrder(item)">去评论
+            </button>
+            <button class="button button-light"
+                    style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
+                    ng-if="item.is_track" ng-click="trackOrder(item)">查看物流
+            </button>
+            <button class="button button-light"
+                    style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
+                    ng-if="item.pay_status_value" ng-click="cancelOrder(item)">取消订单
+            </button>
+            <button class="button button-light"
+                    style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
+                    ng-click="viewDetail(item)">订单详情
+            </button>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll
+      ng-if="hasMore"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>
+
 

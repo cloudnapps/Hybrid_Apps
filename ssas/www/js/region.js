@@ -19,7 +19,7 @@
             callback(result);
           }
         );
-      }
+      };
 
       var initRegion = function (code, callback) {
         var url = apiEndpoint.url + '/init-region.html';

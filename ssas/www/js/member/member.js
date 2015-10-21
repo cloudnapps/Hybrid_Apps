@@ -60,6 +60,10 @@
         $scope.closePopover();
       };
 
+      $scope.gotoOrder = function(type){
+        $state.go('tab.orders', {type: type}, {reload: true});
+      };
+
       $scope.logOut = function(){
         userService.logOut();
         $scope.tabStateGo($scope.tabIndex.home, 'tab.home');

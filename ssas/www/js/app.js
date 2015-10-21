@@ -7,7 +7,6 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home', 'shop', 'cart',
   'member', 'order', 'receiver', 'favorite', 'return', 'setting', 'login', 'point', 'seller', 'complaint', 'ngIOS9UIWebViewPatch'])
-  .constant("jsonEndpoint", {url: "/data"})
   //For the real endpoint, we'd use this
   .run(function ($ionicPlatform, $translate, userService) {
     $ionicPlatform.ready(function () {
@@ -56,7 +55,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home
             }
           }
         },
-        
+
       });
 
     // if none of the above states are matched, use this as the fallback
