@@ -75,16 +75,15 @@ angular.module('cart', ['components'])
 
   $scope.load();
 
-
-  $scope.toggleNature = function (nature) {
-    var goods = [];
-    angular.forEach(nature.aSelCart, function (seller) {
-      seller.seller_info.selected = nature.selected;
-      angular.forEach(seller.goods_list, function (item) {
-        item.selected = seller.seller_info.selected;
-        goods.push(item);
+  $scope.canCheckout = function (nature) {
+    return (nature.aSelCart || []).some(function (seller) {
+      return (seller.goods_list || []).some(function (good) {
+        return good.selected;
       });
     });
+  };
+
+  $scope.toggleGoods = function (goods) {
     $ionicLoading.show();
     cartApi.nocheck(goods).success(function (responseData){
       var dataStatus = responseData.status;
@@ -97,41 +96,27 @@ angular.module('cart', ['components'])
     });
   };
 
+  $scope.toggleNature = function (nature) {
+    var goods = [];
+    angular.forEach(nature.aSelCart, function (seller) {
+      seller.seller_info.selected = nature.selected;
+      angular.forEach(seller.goods_list, function (item) {
+        item.selected = seller.seller_info.selected;
+        goods.push(item);
+      });
+    });
+    $scope.toggleGoods(goods);
+  };
+
   $scope.toggleSeller = function (seller) {
     angular.forEach(seller.goods_list, function (item) {
       item.selected = seller.seller_info.selected;
     });
-    $ionicLoading.show();
-    cartApi.nocheck(seller.goods_list).success(function (responseData){
-      var dataStatus = responseData.status;
-      if (dataStatus === 0) {
-        $scope.cart = responseData.data;
-      }
-    })
-    .finally(function () {
-      $ionicLoading.hide();
-    });
-  };
-
-  $scope.canCheckout = function (nature) {
-    return (nature.aSelCart || []).some(function (seller) {
-      return (seller.goods_list || []).some(function (good) {
-        return good.selected;
-      });
-    });
+    $scope.toggleGoods(seller.goods_list);
   };
 
   $scope.toggleGood = function (good) {
-    $ionicLoading.show();
-    cartApi.nocheck([good]).success(function (responseData){
-      var dataStatus = responseData.status;
-      if (dataStatus === 0) {
-        $scope.cart = responseData.data;
-      }
-    })
-    .finally(function () {
-      $ionicLoading.hide();
-    });
+    $scope.toggleGoods([good]);
   };
 
   $scope.updateGoodQuantity = function (good) {
@@ -147,9 +132,9 @@ angular.module('cart', ['components'])
     });
   };
 
-  $scope.removeGood = function (good) {
+  $scope.removeGoods = function (goods) {
     $ionicLoading.show();
-    cartApi.remove([good]).success(function (responseData){
+    cartApi.remove(goods).success(function (responseData){
       var dataStatus = responseData.status;
       if (dataStatus === 0) {
         $scope.cart = responseData.data;
@@ -158,6 +143,29 @@ angular.module('cart', ['components'])
     .finally(function () {
       $ionicLoading.hide();
     });
+  };
+
+  $scope.removeNature = function (nature) {
+    var goods = [];
+    angular.forEach(nature.aSelCart, function (seller) {
+      seller.seller_info.selected = nature.selected;
+      angular.forEach(seller.goods_list, function (item) {
+        item.selected = seller.seller_info.selected;
+        goods.push(item);
+      });
+    });
+    $scope.removeGoods(goods);
+  };
+
+  $scope.removeSeller = function (seller) {
+    angular.forEach(seller.goods_list, function (item) {
+      item.selected = seller.seller_info.selected;
+    });
+    $scope.removeGoods(seller.goods_list);
+  };
+
+  $scope.removeGood = function (good) {
+    $scope.removeGoods([good]);
   };
 }) // end of CartController
 .controller('CartCheckoutController', function ($rootScope, $scope, $state, $stateParams, $ionicModal, $ionicLoading, cartApi) {

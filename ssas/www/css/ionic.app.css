@@ -7742,7 +7742,7 @@ a.button {
   .vertical-align-middle-container:before {
     height: 100%;
     width: 0px;
-    margin-left: -4px;
+    margin-left: -5px;
     content: ' ';
     display: inline-block;
     vertical-align: middle; }
@@ -7755,19 +7755,30 @@ a.button {
   top: 20%;
   min-height: auto; }
 
-.cart .seller.item label.checkbox {
+.cart .seller.item label.checkbox, .cart .nature.item label.checkbox {
   width: 42px; }
-.cart .nature.item {
-  padding-left: 50px; }
-  .cart .nature.item label.checkbox {
-    width: 42px;
-    margin-left: -8px; }
-.cart .nature.item.direct_mail .item-content {
+.cart .nature.item label.checkbox {
+  width: 42px;
+  margin-left: -10px; }
+.cart .nature.item .item-checkbox {
+  padding-left: 40px;
+  height: 50px;
+  padding: 15px 0px 15px 10px;
+  margin-left: 30px; }
+.cart .nature.item .item-content {
+  padding: 0px 0px 0px 15px; }
+.cart .nature-direct_mail .nature.item .item-checkbox {
   color: white;
   background: #fd8b24; }
-.cart .nature.item.bond .item-content {
+.cart .nature-bond .nature.item .item-checkbox {
   color: white;
   background: #689fbc; }
+.cart .seller.item label.checkbox {
+  width: 42px; }
+.cart .seller.item .item-checkbox {
+  padding-left: 40px; }
+.cart .seller.item .item-content {
+  padding-right: 15px; }
 .cart .good.item label.checkbox {
   width: 42px; }
 .cart .good.item .item-checkbox {
@@ -7776,7 +7787,10 @@ a.button {
   padding-right: 15px; }
 .cart .good.item .good-thumbnail {
   display: block;
-  height: 80px; }
+  height: 82px;
+  width: 82px;
+  border: solid #c8c8c8 1px;
+  padding: 1px; }
   .cart .good.item .good-thumbnail img {
     max-width: 80px;
     max-height: 80px; }

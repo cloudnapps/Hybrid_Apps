@@ -1,5 +1,5 @@
 .cart {
-  .seller.item {
+  .seller.item,.nature.item {
     label.checkbox {
       width: 42px;
     }
@@ -7,26 +7,40 @@
   .nature.item {
     label.checkbox {
       width: 42px;
-      margin-left: -8px;
+      margin-left: -10px;
     }
-
-
-    padding-left: 50px;
-  }
-  .nature.item.direct_mail {
+    .item-checkbox {
+      padding-left: 40px;
+      height: 50px;
+      padding: 15px 0px 15px 10px;
+      margin-left: 30px;
+    }
     .item-content {
-      color: white;
-      background: #fd8b24;
+      padding: 0px 0px 0px 15px;
     }
   }
 
-  .nature.item.bond {
+  .nature-direct_mail .nature.item .item-checkbox {
+    color: white;
+    background: #fd8b24;
+  }
+
+  .nature-bond .nature.item .item-checkbox {
+    color: white;
+    background: #689fbc;
+  }
+
+  .seller.item {
+    label.checkbox {
+      width: 42px;
+    }
+    .item-checkbox {
+      padding-left: 40px;
+    }
     .item-content {
-      color: white;
-      background: #689fbc;
+      padding-right: 15px;
     }
   }
-
   .good.item {
     label.checkbox {
       width: 42px;
@@ -39,7 +53,10 @@
     }
     .good-thumbnail {
       display: block;
-      height: 80px;
+      height: 82px;
+      width: 82px;
+      border: solid #c8c8c8 1px;
+      padding: 1px;
       img {
         max-width: 80px;
         max-height: 80px;
