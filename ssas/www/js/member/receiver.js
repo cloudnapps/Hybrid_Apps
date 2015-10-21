@@ -122,7 +122,7 @@
       }
     })
 
-    .factory('ReceiverApi', function ($http, apiEndpoint, jsonEndpoint, userService, RegionApi, transformRequestAsFormPost) {
+    .factory('ReceiverApi', function ($http, apiEndpoint, userService, RegionApi, transformRequestAsFormPost) {
       console.log(apiEndpoint);
 
       var sendRequest = function (url, data, callback) {
@@ -144,7 +144,7 @@
 
       var getRegionInfo = function (callback) {
         RegionApi.initRegion('02f09323e533c375e2270e0dbf5736ae', function (result) {
-          $http.get(jsonEndpoint.url + '/misc/region.json')
+          $http.get(result.data.link)
             .success(function (data) {
               callback(data);
             }).error(function (data) {

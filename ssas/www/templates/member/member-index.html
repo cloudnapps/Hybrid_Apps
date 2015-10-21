@@ -52,32 +52,42 @@
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #a9a9a9;"/>
 
     <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;">
-      <div class="col col-20" style="padding: 0;text-align: center;height: 40px;font-size: 16px;">
-        <a class="" style="color: #333333;text-decoration: none;" ui-sref="tab.orders.nopay">待付款</a>
+      <div class="col col-20"
+           style="padding: 0;text-align: center;height: 40px;font-size: 16px;"
+           ng-click="gotoOrder('nopay')">
+        <a class="" style="color: #333333;text-decoration: none;">待付款</a>
       </div>
       <div class="col" style="padding: 0;text-align: center;font-size: 16px;">
         |
       </div>
-      <div class="col col-20" style="padding: 0px;text-align: center;height: 40px;font-size: 16px;">
-        <a class="" style="color: #333333;text-decoration: none;" ui-sref="tab.orders.noship">待发货</a>
+      <div class="col col-20"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
+           ng-click="gotoOrder('noship')">
+        <a class="" style="color: #333333;text-decoration: none;">待发货</a>
       </div>
       <div class="col" style="padding: 0;text-align: center;">
         |
       </div>
-      <div class="col col-20" style="padding: 0px;text-align: center;height: 40px;font-size: 16px;">
-        <a class="" style="color: #333333;text-decoration: none;" ui-sref="tab.orders.shipped">待收货</a>
+      <div class="col col-20"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
+           ng-click="gotoOrder('shipped')">
+        <a class="" style="color: #333333;text-decoration: none;">待收货</a>
       </div>
       <div class="col" style="padding: 0;text-align: center;">
         |
       </div>
-      <div class="col col-20" style="padding: 0px;text-align: center;height: 40px;font-size: 16px;">
-        <a class="" style="color: #333333;text-decoration: none;" ui-sref="tab.orders.commenting">待评论</a>
+      <div class="col col-20"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
+           ng-click="gotoOrder('commenting')">
+        <a class="" style="color: #333333;text-decoration: none;">待评论</a>
       </div>
     </div>
 
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #a9a9a9;"/>
 
-    <div class="row" style="padding: 0 20px;height: 40px;line-height: 40px;" ng-click="gotoPage('tab.orders.all')">
+    <div class="row"
+         style="padding: 0 20px;height: 40px;line-height: 40px;"
+         ng-click="gotoOrder('all')">
       <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 16px;">
         <a style="color: #333333;text-decoration: none;">全部订单</a>
       </div>
