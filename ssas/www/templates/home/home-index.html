@@ -20,30 +20,63 @@
   <ion-nav-buttons side="right">
     <div class="row row-center" style="padding: 0px;margin-right: 10px;">
       <div class="col col-center" style="padding: 0px;">
-        <button class="button button-clear" ng-click="openPopover($event)">
+        <button class="button button-clear" ng-click="openBtns()">
           发现
         </button>
       </div>
     </div>
-    <script id="findPopover.html" type="text/ng-template">
-      <ion-popover-view style="width: 80px; height: 100px;background:#ad1222;">
-        <ion-content>
-          <div class="row row-center" style="padding: 0px;">
-            <div class="col col-center" style="padding: 0px;text-align:center;">
-              <a class="button button-clear" style="color:#fff;" href="#/">摇一摇</a>
-            </div>
-          </div>
-          <div class="row row-center" style="padding: 0px;">
-            <div class="col col-center" style="padding: 0px;text-align:center;">
-              <a class="button button-clear" style="color:#fff;" href="#/tab/signin">签个到</a>
-            </div>
-          </div>
-        </ion-content>
-      </ion-popover-view>
-    </script>
   </ion-nav-buttons>
 
   <ion-content style="background-color: #eee;">
+    <!--发现-线下功能-->
+    <div class="row" style="padding: 0;margin: 6px 0;background-color: #fff;" ng-show="showBtns">
+      <div class="col col-20 col-center" style="padding: 0px;height: 90px;">
+        <a class="button button-clear" style="padding: 1px;">
+          <img style="width: 80%;" ng-src="{{homeInfo.cat_info[0].image}}">
+        </a>
+
+        <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+          逛商场
+        </p>
+      </div>
+      <div class="col col-20 col-center" style="padding: 0px;height: 90px;">
+        <a class="button button-clear" style="padding: 1px;">
+          <img style="width: 80%;" ng-src="{{homeInfo.cat_info[0].image}}">
+        </a>
+
+        <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+          签个到
+        </p>
+      </div>
+      <div class="col col-20 col-center" style="padding: 0px;height: 90px;">
+        <a class="button button-clear" style="padding: 1px;">
+          <img style="width: 80%;" ng-src="{{homeInfo.cat_info[0].image}}">
+        </a>
+
+        <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+          摇一摇
+        </p>
+      </div>
+      <div class="col col-20 col-center" style="padding: 0px;height: 90px;">
+        <a class="button button-clear" style="padding: 1px;">
+          <img style="width: 80%;" ng-src="{{homeInfo.cat_info[0].image}}">
+        </a>
+
+        <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+          一键上网
+        </p>
+      </div>
+      <div class="col col-20 col-center" style="padding: 0px;height: 90px;">
+        <a class="button button-clear" style="padding: 1px;">
+          <img style="width: 80%;" ng-src="{{homeInfo.cat_info[0].image}}">
+        </a>
+
+        <p style="text-align: center;margin-bottom: 0;color: #c9000b;">
+          交通
+        </p>
+      </div>
+    </div>
+
     <!--广告轮播图-->
     <div class="row" style="padding: 0px;margin-bottom: 6px;width: 100%; height: 200px">
       <div class="col col-center" style="padding: 0px; width: 100%; height: 100%">
@@ -78,12 +111,15 @@
       <div class="col col-80 col-center" style="padding: 0px;margin: 0 0 5px 0;max-width:50%;">
         <img src="img/newproduct.jpg" style="height: 30px;">
       </div>
-      <span style="margin-top:7px;">距活动结束还有{{activityInfo.diff_time}}</span>
+      <span style="margin-top:7px;">距活动结束还有
+        <div style="color: #FF0000; align: right">{{activityInfo.diff_time}}</div>
+      </span>
     </div>
     <div style="padding: 0 0 0 6px;background-color: #fff;">
       <ion-scroll direction="x">
         <div class="row">
-          <div class="col col-33" style="padding: 0px; border: 1px solid #eee;margin: 0 4px 0 0;">
+          <div class="col col-33" style="padding: 0px; border: 1px solid #eee;margin: 0 4px 0 0;"
+               ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: activityInfo.product_info[0].product_id})">
             <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
               <img style="width:90px;" ng-src="{{activityInfo.product_info[0].image}}">
             </a>
@@ -102,7 +138,8 @@
             </p>
           </div>
 
-          <div class="col col-33" style="padding: 0px; border: 1px solid #eee;">
+          <div class="col col-33" style="padding: 0px; border: 1px solid #eee;"
+               ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: activityInfo.product_info[0].product_id})">
             <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
               <img style="width:90px;" ng-src="{{activityInfo.product_info[0].image}}">
             </a>
@@ -121,7 +158,8 @@
             </p>
           </div>
 
-          <div class="col col-33" style="padding: 0px; border: 1px solid #eee;">
+          <div class="col col-33" style="padding: 0px; border: 1px solid #eee;"
+               ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: activityInfo.product_info[0].product_id})">
             <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
               <img style="width:90px;" ng-src="{{activityInfo.product_info[0].image}}">
             </a>
@@ -140,7 +178,8 @@
             </p>
           </div>
 
-          <div class="col col-33" style="padding: 0px; border: 1px solid #eee;">
+          <div class="col col-33" style="padding: 0px; border: 1px solid #eee;"
+               ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: activityInfo.product_info[0].product_id})">
             <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;">
               <img style="width:90px;" ng-src="{{activityInfo.product_info[1].image}}">
             </a>
@@ -216,7 +255,55 @@
       </a>
     </div>
 
-    <!--商品-->
+    <!--分类商品-->
+    <div ng-repeat="floor in homeInfo.floor">
+      <div class="row" style="padding: 0;margin: 6px 0 0;background-color: #fff;">
+        <div class="col col-50 col-center" style="padding: 0px;margin: 0 0 10px 0;">
+          <img src="img/hotproduct.jpg" style="height: 30px;">
+        </div>
+        <div class="col col-50 col-center" style="padding: 0px;margin: 10px 5px;" align="right">
+          <a style="margin-right: 25px;text-decoration: none;color: #666c70;"
+             ng-click="tabStateGo(tabIndex.shop, 'tab.products', {categoryId: category.cat_id})"
+            >更多<span style="margin-left: 5px;">>></span></a>
+        </div>
+      </div>
+      <div style="padding: 0 0 0 6px;background-color: #fff;">
+        <div class="row"
+             ng-repeat="product in floor.product_info" ng-if="$index % 2 === 0">
+          <div class="col col-50" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
+            <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;"
+               ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: floor.product_info[$index].product_id})">
+              <img style="width:90px; height:60%;" ng-src="{{floor.product_info[$index].image}}">
+            </a>
+
+            <p style="text-align: center;margin-bottom: 0;color: #c9000b; height: 20%">
+              {{floor.product_info[$index].name}}
+            </p>
+
+            <p style="text-align: center;margin-bottom: 0;font-size: 10px;color: #666c70; height: 20%">
+              优惠价：{{floor.product_info[$index].price}}
+            </p>
+          </div>
+
+          <div class="col col-50" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
+            <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;"
+               ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: floor.product_info[$index+1].product_id})">
+              <img style="width:90px; height:60%;" ng-src="{{floor.product_info[$index+1].image}}">
+            </a>
+
+            <p style="text-align: center;margin-bottom: 0;color: #c9000b; height: 20%">
+              {{floor.product_info[$index+1].name}}
+            </p>
+
+            <p style="text-align: center;margin-bottom: 0;font-size: 12px;color: #666c70; height: 20%">
+              优惠价：{{floor.product_info[$index+1].price}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--猜你喜欢-->
     <div class="row" style="padding: 0;margin: 6px 0 0;background-color: #fff;">
       <div class="col col-50 col-center" style="padding: 0px;margin: 0 0 10px 0;">
         <img src="img/hotproduct.jpg" style="height: 30px;">
@@ -229,38 +316,30 @@
     </div>
     <div style="padding: 0 0 0 6px;background-color: #fff;">
       <div class="row"
-           ng-repeat="product in homeInfo.fourth" ng-if="$index % 2 === 0">
+           ng-repeat="product in homeInfo.goods_gallery" ng-if="$index % 2 === 0">
         <div class="col col-50" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
           <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;"
-             ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.fourth[$index].product_id})">
-            <img style="width:90px; height:60%;" ng-src="{{homeInfo.fourth[$index].image}}">
+             ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.goods_gallery[$index].product_id})">
+            <img style="width:90px; height:60%;" ng-src="{{homeInfo.goods_gallery[$index].image}}">
           </a>
 
           <p style="text-align: center;margin-bottom: 0;color: #c9000b; height: 20%">
-            {{homeInfo.fourth[$index].name}}
-          </p>
-
-          <p style="text-align: center;margin-bottom: 0;font-size: 10px;color: #666c70; height: 20%">
-            优惠价：{{homeInfo.fourth[$index].price}}
+            {{homeInfo.goods_gallery[$index].name}}
           </p>
         </div>
 
         <div class="col col-50" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
           <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;"
-             ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.fourth[$index+1].product_id})">
-            <img style="width:90px; height:60%;" ng-src="{{homeInfo.fourth[$index+1].image}}">
+             ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.goods_gallery[$index+1].product_id})">
+            <img style="width:90px; height:60%;" ng-src="{{homeInfo.goods_gallery[$index+1].image}}">
           </a>
 
           <p style="text-align: center;margin-bottom: 0;color: #c9000b; height: 20%">
-            {{homeInfo.fourth[$index+1].name}}
+            {{homeInfo.goods_gallery[$index+1].name}}
           </p>
 
-          <p style="text-align: center;margin-bottom: 0;font-size: 12px;color: #666c70; height: 20%">
-            优惠价：{{homeInfo.fourth[$index+1].price}}
-          </p>
         </div>
       </div>
     </div>
-
   </ion-content>
 </ion-view>

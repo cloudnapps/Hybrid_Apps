@@ -32,13 +32,15 @@
     }) // end of config
 
     .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate,
-                                            $state, $ionicPopover, $window,
+                                            $state, $ionicPopover, $window, $interval,
                                             HomeApi, SellerApi) {
       $scope.homeInfo = {};
 
       $scope.sellerInfo = {};
 
       $scope.activityInfo = {};
+
+      $scope.showBtns = false;
 
       HomeApi.getHomeContent().then(function (result) {
         $scope.homeInfo = result.data.data;
@@ -49,45 +51,32 @@
         $scope.activityInfo.updateDiff = function () {
 
           var end_time = new Date($scope.activityInfo.end_time);
-          var now_time = new Date($scope.activityInfo.now_time);
+          var now_time = new Date();
 
-          var diff_time = end_time.getTime() - now_time.getTime();
+          var diff_time = (end_time.getTime() - now_time.getTime()) / 1000;
+          var diff_hour = parseInt(diff_time / (60 * 60));
+          var diff_minute = parseInt((diff_time - diff_hour * 60 * 60) / 60);
+          var diff_second = parseInt(diff_time - diff_hour * 60 * 60 - diff_minute * 60);
 
-          $scope.activityInfo.diff_time = diff_time/1000;
+          $scope.activityInfo.diff_time = diff_hour + ':' + diff_minute + ':' + diff_second;
         };
 
         $timeout(function () {
           $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
         }, 1000);
 
-        $timeout(function () {
+        var promise = $interval(function(){
           $scope.activityInfo.updateDiff();
-        }, 1000);
+        },1000);
+
+        $scope.$on('$destroy',function(){
+          $interval.cancel(promise);
+        });
       });
 
-      $ionicPopover.fromTemplateUrl('findPopover.html', {
-        scope: $scope
-      }).then(function (popover) {
-        $scope.popover = popover;
-      });
-      $scope.openPopover = function ($event) {
-        $scope.popover.show($event);
+      $scope.openBtns = function () {
+        $scope.showBtns = !$scope.showBtns;
       };
-      $scope.closePopover = function () {
-        $scope.popover.hide();
-      };
-      //Cleanup the popover when we're done with it!
-      $scope.$on('$destroy', function () {
-        $scope.popover.remove();
-      });
-      // Execute action on hide popover
-      $scope.$on('popover.hidden', function () {
-        // Execute action
-      });
-      // Execute action on remove popover
-      $scope.$on('popover.removed', function () {
-        // Execute action
-      });
 
       $scope.openItem = function (item) {
         if (item.type === 'seller') {
