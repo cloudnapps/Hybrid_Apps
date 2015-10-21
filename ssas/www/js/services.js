@@ -49,6 +49,7 @@ angular.module('starter.services', [])
       return ( source + result );
     }
   })
+
   .service('userService', function () {
     var currentUser = {};
 
@@ -121,6 +122,7 @@ angular.module('starter.services', [])
       }
     }
   })
+
   .service('tabStateService', function ($timeout, $ionicTabsDelegate, $state) {
     /**
      * 跨tab页面跳转

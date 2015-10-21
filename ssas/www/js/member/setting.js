@@ -164,7 +164,7 @@
       }
     })
 
-    .controller('ChangePwdCtrl', function ($scope, $state, $ionicPopup, SettingApi) {
+    .controller('ChangePwdCtrl', function ($scope, $state, $ionicPopup, SettingApi, userService) {
       $scope.pwdInfo = {};
 
       $scope.modify = function () {
@@ -193,6 +193,12 @@
 
           alertPopup.then(function (res) {
             console.log(res);
+
+            if(result.status === 0) {
+              userService.logOut();
+              userService.backIndex = -1;
+              $state.go('tab.member', {}, {reload: true});
+            }
           });
         });
       };
@@ -326,9 +332,9 @@
         var url = apiEndpoint.url + '/member-security.html';
         var data = userService.getMember();
 
-        data.new_passwd = passwordInfo.newPassword;
-        data.old_passwd = passwordInfo.oldPassword;
-        data.re_passwd = passwordInfo.confirmPassword;
+        data.new_passwd = btoa(passwordInfo.newPassword);
+        data.old_passwd = btoa(passwordInfo.oldPassword);
+        data.re_passwd = btoa(passwordInfo.confirmPassword);
 
         sendRequest(url, data, callback);
       };

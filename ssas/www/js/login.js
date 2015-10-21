@@ -59,6 +59,25 @@
         }
       };
 
+      $scope.saveInfo = function (result) {
+        var currentUser = {};
+        currentUser.memberId = result.data.member_id;
+        currentUser.name = result.data.login_name;
+        currentUser.token = result.data.token;
+
+        userService.set(currentUser);
+        if (userService.backIndex === -1) {
+          $ionicHistory.goBack();
+          $scope.tabStateGo($scope.tabIndex.member, 'tab.member');
+          userService.backIndex = -1;
+        }
+        else {
+          $ionicHistory.goBack();
+          $scope.tabStateGo(userService.backIndex);
+          userService.backIndex = -1;
+        }
+      };
+
       $scope.login = function () {
         LoginApi.loginUser($scope.userInfo.name, $scope.userInfo.password, function (result) {
           if (result.status === 1) {
@@ -71,22 +90,7 @@
             });
           }
           else {
-            var currentUser = {};
-            currentUser.memberId = result.data.member_id;
-            currentUser.name = result.data.login_name;
-            currentUser.token = result.data.token;
-
-            userService.set(currentUser);
-            if (userService.backIndex === -1) {
-              $ionicHistory.goBack();
-              $scope.tabStateGo($scope.tabIndex.member);
-              userService.backIndex = -1;
-            }
-            else {
-              $ionicHistory.goBack();
-              $scope.tabStateGo(userService.backIndex);
-              userService.backIndex = -1;
-            }
+            $scope.saveInfo(result);
           }
         });
       };
@@ -116,7 +120,6 @@
       };
 
       $scope.submitUser = function () {
-
         if ($scope.userInfo.password !== $scope.userInfo.confirmPwd) {
           var alertPopup = $ionicPopup.alert({
             title: '注册失败',
@@ -139,27 +142,12 @@
               });
             }
             else {
-              var currentUser = {};
-              currentUser.memberId = result.data.member_id;
-              currentUser.name = result.data.login_name;
-              currentUser.token = result.data.token;
-              currentUser.image = result.data.image;
-
-              userService.set(currentUser);
-              if (userService.backIndex === -1) {
-                $ionicHistory.goBack();
-                $scope.tabStateGo($scope.tabIndex.member);
-                userService.backIndex = -1;
-              }
-              else {
-                $ionicHistory.goBack();
-                $scope.tabStateGo(userService.backIndex);
-                userService.backIndex = -1;
-              }
+              $scope.saveInfo(result);
             }
           })
       };
     })
+
     .controller('RetrieveCtrl', function ($scope, $state, $interval, LoginApi, toastService) {
       $scope.userInfo = {};
       $scope.verified = false;
@@ -309,7 +297,7 @@
           psw_confirm: btoa(psw_confirm)
         };
         sendRequest(url, data, callback);
-      }
+      };
 
       return {
         lostPasswd: lostPasswd,

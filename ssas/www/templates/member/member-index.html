@@ -12,12 +12,12 @@
         <ion-content>
           <div class="row row-center" style="padding: 0px;">
             <div class="col col-center" style="padding: 0px;text-align:center;">
-              <a class="button button-clear" style="color:#fff;" href="#/tab/setting/changepwd">修改密码</a>
+              <a class="button button-clear" style="color:#fff;" ng-click="gotoPage('tab.setting_changepwd')">修改密码</a>
             </div>
           </div>
           <div class="row row-center" style="padding: 0px;">
             <div class="col col-center" style="padding: 0px;text-align:center;">
-              <a class="button button-clear" style="color:#fff;" ng-click="logOut()">退出登录</a>
+              <a class="button button-clear" style="color:#fff;" ng-click="logOut()">安全退出</a>
             </div>
           </div>
         </ion-content>
@@ -34,16 +34,17 @@
           <img ng-src="{{currentUser.image}}" style="height: 100px;width: 100px;border-radius: 50% 50%;">
         </div>
         <div class="col col-67 col-center" style="padding: 0;font-size: 16px;color: #333333;">
-          <span>{{currentUser.name}}</span>
+          <p>{{currentUser.mobile}}</p>
+          <p>{{currentUser.lv_name}}</p>
         </div>
       </div>
     </div>
     <div class="row" style="padding: 0px;margin: 0;">
-      <div class="col col-offset-33 col-33 col-center" style="padding: 0px;">
+      <div class="col col-offset-10 col-50 col-center" style="padding: 0px;">
         <a class="button button-clear" style="font-size:16px;padding: 0;border: none;color: #333333;"
            ui-sref="tab.favorites.goods">关注的商品</a>
       </div>
-      <div class="col col-33 col-center" style="padding: 0px;">
+      <div class="col col-50 col-center" style="padding: 0px;">
         <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #333333;"
            ui-sref="tab.favorites.sellers">关注的店铺</a>
       </div>
@@ -53,15 +54,15 @@
 
     <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;">
       <div class="col col-20"
-           style="padding: 0;text-align: center;height: 40px;font-size: 16px;"
+           style="padding: 0;text-align: center;height: 40px;font-size: 12px;"
            ng-click="gotoOrder('nopay')">
         <a class="" style="color: #333333;text-decoration: none;">待付款</a>
       </div>
-      <div class="col" style="padding: 0;text-align: center;font-size: 16px;">
+      <div class="col" style="padding: 0;text-align: center;">
         |
       </div>
       <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
            ng-click="gotoOrder('noship')">
         <a class="" style="color: #333333;text-decoration: none;">待发货</a>
       </div>
@@ -69,7 +70,7 @@
         |
       </div>
       <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
            ng-click="gotoOrder('shipped')">
         <a class="" style="color: #333333;text-decoration: none;">待收货</a>
       </div>
@@ -77,9 +78,17 @@
         |
       </div>
       <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
            ng-click="gotoOrder('commenting')">
         <a class="" style="color: #333333;text-decoration: none;">待评论</a>
+      </div>
+      <div class="col" style="padding: 0;text-align: center;">
+        |
+      </div>
+      <div class="col col-20"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
+           ng-click="gotoPage('tab.feedbacks.returns')">
+        <a class="" style="color: #333333;text-decoration: none;">售后</a>
       </div>
     </div>
 
@@ -145,18 +154,6 @@
     <div class="row" style="padding: 0 20px;height: 40px;line-height: 40px;" ng-click="gotoPage('tab.favorites.goods')">
       <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 16px;">
         <a style="color: #333333;text-decoration: none;">我的收藏</a>
-      </div>
-      <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
-        <i class="icon ion-chevron-right icon-accessory"></i>
-      </div>
-    </div>
-
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #f1f1f1;"/>
-
-    <div class="row" style="padding: 0 20px;height: 40px;line-height: 40px;"
-         ng-click="gotoPage('tab.feedbacks.returns')">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 16px;">
-        <a style="color: #333333;text-decoration: none;">售后与投诉</a>
       </div>
       <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
         <i class="icon ion-chevron-right icon-accessory"></i>

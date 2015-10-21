@@ -18,7 +18,7 @@
           }
         });
     })
-    .controller('MemberCtrl', function ($scope, $ionicPopover, $state, $ionicHistory, userService) {
+    .controller('MemberCtrl', function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService) {
       $scope.currentUser = {};
 
       $scope.$on('$ionicView.beforeEnter', function () {
@@ -26,7 +26,9 @@
           $scope.tabStateGo($scope.tabIndex.member, 'tab.login');
         }
         else {
-          $scope.currentUser = userService.get();
+          SettingApi.getMemberSetting(function(result){
+            $scope.currentUser = result.data;
+          })
         }
       });
 
@@ -60,12 +62,13 @@
         $scope.closePopover();
       };
 
-      $scope.gotoOrder = function(type){
+      $scope.gotoOrder = function (type) {
         $state.go('tab.orders', {type: type}, {reload: true});
       };
 
-      $scope.logOut = function(){
+      $scope.logOut = function () {
         userService.logOut();
+        $scope.closePopover();
         $scope.tabStateGo($scope.tabIndex.home, 'tab.home');
       }
     });

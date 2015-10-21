@@ -68,8 +68,22 @@
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;
-        $scope.hasMore = true;
+        $scope.hasMore = false;
         $scope.filter = {};
+      };
+
+      $scope.getOrders = function () {
+        OrderApi.getOrderList($scope.page, $scope.filter, function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.hasMore = true;
+            $scope.items = $scope.items.concat(result.data);
+          }
+
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
       };
 
       $scope.switchOrder = function (type) {
@@ -103,25 +117,13 @@
             ship_status: 1
           };
         }
+
+        $scope.getOrders();
       };
 
       if ($stateParams.type) {
         $scope.switchOrder($stateParams.type);
       }
-
-      $scope.getOrders = function () {
-        OrderApi.getOrderList($scope.page, $scope.filter, function (result) {
-          if (result.status === 1) {
-            $scope.hasMore = false;
-          }
-          else {
-            $scope.hasMore = true;
-            $scope.items = $scope.items.concat(result.data);
-          }
-
-          $scope.$broadcast('scroll.infiniteScrollComplete');
-        });
-      };
 
       $scope.loadMore = function () {
         $scope.page++;
@@ -349,7 +351,7 @@
       var receiveOrder = function (orderId, callback) {
         var url = apiEndpoint.url + '/member-orderReceives.html';
         var data = {
-         member_id: userService.get('memberId'),
+          member_id: userService.get('memberId'),
           token: userService.get('token'),
           order_id: orderId
         };

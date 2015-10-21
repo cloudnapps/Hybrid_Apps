@@ -91,7 +91,17 @@
         console.log(addrInfo);
 
         ReceiverApi.addReceiver(addrInfo, function (result) {
-          $scope.message = result.msg;
+          var alertPopup = $ionicPopup.alert({
+            title: '添加收货地址',
+            template: result.msg ? result.msg : '添加成功'
+          });
+          alertPopup.then(function (res) {
+            console.log(res);
+          });
+
+          if (result.status === 0) {
+            $state.go('tab.receivers', {}, {reload: true});
+          }
         });
       };
 
@@ -118,7 +128,6 @@
         }
 
         $scope.addrInfo.showChoose = false;
-        $state.reload();
       }
     })
 
