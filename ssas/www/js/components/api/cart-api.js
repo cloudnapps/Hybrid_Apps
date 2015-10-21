@@ -1,7 +1,7 @@
 
 angular.module('components')
-  .factory('cartApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost',
-    function($http, apiEndpoint, transformRequestAsFormPost) {
+  .factory('cartApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost', 'userService',
+    function($http, apiEndpoint, transformRequestAsFormPost, userService) {
 
       var addToCart = function (product) {
         console.log(product);
@@ -9,8 +9,8 @@ angular.module('components')
           product_id: product.product_id,
           goods_id: product.goods_id,
           num: 1,
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
+          member_id: userService.get('memberId'),
+          token: userService.get('token')
         };
         var request = $http({
           method: 'post',
@@ -25,8 +25,8 @@ angular.module('components')
 
       var getCart = function () {
         var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
+          member_id: userService.get('memberId'),
+          token: userService.get('token')
         };
         var request = $http({
           method: 'post',
@@ -43,8 +43,8 @@ angular.module('components')
         var data = {
           obj_ident: good.obj_ident,
           num: good.quantity,
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
+          member_id: userService.get('memberId'),
+          token: userService.get('token')
         };
 
         var request = $http({
@@ -65,8 +65,8 @@ angular.module('components')
         });
         var data = {
           obj_idents: obj_idents,
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
+          member_id: userService.get('memberId'),
+          token: userService.get('token')
         };
 
         var request = $http({
@@ -87,8 +87,8 @@ angular.module('components')
         });
         var data = {
           obj_ident: obj_ident,
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
+          member_id: userService.get('memberId'),
+          token: userService.get('token')
         };
 
         var request = $http({
@@ -114,9 +114,9 @@ angular.module('components')
         var data = {
           shipping: shipping,
           addr_id: addr_id,
-          member_id: 13,
+          member_id: userService.get('memberId'),
           nature: nature,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
+          token: userService.get('token')
         };
 
         var request = $http({
@@ -146,14 +146,16 @@ angular.module('components')
         addr_id = cart.def_addr.addr_id;
         nature = cart.nature;
 
+        console.log(cart);
+
         var data = {
           shipping: shipping,
           addr_id: addr_id,
           payment: cart.def_payment.app_id,
           card_id: cart.def_cardlist.card_id,
           nature: cart.nature,
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
+          member_id: userService.get('memberId'),
+          token: userService.get('token')
         };
 
         var request = $http({

@@ -1,14 +1,14 @@
 
 angular.module('components')
-  .factory('orderApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost',
-    function($http, apiEndpoint, transformRequestAsFormPost) {
+  .factory('orderApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost', 'userService',
+    function($http, apiEndpoint, transformRequestAsFormPost, userService) {
 
       var getPayInfo = function (order) {
         var data = {
           order_id: order.order_id,
           pay_app_id: order.pay_app_id,
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
+          member_id: userService.get('memberId'),
+          token: userService.get('token')
         };
 
         var request = $http({
@@ -25,8 +25,8 @@ angular.module('components')
       var getOrderDetail = function (orderId) {
         var data = {
           order_id: orderId,
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
+          member_id: userService.get('memberId'),
+          token: userService.get('token')
         };
 
         var request = $http({

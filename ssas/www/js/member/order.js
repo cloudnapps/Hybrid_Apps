@@ -489,7 +489,7 @@
       };
     })
 
-    .factory('OrderApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
+    .factory('OrderApi', function ($http, apiEndpoint, transformRequestAsFormPost, userService) {
       var sendRequest = function (url, data, callback) {
         var request = $http({
           method: "post",
@@ -510,8 +510,8 @@
       var getOrderList = function (page, filter, callback) {
         var url = apiEndpoint.url + '/member-orders.html';
         var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4'
+          member_id: userService.get('memberId'),
+          token: userService.get('token')
         };
 
         if (page) {
@@ -528,8 +528,8 @@
       var getOrderDetail = function (orderId, callback) {
         var url = apiEndpoint.url + '/member-orderdetail.html';
         var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          member_id: userService.get('memberId'),
+          token: userService.get('token'),
           order_id: orderId
         };
 
@@ -539,8 +539,8 @@
       var deleteOrder = function (orderId, callback) {
         var url = apiEndpoint.url + '/member-cancelorder.html';
         var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          member_id: userService.get('memberId'),
+          token: userService.get('token'),
           order_id: orderId
         };
 
@@ -550,8 +550,8 @@
       var receiveOrder = function (orderId, callback) {
         var url = apiEndpoint.url + '/member-orderReceives.html';
         var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
+         member_id: userService.get('memberId'),
+          token: userService.get('token'),
           order_id: orderId
         };
 
@@ -561,8 +561,8 @@
       var getMemberRate = function (orderId, callback) {
         var url = apiEndpoint.url + '/member-member_rate.html';
         var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          member_id: userService.get('memberId'),
+          token: userService.get('token'),
           order_id: orderId
         };
 
@@ -572,8 +572,8 @@
       var saveMemberRate = function (orderId, callback) {
         var url = apiEndpoint.url + '/member-save_rate.html';
         var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          member_id: userService.get('memberId'),
+          token: userService.get('token'),
           order_id: orderId
         };
 
@@ -583,8 +583,8 @@
       var getOrderTrack = function (orderId, callback) {
         var url = apiEndpoint.url + '/member-getOrderTrack.html';
         var data = {
-          member_id: 13,
-          token: '11b4f4bd44ee8814d41680dc753a75e4',
+          member_id: userService.get('memberId'),
+          token: userService.get('token'),
           order_id: orderId
         };
 
