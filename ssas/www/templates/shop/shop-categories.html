@@ -1,14 +1,14 @@
 <ion-view view-title="{{'good_category'|translate}}">
   <ion-nav-buttons side="right">
-      <a class="button button-icon ion-ios-barcode-outline" ng-click="scan()"></a>
-    </ion-nav-buttons>
+    <a class="button button-icon ion-ios-barcode-outline" ng-click="scan()"></a>
+  </ion-nav-buttons>
   <ion-pane class="row">
 		<!-- left category list -->
 		<div class="col col-25 view" style="width:84%;border-right: 1px solid #ddd;">
 			<ion-content>
 				<ion-list>
-					<ion-item 	class="item item-thumbnail-top" 
-								ng-repeat="cate in categories" 
+					<ion-item 	class="item item-thumbnail-top"
+								ng-repeat="cate in categories"
 								type="item-text-wrap"
 								style="padding:11px;"
 								ng-click="populateSubCategories(cate.cat_id, $index)">
@@ -29,7 +29,6 @@
 	    			<hr>
 	    		</div>
 			</ion-content>
-		</div>	    
+		</div>
 	</ion-pane>
 </ion-view>
-	

@@ -32,7 +32,9 @@
       $scope.items = [];
 
       ReceiverApi.getReceiverList(null, function (result) {
-        $scope.items = result.data.addrlist;
+        if (result.data && result.data.addrlist) {
+          $scope.items = result.data.addrlist;
+        }
       });
 
       $scope.edit = function (item) {
@@ -62,9 +64,10 @@
     })
 
     .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, ReceiverApi) {
-      $scope.addrInfo = JSON.parse($stateParams.addrInfo);
-
-      if (!$scope.addrInfo) {
+      if ($stateParams.addrInfo) {
+        $scope.addrInfo = JSON.parse($stateParams.addrInfo);
+      }
+      else {
         $scope.addrInfo = {};
       }
 
@@ -109,7 +112,7 @@
         $scope.addrInfo.area = $scope.addrInfo.address.province.value + $scope.addrInfo.address.city.value;
         $scope.addrInfo.region_id = $scope.addrInfo.address.province.id + ',' + $scope.addrInfo.address.city.id;
 
-        if ($scope.addrInfo.address !== "") {
+        if ($scope.addrInfo.address.district) {
           $scope.addrInfo.region_id = $scope.addrInfo.region_id + ',' + $scope.addrInfo.address.district.id;
           $scope.addrInfo.area = $scope.addrInfo.area + $scope.addrInfo.address.district.value;
         }

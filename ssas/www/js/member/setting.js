@@ -241,7 +241,7 @@
       }
     })
 
-    .controller('IdCardAddCtrl', function ($scope, $stateParams, $ionicPopup, SettingApi) {
+    .controller('IdCardAddCtrl', function ($scope, $state, $stateParams, $ionicPopup, SettingApi) {
       if ($stateParams.cardInfo) {
         $scope.idCardInfo = JSON.parse($stateParams.cardInfo);
       }
@@ -277,6 +277,10 @@
             alertPopup.then(function (res) {
               console.log(res);
             });
+
+            if (result.status === 0) {
+              $state.go('tab.idcards', {}, {reload: true});
+            }
           })
         }
       };

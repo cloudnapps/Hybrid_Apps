@@ -33,7 +33,7 @@
 
     .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate,
                                             $state, $ionicPopover, $window, $interval,
-                                            HomeApi, SellerApi) {
+                                            HomeApi, SellerApi, toastService) {
       $scope.homeInfo = {};
 
       $scope.sellerInfo = {};
@@ -65,11 +65,11 @@
           $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
         }, 1000);
 
-        var promise = $interval(function(){
+        var promise = $interval(function () {
           $scope.activityInfo.updateDiff();
-        },1000);
+        }, 1000);
 
-        $scope.$on('$destroy',function(){
+        $scope.$on('$destroy', function () {
           $interval.cancel(promise);
         });
       });
@@ -88,6 +88,34 @@
         else if (item.type === 'product') {
           $scope.tabStateGo($scope.tabIndex.shop, 'tab.product', {productId: item.id});
         }
+      };
+
+      $scope.scan = function () {
+        cordova.plugins.barcodeScanner.scan(
+          function (result) {
+            if (!result.cancelled
+              && result.text !== undefined && result.text !== null) {
+              shopApi.getProductIdByBarcode(result.text).success(
+                function (response) {
+                  var result = response.data;
+                  var status = response.status;
+                  if (status === 0) {
+                    var productId = result["product_id"];
+                    if (productId !== undefined) {
+                      $scope.tabStateGo($scope.tabIndex.shop, 'tab.product', {productId: productId});
+                    }
+                  } else {
+                    toastService.setToast(response.msg);
+                  }
+                }); // end of getProductIdByBarcode success
+            } else {
+              toastService.setToast('没有找到商品');
+            }// end of if
+          }, // end of scan success
+          function (error) {
+            toastService.setToast('扫码失败');
+          } // end of scan error
+        );
       };
 
       SellerApi.getSellerList(null, null, null, function (result) {

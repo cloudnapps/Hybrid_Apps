@@ -1,12 +1,6 @@
 <ion-view view-title="">
   <ion-nav-buttons side="left">
-    <div class="row row-center" style="padding: 0px;margin-left: 16px;">
-      <div class="col col-center" style="padding: 0px;">
-        <a class="button button-clear" href="#/tab/sellers">
-          扫
-        </a>
-      </div>
-    </div>
+    <a class="button button-icon ion-ios-barcode-outline" ng-click="scan()"></a>
   </ion-nav-buttons>
   <ion-nav-title>
     <form ng-submit="search()">

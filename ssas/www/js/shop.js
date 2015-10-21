@@ -1,7 +1,7 @@
   (function () {
   'use strict';
   var shop = angular.module('shop', ['components', 'seller']);
-  
+
   shop.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       // 商品分类
@@ -121,18 +121,18 @@
             for (var i in lv3Obj) {
               cateListObj[name].lv3Arr.push(lv3Obj[i]);
             }
-          }  
-        }  
+          }
+        }
       };
 
       $scope.navToProductList = function(categoryId) {
         $state.go('tab.products', {categoryId: categoryId});
       };
-    
-    $scope.scan = function(){      
+
+    $scope.scan = function(){
       cordova.plugins.barcodeScanner.scan(
-        function (result) {          
-          if (!result.cancelled 
+        function (result) {
+          if (!result.cancelled
               && result.text !== undefined && result.text !== null) {
             shopApi.getProductIdByBarcode(result.text).success(
               function(response){
@@ -144,15 +144,15 @@
                     $scope.tabStateGo($scope.tabIndex.shop, 'tab.product', {productId: productId});
                   }
                 } else {
-                  toastService.setToast(response.msg);  
-                }            
+                  toastService.setToast(response.msg);
+                }
               }); // end of getProductIdByBarcode success
           } else {
-            toastService.setToast('没有找到商品');  
+            toastService.setToast('没有找到商品');
           }// end of if
-        }, // end of scan success 
+        }, // end of scan success
         function (error) {
-          toastService.setToast('扫码失败');  
+          toastService.setToast('扫码失败');
         } // end of scan error
       );
     }
@@ -166,7 +166,7 @@
     //
     //$scope.$on('$ionicView.enter', function(e) {
     //});
-    
+
 
     $scope.products = [];
     $scope.page = 1;
@@ -180,8 +180,8 @@
 
 
     $scope.getProducts = function() {
-      var query = {   
-        page: $scope.page, 
+      var query = {
+        page: $scope.page,
         filter: $scope.filter
       };
       if ($scope.orderBy) {
@@ -190,8 +190,8 @@
       shopApi.getGallery(query).then(function (result) {
         if (result.data.data !== undefined && result.data.data.length > 0) {
           for(var i = 0; i < result.data.data.length; i++) {
-            $scope.products.push(result.data.data[i]);  
-          }  
+            $scope.products.push(result.data.data[i]);
+          }
           $scope.hasMore = true;
         } else {
           $scope.hasMore = false;
@@ -203,11 +203,11 @@
     $scope.loadMore = function() {
       $scope.page ++;
       $scope.getProducts();
-    };  
+    };
 
     $scope.search = function(){
       $scope.filter = {
-        cat_id: $scope.filter.cat_id 
+        cat_id: $scope.filter.cat_id
       };
       $scope.filter.keywords = $scope.keywords.value;
       clearData(true);
@@ -216,7 +216,7 @@
 
     $scope.clearSearch = function(event){
       $scope.filter = {
-        cat_id: $scope.filter.cat_id 
+        cat_id: $scope.filter.cat_id
       };
       $scope.filter.keywords = '';
       $scope.keywords.value = '';
@@ -246,7 +246,7 @@
         $scope.orderBy = '';
       }
       clearData();
-      $scope.getProducts();    
+      $scope.getProducts();
     };
 
 
@@ -261,7 +261,7 @@
           $scope.modal.remove();
         };
       });
-    }
+    };
 
     $scope.setBrandId = function(brandId){
       $scope.brandId = brandId;
@@ -306,7 +306,7 @@
         delete $scope.filter.max_price;
         $scope.priceSection = {};
       }
-      
+
       $scope.page = 1;
       $scope.products.length = 0;
     }
@@ -325,18 +325,18 @@
 
     getGalleryFilter();
 
-    $scope.getProducts();    
+    $scope.getProducts();
     // $scope.chats = Chats.all();
     // $scope.remove = function(chat) {
     //   Chats.remove(chat);
     // };
   }) // end of ShopController
-  
+
   /*
    * ProductDetailController
    */
-  .controller('ProductDetailController', 
-              ['$scope', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading','shopApi',  'cartApi', '$state', 'tabStateService',                            
+  .controller('ProductDetailController',
+              ['$scope', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading','shopApi',  'cartApi', '$state', 'tabStateService',
     function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading,shopApi, cartApi, $state){
 
       $scope.productId = $stateParams.productId;
@@ -353,7 +353,7 @@
           $scope.product = responseData.data.product;
           $scope.comment = (responseData.comment || [])[0];
           $ionicSlideBoxDelegate.update();
-          
+
           console.log('getProduct', responseData);
         }
       });
@@ -448,8 +448,8 @@
 
   .factory('shopApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost',
     function($http, apiEndpoint, transformRequestAsFormPost) {
-     
-      var getGallery = function(data){        
+
+      var getGallery = function(data){
         var request = $http({
             method: "post",
             url: apiEndpoint.url + "/gallery.html",
@@ -461,10 +461,10 @@
         return request.success(function(result){
             console.log('got data:' + result);
             return result;
-        });        
+        });
       };
 
-      var getCategories = function(data) {        
+      var getCategories = function(data) {
         var request = $http({
           method: "post",
           url: apiEndpoint.url + '/gallery-cat_list.html',
@@ -490,7 +490,7 @@
 
         return request;
       };
-      
+
       var getProductGoodsSpec = function(productId) {
         var data = {"product_id": productId};
         var request = $http({
@@ -498,9 +498,9 @@
           url: apiEndpoint.url + '/product-goods_spec.html',
           transformRequest: transformRequestAsFormPost,
           data: data,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}          
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         });
-        
+
         return request;
       };
 
@@ -511,9 +511,9 @@
           url: apiEndpoint.url + '/gallery-filter.html',
           transformRequest: transformRequestAsFormPost,
           data: data,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}          
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         });
-        
+
         return request;
       };
 
@@ -524,9 +524,9 @@
           url: apiEndpoint.url + '/product-comment.html',
           transformRequest: transformRequestAsFormPost,
           data: data,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}          
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         });
-        
+
         return request;
       };
 
@@ -537,11 +537,11 @@
           url: apiEndpoint.url + '/product-intro.html',
           transformRequest: transformRequestAsFormPost,
           data: data,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}          
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         });
         return request;
       };
-      
+
       var getProductIdByBarcode = function(barcode) {
         var data = {"value":barcode};
         var request = $http({
@@ -549,7 +549,7 @@
           url: apiEndpoint.url + '/product-get_productId.html',
           transformRequest: transformRequestAsFormPost,
           data: data,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         });
         return request;
       }; // end of getProductByBarcode
@@ -568,4 +568,4 @@
   } // end of anonymous function
   ]
   ); // end of shopApi
-})(); 
+})();

@@ -1,4 +1,14 @@
 <ion-view view-title="{{'fav_title'|translate}}" hide-tabs="true">
+  <ion-nav-title>
+    <form ng-submit="search()">
+      <label class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="search" placeholder="Search" ng-model="keywords.value" style="height: 28px;">
+      </label>
+      <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
+    </form>
+  </ion-nav-title>
+
   <ion-content>
     <div style="height: 44px">
     </div>
