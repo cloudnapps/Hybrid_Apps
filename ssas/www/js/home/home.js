@@ -11,6 +11,15 @@
             }
           }
         })
+        .state('tab.home-search-history', {
+          url: '/home',
+          views: {
+            'tab-home': {
+              templateUrl: 'templates/home/home-search-history.html',
+              controller: 'HomeSearchHistoryController'
+            }
+          }
+        })
         .state('tab.signin', {
           url: '/signin',
           views: {
@@ -41,6 +50,12 @@
       $scope.activityInfo = {};
 
       $scope.showBtns = false;
+
+      $scope.keywords = '';
+
+      $scope.search = function(){
+        $scope.tabStateGo($scope.tabIndex.shop, 'tab.search', {keywords: $scope.keywords});
+      };
 
       HomeApi.getHomeContent().then(function (result) {
         $scope.homeInfo = result.data.data;
