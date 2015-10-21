@@ -72,7 +72,7 @@ angular.module('starter.services', [])
       return !!currentUser.token;
     };
 
-    this.logOut = function(){
+    this.logOut = function () {
       setObj({});
     };
 

@@ -41,7 +41,13 @@
     .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $ionicHistory, userService, LoginApi) {
       $scope.userInfo = {};
 
-      $scope.goBack = function(){
+      $scope.$on('$ionicView.beforeEnter', function () {
+        if (userService.isLogin()) {
+          $scope.tabStateGo($scope.tabIndex.member, 'tab.member');
+        }
+      });
+
+      $scope.goBack = function () {
         console.log('userService.backIndex', userService.backIndex);
         if ([undefined, -1, $scope.tabIndex.cart, $scope.tabIndex.member].indexOf(userService.backIndex) !== -1) {
           $scope.tabStateGo($scope.tabIndex.home);
@@ -86,7 +92,7 @@
       };
 
       $scope.getSignCode = function () {
-        LoginApi.sendCode($scope.userInfo.mobile, function (result) {
+        LoginApi.sendCode($scope.userInfo.mobile, 'signup', function (result) {
           var alertPopup = $ionicPopup.alert({
             title: '获取验证码',
             template: result.msg
@@ -137,6 +143,7 @@
               currentUser.memberId = result.data.member_id;
               currentUser.name = result.data.login_name;
               currentUser.token = result.data.token;
+              currentUser.image = result.data.image;
 
               userService.set(currentUser);
               if (userService.backIndex === -1) {
@@ -153,7 +160,7 @@
           })
       };
     })
-    .controller('RetrieveCtrl', function($scope, $state, $interval, LoginApi, toastService){
+    .controller('RetrieveCtrl', function ($scope, $state, $interval, LoginApi, toastService) {
       $scope.userInfo = {};
       $scope.verified = false;
       $scope.sendCode = sendCode;
@@ -169,27 +176,27 @@
           return;
         }
         $scope.reSendCodeTime = 30;
-        timer = $interval(function(){
+        timer = $interval(function () {
           $scope.reSendCodeTime--;
           if ($scope.reSendCodeTime === 0) {
             $interval.cancel(timer);
           }
         }, 1000);
         LoginApi
-          .sendCode($scope.userInfo.mobile, function(data){
+          .sendCode($scope.userInfo.mobile, 'lost', function (data) {
             toastService.setToast(data.msg);
           }, {
             type: 'lost'
           });
       }
 
-      function mobileValide(){
+      function mobileValide() {
         if (!$scope.userInfo.mobile) {
           toastService.setToast('请填写手机号~');
           return;
         }
         LoginApi
-          .mobileValide($scope.userInfo.mobile, $scope.userInfo.mobile, $scope.userInfo.signCode, function(data){
+          .mobileValide($scope.userInfo.mobile, $scope.userInfo.mobile, $scope.userInfo.signCode, function (data) {
             if (data && data.status === 0) {
               $scope.verified = true;
             }
@@ -199,17 +206,17 @@
           });
       }
 
-      function lostPasswd(){
+      function lostPasswd() {
         LoginApi
-          .lostPasswd($scope.userInfo.mobile, $scope.userInfo.password, $scope.userInfo.confirmPwd, function(data){
-             if (data && data.status === 0) {
-                toastService.setToast(data && data.msg || '修改成功');
-                $scope.tabStateGo($scope.tabIndex.member, null, null, {isForce: true});
-             }
-             else {
+          .lostPasswd($scope.userInfo.mobile, $scope.userInfo.password, $scope.userInfo.confirmPwd, function (data) {
+            if (data && data.status === 0) {
+              toastService.setToast(data && data.msg || '修改成功');
+              $scope.tabStateGo($scope.tabIndex.member, null, null, {isForce: true});
+            }
+            else {
               toastService.setToast(data && data.msg || '修改失败');
               $scope.verified = false;
-             }
+            }
           });
       }
     })
@@ -276,14 +283,15 @@
         sendRequest(url, data, callback);
       };
 
-      var sendCode = function (mobile, callback) {
+      var sendCode = function (mobile, type, callback) {
         var url = apiEndpoint.url + '/passport-send_code.html';
         var data = {
-          mobile: mobile
+          mobile: mobile,
+          type: type
         };
         var extra = arguments[2];
         if (extra) {
-          for(var f in extra) {
+          for (var f in extra) {
             if (extra.hasOwnProperty(f)) {
               data[f] = extra[f];
             }
@@ -293,7 +301,7 @@
         sendRequest(url, data, callback);
       };
 
-      var lostPasswd = function(login_name, password, psw_confirm, callback){
+      var lostPasswd = function (login_name, password, psw_confirm, callback) {
         var url = apiEndpoint.url + '/passport-lost_passwd.html';
         var data = {
           login_name: login_name,

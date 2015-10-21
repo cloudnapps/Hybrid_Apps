@@ -11,11 +11,11 @@
         <span class="input-label" style="max-width: 5em;color: #222;">手机号码：</span>
         <input type="text" ng-model="userInfo.mobile" placeholder="手机号码">
       </label>
-      <label class="item item-input" style="padding: 0 0 0 16px;position: relative;">
+      <div class="item item-input" style="padding: 0 0 0 16px;position: relative;">
         <span class="input-label" style="max-width: 4em;color: #222;padding: 13px 10px 12px 0;">验证码：</span>
         <input type="number" ng-model="userInfo.signCode" style="padding-right: 112px;">
         <button style="font-size:14px;position: absolute;right: 0;width: 100px;height: 47px;background-color: #568baa;border: 1px solid #568baa;color: #fff;" ng-click="getSignCode()">获取验证码</button>
-      </label>
+      </div>
       <label class="item item-input">
         <span class="input-label" style="max-width: 5em;color: #222;">输入密码：</span>
         <input type="password" ng-model="userInfo.password">
@@ -34,7 +34,7 @@
         <label style="position: relative;color: #222;margin-left: 5px;font-size: 16px;"> 同意<a href="" style="margin-left: 2px;color: #000;">注册条款</a></label>
       </label>
     </div>
-    
+
     <div class="button-bar">
       <a class="button button-full button-light" style="border: none;font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;" ng-click="submitUser()" ng-disabled="!userInfo.license">确定</a>
     </div>
