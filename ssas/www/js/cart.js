@@ -272,5 +272,5 @@ angular.module('cart', ['components'])
 })
 .controller('iframeController', function ($rootScope, $scope) {
   $scope.html = $rootScope.micbcpayData;
-  delete $rootScope.micbcpayData
+  delete $rootScope.micbcpayData;
 });

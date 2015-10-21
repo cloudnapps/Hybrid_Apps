@@ -49,7 +49,7 @@
                   <p>{{good.spec}}</p>
 
                   <div class="good-price row">
-                    <div class="col price assertive">{{good.buy_price|currency:'￥'}}</div>
+                    <div class="col price positive">{{good.buy_price|currency:'￥'}}</div>
                     <quantity-input class="col-60" ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
                   </div>
                 </div>
@@ -61,9 +61,17 @@
             </ion-option-button>
           </ion-item>
         </div>
-        <ion-item class="item item-button-right">
-          <div class="assertive">共计: {{nature.total_item_amount |currency:'￥'}} (不含税 不含运费)</div>
-          <button class="button button-energized" ng-disabled="!canCheckout(nature)" ui-sref="tab.cart-checkout({nature: natureKey})">{{'cart_checkout'|translate}}</button>
+        <ion-item class="item item-complex">
+          <div class="row row-no-padding">
+            <div class="col" style="font-size:0.9em;">
+              <div class="item-content">
+                <div class="positive">货款总计: {{nature.item_amount |currency:'￥'}}</div>
+                <div class="positive">税费总计: {{nature.total_taxation_amount |currency:'￥'}}</div>
+                <div class="positive" style="margin-top: 10px;">共计: {{nature.total_item_amount |currency:'￥'}} (不含运费)</div>
+              </div>
+            </div>
+            <button class="col-30 button button-full button-positive" style="margin:0;" ng-disabled="!canCheckout(nature)" ui-sref="tab.cart-checkout({nature: natureKey})">{{'cart_checkout'|translate}}</button>
+          </div>
         </ion-item>
       </div>
     </ion-list>
