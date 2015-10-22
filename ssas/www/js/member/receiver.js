@@ -63,7 +63,7 @@
       }
     })
 
-    .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, ReceiverApi) {
+    .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicHistory, ReceiverApi) {
       if ($stateParams.addrInfo) {
         $scope.addrInfo = JSON.parse($stateParams.addrInfo);
       }
@@ -91,16 +91,15 @@
         console.log(addrInfo);
 
         ReceiverApi.addReceiver(addrInfo, function (result) {
-          var alertPopup = $ionicPopup.alert({
-            title: '添加收货地址',
-            template: result.msg ? result.msg : '添加成功'
-          });
-          alertPopup.then(function (res) {
-            console.log(res);
-          });
-
           if (result.status === 0) {
-            $state.go('tab.receivers', {}, {reload: true});
+            var alertPopup = $ionicPopup.alert({
+              title: '添加收货地址',
+              template: result.msg ? result.msg : '添加成功'
+            });
+            alertPopup.then(function (res) {
+              $ionicHistory.goBack();
+              // $state.go('tab.cart-checkout', {}, {reload: true});
+            });
           }
         });
       };

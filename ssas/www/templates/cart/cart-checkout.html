@@ -1,7 +1,7 @@
 <ion-view class="cart-checkout" view-title="{{'cart_order_confirm'|translate}}" hide-tabs="true">
   <ion-content>
     <ion-list>
-      <a class="item item-icon-right" href="#" address-select="cart.addrlist" ng-model="cart.def_addr" ng-change="checkout()">
+      <a class="item item-icon-right" address-select="cart.addrlist" ng-model="cart.def_addr" ng-change="checkout()">
         <h2 class="row"><div class="col">收件人: {{cart.def_addr.name}}</div><div class="col">电话: {{cart.def_addr.mobile}}</div></h2>
         <div class="row"><div class="col"><p>收货地址: {{cart.def_addr.area}} {{cart.def_addr.addr}}</p></div></div>
         <i class="icon ion-chevron-right"></i>
