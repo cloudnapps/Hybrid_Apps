@@ -1,4 +1,3 @@
-
 angular.module('components')
   .factory('paymentApi', ['$q',
     function ($q) {
@@ -48,11 +47,11 @@ angular.module('components')
         // deferred.resolve();
         // return deferred.promise;
         var payMetods = {
-          alipay: payByAlipay,
-          weixin: payByWechat
+          alipayWallet: payByAlipay,
+          wxAppay: payByWechat
         };
         var payMethod = payMetods[payment.pay_app_id];
-        if(payMethod) {
+        if (payMethod) {
           return payMethod(payment);
         }
         return $q.reject('不支持的支付方式');
