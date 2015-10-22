@@ -38,6 +38,15 @@ angular.module('cart', ['components'])
         }
       }
     })
+    .state('tab.cart-receiver-change', {
+      url: '/cart-receiver-change/:addrInfo',
+      views: {
+        'tab-cart': {
+          templateUrl: 'templates/member/receiver-add.html',
+          controller: 'ReceiverAddCtrl'
+        }
+      }
+    })
     .state('tab.iframe', {
       url: '/iframe',
       views: {
@@ -178,10 +187,13 @@ angular.module('cart', ['components'])
       }
     })
     .finally(function () {
+      $scope.$broadcast('$addressSelect.afterEnter');
       $ionicLoading.hide();
     });
   };
-  $scope.checkout();
+
+  $scope.$on('$ionicView.afterEnter', $scope.checkout);
+
   $scope.confirm = function () {
     $rootScope.confirmedCart = $scope.cart;
     $state.go('tab.cart-payment');

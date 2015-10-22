@@ -109,7 +109,7 @@ angular.module('components')
           angular.forEach(cart.aSelCart, function (seller) {
             shipping.push({seller_id: seller.seller_info.seller_id, shipping_id: seller.def_shipping.id});
           });
-          addr_id = cart.def_addr.addr_id;
+          addr_id = (cart.def_addr || {}).addr_id;
         }
         var data = {
           shipping: shipping,
