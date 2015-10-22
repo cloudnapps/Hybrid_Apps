@@ -53,7 +53,7 @@
 
       $scope.keywords = '';
 
-      $scope.search = function(){
+      $scope.search = function () {
         $scope.tabStateGo($scope.tabIndex.shop, 'tab.search', {keywords: $scope.keywords});
       };
 

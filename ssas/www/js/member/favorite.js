@@ -9,72 +9,54 @@
       $stateProvider
 
         .state('tab.favorites', {
-          url: '/favorites',
+          url: '/favorites?type',
           views: {
             'tab-member': {
-              templateUrl: 'templates/member/favorite-index.html'
-            }
-          }
-        })
-        .state('tab.favorites.goods', {
-          url: '/goods',
-          views: {
-            'tab-favorites': {
-              templateUrl: 'templates/member/favorite-goods.html',
-              controller: 'FavoritesGoodsCtrl'
-            }
-          }
-        })
-        .state('tab.favorites.sellers', {
-          url: '/sellers',
-          views: {
-            'tab-favorites': {
-              templateUrl: 'templates/member/favorite-sellers.html',
-              controller: 'FavoritesSellersCtrl'
+              templateUrl: 'templates/member/favorite-index.html',
+              controller: 'FavoritesCtrl'
             }
           }
         })
     })
 
-    .controller('FavoritesGoodsCtrl', function ($scope, $ionicPopup, FavoriteApi) {
-      $scope.items = [];
-
-      $scope.selectType = "goods";
-
+    .controller('FavoritesCtrl', function ($scope, $stateParams, $ionicPopup, FavoriteApi) {
       $scope.init = function () {
-        if ($scope.items.length === 0) {
-          $scope.items = [];
-          $scope.page = 0;
-          $scope.hasMore = true;
-        }
+        $scope.items = [];
+        $scope.page = 1;
+        $scope.hasMore = false;
+        $scope.filter = "";
       };
 
-      $scope.loadMore = function () {
-        FavoriteApi.getFavoriteList($scope.page + 1, $scope.selectType, function (result) {
+      $scope.getFavorities = function () {
+        FavoriteApi.getFavoriteList($scope.page, $scope.filter, function (result) {
           if (result.status === 1) {
             $scope.hasMore = false;
           }
           else {
+            $scope.hasMore = true;
             $scope.items = $scope.items.concat(result.data);
-            $scope.page += 1;
-            $scope.$broadcast('scroll.infiniteScrollComplete');
           }
+
+          $scope.$broadcast('scroll.infiniteScrollComplete');
         });
       };
 
-      $scope.$on('$ionicView.enter', function () {
-        $scope.isActtive = true;
+      $scope.switchFavorities = function (type) {
         $scope.init();
-      });
 
-      $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.isActtive = false;
-      });
+        $scope.filter = type;
 
-      $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActtive)
-          $scope.loadMore();
-      });
+        $scope.getFavorities();
+      };
+
+      if ($stateParams.type) {
+        $scope.switchFavorities($stateParams.type);
+      }
+
+      $scope.loadMore = function () {
+        $scope.page++;
+        $scope.getFavorities();
+      };
 
       $scope.remove = function (item) {
         var confirmPopup = $ionicPopup.confirm({
@@ -85,68 +67,6 @@
         confirmPopup.then(function (res) {
           if (res) {
             FavoriteApi.deleteGoodsFavorite(item.goods_id, function (result) {
-              var alertPopup = $ionicPopup.alert({
-                title: '删除收藏',
-                template: result.msg
-              });
-              alertPopup.then(function (res) {
-                console.log(res);
-              });
-            })
-          }
-        });
-      }
-    })
-
-    .controller('FavoritesSellersCtrl', function ($scope, $ionicPopup, FavoriteApi) {
-      $scope.items = [];
-
-      $scope.selectType = "sellers";
-
-      $scope.init = function () {
-        if ($scope.items.length === 0) {
-          $scope.items = [];
-          $scope.page = 0;
-          $scope.hasMore = true;
-        }
-      };
-
-      $scope.loadMore = function () {
-        FavoriteApi.getFavoriteList($scope.page + 1, $scope.selectType, function (result) {
-          if (result.status === 1) {
-            $scope.hasMore = false;
-          }
-          else {
-            $scope.items = $scope.items.concat(result.data);
-            $scope.page += 1;
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-          }
-        });
-      };
-
-      $scope.$on('$ionicView.enter', function () {
-        $scope.isActtive = true;
-        $scope.init();
-      });
-
-      $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.isActtive = false;
-      });
-
-      $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActtive)
-          $scope.loadMore();
-      });
-
-      $scope.remove = function (item) {
-        var confirmPopup = $ionicPopup.confirm({
-          title: '删除收藏',
-          template: '是否真的需要删除收藏?'
-        });
-
-        confirmPopup.then(function (res) {
-          if (res) {
-            FavoriteApi.deleteSellerFavorite(item.seller_id, function (result) {
               var alertPopup = $ionicPopup.alert({
                 title: '删除收藏',
                 template: result.msg

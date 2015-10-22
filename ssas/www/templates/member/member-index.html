@@ -42,11 +42,11 @@
     <div class="row" style="padding: 0px;margin: 0;">
       <div class="col col-offset-10 col-50 col-center" style="padding: 0px;">
         <a class="button button-clear" style="font-size:16px;padding: 0;border: none;color: #333333;"
-           ui-sref="tab.favorites.goods">关注的商品</a>
+           href="#/tab/favorites?type=goods">关注的商品</a>
       </div>
       <div class="col col-50 col-center" style="padding: 0px;">
         <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #333333;"
-           ui-sref="tab.favorites.sellers">关注的店铺</a>
+           href="#/tab/favorites?type=sellers">关注的店铺</a>
       </div>
     </div>
 
@@ -151,9 +151,9 @@
 
     <hr style="margin: 0;height:10px;border:none;border-top:10px solid #f1f1f1;"/>
 
-    <div class="row" style="padding: 0 20px;height: 40px;line-height: 40px;" ng-click="gotoPage('tab.favorites.goods')">
+    <div class="row" style="padding: 0 20px;height: 40px;line-height: 40px;">
       <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 16px;">
-        <a style="color: #333333;text-decoration: none;">我的收藏</a>
+        <a style="color: #333333;text-decoration: none;" href="#/tab/favorites?type=goods">我的收藏</a>
       </div>
       <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
         <i class="icon ion-chevron-right icon-accessory"></i>

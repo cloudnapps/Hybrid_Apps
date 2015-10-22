@@ -1,32 +1,60 @@
-<ion-nav-view name="tab-favorites">
-  <div class="bar bar-subheader">
-    <div class="tabs-striped tabs-color-assertive">
-      <div class="tabs">
-        <a class="tab-item" ui-sref="tab.favorites.sellers">
-          {{'fav_sellers' | translate}}
-        </a>
-        <a class="tab-item" ui-sref="tab.favorites.goods">
-          {{'fav_goods'|translate}}
-        </a>
-      </div>
-    </div>
+<div class="bar bar-subheader">
+  <div class="button-bar">
+    <button class="button button-light" ng-click="switchFavorities('sellers')" style="font-size: 16px;">
+      {{'fav_sellers' | translate}}
+    </button>
+    <button class="button button-light" ng-click="switchFavorities('goods')" style="font-size: 16px;">
+      {{'fav_goods' | translate}}
+    </button>
   </div>
-  <ion-view>
-    <ion-nav-title>
-      <form ng-submit="search()">
-        <label class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
-          <i class="icon ion-search placeholder-icon"></i>
-          <input type="search" placeholder="Search" ng-model="keywords.value" style="height: 28px;">
-        </label>
-        <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
-      </form>
-    </ion-nav-title>
+</div>
+<ion-view view-title="{{'fav_title'|translate}}" hide-tabs="true">
+  <ion-nav-title>
+    <form ng-submit="search()">
+      <label class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="search" placeholder="Search" ng-model="keywords.value" style="height: 28px;">
+      </label>
+      <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
+    </form>
+  </ion-nav-title>
 
-    <div class="bar bar-subheader">
-      <a title="{{'fav_sellers'|translate}}" ui-sref="tab.favorites.sellers"></a>
-      <a title="{{'fav_goods'|translate}}" ui-sref="tab.favorites.goods"></a>
-    </div>
-    <ion-content class="has-subheader">
-    </ion-content>
-  </ion-view>
-</ion-nav-view>
+  <ion-content>
+    <ion-list ng-show="$scope.filter === 'goods'">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items"
+                type="item-text-wrap"
+                ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: item.product_id})">
+        <img style="border-radius: 0;" ng-src="{{item.image}}">
+
+        <h2 style="color:#666c70;font-size: 14px;margin-bottom: 5px;">{{item.name}}</h2>
+
+        <p style="color: #c9000b;">￥{{item.price}}</p>
+
+        <ion-option-button class="button-assertive" ng-click="remove(item)">
+          删除
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+    <ion-list ng-show="$scope.filter === 'sellers'">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap">
+        <div class="col col-25 col-center" style="padding:0;">
+          <img style="height: 75px;width: 75px;margin: 15px 10px 10px;padding: 5px;border: 1px solid #a9a9a9;"
+               ng-src="{{item.image}}">
+        </div>
+        <div class="col col-75 col-center" style="padding-left: 15px;">
+          <p style="margin: 0;color: #3b3a3a;font-size: 18px;font-weight: 400;">{{item.name}}</p>
+        </div>
+
+        <ion-option-button class="button-assertive" ng-click="remove(item)">
+          删除
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll
+      ng-if="hasMore"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>
+

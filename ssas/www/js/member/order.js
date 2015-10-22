@@ -166,7 +166,7 @@
       };
 
       $scope.payOrder = function (item) {
-
+        $state.go('tab.cart-payment');
       };
 
       $scope.commentOrder = function (item) {

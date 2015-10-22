@@ -1,32 +1,34 @@
 <ion-view view-title="{{'seller_title'|translate}}" hide-tabs="true">
   <ion-content>
-    <button class="button" ng-click="openWeb()">
-      Baidu Map
-    </button>
-    <button class="button" ng-click="scanBarcode()">
-      Scan Code
-    </button>
-    <button class="button" ng-click="payByAlipay()">
-      Alipay
-    </button>
-    <button class="button" ng-click="payByWechat()">
-      Wechat Pay
-    </button>
-    <button class="button" ng-click="logonByWechat()">
-      Wechat Logon
-    </button>
-    <button class="button" ng-click="showMap()">
-      Indoor Navi
-    </button>
-    <button class="button" ng-click="shake()">
-      Shake
-    </button>
-    <button class="button" ng-click="monitor()">
-      Beacon Notification
-    </button>
-    <div class="row" style="padding: 0;border-bottom: 1px solid #a9a9a9;" ng-repeat="item in items" ng-click="goDetail(item)">
+    <!--    <button class="button" ng-click="openWeb()">
+          Baidu Map
+        </button>
+        <button class="button" ng-click="scanBarcode()">
+          Scan Code
+        </button>
+        <button class="button" ng-click="payByAlipay()">
+          Alipay
+        </button>
+        <button class="button" ng-click="payByWechat()">
+          Wechat Pay
+        </button>
+        <button class="button" ng-click="logonByWechat()">
+          Wechat Logon
+        </button>
+        <button class="button" ng-click="showMap()">
+          Indoor Navi
+        </button>
+        <button class="button" ng-click="shake()">
+          Shake
+        </button>
+        <button class="button" ng-click="monitor()">
+          Beacon Notification
+        </button>-->
+    <div class="row" style="padding: 0;border-bottom: 1px solid #a9a9a9;" ng-repeat="item in items"
+         ng-click="goDetail(item)">
       <div class="col col-25 col-center" style="padding:0;">
-        <img style="height: 75px;width: 75px;margin: 15px 10px 10px;padding: 5px;border: 1px solid #a9a9a9;" ng-src="{{item.image}}">
+        <img style="height: 75px;width: 75px;margin: 15px 10px 10px;padding: 5px;border: 1px solid #a9a9a9;"
+             ng-src="{{item.image}}">
       </div>
       <div class="col col-75 col-center" style="padding-left: 15px;">
         <p style="margin: 0;color: #3b3a3a;font-size: 18px;font-weight: 400;">{{item.name}}</p>
