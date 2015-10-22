@@ -19,7 +19,7 @@
         })
     })
 
-    .controller('FavoritesCtrl', function ($scope, $stateParams, $ionicPopup, FavoriteApi) {
+    .controller('FavoritesCtrl', function ($scope, $stateParams, $ionicPopup, $ionicHistory, FavoriteApi) {
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;
@@ -66,15 +66,28 @@
 
         confirmPopup.then(function (res) {
           if (res) {
-            FavoriteApi.deleteGoodsFavorite(item.goods_id, function (result) {
-              var alertPopup = $ionicPopup.alert({
-                title: '删除收藏',
-                template: result.msg
-              });
-              alertPopup.then(function (res) {
-                console.log(res);
-              });
-            })
+            if ($scope.filter === 'sellers') {
+              FavoriteApi.deleteSellerFavorite(item.seller_id, function (result) {
+                var alertPopup = $ionicPopup.alert({
+                  title: '删除收藏',
+                  template: result.msg
+                });
+                alertPopup.then(function (res) {
+                  $ionicHistory.goBack();
+                });
+              })
+            }
+            else {
+              FavoriteApi.deleteGoodsFavorite(item.goods_id, function (result) {
+                var alertPopup = $ionicPopup.alert({
+                  title: '删除收藏',
+                  template: result.msg
+                });
+                alertPopup.then(function (res) {
+                  $ionicHistory.goBack();
+                });
+              })
+            }
           }
         });
       }
