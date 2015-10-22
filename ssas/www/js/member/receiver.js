@@ -29,13 +29,34 @@
     })
 
     .controller('ReceiversCtrl', function ($scope, $state, $ionicPopup, ReceiverApi) {
-      $scope.items = [];
+      $scope.init = function () {
+        $scope.items = [];
+        $scope.page = 1;
+        $scope.hasMore = false;
+        $scope.filter = "";
+      };
 
-      ReceiverApi.getReceiverList(null, function (result) {
-        if (result.data && result.data.addrlist) {
-          $scope.items = result.data.addrlist;
-        }
-      });
+      $scope.getReceivers = function () {
+        ReceiverApi.getReceiverList($scope.page, function (result) {
+          if (result.data && result.data.addrlist) {
+            $scope.items = $scope.items.concat(result.data.addrlist);
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.hasMore = false;
+          }
+
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
+      };
+
+      $scope.init();
+      $scope.getReceivers();
+
+      $scope.loadMore = function () {
+ //       $scope.page++;
+ //       $scope.getReceivers();
+      };
 
       $scope.edit = function (item) {
         $state.go('tab.receiver_change', {addrInfo: JSON.stringify(item)}, {reload: true});
@@ -63,7 +84,7 @@
       }
     })
 
-    .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, ReceiverApi) {
+    .controller('ReceiverAddCtrl', function ($scope, $state, $ionicPopup, $stateParams, ReceiverApi) {
       if ($stateParams.addrInfo) {
         $scope.addrInfo = JSON.parse($stateParams.addrInfo);
       }
