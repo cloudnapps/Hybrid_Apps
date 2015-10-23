@@ -136,14 +136,14 @@ angular.module('components')
         shipping = [];
         angular.forEach(cart.aSelCart, function (seller) {
           shipping.push({
-            seller_id: seller.seller_info.seller_id,
-            shipping_id: seller.def_shipping.id,
+            seller_id: (seller.seller_info || {}).seller_id,
+            shipping_id: (seller.def_shipping || {}).id,
             is_tax:false,
             tax_company: '',
             memo: seller.memo
           });
         });
-        addr_id = cart.def_addr.addr_id;
+        addr_id = (cart.def_addr || {}).addr_id;
         nature = cart.nature;
 
         console.log(cart);
@@ -151,8 +151,8 @@ angular.module('components')
         var data = {
           shipping: shipping,
           addr_id: addr_id,
-          payment: cart.def_payment.app_id,
-          card_id: cart.def_cardlist.card_id,
+          payment: (cart.def_payment || {}).app_id,
+          card_id: (cart.def_cardlist || {}).card_id,
           nature: cart.nature,
           member_id: userService.get('memberId'),
           token: userService.get('token')

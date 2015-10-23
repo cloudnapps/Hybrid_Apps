@@ -16,7 +16,7 @@
           </div>
         </ion-item>
         <ion-item class="item item-thumbnail-left" ng-repeat="good in seller.goods_list">
-          <img ng-src="{{good.image}}">
+          <img ng-src="{{good.thumbnail}}">
           <h2>{{good.name}}</h2>
           <div class="row">
             <div class="col">{{good.spec}}</div>
@@ -52,7 +52,7 @@
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
     <div class="button-bar">
-      <button class="button button-energized" ng-click="confirm()">{{'pay_now' | translate}}</button>
+      <button class="button button-energized" ng-disabled="!cart.def_addr" ng-click="confirm()">{{'pay_now' | translate}}</button>
     </div>
   </ion-footer-bar>
 </ion-view>

@@ -78,6 +78,20 @@
       }
     }
   }
+
+  .checkout-warning {
+    .warning-text {
+      padding-bottom: 15px;
+      font-size: 0.9em;
+      white-space: normal;
+    }
+    .detail {
+      p {
+        font-size: 0.8em;
+        white-space: normal;
+      }
+    }
+  }
 }
 .cart-checkout {
   .summary {
@@ -91,5 +105,10 @@
       font-size: 5px;
       font-weight: 100;
     }
+  }
+}
+.cart-payment {
+  .item {
+    padding-left: 90px;
   }
 }

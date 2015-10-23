@@ -7805,6 +7805,13 @@ a.button {
   padding-right: 0px; }
   .cart .good.item .row.good-price .price, .cart .good.item .row.good-price .quanity {
     padding-left: 0px; }
+.cart .checkout-warning .warning-text {
+  padding-bottom: 15px;
+  font-size: 0.9em;
+  white-space: normal; }
+.cart .checkout-warning .detail p {
+  font-size: 0.8em;
+  white-space: normal; }
 
 .cart-checkout .summary {
   font-size: 14px; }
@@ -7815,3 +7822,6 @@ a.button {
   .cart-checkout .total-amount::first-letter {
     font-size: 5px;
     font-weight: 100; }
+
+.cart-payment .item {
+  padding-left: 90px; }

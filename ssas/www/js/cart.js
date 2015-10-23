@@ -84,14 +84,6 @@ angular.module('cart', ['components'])
 
   $scope.load();
 
-  $scope.canCheckout = function (nature) {
-    return (nature.aSelCart || []).some(function (seller) {
-      return (seller.goods_list || []).some(function (good) {
-        return good.selected;
-      });
-    });
-  };
-
   $scope.toggleGoods = function (goods) {
     $ionicLoading.show();
     cartApi.nocheck(goods).success(function (responseData){
