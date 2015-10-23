@@ -40,7 +40,7 @@
         ReceiverApi.getReceiverList($scope.page, function (result) {
           if (result.data && result.data.addrlist) {
             $scope.items = $scope.items.concat(result.data.addrlist);
-            $scope.hasMore = false;
+            $scope.hasMore = true;
           }
           else {
             $scope.hasMore = false;
@@ -54,8 +54,8 @@
       $scope.getReceivers();
 
       $scope.loadMore = function () {
-        //       $scope.page++;
-        //       $scope.getReceivers();
+        $scope.page++;
+        $scope.getReceivers();
       };
 
       $scope.edit = function (item) {

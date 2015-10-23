@@ -194,7 +194,7 @@
           alertPopup.then(function (res) {
             console.log(res);
 
-            if(result.status === 0) {
+            if (result.status === 0) {
               userService.logOut();
               userService.backIndex = -1;
               $state.go('tab.member', {}, {reload: true});
@@ -205,42 +205,34 @@
     })
 
     .controller('IdCardsCtrl', function ($scope, $state, SettingApi) {
-      $scope.items = [];
-
       $scope.init = function () {
-        if ($scope.items.length === 0) {
-          $scope.items = [];
-          $scope.page = 0;
-          $scope.hasMore = true;
-        }
+        $scope.items = [];
+        $scope.page = 1;
+        $scope.hasMore = false;
+        $scope.filter = "";
       };
 
-      $scope.loadMore = function () {
-        SettingApi.getIdCardList($scope.page + 1, function (result) {
+      $scope.getIdCards = function () {
+        SettingApi.getIdCardList($scope.page, function (result) {
           if (result.status === 1) {
             $scope.hasMore = false;
           }
           else {
+            $scope.hasMore = true;
             $scope.items = $scope.items.concat(result.data);
-            $scope.page += 1;
-            $scope.$broadcast('scroll.infiniteScrollComplete');
           }
+
+          $scope.$broadcast('scroll.infiniteScrollComplete');
         });
       };
 
-      $scope.$on('$ionicView.enter', function () {
-        $scope.isActtive = true;
-        $scope.init();
-      });
+      $scope.init();
+      $scope.getIdCards();
 
-      $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.isActtive = false;
-      });
-
-      $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActtive)
-          $scope.loadMore();
-      });
+      $scope.loadMore = function () {
+        $scope.page++;
+        $scope.getIdCards();
+      };
 
       $scope.setDefault = function (item) {
         $state.go('tab.idcard_change', {cardInfo: JSON.stringify(item)}, {reload: true});
