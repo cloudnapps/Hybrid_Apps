@@ -35,6 +35,15 @@
             }
           }
         })
+        .state('tab.order_pay', {
+          url: '/pay/:orderId',
+          views: {
+            'tab-member': {
+              templateUrl: 'templates/cart/cart-payment.html',
+              controller: 'OrderPayCtrl'
+            }
+          }
+        })
         .state('tab.order_comment', {
           url: '/comment/:orderId',
           views: {
@@ -166,7 +175,7 @@
       };
 
       $scope.payOrder = function (item) {
-        $state.go('tab.cart-payment');
+        $state.go('tab.order_pay', {orderId: item.order_id}, {reload: true});
       };
 
       $scope.commentOrder = function (item) {
@@ -178,6 +187,58 @@
       OrderApi.getOrderDetail($stateParams.orderId, function (result) {
         $scope.item = result.data;
       });
+    })
+
+    .controller('OrderPayCtrl', function ($scope, $stateParams, $ionicLoading, $ionicPopup,
+                                          $q, orderApi, OrderApi, paymentApi) {
+      $scope.cart = {};
+      $scope.orderId = $stateParams.orderId;
+
+      OrderApi.getPayInfo($scope.orderId, function (result) {
+        if (result.status === 0 && result.data) {
+          $scope.cart.payments = result.data.payments;
+        }
+      });
+
+      $scope.pay = function (payment) {
+        $ionicLoading.show();
+
+        var order = {
+          order_id: $scope.orderId,
+          pay_app_id: payment.pay_app_id
+        };
+
+        return orderApi.getPayInfo(order)
+          .then(function (response) {
+            console.log(order, order.pay_app_id);
+
+            if (order.pay_app_id === 'micbcpay') {
+              console.log(response);
+              $rootScope.micbcpayData = response.data;
+              $scope.tabStateGo($scope.tabIndex.cart, 'tab.iframe');
+              return;
+            }
+            if (response.data.status !== 0) {
+              $ionicPopup.alert({
+                title: '未能获取支付信息',
+                template: response.data.msg
+              });
+
+              return $q.reject();
+            }
+
+            return paymentApi.pay(response.data.data)
+              .then(function (data) {
+                alert(data);
+              }, function (err) {
+                $ionicPopup.alert({
+                  title: '支付失败',
+                  template: err
+                });
+                return $q.reject();
+              });
+          });
+      };
     })
 
     .controller('OrderTrackCtrl', function ($scope, $stateParams, OrderApi) {
@@ -392,6 +453,17 @@
         sendRequest(url, data, callback);
       };
 
+      var getPayInfo = function (orderId, callback) {
+        var url = apiEndpoint.url + '/member-get_payinfo.html';
+        var data = {
+          member_id: userService.get('memberId'),
+          token: userService.get('token'),
+          order_id: orderId
+        };
+
+        sendRequest(url, data, callback);
+      };
+
       return {
         getOrderList: getOrderList,
         getOrderDetail: getOrderDetail,
@@ -399,7 +471,8 @@
         receiveOrder: receiveOrder,
         getMemberRate: getMemberRate,
         saveMemberRate: saveMemberRate,
-        getOrderTrack: getOrderTrack
+        getOrderTrack: getOrderTrack,
+        getPayInfo: getPayInfo
       };
     });
 })();
