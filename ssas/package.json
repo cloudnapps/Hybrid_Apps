@@ -22,8 +22,8 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "com.ionic.keyboard",
-    "cordova-plugin-inappbrowser",
     "cordova-plugin-globalization",
+    "cordova-plugin-inappbrowser",
     {
       "locator": "../plugins/cordova-beacon-monitor",
       "id": "com.cloudnapps.plugins.beacon.camonitor"
@@ -36,22 +36,36 @@
       "locator": "../plugins/cordova-qdc-alipay",
       "id": "com.qdc.plugins.alipay"
     },
+    "phonegap-plugin-barcodescanner",
     {
       "locator": "../plugins/cordova-qdc-wxpay",
       "id": "com.qdc.plugins.wxpay"
     },
-    "phonegap-plugin-barcodescanner",
+    {
+      "locator": "../plugins/cordova-project-related",
+      "id": "com.cloudnapps.project.related"
+    },
     {
       "locator": "../plugins/cordova-beacon-navi",
       "id": "com.plugins.beacon.navi"
     },
     {
-      "locator": "../plugins/cordova-project-related",
-      "id": "com.cloudnapps.project.related"
+      "locator": "../plugins/cordova-plugin-wechat",
+      "id": "com.cloudnapps.plugins.wechat"
     }
   ],
   "cordovaPlatforms": [
     "android",
-    "ios"
+    "ios",
+    {
+      "platform": "ios",
+      "version": "",
+      "locator": "ios"
+    },
+    {
+      "platform": "ios2",
+      "version": "",
+      "locator": "ios2"
+    }
   ]
 }
