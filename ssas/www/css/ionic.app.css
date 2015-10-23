@@ -7755,6 +7755,123 @@ a.button {
   top: 20%;
   min-height: auto; }
 
+/* 发现 start */
+.find-nav-bar {
+  margin: 0;
+  padding: 10px 0;
+  background-color: #fff;
+  border-bottom: 1px solid #000; }
+  .find-nav-bar .find-item {
+    padding: 0; }
+    .find-nav-bar .find-item a {
+      padding: 2px;
+      display: block;
+      text-align: center; }
+      .find-nav-bar .find-item a img {
+        display: block;
+        margin: 0 auto;
+        width: 35px;
+        height: 35px; }
+      .find-nav-bar .find-item a span {
+        display: inline-block;
+        margin-top: 4px;
+        margin-bottom: 0;
+        color: #666;
+        font-size: 12px; }
+
+/* 发现 end */
+/* 热门分类 start */
+.prdt-hot-sort {
+  padding: 0;
+  background-color: #fff;
+  border-top: 1px solid #000; }
+  .prdt-hot-sort .prdt-item {
+    padding: 0; }
+    .prdt-hot-sort .prdt-item a {
+      margin: 15px 0;
+      display: block;
+      text-align: center; }
+      .prdt-hot-sort .prdt-item a img {
+        display: block;
+        margin: 0 auto;
+        width: 40px;
+        height: 40px; }
+      .prdt-hot-sort .prdt-item a span {
+        display: inline-block;
+        margin-top: 10px;
+        margin-bottom: 0;
+        color: #666;
+        font-size: 12px; }
+
+/* 热门分类 end */
+/* 新品特惠 start*/
+.new-prdt-title .camp-title-left {
+  padding: 0;
+  margin: 0;
+  max-width: 50%; }
+.new-prdt-title .camp-title-right {
+  padding: 0;
+  margin: 0; }
+  .new-prdt-title .camp-title-right span {
+    font-size: 12px; }
+  .new-prdt-title .camp-title-right .end-time {
+    color: #FF0000;
+    font-size: 16px;
+    font-weight: 300; }
+
+.index-prdt-cont .pad-5 {
+  padding: 3px 3px 10px; }
+.index-prdt-cont .new-prdt {
+  padding: 0px;
+  margin: 2px; }
+  .index-prdt-cont .new-prdt a {
+    display: block;
+    text-align: center;
+    border: 1px solid #eee; }
+    .index-prdt-cont .new-prdt a img {
+      display: block;
+      margin: 0;
+      width: 100%;
+      height: 100%; }
+    .index-prdt-cont .new-prdt a .prdt-descb {
+      font-size: 12px;
+      margin: 3px;
+      line-height: 16px;
+      font-weight: 300;
+      text-align: left;
+      height: 4.3em;
+      overflow: hidden; }
+    .index-prdt-cont .new-prdt a .pri-pri {
+      text-align: left;
+      color: #c9000b;
+      font-size: 14px;
+      padding: 0; }
+    .index-prdt-cont .new-prdt a .pri-ori {
+      text-align: right;
+      color: #666c70;
+      font-size: 12px;
+      text-decoration: line-through;
+      padding: 0; }
+
+/* 新品特惠 end*/
+/* 热门标签 start*/
+.nav-bar-title .nav-title-left {
+  padding: 0;
+  margin: 0;
+  max-width: 50%; }
+.nav-bar-title .nav-title-right {
+  padding: 0;
+  margin: 0;
+  text-align: right; }
+  .nav-bar-title .nav-title-right a {
+    cursor: pointer;
+    margin-right: 20px;
+    text-decoration: none;
+    color: #666c70; }
+    .nav-bar-title .nav-title-right a span {
+      margin-left: 5px; }
+
+/* 热门标签 start */
 .cart .seller.item label.checkbox, .cart .nature.item label.checkbox {
   width: 42px; }
 .cart .nature.item label.checkbox {
