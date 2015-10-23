@@ -15,7 +15,7 @@
         }
       }) // 商品列表
       .state('tab.products', {
-        url: '/products?categoryId',
+        url: '/products?categoryId&keywords',
         views: {
           'tab-shop': {
             templateUrl: 'templates/shop/shop-products.html',
@@ -178,7 +178,6 @@
     $scope.isShowGalleryFilter = false;
     $scope.priceSection = {};
 
-
     $scope.getProducts = function() {
       var query = {
         page: $scope.page,
@@ -213,6 +212,11 @@
       clearData(true);
       $scope.getProducts();
     };
+
+    if($stateParams.keywords) {
+      $scope.keywords.value = $stateParams.keywords;
+      $scope.search();
+    }
 
     $scope.clearSearch = function(event){
       $scope.filter = {

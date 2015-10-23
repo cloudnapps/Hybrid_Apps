@@ -51,10 +51,48 @@
 
       $scope.showBtns = false;
 
-      $scope.keywords = '';
+      $scope.keywords = {};
+
+      $ionicPopover.fromTemplateUrl('shopPopover.html', {
+        scope: $scope
+      }).then(function (popover) {
+        $scope.popover = popover;
+      });
+      $scope.openPopover = function ($event) {
+        $scope.popover.show($event);
+      };
+      $scope.closePopover = function () {
+        $scope.popover.hide();
+      };
+      //Cleanup the popover when we're done with it!
+      $scope.$on('$destroy', function () {
+        $scope.popover.remove();
+      });
+      // Execute action on hide popover
+      $scope.$on('popover.hidden', function () {
+        // Execute action
+      });
+      // Execute action on remove popover
+      $scope.$on('popover.removed', function () {
+        // Execute action
+      });
+
+      $scope.changeSearchKind = function(kind){
+        $scope.popover.hide();
+        $scope.kind = kind;
+      };
+
 
       $scope.search = function () {
-        $scope.tabStateGo($scope.tabIndex.shop, 'tab.search', {keywords: $scope.keywords});
+        if(!$scope.kind) {
+          return $scope.tabStateGo($scope.tabIndex.shop, 'tab.products', {keywords: $scope.keywords.value});
+        }
+        return $scope.tabStateGo($scope.tabIndex.home, 'tab.sellers', {keywords: $scope.keywords.value});
+      };
+
+      $scope.clearSearch = function(event){
+        $scope.keywords.value = '';
+        event.stopPropagation();
       };
 
       HomeApi.getHomeContent().then(function (result) {

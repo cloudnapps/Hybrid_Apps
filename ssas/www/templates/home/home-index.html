@@ -1,13 +1,34 @@
 <ion-view view-title="">
+
+  <script id="shopPopover.html" type="text/ng-template">
+    <ion-popover-view style="width: 80px; height: 100px;background:#ad1222; opacity: 1; top: 44px;">
+      <ion-content>
+          <div class="row row-center" style="padding: 0px;">
+            <div class="col col-center" style="padding: 0px;text-align:center;">
+              <a class="button button-clear" style="color:#fff;" ng-click="changeSearchKind(0)">商品</a>
+            </div>
+          </div>
+          <div class="row row-center" style="padding: 0px;">
+            <div class="col col-center" style="padding: 0px;text-align:center;">
+              <a class="button button-clear" style="color:#fff;" ng-click="changeSearchKind(1)">商户</a>
+            </div>
+          </div>
+      </ion-content>
+    </ion-popover-view>
+  </script>
+
   <ion-nav-buttons side="left">
     <a class="button button-icon ion-ios-barcode-outline" ng-click="scan()"></a>
   </ion-nav-buttons>
   <ion-nav-title>
     <form ng-submit="search()">
-      <label class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input type="search" placeholder="Search" ng-model="keywords" style="height: 28px;">
-      </label>
+      <div class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
+        <div style="height: 28px; line-height: 28px">
+          <span ng-click="openPopover()">{{!kind ? '商品' : '商户'}}</span>
+          <i class="icon ion-arrow-down-b"></i>
+        </div>
+        <input type="search" placeholder="Search" ng-model="keywords.value" style="height: 28px;">
+      </div>
       <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
     </form>
   </ion-nav-title>

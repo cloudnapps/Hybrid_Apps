@@ -3,7 +3,7 @@
     .config(function ($stateProvider, $urlRouterProvider) {
       $stateProvider
         .state('tab.sellers', {
-          url: '/sellers',
+          url: '/sellers?keywords',
           views: {
             'tab-home': {
               templateUrl: 'templates/home/seller-list.html',
@@ -24,6 +24,9 @@
     }) // end of config
 
     .controller('SellerListController', function ($scope, $state, $stateParams, $cordovaInAppBrowser, $cordovaBarcodeScanner, SellerApi) {
+
+      $scope.keywords = {};
+
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;
@@ -46,6 +49,15 @@
       };
 
       $scope.init();
+
+      if($stateParams.keywords) {
+        $scope.keywords.value = $stateParams.keywords;
+        $scope.filter = {
+          keywords: $scope.keywords.value
+        };
+        console.log($scope.filter);
+      }
+      
       $scope.getSellers();
 
       $scope.loadMore = function () {
@@ -65,6 +77,9 @@
         $scope.init();
         $scope.getSellers();
       };
+
+
+      
 
       /*
        //test plugin features
