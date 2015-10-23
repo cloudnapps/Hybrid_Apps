@@ -242,9 +242,11 @@
     .controller('IdCardAddCtrl', function ($scope, $state, $stateParams, $ionicPopup, SettingApi) {
       if ($stateParams.cardInfo) {
         $scope.idCardInfo = JSON.parse($stateParams.cardInfo);
+        $scope.title = '设置身份证';
       }
       else {
         $scope.idCardInfo = {};
+        $scope.title = '新建身份证';
       }
 
 
@@ -252,12 +254,16 @@
         if ($scope.idCardInfo.card_id) {
           SettingApi.setDefaultIdCard($scope.idCardInfo.card_id, function (result) {
             var alertPopup = $ionicPopup.alert({
-              title: '设置身份信息',
+              title: '设置身份证',
               template: result.msg ? result.msg : '设置成功'
             });
             alertPopup.then(function (res) {
               console.log(res);
             });
+
+            if (result.status === 0) {
+              $ionicHistory.goBack();
+            }
           })
         }
         else {
@@ -277,7 +283,7 @@
             });
 
             if (result.status === 0) {
-              $state.go('tab.idcards', {}, {reload: true});
+              $ionicHistory.goBack();
             }
           })
         }

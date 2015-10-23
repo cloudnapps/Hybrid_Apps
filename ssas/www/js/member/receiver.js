@@ -87,9 +87,11 @@
     .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicHistory, ReceiverApi) {
       if ($stateParams.addrInfo) {
         $scope.addrInfo = JSON.parse($stateParams.addrInfo);
+        $scope.title = '更新收货地址';
       }
       else {
         $scope.addrInfo = {};
+        $scope.title = '新建收货地址';
       }
 
       $scope.addrInfo.showChoose = false;
@@ -109,17 +111,17 @@
           "zipcode": $scope.addrInfo.zipcode
         };
 
-        console.log(addrInfo);
-
         ReceiverApi.addReceiver(addrInfo, function (result) {
+          var alertPopup = $ionicPopup.alert({
+            title: '添加收货地址',
+            template: result.msg ? result.msg : '添加成功'
+          });
+          alertPopup.then(function (res) {
+            console.log(res);
+          });
+
           if (result.status === 0) {
-            var alertPopup = $ionicPopup.alert({
-              title: '添加收货地址',
-              template: result.msg ? result.msg : '添加成功'
-            });
-            alertPopup.then(function (res) {
-              $ionicHistory.goBack();
-            });
+            $ionicHistory.goBack();
           }
         });
       };
