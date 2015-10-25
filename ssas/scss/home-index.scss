@@ -1,0 +1,159 @@
+/* 发现 start */ 
+.find-nav-bar {
+  margin: 0;
+  padding: 10px 0;
+  background-color: #fff;
+  border-bottom: 1px solid #000;
+
+  .find-item {
+    padding: 0;
+
+    a {
+      padding: 2px;
+      display: block;
+      text-align: center;
+
+      img {
+        display: block;
+        margin: 0 auto;
+        width: 35px;
+        height: 35px; 
+      }
+
+      span {
+        display: inline-block;
+        margin-top: 4px; 
+        margin-bottom: 0;
+        color: #666;
+        font-size: 12px;
+      }
+    }
+  }
+}
+/* 发现 end */
+/* 热门分类 start */
+.prdt-hot-sort {
+  padding: 0;
+  background-color: #fff;
+  border-top: 1px solid #000;
+
+  .prdt-item {
+    padding: 0;
+
+    a {
+      margin: 15px 0;
+      display: block;
+      text-align: center;
+
+      img {
+        display: block;
+        margin: 0 auto;
+        width: 40px;
+        height: 40px; 
+      }
+
+      span {
+        display: inline-block;
+        margin-top: 10px; 
+        margin-bottom: 0;
+        color: #666;
+        font-size: 12px;
+      }
+    }
+  }
+}
+/* 热门分类 end */
+/* 新品特惠 start*/
+.new-prdt-title {
+  .camp-title-left {
+   padding: 0;
+   margin: 0;
+   max-width:50%;
+  }
+  .camp-title-right {
+    padding: 0;
+    margin: 0;
+
+    span {
+      font-size: 12px;
+    }
+
+    .end-time {
+      color: #FF0000;
+      font-size: 16px;
+      font-weight: 300;
+    }
+  }
+}
+.index-prdt-cont {
+  .pad-5 {
+    padding: 3px 3px 10px;
+  }
+  .new-prdt {
+    padding: 0px;
+    margin: 2px;
+
+    a {
+      display: block;
+      text-align: center;
+      border: 1px solid #eee;
+
+      img {
+        display: block;
+        margin: 0;
+        width: 100%;
+        height: 100%; 
+      }
+
+      .prdt-descb {
+        font-size: 12px;
+        margin: 3px;
+        line-height: 16px;
+        font-weight: 300;
+        text-align: left;
+        height: 4.3em;
+        overflow: hidden;
+      } 
+      .pri-pri {
+        text-align: left;
+        color: #c9000b;
+        font-size: 14px;
+        padding: 0;
+      }
+
+      .pri-ori {
+        text-align: right;
+        color: #666c70;
+        font-size: 12px;
+        text-decoration: line-through;
+        padding: 0;
+      }
+    }
+  }
+}
+/* 新品特惠 end*/
+/* 热门标签 start*/
+.nav-bar-title {
+  .nav-title-left{
+   padding: 0;
+   margin: 0;
+   max-width:50%;
+  }
+  .nav-title-right{
+    padding: 0;
+    margin: 0;
+    text-align: right;
+
+    a {
+      cursor: pointer;
+      margin-right: 20px;
+      text-decoration: none;
+      color: #666c70;
+
+      span {
+        margin-left: 5px;
+      }
+    }
+  }
+}
+/* 热门标签 start */

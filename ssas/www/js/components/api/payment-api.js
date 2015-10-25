@@ -48,7 +48,7 @@ angular.module('components')
         // return deferred.promise;
         var payMetods = {
           alipayWallet: payByAlipay,
-          wxAppay: payByWechat
+          wxApppay: payByWechat
         };
         var payMethod = payMetods[payment.pay_app_id];
         if (payMethod) {

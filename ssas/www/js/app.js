@@ -25,7 +25,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home
       // fetch preferredLanguage
       if (typeof navigator.globalization !== "undefined") {
         navigator.globalization.getPreferredLanguage(function (language) {
-          $translate.use((language.value).split("-")[0]);
+          //$translate.use((language.value).split("-")[0]);
+          $translate.use("zh");
         }, null);
       }
     });

@@ -233,6 +233,17 @@ hr {
   flex: 0 0 60%;
   max-width: 60%;
 }
+
+.col-70 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 70%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 70%;
+  -ms-flex: 0 0 70%;
+  flex: 0 0 70%;
+  max-width: 70%;
+}
+
 .set-gender {
   background-color: #568baa;
   color: #fff;

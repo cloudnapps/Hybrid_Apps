@@ -27,66 +27,67 @@
 
   <ion-content>
     <div class="row"
-         style="padding: 0;background-color: #fff;background-image: url('img/me.jpg');background-position: 5% 50%;background-repeat: no-repeat;background-size: cover;background-origin:content-box;width: 100%;height:100px;position: relative;">
+         style="padding: 0;background-color: #fff;background-image: url('img/me.jpg');background-position: 5% 50%;background-repeat: no-repeat;background-size: cover;background-origin:content-box;width: 100%;height:190px;position: relative;">
       <!-- <img src="img/me.jpg" style="width: 100%;height: 100px;"> -->
-      <div class="row" style="padding: 0;position:absolute;top: 33px;" ng-click="gotoPage('tab.settings')">
+      <div class="row" style="padding: 0;position:absolute;top: 33px;padding-left: 16px;margin-top: 2px;" ng-click="gotoPage('tab.settings')">
         <div class="col col-33 col-center" style="text-align: center;padding: 0;">
           <img ng-src="{{currentUser.image}}" style="height: 100px;width: 100px;border-radius: 50% 50%;">
         </div>
-        <div class="col col-67 col-center" style="padding: 0;font-size: 16px;color: #333333;">
+        <div class="col col-67 col-center" style="padding: 0;font-size: 16px;color: #333333;margin: 46px 0 0 16px;">
           <p>{{currentUser.mobile}}</p>
           <p>{{currentUser.lv_name}}</p>
         </div>
       </div>
-    </div>
-    <div class="row" style="padding: 0px;margin: 0;">
-      <div class="col col-offset-10 col-50 col-center" style="padding: 0px;">
-        <a class="button button-clear" style="font-size:16px;padding: 0;border: none;color: #333333;"
-           href="#/tab/favorites?type=goods">关注的商品</a>
+        <div class="row" style="padding: 0px;margin-top: 145px;
+    opacity: 0.7;">
+      <div class="col col-50 col-center" style="padding: 0px;background-color: #bd252c;    text-align: center;border-right: 1px solid #fff;">
+        <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;"
+           href="#/tab/favorites?type=goods">收藏的商品</a>
       </div>
-      <div class="col col-50 col-center" style="padding: 0px;">
-        <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #333333;"
+      <div class="col col-50 col-center" style="padding: 0px;background-color: #bd252c;text-align: center;">
+        <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;"
            href="#/tab/favorites?type=sellers">关注的店铺</a>
       </div>
+    </div>  
     </div>
 
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #a9a9a9;"/>
 
     <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;">
       <div class="col col-20"
-           style="padding: 0;text-align: center;height: 40px;font-size: 12px;"
+           style="padding: 0;text-align: center;height: 40px;font-size: 16px;"
            ng-click="gotoOrder('nopay')">
         <a class="" style="color: #333333;text-decoration: none;">待付款</a>
       </div>
-      <div class="col" style="padding: 0;text-align: center;">
+      <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
         |
       </div>
       <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
            ng-click="gotoOrder('noship')">
         <a class="" style="color: #333333;text-decoration: none;">待发货</a>
       </div>
-      <div class="col" style="padding: 0;text-align: center;">
+      <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
         |
       </div>
       <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
            ng-click="gotoOrder('shipped')">
         <a class="" style="color: #333333;text-decoration: none;">待收货</a>
       </div>
-      <div class="col" style="padding: 0;text-align: center;">
+      <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
         |
       </div>
       <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
            ng-click="gotoOrder('commenting')">
         <a class="" style="color: #333333;text-decoration: none;">待评论</a>
       </div>
-      <div class="col" style="padding: 0;text-align: center;">
+      <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
         |
       </div>
       <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
            ng-click="gotoPage('tab.feedbacks.returns')">
         <a class="" style="color: #333333;text-decoration: none;">售后</a>
       </div>
