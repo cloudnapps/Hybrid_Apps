@@ -243,8 +243,8 @@ angular.module('cart', ['components'])
       });
     })
     .finally(function () {
-      $ionicLoading.hide();
     });
+    $ionicLoading.hide();
   };
 })
 .controller('OrderPayedController', function ($rootScope, $scope, $q, $ionicLoading, orderApi) {
