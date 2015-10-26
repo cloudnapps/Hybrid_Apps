@@ -232,6 +232,7 @@
         {
             // fix issue that lang and country could be nil for iPhone 6 which caused crash.
             SendAuthResp* authResp = (SendAuthResp*)resp;
+            NSDictionary *response = nil;
             response = @{
                          @"code": authResp.code != nil ? authResp.code : @"",
                          @"state": authResp.state != nil ? authResp.state : @"",

@@ -119,7 +119,7 @@
             <a>
               <img ng-src="{{activityInfo.product_info[0].image}}">
               <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
-              <div class="row" style="padding: 0;">
+              <div class="row" style="padding: 0 3px;">
                 <span class="col col-50 col-center pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
                 <span class="col col-50 col-center pri-ori">{{activityInfo.product_info[0].price | currency: '￥'}}</span>
               </div>
@@ -132,7 +132,7 @@
             <a>
               <img ng-src="{{activityInfo.product_info[0].image}}">
               <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
-              <div class="row" style="padding: 0;">
+              <div class="row" style="padding: 0 3px;">
                 <span class="col col-50 col-center pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
                 <span class="col col-50 col-center pri-ori">{{activityInfo.product_info[0].price | currency: '￥'}}</span>
               </div>
@@ -145,7 +145,7 @@
             <a>
               <img ng-src="{{activityInfo.product_info[0].image}}">
               <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
-              <div class="row" style="padding: 0;">
+              <div class="row" style="padding: 0 3px;">
                 <span class="col col-50 col-center pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
                 <span class="col col-50 col-center pri-ori">{{activityInfo.product_info[0].price | currency: '￥'}}</span>
               </div>
@@ -158,7 +158,7 @@
             <a>
               <img ng-src="{{activityInfo.product_info[0].image}}">
               <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
-              <div class="row" style="padding: 0;">
+              <div class="row" style="padding: 0 3px;">
                 <span class="col col-50 col-center pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
                 <span class="col col-50 col-center pri-ori">{{activityInfo.product_info[0].price | currency: '￥'}}</span>
               </div>
@@ -181,46 +181,38 @@
     </div>
 
     <!-- 商标logo -->
-    <div class="row button-bar" style="padding: 8px 0;">
-      <a class="button" style="border-bottom: none;background-color: #fff;padding:0;"
-         ng-href="#/tab/seller/{{sellerInfo.items[0].seller_id}}">
-        <img style="width:100%; height:100%;" ng-src="{{sellerInfo.items[0].image}}">
+    <div class="row prdt-logo-one-row" style="margin: 3px 0 0;padding: 0;">
+      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[0].seller_id}}">
+        <img ng-src="{{sellerInfo.items[0].image}}">
       </a>
 
-      <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"
-         ng-href="#/tab/seller/{{sellerInfos.items[1].seller_id}}">
-        <img style="width:100%; height:50px;" ng-src="{{sellerInfo.items[1].image}}">
+      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfos.items[1].seller_id}}">
+        <img ng-src="{{sellerInfo.items[1].image}}">
       </a>
 
-      <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"
-         ng-href="#/tab/seller/{{sellerInfo.items[2].seller_id}}">
-        <img style="hwidth:100%; height:50px;" ng-src="{{sellerInfo.items[2].image}}">
+      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[2].seller_id}}">
+        <img ng-src="{{sellerInfo.items[2].image}}">
       </a>
 
-      <a class="button" style="border-bottom: none;background-color: #fff;padding: 0;"
-         ng-href="#/tab/seller/{{sellerInfo.items[3].seller_id}}">
-        <img style="width:100%; height:50px;" ng-src="{{sellerInfo.items[3].image}}">
+      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[3].seller_id}}">
+        <img ng-src="{{sellerInfo.items[3].image}}">
       </a>
     </div>
-    <div class="row button-bar" style="background-color: #fff;padding: 0 0 10px 0;">
-      <a class="button" style="background-color: #fff;padding:0;"
-         ng-href="#/tab/seller/{{sellerInfo.items[4].seller_id}}">
-        <img style="width:100%; height:50px;" ng-src="{{sellerInfo.items[4].image}}">
+    <div class="row prdt-logo-two-row" style="margin: 0;padding: 0;">
+      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[4].seller_id}}">
+        <img ng-src="{{sellerInfo.items[4].image}}">
       </a>
 
-      <a class="button" style="background-color: #fff;padding:0;"
-         ng-href="#/tab/seller/{{sellerInfo.items[5].seller_id}}">
-        <img style="width:100%; height:50px" ng-src="{{sellerInfo.items[5].image}}">
+      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[5].seller_id}}">
+        <img ng-src="{{sellerInfo.items[5].image}}">
       </a>
 
-      <a class="button" style="background-color: #fff;padding:0;"
-         ng-href="#/tab/seller/{{sellerInfo.items[6].seller_id}}">
-        <img style="width:100%; height:50px" ng-src="{{sellerInfo.items[6].image}}">
+      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[6].seller_id}}">
+        <img ng-src="{{sellerInfo.items[6].image}}">
       </a>
 
-      <a class="button" style="background-color: #fff;padding:0;"
-         ng-href="#/tab/seller/{{sellerInfo.items[7].seller_id}}">
-        <img style="width:100%; height:50px" ng-src="{{sellerInfo.items[7].image}}">
+      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[7].seller_id}}">
+        <img ng-src="{{sellerInfo.items[7].image}}">
       </a>
     </div>
 
@@ -277,31 +269,30 @@
       </div>
     </div>
 
-
-
-    <div style="padding: 0 0 0 6px;background-color: #fff;">
-      <div class="row" ng-repeat="product in homeInfo.goods_gallery" ng-if="$index % 2 === 0">
-        <div class="col col-50" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
-          <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;"
-             ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.goods_gallery[$index].product_id})">
-            <img style="width:90px; height:60%;" ng-src="{{homeInfo.goods_gallery[$index].image}}">
-          </a>
-
-          <p style="text-align: center;margin-bottom: 0;color: #c9000b; height: 20%">
-            {{homeInfo.goods_gallery[$index].name}}
-          </p>
+    <div class="index-prdt-cont">
+      <div class="row" style="padding: 0;">
+        <div class="col col-50 col-center pad-5" ng-repeat="product in homeInfo.goods_gallery" ng-if="$index % 2 === 0">
+          <div class="new-prdt">
+            <a ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.goods_gallery[$index].product_id})">
+              <img ng-src="{{homeInfo.goods_gallery[$index].image}}">
+              <div class="prdt-descb">{{homeInfo.goods_gallery[$index].name}}</div>
+              <div class="row" style="padding: 0;">
+                <span class="col col-center pri-pri" style="color: #666c70;font-size: 12px;text-align: center;">优惠价：{{homeInfo.goods_gallery[$index].price | currency: '￥'}}</span>
+              </div>
+            </a>
+          </div>
         </div>
 
-        <div class="col col-50" style="padding: 0px;border: 1px solid #eee;margin: 0 4px 0 0;">
-          <a class="button button-light button-full" style="padding: 0px;margin: 0;border: none;"
-             ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.goods_gallery[$index+1].product_id})">
-            <img style="width:90px; height:60%;" ng-src="{{homeInfo.goods_gallery[$index+1].image}}">
-          </a>
-
-          <p style="text-align: center;margin-bottom: 0;color: #c9000b; height: 20%">
-            {{homeInfo.goods_gallery[$index+1].name}}
-          </p>
-
+        <div class="col col-50 col-center pad-5">
+          <div class="new-prdt">
+            <a ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.goods_gallery[$index].product_id})">
+              <img ng-src="{{floor.product_info[$index+1].image}}">
+              <div class="prdt-descb">{{homeInfo.goods_gallery[$index+1].name}}</div>
+              <div class="row" style="padding: 0;">
+                <span class="col col-center pri-pri">优惠价：{{homeInfo.goods_gallery[$index+1].price | currency: '￥'}}</span>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </div>
