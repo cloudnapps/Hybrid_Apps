@@ -7814,6 +7814,16 @@ a.button {
   padding: 0;
   margin: 0;
   max-width: 50%; }
+  .new-prdt-title .camp-title-left .bar-name {
+    height: 27px;
+    position: relative; }
+  .new-prdt-title .camp-title-left .bar-name:after {
+    border: 10px solid transparent;
+    border-left: 10px solid #f00;
+    width: 0;
+    height: 0;
+    position: absolute;
+    content: ' '; }
 .new-prdt-title .camp-title-right {
   padding: 0;
   margin: 0; }
