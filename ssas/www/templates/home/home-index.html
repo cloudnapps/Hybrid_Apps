@@ -16,35 +16,11 @@
       </ion-content>
     </ion-popover-view>
   </script>
-
-  <ion-nav-buttons side="left">
-    <a class="button button-icon ion-ios-barcode-outline" ng-click="scan()"></a>
-  </ion-nav-buttons>
-  <ion-nav-title>
-    <form ng-submit="search()">
-      <div class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
-        <div style="height: 28px; line-height: 28px">
-          <span ng-click="openPopover()">{{!kind ? '商品' : '商户'}}</span>
-          <i class="icon ion-arrow-down-b"></i>
-        </div>
-        <input type="search" placeholder="Search" ng-model="keywords.value" style="height: 28px;">
-      </div>
-      <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
-    </form>
-  </ion-nav-title>
-  <ion-nav-buttons side="right">
-    <div class="row row-center" style="padding: 0px;margin-right: 10px;">
-      <div class="col col-center" style="padding: 0px;">
-        <button class="button button-clear" ng-click="openBtns()">
-          发现
-        </button>
-      </div>
-    </div>
-  </ion-nav-buttons>
-
-  <ion-content style="background-color: #fff;">
-    <!--发现-线下功能-->
-    <div class="row find-nav-bar" ng-show="showBtns">
+  <div>
+    
+  </div>
+  <!--发现-线下功能-->
+  <div class="row find-nav-bar" ng-show="showBtns">
       <div class="col col-20 col-center find-item">
         <a>
           <img src="img/home/icon1.png"/>
@@ -76,7 +52,28 @@
         </a>
       </div>
     </div>
+  <ion-nav-buttons side="left">
+    <a class="button button-icon ion-ios-barcode-outline" style="padding: 0;" ng-click="scan()"></a>
+  </ion-nav-buttons>
+  <ion-nav-title style="margin: 0;">
+    <form ng-submit="search()">
+      <div class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
+        <div style="height: 28px; line-height: 28px;color: #999;">
+          <span ng-click="openPopover()" style="font-weight: 300;">{{!kind ? '商品' : '商户'}}</span>
+          <i class="icon ion-arrow-down-b"></i>
+        </div>
+        <input type="search" placeholder="  Search" ng-model="keywords.value" style="height: 28px;padding-left: 5px;">
+      </div>
+      <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
+    </form>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <div class="row row-center" style="padding: 0;">
+      <button class="col button button-clear" ng-click="openBtns()">发现</button>
+    </div>
+  </ion-nav-buttons>
 
+  <ion-content style="background-color: #fff;">
     <!--广告轮播图-->
     <div class="row" style="padding: 0px;margin: 0;width: 100%; height: 200px">
       <div class="col col-center" style="padding: 0px; width: 100%; height: 100%">
@@ -102,7 +99,8 @@
 
     <div class="row new-prdt-title" style="padding: 0;margin: 0;">
       <div class="col col-30 col-center camp-title-left">
-        <img src="img/newproduct.jpg" style="height: 27px;">
+        <span class="bar-name">{{activityInfo.act_name}}</span>
+        <!-- <img src="img/bar-1.png" style="height: 27px;"> -->
       </div>
       <div class="col col-70 col-center camp-title-right">
         <span>距活动结束还有</span>
@@ -172,7 +170,7 @@
     <!--商户-->
     <div class="row nav-bar-title" style="padding: 0;margin: 0;">
       <div class="col col-30 col-center nav-title-left">
-        <img src="img/hotseller.jpg" style="height: 27px;">
+        <img src="img/bar-2.png" style="height: 27px;">
       </div>
       <div class="col col-70 col-center nav-title-right">
         <a href="#/tab/sellers">更多<span>>></span></a>
@@ -215,13 +213,14 @@
         <img ng-src="{{sellerInfo.items[7].image}}">
       </a>
     </div>
-
+    <hr style="margin: 0;height:1px;border:none;border-top:10px solid #fff;"/>
     <!--分类商品-->
     <div ng-repeat="floor in homeInfo.floor">
 
       <div class="row nav-bar-title" style="padding: 0;margin: 0;">
         <div class="col col-30 col-center nav-title-left">
-          <img src="img/hotproduct.jpg" style="height: 27px;">
+          <span class="bar-name-mid">{{floor.cat_name}}</span>
+          <!-- <img src="img/hotproduct.jpg" style="height: 27px;"> -->
         </div>
         <div class="col col-70 col-center nav-title-right">
           <a ng-click="tabStateGo(tabIndex.shop, 'tab.products', {categoryId: floor.cat_id})">更多<span>>></span></a>
@@ -261,7 +260,8 @@
     <!--猜你喜欢-->
     <div class="row nav-bar-title" style="padding: 0;margin: 0;">
       <div class="col col-30 col-center nav-title-left">
-        <img src="img/hotproduct.jpg" style="height: 27px;">
+        <span class="bar-name-last">猜你喜欢</span>
+        <!-- <img src="img/bar-3.png" style="height: 27px;"> -->
       </div>
       <div class="col col-70 col-center nav-title-right">
         <a ng-click="tabStateGo(tabIndex.shop, 'tab.categories', {})">更多<span>>></span></a>
@@ -276,9 +276,9 @@
             <a ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.goods_gallery[$index].product_id})">
               <img ng-src="{{homeInfo.goods_gallery[$index].image}}">
               <div class="prdt-descb">{{homeInfo.goods_gallery[$index].name}}</div>
-              <div class="row" style="padding: 0;">
+              <!-- <div class="row" style="padding: 0;">
                 <span class="col col-center pri-pri" style="color: #666c70;font-size: 12px;text-align: center;">优惠价：{{homeInfo.goods_gallery[$index].price | currency: '￥'}}</span>
-              </div>
+              </div> -->
             </a>
           </div>
         </div>
@@ -288,9 +288,9 @@
             <a ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.goods_gallery[$index].product_id})">
               <img ng-src="{{floor.product_info[$index+1].image}}">
               <div class="prdt-descb">{{homeInfo.goods_gallery[$index+1].name}}</div>
-              <div class="row" style="padding: 0;">
+              <!-- <div class="row" style="padding: 0;">
                 <span class="col col-center pri-pri">优惠价：{{homeInfo.goods_gallery[$index+1].price | currency: '￥'}}</span>
-              </div>
+              </div> -->
             </a>
           </div>
         </div>

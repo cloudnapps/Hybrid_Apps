@@ -7757,7 +7757,11 @@ a.button {
 
 /* 发现 start */
 .find-nav-bar {
+  position: absolute;
+  z-index: 999;
   margin: 0;
+  top: 44px;
+  left: 0;
   padding: 10px 0;
   background-color: #fff;
   border-bottom: 1px solid #000; }
@@ -7809,7 +7813,25 @@ a.button {
 .new-prdt-title .camp-title-left {
   padding: 0;
   margin: 0;
-  max-width: 50%; }
+  max-width: 50%;
+  height: 30px; }
+  .new-prdt-title .camp-title-left .bar-name {
+    height: 30px;
+    position: relative;
+    background-color: #c30016;
+    padding: 7px;
+    line-height: 24px;
+    color: #fff;
+    font-size: 14px; }
+  .new-prdt-title .camp-title-left .bar-name:after {
+    border: 15px solid transparent;
+    border-left: 10px solid #c30016;
+    width: 0;
+    height: 0;
+    right: -25px;
+    top: 0;
+    position: absolute;
+    content: ' '; }
 .new-prdt-title .camp-title-right {
   padding: 0;
   margin: 0; }
@@ -7859,7 +7881,42 @@ a.button {
 .nav-bar-title .nav-title-left {
   padding: 0;
   margin: 0;
-  max-width: 50%; }
+  max-width: 50%;
+  height: 30px; }
+  .nav-bar-title .nav-title-left .bar-name-mid {
+    height: 30px;
+    position: relative;
+    background-color: #3060aa;
+    padding: 7px;
+    line-height: 24px;
+    color: #fff;
+    font-size: 14px; }
+  .nav-bar-title .nav-title-left .bar-name-mid:after {
+    border: 15px solid transparent;
+    border-left: 10px solid #3060aa;
+    width: 0;
+    height: 0;
+    right: -25px;
+    top: 0;
+    position: absolute;
+    content: ' '; }
+  .nav-bar-title .nav-title-left .bar-name-last {
+    height: 30px;
+    position: relative;
+    background-color: #f9898b;
+    padding: 7px;
+    line-height: 24px;
+    color: #fff;
+    font-size: 14px; }
+  .nav-bar-title .nav-title-left .bar-name-last:after {
+    border: 15px solid transparent;
+    border-left: 10px solid #f9898b;
+    width: 0;
+    height: 0;
+    right: -25px;
+    top: 0;
+    position: absolute;
+    content: ' '; }
 .nav-bar-title .nav-title-right {
   padding: 0;
   margin: 0;
