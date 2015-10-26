@@ -1,7 +1,9 @@
 package com.qdc.plugins.weixin;
 
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.LOG;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
@@ -27,6 +29,13 @@ public class WeixinPay extends CordovaPlugin {
 
 	/** LOG TAG */
 	private static final String LOG_TAG = WeixinPay.class.getSimpleName();
+
+	@Override
+	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+		super.initialize(cordova, webView);
+
+		Constants.APP_ID = preferences.getString("wechat_app_id", "");
+	}
 
 	/**
 	 * 插件主入口
@@ -59,7 +68,7 @@ public class WeixinPay extends CordovaPlugin {
 
 			JSONObject jsonObj = args.getJSONObject(0);
 
-			final String appid = jsonObj.getString("appid");
+			final String appid = Constants.APP_ID;
 			if (appid == null || "".equals(appid)) {
 				LOG.e(LOG_TAG, "appid is empty", new NullPointerException());
 				ret = false;

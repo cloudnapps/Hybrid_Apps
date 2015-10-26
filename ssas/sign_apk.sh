@@ -11,4 +11,4 @@ zip -d $APK META-INF/\*
 # sign apk with KEY
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $KEY $APK $ALIAS
 # align apk
-zipalign -v 4 $APK $APK_REL
+zipalign -vf 4 $APK $APK_REL

@@ -8,7 +8,7 @@ angular.module('components')
         payObj["pay_info"] = payment.orderInfo;
         var paymentString = JSON.stringify(payObj);
 
-        alipay.payment(paymentString, function (cb_success) {
+        alipay.payment(payObj, function (cb_success) {
             alert(cb_success);
             deferred.resolve(cb_success);
           },
@@ -31,7 +31,7 @@ angular.module('components')
         payObj["sign"] = payment.sign;
         var paymentString = JSON.stringify(payObj);
 
-        wxpay.payment(paymentString, function (cb_success) {
+        wxpay.payment(payObj, function (cb_success) {
             alert(cb_success);
             deferred.resolve(cb_success);
           },
