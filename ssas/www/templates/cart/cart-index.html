@@ -81,7 +81,7 @@
                 <div class="positive" style="margin-top: 10px;">共计: {{nature.total_item_amount |currency:'￥'}} (不含运费)</div>
               </div>
             </div>
-            <button class="col-30 button button-full button-positive" style="margin:0;" ng-disabled="nature.lock_btn" ui-sref="tab.cart-checkout({nature: natureKey})">{{'cart_checkout'|translate}}</button>
+            <button class="col-30 button button-full button-positive" style="margin:0;" ui-sref="tab.cart-checkout({nature: natureKey})">{{'cart_checkout'|translate}}</button>
           </div>
         </ion-item>
       </div>

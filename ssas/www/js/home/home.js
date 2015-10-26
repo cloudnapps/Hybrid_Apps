@@ -42,7 +42,7 @@
 
     .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate,
                                             $state, $ionicPopover, $window, $interval,
-                                            HomeApi, SellerApi, toastService) {
+                                            HomeApi, SellerApi, toastService, $ionicScrollDelegate) {
       $scope.homeInfo = {};
 
       $scope.sellerInfo = {};
@@ -129,6 +129,8 @@
 
       $scope.openBtns = function () {
         $scope.showBtns = !$scope.showBtns;
+
+        $ionicScrollDelegate.scrollTop();
       };
 
       $scope.openItem = function (item) {

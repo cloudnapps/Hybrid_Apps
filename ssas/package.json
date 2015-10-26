@@ -38,10 +38,6 @@
     },
     "phonegap-plugin-barcodescanner",
     {
-      "locator": "../plugins/cordova-qdc-wxpay",
-      "id": "com.qdc.plugins.wxpay"
-    },
-    {
       "locator": "../plugins/cordova-project-related",
       "id": "com.cloudnapps.project.related"
     },
@@ -52,11 +48,19 @@
     {
       "locator": "../plugins/cordova-plugin-wechat",
       "id": "com.cloudnapps.plugins.wechat"
+    },
+    {
+      "locator": "https://github.com/wymsee/cordova-imagePicker.git",
+      "id": "com.synconset.imagepicker"
+    },
+    "org.apache.cordova.file",
+    "org.apache.cordova.file-transfer",
+    {
+      "locator": "../plugins/cordova-qdc-wxpay",
+      "id": "com.qdc.plugins.wxpay"
     }
   ],
   "cordovaPlatforms": [
-    "android",
-    "ios",
     {
       "platform": "ios",
       "version": "",
