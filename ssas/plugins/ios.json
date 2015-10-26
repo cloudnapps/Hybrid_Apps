@@ -5,8 +5,72 @@
     },
     "config_munge": {
         "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Globalization\"><param name=\"ios-package\" value=\"CDVGlobalization\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Monitor\"><param name=\"ios-package\" value=\"CDVBeaconMonitor\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Shake\"><param name=\"ios-package\" value=\"CDVShake\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Wechat\"><param name=\"ios-package\" value=\"CDVWechat\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WeixinPay\"><param name=\"ios-package\" value=\"CDVWxpay\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Alipay\"><param name=\"ios-package\" value=\"CDVAlipay\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"alipay\" value=\"ctfalipay\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
             "framework": {
                 "parents": {
+                    "CoreGraphics.framework": [
+                        {
+                            "xml": false,
+                            "count": 3
+                        }
+                    ],
                     "libsqlite3.0.tbd": [
                         {
                             "xml": false,
@@ -31,12 +95,6 @@
                             "count": 1
                         }
                     ],
-                    "lib/ios/libc++.1.dylib": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
                     "Security.framework": [
                         {
                             "xml": false,
@@ -53,30 +111,6 @@
                         {
                             "xml": false,
                             "count": 2
-                        }
-                    ],
-                    "libz.dylib": [
-                        {
-                            "xml": false,
-                            "count": 2
-                        }
-                    ],
-                    "libsqlite3.0.dylib": [
-                        {
-                            "xml": false,
-                            "count": 2
-                        }
-                    ],
-                    "libstdc++.6.dylib": [
-                        {
-                            "xml": false,
-                            "count": 2
-                        }
-                    ],
-                    "CoreGraphics.framework": [
-                        {
-                            "xml": false,
-                            "count": 3
                         }
                     ],
                     "libiconv.dylib": [
@@ -115,10 +149,28 @@
                             "count": 1
                         }
                     ],
+                    "libz.dylib": [
+                        {
+                            "xml": false,
+                            "count": 2
+                        }
+                    ],
+                    "libsqlite3.0.dylib": [
+                        {
+                            "xml": false,
+                            "count": 2
+                        }
+                    ],
                     "CoreTelephony.framework": [
                         {
                             "xml": false,
                             "count": 1
+                        }
+                    ],
+                    "libstdc++.6.dylib": [
+                        {
+                            "xml": false,
+                            "count": 2
                         }
                     ]
                 }
@@ -128,13 +180,27 @@
                     "NSLocationAlwaysUsageDescription": [
                         {
                             "xml": "<string>始终利用位置服务检测周边的iBeacon，提醒用户关心的内容。</string>",
-                            "count": 3
+                            "count": 2
                         }
                     ],
                     "NSAppTransportSecurity": [
                         {
                             "xml": "<dict><key>NSAllowsArbitraryLoads</key><true /></dict>",
-                            "count": 4
+                            "count": 3
+                        }
+                    ],
+                    "LSApplicationQueriesSchemes": [
+                        {
+                            "xml": "<array><string>weixin</string><string>wechat</string></array>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<array><string>wechat</string><string>weixin</string></array>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<array><string>alipay</string></array>",
+                            "count": 1
                         }
                     ],
                     "CFBundleURLTypes": [
@@ -143,87 +209,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<array><dict><key>CFBundleTypeRole</key><string>Editor</string><key>CFBundleURLIconFile</key><string>icon-50@2x</string><key>CFBundleURLName</key><string>alipay</string><key>CFBundleURLSchemes</key><array><string>zdfalipay</string></array></dict></array>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<array><dict><key>CFBundleTypeRole</key><string>Editor</string><key>CFBundleURLIconFile</key><string>icon-50@2x</string><key>CFBundleURLName</key><string>alipay</string><key>CFBundleURLSchemes</key><array><string>qdcalipay</string></array></dict></array>",
-                            "count": 1
-                        }
-                    ],
-                    "LSApplicationQueriesSchemes": [
-                        {
-                            "xml": "<array><string>alipay</string></array>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<array><string>wechat</string><string>weixin</string></array>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<array><string>weixin</string><string>wechat</string></array>",
-                            "count": 1
-                        }
-                    ]
-                }
-            },
-            "config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"Monitor\"><param name=\"ios-package\" value=\"CDVBeaconMonitor\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Shake\"><param name=\"ios-package\" value=\"CDVShake\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Navi\"><param name=\"ios-package\" value=\"CDVMapNavigator\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Alipay\"><param name=\"ios-package\" value=\"CDVAlipay\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"alipay\" value=\"qdcalipay\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"WeixinPay\"><param name=\"ios-package\" value=\"CDVWxpay\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Globalization\"><param name=\"ios-package\" value=\"CDVGlobalization\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Wechat\"><param name=\"ios-package\" value=\"CDVWechat\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<array><dict><key>CFBundleTypeRole</key><string>Editor</string><key>CFBundleURLIconFile</key><string>icon-50@2x</string><key>CFBundleURLName</key><string>alipay</string><key>CFBundleURLSchemes</key><array><string>ctfalipay</string></array></dict></array>",
                             "count": 1
                         }
                     ]
@@ -232,31 +218,16 @@
         }
     },
     "installed_plugins": {
-        "com.cloudnapps.plugins.beacon.camonitor": {
-            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
-        },
-        "com.cloudnapps.plugins.beacon.shake": {
-            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
-        },
-        "com.cloudnapps.project.related": {
-            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
-        },
-        "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
-        },
-        "com.plugins.beacon.navi": {
-            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
-        },
-        "com.qdc.plugins.alipay": {
-            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
-        },
-        "com.qdc.plugins.wxpay": {
+        "cordova-plugin-device": {
             "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         },
-        "cordova-plugin-device": {
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "com.ionic.keyboard": {
             "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         },
         "cordova-plugin-globalization": {
@@ -265,18 +236,31 @@
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         },
-        "cordova-plugin-splashscreen": {
+        "com.cloudnapps.plugins.beacon.camonitor": {
             "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         },
-        "cordova-plugin-whitelist": {
+        "com.cloudnapps.plugins.beacon.shake": {
             "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         },
         "phonegap-plugin-barcodescanner": {
             "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         },
-        "com.cloudnapps.plugins.wechat": {
+        "com.qdc.plugins.wxpay": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "com.qdc.plugins.alipay": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "com.cloudnapps.project.related": {
             "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "com.cloudnapps.plugins.wechat": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        }
+    }
 }

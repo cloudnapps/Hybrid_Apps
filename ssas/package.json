@@ -32,15 +32,7 @@
       "locator": "../plugins/cordova-beacon-shake",
       "id": "com.cloudnapps.plugins.beacon.shake"
     },
-    {
-      "locator": "../plugins/cordova-qdc-alipay",
-      "id": "com.qdc.plugins.alipay"
-    },
     "phonegap-plugin-barcodescanner",
-    {
-      "locator": "../plugins/cordova-project-related",
-      "id": "com.cloudnapps.project.related"
-    },
     {
       "locator": "../plugins/cordova-beacon-navi",
       "id": "com.plugins.beacon.navi"
@@ -58,6 +50,14 @@
     {
       "locator": "../plugins/cordova-qdc-wxpay",
       "id": "com.qdc.plugins.wxpay"
+    },
+    {
+      "locator": "../plugins/cordova-qdc-alipay",
+      "id": "com.qdc.plugins.alipay"
+    },
+    {
+      "locator": "../plugins/cordova-project-related",
+      "id": "com.cloudnapps.project.related"
     }
   ],
   "cordovaPlatforms": [

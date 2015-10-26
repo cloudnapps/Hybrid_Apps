@@ -15,14 +15,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-whitelist": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-whitelist"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-splashscreen": {
         "source": {
             "type": "registry",
@@ -71,14 +63,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.qdc.plugins.alipay": {
-        "source": {
-            "type": "local",
-            "path": "../plugins/cordova-qdc-alipay"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "phonegap-plugin-barcodescanner": {
         "source": {
             "type": "registry",
@@ -95,14 +79,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.cloudnapps.project.related": {
-        "source": {
-            "type": "local",
-            "path": "../plugins/cordova-project-related"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "com.plugins.beacon.navi": {
         "source": {
             "type": "local",
@@ -115,6 +91,30 @@
         "source": {
             "type": "local",
             "path": "../plugins/cordova-plugin-wechat"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-whitelist"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com.qdc.plugins.alipay": {
+        "source": {
+            "type": "local",
+            "path": "../plugins/cordova-qdc-alipay"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com.cloudnapps.project.related": {
+        "source": {
+            "type": "local",
+            "path": "../plugins/cordova-project-related"
         },
         "is_top_level": true,
         "variables": {}
