@@ -53,7 +53,7 @@
         <param name="ios-package" value="CDVAlipay" />
         <param name="onload" value="true" />
       </feature>
-      <preference name="alipay" value="qdcalipay"/>
+      <preference name="alipay" value="ctfalipay"/>
     </config-file>
 
     <header-file src="src/ios/CDVAlipay.h" />
