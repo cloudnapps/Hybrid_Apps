@@ -268,10 +268,16 @@
     };
 
     $scope.setBrandId = function(brandId){
+      if(brandId === $scope.brandId) {
+        return ($scope.brandId = '');
+      }
       $scope.brandId = brandId;
     };
 
     $scope.setPropIndex = function(propIndex){
+      if(propIndex == $scope.propIndex) {
+        return ($scope.propIndex = '');
+      }
       $scope.propIndex = propIndex;
     };
 
