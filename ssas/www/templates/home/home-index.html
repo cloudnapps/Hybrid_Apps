@@ -213,13 +213,14 @@
         <img ng-src="{{sellerInfo.items[7].image}}">
       </a>
     </div>
-
+    <hr style="margin: 0;height:1px;border:none;border-top:10px solid #fff;"/>
     <!--分类商品-->
     <div ng-repeat="floor in homeInfo.floor">
 
       <div class="row nav-bar-title" style="padding: 0;margin: 0;">
         <div class="col col-30 col-center nav-title-left">
-          <img src="img/hotproduct.jpg" style="height: 27px;">
+          <span class="bar-name-mid">{{floor.cat_name}}</span>
+          <!-- <img src="img/hotproduct.jpg" style="height: 27px;"> -->
         </div>
         <div class="col col-70 col-center nav-title-right">
           <a ng-click="tabStateGo(tabIndex.shop, 'tab.products', {categoryId: floor.cat_id})">更多<span>>></span></a>
@@ -259,7 +260,8 @@
     <!--猜你喜欢-->
     <div class="row nav-bar-title" style="padding: 0;margin: 0;">
       <div class="col col-30 col-center nav-title-left">
-        <img src="img/bar-3.png" style="height: 27px;">
+        <span class="bar-name-last">猜你喜欢</span>
+        <!-- <img src="img/bar-3.png" style="height: 27px;"> -->
       </div>
       <div class="col col-70 col-center nav-title-right">
         <a ng-click="tabStateGo(tabIndex.shop, 'tab.categories', {})">更多<span>>></span></a>

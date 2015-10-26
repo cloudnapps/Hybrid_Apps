@@ -165,6 +165,49 @@
    padding: 0;
    margin: 0;
    max-width:50%;
+   height: 30px;
+
+   .bar-name-mid {
+    height: 30px;
+    position: relative;
+    background-color: #3060aa;
+    padding: 7px;
+    line-height: 24px;
+    color: #fff;
+    font-size: 14px;
+   }
+
+   .bar-name-mid:after {
+      border: 15px solid transparent;
+      border-left: 10px solid #3060aa;
+      width: 0;
+      height: 0;
+      right: -25px;
+      top: 0;
+      position: absolute;
+      content: ' '
+   }
+
+   .bar-name-last {
+    height: 30px;
+    position: relative;
+    background-color: #f9898b;
+    padding: 7px;
+    line-height: 24px;
+    color: #fff;
+    font-size: 14px;
+   }
+
+   .bar-name-last:after {
+      border: 15px solid transparent;
+      border-left: 10px solid #f9898b;
+      width: 0;
+      height: 0;
+      right: -25px;
+      top: 0;
+      position: absolute;
+      content: ' '
+   }
   }
   .nav-title-right{
     padding: 0;
