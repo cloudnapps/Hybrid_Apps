@@ -10,7 +10,10 @@
 
     <div class="row" style="padding: 10px 5px 10px 15px;">
       <div class="col">
-        <p style="margin-bottom: 13px;color: #4a4b4d;">收件人：{{item.consignee.name}}<span style="float: right;" ng-if="item.mobile">电话：{{item.consignee.mobile}}</span></p>
+        <p style="margin-bottom: 13px;color: #4a4b4d;">收件人：{{item.consignee.name}}<span style="float: right;"
+                                                                                        ng-if="item.mobile">电话：{{item.consignee.mobile}}</span>
+        </p>
+
         <div class="row" style="padding: 0;">
           <div class="col col-25 col-center" style="padding: 0;">
             <span style="font-size: 14px;color: #4a4b4d;">收件地址：</span>
@@ -23,7 +26,8 @@
     </div>
 
     <hr style="margin: 0;height:1px;border:none;border-top:10px solid #f2f2f2;"/>
-    <div class="row" style="padding:10px;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #f2f2f2;">
+    <div class="row"
+         style="padding:10px;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #f2f2f2;">
       <div class="col col-75 col-center" style="height: 100%; padding: 0px">
         <p style="padding: 0px;color: #4a4b4d;margin: 0;">{{item.order_title.seller_name}}</p>
       </div>
@@ -40,6 +44,7 @@
           </div>
           <div class="col col-80" style="padding: 0 0 0 10px;height: 65px;">
             <p style="padding: 0px;margin-bottom: 25px;">{{product.name}}</p>
+
             <p>
               <span style="float: left;">{{product.price | currency:'￥'}}</span>
               <span style="float: right;">x{{product.num}}</span>
@@ -91,7 +96,24 @@
       </div>
     </div>
 
-    <div class="row" style="padding:10px;">
+    <div class="button-bar">
+      <div class="row">
+        <div class="col col-50">
+          <button class="button button-full button-positive" style="font-size:16px;"
+                  ng-if="item.pay_status_value" ng-click="payOrder(item)">
+            去支付
+          </button>
+        </div>
+        <div class="col col-50">
+          <button class="button button-full button-positive" style="font-size:16px;"
+                  ng-if="item.pay_status_value" ng-click="cancelOrder(item)">
+            取消订单
+          </button>
+        </div>
+      </div>
+    </div>
+    <!--<div class="row" style="padding:10px;">
+
       <div style="width: 100%;">
         <button class="button button-energized"
                 style="font-size:12px;float:right;margin: 0 2px;min-height: 27px;line-height: 30px;padding: 0 18px;"
@@ -110,6 +132,6 @@
                 ng-if="item.pay_status_value" ng-click="cancelOrder(item)">取消订单
         </button>
       </div>
-    </div>
+    </div>-->
   </ion-content>
 </ion-view>

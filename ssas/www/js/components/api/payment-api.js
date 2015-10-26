@@ -2,7 +2,7 @@ angular.module('components')
   .factory('paymentApi', ['$q',
     function ($q) {
       var payByAlipay = function (payment) {
-        alert("alipay");
+        //alert("alipay");
         var deferred = $q.defer();
         var payObj = {};
         payObj["pay_info"] = payment.orderInfo;
@@ -20,7 +20,7 @@ angular.module('components')
       };
 
       var payByWechat = function (payment) {
-        alert("wxPay");
+        //alert("wxPay");
         var deferred = $q.defer();
         var payObj = {};
         payObj["noncestr"] = payment.noncestr;
