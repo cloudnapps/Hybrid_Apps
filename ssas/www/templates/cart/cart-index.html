@@ -12,8 +12,7 @@
             <div>{{natureKey|translate}}</div>
           </div>
 
-          <ion-option-button class="button-assertive"
-                             ng-click="removeNature(nature)">
+          <ion-option-button class="button-assertive" ng-click="removeNature(nature)">
             {{'remove' | translate}}
           </ion-option-button>
         </ion-item>
@@ -39,24 +38,20 @@
                 <input type="checkbox" ng-model="good.selected" ng-change="toggleGood(good)">
               </label>
               <div class="row row-no-padding">
-                <a class="good-thumbnail vertical-align-middle-container" ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: good.product_id})">
+                <a class="good-thumbnail-test" ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: good.product_id})">
                   <img class="vertical-align-middle" ng-src="{{good.thumbnail}}">
                   <!-- <div class="vertical-align-middle" style="border:solid 1px; width:80px;height:80px;">test</div> -->
                 </a>
 
                 <div class="good-info col">
-                  <h2>{{good.name}}</h2>
+                  <h2 style="color: #444;font-size: 14px;">{{good.name}}</h2>
                   <p>{{good.spec}}</p>
-
-                  <div class="good-price row">
-                    <div class="col price positive">{{good.buy_price|currency:'￥'}}</div>
-                    <quantity-input class="col-60" ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
-                  </div>
+                  <p class="price" style="color: #bd252c;">{{good.buy_price|currency:'￥'}}</p>
+                    <quantity-input ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
                 </div>
               </div>
             </div>
-            <ion-option-button class="button-assertive"
-                               ng-click="removeGood(good)">
+            <ion-option-button class="button-assertive" ng-click="removeGood(good)">
               {{'remove' | translate}}
             </ion-option-button>
           </ion-item>
@@ -74,11 +69,11 @@
         </ion-item>
         <ion-item class="item item-complex">
           <div class="row row-no-padding">
-            <div class="col" style="font-size:0.9em;">
-              <div class="item-content">
+            <div class="col" style="font-size:0.5em;">
+              <div class="item-content" style="padding: 5px 10px 5px 16px;">
                 <div class="positive">货款总计: {{nature.item_amount |currency:'￥'}}</div>
                 <div class="positive">税费总计: {{nature.total_taxation_amount |currency:'￥'}}</div>
-                <div class="positive" style="margin-top: 10px;">共计: {{nature.total_item_amount |currency:'￥'}} (不含运费)</div>
+                <div class="positive" style="margin-top: 2px;">共计: {{nature.total_item_amount |currency:'￥'}} (不含运费)</div>
               </div>
             </div>
             <button class="col-30 button button-full button-positive" style="margin:0;" ui-sref="tab.cart-checkout({nature: natureKey})">{{'cart_checkout'|translate}}</button>
