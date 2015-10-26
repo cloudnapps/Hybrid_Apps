@@ -7813,15 +7813,23 @@ a.button {
 .new-prdt-title .camp-title-left {
   padding: 0;
   margin: 0;
-  max-width: 50%; }
+  max-width: 50%;
+  height: 30px; }
   .new-prdt-title .camp-title-left .bar-name {
-    height: 27px;
-    position: relative; }
+    height: 30px;
+    position: relative;
+    background-color: #c30016;
+    padding: 7px;
+    line-height: 24px;
+    color: #fff;
+    font-size: 14px; }
   .new-prdt-title .camp-title-left .bar-name:after {
-    border: 10px solid transparent;
-    border-left: 10px solid #f00;
+    border: 15px solid transparent;
+    border-left: 10px solid #c30016;
     width: 0;
     height: 0;
+    right: -25px;
+    top: 0;
     position: absolute;
     content: ' '; }
 .new-prdt-title .camp-title-right {
