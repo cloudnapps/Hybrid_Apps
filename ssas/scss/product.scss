@@ -1,0 +1,56 @@
+/* product-detail */
+.prdt-detail {
+  padding: 10px;
+
+  .prdt-name {
+    color: #4c4c4c;
+    font-weight: 300;
+    font-size: 14px;
+  }
+
+  .post-type {
+    color: #bd252c;
+    font-size: 14px;
+    padding-bottom: 2px;
+  }
+
+  .now-price {
+    color: #cf0013;
+    padding-right: 1em;
+    font-size: 20px;
+  }
+
+  .ori-price {
+    text-decoration: line-through;
+    color: #bd252c;
+
+    span {
+      color: #666;
+    }
+  }
+  .amount {
+    padding-top: 5px;
+    color: #4c4c4c;
+
+    label {
+      font-size: 10px;
+    }
+  }
+}
+
+.prdt-tax {
+  font-size: 14px;
+  color: #4c4c4c;
+  padding: 10px 10px 0;
+
+  .tax-pri {
+    padding-left: 10px;
+    color: #bd252c;
+  }
+}
+
+.prdt-std {
+  text-align: left;
+  font-size: 14px;
+  padding-left: 10px;
+}

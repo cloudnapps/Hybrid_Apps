@@ -7924,6 +7924,45 @@ a.button {
       height: 100%; }
 
 /* 商标显示 end */
+/* product-detail */
+.prdt-detail {
+  padding: 10px; }
+  .prdt-detail .prdt-name {
+    color: #4c4c4c;
+    font-weight: 300;
+    font-size: 14px; }
+  .prdt-detail .post-type {
+    color: #bd252c;
+    font-size: 14px;
+    padding-bottom: 2px; }
+  .prdt-detail .now-price {
+    color: #cf0013;
+    padding-right: 1em;
+    font-size: 20px; }
+  .prdt-detail .ori-price {
+    text-decoration: line-through;
+    color: #bd252c; }
+    .prdt-detail .ori-price span {
+      color: #666; }
+  .prdt-detail .amount {
+    padding-top: 5px;
+    color: #4c4c4c; }
+    .prdt-detail .amount label {
+      font-size: 10px; }
+
+.prdt-tax {
+  font-size: 14px;
+  color: #4c4c4c;
+  padding: 10px 10px 0; }
+  .prdt-tax .tax-pri {
+    padding-left: 10px;
+    color: #bd252c; }
+
+.prdt-std {
+  text-align: left;
+  font-size: 14px;
+  padding-left: 10px; }
+
 .cart .list:first-child {
   padding-top: 0; }
 .cart .seller.item label.checkbox, .cart .nature.item label.checkbox {
