@@ -1,6 +1,6 @@
 (function () {
   var home = angular.module('seller', [])
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider) {
       $stateProvider
         .state('tab.sellers', {
           url: '/sellers?keywords',
@@ -57,7 +57,7 @@
         };
         console.log($scope.filter);
       }
-      
+
       $scope.getSellers();
 
       $scope.loadMore = function () {
@@ -79,7 +79,7 @@
       };
 
 
-      
+
 
       /*
        //test plugin features

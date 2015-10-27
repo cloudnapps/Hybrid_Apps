@@ -328,7 +328,7 @@
       var getOpenId = function (code, callback) {
         var url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx169f5e5b9d07599c&secret=4045e23690ff1d4f4d2c950328326e71&grant_type=authorization_code';
         url = url + '&code=' + code;
-        
+
         var request = $http({
           method: "get",
           url: url
