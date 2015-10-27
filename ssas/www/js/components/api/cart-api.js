@@ -103,17 +103,19 @@ angular.module('components')
       };
 
       var checkout = function (cart, nature) {
-        var shipping, addr_id;
+        var shipping, addr_id, card_id;
         if(cart) {
           shipping = [];
           angular.forEach(cart.aSelCart, function (seller) {
             shipping.push({seller_id: seller.seller_info.seller_id, shipping_id: seller.def_shipping.id});
           });
           addr_id = (cart.def_addr || {}).addr_id;
+          card_id = (cart.def_cardlist || {}).card_id;
         }
         var data = {
           shipping: shipping,
           addr_id: addr_id,
+          card_id: card_id,
           member_id: userService.get('memberId'),
           nature: nature,
           token: userService.get('token')

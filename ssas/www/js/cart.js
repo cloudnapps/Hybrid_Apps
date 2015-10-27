@@ -47,6 +47,15 @@ angular.module('cart', ['components'])
         }
       }
     })
+    .state('tab.cart-idcard-change', {
+      url: '/idcardchange/:cardInfo',
+      views: {
+        'tab-cart': {
+          templateUrl: 'templates/member/idcard-add.html',
+          controller: 'IdCardAddCtrl'
+        }
+      }
+    })
     .state('tab.iframe', {
       url: '/iframe',
       views: {
