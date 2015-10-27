@@ -1,5 +1,20 @@
-<div class="button-bar">
-  <button class="button col-25" ng-click="tabStateGo(tabIndex.home, 'tab.seller_detail', {sellerId: product.seller_id})">{{'product_goto_shop' | translate}}</button>
-  <button class="button col-25" ng-click="addGoodsFavorite()">{{'good_fav' | translate}}</button>
-  <button class="button button-energized col-50" ng-click="addToCart()">{{'product_cart' | translate}}</button>
+<div class="row add-to-cart">
+  <div class="row">
+    <div class="col-50 small-button">
+      <div class="row">
+        <div class="col-33">
+          <button class="button" ng-click="addGoodsFavorite()">收藏</button>
+        </div>
+        <div class="col-33">
+          <button class="button" ng-click="tabStateGo(tabIndex.home, 'tab.seller_detail', {sellerId: product.seller_id})">进店</button>
+        </div>
+        <div class="col-33">
+          <button class="button" ng-click="tabStateGo(tabIndex.cart, 'tab-cart')">购物车</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-50">
+      <button class="button button-energized" ng-click="addToCart()">{{'product_cart' | translate}}</button>
+    </div>
+  </div>
 </div>
