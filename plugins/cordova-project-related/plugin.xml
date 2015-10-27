@@ -14,12 +14,14 @@
         <string name="app_name">好酷</string>
       </config-file>        
       
-        <source-file src="src/MapResource.bundle/0021" target-dir="assets/MapResource"></source-file>
-        <source-file src="src/MapResource.bundle/0452" target-dir="assets/MapResource"></source-file>
-        <source-file src="src/MapResource.bundle/0755" target-dir="assets/MapResource"></source-file>
-        <source-file src="src/MapResource.bundle/Cities.json" target-dir="assets/MapResource"></source-file>
-        <source-file src="src/MapResource.bundle/Licenses.json" target-dir="assets/MapResource"></source-file>
-        <source-file src="src/MapResource.bundle/RenderingScheme.json" target-dir="assets/MapResource"></source-file>
+      <source-file src="libs/android/android-support-v4.jar" target-dir="libs"></source-file>
+       <!--  
+       <source-file src="src/MapResource.bundle/0021" target-dir="assets/MapResource"></source-file>
+       <source-file src="src/MapResource.bundle/0452" target-dir="assets/MapResource"></source-file>
+       <source-file src="src/MapResource.bundle/0755" target-dir="assets/MapResource"></source-file>
+       <source-file src="src/MapResource.bundle/Cities.json" target-dir="assets/MapResource"></source-file>
+       <source-file src="src/MapResource.bundle/Licenses.json" target-dir="assets/MapResource"></source-file>
+       <source-file src="src/MapResource.bundle/RenderingScheme.json" target-dir="assets/MapResource"></source-file> -->
     </platform>
     
     <!-- ios -->
