@@ -61,11 +61,7 @@
     }
   ],
   "cordovaPlatforms": [
-    {
-      "platform": "ios",
-      "version": "",
-      "locator": "ios"
-    },
+    "ios",
     {
       "platform": "ios2",
       "version": "",
