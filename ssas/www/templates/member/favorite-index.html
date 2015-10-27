@@ -1,11 +1,18 @@
 <div class="bar bar-subheader">
-  <div class="button-bar">
-    <button class="button button-light" ng-click="switchFavorities('sellers')" style="font-size: 16px;">
-      {{'fav_sellers' | translate}}
-    </button>
-    <button class="button button-light" ng-click="switchFavorities('goods')" style="font-size: 16px;">
-      {{'fav_goods' | translate}}
-    </button>
+  <div class="row" style="padding: 0 0px;height: 40px;line-height: 40px;">
+    <div class="col col-50"
+         style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
+         ng-click="switchFavorities('sellers')">
+      <a class="" style="color: #333333;text-decoration: none;">{{'fav_sellers' | translate}}</a>
+    </div>
+    <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
+      |
+    </div>
+    <div class="col col-50"
+         style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
+         ng-click="switchFavorities('goods')">
+      <a class="" style="color: #333333;text-decoration: none;">{{'fav_goods' | translate}}</a>
+    </div>
   </div>
 </div>
 <ion-view view-title="{{'fav_title'|translate}}" hide-tabs="true">
