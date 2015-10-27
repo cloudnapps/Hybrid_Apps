@@ -148,10 +148,25 @@
       };
 
       $scope.logonByWechat = function () {
-        alert("wxLogon");
         var scope = "snsapi_userinfo";
         wechat.auth(scope, function (cb_success) {
-            alert(JSON.stringify(cb_success));
+            LoginApi.getOpenId(cb_success.code, function (result) {
+              LoginApi.loginByWechatId(result.openid, function (result) {
+                if (result.status === 1) {
+                  var alertPopup = $ionicPopup.alert({
+                    title: '登录失败',
+                    template: '账户名或者密码不正确'
+                  });
+                  alertPopup.then(function (res) {
+                    console.log(res);
+                  });
+                }
+                else {
+                  $scope.saveInfo(result);
+                }
+              })
+            })
+
           },
           function (cb_failure) {
             alert(cb_failure);
@@ -310,13 +325,40 @@
         sendRequest(url, data, callback);
       };
 
+      var getOpenId = function (code, callback) {
+        var url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx169f5e5b9d07599c&secret=4045e23690ff1d4f4d2c950328326e71&grant_type=authorization_code';
+        url = url + '&code=' + code;
+        
+        var request = $http({
+          method: "get",
+          url: url
+        });
+
+        request.success(
+          function (result) {
+            console.log(result);
+            callback(result);
+          }
+        );
+      };
+
+      var loginByWechatId = function (openId, callback) {
+        var url = apiEndpoint.url + '/passport-wx_login.html';
+        var data = {
+          wx_id: openId
+        };
+        sendRequest(url, data, callback);
+      };
+
       return {
         lostPasswd: lostPasswd,
         mobileValide: mobileValide,
         validateUser: validateUser,
         submitUser: submitUser,
         loginUser: loginUser,
-        sendCode: sendCode
+        sendCode: sendCode,
+        getOpenId: getOpenId,
+        loginByWechatId: loginByWechatId
       };
     })
 })();
