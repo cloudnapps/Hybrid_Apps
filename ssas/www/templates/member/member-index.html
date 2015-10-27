@@ -33,29 +33,28 @@
         <div class="col col-33 col-center" style="text-align: center;padding: 0;">
           <img ng-src="{{currentUser.image}}" style="height: 100px;width: 100px;border-radius: 50% 50%;">
         </div>
-        <div class="col col-67 col-center" style="padding: 0;font-size: 16px;color: #333333;margin: 46px 0 0 16px;">
+        <div class="col col-67 col-center" style="padding: 0;font-size: 16px;color: #333333;margin: 46px 0 0 14px;">
           <p>{{currentUser.mobile}}</p>
           <p>{{currentUser.lv_name}}</p>
         </div>
       </div>
-        <div class="row" style="padding: 0px;margin-top: 145px;
-    opacity: 0.7;">
-      <div class="col col-50 col-center" style="padding: 0px;background-color: #bd252c;    text-align: center;border-right: 1px solid #fff;">
-        <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;"
-           href="#/tab/favorites?type=goods">收藏的商品</a>
-      </div>
-      <div class="col col-50 col-center" style="padding: 0px;background-color: #bd252c;text-align: center;">
-        <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;"
-           href="#/tab/favorites?type=sellers">关注的店铺</a>
-      </div>
-    </div>  
+      <div class="row" style="padding: 0px;margin-top: 145px;opacity: 0.7;">
+        <div class="col col-50 col-center" style="padding: 0px;background-color: #bd252c;    text-align: center;border-right: 1px solid #fff;">
+          <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;"
+             href="#/tab/favorites?type=goods">收藏的商品</a>
+        </div>
+        <div class="col col-50 col-center" style="padding: 0px;background-color: #bd252c;text-align: center;">
+          <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;"
+             href="#/tab/favorites?type=sellers">关注的店铺</a>
+        </div>
+      </div>  
     </div>
 
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #a9a9a9;"/>
 
-    <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;">
+    <div class="row" style="padding: 0;height: 40px;line-height: 40px;">
       <div class="col col-20"
-           style="padding: 0;text-align: center;height: 40px;font-size: 16px;"
+           style="padding: 0;text-align: center;height: 40px;font-size: 14px;"
            ng-click="gotoOrder('nopay')">
         <a class="" style="color: #333333;text-decoration: none;">待付款</a>
       </div>
@@ -63,7 +62,7 @@
         |
       </div>
       <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
            ng-click="gotoOrder('noship')">
         <a class="" style="color: #333333;text-decoration: none;">待发货</a>
       </div>
@@ -71,7 +70,7 @@
         |
       </div>
       <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
            ng-click="gotoOrder('shipped')">
         <a class="" style="color: #333333;text-decoration: none;">待收货</a>
       </div>
@@ -79,7 +78,7 @@
         |
       </div>
       <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
            ng-click="gotoOrder('commenting')">
         <a class="" style="color: #333333;text-decoration: none;">待评论</a>
       </div>
@@ -87,7 +86,7 @@
         |
       </div>
       <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
+           style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
            ng-click="gotoPage('tab.feedbacks.returns')">
         <a class="" style="color: #333333;text-decoration: none;">售后</a>
       </div>
@@ -98,7 +97,7 @@
     <div class="row"
          style="padding: 0 20px;height: 40px;line-height: 40px;"
          ng-click="gotoOrder('all')">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 16px;">
+      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
         <a style="color: #333333;text-decoration: none;">全部订单</a>
       </div>
       <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
@@ -109,7 +108,7 @@
     <hr style="margin: 0;height:10px;border:none;border-top:10px solid #f1f1f1;"/>
 
     <div class="row" style="padding: 0 20px;height: 40px;line-height: 40px;" ng-click="gotoPage('tab.points')">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 16px;">
+      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
         <a style="color: #333333;text-decoration: none;">我的积分</a>
       </div>
       <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
@@ -120,7 +119,7 @@
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #f1f1f1;"/>
 
     <div class="row" style="padding: 0 20px;height: 40px;line-height: 40px;" ng-click="gotoPage('tab.golds')">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 16px;">
+      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
         <a style="color: #333333;text-decoration: none;">我的金币</a>
       </div>
       <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
@@ -131,7 +130,7 @@
     <hr style="margin: 0;height:10px;border:none;border-top:10px solid #f1f1f1;"/>
 
     <div class="row" style="padding: 0 20px;height: 40px;line-height: 40px;" ng-click="gotoPage('tab.receivers')">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 16px;">
+      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
         <a style="color: #333333;text-decoration: none;">收货地址管理</a>
       </div>
       <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
@@ -142,7 +141,7 @@
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #f1f1f1;"/>
 
     <div class="row" style="padding: 0 20px;height: 40px;line-height: 40px;" ng-click="gotoPage('tab.idcards')">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 16px;">
+      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
         <a style="color: #333333;text-decoration: none;">身份证管理</a>
       </div>
       <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
@@ -153,7 +152,7 @@
     <hr style="margin: 0;height:10px;border:none;border-top:10px solid #f1f1f1;"/>
 
     <div class="row" style="padding: 0 20px;height: 40px;line-height: 40px;">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 16px;">
+      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
         <a style="color: #333333;text-decoration: none;" href="#/tab/favorites?type=goods">我的收藏</a>
       </div>
       <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
