@@ -34,8 +34,7 @@
 
     [self.commandDelegate runInBackground:^{
         // check arguments
-        NSString* strJson = [command.arguments objectAtIndex:0];
-        NSDictionary *params = [self getObjectFromJSON:strJson];
+         NSDictionary* params = [command.arguments objectAtIndex:0];
          if (!params)
          {
              [self failWithCallbackID:self.currentCallbackId withMessage:@"参数格式错误"];
