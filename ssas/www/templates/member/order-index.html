@@ -96,6 +96,10 @@
             </button>
             <button class="button button-light"
                     style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
+                    ng-if="item.is_confirm" ng-click="confirmOrder(item)">确认收货
+            </button>
+            <button class="button button-light"
+                    style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
                     ng-if="item.pay_status_value" ng-click="cancelOrder(item)">取消订单
             </button>
             <button class="button button-light"

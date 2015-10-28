@@ -110,28 +110,19 @@
             取消订单
           </button>
         </div>
+        <div class="col col-50">
+          <button class="button button-full button-positive" style="font-size:16px;"
+                  ng-if="item.is_confirm" ng-click="confirmOrder(item)">
+            确认收货
+          </button>
+        </div>
+        <div class="col col-50">
+          <button class="button button-full button-positive" style="font-size:16px;"
+                  ng-if="item.is_rate" ng-click="commentOrder(item)">
+            去评论
+          </button>
+        </div>
       </div>
     </div>
-    <!--<div class="row" style="padding:10px;">
-
-      <div style="width: 100%;">
-        <button class="button button-energized"
-                style="font-size:12px;float:right;margin: 0 2px;min-height: 27px;line-height: 30px;padding: 0 18px;"
-                ng-if="item.pay_status_value" ng-click="payOrder(item)">去支付
-        </button>
-        <button class="button button-light"
-                style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
-                ng-if="item.is_rate" ng-click="commentOrder(item)">去评论
-        </button>
-        <button class="button button-light"
-                style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
-                ng-if="item.is_track" ng-click="trackOrder(item)">查看物流
-        </button>
-        <button class="button button-light"
-                style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
-                ng-if="item.pay_status_value" ng-click="cancelOrder(item)">取消订单
-        </button>
-      </div>
-    </div>-->
   </ion-content>
 </ion-view>

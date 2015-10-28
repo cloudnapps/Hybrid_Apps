@@ -123,7 +123,7 @@
         else if (type === 'commenting') {
           //待评价
           $scope.filter = {
-            ship_status: 1
+            comment_status: 0
           };
         }
 
@@ -168,6 +168,20 @@
             }
           ]
         });
+      };
+
+      $scope.confirmOrder = function (item) {
+        OrderApi.receiveOrder(item.order_id, function (result) {
+          if (result.status === 1) {
+            var alertPopup = $ionicPopup.alert({
+              title: '确认收货',
+              template: result.msg
+            });
+            alertPopup.then(function (res) {
+              console.log(res);
+            });
+          }
+        })
       };
 
       $scope.trackOrder = function (item) {
