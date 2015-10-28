@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home', 'shop', 'cart',
+var app = angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home', 'shop', 'cart',
   'member', 'order', 'receiver', 'favorite', 'return', 'setting', 'login', 'point', 'seller', 'complaint', 'ngIOS9UIWebViewPatch'])
   //For the real endpoint, we'd use this
   .run(function ($ionicPlatform, $translate, userService) {
