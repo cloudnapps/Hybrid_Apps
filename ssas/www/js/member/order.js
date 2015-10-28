@@ -208,7 +208,7 @@
           pay_app_id: payment.pay_app_id
         };
 
-        return orderApi.getPayInfo(order)
+        orderApi.getPayInfo(order)
           .then(function (response) {
             console.log(order, order.pay_app_id);
 
@@ -229,7 +229,7 @@
 
             return paymentApi.pay(response.data.data)
               .then(function (data) {
-                alert(data);
+                console.log(data);
               }, function (err) {
                 $ionicPopup.alert({
                   title: '支付失败',
@@ -238,6 +238,8 @@
                 return $q.reject();
               });
           });
+
+        $ionicLoading.hide();
       };
     })
 

@@ -62,7 +62,7 @@
 
       $scope.loadMore = function () {
         $scope.page++;
-        $scope.getFavorities();
+        $scope.getSellers();
       };
 
       $scope.goDetail = function (item) {
@@ -77,9 +77,6 @@
         $scope.init();
         $scope.getSellers();
       };
-
-
-
 
       /*
        //test plugin features
@@ -192,12 +189,26 @@
 
     .controller('SellerDetailController', function ($scope, $stateParams, $timeout, $ionicSlideBoxDelegate,
                                                     SellerApi, shopApi, FavoriteApi, userService, toastService) {
-      $scope.products = [];
-      $scope.allProducts = [];
-      $scope.page = 1;
-      $scope.hasMore = false;
-      $scope.productType = 1;
-      $scope.sellerId = $stateParams.sellerId;
+      $scope.init = function() {
+        $scope.products = [];
+        $scope.allProducts = [];
+        $scope.page = 1;
+        $scope.hasMore = false;
+        $scope.productType = 1;
+        $scope.sellerId = $stateParams.sellerId;
+        $scope.item = {};
+        $scope.item.title = '商户详情';
+      };
+
+      $scope.getSeller = function(){
+        SellerApi.getSellerDetail($scope.sellerId, function (result) {
+          $scope.item = result.data;
+          $scope.item.title = $scope.item.once.name;
+
+          $scope.getProducts();
+          $scope.showAdvertise();
+        });
+      };
 
       $scope.getProducts = function () {
         var query = {
@@ -265,11 +276,9 @@
         $scope.products = $scope.item.fourth;
       };
 
-      SellerApi.getSellerDetail($scope.sellerId, function (result) {
-        $scope.item = result.data;
-
-        $scope.getProducts();
-        $scope.showAdvertise();
+      $scope.$on('$ionicView.beforeEnter', function(){
+        $scope.init();
+        $scope.getSeller();
       });
     })
 

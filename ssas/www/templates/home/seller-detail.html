@@ -1,4 +1,4 @@
-<ion-view view-title="{{'seller_detail'|translate}}" hide-tabs="true">
+<ion-view view-title="{{item.title}}" hide-tabs="true">
   <ion-content>
     <div class="row seller-header" style="padding: 0;background-image: url('img/seller-index.jpg');">
       <div class="row" style="padding: 0;position: absolute;top: 90px;left:10px;">
@@ -7,10 +7,13 @@
           <!-- <span style="width:4em;margin-left: 5px;word-break: break-all;top: 20px;left: 77px;">{{item.once.name}}</span> -->
         </div>
         <div class="col col-33 col-center" style="padding: 0;">
-          <button class="button button-assertive" style="min-width: 90px;min-height: 33px;line-height: 33px;" ng-click="addFavorite()">收藏店铺</button>
+          <button class="button button-assertive" style="min-width: 90px;min-height: 33px;line-height: 33px;"
+                  ng-click="addFavorite()">收藏店铺
+          </button>
         </div>
         <div class="col col-33 col-center" style="padding: 0;">
-          <button class="button button-assertive" style="min-width: 90px;min-height: 33px;line-height: 33px;">带我去</button>
+          <button class="button button-assertive" style="min-width: 90px;min-height: 33px;line-height: 33px;">带我去
+          </button>
         </div>
       </div>
     </div>
@@ -41,8 +44,10 @@
 
           <div class="col col-50 col-center pad-5" ng-if="$index+1 < products.length">
             <div class="new-prdt">
-              <a ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: floor.product_info[$index+1].product_id})">
+              <a
+                ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: floor.product_info[$index+1].product_id})">
                 <img ng-src="{{products[$index+1].image}}">
+
                 <div class="prdt-descb">{{products[$index+1].name}}</div>
               </a>
             </div>

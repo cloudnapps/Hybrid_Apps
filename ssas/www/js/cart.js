@@ -240,7 +240,7 @@ angular.module('cart', ['components'])
 
         return paymentApi.pay(response.data.data)
         .then(function (data) {
-          alert(data);
+          console.log(data);
           $state.go('tab.order-payed');
         }, function (err) {
           $ionicPopup.alert({

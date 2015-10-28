@@ -9,7 +9,7 @@ angular.module('components')
         var paymentString = JSON.stringify(payObj);
 
         alipay.payment(payObj, function (cb_success) {
-            alert(cb_success);
+            //alert(cb_success);
             deferred.resolve(cb_success);
           },
           function (cb_failure) {
@@ -32,7 +32,7 @@ angular.module('components')
         var paymentString = JSON.stringify(payObj);
 
         wxpay.payment(payObj, function (cb_success) {
-            alert(cb_success);
+            //alert(cb_success);
             deferred.resolve(cb_success);
           },
           function (cb_failure) {
