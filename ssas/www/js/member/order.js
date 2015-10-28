@@ -281,8 +281,8 @@
       OrderApi.getMemberRate($stateParams.orderId, function (result) {
         if (result.status === 0) {
           $scope.item = result.data;
-          $scope.order_id = $stateParams.orderId;
-          $scope.seller_id = $scope.item[0].id;
+          $scope.commentInfo.order_id = $stateParams.orderId;
+          $scope.commentInfo.seller_id = $scope.item[0].id;
           for (var i = 1; i < $scope.item.length; i++) {
             $scope.commentInfo.comment.push({
               product_id: $scope.item[i].product_id,
@@ -294,7 +294,7 @@
             })
           }
 
-          for (var j = 1; j < $scope.item[0].rate.length; j++) {
+          for (var j = 0; j < $scope.item[0].rate.length; j++) {
             $scope.commentInfo.seller_point.push({
               type_id: $scope.item[0].rate[j].type_id,
               value: '5'
@@ -303,12 +303,16 @@
         }
       });
 
-      $scope.setGoodComment = function(type) {
-
-      };
-
-      $scope.setSellerComment = function(value) {
-
+      $scope.submitRequest = function () {
+        OrderApi.getMemberRate($scope.commentInfo, function (result) {
+          var alertPopup = $ionicPopup.alert({
+            title: '确认收货',
+            template: result.msg
+          });
+          alertPopup.then(function (res) {
+            console.log(res);
+          });
+        })
       };
     })
 
@@ -486,15 +490,12 @@
         sendRequest(url, data, callback);
       };
 
-      var saveMemberRate = function (orderId, callback) {
+      var saveMemberRate = function (commentInfo, callback) {
         var url = apiEndpoint.url + '/member-save_rate.html';
-        var data = {
-          member_id: userService.get('memberId'),
-          token: userService.get('token'),
-          order_id: orderId
-        };
+        commentInfo.member_id = userService.get('memberId');
+        commentInfo.token = userService.get('token');
 
-        sendRequest(url, data, callback);
+        sendRequest(url, commentInfo, callback);
       };
 
       var getOrderTrack = function (orderId, callback) {
