@@ -1,41 +1,37 @@
 <div class="bar bar-subheader">
   <div class="row" style="padding: 0 0px;height: 40px;line-height: 40px;">
     <div class="col col-20"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
-         ng-click="switchOrder('all')">
-      <a class="" style="color: #333333;text-decoration: none;">全部</a>
+         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;" ng-click="switchOrder('all')" ng-class="{'switch-order':orderState === 1}">
+      <a class="">全部</a>
     </div>
     <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
       |
     </div>
     <div class="col col-20"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
-         ng-click="switchOrder('nopay')">
-      <a class="" style="color: #333333;text-decoration: none;">待付款</a>
+         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
+         ng-click="switchOrder('nopay')" ng-class="{'switch-order':orderState === 2}">
+      <a class="">待付款</a>
     </div>
     <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
       |
     </div>
     <div class="col col-20"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
-         ng-click="switchOrder('noship')">
-      <a class="" style="color: #333333;text-decoration: none;">待发货</a>
+         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;" ng-click="switchOrder('noship')" ng-class="{'switch-order':orderState === 3}">
+      <a class="">待发货</a>
     </div>
     <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
       |
     </div>
     <div class="col col-20"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
-         ng-click="switchOrder('shipped')">
-      <a class="" style="color: #333333;text-decoration: none;">待收货</a>
+         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;" ng-click="switchOrder('shipped')" ng-class="{'switch-order':orderState === 4}">
+      <a class="">待收货</a>
     </div>
     <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
       |
     </div>
     <div class="col col-20"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
-         ng-click="switchOrder('commenting')">
-      <a class="" style="color: #333333;text-decoration: none;">待评论</a>
+         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;" ng-click="switchOrder('commenting')" ng-class="{'switch-order':orderState === 5}">
+      <a class="">待评论</a>
     </div>
   </div>
 </div>

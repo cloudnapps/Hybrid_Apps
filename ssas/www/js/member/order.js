@@ -79,6 +79,7 @@
         $scope.page = 1;
         $scope.hasMore = false;
         $scope.filter = {};
+        $scope.orderState = 1;
       };
 
       $scope.getOrders = function () {
@@ -100,28 +101,33 @@
 
         if (type === 'all') {
           //全部
+          $scope.orderState = 1;
           $scope.filter = {};
         }
         else if (type === 'nopay') {
           //待付款
+          $scope.orderState = 2;
           $scope.filter = {
             pay_status: 0
           };
         }
         else if (type === 'noship') {
           //待发货
+          $scope.orderState = 3;
           $scope.filter = {
             ship_status: 0
           };
         }
         else if (type === 'shipped') {
           //待收货
+          $scope.orderState = 4;
           $scope.filter = {
             ship_status: 1
           };
         }
         else if (type === 'commenting') {
           //待评价
+          $scope.orderState = 5;
           $scope.filter = {
             comment_status: 0
           };
