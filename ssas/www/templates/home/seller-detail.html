@@ -14,15 +14,15 @@
         </div>
       </div>
     </div>
-    <div class="row seller-nav" style="padding: 0;">
+    <div class="row seller-nav" style="padding: 0;margin: 0;">
       <div class="col col-33 col-center sel-top" style="padding: 0;">
-        <a ng-click="showAdvertise()"><span style="color: #e42112;">商品展示</span></a>
+        <a ng-click="showAdvertise()"><span ng-class="{'selt': productType === 1}">商品展示</span></a>
       </div>
       <div class="col col-33 col-center sel-top" style="padding: 0px;">
-        <a ng-click="showRecommend()"><span>热门促销</span></a>
+        <a ng-click="showRecommend()"><span ng-class="{'selt': productType === 2}">热门促销</span></a>
       </div>
       <div class="col col-33 col-center sel-top" style="padding: 0px;">
-        <a ng-click="showItem()"><span>热门商品</span></a>
+        <a ng-click="showItem()"><span ng-class="{'selt': productType === 3}">热门商品</span></a>
       </div>
     </div>
     <div>

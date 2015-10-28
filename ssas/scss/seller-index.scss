@@ -27,13 +27,21 @@
 
     a {
       color: #333333;
+      display: block;
+      padding: 10px 0;
       text-decoration: none;
-      padding: 0 14px;
-      border-right: 1px solid #e5e5e5;
+
+      span {
+        display: block;
+        line-height: 20px;
+        border-right: 1px solid #e5e5e5;
+      }
+      .selt {
+        color: #e42112;
+      }
     }
   }
   .sel-top:last-child a {
-      padding: 0;
-      border-right: none;
+    border-right: none;
   }
 }
