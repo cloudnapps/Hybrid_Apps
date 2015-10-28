@@ -1,5 +1,5 @@
 angular.module('cart', ['components'])
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider) {
   $stateProvider
     .state('tab.cart', {
       url: '/cart',
@@ -204,7 +204,7 @@ angular.module('cart', ['components'])
   $scope.cart = $rootScope.confirmedCart;
   delete $rootScope.confirmedCart;
 
-  $scope.pay = function (payment) {
+  $scope.pay = function (/*payment*/) {
     $ionicLoading.show();
     cartApi.createOrder($scope.cart)
     .then(function (response){

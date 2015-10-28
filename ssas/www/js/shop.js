@@ -2,7 +2,7 @@
   'use strict';
   var shop = angular.module('shop', ['components', 'seller']);
 
-  shop.config(function ($stateProvider, $urlRouterProvider) {
+  shop.config(function ($stateProvider) {
     $stateProvider
       // 商品分类
       .state('tab.categories', {
@@ -88,7 +88,7 @@
     // })
   });
 
-  shop.controller('CategoryController', function ($scope, $state, shopApi, toastService) {
+  shop.controller('CategoryController', function ($scope, $state, shopApi) {
       $scope.categoryObj = {};
       $scope.categories = [];
       $scope.subCategories = [];
@@ -247,7 +247,7 @@
     };
 
     $scope.setPropIndex = function(propIndex){
-      if(propIndex == $scope.propIndex) {
+      if(propIndex === $scope.propIndex) {
         return ($scope.propIndex = '');
       }
       $scope.propIndex = propIndex;
@@ -319,7 +319,7 @@
    */
   .controller('ProductDetailController',
               ['$scope', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading','shopApi',  'cartApi', '$state', 'tabStateService',
-    function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading,shopApi, cartApi, $state){
+    function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading,shopApi, cartApi){
 
       $scope.productId = $stateParams.productId;
       $scope.product = {};
@@ -353,7 +353,7 @@
         });
       }
 
-      function getProductGoodsSpec(productId, isSpecState){
+      function getProductGoodsSpec(productId /*, isSpecState*/){
         $ionicLoading.show();
         shopApi
           .getProductGoodsSpec(productId)
@@ -433,8 +433,8 @@
 
       var getGallery = function(data){
         var request = $http({
-            method: "post",
-            url: apiEndpoint.url + "/gallery.html",
+            method: 'post',
+            url: apiEndpoint.url + '/gallery.html',
             transformRequest: transformRequestAsFormPost,
             data: data,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -448,7 +448,7 @@
 
       var getCategories = function(data) {
         var request = $http({
-          method: "post",
+          method: 'post',
           url: apiEndpoint.url + '/gallery-cat_list.html',
           transformRequest: transformRequestAsFormPost,
           data: data,
@@ -461,9 +461,9 @@
       };
 
       var getProduct = function(productId) {
-        var data = {"product_id": productId};
+        var data = {'product_id': productId};
         var request = $http({
-          method: "post",
+          method: 'post',
           url: apiEndpoint.url + '/product.html',
           transformRequest: transformRequestAsFormPost,
           data: data,
@@ -474,7 +474,7 @@
       };
 
       var getProductGoodsSpec = function(productId) {
-        var data = {"product_id": productId};
+        var data = {'product_id': productId};
         var request = $http({
           method: 'post',
           url: apiEndpoint.url + '/product-goods_spec.html',
@@ -487,7 +487,7 @@
       };
 
       var getGalleryFilter = function(catId){
-        var data = {"cat_id": catId};
+        var data = {'cat_id': catId};
         var request = $http({
           method: 'post',
           url: apiEndpoint.url + '/gallery-filter.html',
@@ -500,7 +500,7 @@
       };
 
       var getProductComment = function(goods_id, page){
-        var data = {"goods_id": goods_id, page: page || 1};
+        var data = {'goods_id': goods_id, page: page || 1};
         var request = $http({
           method: 'post',
           url: apiEndpoint.url + '/product-comment.html',
@@ -513,7 +513,7 @@
       };
 
       var getProductIntro = function(goods_id){
-        var data = {"goods_id": goods_id};
+        var data = {'goods_id': goods_id};
         var request = $http({
           method: 'post',
           url: apiEndpoint.url + '/product-intro.html',
@@ -525,7 +525,7 @@
       };
 
       var getProductIdByBarcode = function(barcode) {
-        var data = {"value":barcode};
+        var data = {'value':barcode};
         var request = $http({
           method: 'post',
           url: apiEndpoint.url + '/product-get_productId.html',

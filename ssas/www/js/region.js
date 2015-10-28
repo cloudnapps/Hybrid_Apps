@@ -6,7 +6,7 @@
 
       var sendRequest = function (url, data, callback) {
         var request = $http({
-          method: "post",
+          method: 'post',
           url: url,
           transformRequest: transformRequestAsFormPost,
           data: data,

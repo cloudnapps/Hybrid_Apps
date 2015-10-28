@@ -104,7 +104,7 @@
           alertPopup.then(function (res) {
             console.log(res);
           });
-        })
+        });
       };
 
       $scope.checkUser = function () {
@@ -116,7 +116,7 @@
           alertPopup.then(function (res) {
             console.log(res);
           });
-        })
+        });
       };
 
       $scope.submitUser = function () {
@@ -144,11 +144,11 @@
             else {
               $scope.saveInfo(result);
             }
-          })
+          });
       };
 
       $scope.logonByWechat = function () {
-        var scope = "snsapi_userinfo";
+        var scope = 'snsapi_userinfo';
         wechat.auth(scope, function (cb_success) {
             LoginApi.getOpenId(cb_success.code, function (result) {
               LoginApi.loginByWechatId(result.openid, function (result) {
@@ -164,9 +164,8 @@
                 else {
                   $scope.saveInfo(result);
                 }
-              })
-            })
-
+              });
+            });
           },
           function (cb_failure) {
             alert(cb_failure);
@@ -240,7 +239,7 @@
 
       var sendRequest = function (url, data, callback) {
         var request = $http({
-          method: "post",
+          method: 'post',
           url: url,
           transformRequest: transformRequestAsFormPost,
           data: data,
@@ -330,7 +329,7 @@
         url = url + '&code=' + code;
 
         var request = $http({
-          method: "get",
+          method: 'get',
           url: url
         });
 
@@ -360,5 +359,5 @@
         getOpenId: getOpenId,
         loginByWechatId: loginByWechatId
       };
-    })
+    });
 })();

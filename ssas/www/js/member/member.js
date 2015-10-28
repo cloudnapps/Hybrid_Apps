@@ -28,7 +28,7 @@
         else {
           SettingApi.getMemberSetting(function(result){
             $scope.currentUser = result.data;
-          })
+          });
         }
       });
 
@@ -70,6 +70,6 @@
         userService.logOut();
         $scope.closePopover();
         $scope.tabStateGo($scope.tabIndex.home, 'tab.home');
-      }
+      };
     });
 })();

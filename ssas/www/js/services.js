@@ -1,8 +1,8 @@
 angular.module('starter.services', [])
-  .factory("transformRequestAsFormPost", function () {
+  .factory('transformRequestAsFormPost', function () {
     function transformRequest(data, getHeaders) {
       var headers = getHeaders();
-      headers["Content-type"] = "application/x-www-form-urlencoded; charset=utf-8";
+      headers['Content-type'] = 'application/x-www-form-urlencoded; charset=utf-8';
 
       return ( serializeData(data) );
     }
@@ -10,9 +10,9 @@ angular.module('starter.services', [])
     return ( transformRequest );
 
     function serializeData(data) {
-      var source = "";
+      var source = '';
       if (!angular.isObject(data)) {
-        source = ( data == null ) ? "" : data.toString();
+        source = ( data === null || data === undefined ) ? '' : data.toString();
       }
       else {
         var buffer = [];
@@ -29,22 +29,22 @@ angular.module('starter.services', [])
 
             buffer.push(
               encodeURIComponent(name) +
-              "=" +
+              '=' +
               value);
           }
           else {
             buffer.push(
               encodeURIComponent(name) +
-              "=" +
-              (( value == null ) ? "" : value)
+              '=' +
+              (( value === null || value === undefined ) ? '' : value)
             );
           }
         }
 
-        source = buffer.join("&").replace(/%20/g, "+");
+        source = buffer.join('&').replace(/%20/g, '+');
       }
 
-      var result = ((source === "") ? "sign=" : "&sign=") + md5(source).substring(0, 16);
+      var result = ((source === '') ? 'sign=' : '&sign=') + md5(source).substring(0, 16);
 
       return ( source + result );
     }
@@ -78,10 +78,10 @@ angular.module('starter.services', [])
     };
 
     this.getMember = function () {
-      return data = {
+      return {
         member_id: currentUser.memberId,
         token: currentUser.token
-      }
+      };
     };
 
     // 从localStorage获取 currentUser对象, 用于app退出重新进入时

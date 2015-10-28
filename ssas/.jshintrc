@@ -45,7 +45,7 @@
     "-W100"         : true,
 
     "quotmark"      : "single",
-    "unused"        : false,
+    "unused"        : true,
     "strict"        : false,
     "latedef"       : "nofunc",
     "predef": [
@@ -59,6 +59,9 @@
         "translations_en",
         "translations_zh",
         "alipay",
-        "wxpay"
+        "wxpay",
+        "wechat",
+        "localStorage",
+        "appendByCamera"
     ]
 }

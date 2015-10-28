@@ -18,7 +18,7 @@ angular
             return;
           }
           FavoriteApi
-            .addGoodsFavorite([$scope.product.goods_id], function(data, errReason) {
+            .addGoodsFavorite([$scope.product.goods_id], function(data) {
               if (data) {
                 return toastService.setToast(data.msg);
               }
@@ -34,7 +34,7 @@ angular
             .then(function(data) {
               toastService.setToast(data && data.data && data.data.msg || '');
             })
-            .catch(function(e) {
+            .catch(function() {
               toastService.setToast('添加失败');
             });
         };
@@ -45,12 +45,12 @@ angular
           }
           cartApi
             .addToCart($scope.product)
-            .then(function(data) {
+            .then(function() {
               $scope.tabStateGo($scope.tabIndex.cart, 'tab.cart');
             })
-            .catch(function(e) {
+            .catch(function() {
             });
-        }
+        };
 
         function isLogin(){
           if(!userService.isLogin()) {

@@ -37,7 +37,7 @@
         });
     })
 
-    .controller('ComplaintRequestCtrl', function ($scope, $stateParams, $state, ComplaintApi) {
+    .controller('ComplaintRequestCtrl', function ($scope, $stateParams, $state, ReturnApi) {
       $scope.complaintInfo = {};
 
       ReturnApi.getReturnIndex($stateParams.orderId, function (result) {
@@ -77,10 +77,10 @@
           $scope.returnInfo.title, $scope.returnInfo.content, $scope.returnInfo.products,
           function (result) {
             if (result.status === 0) {
-              $state.go("return_list", {}, {reload: true});
+              $state.go('return_list', {}, {reload: true});
             }
           });
-      }
+      };
     })
 
     .controller('ComplaintListCtrl', function ($scope, $state, ComplaintApi) {
@@ -91,12 +91,12 @@
       });
 
       $scope.goDetail = function (item) {
-        $state.go('tab.feedbacks.complaint_detail', {oId: item.oid}, {reload: true})
+        $state.go('tab.feedbacks.complaint_detail', {oId: item.oid}, {reload: true});
       };
 
       $scope.request = function () {
-        $state.go('tab.complaint_orders', {}, {reload: true})
-      }
+        $state.go('tab.complaint_orders', {}, {reload: true});
+      };
     })
 
     .controller('ComplaintDetailCtrl', function ($scope, $stateParams, ComplaintApi) {
@@ -110,7 +110,7 @@
     .factory('ComplaintApi', function ($http, apiEndpoint, userService, transformRequestAsFormPost) {
       var sendRequest = function (url, data, callback) {
         var request = $http({
-          method: "post",
+          method: 'post',
           url: url,
           transformRequest: transformRequestAsFormPost,
           data: data,

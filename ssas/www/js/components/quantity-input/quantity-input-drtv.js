@@ -1,5 +1,5 @@
 angular.module('components')
-  .directive('quantityInput', function($rootScope) {
+  .directive('quantityInput', function() {
     return {
       restrict: 'EA',
       templateUrl: 'templates/components/quantity-input.tpl.html',

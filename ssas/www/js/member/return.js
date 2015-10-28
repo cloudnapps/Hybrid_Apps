@@ -95,10 +95,10 @@
           $scope.returnInfo.title, $scope.returnInfo.content, $scope.returnInfo.products,
           function (result) {
             if (result.status === 0) {
-              $state.go("return_list", {}, {reload: true});
+              $state.go('return_list', {}, {reload: true});
             }
           });
-      }
+      };
     })
 
     .controller('ReturnListCtrl', function ($scope, $state, ReturnApi) {
@@ -109,12 +109,12 @@
       });
 
       $scope.goDetail = function (item) {
-        $state.go('tab.feedbacks.return_detail', {returnId: item.return_id}, {reload: true})
+        $state.go('tab.feedbacks.return_detail', {returnId: item.return_id}, {reload: true});
       };
 
       $scope.request = function () {
-        $state.go('tab.return_orders', {}, {reload: true})
-      }
+        $state.go('tab.return_orders', {}, {reload: true});
+      };
     })
 
     .controller('ReturnDetailCtrl', function ($scope, $stateParams, ReturnApi) {
@@ -128,7 +128,7 @@
     .factory('ReturnApi', function ($http, apiEndpoint, userService, transformRequestAsFormPost) {
       var sendRequest = function (url, data, callback) {
         var request = $http({
-          method: "post",
+          method: 'post',
           url: url,
           transformRequest: transformRequestAsFormPost,
           data: data,

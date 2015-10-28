@@ -1,4 +1,4 @@
-angular.module("starter")
+angular.module('starter')
 	.factory('barcode', 
 	function($rootScope, shopApi, toastService, tabStateService){
 		
@@ -10,19 +10,18 @@ angular.module("starter")
 		 * scan barcode and show product detail
 		 */
 		 function scan() {
-		 	if (isScanning) {return};
+		 	if (isScanning) {return;}
 		 	isScanning = true;
 
 		 	cordova.plugins.barcodeScanner.scan(
 		 		function (result) {		 			
-		 			if (!result.cancelled
-		 				&& result.text !== undefined && result.text !== null) {
+		 			if (!result.cancelled && result.text !== undefined && result.text !== null) {
 		 				shopApi.getProductIdByBarcode(result.text).success(
 		 					function(response){
 		 						var result = response.data;
 		 						var status = response.status;
 		 						if (status === 0) {
-		 							var productId = result["product_id"];
+		 							var productId = result.product_id;
 		 							if (productId !== undefined) {
 		 								tabStateService.go(tabStateService.tabIndex.shop, 'tab.product', {productId: productId});
 		 							}
@@ -36,7 +35,7 @@ angular.module("starter")
             	}// end of if
             	isScanning = false;
           }, // end of scan success
-          function (error) {
+          function () {
           	
           	toastService.setToast('扫码失败');
 
@@ -47,8 +46,8 @@ angular.module("starter")
 
 		 $rootScope.barcodeScan = scan;
 
-		 return {
-		 	scan: scan			
-		 }
+		  return {
+		 	  scan: scan			
+		  };
 		}		
 	); // end of barcode factory

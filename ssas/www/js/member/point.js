@@ -66,15 +66,16 @@
       });
 
       $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActive)
+        if ($scope.isActive){
           $scope.loadMore();
+        }
       });
 
       $scope.loadMore();
 
       $scope.showHistory = function () {
         $scope.pointInfo.isShow = !$scope.pointInfo.isShow;
-      }
+      };
     })
     .controller('GoldsCtrl', function ($scope, PointApi) {
       $scope.goldInfo = {};
@@ -115,20 +116,21 @@
       });
 
       $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActive)
+        if ($scope.isActive){
           $scope.loadMore();
+        }
       });
 
       $scope.loadMore();
 
       $scope.showHistory = function () {
         $scope.goldInfo.isShow = !$scope.goldInfo.isShow;
-      }
+      };
     })
     .factory('PointApi', function ($http, apiEndpoint, userService, transformRequestAsFormPost) {
       var sendRequest = function (url, data, callback) {
         var request = $http({
-          method: "post",
+          method: 'post',
           url: url,
           transformRequest: transformRequestAsFormPost,
           data: data,
@@ -158,7 +160,7 @@
 
       var addGold = function (value, reason, callback) {
         var url = apiEndpoint.url + '/member-add_gold.html';
-        var data = init();
+        var data = {};//init();
 
         data.add_value = value;
         data.reason = reason;

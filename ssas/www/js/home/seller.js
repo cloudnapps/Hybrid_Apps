@@ -1,5 +1,5 @@
 (function () {
-  var home = angular.module('seller', [])
+  angular.module('seller', [])
     .config(function ($stateProvider) {
       $stateProvider
         .state('tab.sellers', {
@@ -20,7 +20,7 @@
               controller: 'SellerDetailController'
             }
           }
-        })
+        });
     }) // end of config
 
     .controller('SellerListController', function ($scope, $state, $stateParams, $cordovaInAppBrowser, $cordovaBarcodeScanner, SellerApi) {
@@ -66,7 +66,7 @@
       };
 
       $scope.goDetail = function (item) {
-        $state.go("tab.seller_detail", {sellerId: item.seller_id}, {reload: true});
+        $state.go('tab.seller_detail', {sellerId: item.seller_id}, {reload: true});
       };
 
       $scope.search = function () {
@@ -253,7 +253,7 @@
           return;
         }
 
-        FavoriteApi.addSellerFavorite($scope.sellerId, function (data, errReason) {
+        FavoriteApi.addSellerFavorite($scope.sellerId, function (data) {
           if (data) {
             return toastService.setToast(data.msg);
           }
@@ -287,7 +287,7 @@
 
       var sendRequest = function (url, data, callback) {
         var request = $http({
-          method: "post",
+          method: 'post',
           url: url,
           transformRequest: transformRequestAsFormPost,
           data: data,
@@ -334,6 +334,6 @@
       return {
         getSellerList: getSellerList,
         getSellerDetail: getSellerDetail
-      }
-    })
+      };
+    });
 })();

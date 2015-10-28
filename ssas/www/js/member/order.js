@@ -140,7 +140,7 @@
       };
 
       $scope.viewDetail = function (item) {
-        $state.go("tab.order_detail", {orderId: item.order_id}, {reload: true});
+        $state.go('tab.order_detail', {orderId: item.order_id}, {reload: true});
       };
 
       $scope.cancelOrder = function (item) {
@@ -152,7 +152,7 @@
             {
               text: '<b>确定</b>',
               type: 'button-positive',
-              onTap: function (e) {
+              onTap: function () {
                 OrderApi.deleteOrder(item.order_id, function (result) {
                   if (result.status === 1) {
                     var alertPopup = $ionicPopup.alert({
@@ -163,11 +163,13 @@
                       console.log(res);
                     });
                   }
-                })
+                });
               }
             }
           ]
         });
+
+        console.log(myPopup);
       };
 
       $scope.confirmOrder = function (item) {
@@ -181,11 +183,11 @@
               console.log(res);
             });
           }
-        })
+        });
       };
 
       $scope.trackOrder = function (item) {
-        $state.go("tab.order_track", {orderId: item.order_id}, {reload: true});
+        $state.go('tab.order_track', {orderId: item.order_id}, {reload: true});
       };
 
       $scope.payOrder = function (item) {
@@ -203,7 +205,7 @@
       });
     })
 
-    .controller('OrderPayCtrl', function ($scope, $stateParams, $ionicLoading, $ionicPopup,
+    .controller('OrderPayCtrl', function ($scope, $stateParams, $rootScope, $ionicLoading, $ionicPopup,
                                           $q, orderApi, OrderApi, paymentApi) {
       $scope.cart = {};
       $scope.orderId = $stateParams.orderId;
@@ -311,8 +313,9 @@
       });
 
       $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActive)
+        if ($scope.isActive){
           $scope.loadMore();
+        }
       });
 
       $scope.requestReturn = function (item) {
@@ -358,8 +361,9 @@
       });
 
       $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActive)
+        if ($scope.isActive){
           $scope.loadMore();
+        }
       });
 
       $scope.requestComplaint = function (item) {
@@ -370,7 +374,7 @@
     .factory('OrderApi', function ($http, apiEndpoint, transformRequestAsFormPost, userService) {
       var sendRequest = function (url, data, callback) {
         var request = $http({
-          method: "post",
+          method: 'post',
           url: url,
           transformRequest: transformRequestAsFormPost,
           data: data,

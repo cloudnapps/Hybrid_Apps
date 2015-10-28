@@ -115,6 +115,7 @@ var config = {
   userJs: {
     src: [
       '**/*.js',
+      '!i18n/**/*.js',
       '!lib/**/*',
       '!dist/**/*'
     ],
@@ -225,6 +226,17 @@ gulp.task('injectHtmlProd', ['htmljs', 'userJsProd', 'sassProd', 'copyFonts'], f
     .pipe(inject(
       series(
         gulp
+          .src([
+            'www/i18n/**/*.js',
+          ])
+          .pipe(concat('i18n.js'))
+          .pipe(uglify({
+            compress: {
+              drop_console: true
+            }
+          }))
+          .pipe(gulp.dest('www/dist')),
+        gulp
         .src([
           'www/dist/css/**/*.min.css'
         ]),
@@ -277,10 +289,10 @@ gulp.task('copyFonts', function() {
 
 gulp.task('userJsDev', function() {
   return gulp.src(config.userJs.src, config.userJs.opt)
-    // .pipe(cached('js')) // 只传递更改过的文件
-    // .pipe(jshint('.jshintrc'))
-    // .pipe(myReporter()) // 对这些更改过的文件做一些特殊的处理...
-    // .pipe(remember('js')) // 把所有的文件放回 stream
+    .pipe(cached('js')) // 只传递更改过的文件
+    .pipe(jshint('.jshintrc'))
+    .pipe(myReporter()) // 对这些更改过的文件做一些特殊的处理...
+    .pipe(remember('js')) // 把所有的文件放回 stream
     .pipe(gulp.dest(config.userJs.dest))
 });
 
@@ -294,6 +306,12 @@ gulp.task('injectHtmlDev', ['userJsDev', 'htmljs', 'sassDev'], function() {
           'www/css/style.css',
           'www/css/toast.css'
         ]),
+        gulp
+          .src([
+            'www/i18n/**/*.js',
+          ])
+          .pipe(concat('i18n.js'))
+          .pipe(gulp.dest('www/dist')),
         // lib 在前, 其它js在后
         gulp
         .src(config.libJs.src, config.libJs.opt)
@@ -302,6 +320,7 @@ gulp.task('injectHtmlDev', ['userJsDev', 'htmljs', 'sassDev'], function() {
         // 其它js在后
         gulp.src([
           'www/dist/**/*.js',
+          '!www/dist/i18n.js',
           '!www/dist/lib/**/*.js',
           '!www/dist/lib.js'
         ])

@@ -1,5 +1,5 @@
 (function () {
-  var home = angular.module('home', ['seller', 'point'])
+  angular.module('home', ['seller', 'point'])
     .config(function ($stateProvider) {
       $stateProvider
         .state('tab.home', {
@@ -42,7 +42,7 @@
 
     .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate,
                                             $state, $ionicPopover, $window, $interval,
-                                            HomeApi, SellerApi, toastService, $ionicScrollDelegate, barcode) {
+                                            HomeApi, SellerApi, toastService, $ionicScrollDelegate) {
       $scope.homeInfo = {};
 
       $scope.sellerInfo = {};
@@ -157,7 +157,7 @@
 
       ActivityApi.getActivityContent().then(function (result) {
         $scope.activityInfo = result.data.data;
-      })
+      });
     }) // end of ActivityController
 
     .controller('SigninController', function ($scope, $ionicPopup, PointApi) {
@@ -173,7 +173,7 @@
             });
           }
         });
-      }
+      };
     }) // end of HomeController
 
     .factory('HomeApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost',
@@ -182,8 +182,8 @@
         var getHomeContent = function () {
           var data = {};
           var request = $http({
-            method: "post",
-            url: apiEndpoint.url + "/home.html",
+            method: 'post',
+            url: apiEndpoint.url + '/home.html',
             transformRequest: transformRequestAsFormPost,
             data: data,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -192,12 +192,12 @@
           return request.success(function (result) {
             console.log('got data:' + result);
             return result;
-          })
+          });
         };
 
         return {
           getHomeContent: getHomeContent
-        }
+        };
       } // end of anonymous function
     ])
 
@@ -207,8 +207,8 @@
         var getActivityContent = function () {
           var data = {};
           var request = $http({
-            method: "post",
-            url: apiEndpoint.url + "/activity-gallery.html",
+            method: 'post',
+            url: apiEndpoint.url + '/activity-gallery.html',
             transformRequest: transformRequestAsFormPost,
             data: data,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -217,12 +217,12 @@
           return request.success(function (result) {
             console.log('got data:' + result);
             return result;
-          })
+          });
         };
 
         return {
           getActivityContent: getActivityContent
-        }
+        };
       } // end of anonymous function
     ]);
 })();

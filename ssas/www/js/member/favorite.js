@@ -16,7 +16,7 @@
               controller: 'FavoritesCtrl'
             }
           }
-        })
+        });
     })
 
     .controller('FavoritesCtrl', function ($scope, $stateParams, $ionicPopup, $ionicHistory, FavoriteApi) {
@@ -24,7 +24,7 @@
         $scope.items = [];
         $scope.page = 1;
         $scope.hasMore = false;
-        $scope.filter = "";
+        $scope.filter = '';
       };
 
       $scope.getFavorities = function () {
@@ -72,10 +72,10 @@
                   title: '删除收藏',
                   template: result.msg
                 });
-                alertPopup.then(function (res) {
+                alertPopup.then(function () {
                   $ionicHistory.goBack();
                 });
-              })
+              });
             }
             else {
               FavoriteApi.deleteGoodsFavorite(item.goods_id, function (result) {
@@ -83,20 +83,20 @@
                   title: '删除收藏',
                   template: result.msg
                 });
-                alertPopup.then(function (res) {
+                alertPopup.then(function () {
                   $ionicHistory.goBack();
                 });
-              })
+              });
             }
           }
         });
-      }
+      };
     })
 
     .factory('FavoriteApi', function ($http, apiEndpoint, userService, transformRequestAsFormPost) {
       var sendRequest = function (url, data, callback) {
         var request = $http({
-          method: "post",
+          method: 'post',
           url: url,
           transformRequest: transformRequestAsFormPost,
           data: data,

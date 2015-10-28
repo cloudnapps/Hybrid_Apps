@@ -25,9 +25,9 @@ var translations_zh = {
     my: '我',
 
     // business
-    direct_mail: "香港直邮",
-    bond: "保税仓",
-    bond_place: "(深圳前海)",
+    direct_mail: '香港直邮',
+    bond: '保税仓',
+    bond_place: '(深圳前海)',
 
     //login
     login_title: '登录',

@@ -5,8 +5,8 @@ angular.module('components')
         //alert("alipay");
         var deferred = $q.defer();
         var payObj = {};
-        payObj["pay_info"] = payment.orderInfo;
-        var paymentString = JSON.stringify(payObj);
+        payObj.pay_info = payment.orderInfo;
+        // var paymentString = JSON.stringify(payObj);
 
         alipay.payment(payObj, function (cb_success) {
             //alert(cb_success);
@@ -20,16 +20,16 @@ angular.module('components')
       };
 
       var payByWechat = function (payment) {
-        //alert("wxPay");
+        //alert('wxPay');
         var deferred = $q.defer();
         var payObj = {};
-        payObj["noncestr"] = payment.noncestr;
-        payObj["package"] = payment.package;
-        payObj["partnerid"] = payment.partnerid;
-        payObj["prepayid"] = payment.prepayid;
-        payObj["timestamp"] = payment.timestamp;
-        payObj["sign"] = payment.sign;
-        var paymentString = JSON.stringify(payObj);
+        payObj.noncestr = payment.noncestr;
+        payObj.package = payment.package;
+        payObj.partnerid = payment.partnerid;
+        payObj.prepayid = payment.prepayid;
+        payObj.timestamp = payment.timestamp;
+        payObj.sign = payment.sign;
+        // var paymentString = JSON.stringify(payObj);
 
         wxpay.payment(payObj, function (cb_success) {
             //alert(cb_success);

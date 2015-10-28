@@ -33,7 +33,7 @@
         $scope.items = [];
         $scope.page = 1;
         $scope.hasMore = false;
-        $scope.filter = "";
+        $scope.filter = '';
       };
 
       $scope.getReceivers = function () {
@@ -79,11 +79,11 @@
               });
               alertPopup.then(function (res) {
                 console.log(res);
-              })
-            })
+              });
+            });
           }
         });
-      }
+      };
     })
 
     .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicHistory, ReceiverApi) {
@@ -103,14 +103,14 @@
 
       $scope.add = function () {
         var addrInfo = {
-          "addr_id": $scope.addrInfo.addr_id,
-          "region_id": $scope.addrInfo.region_id,
-          "addr": $scope.addrInfo.addr,
-          "name": $scope.addrInfo.name,
-          "mobile": $scope.addrInfo.mobile,
-          "tel": "",
-          "default": $scope.addrInfo.checked ? '1' : '0',
-          "zipcode": $scope.addrInfo.zipcode
+          'addr_id': $scope.addrInfo.addr_id,
+          'region_id': $scope.addrInfo.region_id,
+          'addr': $scope.addrInfo.addr,
+          'name': $scope.addrInfo.name,
+          'mobile': $scope.addrInfo.mobile,
+          'tel': '',
+          'default': $scope.addrInfo.checked ? '1' : '0',
+          'zipcode': $scope.addrInfo.zipcode
         };
 
         ReceiverApi.addReceiver(addrInfo, function (result) {
@@ -133,12 +133,12 @@
       });
 
       $scope.onProvinceChanged = function () {
-        $scope.addrInfo.address.city = "";
-        $scope.addrInfo.address.district = "";
+        $scope.addrInfo.address.city = '';
+        $scope.addrInfo.address.district = '';
       };
 
       $scope.onCityChanged = function () {
-        $scope.addrInfo.address.district = "";
+        $scope.addrInfo.address.district = '';
       };
 
       $scope.saveAddress = function () {
@@ -151,7 +151,7 @@
         }
 
         $scope.addrInfo.showChoose = false;
-      }
+      };
     })
 
     .factory('ReceiverApi', function ($http, apiEndpoint, userService, RegionApi, transformRequestAsFormPost) {
@@ -159,7 +159,7 @@
 
       var sendRequest = function (url, data, callback) {
         var request = $http({
-          method: "post",
+          method: 'post',
           url: url,
           transformRequest: transformRequestAsFormPost,
           data: data,
@@ -181,7 +181,7 @@
               callback(data);
             }).error(function (data) {
               callback(data);
-            })
+            });
         });
       };
 

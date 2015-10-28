@@ -54,13 +54,13 @@
         }
 
         $scope.birthdayInfo.months = [];
-        for (var i = 1; i < 13; i++) {
-          $scope.birthdayInfo.months.push(i);
+        for (var j = 1; j < 13; j++) {
+          $scope.birthdayInfo.months.push(j);
         }
 
         $scope.birthdayInfo.days = [];
-        for (var i = 1; i < 32; i++) {
-          $scope.birthdayInfo.days.push(i);
+        for (var k = 1; k < 32; k++) {
+          $scope.birthdayInfo.days.push(k);
         }
       }
 
@@ -137,7 +137,7 @@
         $cordovaImagePicker.getPictures(options)
           .then(function (results) {
             $scope.images_list.push(results[0]);
-          }, function (error) {
+          }, function () {
           });
       };
 
@@ -201,7 +201,7 @@
         $scope.items = [];
         $scope.page = 1;
         $scope.hasMore = false;
-        $scope.filter = "";
+        $scope.filter = '';
       };
 
       $scope.getIdCards = function () {
@@ -230,7 +230,7 @@
 
       $scope.setDefault = function (item) {
         $state.go('tab.idcard_change', {cardInfo: JSON.stringify(item)}, {reload: true});
-      }
+      };
     })
 
     .controller('IdCardAddCtrl', function ($scope, $state, $stateParams, $ionicHistory, $ionicPopup, SettingApi) {
@@ -258,7 +258,7 @@
             if (result.status === 0) {
               $ionicHistory.goBack();
             }
-          })
+          });
         }
         else {
           var data = {
@@ -279,7 +279,7 @@
             if (result.status === 0) {
               $ionicHistory.goBack();
             }
-          })
+          });
         }
       };
     })
@@ -287,7 +287,7 @@
     .factory('SettingApi', function ($http, apiEndpoint, userService, transformRequestAsFormPost) {
       var sendRequest = function (url, data, callback) {
         var request = $http({
-          method: "post",
+          method: 'post',
           url: url,
           transformRequest: transformRequestAsFormPost,
           data: data,
