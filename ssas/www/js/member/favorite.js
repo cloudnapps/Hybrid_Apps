@@ -25,6 +25,7 @@
         $scope.page = 1;
         $scope.hasMore = false;
         $scope.filter = '';
+	      $scope.dsjd =1;
       };
 
       $scope.getFavorities = function () {
@@ -41,10 +42,11 @@
         });
       };
 
-      $scope.switchFavorities = function (type) {
+      $scope.switchFavorities = function (type,x) {
         $scope.init();
 
         $scope.filter = type;
+        $scope.dsjd = x;
 
         $scope.getFavorities();
       };

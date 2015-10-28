@@ -79,6 +79,7 @@
         $scope.page = 1;
         $scope.hasMore = false;
         $scope.filter = {};
+        $scope.orderState = 1;
       };
 
       $scope.getOrders = function () {
@@ -100,28 +101,33 @@
 
         if (type === 'all') {
           //全部
+          $scope.orderState = 1;
           $scope.filter = {};
         }
         else if (type === 'nopay') {
           //待付款
+          $scope.orderState = 2;
           $scope.filter = {
             pay_status: 0
           };
         }
         else if (type === 'noship') {
           //待发货
+          $scope.orderState = 3;
           $scope.filter = {
             ship_status: 0
           };
         }
         else if (type === 'shipped') {
           //待收货
+          $scope.orderState = 4;
           $scope.filter = {
             ship_status: 1
           };
         }
         else if (type === 'commenting') {
           //待评价
+          $scope.orderState = 5;
           $scope.filter = {
             comment_status: 0
           };
@@ -270,9 +276,46 @@
     })
 
     .controller('CommentRequestCtrl', function ($scope, $stateParams, OrderApi) {
+      $scope.commentInfo = {};
+      $scope.commentInfo.comment = [];
+      $scope.commentInfo.seller_point = [];
+
       OrderApi.getMemberRate($stateParams.orderId, function (result) {
-        $scope.item = result.data;
+        if (result.status === 0) {
+          $scope.item = result.data;
+          $scope.commentInfo.order_id = $stateParams.orderId;
+          $scope.commentInfo.seller_id = $scope.item[0].id;
+          for (var i = 1; i < $scope.item.length; i++) {
+            $scope.commentInfo.comment.push({
+              product_id: $scope.item[i].product_id,
+              goods_id: $scope.item[i].goods_id,
+              goods_comment: '',
+              point: [{
+                type_id: '1'
+              }]
+            })
+          }
+
+          for (var j = 0; j < $scope.item[0].rate.length; j++) {
+            $scope.commentInfo.seller_point.push({
+              type_id: $scope.item[0].rate[j].type_id,
+              value: '5'
+            })
+          }
+        }
       });
+
+      $scope.submitRequest = function () {
+        OrderApi.getMemberRate($scope.commentInfo, function (result) {
+          var alertPopup = $ionicPopup.alert({
+            title: '确认收货',
+            template: result.msg
+          });
+          alertPopup.then(function (res) {
+            console.log(res);
+          });
+        })
+      };
     })
 
     .controller('OrderReturnCtrl', function ($scope, $state, OrderApi) {
@@ -451,15 +494,12 @@
         sendRequest(url, data, callback);
       };
 
-      var saveMemberRate = function (orderId, callback) {
+      var saveMemberRate = function (commentInfo, callback) {
         var url = apiEndpoint.url + '/member-save_rate.html';
-        var data = {
-          member_id: userService.get('memberId'),
-          token: userService.get('token'),
-          order_id: orderId
-        };
+        commentInfo.member_id = userService.get('memberId');
+        commentInfo.token = userService.get('token');
 
-        sendRequest(url, data, callback);
+        sendRequest(url, commentInfo, callback);
       };
 
       var getOrderTrack = function (orderId, callback) {
