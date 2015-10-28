@@ -274,9 +274,42 @@
     })
 
     .controller('CommentRequestCtrl', function ($scope, $stateParams, OrderApi) {
+      $scope.commentInfo = {};
+      $scope.commentInfo.comment = [];
+      $scope.commentInfo.seller_point = [];
+
       OrderApi.getMemberRate($stateParams.orderId, function (result) {
-        $scope.item = result.data;
+        if (result.status === 0) {
+          $scope.item = result.data;
+          $scope.order_id = $stateParams.orderId;
+          $scope.seller_id = $scope.item[0].id;
+          for (var i = 1; i < $scope.item.length; i++) {
+            $scope.commentInfo.comment.push({
+              product_id: $scope.item[i].product_id,
+              goods_id: $scope.item[i].goods_id,
+              goods_comment: '',
+              point: [{
+                type_id: '1'
+              }]
+            })
+          }
+
+          for (var j = 1; j < $scope.item[0].rate.length; j++) {
+            $scope.commentInfo.seller_point.push({
+              type_id: $scope.item[0].rate[j].type_id,
+              value: '5'
+            })
+          }
+        }
       });
+
+      $scope.setGoodComment = function(type) {
+
+      };
+
+      $scope.setSellerComment = function(value) {
+
+      };
     })
 
     .controller('OrderReturnCtrl', function ($scope, $state, OrderApi) {

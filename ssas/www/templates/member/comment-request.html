@@ -1,23 +1,82 @@
 <ion-view view-title="{{'comment_title'|translate}}" hide-tabs="true">
   <ion-content>
-    <div style="height: 44px">
+    <div ng-class="list" style="border: 1px solid #ddd;">
+      <ion-item ng-repeat="product in item" ng-if="$index > 0" style="border-top: none;padding: 10px 16px;">
+        <div class="row" style="margin:0;padding: 0 5px 10px 0;">
+          <div class="col col-20" style="padding: 0;height: 60px;">
+            <img style="width: 65px;height: 65px;" ng-src="{{product.image}}">
+          </div>
+          <div class="col col-80"
+               style="padding: 0 0 0 10px;height: 65px;">
+            <p style="padding: 0px;margin-bottom: 25px;word-break: break-all;white-space: normal">{{product.name}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="button-bar">
+            <a class="button button-clear" style="border: none;padding: 0; color: #000;"
+               ng-click="commentInfo.comment[$index-1].point.type_id = '1'">
+              <span ng-class="{'set-gender': commentInfo.comment[$index-1].point.type_id === '1'}">好评</span>
+            </a>
+            <a class="button button-clear" style="border: none;padding: 0;color: #000;"
+               ng-click="commentInfo.comment[$index-1].point.type_id = '2'">
+              <span ng-class="{'set-gender': commentInfo.comment[$index-1].point.type_id === '2'}">中评</span>
+            </a>
+            <a class="button button-clear" style="border: none;padding: 0;color: #000;"
+               ng-click="commentInfo.comment[$index-1].point.type_id = '3'">
+              <span ng-class="{'set-gender': commentInfo.comment[$index-1].point.type_id === '3'}">差评</span>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <textarea rows="3" placeholder="您的评论对其他人很有帮助哦" style="width: 100%"
+                    ng-model="commentInfo.comment[$index-1].goods_comment"></textarea>
+        </div>
+      </ion-item>
     </div>
-    <div class="row">
-      <div class="col col-100">
-        {{item.seller_name}}
-        <img ng-src="{{item.seller_logo}}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col col-100">
-        {{item.order_id}}
-        {{item.name}}
+    <div ng-class="list" style="border: 1px solid #ddd;">
+      <div style="border-top: none;">
+        <div class="row" style="margin:0;padding: 0 0 10px 0;">
+          <div class="col col-100">
+            <p style="padding: 0px;word-break: break-all;white-space: normal">店铺评分</p>
+          </div>
+        </div>
+        <div class="row" ng-repeat="rate in item[0].rate">
+          <div class="col col-20" style="font-size: 8px">{{rate.name}}</div>
+          <div class="col col-80">
+            <div class="button-bar">
+              <a class="button button-clear" style="border: none;padding: 0; color: #000;font-size: 8px"
+                 ng-click="$scope.commentInfo.seller_point.value = '5'">
+                <span ng-class="{'set-gender': $scope.commentInfo.seller_point.value === '5'}">5星</span>
+              </a>
+              <a class="button button-clear" style="border: none;padding: 0;color: #000;font-size: 8px"
+                 ng-click="$scope.commentInfo.seller_point.value = '4'">
+                <span ng-class="{'set-gender': $scope.commentInfo.seller_point.value === '4'}">4星</span>
+              </a>
+              <a class="button button-clear" style="border: none;padding: 0;color: #000;font-size: 8px"
+                 ng-click="$scope.commentInfo.seller_point.value = '3'">
+                <span ng-class="{'set-gender': $scope.commentInfo.seller_point.value === '3'}">3星</span>
+              </a>
+              <a class="button button-clear" style="border: none;padding: 0;color: #000;font-size: 8px"
+                 ng-click="$scope.commentInfo.seller_point.value = '2'">
+                <span ng-class="{'set-gender': $scope.commentInfo.seller_point.value === '2'}">2星</span>
+              </a>
+              <a class="button button-clear" style="border: none;padding: 0;color: #000;font-size: 8px"
+                 ng-click="$scope.commentInfo.seller_point.value = '1'">
+                <span ng-class="{'set-gender': $scope.commentInfo.seller_point.value === '1'}">1星</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="button-bar">
-      <a class="button button-full button-light" style="font-size:20px;" ng-click="submitRequest()">
-        {{'return_addbtn'|translate}}
-      </a>
+      <div class="row">
+        <div class="col col-100">
+          <button class="button button-full button-positive" style="font-size:16px;" ng-click="submitRequest()">
+            {{'return_addbtn'|translate}}
+          </button>
+        </div>
+      </div>
     </div>
   </ion-content>
 </ion-view>

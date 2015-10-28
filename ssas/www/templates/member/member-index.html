@@ -3,7 +3,7 @@
     <div class="row row-center" style="padding: 0px;margin-right: 10px;" ng-click="openPopover($event)">
       <div class="col col-center" style="padding: 0px;">
         <a class="button button-clear">
-          <i class="icon ion-settings"></i>
+          <i class="icon ion-gear-b"></i>
         </a>
       </div>
     </div>
@@ -28,17 +28,20 @@
   <ion-content>
     <div class="row"
          style="padding: 0;background-color: #fff;background-image: url('img/me.jpg');background-position: 5% 50%;background-repeat: no-repeat;background-size: cover;background-origin:content-box;width: 100%;height:190px;position: relative;">
-      <div class="row" style="padding: 0;position:absolute;top: 33px;padding-left: 16px;margin-top: 2px;" ng-click="gotoPage('tab.settings')">
+      <div class="row" style="padding: 0;position:absolute;top: 33px;padding-left: 16px;margin-top: 2px;"
+           ng-click="gotoPage('tab.settings')">
         <div class="col col-33 col-center" style="text-align: center;padding: 0;">
           <img ng-src="{{currentUser.image}}" style="height: 100px;width: 100px;border-radius: 50% 50%;">
         </div>
         <div class="col col-67 col-center" style="padding: 0;font-size: 14px;color: #333333;margin: 46px 0 0 14px;">
           <p>{{currentUser.login_name}}</p>
+
           <p>{{currentUser.lv_name}}</p>
         </div>
       </div>
       <div class="row" style="padding: 0px;margin-top: 145px;opacity: 0.7;">
-        <div class="col col-50 col-center" style="padding: 0px;background-color: #bd252c;    text-align: center;border-right: 1px solid #fff;">
+        <div class="col col-50 col-center"
+             style="padding: 0px;background-color: #bd252c;    text-align: center;border-right: 1px solid #fff;">
           <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;"
              href="#/tab/favorites?type=goods">收藏的商品</a>
         </div>
