@@ -26,12 +26,18 @@
         </button>-->
     <div class="row" style="padding: 0;border-bottom: 1px solid #a9a9a9;" ng-repeat="item in items"
          ng-click="goDetail(item)">
-      <div class="col col-25 col-center" style="padding:0;">
+      <div class="col col-20 col-center" style="padding:0;">
         <img style="height: 75px;width: 75px;margin: 15px 10px 10px;padding: 5px;border: 1px solid #a9a9a9;"
              ng-src="{{item.image}}">
       </div>
-      <div class="col col-75 col-center" style="padding-left: 15px;">
+      <div class="col col-70 col-center" style="padding-left: 15px;">
         <p style="margin: 0;color: #3b3a3a;font-size: 18px;font-weight: 400;">{{item.name}}</p>
+      </div>
+
+      <div class="col col-10 col-center">
+        <a href="" title="">
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
       </div>
     </div>
     <ion-infinite-scroll
