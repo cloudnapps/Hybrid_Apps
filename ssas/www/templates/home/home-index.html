@@ -21,7 +21,7 @@
   </div>
   <!--发现-线下功能-->
   <div class="row find-nav-bar has-header" ng-show="showBtns">
-    <div class="col col-20 col-center find-item">
+    <div class="col col-20 col-center find-item" ng-click="showMap()">
       <a>
         <img src="img/home/icon1.png"/>
         <span>逛商场</span>
@@ -33,7 +33,7 @@
         <span>签个到</span>
       </a>
     </div>
-    <div class="col col-20 col-center find-item">
+    <div class="col col-20 col-center find-item" ng-click="shake()">
       <a>
         <img src="img/home/icon3.png"/>
         <span>摇一摇</span>
@@ -45,7 +45,7 @@
         <span>一键上网</span>
       </a>
     </div>
-    <div class="col col-20 col-center find-item">
+    <div class="col col-20 col-center find-item" ng-click="openWeb()">
       <a>
         <img src="img/home/icon5.png"/>
         <span>交通</span>
@@ -53,13 +53,15 @@
     </div>
   </div>
   <ion-nav-buttons side="left">
-    <a class="button button-icon" style="padding: 0;" ng-click="barcodeScan()"><img src="img/home/scan.png" style="width: 67%"></a>
+    <a class="button button-icon" style="padding: 0;" ng-click="barcodeScan()"><img src="img/home/scan.png"
+                                                                                    style="width: 67%"></a>
   </ion-nav-buttons>
   <ion-nav-title style="margin: 0;">
     <form ng-submit="search()">
       <div class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
         <div style="line-height: 28px;color: #999;">
-          <span ng-click="openPopover()" style="font-weight: 300;font-size: 14px;">{{!kind ? '商品' : '商户'}}<i class="icon ion-arrow-down-b"></i>&nbsp;&nbsp;</span>
+          <span ng-click="openPopover()" style="font-weight: 300;font-size: 14px;">{{!kind ? '商品' : '商户'}}<i
+            class="icon ion-arrow-down-b"></i>&nbsp;&nbsp;</span>
         </div>
         <input type="search" placeholder="  Search" ng-model="keywords.value" style="height: 28px;padding-left: 5px;">
       </div>
@@ -100,7 +102,8 @@
 
     <div class="row new-prdt-title" style="padding: 0;margin: 0;">
       <div class="col col-30 col-center camp-title-left">
-        <div style="background-image: url('img/nav-bar-first.png');background-repeat: no-repeat;background-size: contain;height: 30px;width: 95%;">
+        <div
+          style="background-image: url('img/nav-bar-first.png');background-repeat: no-repeat;background-size: contain;height: 30px;width: 95%;">
           <span class="bar-name">{{activityInfo.act_name}}</span>
         </div>
         <!-- <img src="img/bar-1.png" style="height: 27px;"> -->
@@ -113,48 +116,49 @@
     </div>
 
     <div class="index-prdt-cont">
-     <!-- <ion-scroll direction="x"> -->
-        <div class="row" style="padding: 0;">
-          <div class="col col-50 col-center pad-5"
-               ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: activityInfo.product_info[0].product_id})">
-            <div class="new-prdt">
-              <a>
-                <img ng-src="{{activityInfo.product_info[0].image}}">
+      <!-- <ion-scroll direction="x"> -->
+      <div class="row" style="padding: 0;">
+        <div class="col col-50 col-center pad-5"
+             ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: activityInfo.product_info[0].product_id})">
+          <div class="new-prdt">
+            <a>
+              <img ng-src="{{activityInfo.product_info[0].image}}">
 
-                <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
-                <div class="row" style="padding: 0 3px;">
-                  <span class="col col-50 col-center pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
+              <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
+              <div class="row" style="padding: 0 3px;">
+                <span class="col col-50 col-center pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
                   <span
                     class="col col-50 col-center pri-ori">{{activityInfo.product_info[0].price | currency: '￥'}}</span>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <div class="col col-50 col-center pad-5"
-               ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: activityInfo.product_info[0].product_id})">
-            <div class="new-prdt">
-              <a>
-                <img ng-src="{{activityInfo.product_info[0].image}}">
-
-                <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
-                <div class="row" style="padding: 0 3px;">
-                  <span class="col col-50 col-center pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
-                  <span
-                    class="col col-50 col-center pri-ori">{{activityInfo.product_info[0].price | currency: '￥'}}</span>
-                </div>
-              </a>
-            </div>
+              </div>
+            </a>
           </div>
         </div>
-     <!-- </ion-scroll> -->
+
+        <div class="col col-50 col-center pad-5"
+             ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: activityInfo.product_info[0].product_id})">
+          <div class="new-prdt">
+            <a>
+              <img ng-src="{{activityInfo.product_info[0].image}}">
+
+              <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
+              <div class="row" style="padding: 0 3px;">
+                <span class="col col-50 col-center pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
+                  <span
+                    class="col col-50 col-center pri-ori">{{activityInfo.product_info[0].price | currency: '￥'}}</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- </ion-scroll> -->
     </div>
 
     <!--商户-->
     <div class="row nav-bar-title" style="padding: 0 0 5px;margin: 0;">
       <div class="col col-30 col-center nav-title-left">
-        <div style="background-image: url('img/nav-bar-seller.png');background-repeat: no-repeat;background-size: contain;height: 30px;width: 95%;">
-        <span class="bar-name-mid">热门商户</span>
+        <div
+          style="background-image: url('img/nav-bar-seller.png');background-repeat: no-repeat;background-size: contain;height: 30px;width: 95%;">
+          <span class="bar-name-mid">热门商户</span>
         </div>
       </div>
       <div class="col col-70 col-center nav-title-right">
@@ -204,7 +208,8 @@
 
       <div class="row nav-bar-title" style="padding: 0;margin: 0;">
         <div class="col col-30 col-center nav-title-left">
-          <div style="background-image: url('img/nav-bar-{{$index}}.png');background-repeat: no-repeat;background-size: contain;height: 30px;width: 95%;">
+          <div
+            style="background-image: url('img/nav-bar-{{$index}}.png');background-repeat: no-repeat;background-size: contain;height: 30px;width: 95%;">
             <span class="bar-name-mid">{{floor.cat_name}}</span>
           </div>
           <!-- <img src="img/hotproduct.jpg" style="height: 27px;"> -->
@@ -250,7 +255,8 @@
     <!--猜你喜欢-->
     <div class="row nav-bar-title" style="padding: 0;margin: 0;">
       <div class="col col-30 col-center nav-title-left">
-        <div style="background-image: url('img/nav-bar-last.png');background-repeat: no-repeat;background-size: contain;height: 30px;width: 95%;">
+        <div
+          style="background-image: url('img/nav-bar-last.png');background-repeat: no-repeat;background-size: contain;height: 30px;width: 95%;">
           <span class="bar-name-mid">猜你喜欢</span>
         </div>
       </div>

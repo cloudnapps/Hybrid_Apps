@@ -77,20 +77,19 @@
         // Execute action
       });
 
-      $scope.changeSearchKind = function(kind){
+      $scope.changeSearchKind = function (kind) {
         $scope.popover.hide();
         $scope.kind = kind;
       };
 
-
       $scope.search = function () {
-        if(!$scope.kind) {
+        if (!$scope.kind) {
           return $scope.tabStateGo($scope.tabIndex.shop, 'tab.products', {keywords: $scope.keywords.value});
         }
         return $scope.tabStateGo($scope.tabIndex.home, 'tab.sellers', {keywords: $scope.keywords.value});
       };
 
-      $scope.clearSearch = function(event){
+      $scope.clearSearch = function (event) {
         $scope.keywords.value = '';
         event.stopPropagation();
       };
@@ -143,13 +142,47 @@
         else if (item.type === 'product') {
           $scope.tabStateGo($scope.tabIndex.shop, 'tab.product', {productId: item.id});
         }
-      };         
+      };
 
       SellerApi.getSellerList(null, null, null, function (result) {
         if (result.status === 0) {
           $scope.sellerInfo.items = result.data;
         }
       });
+
+      $scope.openWeb = function () {
+        alert("web");
+        var options = {
+          location: 'no',
+          clearcache: 'yes',
+          toolbar: 'no'
+        };
+        $cordovaInAppBrowser.open('http://map.baidu.com/mobile/webapp/search/search/qt=s&wd=深圳前海自贸区临海大道59号&vt=map', '_self', options)
+          .then(function (event) {
+            // success
+          })
+          .catch(function (event) {
+            // error
+          });
+        //$cordovaInAppBrowser.close();
+      };
+
+      $scope.showMap = function () {
+        alert("navi");
+
+        navi.showMapNavigator("07550002F0110050", "1");
+      };
+
+      $scope.shake = function () {
+        alert("shake");
+
+        shake.shakeByBeacon();
+      };
+
+      $scope.monitor = function () {
+        alert("monitor");
+        beaconMonitor.monitorByBeacon();
+      };
     }) // end of HomeController
 
     .controller('ActivityController', function ($scope, ActivityApi) {
