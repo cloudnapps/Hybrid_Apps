@@ -2,7 +2,7 @@
  <ion-nav-bar class="bar-positive ">
   <ion-nav-back-button class="button-clear"
     ng-click="goBack()">
-    <i class="icon ion-chevron-left"></i> 
+    <i class="icon ion-chevron-left"></i>
   </ion-nav-back-button>
 </ion-nav-bar>
   <ion-content class="padding">
@@ -37,7 +37,11 @@
           </div>
 
           <div class="row" style="margin-top: 5px;">
-            <div class="col col-center" style="text-align: center;">
+            <div class="col col-50 col-center" style="text-align: center;" ng-click="logonByWechat()">
+              <a href="" style="text-decoration: none;color: #666;">微信登录</a>
+            </div>
+
+            <div class="col col-50 col-center" style="text-align: center;">
               <a href="#/tab/retrieve" style="text-decoration: none;color: #666;">忘记密码</a>
             </div>
           </div>

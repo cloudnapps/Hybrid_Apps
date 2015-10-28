@@ -47,6 +47,15 @@ angular.module('cart', ['components'])
         }
       }
     })
+    .state('tab.cart-idcard-change', {
+      url: '/idcardchange/:cardInfo',
+      views: {
+        'tab-cart': {
+          templateUrl: 'templates/member/idcard-add.html',
+          controller: 'IdCardAddCtrl'
+        }
+      }
+    })
     .state('tab.iframe', {
       url: '/iframe',
       views: {
@@ -231,7 +240,7 @@ angular.module('cart', ['components'])
 
         return paymentApi.pay(response.data.data)
         .then(function (data) {
-          alert(data);
+          console.log(data);
           $state.go('tab.order-payed');
         }, function (err) {
           $ionicPopup.alert({
@@ -243,8 +252,8 @@ angular.module('cart', ['components'])
       });
     })
     .finally(function () {
-      $ionicLoading.hide();
     });
+    $ionicLoading.hide();
   };
 })
 .controller('OrderPayedController', function ($rootScope, $scope, $q, $ionicLoading, orderApi) {

@@ -42,7 +42,7 @@
 
     .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate,
                                             $state, $ionicPopover, $window, $interval,
-                                            HomeApi, SellerApi, toastService) {
+                                            HomeApi, SellerApi, toastService, $ionicScrollDelegate, barcode) {
       $scope.homeInfo = {};
 
       $scope.sellerInfo = {};
@@ -129,6 +129,8 @@
 
       $scope.openBtns = function () {
         $scope.showBtns = !$scope.showBtns;
+
+        $ionicScrollDelegate.scrollTop();
       };
 
       $scope.openItem = function (item) {
@@ -141,35 +143,7 @@
         else if (item.type === 'product') {
           $scope.tabStateGo($scope.tabIndex.shop, 'tab.product', {productId: item.id});
         }
-      };
-
-      $scope.scan = function () {
-        cordova.plugins.barcodeScanner.scan(
-          function (result) {
-            if (!result.cancelled
-              && result.text !== undefined && result.text !== null) {
-              shopApi.getProductIdByBarcode(result.text).success(
-                function (response) {
-                  var result = response.data;
-                  var status = response.status;
-                  if (status === 0) {
-                    var productId = result["product_id"];
-                    if (productId !== undefined) {
-                      $scope.tabStateGo($scope.tabIndex.shop, 'tab.product', {productId: productId});
-                    }
-                  } else {
-                    toastService.setToast(response.msg);
-                  }
-                }); // end of getProductIdByBarcode success
-            } else {
-              toastService.setToast('没有找到商品');
-            }// end of if
-          }, // end of scan success
-          function (error) {
-            toastService.setToast('扫码失败');
-          } // end of scan error
-        );
-      };
+      };         
 
       SellerApi.getSellerList(null, null, null, function (result) {
         if (result.status === 0) {

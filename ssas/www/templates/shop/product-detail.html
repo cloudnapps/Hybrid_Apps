@@ -5,24 +5,27 @@
           <img ng-src="{{image}}"/>          
         </ion-slide>
     </ion-slide-box>
-    <hr>
-    <section class="padding">
-      <h4>{{product.name}} {{product.brief}}</h4>
-      <div class="positive padding" style="padding-left: 0">{{product.nature === 'bond' ? '保税仓发货' : '海外直邮'}}</div>
-      <label class="assertive" style="font-size: 20px; padding-right: 1em">{{product.price|currency:'￥'}}</label>
-      <label class="stroke">{{'mkt_price'|translate}}:{{product.mktprice|currency:'￥'}}</label>
-      <br>
-      <div class="padding-top">
-        <label style="padding-right: 1.5em">月销&nbsp;{{product.count}}</label>
+    <hr style="margin: 0;border-color: #e5e5e5;">
+    <section class="prdt-detail">
+      <h5 class="prdt-name">{{product.name}} {{product.brief}}</h5>
+      <div class="post-type">{{product.nature === 'bond' ? '保税仓发货' : '海外直邮'}}</div>
+      <label class="now-price">{{product.price|currency:'￥'}}</label>
+      <label class="ori-price">
+        <span>{{'mkt_price'|translate}}:{{product.mktprice|currency:'￥'}}</span>
+      </label>
+      <div class="amount">
+        <label style="padding-right: 2em">月销&nbsp;{{product.count}}</label>
         <label>库存&nbsp;{{product.store}}</label>
       </div>
-    </section>    
-    <hr></hr>
-    <div class="padding-left">税率: <label class="positive padding-left">{{product.tax_rate * 100}}%</label></div>
-    <div class="padding-left">税金: <label class="positive padding-left">{{product.tax_price|currency:'￥'}}</label></div>
-    <hr></hr>
-    <a class="button button-clear  button-full button-small icon ion-chevron-right icon-right padding-left" ng-click="showSpecModal()" style="text-align: left; color: #000">选择规格</a>
-    <hr ng-hide="true" >
+    </section> 
+
+    <hr style="margin: 0;border-color: #e5e5e5;">
+    <div class="prdt-tax">税率: <label class="tax-pri">{{product.tax_rate * 100}}%</label></div>
+    <div class="prdt-tax">税金: <label class="tax-pri">{{product.tax_price|currency:'￥'}}</label></div>
+    <hr style="margin: 0;border-color: #e5e5e5;padding-top: 10px;">
+    <a class="button button-clear button-full button-small icon ion-chevron-right icon-right prdt-std" ng-click="showSpecModal()" style="color: #4c4c4c;">选择规格</a>
+    <hr style="margin: 0;border-color: #e5e5e5;">
+    
     <div ng-hide="true" ng-click="tabStateGo(tabIndex.shop, 'tab.comments', {id:product.goods_id})">
       <a class="button button-clear button-full button-small icon ion-chevron-right icon-right" style="text-align: left; color: #000">{{'comment'|translate}}
       </a>
@@ -31,24 +34,27 @@
     <div style="padding-left: 10px; font-size: 10px; color: #cccccc">{{comment.name}}</div>
     <div style="padding-left: 10px; font-size: 10px; color: #cccccc">{{comment.content}}</div>
     </div>
-    <a class="button button-clear button-full button-small icon ion-chevron-right icon-right padding-left" style="font-size: 13px; color: #000" ng-click="tabStateGo(tabIndex.shop, 'tab.intro', {id: product.goods_id, productId: productId, sellerId: product.seller_id})">查看产品图文详情</a>
-    <hr style="margin: 0;height:10px;border:none;border-top:10px solid #f1f1f1;">
+
+    <a class="button button-clear button-full button-small icon ion-chevron-right icon-right prdt-std" style="color: #4c4c4c;" ng-click="tabStateGo(tabIndex.shop, 'tab.intro', {id: product.goods_id, productId: productId, sellerId: product.seller_id})">查看产品图文详情</a>
+
+    <hr style="margin: 0;border:none;border-top:10px solid #e5e5e5;">
+
     <div class="list">
       <div class="item item-thumbnail-left" style="border: none">
         <img ng-src="{{point.url}}">
-        <div style="font-size: 20px; padding-top: 10px">{{point.name}}</div>
-        <div class="row" style="flex-wrap:wrap">
-          <div class="col col-33" ng-repeat="value in point.value">
+        <div style="font-size: 14px; padding: 0 0 7px;">{{point.name}}</div>
+        <div style="font-size: 10px;" ng-repeat="value in point.value">{{value.type_name}} &nbsp;
+            {{value.point}}</div>
+        <!-- <div class="row" style="flex-wrap:wrap">
+          <div class="col" ng-repeat="value in point.value">
             {{value.type_name}} &nbsp;
             {{value.point}}
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
-    <div class="button-bar">
-      <div add-to-cart="product"></div>
-    </div>
+    <div add-to-cart="product"></div>
   </ion-footer-bar>
 </ion-view>

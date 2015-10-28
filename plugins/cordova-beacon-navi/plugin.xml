@@ -44,7 +44,7 @@
         <source-file src="src/android/FileHelper.java" target-dir="src/com/cloudnapps/plugins/map" />
         <source-file src="src/android/build-extras.gradle" target-dir="./" />
 
-        <source-file src="libs/android/android-support-v4.jar" target-dir="libs" />
+        <!-- <source-file src="libs/android/android-support-v4.jar" target-dir="libs" /> -->
         <source-file src="libs/android/arcgis-android-api.jar" target-dir="libs" />
         <source-file src="libs/android/jackson-core-lgpl-1.9.5.jar" target-dir="libs" />
         <source-file src="libs/android/jackson-mapper-lgpl-1.9.5.jar" target-dir="libs" />

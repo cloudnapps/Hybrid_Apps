@@ -208,8 +208,8 @@ gulp.task('userJsProd', function() {
   return gulp.src(config.userJs.src, config.userJs.opt)
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default')) // Console output
-    .pipe(angularFilesort())
     .pipe(ngAnnotate())
+    .pipe(angularFilesort())
     .pipe(concat('production.js'))
     .pipe(uglify({
       compress: {
@@ -223,7 +223,6 @@ gulp.task('injectHtmlProd', ['htmljs', 'userJsProd', 'sassProd', 'copyFonts'], f
   return gulp
     .src(config.injectHtmlProd.src, config.injectHtmlProd.opt)
     .pipe(inject(
-      // lib 在前, 其它js在后
       series(
         gulp
         .src([
@@ -234,7 +233,7 @@ gulp.task('injectHtmlProd', ['htmljs', 'userJsProd', 'sassProd', 'copyFonts'], f
           'www/css/**/*.css',
           '!www/css/ionic.app*'
         ])
-        .pipe(concat('vendor.css'))
+        .pipe(concat('user.css'))
         .pipe(minifyCss({
           keepSpecialComments: 0
         }))
@@ -242,6 +241,7 @@ gulp.task('injectHtmlProd', ['htmljs', 'userJsProd', 'sassProd', 'copyFonts'], f
           extname: '.min.css'
         }))
         .pipe(gulp.dest('./www/dist/css')),
+        // lib 在前, 其它js在后
         gulp
         .src(config.libJs.src, config.libJs.opt)
         .pipe(concat('lib.js'))

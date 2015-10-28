@@ -39,6 +39,19 @@ angular
             });
         };
 
+        $scope.goToCart = function(){
+          if(!isLogin) {
+            return;
+          }
+          cartApi
+            .addToCart($scope.product)
+            .then(function(data) {
+              $scope.tabStateGo($scope.tabIndex.cart, 'tab.cart');
+            })
+            .catch(function(e) {
+            });
+        }
+
         function isLogin(){
           if(!userService.isLogin()) {
             // 跳转登录

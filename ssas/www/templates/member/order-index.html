@@ -1,14 +1,42 @@
 <div class="bar bar-subheader">
-  <div class="button-bar">
-    <button class="button button-light" ng-click="switchOrder('all')" style="font-size: 10px;">
-      <span style="width: 100%">{{'ord_alltitle'|translate}}</span>
-    </button>
-    <button class="button button-light" ng-click="switchOrder('nopay')" style="font-size: 10px">
-      <span style="width: 100%">{{'ord_nopaytitle'|translate}}</span>
-    </button>
-    <button class="button button-light" ng-click="switchOrder('noship')" style="font-size: 10px">{{'ord_noshiptitle'|translate}}</button>
-    <button class="button button-light" ng-click="switchOrder('shipped')" style="font-size: 10px">{{'ord_shippedtitle'|translate}}</button>
-    <button class="button button-light" ng-click="switchOrder('commenting')" style="font-size: 10px">{{'ord_nocommenttitle'|translate}}</button>
+  <div class="row" style="padding: 0 0px;height: 40px;line-height: 40px;">
+    <div class="col col-20"
+         style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
+         ng-click="switchOrder('all')">
+      <a class="" style="color: #333333;text-decoration: none;">全部</a>
+    </div>
+    <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
+      |
+    </div>
+    <div class="col col-20"
+         style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
+         ng-click="switchOrder('nopay')">
+      <a class="" style="color: #333333;text-decoration: none;">待付款</a>
+    </div>
+    <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
+      |
+    </div>
+    <div class="col col-20"
+         style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
+         ng-click="switchOrder('noship')">
+      <a class="" style="color: #333333;text-decoration: none;">待发货</a>
+    </div>
+    <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
+      |
+    </div>
+    <div class="col col-20"
+         style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
+         ng-click="switchOrder('shipped')">
+      <a class="" style="color: #333333;text-decoration: none;">待收货</a>
+    </div>
+    <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
+      |
+    </div>
+    <div class="col col-20"
+         style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
+         ng-click="switchOrder('commenting')">
+      <a class="" style="color: #333333;text-decoration: none;">待评论</a>
+    </div>
   </div>
 </div>
 <ion-view view-title="订单列表" hide-tabs="true">
@@ -28,11 +56,11 @@
         </div>
 
         <div class="row" style="padding:10px;">
-          <div class="col col-75" style="height: 100%; padding: 0px">
+          <div class="col col-66" style="height: 100%; padding: 0px">
             <p style="padding: 0px; height: 100%;">{{item.seller_name}}</p>
           </div>
 
-          <div class="col col-25" style="height: 100%; padding: 0px" align="right">
+          <div class="col col-34" style="height: 100%; padding: 0px" align="right">
             <p style="padding: 0px; height: 100%;">{{item.status}}</p>
           </div>
         </div>
@@ -65,6 +93,10 @@
             <button class="button button-light"
                     style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
                     ng-if="item.is_track" ng-click="trackOrder(item)">查看物流
+            </button>
+            <button class="button button-light"
+                    style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"
+                    ng-if="item.is_confirm" ng-click="confirmOrder(item)">确认收货
             </button>
             <button class="button button-light"
                     style="font-size:12px;float:right;min-height: 27px;line-height: 30px;margin: 0 2px;"

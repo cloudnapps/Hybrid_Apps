@@ -14,9 +14,9 @@ import com.alipay.sdk.app.PayTask;
 
 /**
  * 支付宝支付插件
- * 
+ *
  * @author NCIT
- * 
+ *
  */
 public class Alipay extends CordovaPlugin {
 	/** JS回调接口对象 */
@@ -69,27 +69,27 @@ public class Alipay extends CordovaPlugin {
 				return ret;
 			}
 
-			final String sign = jsonObj.getString("sign");
-			if (sign == null || "".equals(sign)) {
-				LOG.e(LOG_TAG, "sign is empty", new NullPointerException());
-				ret = false;
-				PluginResult result = new PluginResult(
-						PluginResult.Status.ERROR, "sign is empty");
-				result.setKeepCallback(true);
-				cbContext.sendPluginResult(result);
-				return ret;
-			}
-
-			if (!isSameSignature(payInfo, sign)) {
-				LOG.e(LOG_TAG, "pay_info sign failure.",
-						new IllegalStateException());
-				ret = false;
-				PluginResult result = new PluginResult(
-						PluginResult.Status.ERROR, "pay_info sign failure.");
-				result.setKeepCallback(true);
-				cbContext.sendPluginResult(result);
-				return ret;
-			}
+//			final String sign = jsonObj.getString("sign");
+//			if (sign == null || "".equals(sign)) {
+//				LOG.e(LOG_TAG, "sign is empty", new NullPointerException());
+//				ret = false;
+//				PluginResult result = new PluginResult(
+//						PluginResult.Status.ERROR, "sign is empty");
+//				result.setKeepCallback(true);
+//				cbContext.sendPluginResult(result);
+//				return ret;
+//			}
+//
+//			if (!isSameSignature(payInfo, sign)) {
+//				LOG.e(LOG_TAG, "pay_info sign failure.",
+//						new IllegalStateException());
+//				ret = false;
+//				PluginResult result = new PluginResult(
+//						PluginResult.Status.ERROR, "pay_info sign failure.");
+//				result.setKeepCallback(true);
+//				cbContext.sendPluginResult(result);
+//				return ret;
+//			}
 
 			Runnable payRunnable = new Runnable() {
 
@@ -151,7 +151,7 @@ public class Alipay extends CordovaPlugin {
 
 	/**
 	 * 判断签名是否一致
-	 * 
+	 *
 	 * @param orign
 	 *            原始值
 	 * @param sign
@@ -185,5 +185,4 @@ public class Alipay extends CordovaPlugin {
 			return false;
 		}
 	}
-
 }

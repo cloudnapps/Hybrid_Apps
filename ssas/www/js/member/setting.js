@@ -17,24 +17,6 @@
             }
           }
         })
-        .state('tab.setting_gender', {
-          url: '/setting/gender?params',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/setting-gender.html',
-              controller: 'SettingGenderCtrl'
-            }
-          }
-        })
-        .state('tab.setting_birthday', {
-          url: '/setting/birthday?params',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/setting-birthday.html',
-              controller: 'SettingBirthdayCtrl'
-            }
-          }
-        })
         .state('tab.setting_changepwd', {
           url: '/setting/changepwd',
           views: {
@@ -64,104 +46,114 @@
         });
     })
 
-    .controller('SettingCtrl', function ($scope, $state, $stateParams, $ionicActionSheet, SettingApi) {
+    .controller('SettingCtrl', function ($scope, $state, $stateParams, $cordovaImagePicker, $ionicActionSheet, SettingApi) {
+      function setDays() {
+        $scope.birthdayInfo.years = [];
+        for (var i = 1900; i < 2020; i++) {
+          $scope.birthdayInfo.years.push(i);
+        }
+
+        $scope.birthdayInfo.months = [];
+        for (var i = 1; i < 13; i++) {
+          $scope.birthdayInfo.months.push(i);
+        }
+
+        $scope.birthdayInfo.days = [];
+        for (var i = 1; i < 32; i++) {
+          $scope.birthdayInfo.days.push(i);
+        }
+      }
+
       $scope.init = function () {
         $scope.item = {};
+        $scope.isChanged = false;
+
+        $scope.showGender = false;
+        $scope.showBirthday = false;
+
+        $scope.birthdayInfo = {};
+        setDays();
 
         SettingApi.getMemberSetting(function (result) {
           $scope.item = result.data;
+
+          var userBirthday = ($scope.birthday || '1980-1-1').split('-');
+          $scope.birthdayInfo.selectedYear = userBirthday[0];
+          $scope.birthdayInfo.selectedMonth = userBirthday[1];
+          $scope.birthdayInfo.selectedDay = userBirthday[2];
         });
+      };
+
+      $scope.setGender = function (gender) {
+        $scope.item.sex = gender;
+        $scope.isChanged = true;
+      };
+
+      $scope.setBirthday = function () {
+        $scope.item.birthday = $scope.birthdayInfo.selectedYear +
+          '-' + $scope.birthdayInfo.selectedMonth +
+          '-' + $scope.birthdayInfo.selectedDay;
+        $scope.isChanged = true;
+      };
+
+      $scope.images_list = [];
+
+      // "添加附件"事件
+      $scope.addAttachment = function () {
+        $ionicActionSheet.show({
+          buttons: [
+            {text: '相机'},
+            {text: '图库'}
+          ],
+          cancelText: '关闭',
+          cancel: function () {
+            return true;
+          },
+          buttonClicked: function (index) {
+            switch (index) {
+              case 0:
+                appendByCamera();
+                break;
+              case 1:
+                pickImage();
+                break;
+              default:
+                break;
+            }
+            return true;
+          }
+        });
+      };
+
+      //image picker
+      var pickImage = function () {
+        var options = {
+          maximumImagesCount: 1,
+          width: 800,
+          height: 800,
+          quality: 80
+        };
+
+        $cordovaImagePicker.getPictures(options)
+          .then(function (results) {
+            $scope.images_list.push(results[0]);
+          }, function (error) {
+          });
       };
 
       $scope.$on('$ionicView.enter', function () {
         $scope.init();
       });
 
-      $scope.goPage = function (url) {
-        if (url === 'tab.setting_birthday') {
-          $state.go(url, {params: $scope.item.birthday}, {reload: true});
-        }
-        else if (url === 'tab.setting_gender') {
-          $state.go(url, {params: $scope.item.sex}, {reload: true});
-        }
-      };
-    })
-
-    .controller('SettingBirthdayCtrl', function ($scope, $stateParams, $state, $ionicPopup, SettingApi) {
-      var userBirthday = ($stateParams.params || '1900-1-1').split('-');
-      $scope.birthdayInfo = {};
-      $scope.birthdayInfo.selectedYear = userBirthday[0];
-      $scope.birthdayInfo.selectedMonth = userBirthday[1];
-      $scope.birthdayInfo.selectedDay = userBirthday[2];
-
-      $scope.birthdayInfo.years = [];
-      for (var i = 1900; i < 2020; i++) {
-        $scope.birthdayInfo.years.push(i);
-      }
-
-      $scope.birthdayInfo.months = [];
-      for (var i = 1; i < 13; i++) {
-        $scope.birthdayInfo.months.push(i);
-      }
-
-      $scope.birthdayInfo.days = [];
-      for (var i = 1; i < 32; i++) {
-        $scope.birthdayInfo.days.push(i);
-      }
-
-      $scope.changeBirthday = function () {
-        var memberInfo = {
-          birthday: $scope.birthdayInfo.selectedYear +
-          '-' + $scope.birthdayInfo.selectedMonth +
-          '-' + $scope.birthdayInfo.selectedDay
-        };
-
-        SettingApi.modifyMemberSetting(memberInfo, function (result) {
-          if (result.status === 1) {
-            var alertPopup = $ionicPopup.alert({
-              title: '修改个人信息',
-              template: result.msg
-            });
-
-            alertPopup.then(function (res) {
-              console.log(res);
-            });
-          }
-          else {
-            $state.go('tab.settings', {}, {reload: true});
-          }
+      $scope.save = function () {
+        SettingApi.modifyMemberSetting($scope.item, function (result) {
+          console.log(result);
         });
-      }
-    })
-
-    .controller('SettingGenderCtrl', function ($scope, $state, $stateParams, SettingApi) {
-      $scope.userGender = $stateParams.params || 'gentle';
-
-      $scope.setGender = function (gender) {
-        $scope.userGender = gender;
       };
 
-      $scope.changeGender = function () {
-        var memberInfo = {
-          sex: $scope.userGender
-        };
-
-        SettingApi.modifyMemberSetting(memberInfo, function (result) {
-          if (result.status === 1) {
-            var alertPopup = $ionicPopup.alert({
-              title: '修改个人信息',
-              template: result.msg
-            });
-
-            alertPopup.then(function (res) {
-              console.log(res);
-            });
-          }
-          else {
-            $state.go('tab.settings', {}, {reload: true});
-          }
-        });
-      }
+      $scope.$on('$ionicView.beforeLeave', function () {
+        $scope.save();
+      });
     })
 
     .controller('ChangePwdCtrl', function ($scope, $state, $ionicPopup, SettingApi, userService) {
@@ -226,8 +218,10 @@
         });
       };
 
-      $scope.init();
-      $scope.getIdCards();
+      $scope.$on('$ionicView.beforeEnter', function(){
+        $scope.init();
+        $scope.getIdCards();
+      });
 
       $scope.loadMore = function () {
         $scope.page++;
@@ -239,25 +233,31 @@
       }
     })
 
-    .controller('IdCardAddCtrl', function ($scope, $state, $stateParams, $ionicPopup, SettingApi) {
+    .controller('IdCardAddCtrl', function ($scope, $state, $stateParams, $ionicHistory, $ionicPopup, SettingApi) {
       if ($stateParams.cardInfo) {
         $scope.idCardInfo = JSON.parse($stateParams.cardInfo);
+        $scope.title = '设置身份证';
       }
       else {
         $scope.idCardInfo = {};
+        $scope.title = '新建身份证';
       }
 
 
       $scope.add = function () {
         if ($scope.idCardInfo.card_id) {
           SettingApi.setDefaultIdCard($scope.idCardInfo.card_id, function (result) {
-            var alertPopup = $ionicPopup.alert({
-              title: '设置身份信息',
+/*            var alertPopup = $ionicPopup.alert({
+              title: '设置身份证',
               template: result.msg ? result.msg : '设置成功'
             });
             alertPopup.then(function (res) {
               console.log(res);
-            });
+            });*/
+
+            if (result.status === 0) {
+              $ionicHistory.goBack();
+            }
           })
         }
         else {
@@ -268,16 +268,16 @@
           };
 
           SettingApi.addIdCard(data, function (result) {
-            var alertPopup = $ionicPopup.alert({
+/*            var alertPopup = $ionicPopup.alert({
               title: '添加身份信息',
               template: result.msg ? result.msg : '添加成功'
             });
             alertPopup.then(function (res) {
               console.log(res);
-            });
+            });*/
 
             if (result.status === 0) {
-              $state.go('tab.idcards', {}, {reload: true});
+              $ionicHistory.goBack();
             }
           })
         }
@@ -285,8 +285,6 @@
     })
 
     .factory('SettingApi', function ($http, apiEndpoint, userService, transformRequestAsFormPost) {
-      console.log(apiEndpoint);
-
       var sendRequest = function (url, data, callback) {
         var request = $http({
           method: "post",

@@ -57,6 +57,8 @@
         "StatusBar",
         "navigator",
         "translations_en",
-        "translations_zh"
+        "translations_zh",
+        "alipay",
+        "wxpay"
     ]
 }

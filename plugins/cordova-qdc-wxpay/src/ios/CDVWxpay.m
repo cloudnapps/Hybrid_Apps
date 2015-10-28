@@ -64,8 +64,7 @@
 {
     [self.commandDelegate runInBackground:^{
         // check arguments
-        NSString* strJson = [command.arguments objectAtIndex:0];
-        NSDictionary *params = [self getObjectFromJSON:strJson];
+        NSDictionary* params = [command.arguments objectAtIndex:0];
         if (!params)
         {
             [self failWithCallbackID:command.callbackId withMessage:@"参数格式错误"];
@@ -232,6 +231,7 @@
         {
             // fix issue that lang and country could be nil for iPhone 6 which caused crash.
             SendAuthResp* authResp = (SendAuthResp*)resp;
+            NSDictionary *response = nil;
             response = @{
                          @"code": authResp.code != nil ? authResp.code : @"",
                          @"state": authResp.state != nil ? authResp.state : @"",

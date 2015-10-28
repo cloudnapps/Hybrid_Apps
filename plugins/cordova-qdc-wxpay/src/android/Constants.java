@@ -9,12 +9,12 @@ package com.qdc.plugins.weixin;
 public class Constants {
 
 	// appid
-	public static final String APP_ID = "wxf2f565574a968187";
+	public static String APP_ID = "";
 
 	// 商户号
-	public static final String MCH_ID = "";
+	public static String MCH_ID = "";
 
 	// API密钥，在商户平台设置
-	public static final String API_KEY = "";
+	public static String API_KEY = "";
 
 }

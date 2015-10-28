@@ -1,0 +1,47 @@
+/* 商户首页 */
+.seller-header {
+  background-color: #fff;
+  background-position: 5% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-origin:content-box;
+  width: 100%;
+  height:170px;
+
+  .sel-logo {
+    height: 80px;
+
+    img {
+      width: 80px;
+      height: 80px;
+    }
+  }
+}
+.seller-nav {
+  line-height: 40px;
+
+  .sel-top {
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+
+    a {
+      color: #333333;
+      display: block;
+      padding: 10px 0;
+      text-decoration: none;
+
+      span {
+        display: block;
+        line-height: 20px;
+        border-right: 1px solid #e5e5e5;
+      }
+      .selt {
+        color: #e42112;
+      }
+    }
+  }
+  .sel-top:last-child a {
+    border-right: none;
+  }
+}

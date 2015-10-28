@@ -1,47 +1,130 @@
 <ion-view view-title="{{'settng_title'|translate}}" hide-tabs="true">
   <ion-content>
     <div class="row" style="padding: 0 20px;">
+      <div class="col col-90 col-center" style="padding: 0;height: 60px;line-height: 60px;font-size: 16px;">
+        <div class="row" style="padding: 0;">
+          <span class="col col-50 col-center" style="padding: 0;">用户名</span>
+          <span class="col col-50 col-center" style="padding: 0;text-align: right;">{{item.login_name}}</span>
+        </div>
+      </div>
+      <div class="col col-10 col-center" style="padding: 0;height: 60px;line-height: 60px;text-align: right;"
+           align="right">
+      </div>
+    </div>
+    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
+    <div class="row" style="padding: 0 20px;" ng-click="addAttachment()">
       <div class="col col-90 col-center" style="padding: 0;font-size: 16px;">
         <div class="row" style="padding: 0;line-height: 60px;height: 60px;">
           <span class="col col-50 col-center" style="padding: 0;">头像</span>
           <span class="col col-50 col-center" style="padding: 0;height: 60px;text-align: right;">
-            <img style="width: 50px;height: 50px;margin-top: 5px;border-radius: 50%;" src="img/ctf.png">
-            <!-- <img ng-src="{{item.logo}}"> -->
+            <img style="width: 50px;height: 50px;margin-top: 5px;border-radius: 50%;" ng-src="{{item.image}}">
           </span>
         </div>
       </div>
-      <div class="col col-10 col-center" style="padding: 0;line-height: 60px;height: 60px;text-align: right;" align="right">
+      <div class="col col-10 col-center" style="padding: 0;line-height: 60px;height: 60px;text-align: right;"
+           align="right">
         <a>
           <i class="icon ion-chevron-right icon-accessory"></i>
         </a>
       </div>
     </div>
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
-    <div class="row" style="padding: 0 20px;" ng-click="goPage('tab.setting_gender')">
+    <div class="row" style="padding: 0 20px;" ng-click="showGender = !showGender">
       <div class="col col-90 col-center" style="padding: 0;height: 60px;line-height: 60px;font-size: 16px;">
         <div class="row" style="padding: 0;">
           <span class="col col-50 col-center" style="padding: 0;">性别</span>
           <span class="col col-50 col-center" style="padding: 0;text-align: right;">{{item.sex}}</span>
         </div>
       </div>
-      <div class="col col-10 col-center" style="padding: 0;height: 60px;line-height: 60px;text-align: right;" align="right">
+      <div class="col col-10 col-center" style="padding: 0;height: 60px;line-height: 60px;text-align: right;"
+           align="right">
         <a>
-          <i class="icon ion-chevron-right icon-accessory"></i>
+          <i class="icon ion-chevron-right icon-accessory" ng-show="!showGender"></i>
+          <i class="icon ion-chevron-down icon-accessory" ng-show="showGender"></i>
         </a>
       </div>
     </div>
+
+    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;" ng-show="showGender">
+
+    <div class="button-bar" ng-show="showGender">
+      <a class="button button-clear" style="border: none;padding: 0; color: #000;" ng-click="setGender('gentle')">
+        <span ng-class="{'set-gender': item.sex === 'gentle'}">男</span>
+      </a>
+      <a class="button button-clear" style="border: none;padding: 0;color: #000;" ng-click="setGender('lady')">
+        <span ng-class="{'set-gender': item.sex === 'lady'}">女</span>
+      </a>
+    </div>
+
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
-    <div class="row" style="padding: 0 20px;" ng-click="goPage('tab.setting_birthday')">
+
+    <div class="row" style="padding: 0 20px;" ng-click="showBirthday = !showBirthday">
       <div class="col col-90 col-center" style="padding: 0;height: 60px;line-height: 60px;font-size: 16px;">
         <div class="row" style="padding: 0;">
           <span class="col col-50 col-center" style="padding: 0;">生日</span>
           <span class="col col-50 col-center" style="padding: 0;text-align: right;">{{item.birthday}}</span>
         </div>
       </div>
-      <div class="col col-10 col-center" style="padding: 0;height: 60px;line-height: 60px;text-align: right;" align="right">
+      <div class="col col-10 col-center" style="padding: 0;height: 60px;line-height: 60px;text-align: right;"
+           align="right">
         <a>
-          <i class="icon ion-chevron-right icon-accessory"></i>
+          <i class="icon ion-chevron-right icon-accessory" ng-show="!showBirthday"></i>
+          <i class="icon ion-chevron-down icon-accessory" ng-show="showBirthday"></i>
         </a>
+      </div>
+    </div>
+
+    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;" ng-show="showBirthday">
+
+    <div ng-show="showBirthday">
+      <div class="list">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            年
+          </div>
+          <select ng-model="birthdayInfo.selectedYear">
+            <option ng-repeat="s in birthdayInfo.years">{{s}}</option>
+          </select>
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            月
+          </div>
+          <select ng-model="birthdayInfo.selectedMonth">
+            <option ng-repeat="sh in birthdayInfo.months">{{sh}}</option>
+          </select>
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            日
+          </div>
+          <select ng-model="birthdayInfo.selectedDay">
+            <option ng-repeat="ar in birthdayInfo.days">{{ar}}</option>
+          </select>
+        </label>
+      </div>
+      <div class="button-bar">
+        <div class="row">
+          <div class="col col-100">
+            <button class="button button-full button-positive" style="font-size:16px;" ng-click="setBirthday()">
+              确定
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
+
+    <div class="row" style="padding: 0 20px;">
+      <div class="col col-90 col-center" style="padding: 0;height: 60px;line-height: 60px;font-size: 16px;">
+        <div class="row" style="padding: 0;">
+          <span class="col col-50 col-center" style="padding: 0;">用户级别</span>
+          <span class="col col-50 col-center" style="padding: 0;text-align: right;">{{item.lv_name}}</span>
+        </div>
+      </div>
+      <div class="col col-10 col-center" style="padding: 0;height: 60px;line-height: 60px;text-align: right;"
+           align="right">
       </div>
     </div>
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">

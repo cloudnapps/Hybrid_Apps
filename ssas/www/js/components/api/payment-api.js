@@ -2,14 +2,14 @@ angular.module('components')
   .factory('paymentApi', ['$q',
     function ($q) {
       var payByAlipay = function (payment) {
-        alert("alipay");
+        //alert("alipay");
         var deferred = $q.defer();
         var payObj = {};
         payObj["pay_info"] = payment.orderInfo;
         var paymentString = JSON.stringify(payObj);
 
-        alipay.payment(paymentString, function (cb_success) {
-            alert(cb_success);
+        alipay.payment(payObj, function (cb_success) {
+            //alert(cb_success);
             deferred.resolve(cb_success);
           },
           function (cb_failure) {
@@ -20,7 +20,7 @@ angular.module('components')
       };
 
       var payByWechat = function (payment) {
-        alert("wxPay");
+        //alert("wxPay");
         var deferred = $q.defer();
         var payObj = {};
         payObj["noncestr"] = payment.noncestr;
@@ -31,8 +31,8 @@ angular.module('components')
         payObj["sign"] = payment.sign;
         var paymentString = JSON.stringify(payObj);
 
-        wxpay.payment(paymentString, function (cb_success) {
-            alert(cb_success);
+        wxpay.payment(payObj, function (cb_success) {
+            //alert(cb_success);
             deferred.resolve(cb_success);
           },
           function (cb_failure) {
@@ -48,7 +48,7 @@ angular.module('components')
         // return deferred.promise;
         var payMetods = {
           alipayWallet: payByAlipay,
-          wxAppay: payByWechat
+          wxApppay: payByWechat
         };
         var payMethod = payMetods[payment.pay_app_id];
         if (payMethod) {
