@@ -51,4 +51,4 @@ angular.module("starter")
 		 	scan: scan			
 		 }
 		}		
-	) // end of barcode factory
+	); // end of barcode factory
