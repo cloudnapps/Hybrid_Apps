@@ -9,7 +9,7 @@
             <label class="checkbox">
               <input type="checkbox" ng-model="nature.selected" ng-change="toggleNature(nature)">
             </label>
-            <div>{{natureKey|translate}}</div>
+            <div class="item-name">{{natureKey|translate}}<span style="font-size: 10px;padding-left: 0.5em;">{{'bond_place'|translate}}</span></div>
           </div>
 
           <ion-option-button class="button-assertive" ng-click="removeNature(nature)">
@@ -35,7 +35,7 @@
           <ion-item class="good item" ng-repeat="good in seller.goods_list">
             <div class="item-checkbox">
               <label class="checkbox">
-                <input type="checkbox" ng-model="good.selected" ng-change="toggleGood(good)">
+                <input type="checkbox" class="selt-prdt" ng-model="good.selected" ng-change="toggleGood(good)">
               </label>
               <div class="row row-no-padding">
                 <a class="good-thumbnail-test" ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: good.product_id})">
@@ -44,9 +44,9 @@
                 </a>
 
                 <div class="good-info col">
-                  <h2 style="color: #444;font-size: 14px;">{{good.name}}</h2>
+                  <h2 style="color:#444;font-size:14px;">{{good.name}}</h2>
                   <p>{{good.spec}}</p>
-                  <p class="price" style="color: #bd252c;">{{good.buy_price|currency:'￥'}}</p>
+                  <p class="price">{{good.buy_price|currency:'￥'}}</p>
                     <quantity-input ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
                 </div>
               </div>
@@ -69,11 +69,11 @@
         </ion-item>
         <ion-item class="item item-complex">
           <div class="row row-no-padding">
-            <div class="col" style="font-size:0.5em;">
-              <div class="item-content" style="padding: 5px 10px 5px 16px;">
-                <div class="positive">货款总计: {{nature.item_amount |currency:'￥'}}</div>
-                <div class="positive">税费总计: {{nature.total_taxation_amount |currency:'￥'}}</div>
-                <div class="positive" style="margin-top: 2px;">共计: {{nature.total_item_amount |currency:'￥'}} (不含运费)</div>
+            <div class="col car-tol-price">
+              <div class="item-content car-cont">
+                <span>货款总计: {{nature.item_amount |currency:'￥'}}</span>
+                <span>税费总计: {{nature.total_taxation_amount |currency:'￥'}}</span>
+                <span style="margin-top: 2px;">共计: {{nature.total_item_amount |currency:'￥'}} (不含运费)</span>
               </div>
             </div>
             <button class="col-30 button button-full button-positive" style="margin:0;" ui-sref="tab.cart-checkout({nature: natureKey})">{{'cart_checkout'|translate}}</button>
