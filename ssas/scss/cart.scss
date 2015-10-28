@@ -10,13 +10,33 @@
   .nature.item {
     label.checkbox {
       width: 42px;
+      padding: 11px;
       margin-left: -10px;
     }
     .item-checkbox {
       padding-left: 40px;
-      height: 50px;
-      padding: 15px 0px 15px 10px;
+      height: 36px;
+      padding: 8px 0px 8px 10px;
       margin-left: 30px;
+
+      input {
+        width: 20px;
+        height: 20px;
+
+        &:before {
+          border-radius: 20px;
+        }
+
+        &:after {
+          top: 24%;
+          left: 25%;
+          width: 11px;
+          height: 6px;
+        }
+      }
+      .item-name {
+        font-size: 14px;
+      }
     }
     .item-content {
       padding: 0px 0px 0px 15px;
@@ -36,20 +56,55 @@
   .seller.item {
     label.checkbox {
       width: 42px;
+      padding: 11px;
     }
     .item-checkbox {
       padding-left: 40px;
+      font-size: 14px;
+      input {
+        width: 20px;
+        height: 20px;
+
+        &:before {
+          border-radius: 20px;
+        }
+
+        &:after {
+          top: 24%;
+          left: 25%;
+          width: 11px;
+          height: 6px;
+        }
+      }
     }
     .item-content {
       padding-right: 15px;
+      padding: 8px 8px 8px 16px;
     }
   }
   .good.item {
     label.checkbox {
       width: 42px;
+      padding: 11px;
     }
     .item-checkbox {
       padding-left: 40px;
+
+      .selt-prdt {
+        width: 20px;
+        height: 20px;
+
+        &:before {
+          border-radius: 20px;
+        }
+
+        &:after {
+          top: 24%;
+          left: 25%;
+          width: 11px;
+          height: 6px;
+        }
+      }
     }
     .item-content {
       padding-right: 15px;
@@ -78,6 +133,17 @@
     .good-info {
       display: inline-block;
       padding: 0px 0px 0px 10px;
+      font-size: 14px;
+
+      p {
+        height: 14px;
+        line-height: 14px;
+        font-size: 14px;
+      }
+      .price {
+        color: #bd252c;
+        margin-bottom: 3px;
+      }
     }
     .quantity-input {
       float: left;
@@ -126,5 +192,17 @@
 .cart-payment {
   .item {
     padding-left: 90px;
+  }
+}
+.car-tol-price {
+  font-size: 10px;
+
+  .car-cont {
+    padding: 5px 10px 5px 16px;
+
+    span {
+      display: block;
+      color: #bd252c;
+    }
   }
 }
