@@ -218,7 +218,7 @@
         });
       };
 
-      $scope.$on('$ionicView.beforeEnter', function(){
+      $scope.$on('$ionicView.beforeEnter', function () {
         $scope.init();
         $scope.getIdCards();
       });
@@ -247,16 +247,17 @@
       $scope.add = function () {
         if ($scope.idCardInfo.card_id) {
           SettingApi.setDefaultIdCard($scope.idCardInfo.card_id, function (result) {
-/*            var alertPopup = $ionicPopup.alert({
-              title: '设置身份证',
-              template: result.msg ? result.msg : '设置成功'
-            });
-            alertPopup.then(function (res) {
-              console.log(res);
-            });*/
-
             if (result.status === 0) {
               $ionicHistory.goBack();
+            }
+            else {
+              var alertPopup = $ionicPopup.alert({
+                title: '设置身份证',
+                template: result.msg
+              });
+              alertPopup.then(function (res) {
+                console.log(res);
+              })
             }
           });
         }
@@ -268,16 +269,18 @@
           };
 
           SettingApi.addIdCard(data, function (result) {
-/*            var alertPopup = $ionicPopup.alert({
-              title: '添加身份信息',
-              template: result.msg ? result.msg : '添加成功'
-            });
-            alertPopup.then(function (res) {
-              console.log(res);
-            });*/
-
             if (result.status === 0) {
               $ionicHistory.goBack();
+            }
+            else {
+              var alertPopup = $ionicPopup.alert({
+                title: '添加身份信息',
+                template: result.msg
+              });
+
+              alertPopup.then(function (res) {
+                console.log(res);
+              });
             }
           });
         }

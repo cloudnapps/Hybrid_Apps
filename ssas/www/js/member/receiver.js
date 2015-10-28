@@ -114,16 +114,17 @@
         };
 
         ReceiverApi.addReceiver(addrInfo, function (result) {
-/*          var alertPopup = $ionicPopup.alert({
-            title: '添加收货地址',
-            template: result.msg ? result.msg : '添加成功'
-          });
-          alertPopup.then(function (res) {
-            console.log(res);
-          });*/
-
           if (result.status === 0) {
             $ionicHistory.goBack();
+          }
+          else {
+            var alertPopup = $ionicPopup.alert({
+              title: '添加收货地址',
+              template: result.msg
+            });
+            alertPopup.then(function (res) {
+              console.log(res);
+            });
           }
         });
       };

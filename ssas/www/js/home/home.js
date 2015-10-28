@@ -150,6 +150,10 @@
         }
       });
 
+      $scope.signIn = function(){
+        $state.go('tab.signin', {}, {reload: true});
+      };
+
       $scope.openWeb = function () {
         alert("web");
         var options = {

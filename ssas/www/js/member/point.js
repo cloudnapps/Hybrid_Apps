@@ -66,7 +66,7 @@
       });
 
       $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActive){
+        if ($scope.isActive) {
           $scope.loadMore();
         }
       });
@@ -116,7 +116,7 @@
       });
 
       $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActive){
+        if ($scope.isActive) {
           $scope.loadMore();
         }
       });
@@ -160,7 +160,7 @@
 
       var addGold = function (value, reason, callback) {
         var url = apiEndpoint.url + '/member-add_gold.html';
-        var data = {};//init();
+        var data = userService.getMember();
 
         data.add_value = value;
         data.reason = reason;
