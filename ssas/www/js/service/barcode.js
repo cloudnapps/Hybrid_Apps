@@ -1,4 +1,5 @@
-app.factory('barcode', 
+angular.module("starter")
+	.factory('barcode', 
 	function($rootScope, shopApi, toastService, tabStateService){
 		
 		// definition start
