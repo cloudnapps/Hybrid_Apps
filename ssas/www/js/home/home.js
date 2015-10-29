@@ -40,9 +40,9 @@
         });
     }) // end of config
 
-    .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate, $ionicLoading,
+    .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate, $ionicLoading, barcode,
                                             $state, $ionicPopover, $window, $interval, $cordovaInAppBrowser,
-                                            HomeApi, SellerApi, toastService, $ionicScrollDelegate) {
+                                            HomeApi, SellerApi, toastService, $ionicScrollDelegate, $rootScope) {
       $scope.homeInfo = {};
 
       $scope.sellerInfo = {};
@@ -52,6 +52,8 @@
       $scope.showBtns = false;
 
       $scope.keywords = {};
+
+      $rootScope.barcodeScan = barcode.scan;
 
       $ionicPopover.fromTemplateUrl('shopPopover.html', {
         scope: $scope
@@ -150,7 +152,7 @@
         }
       });
 
-      $scope.signIn = function(){
+      $scope.signIn = function () {
         $state.go('tab.signin', {}, {reload: true});
       };
 
