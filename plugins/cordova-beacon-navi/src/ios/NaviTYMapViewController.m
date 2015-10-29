@@ -104,7 +104,7 @@
     self.navigationItem.titleView = _menu;
     
     
-    if(_poiID)
+    if(_poiID && [_poiID isKindOfClass:[NSString class]] && _poiID.length)
     {
         endPoi = [self.mapView getPoiOnCurrentFloorWithPoiID:_poiID layer:POI_ROOM];
         [self.mapView highlightPoi:endPoi];
