@@ -38,6 +38,9 @@ var translations_zh = {
     seller_title:'商户列表',
     seller_detail: '商戸详情',
 
+    //signin
+    signin_title: '签个到',
+
     //order
     ord_alltitle:'全部',
     ord_nopaytitle: '待付款',
