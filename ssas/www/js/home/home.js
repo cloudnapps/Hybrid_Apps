@@ -157,7 +157,6 @@
       };
 
       $scope.openWeb = function () {
-        $ionicLoading.show();
         var options = {
           location: 'no',
           clearcache: 'yes',
@@ -171,32 +170,18 @@
             // error
           });
         //$cordovaInAppBrowser.close();
-
-        $ionicLoading.hide();
       };
 
       $scope.showMap = function () {
-        $ionicLoading.show();
-
         navi.showMapNavigator("07550002F0110050", "1");
-
-        $ionicLoading.hide();
       };
 
       $scope.shake = function () {
-        $ionicLoading.show();
-
         shake.shakeByBeacon();
-
-        $ionicLoading.hide();
       };
 
       $scope.monitor = function () {
-        $ionicLoading.show();
-
         beaconMonitor.monitorByBeacon();
-
-        $ionicLoading.hide();
       };
     }) // end of HomeController
 
