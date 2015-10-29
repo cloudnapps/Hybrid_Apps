@@ -6,7 +6,7 @@
           <button class="button" ng-click="addGoodsFavorite()">收藏</button>
         </div>
         <div class="col-50">
-          <button class="button" ng-click="tabStateGo(tabIndex.home, 'tab.seller_detail', {sellerId: product.seller_id})">进店</button>
+          <button class="button" ui-sref="seller-detail({sellerId: product.seller_id})">进店</button>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
-<ion-view view-title="{{'product_detail'|translate}}" class="product" hide-tabs="true">
+<ion-view view-title="{{'product_detail'|translate}}" class="product">
+  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
   <ion-content>
     <ion-slide-box show-pager="true" does-continue="true" auto-play="true">
         <ion-slide ng-repeat="image in product.urls">
@@ -26,7 +27,7 @@
     <a class="button button-clear button-full button-small icon ion-chevron-right icon-right prdt-std" ng-click="showSpecModal()" style="color: #4c4c4c;">选择规格</a>
     <hr style="margin: 0;border-color: #e5e5e5;">
     
-    <div ng-hide="true" ng-click="tabStateGo(tabIndex.shop, 'tab.comments', {id:product.goods_id})">
+    <div ng-hide="true" ui-sref="tab.comments({id:product.goods_id})">
       <a class="button button-clear button-full button-small icon ion-chevron-right icon-right" style="text-align: left; color: #000">{{'comment'|translate}}
       </a>
     <div style="padding-left: 10px; font-size: 5px;">好评{{product.high_point}}% 已有{{product.count}}人购买</div>
@@ -35,7 +36,7 @@
     <div style="padding-left: 10px; font-size: 10px; color: #cccccc">{{comment.content}}</div>
     </div>
 
-    <a class="button button-clear button-full button-small icon ion-chevron-right icon-right prdt-std" style="color: #4c4c4c;" ng-click="tabStateGo(tabIndex.shop, 'tab.intro', {id: product.goods_id, productId: productId, sellerId: product.seller_id})">查看产品图文详情</a>
+    <a class="button button-clear button-full button-small icon ion-chevron-right icon-right prdt-std" style="color: #4c4c4c;" ui-sref="product-intro({id: product.goods_id, productId: productId, sellerId: product.seller_id})">查看产品图文详情</a>
 
     <hr style="margin: 0;border:none;border-top:10px solid #e5e5e5;">
 

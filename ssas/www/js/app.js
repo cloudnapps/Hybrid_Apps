@@ -5,10 +5,10 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home', 'shop', 'cart',
+var app = angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home', 'shop', 'cart',
   'member', 'order', 'receiver', 'favorite', 'return', 'setting', 'login', 'point', 'seller', 'complaint', 'ngIOS9UIWebViewPatch'])
   //For the real endpoint, we'd use this
-  .run(function ($ionicPlatform, $translate, userService) {
+  .run(function ($ionicPlatform, $translate, userService, $rootScope, $ionicHistory) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -32,35 +32,12 @@ angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home
     });
 
     userService.initFromLocal();
+
+    $rootScope.back = $ionicHistory.goBack;
+    $rootScope.checkLogin = userService.checkLogin;
   }) // end of run
 
-  .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
-
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
-    $stateProvider
-
-      // setup an abstract state for the tabs directive
-      .state('tab', {
-        url: '/tab',
-        abstract: true,
-        views: {
-          'main-view': {
-            templateUrl: 'templates/tab-main.html',
-            controller: function($scope, tabStateService){
-              // 跨tab之间的跳转
-              $scope.tabIndex = tabStateService.tabIndex;
-              $scope.tabStateGo = tabStateService.go;
-            }
-          }
-        },
-
-      });
-
-    // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/home');
+  .config(function ($translateProvider, $ionicConfigProvider) {   
     // register language tables
     $translateProvider.translations('en', translations_en);
     $translateProvider.translations('zh', translations_zh);

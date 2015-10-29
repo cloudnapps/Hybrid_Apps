@@ -13,15 +13,7 @@
         })
 
         .state('tab.seller_detail', {
-          url: '/seller/:sellerId',
-          views: {
-            'tab-home': {
-              templateUrl: 'templates/home/seller-detail.html',
-              controller: 'SellerDetailController'
-            }
-          }
-        });
-    }) // end of config
+  var home = angular.module('seller', [])  
 
     .controller('SellerListController', function ($scope, $state, $stateParams, $cordovaInAppBrowser, $cordovaBarcodeScanner, SellerApi) {
 
@@ -63,11 +55,7 @@
       $scope.loadMore = function () {
         $scope.page++;
         $scope.getSellers();
-      };
-
-      $scope.goDetail = function (item) {
-        $state.go('tab.seller_detail', {sellerId: item.seller_id}, {reload: true});
-      };
+      };    
 
       $scope.search = function () {
         $scope.filter = {

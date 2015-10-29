@@ -50,8 +50,9 @@ angular.module('starter.services', [])
     }
   })
 
-  .service('userService', function () {
+  .service('userService', function ($rootScope, $state) {
     var currentUser = {};
+    var nextState = null;
 
     // 存在 key 获取此属性值, 不存在key返回 currentUser对象
     this.get = function (key) {
@@ -126,6 +127,31 @@ angular.module('starter.services', [])
         localStorage.setItem('currentUser', '');
       }
     }
+
+    function setNextState(state) {
+      nextState = state;
+    }
+
+    function getNextState() {
+      return nextState;
+    }
+
+    function checkLogin(state) { 
+      
+      if (!this.isLogin()) {
+        setNextState(state);
+        $state.go('login');
+      } else {
+        $state.go(state);
+      }
+    
+    }
+
+    this.setNextState = setNextState;
+    this.getNextState = getNextState;
+    this.checkLogin = checkLogin;
+
+    $rootScope.userService = this;
   })
 
   .service('tabStateService', function ($timeout, $ionicTabsDelegate, $state) {

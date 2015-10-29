@@ -52,10 +52,13 @@
       </a>
     </div>
   </div>
+  <!-- barcode scan -->
   <ion-nav-buttons side="left">
     <a class="button button-icon" style="padding: 0;" ng-click="barcodeScan()"><img src="img/home/scan.png"
                                                                                     style="width: 67%"></a>
   </ion-nav-buttons>
+  
+  <!-- search -->
   <ion-nav-title style="margin: 0;">
     <form ng-submit="search()">
       <div class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
@@ -68,12 +71,15 @@
       <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
     </form>
   </ion-nav-title>
+  
+  <!-- discovery -->
   <ion-nav-buttons side="right">
     <div class="row row-center">
       <button class="col button button-clear" ng-click="openBtns()" style="font-size: 14px;">发现</button>
     </div>
   </ion-nav-buttons>
 
+  <!-- body -->
   <ion-content style="background-color: #fff;">
     <!--广告轮播图-->
     <div class="row" style="padding: 0px;margin: 0;width: 100%; height: 200px">
@@ -92,7 +98,7 @@
     <!--热门分类-->
     <div class="row prdt-hot-sort" style="margin: 0;">
       <div class="col col-20 col-center prdt-item" ng-repeat="category in homeInfo.cat_info"
-           ng-click="tabStateGo(tabIndex.shop, 'tab.products', {categoryId: category.cat_id})">
+           ui-sref="products({categoryId: category.cat_id})">
         <a>
           <img ng-src="{{category.image}}">
           <span>{{category.cat_name}}</span>
@@ -115,15 +121,15 @@
       </div>
     </div>
 
+    <!-- 促销活动 -->
     <div class="index-prdt-cont">
-      <!-- <ion-scroll direction="x"> -->
-      <div class="row" style="padding: 0;">
-        <div class="col col-50 col-center pad-5"
-             ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: activityInfo.product_info[0].product_id})">
-          <div class="new-prdt">
-            <a>
-              <img ng-src="{{activityInfo.product_info[0].image}}">
-
+     <!-- <ion-scroll direction="x"> -->
+        <div class="row" style="padding: 0;">
+          <div class="col col-50 col-center pad-5"
+               ui-sref="product({productId: activityInfo.product_info[0].product_id})">
+            <div class="new-prdt">
+              <a>
+                <img ng-src="{{activityInfo.product_info[0].image}}">
               <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
               <div class="row" style="padding: 0 3px;">
                 <span class="col col-50 col-center pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
@@ -134,11 +140,11 @@
           </div>
         </div>
 
-        <div class="col col-50 col-center pad-5"
-             ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: activityInfo.product_info[0].product_id})">
-          <div class="new-prdt">
-            <a>
-              <img ng-src="{{activityInfo.product_info[0].image}}">
+          <div class="col col-50 col-center pad-5"
+               ui-sref="product({productId: activityInfo.product_info[0].product_id})">
+            <div class="new-prdt">
+              <a>
+                <img ng-src="{{activityInfo.product_info[0].image}}">
 
               <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
               <div class="row" style="padding: 0 3px;">
@@ -153,7 +159,7 @@
       <!-- </ion-scroll> -->
     </div>
 
-    <!--商户-->
+    <!-- 商户列表 -->
     <div class="row nav-bar-title" style="padding: 0 0 5px;margin: 0;">
       <div class="col col-30 col-center nav-title-left">
         <div
@@ -162,45 +168,19 @@
         </div>
       </div>
       <div class="col col-70 col-center nav-title-right">
-        <a href="#/tab/sellers">更多<span>>></span></a>
+        <a ui-sref="sellers">更多<span>>></span></a>
         </span>
       </div>
     </div>
 
     <!-- 商标logo -->
-    <div class="row prdt-logo-one-row" style="margin: 3px 0 0;padding: 0;">
-      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[0].seller_id}}">
-        <img ng-src="{{sellerInfo.items[0].image}}">
-      </a>
-
-      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfos.items[1].seller_id}}">
-        <img ng-src="{{sellerInfo.items[1].image}}">
-      </a>
-
-      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[2].seller_id}}">
-        <img ng-src="{{sellerInfo.items[2].image}}">
-      </a>
-
-      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[3].seller_id}}">
-        <img ng-src="{{sellerInfo.items[3].image}}">
-      </a>
-    </div>
-    <div class="row prdt-logo-two-row" style="margin: 0;padding: 0;">
-      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[4].seller_id}}">
-        <img ng-src="{{sellerInfo.items[4].image}}">
-      </a>
-
-      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[5].seller_id}}">
-        <img ng-src="{{sellerInfo.items[5].image}}">
-      </a>
-
-      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[6].seller_id}}">
-        <img ng-src="{{sellerInfo.items[6].image}}">
-      </a>
-
-      <a class="col col-25 col-center logo-item" ng-href="#/tab/seller/{{sellerInfo.items[7].seller_id}}">
-        <img ng-src="{{sellerInfo.items[7].image}}">
-      </a>
+    <div class="row" style="margin: 3px 0 0;padding: 0; flex-wrap:wrap;">      
+      <div class="col col-25 col-center prdt-logo-one-row logo-item" ng-repeat="item in sellerInfo.items">
+        <a class="logo-item" 
+          ui-sref="seller-detail({sellerId:item.seller_id})">
+          <img ng-src="{{item.image}}"/>
+        </a>      
+      </div>      
     </div>
     <hr style="margin: 0;height:1px;border:none;border-top:10px solid #fff;"/>
     <!--分类商品-->
@@ -215,7 +195,7 @@
           <!-- <img src="img/hotproduct.jpg" style="height: 27px;"> -->
         </div>
         <div class="col col-70 col-center nav-title-right">
-          <a ng-click="tabStateGo(tabIndex.shop, 'tab.products', {categoryId: floor.cat_id})">更多<span>>></span></a>
+          <a ui-sref="products({categoryId:floor.cat_id})">更多<span>>></span></a>
         </div>
       </div>
 
@@ -223,8 +203,7 @@
         <div class="row" style="padding: 0;" ng-repeat="product in floor.product_info" ng-if="$index % 2 === 0">
           <div class="col col-50 col-center pad-5" ng-if="$index < floor.product_info.length">
             <div class="new-prdt">
-              <a
-                ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: floor.product_info[$index].product_id})">
+              <a ui-sref="product({productId:floor.product_info[$index].product_id})">
                 <img ng-src="{{floor.product_info[$index].image}}">
 
                 <div class="prdt-descb">{{floor.product_info[$index].name}}</div>
@@ -237,8 +216,7 @@
 
           <div class="col col-50 col-center pad-5" ng-if="$index+1 < floor.product_info.length">
             <div class="new-prdt">
-              <a
-                ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: floor.product_info[$index+1].product_id})">
+              <a ui-sref="product({productId:floor.product_info[$index+1].product_id})">
                 <img ng-src="{{floor.product_info[$index+1].image}}">
 
                 <div class="prdt-descb">{{floor.product_info[$index+1].name}}</div>
@@ -261,7 +239,7 @@
         </div>
       </div>
       <div class="col col-70 col-center nav-title-right">
-        <a ng-click="tabStateGo(tabIndex.shop, 'tab.categories', {})">更多<span>>></span></a>
+        <a ui-sref="tab.categories">更多<span>>></span></a>
         </span>
       </div>
     </div>
@@ -270,8 +248,7 @@
       <div class="row" style="padding: 0;" ng-repeat="product in homeInfo.goods_gallery" ng-if="$index % 2 === 0">
         <div class="col col-50 col-center pad-5" ng-if="$index < homeInfo.goods_gallery.length">
           <div class="new-prdt">
-            <a
-              ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.goods_gallery[$index].product_id})">
+            <a ui-sref="product({productId: homeInfo.goods_gallery[$index].product_id})">
               <img ng-src="{{homeInfo.goods_gallery[$index].image}}">
 
               <div class="prdt-descb">{{homeInfo.goods_gallery[$index].name}}</div>
@@ -284,8 +261,7 @@
 
         <div class="col col-50 col-center pad-5" ng-if="$index+1 < homeInfo.goods_gallery.length">
           <div class="new-prdt">
-            <a
-              ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: homeInfo.goods_gallery[$index].product_id})">
+            <a ui-sref="product({productId: homeInfo.goods_gallery[$index].product_id})">
               <img ng-src="{{floor.product_info[$index+1].image}}">
 
               <div class="prdt-descb">{{homeInfo.goods_gallery[$index+1].name}}</div>

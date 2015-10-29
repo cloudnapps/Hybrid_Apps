@@ -1,51 +1,7 @@
 (function () {
-  angular.module('login', ['starter.services'])
-    .config(function ($stateProvider) {
-
-      // Ionic uses AngularUI Router which uses the concept of states
-      // Learn more here: https://github.com/angular-ui/ui-router
-      // Set up the various states which the app can be in.
-      // Each state's controller can be found in controllers.js
-      $stateProvider
-
-        .state('tab.login', {
-          url: '/login',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/login/user-login.html',
-              controller: 'LoginCtrl'
-            }
-          }
-        })
-        .state('tab.register', {
-          url: '/register',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/login/user-register.html',
-              controller: 'LoginCtrl'
-            }
-          }
-        }) // 找回密码
-        .state('tab.retrieve', {
-          url: '/retrieve',
-          cache: false,
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/login/user-retrieve-password.html',
-              controller: 'RetrieveCtrl'
-            }
-          }
-        });
-    })
-
+  angular.module('login', ['starter.services'])    
     .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $ionicHistory, userService, LoginApi) {
-      $scope.userInfo = {};
-
-      $scope.$on('$ionicView.beforeEnter', function () {
-        if (userService.isLogin()) {
-          $scope.tabStateGo($scope.tabIndex.member, 'tab.member');
-        }
-      });
+      $scope.userInfo = {};      
 
       $scope.goBack = function () {
         console.log('userService.backIndex', userService.backIndex);
@@ -172,6 +128,12 @@
             alert(cb_failure);
           });
       };
+
+      $scope.register = function($scope, $state) {
+        this.back();
+        $state.go('register');
+      }
+
     })
 
     .controller('RetrieveCtrl', function ($scope, $state, $interval, LoginApi, toastService) {

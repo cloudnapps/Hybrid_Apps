@@ -1,48 +1,59 @@
-<ion-view view-title="{{'login_title'|translate}}" hide-tabs="true">
- <ion-nav-bar class="bar-positive ">
-  <ion-nav-back-button class="button-clear"
-    ng-click="goBack()">
-    <i class="icon ion-chevron-left"></i>
-  </ion-nav-back-button>
-</ion-nav-bar>
+<ion-view view-title="{{'login_title'|translate}}">
+  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+  
   <ion-content class="padding">
 
     <div class="list card" style="box-shadow: none;">
 
       <div class="item item-body" style="text-align: center;margin: 16px 30px;">
+        <!-- Logo -->
         <img src="img/ctf.png" style="width: 100%;height: 200px;">
 
         <div class="list" style="margin-top:20px;">
           <div style="border-radius: 10px;border: 1px solid #cecece;">
+            
+            <!-- 用户名 -->
             <div class="row" style="border-bottom: 1px solid #cecece;margin-top: 5px;">
               <i class="col col-20 col-center ion-person"></i>
               <input class="col col-80 col-center" type="text" ng-model="userInfo.name" placeholder="请输入用户名（手机号）">
             </div>
+            
+            <!-- 密码 -->
             <div class="row" style="margin-top:6px;">
               <i class="col col-20 col-center ion-locked"></i>
               <input class="col col-80 col-center" type="password" ng-model="userInfo.password" placeholder="请输入密码">
             </div>
           </div>
-          <div class="row" style="padding: 0;height: 50px;">
+
+
+          <div class="row" style="padding: 0;height: 50px;">            
+            <!-- 记住密码 -->            
             <div class="col col-50 col-center" style="text-align: left;">
               <input type="checkbox" ng-model="userInfo.remembered">
               <a href="" style="text-decoration: none;color: #666;">记住密码</a>
             </div>
+            
+            <!-- 注册 -->
             <div class="col col-50 col-center" style="text-align: right;">
-              <a href="#/tab/register" style="text-decoration: none;color: #666;">新用户注册</a>
+              <a ng-click="register()" style="text-decoration: none;color: #666;">新用户注册</a>
             </div>
           </div>
+
+          <!-- 登录按钮 -->
           <div class="row" style="padding: 0;margin-top: 20px;">
               <button class="button button-light" style="width: 100%;background-color: #568baa;color: #fff;border-radius: 10px;" ng-click="login()">登录</button>
           </div>
 
+
           <div class="row" style="margin-top: 5px;">
+            <!-- 微信登录 -->
             <div class="col col-50 col-center" style="text-align: center;" ng-click="logonByWechat()">
               <a href="" style="text-decoration: none;color: #666;">微信登录</a>
             </div>
 
+            <!-- 忘记密码 -->
             <div class="col col-50 col-center" style="text-align: center;">
-              <a href="#/tab/retrieve" style="text-decoration: none;color: #666;">忘记密码</a>
+              <a ng-click="retrievePassword()" style="text-decoration: none;color: #666;">忘记密码</a>
             </div>
           </div>
 
@@ -50,4 +61,3 @@
     </div>
   </ion-content>
 </ion-view>
-

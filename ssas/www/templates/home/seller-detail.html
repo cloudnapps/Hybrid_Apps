@@ -1,4 +1,5 @@
-<ion-view view-title="{{item.title}}" hide-tabs="true">
+<ion-view view-title="{{item.title}}">
+  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
   <ion-content>
     <div class="row seller-header" style="padding: 0;background-image: url('img/seller-index.jpg');">
       <div class="row" style="padding: 0;position: absolute;top: 90px;left:10px;">
@@ -34,20 +35,17 @@
         <div class="row" style="padding: 0;" ng-repeat="product in products" ng-if="$index % 2 === 0">
           <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
             <div class="new-prdt">
-              <a ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: products[$index].product_id})">
+              <a ui-sref="product({productId: products[$index].product_id})">
                 <img ng-src="{{products[$index].image}}">
 
                 <div class="prdt-descb">{{products[$index].name}}</div>
               </a>
             </div>
           </div>
-
           <div class="col col-50 col-center pad-5" ng-if="$index+1 < products.length">
             <div class="new-prdt">
-              <a
-                ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: floor.product_info[$index+1].product_id})">
+              <a ui-sref="product({productId: floor.product_info[$index+1].product_id})">
                 <img ng-src="{{products[$index+1].image}}">
-
                 <div class="prdt-descb">{{products[$index+1].name}}</div>
               </a>
             </div>

@@ -1,4 +1,5 @@
 <ion-view view-title="{{'seller_title'|translate}}" hide-tabs="true">
+  <ion-nav-buttons><back-button></back-button></ion-nav-buttons>
   <ion-content>
     <!--    <button class="button" ng-click="openWeb()">
           Baidu Map
@@ -25,8 +26,8 @@
           Beacon Notification
         </button>-->
     <div class="row" style="padding: 0;border-bottom: 1px solid #a9a9a9;" ng-repeat="item in items"
-         ng-click="goDetail(item)">
-      <div class="col col-20 col-center" style="padding:0;">
+         ui-sref="seller-detail({sellerId: item.seller_id})">
+      <div class="col col-25 col-center" style="padding:0;">
         <img style="height: 75px;width: 75px;margin: 15px 10px 10px;padding: 5px;border: 1px solid #a9a9a9;"
              ng-src="{{item.image}}">
       </div>
