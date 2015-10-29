@@ -92,7 +92,7 @@ angular.module('starter.services', [])
       catch (e) {
         console.log(e);
         currentUser = {};
-        saveToLocal();
+        localStorage.setItem('currentUser', '');
       }
       return currentUser;
     };
@@ -113,7 +113,12 @@ angular.module('starter.services', [])
 
     function saveToLocal() {
       try {
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        if (currentUser && currentUser.isRemembered) {
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        }
+        else {
+          localStorage.setItem('currentUser', '');
+        }
       }
       catch (e) {
         console.log(e);

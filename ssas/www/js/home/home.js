@@ -40,9 +40,10 @@
         });
     }) // end of config
 
-    .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate, $ionicLoading, barcode,
-                                            $state, $ionicPopover, $window, $interval, $cordovaInAppBrowser,
-                                            HomeApi, SellerApi, toastService, $ionicScrollDelegate, $rootScope) {
+    .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate, $ionicLoading,
+                                            $rootScope, barcode, $cordovaInAppBrowser,
+                                            $state, $ionicPopover, $window, $interval, $ionicScrollDelegate,
+                                            HomeApi, SellerApi) {
       $scope.homeInfo = {};
 
       $scope.sellerInfo = {};
@@ -193,21 +194,52 @@
       });
     }) // end of ActivityController
 
-    .controller('SigninController', function ($scope, $ionicPopup, PointApi) {
+    .controller('SigninController', function ($scope, $ionicPopup, $cordovaGeolocation, PointApi) {
+      var lat_constant = 31,
+        long_constant = 121;
+
+      function radius(d) {
+        return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+      }
+
+      //计算距离，参数分别为第一点的纬度，经度；第二点的纬度，经度
+      function getDistance(lat1, lng1, lat2, lng2) {
+        var radLat1 = radius(lat1);
+        var radLat2 = radius(lat2);
+        var a = radLat1 - radLat2;
+        var b = radius(lng1) - radius(lng2);
+        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
+            Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+        s = s * 6378.137;// EARTH_RADIUS;
+        s = Math.round(s * 10000) / 10000; //输出为公里
+        //s=s.toFixed(4);
+        return s;
+      }
+
+
       $scope.signedIn = function () {
-        PointApi.addGold(10, '签到送积分', function (result) {
-          if (result.status === 0) {
-            var alertPopup = $ionicPopup.alert({
-              title: '签到成功',
-              template: '恭喜你获得10个金币，请到会员中心查看'
-            });
-            alertPopup.then(function (res) {
-              console.log(res);
-            });
-          }
+        var result = $cordovaGeolocation.getCurrentPosition();
+        result.then(function (response) {
+          var distantce = getDistance(response.coords.latitude, response.coords.longitude,
+            lat_constant, long_constant);
+          alert(distantce);
+
+          PointApi.addGold(10, '签到送金币', function (result) {
+            if (result.status === 0) {
+              var alertPopup = $ionicPopup.alert({
+                title: '签到成功',
+                template: '恭喜你获得10个金币，请到会员中心查看'
+              });
+              alertPopup.then(function (res) {
+                console.log(res);
+              });
+            }
+          });
+        }, function (err) {
+          console.log('eeeeeee', err);
         });
       };
-    }) // end of HomeController
+    }) // end of SigninController
 
     .factory('HomeApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost',
       function ($http, apiEndpoint, transformRequestAsFormPost) {

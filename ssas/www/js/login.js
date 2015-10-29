@@ -64,6 +64,7 @@
         currentUser.memberId = result.data.member_id;
         currentUser.name = result.data.login_name;
         currentUser.token = result.data.token;
+        currentUser.isRemembered = $scope.userInfo.remembered;
 
         userService.set(currentUser);
         if (userService.backIndex === -1) {
