@@ -40,8 +40,8 @@
         });
     }) // end of config
 
-    .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate,
-                                            $state, $ionicPopover, $window, $interval,
+    .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate, $ionicLoading,
+                                            $state, $ionicPopover, $window, $interval, $cordovaInAppBrowser,
                                             HomeApi, SellerApi, toastService, $ionicScrollDelegate) {
       $scope.homeInfo = {};
 
@@ -155,7 +155,7 @@
       };
 
       $scope.openWeb = function () {
-        alert("web");
+        $ionicLoading.show();
         var options = {
           location: 'no',
           clearcache: 'yes',
@@ -169,23 +169,32 @@
             // error
           });
         //$cordovaInAppBrowser.close();
+
+        $ionicLoading.hide();
       };
 
       $scope.showMap = function () {
-        alert("navi");
+        $ionicLoading.show();
 
         navi.showMapNavigator("07550002F0110050", "1");
+
+        $ionicLoading.hide();
       };
 
       $scope.shake = function () {
-        alert("shake");
+        $ionicLoading.show();
 
         shake.shakeByBeacon();
+
+        $ionicLoading.hide();
       };
 
       $scope.monitor = function () {
-        alert("monitor");
+        $ionicLoading.show();
+
         beaconMonitor.monitorByBeacon();
+
+        $ionicLoading.hide();
       };
     }) // end of HomeController
 
