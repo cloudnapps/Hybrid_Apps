@@ -173,7 +173,7 @@
       };
 
       $scope.showMap = function () {
-        navi.showMapNavigator("07550002F0110050", "1");
+        navi.showMapNavigator("", "1"); //07550002F0110050
       };
 
       $scope.shake = function () {

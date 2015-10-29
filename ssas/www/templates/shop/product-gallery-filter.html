@@ -20,7 +20,7 @@
     <div ng-repeat="props in galleryFilter.props">
       <h4>{{props.prop_name}}</h4>
       <div class="row" style="flex-wrap:wrap">
-        <div class="col col-33 text-center" ng-repeat="propValue in props.prop_value" ng-click="setPropIndex(propValue.prop_index)" style="white-space: nowrap;">        
+        <div class="col col-33 text-center" ng-repeat="propValue in props.prop_value" ng-click="setPropIndex(propValue.prop_index)">        
           <div class="prop" ng-class="{active: propValue.prop_index === propIndex}">
           {{propValue.prop_value_name}}
           </div>        

@@ -46,8 +46,7 @@
     
     __weak CDVMapNavigator* weakSelf = self;
     [self.commandDelegate runInBackground:^{
-        if(mapNavigatorViewController == nil)
-            mapNavigatorViewController = [[NaviTYMapViewController alloc] init];
+        mapNavigatorViewController = [[NaviTYMapViewController alloc] init];
         mapNavigatorViewController.floor = floorNum.intValue;
         mapNavigatorViewController.poiID = strPoiID;
         mapNavigatorViewController.cityID = cityID;
@@ -78,12 +77,11 @@
     
     __weak CDVMapNavigator* weakSelf = self;
     [self.commandDelegate runInBackground:^{
-        if(shopTYMapViewController == nil)
-            shopTYMapViewController = [[ShopTYMapViewController alloc] init];
+        shopTYMapViewController = [[ShopTYMapViewController alloc] init];
         shopTYMapViewController.floor = floorNum.intValue;
         shopTYMapViewController.poiID = strPoiID;
         shopTYMapViewController.cityID = cityID;
-        mapNavigatorViewController.buildingID = buildingID;
+        shopTYMapViewController.buildingID = buildingID;
         shopTYMapViewController.userID = userID;
         shopTYMapViewController.licenseID = licenseID;
         shopTYMapViewController.beaconUUID = beaconUUID;
