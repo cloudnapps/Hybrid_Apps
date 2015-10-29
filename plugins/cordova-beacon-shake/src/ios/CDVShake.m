@@ -31,7 +31,7 @@
 {
     if([CAProximityManager shared] == nil)
     {
-         CAConfig *config = [CAConfig new];
+        CAConfig *config = [CAConfig new];
         AppDelegate* delegate = self.appDelegate;
         config.serverURL = [delegate.viewController.settings objectForKey:@"serverurl"];
         config.appKey = [delegate.viewController.settings objectForKey:@"appkey"];
@@ -93,7 +93,7 @@
     [[CAProximityManager shared] startMonitoring];
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close)];
-
+    self.navigationItem.title = @"摇一摇";
     [self loadGifView];
     
     self.view.backgroundColor = [UIColor colorWithWhite:74/255.0f alpha:1];
@@ -213,7 +213,7 @@
                [_motionManager stopAccelerometerUpdates];
                 _labelView.text = @"";
                 NSLog(@"没有发现推送信息");
-                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"检测结果" message:[NSString stringWithFormat:@"没有发现推送信息:%ld",(long)_tryCount] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"检测结果" message:[NSString stringWithFormat:@"没有发现推送信息"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alert show];
                 _isShaking = NO;
             }
@@ -233,7 +233,7 @@
 
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if(motion == UIEventSubtypeMotionShake && _isShaking == NO) {
-        _labelView.text = @"Loading...";
+        _labelView.text = @"发现中...";
         [_motionManager startAccelerometerUpdates];
         _isShaking = YES;
         AudioServicesPlaySystemSound(_sound);

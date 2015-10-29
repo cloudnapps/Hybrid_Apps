@@ -32,6 +32,12 @@
 
         <resource-file src="src/MapResource.bundle" />
 
+        <config-file target="*-Info.plist" parent="UISupportedInterfaceOrientations">
+           <array>
+              <string>UIInterfaceOrientationPortrait</string>
+           </array>
+        </config-file>
+
         <config-file target="*-Info.plist" parent="CFBundleURLTypes">
           <array>
             <dict>
