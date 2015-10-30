@@ -1,49 +1,5 @@
 (function () {
-  angular.module('return', ['starter.services'])
-    .config(function ($stateProvider) {
-
-      // Ionic uses AngularUI Router which uses the concept of states
-      // Learn more here: https://github.com/angular-ui/ui-router
-      // Set up the various states which the app can be in.
-      // Each state's controller can be found in controllers.js
-      $stateProvider
-
-        .state('tab.feedbacks', {
-          url: '/feedbacks',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/feedback-index.html'
-            }
-          }
-        })
-        .state('tab.return_request', {
-          url: '/returnrequest/:orderId',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/return-request.html',
-              controller: 'ReturnRequestCtrl'
-            }
-          }
-        })
-        .state('tab.feedbacks.returns', {
-          url: '/returns',
-          views: {
-            'tab-feedbacks': {
-              templateUrl: 'templates/member/return-list.html',
-              controller: 'ReturnListCtrl'
-            }
-          }
-        })
-        .state('tab.feedbacks.return_detail', {
-          url: '/return/:returnId',
-          views: {
-            'tab-feedbacks': {
-              templateUrl: 'templates/member/return-detail.html',
-              controller: 'ReturnDetailCtrl'
-            }
-          }
-        });
-    })
+  angular.module('return', ['starter.services'])   
 
     .controller('ReturnRequestCtrl', function ($scope, $stateParams, $ionicPopup, $state, ReturnApi) {
       $scope.returnInfo = {};

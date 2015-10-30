@@ -44,13 +44,11 @@
         <div class="col col-50 col-center"
              style="padding: 0px;background-color: #bd252c;    text-align: center;border-right: 1px solid #fff;">
           <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;"
-             ui-sref="favorites"
-
-             href="#/tab/favorites?type=goods">收藏的商品</a>
+             ui-sref="favorites({type:'goods'})">收藏的商品</a>
         </div>
         <div class="col col-50 col-center" style="padding: 0px;background-color: #bd252c;text-align: center;">
           <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;"
-             href="#/tab/favorites?type=sellers">收藏的店铺</a>
+             ui-sref="favorites({type:'sellers'})">收藏的店铺</a>
         </div>
       </div>
     </div>
@@ -112,7 +110,7 @@
 
     <hr style="margin: 0;height:10px;border:none;border-top:10px solid #f1f1f1;"/>
 
-    <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ng-click="gotoPage('points')">
+    <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ui-sref="points">
       <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
         <a style="color: #333333;text-decoration: none;">我的积分</a>
       </div>
@@ -123,7 +121,7 @@
 
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #f1f1f1;"/>
 
-    <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ng-click="gotoPage('golds')">
+    <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ui-sref="golds">
       <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
         <a style="color: #333333;text-decoration: none;">我的金币</a>
       </div>

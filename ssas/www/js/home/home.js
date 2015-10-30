@@ -103,7 +103,7 @@
           $window.location.href = item.outurl;
         }
         else if (item.type === 'product') {
-          $scope.tabStateGo($scope.tabIndex.shop, 'tab.product', {productId: item.id});
+          $state.go('product', {productId: item.id});
         }
       };
 

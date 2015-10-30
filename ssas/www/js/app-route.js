@@ -175,7 +175,7 @@ angular.module('starter')
           }
         })
         // 收货地址修改
-        .state('receiver_change', {
+        .state('receiver-change', {
           url: '/receiverchange/:addrInfo',
           views: {
             'main-view': {
@@ -203,7 +203,236 @@ angular.module('starter')
               controller: 'IdCardAddCtrl'
             }
           }
-        })     
+        })
+        // 收藏管理
+        .state('favorites', {
+          url: '/favorites?type',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/favorite-index.html',
+              controller: 'FavoritesCtrl'
+            }
+          }
+        })
+        // 积分管理
+        .state('points', {
+          url: '/points',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/point-index.html',
+              controller: 'PointsCtrl'
+            }
+          }
+        })
+        // 金币管理
+        .state('golds', {
+          url: '/golds',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/gold-index.html',
+              controller: 'GoldsCtrl'
+            }
+          }
+        })
+        // 订单管理
+        .state('orders', {
+          url: '/orders?type',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/order-index.html',
+              controller: 'OrdersAllCtrl'
+            }
+          }
+        })
+        // 订单详情
+        .state('order-detail', {
+          url: '/order/:orderId',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/order-detail.html',
+              controller: 'OrderDetailCtrl'
+            }
+          }
+        })
+        // 订单跟踪详情
+        .state('order-track', {
+          url: '/track/:orderId',
+          views: {
+            'tab-member': {
+              templateUrl: 'templates/member/order-track.html',
+              controller: 'OrderTrackCtrl'
+            }
+          }
+        })
+        // 支付方法选择
+        .state('order-pay', {
+          url: '/pay/:orderId',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/cart/cart-payment.html',
+              controller: 'OrderPayCtrl'
+            }
+          }
+        })
+        // 订单评论
+        .state('order-comment', {
+          url: '/comment/:orderId',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/comment-request.html',
+              controller: 'CommentRequestCtrl'
+            }
+          }
+        })
+        // 退货管理
+        .state('return-orders', {
+          url: '/return_orders',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/order-list-return.html',
+              controller: 'OrderReturnCtrl'
+            }
+          }
+        })
+        // 投诉管理
+        .state('complaint-orders', {
+          url: '/complaint_orders',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/order-list-complaint.html',
+              controller: 'OrderComplaintCtrl'
+            }
+          }
+        })
+        // 投诉申请
+        .state('complaint-request', {
+          url: '/complaintrequest/:orderId',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/complaint-request.html',
+              controller: 'ComplaintRequestCtrl'
+            }
+          }
+        })
+        .state('complaints', {
+          url: '/complaints',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/complaint-list.html',
+              controller: 'ComplaintListCtrl'
+            }
+          }
+        })
+        .state('complaint-detail', {
+          url: '/complaint/:oId',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/complaint-detail.html',
+              controller: 'ComplaintDetailCtrl'
+            }
+          }
+        })
+        .state('feedbacks', {
+          url: '/feedbacks',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/feedback-index.html'
+            }
+          }
+        })
+        .state('return-request', {
+          url: '/returnrequest/:orderId',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/return-request.html',
+              controller: 'ReturnRequestCtrl'
+            }
+          }
+        })
+        .state('feedbacks-returns', {
+          url: '/returns',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/return-list.html',
+              controller: 'ReturnListCtrl'
+            }
+          }
+        })
+        .state('feedbacks-return-detail', {
+          url: '/return/:returnId',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/return-detail.html',
+              controller: 'ReturnDetailCtrl'
+            }
+          }
+        })
+        // 购物车首页
+        .state('tab.cart', {
+            url: '/cart',
+            cache: false,
+            views: {
+              'tab-cart': {
+                templateUrl: 'templates/cart/cart-index.html',
+                controller: 'CartController'
+              }
+            }
+          })
+
+          .state('tab.cart-checkout', {
+            url: '/cart-checkout?nature',
+            views: {
+              'tab-cart': {
+                templateUrl: 'templates/cart/cart-checkout.html',
+                controller: 'CartCheckoutController'
+              }
+            }
+          })
+          .state('tab.cart-payment', {
+            url: '/cart-payment',
+            views: {
+              'tab-cart': {
+                templateUrl: 'templates/cart/cart-payment.html',
+                controller: 'CartPaymentController'
+              }
+            }
+          })
+          .state('tab.order-payed', {
+            url: '/order-payed',
+            views: {
+              'tab-cart': {
+                templateUrl: 'templates/cart/order-payed.html',
+                controller: 'OrderPayedController'
+              }
+            }
+          })
+          .state('tab.cart-receiver-change', {
+            url: '/cart-receiver-change/:addrInfo',
+            views: {
+              'tab-cart': {
+                templateUrl: 'templates/member/receiver-add.html',
+                controller: 'ReceiverAddCtrl'
+              }
+            }
+          })
+          .state('tab.cart-idcard-change', {
+            url: '/idcardchange/:cardInfo',
+            views: {
+              'tab-cart': {
+                templateUrl: 'templates/member/idcard-add.html',
+                controller: 'IdCardAddCtrl'
+              }
+            }
+          })
+          .state('iframe', {
+            url: '/iframe',
+            views: {
+              'main-view': {
+                templateUrl: 'templates/cart/cart-iframe.html',
+                controller: 'iframeController'
+              }
+            }
+          })
 
     	// if none of the above states are matched, use this as the fallback
     	$urlRouterProvider.otherwise('/tab/home');

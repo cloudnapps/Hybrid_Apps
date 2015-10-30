@@ -1,4 +1,4 @@
-<div class="bar bar-subheader">
+<div class="bar bar-subheader">  
   <div class="row" style="padding: 0 0px;height: 40px;line-height: 40px;">
     <div class="col col-50"
          style="padding: 0px;text-align: center;height: 40px;font-size: 12px;"
@@ -16,13 +16,14 @@
   </div>
 </div>
 <ion-view view-title="{{'fav_title'|translate}}" hide-tabs="true">
+  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
   <ion-content>
     <div style="height: 44px">
     </div>
     <ion-list ng-show="filter === 'goods'">
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items"
                 type="item-text-wrap"
-                ng-click="tabStateGo(tabIndex.shop, 'tab.product', {productId: item.product_id})">
+                ui-sref="product({productId: item.product_id})">
         <img style="border-radius: 0;" ng-src="{{item.image}}">
 
         <h2 style="color:#666c70;font-size: 14px;margin-bottom: 5px;">{{item.name}}</h2>
@@ -37,7 +38,7 @@
     <ion-list ng-show="filter === 'sellers'">
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items"
                 type="item-text-wrap"
-                ng-click="tabStateGo(tabIndex.home, 'tab.seller_detail', {sellerId: item.seller_id})">
+                ui-sref="seller-detail({sellerId: item.seller_id})">
 
         <img style="border-radius: 0;" ng-src="{{item.image}}">
 

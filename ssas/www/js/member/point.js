@@ -1,32 +1,5 @@
 (function () {
-  angular.module('point', ['starter.services'])
-    .config(function ($stateProvider) {
-
-      // Ionic uses AngularUI Router which uses the concept of states
-      // Learn more here: https://github.com/angular-ui/ui-router
-      // Set up the various states which the app can be in.
-      // Each state's controller can be found in controllers.js
-      $stateProvider
-
-        .state('tab.points', {
-          url: '/points',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/point-index.html',
-              controller: 'PointsCtrl'
-            }
-          }
-        })
-        .state('tab.golds', {
-          url: '/golds',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/gold-index.html',
-              controller: 'GoldsCtrl'
-            }
-          }
-        });
-    })
+  angular.module('point', ['starter.services'])    
     .controller('PointsCtrl', function ($scope, PointApi) {
       $scope.pointInfo = {};
 

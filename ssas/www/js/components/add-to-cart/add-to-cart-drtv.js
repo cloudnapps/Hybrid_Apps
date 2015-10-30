@@ -46,7 +46,7 @@ angular
           cartApi
             .addToCart($scope.product)
             .then(function() {
-              $scope.tabStateGo($scope.tabIndex.cart, 'tab.cart');
+              $scope.userService.checkLogin('tab.cart');              
             })
             .catch(function() {
             });
@@ -54,9 +54,6 @@ angular
 
         function isLogin(){
           if(!userService.isLogin()) {
-            // 跳转登录
-            userService.backIndex = $scope.tabIndex.shop;
-            $scope.tabStateGo($scope.tabIndex.member);
             return false;
           }
           return true;

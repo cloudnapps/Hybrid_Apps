@@ -34,7 +34,7 @@
       };
 
       $scope.edit = function (item) {
-        $state.go('tab.receiver_change', {addrInfo: JSON.stringify(item)}, {reload: true});
+        $state.go('receiver-change', {addrInfo: JSON.stringify(item)}, {reload: true});
       };
 
       $scope.remove = function (item) {

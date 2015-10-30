@@ -16,7 +16,8 @@ navigation history that also transitions its views in and out.
   </ion-tab>
 
    <!-- Cart Tab -->
-  <ion-tab title="{{'cart'|translate}}" icon-off="ion-android-cart" icon-on="ion-android-cart" href="#/tab/cart">
+  <ion-tab title="{{'cart'|translate}}" icon-off="ion-android-cart" icon-on="ion-android-cart"
+    ng-click="userService.checkLogin('tab.cart')">
     <ion-nav-view name="tab-cart"></ion-nav-view>
   </ion-tab>
 

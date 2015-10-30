@@ -1,78 +1,5 @@
 (function () {
-  angular.module('order', ['starter.services'])
-    .config(function ($stateProvider) {
-
-      // Ionic uses AngularUI Router which uses the concept of states
-      // Learn more here: https://github.com/angular-ui/ui-router
-      // Set up the various states which the app can be in.
-      // Each state's controller can be found in controllers.js
-      $stateProvider
-
-        .state('tab.orders', {
-          url: '/orders?type',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/order-index.html',
-              controller: 'OrdersAllCtrl'
-            }
-          }
-        })
-        .state('tab.order_detail', {
-          url: '/order/:orderId',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/order-detail.html',
-              controller: 'OrderDetailCtrl'
-            }
-          }
-        })
-        .state('tab.order_track', {
-          url: '/track/:orderId',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/order-track.html',
-              controller: 'OrderTrackCtrl'
-            }
-          }
-        })
-        .state('tab.order_pay', {
-          url: '/pay/:orderId',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/cart/cart-payment.html',
-              controller: 'OrderPayCtrl'
-            }
-          }
-        })
-        .state('tab.order_comment', {
-          url: '/comment/:orderId',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/comment-request.html',
-              controller: 'CommentRequestCtrl'
-            }
-          }
-        })
-        .state('tab.return_orders', {
-          url: '/return_orders',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/order-list-return.html',
-              controller: 'OrderReturnCtrl'
-            }
-          }
-        })
-        .state('tab.complaint_orders', {
-          url: '/complaint_orders',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/order-list-complaint.html',
-              controller: 'OrderComplaintCtrl'
-            }
-          }
-        });
-    })
-
+  angular.module('order', ['starter.services'])   
     .controller('OrdersAllCtrl', function ($scope, $state, $stateParams, $ionicPopup, OrderApi) {
       $scope.init = function () {
         $scope.items = [];
@@ -143,11 +70,7 @@
       $scope.loadMore = function () {
         $scope.page++;
         $scope.getOrders();
-      };
-
-      $scope.viewDetail = function (item) {
-        $state.go('tab.order_detail', {orderId: item.order_id}, {reload: true});
-      };
+      };      
 
       $scope.cancelOrder = function (item) {
         var myPopup = $ionicPopup.show({
@@ -190,18 +113,14 @@
             });
           }
         });
-      };
-
-      $scope.trackOrder = function (item) {
-        $state.go('tab.order_track', {orderId: item.order_id}, {reload: true});
-      };
+      };    
 
       $scope.payOrder = function (item) {
-        $state.go('tab.order_pay', {orderId: item.order_id}, {reload: true});
+        $state.go('order-pay', {orderId: item.order_id}, {reload: true});
       };
 
       $scope.commentOrder = function (item) {
-        $state.go('tab.order_comment', {orderId: item.order_id}, {reload: true});
+        $state.go('order-comment', {orderId: item.order_id}, {reload: true});
       };
     })
 
@@ -384,7 +303,7 @@
       });
 
       $scope.requestReturn = function (item) {
-        $state.go('tab.return_request', {orderId: item.order_id}, {reload: true});
+        $state.go('return-request', {orderId: item.order_id}, {reload: true});
       };
     })
 
@@ -432,7 +351,7 @@
       });
 
       $scope.requestComplaint = function (item) {
-        $state.go('tab.complaint_request', {orderId: item.order_id}, {reload: true});
+        $state.go('complaint-request', {orderId: item.order_id}, {reload: true});
       };
     })
 

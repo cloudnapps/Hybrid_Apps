@@ -1,80 +1,9 @@
 angular.module('cart', ['components'])
-.config(function ($stateProvider) {
-  $stateProvider
-    .state('tab.cart', {
-      url: '/cart',
-      cache: false,
-      views: {
-        'tab-cart': {
-          templateUrl: 'templates/cart/cart-index.html',
-          controller: 'CartController'
-        }
-      }
-    })
-    .state('tab.cart-checkout', {
-      url: '/cart-checkout?nature',
-      views: {
-        'tab-cart': {
-          templateUrl: 'templates/cart/cart-checkout.html',
-          controller: 'CartCheckoutController'
-        }
-      }
-    })
-    .state('tab.cart-payment', {
-      url: '/cart-payment',
-      views: {
-        'tab-cart': {
-          templateUrl: 'templates/cart/cart-payment.html',
-          controller: 'CartPaymentController'
-        }
-      }
-    })
-    .state('tab.order-payed', {
-      url: '/order-payed',
-      views: {
-        'tab-cart': {
-          templateUrl: 'templates/cart/order-payed.html',
-          controller: 'OrderPayedController'
-        }
-      }
-    })
-    .state('tab.cart-receiver-change', {
-      url: '/cart-receiver-change/:addrInfo',
-      views: {
-        'tab-cart': {
-          templateUrl: 'templates/member/receiver-add.html',
-          controller: 'ReceiverAddCtrl'
-        }
-      }
-    })
-    .state('tab.cart-idcard-change', {
-      url: '/idcardchange/:cardInfo',
-      views: {
-        'tab-cart': {
-          templateUrl: 'templates/member/idcard-add.html',
-          controller: 'IdCardAddCtrl'
-        }
-      }
-    })
-    .state('tab.iframe', {
-      url: '/iframe',
-      views: {
-        'tab-cart': {
-          templateUrl: 'templates/cart/cart-iframe.html',
-          controller: 'iframeController'
-        }
-      }
-    });
-
-}) // end of config
 
 .controller('CartController', function ($scope, $state, $ionicLoading, cartApi, tabStateService, userService) {
 
   $scope.$on('$ionicView.beforeEnter', function(){
-    if(!userService.isLogin()) {
-      userService.backIndex =$scope.tabIndex.cart;
-      $scope.tabStateGo($scope.tabIndex.member);
-    }
+    userService.checkLogin('tab.cart');    
   });
 
   $scope.load = function () {
@@ -226,7 +155,7 @@ angular.module('cart', ['components'])
         if(order.pay_app_id === 'micbcpay') {
           console.log(response);
           $rootScope.micbcpayData = response.data;
-          $scope.tabStateGo($scope.tabIndex.cart, 'tab.iframe');
+          $state.go('iframe');
           return;
         }
         if (response.data.status !== 0) {

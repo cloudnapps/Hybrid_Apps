@@ -1,21 +1,8 @@
 (function () {
   angular.module('login', ['starter.services'])    
     .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $ionicHistory, userService, LoginApi) {
-      $scope.userInfo = {};      
-
-      // TODO: remove if not used
-      $scope.goBack = function () {
-        console.log('userService.backIndex', userService.backIndex);
-        if ([undefined, -1, $scope.tabIndex.cart, $scope.tabIndex.member].indexOf(userService.backIndex) !== -1) {
-          $scope.tabStateGo($scope.tabIndex.home);
-          userService.backIndex = -1;
-        }
-        else {
-          $scope.tabStateGo(userService.backIndex);
-          userService.backIndex = -1;
-        }
-      };
-
+      $scope.userInfo = {};          
+      
       // 会员登录成功
       $scope.saveInfo = function (result) {
         var currentUser = {};
@@ -29,17 +16,7 @@
           $scope.back();  
         }
         $scope.back();
-        userService.goNext();     
-        // if (userService.backIndex === -1) {
-        //   $ionicHistory.goBack();
-        //   $scope.tabStateGo($scope.tabIndex.member, 'tab.member');
-        //   userService.backIndex = -1;
-        // }
-        // else {
-        //   $ionicHistory.goBack();
-        //   $scope.tabStateGo(userService.backIndex);
-        //   userService.backIndex = -1;
-        // }
+        userService.goNext();        
       };
 
       $scope.login = function () {

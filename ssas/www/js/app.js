@@ -33,7 +33,9 @@ var app = angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.transla
 
     userService.initFromLocal();
 
-    $rootScope.back = $ionicHistory.goBack;
+    $rootScope.back = function(){
+      $ionicHistory.goBack.apply($ionicHistory, arguments);      
+    };    
     $rootScope.checkLogin = userService.checkLogin;
   }) // end of run
 

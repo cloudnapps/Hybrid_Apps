@@ -1,24 +1,5 @@
 (function () {
-  angular.module('favorite', ['starter.services'])
-    .config(function ($stateProvider) {
-
-      // Ionic uses AngularUI Router which uses the concept of states
-      // Learn more here: https://github.com/angular-ui/ui-router
-      // Set up the various states which the app can be in.
-      // Each state's controller can be found in controllers.js
-      $stateProvider
-
-        .state('tab.favorites', {
-          url: '/favorites?type',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/favorite-index.html',
-              controller: 'FavoritesCtrl'
-            }
-          }
-        });
-    })
-
+  angular.module('favorite', ['starter.services'])    
     .controller('FavoritesCtrl', function ($scope, $stateParams, $ionicPopup, $ionicHistory, FavoriteApi) {
       $scope.init = function () {
         $scope.items = [];

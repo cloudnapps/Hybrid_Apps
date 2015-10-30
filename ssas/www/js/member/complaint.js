@@ -1,42 +1,5 @@
 (function () {
-  angular.module('complaint', ['starter.services'])
-    .config(function ($stateProvider) {
-
-      // Ionic uses AngularUI Router which uses the concept of states
-      // Learn more here: https://github.com/angular-ui/ui-router
-      // Set up the various states which the app can be in.
-      // Each state's controller can be found in controllers.js
-      $stateProvider
-
-        .state('tab.complaint_request', {
-          url: '/complaintrequest/:orderId',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/complaint-request.html',
-              controller: 'ComplaintRequestCtrl'
-            }
-          }
-        })
-        .state('tab.feedbacks.complaints', {
-          url: '/complaints',
-          views: {
-            'tab-feedbacks': {
-              templateUrl: 'templates/member/complaint-list.html',
-              controller: 'ComplaintListCtrl'
-            }
-          }
-        })
-        .state('tab.feedbacks.complaint_detail', {
-          url: '/complaint/:oId',
-          views: {
-            'tab-feedbacks': {
-              templateUrl: 'templates/member/complaint-detail.html',
-              controller: 'ComplaintDetailCtrl'
-            }
-          }
-        });
-    })
-
+  angular.module('complaint', ['starter.services'])    
     .controller('ComplaintRequestCtrl', function ($scope, $stateParams, $state, ReturnApi) {
       $scope.complaintInfo = {};
 
@@ -77,7 +40,7 @@
           $scope.returnInfo.title, $scope.returnInfo.content, $scope.returnInfo.products,
           function (result) {
             if (result.status === 0) {
-              $state.go('return_list', {}, {reload: true});
+              $state.go('return-list', {}, {reload: true});
             }
           });
       };
