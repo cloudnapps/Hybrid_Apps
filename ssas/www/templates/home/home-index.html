@@ -175,7 +175,7 @@
 
     <!-- 商标logo -->
     <div class="row" style="margin: 3px 0 0;padding: 0; flex-wrap:wrap;">      
-      <div class="col col-25 col-center prdt-logo-one-row logo-item" ng-repeat="item in sellerInfo.items">
+      <div class="col col-25 col-center prdt-logo-one-row" ng-repeat="item in sellerInfo.items">
         <a class="logo-item" 
           ui-sref="seller-detail({sellerId:item.seller_id})">
           <img ng-src="{{item.image}}"/>
