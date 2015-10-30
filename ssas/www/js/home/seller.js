@@ -1,21 +1,6 @@
-(function () {
+(function () {  
   angular.module('seller', [])
-    .config(function ($stateProvider) {
-      $stateProvider
-        .state('tab.sellers', {
-          url: '/sellers?keywords',
-          views: {
-            'tab-home': {
-              templateUrl: 'templates/home/seller-list.html',
-              controller: 'SellerListController'
-            }
-          }
-        })
-
-        .state('tab.seller_detail', {
-  var home = angular.module('seller', [])  
-
-    .controller('SellerListController', function ($scope, $state, $stateParams, $cordovaInAppBrowser, $cordovaBarcodeScanner, SellerApi) {
+      .controller('SellerListController', function ($scope, $state, $stateParams, $cordovaInAppBrowser, $cordovaBarcodeScanner, SellerApi) {
 
       $scope.keywords = {};
 
