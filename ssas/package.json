@@ -70,7 +70,8 @@
     {
       "locator": "../plugins/cordova-project-related",
       "id": "com.cloudnapps.project.related"
-    }
+    },
+    "org.apache.cordova.camera"
   ],
   "cordovaPlatforms": [
     "ios",
@@ -78,6 +79,7 @@
       "platform": "ios2",
       "version": "",
       "locator": "ios2"
-    }
+    },
+    "android"
   ]
 }

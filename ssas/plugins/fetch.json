@@ -71,14 +71,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.qdc.plugins.wxpay": {
-        "source": {
-            "type": "local",
-            "path": "../plugins/cordova-qdc-wxpay"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "com.plugins.beacon.navi": {
         "source": {
             "type": "local",
@@ -115,6 +107,22 @@
         "source": {
             "type": "local",
             "path": "../plugins/cordova-project-related"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com.qdc.plugins.wxpay": {
+        "source": {
+            "type": "local",
+            "path": "../plugins/cordova-qdc-wxpay"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "org.apache.cordova.camera": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.camera"
         },
         "is_top_level": true,
         "variables": {}

@@ -1,4 +1,4 @@
-(function () {  
+(function () {
   angular.module('seller', [])
       .controller('SellerListController', function ($scope, $state, $stateParams, $cordovaInAppBrowser, $cordovaBarcodeScanner, SellerApi) {
 
@@ -40,7 +40,7 @@
       $scope.loadMore = function () {
         $scope.page++;
         $scope.getSellers();
-      };    
+      };
 
       $scope.search = function () {
         $scope.filter = {
@@ -256,8 +256,6 @@
     })
 
     .factory('SellerApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
-      console.log(apiEndpoint);
-
       var sendRequest = function (url, data, callback) {
         var request = $http({
           method: 'post',
