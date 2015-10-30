@@ -1,51 +1,5 @@
 (function () {
   angular.module('setting', ['starter.services'])
-    .config(function ($stateProvider) {
-
-      // Ionic uses AngularUI Router which uses the concept of states
-      // Learn more here: https://github.com/angular-ui/ui-router
-      // Set up the various states which the app can be in.
-      // Each state's controller can be found in controllers.js
-      $stateProvider
-
-        .state('tab.settings', {
-          url: '/settings',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/setting-index.html',
-              controller: 'SettingCtrl'
-            }
-          }
-        })
-        .state('tab.setting_changepwd', {
-          url: '/setting/changepwd',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/setting-changepwd.html',
-              controller: 'ChangePwdCtrl'
-            }
-          }
-        })
-        .state('tab.idcards', {
-          url: '/idcards',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/idcard-list.html',
-              controller: 'IdCardsCtrl'
-            }
-          }
-        })
-        .state('tab.idcard_change', {
-          url: '/idcardchange/:cardInfo',
-          views: {
-            'tab-member': {
-              templateUrl: 'templates/member/idcard-add.html',
-              controller: 'IdCardAddCtrl'
-            }
-          }
-        });
-    })
-
     .controller('SettingCtrl', function ($scope, $state, $stateParams, $cordovaImagePicker, $ionicActionSheet, SettingApi) {
       function setDays() {
         $scope.birthdayInfo.years = [];
@@ -187,9 +141,7 @@
             console.log(res);
 
             if (result.status === 0) {
-              userService.logOut();
-              userService.backIndex = -1;
-              $state.go('tab.member', {}, {reload: true});
+              $scope.back();
             }
           });
         });
@@ -229,7 +181,7 @@
       };
 
       $scope.setDefault = function (item) {
-        $state.go('tab.idcard_change', {cardInfo: JSON.stringify(item)}, {reload: true});
+        $state.go('idcard-change', {cardInfo: JSON.stringify(item)}, {reload: true});
       };
     })
 
@@ -248,7 +200,7 @@
         if ($scope.idCardInfo.card_id) {
           SettingApi.setDefaultIdCard($scope.idCardInfo.card_id, function (result) {
             if (result.status === 0) {
-              $ionicHistory.goBack();
+              $scope.back();
             }
             else {
               var alertPopup = $ionicPopup.alert({
@@ -270,7 +222,7 @@
 
           SettingApi.addIdCard(data, function (result) {
             if (result.status === 0) {
-              $ionicHistory.goBack();
+              $scope.back();
             }
             else {
               var alertPopup = $ionicPopup.alert({

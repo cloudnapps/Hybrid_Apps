@@ -3,6 +3,7 @@
     .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $ionicHistory, userService, LoginApi) {
       $scope.userInfo = {};      
 
+      // TODO: remove if not used
       $scope.goBack = function () {
         console.log('userService.backIndex', userService.backIndex);
         if ([undefined, -1, $scope.tabIndex.cart, $scope.tabIndex.member].indexOf(userService.backIndex) !== -1) {
@@ -15,6 +16,7 @@
         }
       };
 
+      // 会员登录成功
       $scope.saveInfo = function (result) {
         var currentUser = {};
         currentUser.memberId = result.data.member_id;
@@ -23,16 +25,21 @@
         currentUser.isRemembered = $scope.userInfo.remembered;
 
         userService.set(currentUser);
-        if (userService.backIndex === -1) {
-          $ionicHistory.goBack();
-          $scope.tabStateGo($scope.tabIndex.member, 'tab.member');
-          userService.backIndex = -1;
+        if ($state.current.name === 'register') {
+          $scope.back();  
         }
-        else {
-          $ionicHistory.goBack();
-          $scope.tabStateGo(userService.backIndex);
-          userService.backIndex = -1;
-        }
+        $scope.back();
+        userService.goNext();     
+        // if (userService.backIndex === -1) {
+        //   $ionicHistory.goBack();
+        //   $scope.tabStateGo($scope.tabIndex.member, 'tab.member');
+        //   userService.backIndex = -1;
+        // }
+        // else {
+        //   $ionicHistory.goBack();
+        //   $scope.tabStateGo(userService.backIndex);
+        //   userService.backIndex = -1;
+        // }
       };
 
       $scope.login = function () {
@@ -129,8 +136,7 @@
           });
       };
 
-      $scope.register = function($scope, $state) {
-        this.back();
+      $scope.register = function() {        
         $state.go('register');
       }
 
@@ -185,13 +191,12 @@
       function lostPasswd() {
         LoginApi
           .lostPasswd($scope.userInfo.mobile, $scope.userInfo.password, $scope.userInfo.confirmPwd, function (data) {
+            // 密码修改成功
             if (data && data.status === 0) {
               toastService.setToast(data && data.msg || '修改成功');
-              $scope.tabStateGo($scope.tabIndex.member, null, null, {isForce: true});
-            }
-            else {
-              toastService.setToast(data && data.msg || '修改失败');
-              $scope.verified = false;
+              $scope.back();
+            } else {
+              toastService.setToast(data && data.msg || '修改失败');              
             }
           });
       }

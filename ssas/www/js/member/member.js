@@ -3,16 +3,16 @@
     .controller('MemberCtrl', function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService) {
       $scope.currentUser = {};
 
-      $scope.$on('$ionicView.beforeEnter', function () {
-        if (!userService.isLogin()) {
-          $scope.tabStateGo($scope.tabIndex.member, 'tab.login');
-        }
-        else {
-          SettingApi.getMemberSetting(function(result){
-            $scope.currentUser = result.data;
-          });
-        }
-      });
+      // $scope.$on('$ionicView.beforeEnter', function () {
+      //   if (!userService.isLogin()) {
+      //     $scope.tabStateGo($scope.tabIndex.member, 'tab.login');
+      //   }
+      //   else {
+      //     SettingApi.getMemberSetting(function(result){
+      //       $scope.currentUser = result.data;
+      //     });
+      //   }
+      // });
 
       $ionicPopover.fromTemplateUrl('findPopover.html', {
         scope: $scope

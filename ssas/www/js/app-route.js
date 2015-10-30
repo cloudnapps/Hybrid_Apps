@@ -32,6 +32,26 @@ angular.module('starter')
             }
           }
         })
+        // 首页
+        .state('tab.home', {
+          url: '/home',
+          views: {
+            'tab-home': {
+              templateUrl: 'templates/home/home-index.html',
+              controller: 'HomeController'
+            }
+          }
+        })
+        // 首页签到
+        .state('signin', {
+          url: '/signin',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/home/home-signin.html',
+              controller: 'SigninController'
+            }
+          }
+        })
       	// 商品分类
       	.state('tab.categories', {
         	url: '/categories',
@@ -95,6 +115,7 @@ angular.module('starter')
         // 登录
         .state('login', {
           url: '/login',
+          cache: false,
           views: {
             'main-view': {
               templateUrl: 'templates/login/user-login.html',
@@ -105,6 +126,7 @@ angular.module('starter')
         // 注册
         .state('register', {
           url: '/register',
+          cache: false,
           views: {
             'main-view': {
               templateUrl: 'templates/login/user-register.html',
@@ -122,7 +144,66 @@ angular.module('starter')
               controller: 'RetrieveCtrl'
             }
           }
-        })        
+        })
+        // 会员设置
+        .state('settings', {
+          url: '/settings',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/setting-index.html',
+              controller: 'SettingCtrl'
+            }
+          }
+        })
+        .state('setting_changepwd', {
+          url: '/setting/changepwd',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/setting-changepwd.html',
+              controller: 'ChangePwdCtrl'
+            }
+          }
+        })
+        // 收货地址管理
+        .state('receivers', {
+          url: '/receivers',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/receiver-index.html',
+              controller: 'ReceiversCtrl'
+            }
+          }
+        })
+        // 收货地址修改
+        .state('receiver_change', {
+          url: '/receiverchange/:addrInfo',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/receiver-add.html',
+              controller: 'ReceiverAddCtrl'
+            }
+          }
+        })
+        // 身份证管理
+        .state('idcards', {
+          url: '/idcards',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/idcard-list.html',
+              controller: 'IdCardsCtrl'
+            }
+          }
+        })
+        // 身份证修改
+        .state('idcard-change', {
+          url: '/idcardchange/:cardInfo',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/idcard-add.html',
+              controller: 'IdCardAddCtrl'
+            }
+          }
+        })     
 
     	// if none of the above states are matched, use this as the fallback
     	$urlRouterProvider.otherwise('/tab/home');

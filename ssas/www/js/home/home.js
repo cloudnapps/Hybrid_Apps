@@ -1,45 +1,5 @@
 (function () {
-  angular.module('home', ['seller', 'point'])
-    .config(function ($stateProvider) {
-      $stateProvider
-        .state('tab.home', {
-          url: '/home',
-          views: {
-            'tab-home': {
-              templateUrl: 'templates/home/home-index.html',
-              controller: 'HomeController'
-            }
-          }
-        })
-        .state('tab.home-search-history', {
-          url: '/home',
-          views: {
-            'tab-home': {
-              templateUrl: 'templates/home/home-search-history.html',
-              controller: 'HomeSearchHistoryController'
-            }
-          }
-        })
-        .state('tab.signin', {
-          url: '/signin',
-          views: {
-            'tab-home': {
-              templateUrl: 'templates/home/home-signin.html',
-              controller: 'SigninController'
-            }
-          }
-        })
-        .state('tab.activity', {
-          url: '/activity',
-          views: {
-            'tab-home': {
-              templateUrl: 'templates/home/activity-list.html',
-              controller: 'ActivityController'
-            }
-          }
-        });
-    }) // end of config
-
+  angular.module('home', ['seller', 'point'])    
     .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate, $ionicLoading,
                                             $rootScope, barcode, $cordovaInAppBrowser,
                                             $state, $ionicPopover, $window, $interval, $ionicScrollDelegate,
@@ -87,9 +47,9 @@
 
       $scope.search = function () {
         if (!$scope.kind) {
-          return $scope.tabStateGo($scope.tabIndex.shop, 'tab.products', {keywords: $scope.keywords.value});
+          return $state.go('products', {keywords: $scope.keywords.value});
         }
-        return $scope.tabStateGo($scope.tabIndex.home, 'tab.sellers', {keywords: $scope.keywords.value});
+        return $state.go('sellers', {keywords: $scope.keywords.value});
       };
 
       $scope.clearSearch = function (event) {
@@ -151,11 +111,7 @@
         if (result.status === 0) {
           $scope.sellerInfo.items = result.data;
         }
-      });
-
-      $scope.signIn = function () {
-        $state.go('tab.signin', {}, {reload: true});
-      };
+      });    
 
       $scope.openWeb = function () {
         var options = {
