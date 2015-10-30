@@ -57,7 +57,7 @@
     <a class="button button-icon" style="padding: 0;" ng-click="barcodeScan()"><img src="img/home/scan.png"
                                                                                     style="width: 67%"></a>
   </ion-nav-buttons>
-  
+
   <!-- search -->
   <ion-nav-title style="margin: 0;">
     <form ng-submit="search()">
@@ -71,7 +71,7 @@
       <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
     </form>
   </ion-nav-title>
-  
+
   <!-- discovery -->
   <ion-nav-buttons side="right">
     <div class="row row-center">
@@ -174,13 +174,22 @@
     </div>
 
     <!-- 商标logo -->
-    <div class="row" style="margin: 3px 0 0;padding: 0; flex-wrap:wrap;">      
-      <div class="col col-25 col-center prdt-logo-one-row" ng-repeat="item in sellerInfo.items">
-        <a class="logo-item" 
+    <div class="row" style="margin: 3px 0 0;padding: 0; flex-wrap:wrap;">
+      <div class="col col-25 col-center prdt-logo-one-row" ng-repeat="item in sellerInfo.items" ng-if="$index < 4">
+        <a class="logo-item"
           ui-sref="seller-detail({sellerId:item.seller_id})">
           <img ng-src="{{item.image}}"/>
-        </a>      
-      </div>      
+        </a>
+      </div>
+    </div>
+
+    <div class="row" style="margin: 3px 0 0;padding: 0; flex-wrap:wrap;">
+      <div class="col col-25 col-center prdt-logo-one-row" ng-repeat="item in sellerInfo.items" ng-if="$index >= 4 && $index<8">
+        <a class="logo-item"
+           ui-sref="seller-detail({sellerId:item.seller_id})">
+          <img ng-src="{{item.image}}"/>
+        </a>
+      </div>
     </div>
     <hr style="margin: 0;height:1px;border:none;border-top:10px solid #fff;"/>
     <!--分类商品-->
