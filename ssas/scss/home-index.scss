@@ -112,6 +112,7 @@
       display: block;
       text-align: center;
       border: 1px solid #eee;
+      text-decoration: none;
 
       img {
         display: block;
@@ -123,6 +124,7 @@
       .prdt-descb {
         font-size: 12px;
         margin: 3px;
+        color: #000;
         line-height: 16px;
         font-weight: 300;
         text-align: left;
@@ -199,9 +201,6 @@
       height: 100%;
     }
   }
-}
-.prdt-logo-one-row:nth-child(n+5) {
-  border-top: none;
 }
 
 /* 商标显示 end */
