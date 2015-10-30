@@ -276,6 +276,11 @@
     })
 
     .controller('CommentRequestCtrl', function ($scope, $stateParams, OrderApi) {
+      // 初始商户四项评分为 5星
+      $scope.item_0_level = 5;
+      $scope.item_1_level = 5;
+      $scope.item_2_level = 5;
+      $scope.item_3_level = 5;
       $scope.commentInfo = {};
       $scope.commentInfo.comment = [];
       $scope.commentInfo.seller_point = [];
@@ -304,6 +309,23 @@
           }
         }
       });
+
+      $scope.start_level_0 = function (level) {
+        $scope.item_0_level = level;
+        $scope.commentInfo.seller_point[0].value = level;
+      };
+      $scope.start_level_1 = function (level) {
+        $scope.item_1_level = level;
+        $scope.commentInfo.seller_point[1].value = level;
+      };
+      $scope.start_level_2 = function (level) {
+        $scope.item_2_level = level;
+        $scope.commentInfo.seller_point[2].value = level;
+      };
+      $scope.start_level_3 = function (level) {
+        $scope.item_3_level = level;
+        $scope.commentInfo.seller_point[3].value = level;
+      };
 
       $scope.submitRequest = function () {
         OrderApi.getMemberRate($scope.commentInfo, function (result) {

@@ -1,17 +1,17 @@
 <ion-view view-title="{{'comment_title'|translate}}" hide-tabs="true">
   <ion-content>
-    <div ng-class="list" style="border: 1px solid #ddd;">
-      <ion-item ng-repeat="product in item" ng-if="$index > 0" style="border-top: none;padding: 10px 16px;">
-        <div class="row" style="margin:0;padding: 0 5px 10px 0;">
-          <div class="col col-20" style="padding: 0;height: 60px;">
-            <img style="width: 65px;height: 65px;" ng-src="{{product.image}}">
+    <div class="order-comment">
+      <div class="com-item" ng-repeat="product in item" ng-if="$index > 0">
+        <div class="row com-prdt" style="margin:0;padding: 10px;">
+          <div class="col col-25" style="padding: 0;">
+            <img ng-src="{{product.image}}">
           </div>
-          <div class="col col-80"
-               style="padding: 0 0 0 10px;height: 65px;">
-            <p style="padding: 0px;margin-bottom: 25px;word-break: break-all;white-space: normal">{{product.name}}</p>
+          <div class="col col-75" style="padding: 0 0 0 10px;">
+            <p class="prdt-name">{{product.name}}</p>
           </div>
         </div>
-        <div class="row">
+        <hr class="com-hr"/>
+        <div class="row" style="padding: 0 10px;">
           <div class="button-bar">
             <a class="button button-clear" style="border: none;padding: 0; color: #000;"
                ng-click="commentInfo.comment[$index-1].point[0].type_id = '1'">
@@ -27,55 +27,38 @@
             </a>
           </div>
         </div>
-        <div class="row">
-          <textarea rows="3" placeholder="您的评论对其他人很有帮助哦" style="width: 100%"
-                    ng-model="commentInfo.comment[$index-1].goods_comment"></textarea>
+        <hr class="com-hr"/>
+        <div class="row" style="padding: 5px 10px;">
+          <textarea rows="4" placeholder="您的评论对其他人很有帮助哦" style="width: 100%" ng-model="commentInfo.comment[$index-1].goods_comment"></textarea>
         </div>
-      </ion-item>
+      </div>
+      <hr class="com-hr"/>
     </div>
-    <div ng-class="list" style="border: 1px solid #ddd;">
-      <div style="border-top: none;">
-        <div class="row" style="margin:0;padding: 0 0 0px 0;">
+    <div ng-class="list">
+      <div style="padding: 10px 0;">
+        <div class="row">
           <div class="col col-100">
-            <p style="padding: 0px;word-break: break-all;white-space: normal">店铺评分</p>
+            <p style="margin: 0;font-size: 16px;">店铺评分:</p>
           </div>
         </div>
-        <div class="row" ng-repeat="rate in item[0].rate">
-          <div class="col col-20" style="font-size: 8px">{{rate.name}}</div>
-          <div class="col col-80">
-            <div class="button-bar">
-              <a class="button button-clear" style="border: none;padding: 0; color: #000;font-size: 8px"
-                 ng-click="commentInfo.seller_point[$index].value = '5'">
-                <span ng-class="{'set-gender': commentInfo.seller_point[$index].value === '5'}">5星</span>
-              </a>
-              <a class="button button-clear" style="border: none;padding: 0;color: #000;font-size: 8px"
-                 ng-click="commentInfo.seller_point[$index].value = '4'">
-                <span ng-class="{'set-gender': commentInfo.seller_point[$index].value === '4'}">4星</span>
-              </a>
-              <a class="button button-clear" style="border: none;padding: 0;color: #000;font-size: 8px"
-                 ng-click="commentInfo.seller_point[$index].value = '3'">
-                <span ng-class="{'set-gender': commentInfo.seller_point[$index].value === '3'}">3星</span>
-              </a>
-              <a class="button button-clear" style="border: none;padding: 0;color: #000;font-size: 8px"
-                 ng-click="commentInfo.seller_point[$index].value = '2'">
-                <span ng-class="{'set-gender': commentInfo.seller_point[$index].value === '2'}">2星</span>
-              </a>
-              <a class="button button-clear" style="border: none;padding: 0;color: #000;font-size: 8px"
-                 ng-click="commentInfo.seller_point[$index].value = '1'">
-                <span ng-class="{'set-gender': commentInfo.seller_point[$index].value === '1'}">1星</span>
-              </a>
-            </div>
-          </div>
+        <div class="row" style="margin: 0;padding: 5px;" ng-repeat="rate in item[0].rate">
+          <p class="comment_star">{{rate.name}}:<!--
+          --><span class="comment_starlevel">
+              <a class="s1" ng-click="start_level_{{$index}}(1)" ng-class="{'active': item_{{$index}}_level === 1}"></a>
+              <a class="s2" ng-click="start_level_{{$index}}(2)" ng-class="{'active': item_{{$index}}_level === 2}"></a>
+              <a class="s3" ng-click="start_level_{{$index}}(3)" ng-class="{'active': item_{{$index}}_level === 3}"></a>
+              <a class="s4" ng-click="start_level_{{$index}}(4)" ng-class="{'active': item_{{$index}}_level === 4}"></a>
+              <a class="s5" ng-click="start_level_{{$index}}(5)" ng-class="{'active': item_{{$index}}_level === 5}"></a>
+            </span>
+          </p>
         </div>
       </div>
     </div>
-    <div class="button-bar">
-      <div class="row">
-        <div class="col col-100">
-          <button class="button button-full button-positive" style="font-size:16px;" ng-click="submitRequest()">
-            {{'return_addbtn'|translate}}
-          </button>
-        </div>
+    <div class="row" style="padding: 0;">
+      <div class="col col-100 col-center" style="padding: 0;">
+        <button class="button button-full button-energized" style="font-size:16px;" ng-click="submitRequest()">
+          {{'submit_comment'|translate}}
+        </button>
       </div>
     </div>
   </ion-content>

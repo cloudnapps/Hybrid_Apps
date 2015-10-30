@@ -61,3 +61,93 @@
     color: #e42112;
     border-bottom: 1px solid #e42112;
 }
+
+/* order comment */
+
+.order-comment {
+  .com-hr {
+    margin: 0;
+    height: 1px;
+    border: none;
+    border-top: 8px solid #e5e5e5;
+  }
+
+  .com-item {
+    padding: 0;
+    margin: 0;
+
+    .com-prdt {
+      height: 90px;
+
+      img {
+        border: 1px solid #e5e5e5;
+        width: 70px;
+        height: 70px;
+      }
+
+      .prdt-name {
+        margin: 0;
+        padding: 0;
+        height: 4.3em;
+        overflow: hidden;
+        font-size: 14px;
+        word-break: break-all;
+        white-space: normal;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+.comment_star {
+  margin: 0;
+  height: 34px;
+  line-height: 34px;
+  font-size: 14px;
+  margin-left: 25px;
+}
+.comment_starlevel {
+  width: 125px;
+  height: 20px;
+  margin-left: 10px;
+  margin-right: 25px;
+  background: url(../img/star.png) 0 -30px repeat-x;
+  position: relative;
+  top: 4px;
+  display: inline-block;
+
+  a {
+    text-decoration: none;
+    color: #404040;
+    width: 20%;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    height: 20px;
+  }
+  a:hover,.active {
+    background:url(../img/star.png) left top repeat-x;
+  }
+  .s1 { 
+    width: 20%;
+    z-index: 9;
+  }
+  .s2 { 
+    width: 40%;
+    z-index: 8;
+  }
+  .s3 { 
+    width: 60%;
+    z-index: 7;
+  }
+  .s4 { 
+    width: 80%;
+    z-index: 6;
+  }
+  .s5 { 
+    width:100%;
+    z-index :5;
+  }
+}

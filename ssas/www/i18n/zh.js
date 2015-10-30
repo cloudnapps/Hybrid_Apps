@@ -87,6 +87,7 @@ var translations_zh = {
     complaint_title: '投诉与建议',
     complaint_addbtn: '提交',
     complaint_newbtn: '新建投诉与建议',
+    submit_comment: '发表评论',
 
     //good
     good_category: '商品分类',
