@@ -9,21 +9,20 @@
                 type="item-text-wrap" ng-click="edit(item)"
                 style="border-bottom: none; border-top-style: dashed;padding: 1px 0px 1px 0px;">
         <div class="row" style="padding: 0;">
-          <div class="col col-90">
-            <p style="margin-bottom: 13px;color: #4a4b4d;">收件人：{{item.name}}<span style="float: right;" ng-if="item.mobile">电话：{{item.mobile}}</span>
-            </p>
-
+          <div class="col col-90" style="padding: 0;">
+            <p style="margin-bottom: 3px;color: #4a4b4d;">收件人：{{item.name}}</p>
+            <p style="margin-bottom: 3px;color: #4a4b4d;" ng-if="item.mobile">电话：{{item.mobile}}</p>
             <div class="row" style="padding: 0;">
               <div class="col col-20" style="padding: 0;">
                 <span style="font-size: 14px;color: #4a4b4d;">地址：</span>
               </div>
               <div class="col col-80"
-                   style="padding: 0 0 0 0px;word-break: break-all;max-width: 16em;white-space: normal;">
+                   style="padding: 0;word-break: break-all;max-width: 16em;white-space: normal;">
                 <span style="font-size: 14px;">{{item.area}}{{item.addr}}</span>
               </div>
             </div>
           </div>
-          <div class="col col-10">
+          <div class="col col-10" style="padding: 0;">
             <a href="" title="">
               <i class="icon ion-chevron-right icon-accessory"></i>
             </a>
@@ -44,15 +43,15 @@
                 style="border-bottom: none; border-top-style: dashed;padding: 1px 0px 1px 0px;">
         <div class="row" style="padding: 0;">
           <div class="col col-90">
-            <p style="margin-bottom: 13px;color: #4a4b4d;">收件人：{{item.name}}<span style="float: right;" ng-if="item.mobile">电话：{{item.mobile}}</span>
-            </p>
+            <p style="margin-bottom: 3px;color: #4a4b4d;">收件人：{{item.name}}</p>
+            <p style="margin-bottom: 3px;color: #4a4b4d;" ng-if="item.mobile">电话：{{item.mobile}}</p>
 
             <div class="row" style="padding: 0;">
               <div class="col col-20" style="padding: 0;">
                 <span style="font-size: 14px;color: #4a4b4d;">地址：</span>
               </div>
               <div class="col col-80"
-                   style="padding: 0 0 0 0px;word-break: break-all;max-width: 16em;white-space: normal;">
+                   style="padding: 0;word-break: break-all;max-width: 16em;white-space: normal;">
                 <span style="font-size: 14px;">{{item.area}}{{item.addr}}</span>
               </div>
             </div>
