@@ -8,7 +8,7 @@
 var app = angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home', 'shop', 'cart',
   'member', 'order', 'receiver', 'favorite', 'return', 'setting', 'login', 'point', 'seller', 'complaint', 'ngIOS9UIWebViewPatch'])
   //For the real endpoint, we'd use this
-  .run(function ($ionicPlatform, $translate, userService, $rootScope, $ionicHistory) {
+  .run(function ($ionicPlatform, $translate, userService, $rootScope, barcode, $ionicHistory) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
