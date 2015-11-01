@@ -3,13 +3,13 @@
   <ion-content>
     <ion-slide-box show-pager="true" does-continue="true" auto-play="true">
         <ion-slide ng-repeat="image in product.urls">
-          <img ng-src="{{image}}"/>          
+          <img ng-src="{{image}}"/>
         </ion-slide>
     </ion-slide-box>
     <hr style="margin: 0;border-color: #e5e5e5;">
     <section class="prdt-detail">
       <h5 class="prdt-name">{{product.name}} {{product.brief}}</h5>
-      <div class="post-type">{{product.nature === 'bond' ? '保税仓发货' : '海外直邮'}}</div>
+      <div class="post-type">{{product.nature === 'bond' ? '保税仓（深圳前海）' : '香港直邮'}}</div>
       <label class="now-price">{{product.price|currency:'￥'}}</label>
       <label class="ori-price">
         <span>{{'mkt_price'|translate}}:{{product.mktprice|currency:'￥'}}</span>
@@ -18,7 +18,7 @@
         <label style="padding-right: 2em">月销&nbsp;{{product.count}}</label>
         <label>库存&nbsp;{{product.store}}</label>
       </div>
-    </section> 
+    </section>
 
     <hr style="margin: 0;border-color: #e5e5e5;">
     <div class="prdt-tax">税率: <label class="tax-pri">{{product.tax_rate * 100}}%</label></div>
@@ -26,7 +26,7 @@
     <hr style="margin: 0;border-color: #e5e5e5;padding-top: 10px;">
     <a class="button button-clear button-full button-small icon ion-chevron-right icon-right prdt-std" ng-click="showSpecModal()" style="color: #4c4c4c;">选择规格</a>
     <hr style="margin: 0;border-color: #e5e5e5;">
-    
+
     <div ng-hide="true" ui-sref="tab.comments({id:product.goods_id})">
       <a class="button button-clear button-full button-small icon ion-chevron-right icon-right" style="text-align: left; color: #000">{{'comment'|translate}}
       </a>
