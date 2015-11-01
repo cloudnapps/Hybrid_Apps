@@ -101,7 +101,7 @@ var translations_zh = {
     cart_empty: '购物车空空如也～～～',
     submit_order: '提交订单',
     cart_checkout: '结算',
-    cart_order_confirm: '订单核对',
+    cart_order_confirm: '订单确认',
     pay_now: '立刻支付',
     shipping: '配送方式',
 

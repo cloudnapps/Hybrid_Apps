@@ -1,13 +1,39 @@
 <div class="bar bar-subheader">
-  <div class="button-bar">
-    <button class="button button-light" ng-click="changeOrder()">默认</button>
-    <button class="button button-light icon-right" ng-class="{'ion-arrow-up-c': orderBy === 'buy_count asc', 'ion-arrow-down-c': orderBy === 'buy_count desc'}" ng-click="changeOrder('buy_count')">销量</button>
-    <button class="button button-light icon-right" ng-class="{'ion-arrow-up-c': orderBy === 'price asc', 'ion-arrow-down-c': orderBy === 'price desc'}" ng-click="changeOrder('price')">价格</button>
-    <button class="button button-light" ng-click="showSpecModal()">筛选</button>
+  <div class="row" style="padding: 0 0px;height: 40px;line-height: 40px;">
+    <div class="col col-25"
+         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
+         ng-click="changeOrder()"
+         ng-class="{'selt':orderState === 1}">
+      <a class="">综合</a>
+    </div>
+    <div class="col col-25"
+         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
+         ng-class="{'ion-arrow-up-c': orderBy === 'buy_count asc',
+                      'ion-arrow-down-c': orderBy === 'buy_count desc',
+                      'selt':orderState === 2}"
+         ng-click="changeOrder('buy_count')">
+      <a class="">销量</a>
+    </div>
+    <div class="col col-25"
+         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
+         ng-class="{'ion-arrow-up-c': orderBy === 'price asc',
+                      'ion-arrow-down-c': orderBy === 'price desc',
+                      'selt':orderState === 3}"
+         ng-click="changeOrder('price')">
+      <a class="">价格</a>
+    </div>
+    <div class="col col-25"
+         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
+         ng-click="showSpecModal()"
+         ng-class="{'selt':orderState === 4}">
+      <a class="">筛选</a>
+    </div>
   </div>
 </div>
 <ion-view view-title="">
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
   <ion-nav-title>
     <form ng-submit="search()">
       <label class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
@@ -18,19 +44,48 @@
     </form>
   </ion-nav-title>
   <ion-content class="has-subheader">
-    <ion-list>
-     <div class="item item-body col-50 products-list" ng-repeat="product in products" type="item-text-wrap" 
-     ui-sref="product({productId:product.product_id})">
-        <div class="detail">
-          <img class="full-image" ng-src="{{product.image || 'img/3.pic.jpg'}}">
-          <div class="name padding-left">{{product.name}}</div>
-          <div class="price">
-            <span class="positive padding-left">{{product.price|currency:'￥'}}</span>
-            <span class="nature" ng-class="{calm: product.nature === 'bond', energized: product.nature !== 'bond'}">{{product.nature === 'bond' ? '保' : '直'}}</span>
+
+    <div class="index-prdt-cont">
+      <div class="row" style="padding: 0;" ng-repeat="product in products" ng-if="$index % 2 === 0">
+        <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
+          <div class="new-prdt">
+            <a ui-sref="product({productId:products[$index].product_id})">
+              <img ng-src="{{products[$index].image}}">
+
+              <div class="prdt-descb">{{products[$index].name}}</div>
+              <div class="row" style="padding: 0 5px 0px 5px;">
+                <span class="col pri-pri" style="color: #666c70;font-size: 12px;text-align: left;">
+                  {{products[$index].price | currency: '￥'}}
+                </span>
+                <span class="nature"
+                      ng-class="{calm: products[$index].nature === 'bond', energized: products[$index].nature !== 'bond'}">
+                  {{products[$index].nature === 'bond' ? '保' : '直'}}
+                </span>
+              </div>
+            </a>
           </div>
         </div>
+
+        <div class="col col-50 col-center pad-5" ng-if="$index+1 < products.length">
+          <div class="new-prdt">
+            <a ui-sref="product({productId:products[$index+1].product_id})">
+              <img ng-src="{{products[$index+1].image}}">
+
+              <div class="prdt-descb">{{products[$index+1].name}}</div>
+              <div class="row" style="padding: 0 5px 0px 5px;">
+                <span class="col pri-pri" style="color: #666c70;font-size: 12px;text-align: left;">
+                  {{products[$index+1].price | currency: '￥'}}
+                </span>
+                <span class="nature"
+                      ng-class="{calm: products[$index+1].nature === 'bond', energized: products[$index+1].nature !== 'bond'}">
+                  {{products[$index+1].nature === 'bond' ? '保' : '直'}}
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    </ion-list>
     <ion-infinite-scroll
       ng-if="hasMore"
       on-infinite="loadMore()"

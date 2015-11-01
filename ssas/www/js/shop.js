@@ -41,7 +41,7 @@
 
       $scope.navToProductList = function(categoryId) {
         $state.go('tab.products', {categoryId: categoryId});
-      };      
+      };
   }) // end of CategoryController
 
   .controller('ShopController', function ($scope, $state, $stateParams, $ionicModal, shopApi) {
@@ -115,6 +115,7 @@
       event.stopPropagation();
     };
 
+    $scope.orderState = 1;
     $scope.changeOrder = function(type){
       if (type === 'price') {
         if ($scope.orderBy === 'price asc') {
@@ -123,6 +124,8 @@
         else {
           $scope.orderBy = 'price asc';
         }
+
+        $scope.orderState = 3;
       }
       else if(type === 'buy_count'){
         if ($scope.orderBy === 'buy_count asc') {
@@ -131,9 +134,13 @@
         else {
           $scope.orderBy = 'buy_count asc';
         }
+
+        $scope.orderState = 2;
       }
       else {
         $scope.orderBy = '';
+
+        $scope.orderState = 1;
       }
       clearData();
       $scope.getProducts();
@@ -141,6 +148,8 @@
 
 
     $scope.showSpecModal = function showSpecModal(){
+      $scope.orderState = 4;
+
       $ionicModal.fromTemplateUrl('templates/shop/product-gallery-filter.html', {
         scope: $scope
       }).then(function(modal) {
@@ -311,7 +320,7 @@
   .controller('ProductCommentController', function($scope, $stateParams, shopApi){
     console.log($stateParams.id);
     $stateParams.id = 16;  // goodsId 16为测试
-    
+
     $scope.page = 0;
     $scope.comments = [];
     $scope.hasMore = true;

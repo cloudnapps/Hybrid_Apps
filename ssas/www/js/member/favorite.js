@@ -1,12 +1,12 @@
 (function () {
-  angular.module('favorite', ['starter.services'])    
+  angular.module('favorite', ['starter.services'])
     .controller('FavoritesCtrl', function ($scope, $stateParams, $ionicPopup, $ionicHistory, FavoriteApi) {
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;
         $scope.hasMore = false;
         $scope.filter = '';
-	      $scope.dsjd =1;
+	      $scope.favoriteState =1;
       };
 
       $scope.getFavorities = function () {
@@ -23,11 +23,17 @@
         });
       };
 
-      $scope.switchFavorities = function (type,x) {
+      $scope.switchFavorities = function (type) {
         $scope.init();
 
         $scope.filter = type;
-        $scope.dsjd = x;
+
+        if(type == 'sellers') {
+          $scope.favoriteState = 1;
+        }
+        else if(type == 'goods') {
+          $scope.favoriteState = 2;
+        }
 
         $scope.getFavorities();
       };

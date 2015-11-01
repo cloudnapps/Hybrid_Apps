@@ -9,7 +9,8 @@
             <label class="checkbox">
               <input type="checkbox" ng-model="nature.selected" ng-change="toggleNature(nature)">
             </label>
-            <div class="item-name">{{natureKey|translate}}<span style="font-size: 10px;padding-left: 0.5em;">{{'bond_place'|translate}}</span></div>
+            <div class="item-name">{{natureKey|translate}}
+              <span style="font-size: 10px;padding-left: 0.5em;" ng-if="natureKey === 'bond'">{{'bond_place'|translate}}</span></div>
           </div>
 
           <ion-option-button class="button-assertive" ng-click="removeNature(nature)">
