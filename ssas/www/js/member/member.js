@@ -43,13 +43,9 @@
         $scope.closePopover();
       };
 
-      $scope.gotoOrder = function (type) {
-        $state.go('orders', {type: type}, {reload: true});
-      };
-
       $scope.logOut = function () {
-        userService.logOut();
         $scope.closePopover();
+        userService.logOut();
         $state.go('tab.home');
       };
     });

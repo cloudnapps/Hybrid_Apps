@@ -136,15 +136,13 @@ angular.module('starter.services', [])
       return nextState;
     }
 
-    function checkLogin(state) { 
-      
+    function checkLogin(state) {
       if (!this.isLogin()) {
         setNext(state);
         $state.go('login');
       } else {
         $state.go(state);
       }
-    
     }
 
     function goNext() {
@@ -156,7 +154,7 @@ angular.module('starter.services', [])
     this.setNext = setNext;
     this.getNext = getNext;
     this.goNext = goNext;
-    this.checkLogin = checkLogin;    
+    this.checkLogin = checkLogin;
 
     $rootScope.userService = this;
   })

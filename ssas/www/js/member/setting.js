@@ -79,6 +79,15 @@
         });
       };
 
+      var appendByCamera = function () {
+        navigator.camera.getPicture(function (result) {
+            alert(result);
+            $scope.images_list.push(result);
+          }, function (err) {
+          }
+        )
+      };
+
       //image picker
       var pickImage = function () {
         var options = {
@@ -90,6 +99,7 @@
 
         $cordovaImagePicker.getPictures(options)
           .then(function (results) {
+            alert(results[0]);
             $scope.images_list.push(results[0]);
           }, function () {
           });
@@ -100,6 +110,10 @@
       });
 
       $scope.save = function () {
+        /*if($scope.images_list.length > 0){
+
+        }*/
+
         SettingApi.modifyMemberSetting($scope.item, function (result) {
           console.log(result);
         });

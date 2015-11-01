@@ -58,9 +58,6 @@ angular.module('components')
       };
 
       return {
-        payByAlipay: payByAlipay,
-        payByWechat: payByWechat,
         pay: pay
       };
-
     }]);

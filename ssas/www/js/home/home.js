@@ -1,9 +1,9 @@
 (function () {
   angular.module('home', ['seller', 'point'])    
     .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate, $ionicLoading,
-                                            $rootScope, barcode, $cordovaInAppBrowser,
+                                            $rootScope, barcode, $cordovaInAppBrowser, userService,
                                             $state, $ionicPopover, $window, $interval, $ionicScrollDelegate,
-                                            HomeApi, SellerApi) {
+                                            HomeApi, SellerApi, $http) {
       $scope.homeInfo = {};
 
       $scope.sellerInfo = {};
@@ -112,6 +112,28 @@
           $scope.sellerInfo.items = result.data;
         }
       });    
+
+      $scope.loginPortal = function () {
+        if (!userService.isLogin()) {
+          $scope.tabStateGo($scope.tabIndex.member, 'tab.login');
+        }
+        else {
+          alert('test loginPortal');
+          $http({
+            method: 'HEAD',
+            //url: 'http://192.168.10.249/quickauth.do?wlanacname=portal&wlanuserip=192.168.1.23&userid=test&passwd=8888&isapp=1'
+            url: 'http://www.baidu.com'
+          }).then(function successCallback(response) {
+            alert('success');
+            alert(JSON.stringify(response));
+          }, function errorCallback(response) {
+            alert('failed');
+            alert(JSON.stringify(response));
+            alert(response.headers('location'));
+          });
+        }
+
+      };
 
       $scope.openWeb = function () {
         var options = {
