@@ -1,7 +1,17 @@
 (function () {
-  angular.module('member', ['starter.services', 'login'])    
+  angular.module('member', ['starter.services', 'login'])
     .controller('MemberCtrl', function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService) {
-      $scope.currentUser = {};      
+      $scope.currentUser = {};
+
+      $scope.$on('$ionicView.beforeEnter', function () {
+        $scope.getUserInfo();
+      });
+
+      $scope.getUserInfo = function () {
+        SettingApi.getMemberSetting(function (result) {
+          $scope.currentUser = result.data;
+        });
+      };
 
       $ionicPopover.fromTemplateUrl('findPopover.html', {
         scope: $scope
