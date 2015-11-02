@@ -12,19 +12,20 @@
           </div>
         </div>
         <hr class="com-hr"/>
-        <div class="row" style="padding: 0 10px;">
-          <div class="button-bar">
-            <a class="button button-clear" style="border: none;padding: 0; color: #000;"
-               ng-click="commentInfo.comment[$index-1].point[0].type_id = '1'">
-              <span ng-class="{'set-gender': commentInfo.comment[$index-1].point[0].type_id === '1'}">好评</span>
+        <div class="row ord-prdt-comt" style="padding: 10px;">
+          <div class="col col-33">
+            <a ng-click="commentInfo.comment[$index-1].point[0].type_id = '1'">
+              <span ng-class="{'ch-comt': commentInfo.comment[$index-1].point[0].type_id === '1'}">好评</span>
             </a>
-            <a class="button button-clear" style="border: none;padding: 0;color: #000;"
-               ng-click="commentInfo.comment[$index-1].point[0].type_id = '2'">
-              <span ng-class="{'set-gender': commentInfo.comment[$index-1].point[0].type_id === '2'}">中评</span>
+          </div>
+          <div class="col col-33">
+            <a ng-click="commentInfo.comment[$index-1].point[0].type_id = '2'">
+              <span ng-class="{'ch-comt': commentInfo.comment[$index-1].point[0].type_id === '2'}">中评</span>
             </a>
-            <a class="button button-clear" style="border: none;padding: 0;color: #000;"
-               ng-click="commentInfo.comment[$index-1].point[0].type_id = '3'">
-              <span ng-class="{'set-gender': commentInfo.comment[$index-1].point[0].type_id === '3'}">差评</span>
+          </div>
+          <div class="col col-33">
+            <a ng-click="commentInfo.comment[$index-1].point[0].type_id = '3'">
+              <span ng-class="{'ch-comt': commentInfo.comment[$index-1].point[0].type_id === '3'}">差评</span>
             </a>
           </div>
         </div>
@@ -57,7 +58,7 @@
     </div>
     <div class="row" style="padding: 0;">
       <div class="col col-100 col-center" style="padding: 0;">
-        <button class="button button-full button-energized" style="font-size:16px;" ng-click="submitRequest()">
+        <button class="button button-full" style="font-size:18px;background-color: #bd252c;color: #fff;" ng-click="submitRequest()">
           {{'submit_comment'|translate}}
         </button>
       </div>
