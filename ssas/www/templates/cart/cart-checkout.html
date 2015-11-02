@@ -17,50 +17,48 @@
       <div class="item item-divider">
       </div>
       <div ng-repeat="seller in cart.aSelCart">
-        <ion-item class="item item-complex">
-          <div class="item-content item-button-right">
-            <h2>{{seller.seller_info.seller_name}}</h2>
-            <a class="button button-clear button-small button-assertive" shipping-select="seller.shipping_list" ng-model="seller.def_shipping" ng-change="checkout()">{{seller.def_shipping.name}} <i class="icon ion-chevron-right"></i></a>
+        <ion-item class="item item-complex" style="border-top: 0;">
+          <div class="item-content item-button-right" style="padding: 10px;height: 40px;clear: both;">
+            <span style="display: inline-block;width: 70%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{seller.seller_info.seller_name}}</span>
+            <a style="float: right;width: 30%;text-align: right;color: #bd252c;" shipping-select="seller.shipping_list" ng-model="seller.def_shipping" ng-change="checkout()">{{seller.def_shipping.name}} <i style="color: #444;" class="icon ion-chevron-right"></i></a>
           </div>
         </ion-item>
-        <ion-item class="item item-thumbnail-left" ng-repeat="good in seller.goods_list">
-          <img ng-src="{{good.thumbnail}}">
-          <h2>{{good.name}}</h2>
-          <div class="row">
-            <div class="col">{{good.spec}}</div>
-          </div>
-          <div class="row">
-            <div class="col">{{good.buy_price|currency:'￥'}}</div>
-            <div class="col text-right">x{{good.quantity}}</div>
+        <ion-item class="item item-thumbnail-left" style="padding: 15px 10px 15px 106px;" ng-repeat="good in seller.goods_list">
+          <img style="top: 15px;" ng-src="{{good.thumbnail}}">
+          <h2 style="color: #444;font-weight: 300;">{{good.name}}</h2>
+          <h3 style="color: #444;font-weight: 300;min-height: 16px;">{{good.spec}}</h3>
+          <div class="row" style="padding: 0;padding: 0;margin-top: 22px;">
+            <div class="col col-60" style="padding: 0;color: #bd252c;">{{good.buy_price|currency:'￥'}}</div>
+            <div class="col col-40" style="padding: 0;text-align: right;">x{{good.quantity}}</div>
           </div>
         </ion-item>
-        <ion-item class="item">
-          <div class="row">
-            <div class="col"><span>运费: </span><span class="assertive">{{seller.def_shipping.price |currency:'￥'}}</span></div>
-            <div class="col-40 assertive" style="float:right;">共计: {{seller.total_amount |currency:'￥'}}</div>
+        <ion-item class="item" style="padding: 10px 0;border-bottom: 0;">
+          <div class="row" style="padding: 0 10px 10px;font-size: 14px;">
+            <div class="col col-50 col-center" style="padding: 0;">运费: <span style="color: #bd252c;">{{seller.def_shipping.price |currency:'￥'}}</span></div>
+            <div class="col col-50 col-center" style="float:right;padding: 0;text-align: right;">共计: <span style="color: #bd252c;">{{seller.total_amount |currency:'￥'}}</span></div>
           </div>
-          <div class="row item-input">
-            <label class="item-input-wrapper text-stable">
+          <div class="row item-input" style="margin: 0;">
+            <label class="item-input-wrapper text-stable" style="background-color: #fff;border: 1px solid #e5e5e5;">
               <input type="text" ng-model="seller.memo" placeholder="留言">
             </label>
           </div>
         </ion-item>
+        <hr style="margin:0;height:1px;border:none;border-top:15px solid #f1f1f1;"/>
       </div>
-      <div class="item item-divider">
-      </div>
-      <ion-item class="item item-complex summary" style="padding:10px 30px;">
+      <ion-item class="item item-complex summary" style="padding:10px;">
         <div>货款总计: {{cart.total_item_amount |currency:'￥'}}</div>
         <div>税费总计: {{cart.total_taxation_amount |currency:'￥'}}</div>
         <div class="row row-no-padding">
           <div class="col"><div>运费总计: {{cart.total_freight |currency:'￥'}}</div></div>
-          <div class="col"><div style="overflow:visible">订单总计: <div class="assertive total-amount" style="line-height:0;font-weight:200;">{{cart.total_amount |currency:'￥'}}</div></div></div>
+          <div class="col" style="text-align: right;">订单总计: <span style="font-size: 18px;color: #bd252c;">{{cart.total_amount |currency:'￥'}}</span>
+          </div>
         </div>
       </ion-item>
     </ion-list>
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
     <div class="button-bar">
-      <button class="button button-energized" ng-disabled="!cart.def_addr" ng-click="confirm()">{{'pay_now' | translate}}</button>
+      <button class="button" ng-disabled="!cart.def_addr" style="background-color: #bd252c;color: #fff;font-size: 18px;" ng-click="confirm()">{{'pay_now' | translate}}</button>
     </div>
   </ion-footer-bar>
 </ion-view>
