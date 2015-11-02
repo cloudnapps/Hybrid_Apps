@@ -33,6 +33,23 @@
  */
 - (void)TYLocationManagerdidFailUpdateLocation:(TYLocationManager *)manager;
 
+@optional
+/**
+ *  Beacon扫描结果事件回调，返回符合扫描参数的所有Beacon
+ *
+ *  @param manager 定位引擎实例
+ *  @param beacons Beacon数组，[TYBeacon]
+ */
+- (void)TYLocationManager:(TYLocationManager *)manager didRangedBeacons:(NSArray *)beacons;
+
+/**
+ *  定位Beacon扫描结果事件回调，返回符合扫描参数的定位Beacon，定位Beacon包含坐标信息。
+ *
+ *  @param manager 定位引擎实例
+ *  @param beacons 定位Beacon数组，[TYPublicBeacon]
+ */
+- (void)TYLocationManager:(TYLocationManager *)manager didRangedLocationBeacons:(NSArray *)beacons;
+
 /**
  *  设备方向改变事件回调
  *
