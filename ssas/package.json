@@ -71,7 +71,8 @@
       "locator": "../plugins/cordova-project-related",
       "id": "com.cloudnapps.project.related"
     },
-    "org.apache.cordova.camera"
+    "org.apache.cordova.camera",
+    "cordova-plugin-geolocation"
   ],
   "cordovaPlatforms": [
     "ios",

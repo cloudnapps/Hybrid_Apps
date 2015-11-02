@@ -217,26 +217,31 @@
 
 
       $scope.signedIn = function () {
-        var result = $cordovaGeolocation.getCurrentPosition();
-        result.then(function (response) {
-          var distantce = getDistance(response.coords.latitude, response.coords.longitude,
-            lat_constant, long_constant);
-          alert(distantce);
+        navigator.geolocation.getCurrentPosition(function (response) {
+            alert(JSON.stringify(response));
+            var distantce = getDistance(response.coords.latitude, response.coords.longitude,
+              lat_constant, long_constant);
+            alert(distantce);
 
-          PointApi.addGold(10, '签到送金币', function (result) {
-            if (result.status === 0) {
-              var alertPopup = $ionicPopup.alert({
-                title: '签到成功',
-                template: '恭喜你获得10个金币，请到会员中心查看'
-              });
-              alertPopup.then(function (res) {
-                console.log(res);
-              });
-            }
+            PointApi.addGold(10, '签到送金币', function (result) {
+              if (result.status === 0) {
+                var alertPopup = $ionicPopup.alert({
+                  title: '签到成功',
+                  template: '恭喜你获得10个金币，请到会员中心查看'
+                });
+                alertPopup.then(function (res) {
+                  console.log(res);
+                });
+              }
+            });
+          }, function (err) {
+            alert('error' + JSON.stringify(err));
+          },
+          {
+            enableHighAccuracy: false,
+            timeout: 60 * 1000,
+            maximumAge: 1000 * 60 * 10
           });
-        }, function (err) {
-          console.log('eeeeeee', err);
-        });
       };
     }) // end of SigninController
 
