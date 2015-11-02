@@ -1,7 +1,7 @@
 (function () {
-  angular.module('home', ['seller', 'point'])    
+  angular.module('home', ['seller', 'point'])
     .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate, $ionicLoading,
-                                            $rootScope, barcode, $cordovaInAppBrowser, userService,
+                                            $rootScope, barcode, $cordovaInAppBrowser, userService, $ionicPopup,
                                             $state, $ionicPopover, $window, $interval, $ionicScrollDelegate,
                                             HomeApi, SellerApi, $http) {
       $scope.homeInfo = {};
@@ -111,27 +111,48 @@
         if (result.status === 0) {
           $scope.sellerInfo.items = result.data;
         }
-      });    
+      });
 
       $scope.loginPortal = function () {
-        if (!userService.isLogin()) {
-          $scope.tabStateGo($scope.tabIndex.member, 'tab.login');
-        }
-        else {
-          alert('test loginPortal');
-          $http({
-            method: 'HEAD',
-            //url: 'http://192.168.10.249/quickauth.do?wlanacname=portal&wlanuserip=192.168.1.23&userid=test&passwd=8888&isapp=1'
-            url: 'http://www.baidu.com'
-          }).then(function successCallback(response) {
-            alert('success');
+        var state = {
+          success: success
+        };
+
+        userService.checkLogin(state);
+      };
+
+      var success = function (caller, args) {
+        alert('test loginPortal');
+        $http({
+          method: 'GET',
+          url: 'http://192.168.10.249/quickauth.do?wlanacname=portal&wlanuserip=192.168.1.23&userid=test&passwd=8888&isapp=1'
+        })
+          .then(function successCallback(response) {
             alert(JSON.stringify(response));
-          }, function errorCallback(response) {
-            alert('failed');
+            alert(userService.get('mobile'));
+            $http({
+              method: 'GET',
+              url: 'https://securelogin.arubanetworks.com/auth/index.html/u?password=8888&username='
+              + userService.get('mobile')
+            })
+              .then(function successCallback(response) {
+                alert(JSON.stringify(response));
+
+                var alertPopup = $ionicPopup.alert({
+                  title: '一键上网',
+                  template: '联网成功'
+                });
+                alertPopup.then(function (res) {
+                  console.log(res);
+                });
+
+              }, function errorCallback(response) {
+                alert(JSON.stringify(response));
+              });
+          },
+          function errorCallback(response) {
             alert(JSON.stringify(response));
-            alert(response.headers('location'));
           });
-        }
 
       };
 

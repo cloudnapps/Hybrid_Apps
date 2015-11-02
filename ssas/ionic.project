@@ -5,10 +5,6 @@
     {
       "path": "/m",
       "proxyUrl": "http://zdf.jooau.com/index.php/m"
-    },
-    {
-      "path": "/data",
-      "proxyUrl": "http://192.168.10.249/quickauth.do?wlanacname=portal&wlanuserip=192.168.1.23&userid=test&passwd=8888&isapp=1"
     }
   ],
   "gulpStartupTasks": [

@@ -1,22 +1,23 @@
 (function () {
-  angular.module('login', ['starter.services'])    
+  angular.module('login', ['starter.services'])
     .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $ionicHistory, userService, LoginApi) {
-      $scope.userInfo = {};          
-      
+      $scope.userInfo = {};
+
       // 会员登录成功
       $scope.saveInfo = function (result) {
         var currentUser = {};
         currentUser.memberId = result.data.member_id;
         currentUser.name = result.data.login_name;
         currentUser.token = result.data.token;
+        currentUser.mobile = result.data.mobile;
         currentUser.isRemembered = $scope.userInfo.remembered;
 
         userService.set(currentUser);
         if ($state.current.name === 'register') {
-          $scope.back();  
+          $scope.back();
         }
         $scope.back();
-        userService.goNext();        
+        userService.goNext();
       };
 
       $scope.login = function () {
@@ -113,7 +114,7 @@
           });
       };
 
-      $scope.register = function() {        
+      $scope.register = function() {
         $state.go('register');
       }
 
@@ -173,7 +174,7 @@
               toastService.setToast(data && data.msg || '修改成功');
               $scope.back();
             } else {
-              toastService.setToast(data && data.msg || '修改失败');              
+              toastService.setToast(data && data.msg || '修改失败');
             }
           });
       }
