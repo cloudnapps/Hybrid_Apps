@@ -4,6 +4,13 @@ typedef enum type {
    UNKNOWN, PUBLIC, TRIGGER, ACTIVITY
 } TYPE;
 
+typedef enum proximity {
+    TYProximityUnknown,
+    TYProximityImmediate,
+    TYProximityNear,
+    TYProximityFar
+} TYProximity;
+
 /**
  *  图呀Beacon类
  */
@@ -29,6 +36,20 @@ typedef enum type {
  */
 @property (readonly, strong) NSString *tag;
 
+/**
+ *  扫描到Beacon的信号强度
+ */
+@property (nonatomic, assign) int rssi;
+
+/**
+ *  距离Beacon相对距离的准确性，单位为米
+ */
+@property (nonatomic, assign) double accuracy;
+
+/**
+ *  距离Beacon的相对距离
+ */
+@property (nonatomic, assign) TYProximity proximity;
 
 /**
  *  Beacon用途类型，如用于定位、营销等
