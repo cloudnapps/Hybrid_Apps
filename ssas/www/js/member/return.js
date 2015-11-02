@@ -63,10 +63,6 @@
       ReturnApi.getReturnList(null, null, function (result) {
         $scope.items = result.data;
       });
-
-      $scope.goDetail = function (item) {
-        $state.go('tab.feedbacks.return_detail', {returnId: item.return_id}, {reload: true});
-      };
     })
 
     .controller('ReturnDetailCtrl', function ($scope, $stateParams, ReturnApi) {

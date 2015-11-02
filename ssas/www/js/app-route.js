@@ -350,7 +350,7 @@ angular.module('starter')
             }
           }
         })
-        .state('feedbacks-return-detail', {
+        .state('return-detail', {
           url: '/return/:returnId',
           views: {
             'main-view': {

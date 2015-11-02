@@ -4,8 +4,9 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap"
-                style="padding: 10px 40px 15px 20px;" ng-click="goDetail(item)">
+      <ion-item class="item-remove-animate item-avatar item-icon-right"
+                ng-repeat="item in items" type="item-text-wrap"
+                style="padding: 10px 40px 15px 20px;" ui-sref="return-detail">
         <h2 style="font-size: 18px;color: #4c4b4d;">{{item.time}}</h2>
 
         <p style="font-size: 18px;margin-top: 10px;color: #4c4b4d;">{{item.order_id}} - {{item.status}}</p>
