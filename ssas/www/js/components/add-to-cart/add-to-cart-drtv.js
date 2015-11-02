@@ -14,50 +14,46 @@ angular
         $scope.tabStateGo = tabStateService.go;
 
         $scope.addGoodsFavorite = function() {
-          if(!isLogin()) {
-            return;
-          }
-          FavoriteApi
-            .addGoodsFavorite([$scope.product.goods_id], function(data) {
-              if (data) {
-                return toastService.setToast(data.msg);
-              }
-              toastService.setToast('添加失败');
-            });
+          userService.checkLogin({
+            success: function() {
+              FavoriteApi
+                .addGoodsFavorite([$scope.product.goods_id], function(data) {
+                  if (data) {
+                    return toastService.setToast(data.msg);
+                  }
+                  toastService.setToast('添加失败');
+                });
+            }
+          });
+
         };
         $scope.addToCart = function() {
-          if(!isLogin()) {
-            return;
-          }
-          cartApi
-            .addToCart($scope.product)
-            .then(function(data) {
-              toastService.setToast(data && data.data && data.data.msg || '');
-            })
-            .catch(function() {
-              toastService.setToast('添加失败');
-            });
+          userService.checkLogin({
+            success: function() {
+              cartApi
+                .addToCart($scope.product)
+                .then(function(data) {
+                  toastService.setToast(data && data.data && data.data.msg || '');
+                })
+                .catch(function() {
+                  toastService.setToast('添加失败');
+                });
+            }
+          });
         };
 
-        $scope.goToCart = function(){
-          if(!isLogin) {
-            return;
-          }
-          cartApi
-            .addToCart($scope.product)
-            .then(function() {
-              $scope.userService.checkLogin('tab.cart');              
-            })
-            .catch(function() {
-            });
+        $scope.goToCart = function() {
+          userService.checkLogin({
+            success: function() {
+              cartApi
+                .addToCart($scope.product)
+                .then(function() {
+                  userService.checkLogin('tab.cart');
+                })
+                .catch(function() {});
+            }
+          });
         };
-
-        function isLogin(){
-          if(!userService.isLogin()) {
-            return false;
-          }
-          return true;
-        }
       }
     };
   });
