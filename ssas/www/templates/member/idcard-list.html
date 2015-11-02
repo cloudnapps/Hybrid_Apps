@@ -1,12 +1,15 @@
 <ion-view view-title="{{'idcard_title'|translate}}" hide-tabs="true">
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
   <ion-content>
     <div class="row">
       <h4 style="padding-left: 17px;font-size: 16px;font-weight: normal;color: #4a4b4d;">默认身份证号</h4>
     </div>
 
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" ng-if="!!item && !!item.is_default"
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items"
+                ng-if="!!item && !!item.is_default"
                 type="item-text-wrap"
                 style="border-bottom: none; border-top-style: dashed;padding: 10px 5px 10px 15px;">
         <div class="row" style="padding: 0;">
@@ -45,8 +48,8 @@
       </ion-item>
     </ion-list>
     <div class="button-bar">
-      <a class="button button-full button-light"
-         style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;"
+      <a class="button button-full button-positive"
+         style="font-size:20px;margin-bottom: 0;"
          ui-sref="idcard-change">
         {{'idcard_addbtn'|translate}}
       </a>

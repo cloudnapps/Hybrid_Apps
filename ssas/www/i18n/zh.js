@@ -83,7 +83,7 @@ var translations_zh = {
     //return & complaint
     return_title: '退款退货',
     return_addbtn: '提交申请',
-    return_newbtn: '新建退款退货',
+    return_newbtn: '我要售后',
     complaint_title: '投诉与建议',
     complaint_addbtn: '提交',
     complaint_newbtn: '新建投诉与建议',

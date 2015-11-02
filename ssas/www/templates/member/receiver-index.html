@@ -1,5 +1,7 @@
-<ion-view view-title="{{'rec_title'|translate}}" hide-tabs="true">  
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+<ion-view view-title="{{'rec_title'|translate}}" hide-tabs="true">
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
   <ion-content>
     <div class="row">
       <h4 style="padding-left: 17px;font-size: 16px;font-weight: normal;color: #4a4b4d;">默认地址</h4>
@@ -12,7 +14,9 @@
         <div class="row" style="padding: 0;">
           <div class="col col-90" style="padding: 0;">
             <p style="margin-bottom: 3px;color: #4a4b4d;">收件人：{{item.name}}</p>
+
             <p style="margin-bottom: 3px;color: #4a4b4d;" ng-if="item.mobile">电话：{{item.mobile}}</p>
+
             <div class="row" style="padding: 0;">
               <div class="col col-20" style="padding: 0;">
                 <span style="font-size: 14px;color: #4a4b4d;">地址：</span>
@@ -45,6 +49,7 @@
         <div class="row" style="padding: 0;">
           <div class="col col-90">
             <p style="margin-bottom: 3px;color: #4a4b4d;">收件人：{{item.name}}</p>
+
             <p style="margin-bottom: 3px;color: #4a4b4d;" ng-if="item.mobile">电话：{{item.mobile}}</p>
 
             <div class="row" style="padding: 0;">
@@ -76,7 +81,9 @@
     </ion-infinite-scroll>
     <div class="button-bar">
       <a class="button button-full button-positive"
-         style="font-size:20px;margin-bottom: 0;" ui-sref="tab.receiver_change">{{'rec_addbtn'|translate}}</a>
+         style="font-size:20px;margin-bottom: 0;" ui-sref="receiver-change">
+        {{'rec_addbtn'|translate}}
+      </a>
     </div>
   </ion-content>
 </ion-view>

@@ -1,5 +1,7 @@
 <ion-view view-title="{{title}}" hide-tabs="true">
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
   <ion-content>
     <div class="list">
       <label class="item item-input">
@@ -12,7 +14,8 @@
         <input type="text" ng-model="addrInfo.zipcode" placeholder="邮政编码">
       </label>
       <label class="item item-input" ng-click="addrInfo.showChoose=true">
-        <input type="text" ng-model="addrInfo.area" placeholder="省市区县" readonly="readonly" style="background-color: #fff;"></label>
+        <input type="text" ng-model="addrInfo.area" placeholder="省市区县" readonly="readonly"
+               style="background-color: #fff;"></label>
       </label>
       <label class="item item-input">
         <input type="text" ng-model="addrInfo.addr" placeholder="详细地址">
@@ -30,14 +33,17 @@
     </div>
 
     <div class="button-bar">
-      <button class="button button-full button-light" style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;" ng-click="add()">确定</button>
+      <button class="button button-full button-light"
+              style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;" ng-click="add()">确定
+      </button>
     </div>
 
     <div ng-show="addrInfo.showChoose">
       <div class="button-bar">
         <div class="row">
           <div class="col col-50">
-            <button class="button button-clear button-positive" style="font-size:16px;" ng-click="addrInfo.showChoose=false">
+            <button class="button button-clear button-positive" style="font-size:16px;"
+                    ng-click="addrInfo.showChoose=false">
               关闭
             </button>
           </div>

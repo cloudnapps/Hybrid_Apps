@@ -1,5 +1,5 @@
 (function () {
-  angular.module('return', ['starter.services'])   
+  angular.module('return', ['starter.services'])
 
     .controller('ReturnRequestCtrl', function ($scope, $stateParams, $ionicPopup, $state, ReturnApi) {
       $scope.returnInfo = {};
@@ -66,10 +66,6 @@
 
       $scope.goDetail = function (item) {
         $state.go('tab.feedbacks.return_detail', {returnId: item.return_id}, {reload: true});
-      };
-
-      $scope.request = function () {
-        $state.go('tab.return_orders', {}, {reload: true});
       };
     })
 

@@ -61,7 +61,7 @@ angular.module('starter')
             		controller: 'CategoryController'
           		}
         	}
-      	}) 
+      	})
       	// 商品列表
       	.state('products', {
         	url: '/products?categoryId&keywords',
@@ -69,10 +69,10 @@ angular.module('starter')
           		'main-view': {
             		templateUrl: 'templates/shop/shop-products.html',
             		controller: 'ShopController'
-          		}	
+          		}
         	}
-      	}) 
-      	// 商品详情页      	
+      	})
+      	// 商品详情页
       	.state('product', {
         	url: '/products/:productId',
         	views: {
@@ -81,7 +81,7 @@ angular.module('starter')
             		controller: 'ProductDetailController'
           		}
         	}
-      	}) 
+      	})
       	// 产品图文详情
       	.state('product-intro', {
         	url: '/goods/:id/intro?productId&sellerId',
@@ -111,7 +111,7 @@ angular.module('starter')
               controller: 'SellerDetailController'
             }
           }
-        })  	
+        })
         // 登录
         .state('login', {
           url: '/login',
@@ -133,7 +133,7 @@ angular.module('starter')
               controller: 'LoginCtrl'
             }
           }
-        }) 
+        })
         // 找回密码
         .state('retrieve', {
           url: '/retrieve',
@@ -332,14 +332,6 @@ angular.module('starter')
             }
           }
         })
-        .state('feedbacks', {
-          url: '/feedbacks',
-          views: {
-            'main-view': {
-              templateUrl: 'templates/member/feedback-index.html'
-            }
-          }
-        })
         .state('return-request', {
           url: '/returnrequest/:orderId',
           views: {
@@ -349,7 +341,7 @@ angular.module('starter')
             }
           }
         })
-        .state('feedbacks-returns', {
+        .state('returns', {
           url: '/returns',
           views: {
             'main-view': {
