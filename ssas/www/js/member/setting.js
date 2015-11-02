@@ -83,6 +83,7 @@
         navigator.camera.getPicture(function (result) {
             alert(result);
             $scope.images_list.push(result);
+            $scope.item.image = result;
           }, function (err) {
           }
         )
@@ -101,6 +102,7 @@
           .then(function (results) {
             alert(results[0]);
             $scope.images_list.push(results[0]);
+            $scope.item.image = results[0];
           }, function () {
           });
       };
@@ -109,22 +111,85 @@
         $scope.init();
       });
 
+      var onError = function (err) {
+      };
+
       $scope.save = function () {
-        /*if($scope.images_list.length > 0){
+        $scope.images_list.push('/Users/xianlong/Downloads/aaa.png');
+        if ($scope.images_list.length > 0) {
+          window.requestFileSystem(1, 0, function (fs) {
+            fs.root.getFile($scope.images_list.length[0], {create: false}, function (fileEntry) {
+              fileEntry.file(function (fl) {
+                alert(JSON.stringify(fl));
+                var fileReader = new FileReader();
 
-        }*/
+                fileReader.onloadend = function () {
+                  // 这个事件在读取结束后，无论成功或者失败都会触发
+                  if (fileReader.error) {
+                    alert('FileReader' + JSON.stringify(fileReader.error));
+                  } else {
+                    alert(JSON.stringify(fileReader.result));
+                    $scope.item.logo = fileReader.result;
 
-        SettingApi.modifyMemberSetting($scope.item, function (result) {
-          console.log(result);
-        });
+                    SettingApi.modifyMemberSetting($scope.item, function (result) {
+                      console.log(result);
+                    });
+                  }
+                };
+
+                fileReader.readAsBinaryString(file);
+              }, function(err) {
+                alert('FileEntry' + JSON.stringify(err));
+              });
+            }, function(err) {
+              alert('GetFile' + JSON.stringify(err));
+            });
+          }, function(err) {
+            alert('RequestFileSystem' + JSON.stringify(err));
+          });
+          /*          fileSystem.root.getFile($scope.images_list[0], {
+           create: false
+           }, function (entry) {
+           entry.file(function (file) {
+           alert(JSON.stringify(file));
+           var fileReader = new FileReader();
+           fileReader.onloadend = function () {
+           // 这个事件在读取结束后，无论成功或者失败都会触发
+           if (fileReader.error) {
+           alert('FileReader' + JSON.stringify(fileReader.error));
+           } else {
+           alert(JSON.stringify(fileReader.result));
+           $scope.item.logo = fileReader.result;
+
+           SettingApi.modifyMemberSetting($scope.item, function (result) {
+           console.log(result);
+           });
+           }
+           };
+
+           fileReader.readAsBinaryString(file);
+           }, function (err) {
+           alert('Entry' + JSON.stringify(err));
+           });
+           }, function (err) {
+           alert('FileSystem' + JSON.stringify(err));
+           });*/
+        }
+        else {
+          SettingApi.modifyMemberSetting($scope.item, function (result) {
+            console.log(result);
+          });
+        }
       };
 
       $scope.$on('$ionicView.beforeLeave', function () {
         $scope.save();
       });
-    })
+    }
+  )
 
-    .controller('ChangePwdCtrl', function ($scope, $state, $ionicPopup, SettingApi, userService) {
+    .
+    controller('ChangePwdCtrl', function ($scope, $state, $ionicPopup, SettingApi, userService) {
       $scope.pwdInfo = {};
 
       $scope.modify = function () {

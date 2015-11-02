@@ -126,7 +126,7 @@ angular.module('starter.services', [])
         currentUser = {};
         localStorage.setItem('currentUser', '');
       }
-    }  
+    }
 
     function setNext(state) {
       if (state) {
@@ -137,7 +137,7 @@ angular.module('starter.services', [])
           nextCallback = state.success;
           nextCaller = state.caller;
           nextCallbackArgs = state.args;
-        }        
+        }
       } else {
         nextState = null;
         nextCallback = null;
@@ -150,27 +150,27 @@ angular.module('starter.services', [])
       return nextState;
     }
 
-    function checkLogin(state) {      
-      setNext(state);   
-      if (!this.isLogin()) {                     
+    function checkLogin(state) {
+      setNext(state);
+      if (!this.isLogin()) {
         $state.go('login');
       } else {
-        goNext();        
+        goNext();
       }
     }
 
     function goNext() {
       if (nextCallback) {
         nextCallback.apply(nextCaller, nextCallbackArgs);
-      };
+      }
 
       if (nextState) {
         $state.go(nextState);
-      };
+      }
 
       setNext(null);
     }
-    
+
     this.getNext = getNext;
     this.goNext = goNext;
     this.checkLogin = checkLogin;

@@ -72,6 +72,27 @@
     border-top: 8px solid #e5e5e5;
   }
 
+  .ord-prdt-comt {
+    a {
+      display: block;
+      border: 1px solid #ddd;
+      padding: 0;
+      border-radius: 17px;
+
+      span {
+        line-height: 30px;
+        text-align: center;
+        display: block;
+      }
+
+      .ch-comt {
+        background-color: #bd252c;
+        color: #fff;
+        border-radius: 17px;
+      }
+    }
+  }
+
   .com-item {
     padding: 0;
     margin: 0;
