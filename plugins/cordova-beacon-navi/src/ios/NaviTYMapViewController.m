@@ -473,7 +473,7 @@
     }
 }
 
-- (void)offlineRouteManager:(TYOfflineRouteManager *)routeManager didSolveRouteWithResult:(TYRouteResult *)rs OriginalLine:(AGSPolyline *)line
+- (void)offlineRouteManager:(TYOfflineRouteManager *)routeManager didSolveRouteWithResult:(TYRouteResult *)rs
 {
     routeResult = rs;
     

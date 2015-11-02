@@ -28,6 +28,8 @@ typedef struct mapextent {
     double ymax;
 } MapExtent;
 
+MapExtent TYMapExtentMake(double xmin, double ymin, double xmax, double ymax);
+MapSize TYMapSizeMake(double x, double y);
 /**
  *  地图信息类：用于表示某一层地图的配置信息，包含地图ID、地图尺寸、地图范围、地图偏转角等
  */
@@ -80,6 +82,21 @@ typedef struct mapextent {
 @property (readonly) double scaley;
 
 /**
+ *  地图信息的实例化方法
+ *
+ *  @param cityID     城市ID
+ *  @param buidlingID 建筑ID
+ *  @param mapID      地图ID，与楼层ID相同
+ *  @param e          地图范围
+ *  @param s          地图尺寸
+ *  @param fs         楼层名称
+ *  @param fi         楼层序号
+ *
+ *  @return 地图信息实例
+ */
+- (id)initWithCityID:(NSString *)cityID BuildingID:(NSString *)buidlingID MapID:(NSString *)mapID Extent:(MapExtent)e Size:(MapSize)s Floor:(NSString *)fs FloorNumber:(int)fi;
+
+/**
  *  解析目标建筑的特定名称的地图信息
  *
  *  @param floor    目标楼层名称
@@ -107,5 +124,15 @@ typedef struct mapextent {
  *  @return 目标楼层信息
  */
 + (TYMapInfo *)searchMapInfoFromArray:(NSArray *)array Floor:(int)floor;
+
+/**
+ *  从目标路径的地图信息文件中解析所有地图信息
+ *
+ *  @param path 目标地图信息文件
+ *
+ *  @return 所有地图信息
+ */
++ (NSArray *)parseAllMapInfoFromFile:(NSString *)path;
+
 
 @end
