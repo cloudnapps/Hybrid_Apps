@@ -52,7 +52,7 @@ angular.module('starter.services', [])
 
   .service('userService', function ($rootScope, $state) {
     var currentUser = {};
-    var nextState = null;
+    var nextState = null, nextCallback = null, nextCaller = null, nextCallbackArgs = null;
 
     // 存在 key 获取此属性值, 不存在key返回 currentUser对象
     this.get = function (key) {
@@ -126,32 +126,51 @@ angular.module('starter.services', [])
         currentUser = {};
         localStorage.setItem('currentUser', '');
       }
-    }
+    }  
 
     function setNext(state) {
-      nextState = state;
+      if (state) {
+        if (typeof state === 'string') {
+          nextState = state;
+        } else if (typeof state === 'object') {
+          nextState = state.name;
+          nextCallback = state.success;
+          nextCaller = state.caller;
+          nextCallbackArgs = state.args;
+        }        
+      } else {
+        nextState = null;
+        nextCallback = null;
+        nextCaller = null;
+        nextCallbackArgs = null;
+      }
     }
 
     function getNext() {
       return nextState;
     }
 
-    function checkLogin(state) {
-      if (!this.isLogin()) {
-        setNext(state);
+    function checkLogin(state) {      
+      setNext(state);   
+      if (!this.isLogin()) {                     
         $state.go('login');
       } else {
-        $state.go(state);
+        goNext();        
       }
     }
 
     function goNext() {
+      if (nextCallback) {
+        nextCallback.apply(nextCaller, nextCallbackArgs);
+      };
+
       if (nextState) {
         $state.go(nextState);
       };
-    }
 
-    this.setNext = setNext;
+      setNext(null);
+    }
+    
     this.getNext = getNext;
     this.goNext = goNext;
     this.checkLogin = checkLogin;
