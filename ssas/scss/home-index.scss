@@ -117,8 +117,9 @@
       img {
         display: block;
         margin: 0 auto;
-        width: 150px;
-        height: 150px; 
+        width: 100%;
+        max-width: 150px;
+        max-height: 150px; 
       }
 
       .prdt-descb {
