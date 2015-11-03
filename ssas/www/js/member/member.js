@@ -3,7 +3,12 @@
     .controller('MemberCtrl', function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService) {
       $scope.currentUser = {};
 
+      // 勿删,控制设置隐藏 displayBlur selt_set
       $scope.select_setting = false;
+      $scope.displayBlur = function(event) {
+        $scope.select_setting = false;
+      };
+
       $scope.selt_set = function () {
         $scope.select_setting = !$scope.select_setting;
       };
@@ -44,12 +49,11 @@
 
       $scope.gotoPage = function (url) {
         $state.go(url, {}, {reload: true});
-
-        $scope.closePopover();
+        // $scope.closePopover();
       };
 
       $scope.logOut = function () {
-        $scope.closePopover();
+        // $scope.closePopover();
         userService.logOut();
         $state.go('tab.home');
       };
