@@ -3,6 +3,11 @@
     .controller('MemberCtrl', function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService) {
       $scope.currentUser = {};
 
+      $scope.select_setting = false;
+      $scope.selt_set = function () {
+        $scope.select_setting = !$scope.select_setting;
+      };
+
       $scope.$on('$ionicView.beforeEnter', function () {
         $scope.getUserInfo();
       });

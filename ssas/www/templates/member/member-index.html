@@ -1,4 +1,5 @@
 <ion-view view-title="{{'my'|translate}}" hide-tabs="false">
+  <!--
   <script id="findPopover.html" type="text/ng-template">
     <ion-popover-view style="width: 80px; height: 100px;background:#ad1222;">
       <ion-content>
@@ -16,13 +17,26 @@
       </ion-content>
     </ion-popover-view>
   </script>
-
+  -->
   <ion-nav-buttons side="right">
-    <div class="row row-center" style="padding: 0px;margin-right: 10px;" ng-click="openPopover($event)">
-      <div class="col col-center" style="padding: 0px;">
+    <div class="row row-center member-set" style="padding: 0px;margin-right: 10px;position: relative;">
+      <div class="col col-center" style="padding: 0px;" ng-click="selt_set()">
         <a class="button button-clear">
           <i class="icon ion-gear-b"></i>
         </a>
+      </div>
+      <div ng-show="select_setting" style="position: absolute;right: -9px;top: 48px;background-color: #bd252c;color: #fff;width: 88px;border-radius: 16px;padding: 10px 0;">
+        <div class="pop-arrow"></div>
+        <div class="row row-center" style="padding: 0;margin: 5px 0 10px;">
+          <div class="col col-center" style="font-size: 16px;text-align:center;">
+            <a style="color:#fff;display: block;text-decoration: none;" ui-sref="setting_changepwd">修改密码</a>
+          </div>
+        </div>
+        <div class="row row-center" style="padding: 0;margin: 5px 0;">
+          <div class="col col-center" style="font-size: 16px;text-align:center;">
+            <a style="color:#fff;display: block;text-decoration: none;" ng-click="logOut()">安全退出</a>
+          </div>
+        </div>
       </div>
     </div>
   </ion-nav-buttons>
