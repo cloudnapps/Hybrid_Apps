@@ -249,10 +249,10 @@
 
       $scope.signedIn = function () {
         navigator.geolocation.getCurrentPosition(function (response) {
-            alert(JSON.stringify(response));
+            //alert(JSON.stringify(response));
             var distantce = getDistance(response.coords.latitude, response.coords.longitude,
               lat_constant, long_constant);
-            alert(distantce);
+            //alert(distantce);
 
             PointApi.addGold(10, '签到送金币', function (result) {
               var alertPopup = $ionicPopup.alert({
