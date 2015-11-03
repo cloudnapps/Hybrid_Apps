@@ -1,6 +1,6 @@
 <ion-view class="cart" view-title="{{'cart'|translate}}">
   <ion-content>
-    <div class="text-center padding" ng-if="cartLoaded && !cart"><img style="width:90%;" src="img/no-cart.jpg"></div>
+    <div class="text-center padding" ng-if="cartLoaded && !cart"><img style="width:80%;" src="img/no-cart.jpg"></div>
     <ion-list ng-if="!!cart">
       <div class="nature-{{natureKey}}" ng-repeat="(natureKey, nature) in cart.natureCart">
         <ion-item class="item item-divider" ng-if="!$first"></ion-item>

@@ -4,7 +4,7 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="row">
-      <h4 style="padding-left: 17px;font-size: 16px;font-weight: normal;color: #4a4b4d;">默认地址</h4>
+      <h4 style="padding-left: 12px;font-size: 16px;font-weight: normal;color: #4a4b4d;">默认地址</h4>
     </div>
 
     <ion-list>
@@ -15,13 +15,15 @@
           <div class="col col-90" style="padding: 0;">
             <p style="margin-bottom: 3px;color: #4a4b4d;">收件人：{{item.name}}</p>
 
-            <p style="margin-bottom: 3px;color: #4a4b4d;" ng-if="item.mobile">电话：{{item.mobile}}</p>
+            <p style="margin-bottom: 3px;color: #4a4b4d;" ng-if="item.mobile">手机号码：{{item.mobile}}</p>
+
+            <p style="margin-bottom: 3px;color: #4a4b4d;">身份证号：{{item.number}}</p>
 
             <div class="row" style="padding: 0;">
-              <div class="col col-20" style="padding: 0;">
-                <span style="font-size: 14px;color: #4a4b4d;">地址：</span>
+              <div class="col col-30" style="padding: 0;">
+                <span style="font-size: 14px;color: #4a4b4d;">收件地址：</span>
               </div>
-              <div class="col col-80"
+              <div class="col col-70"
                    style="padding: 0;word-break: break-all;max-width: 16em;white-space: normal;">
                 <span style="font-size: 14px;">{{item.area}}{{item.addr}}</span>
               </div>
@@ -51,6 +53,16 @@
             <p style="margin-bottom: 3px;color: #4a4b4d;">收件人：{{item.name}}</p>
 
             <p style="margin-bottom: 3px;color: #4a4b4d;" ng-if="item.mobile">电话：{{item.mobile}}</p>
+
+            <div class="row" style="padding: 0;">
+              <div class="col col-20" style="padding: 0;">
+                <span style="font-size: 14px;color: #4a4b4d;">身份证号：</span>
+              </div>
+              <div class="col col-80"
+                   style="padding: 0;word-break: break-all;max-width: 16em;white-space: normal;">
+                <span style="font-size: 14px;">{{item.number}}</span>
+              </div>
+            </div>
 
             <div class="row" style="padding: 0;">
               <div class="col col-20" style="padding: 0;">

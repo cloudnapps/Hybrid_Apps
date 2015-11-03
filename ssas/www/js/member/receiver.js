@@ -1,5 +1,5 @@
 (function () {
-  angular.module('receiver', ['starter.services', 'region'])  
+  angular.module('receiver', ['starter.services', 'region'])
 
     .controller('ReceiversCtrl', function ($scope, $state, $ionicPopup, ReceiverApi) {
       $scope.init = function () {
@@ -23,7 +23,7 @@
         });
       };
 
-      $scope.$on('$ionicView.beforeEnter', function(){
+      $scope.$on('$ionicView.beforeEnter', function () {
         $scope.init();
         $scope.getReceivers();
       });
@@ -59,7 +59,8 @@
       };
     })
 
-    .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicHistory, ReceiverApi) {
+    .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicHistory,
+                                             ReceiverApi) {
       if ($stateParams.addrInfo) {
         $scope.addrInfo = JSON.parse($stateParams.addrInfo);
         $scope.title = '更新收货地址';
@@ -68,6 +69,18 @@
         $scope.addrInfo = {};
         $scope.title = '新建收货地址';
       }
+
+      $scope.loadCardList = function () {
+        ReceiverApi.getReceiverList(1, function (result) {
+          if (result.data && result.data.cardlist) {
+            $scope.cardList = result.data.cardlist;
+          }
+        });
+      };
+
+      $scope.$on('$ionicView.beforeEnter', function () {
+        $scope.loadCardList();
+      });
 
       $scope.addrInfo.showChoose = false;
       if (!$scope.addrInfo.address) {
@@ -81,6 +94,7 @@
           'addr': $scope.addrInfo.addr,
           'name': $scope.addrInfo.name,
           'mobile': $scope.addrInfo.mobile,
+          'member_idnumber': $scope.addrInfo.number,
           'tel': '',
           'default': $scope.addrInfo.checked ? '1' : '0',
           'zipcode': $scope.addrInfo.zipcode

@@ -95,7 +95,7 @@
             $scope.images_list.push(results);
             $scope.item.image = results;
           }, function () {
-          }); 
+          });
       };
 
       //image picker
@@ -112,25 +112,22 @@
         $cordovaCamera.getPicture(options)
           .then(function (results) {
             alert(results);
-            window.resolveLocalFileSystemURL(results, function(fileEntry) {
-                $scope.images_list.push(fileEntry.nativeURL);
-                $scope.item.image = fileEntry.nativeURL;
+            window.resolveLocalFileSystemURL(results, function (fileEntry) {
+              $scope.images_list.push(fileEntry.nativeURL);
+              $scope.item.image = fileEntry.nativeURL;
             });
           }, function () {
-        });
+          });
       };
 
       $scope.$on('$ionicView.enter', function () {
         $scope.init();
       });
-
-      var onError = function (err) {
-      };
-
-      function convertImgToBase64URL(url, callback, outputFormat){
+      
+      function convertImgToBase64URL(url, callback, outputFormat) {
         var img = new Image();
         img.crossOrigin = 'Anonymous';
-        img.onload = function(){
+        img.onload = function () {
           var canvas = document.createElement('CANVAS');
           var ctx = canvas.getContext('2d');
           canvas.height = this.height;
@@ -138,7 +135,7 @@
           ctx.drawImage(this, 0, 0);
           var dataURL = canvas.toDataURL(outputFormat || 'image/jpg');
           callback(dataURL);
-          canvas = null; 
+          canvas = null;
         };
         img.src = url;
       }
@@ -146,11 +143,12 @@
       $scope.save = function () {
         //$scope.images_list.push('/Users/xianlong/Downloads/aaa.png');
         if ($scope.images_list.length > 0) {
-          convertImgToBase64URL($scope.images_list[0], function(base64Img){
+
+          convertImgToBase64URL($scope.images_list[0], function (base64Img) {
             //remove header: data:image/jpeg;base64,
             var base64result = base64Img.result.substr(base64Img.result.indexOf(',') + 1);
-            console.log('converted',base64result);
-           // $scope.item.logo = base64result;
+            console.log('converted', base64result);
+            // $scope.item.logo = base64result;
           });
           // window.requestFileSystem(1, 0, function (fs) {
           //   fs.root.getFile($scope.images_list.length[0], {create: false}, function (fileEntry) {
@@ -209,8 +207,7 @@
            alert('FileSystem' + JSON.stringify(err));
            });*/
         }
-        //else 
-        {
+        else {
           SettingApi.modifyMemberSetting($scope.item, function (result) {
             console.log(result);
           });

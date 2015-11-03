@@ -5,7 +5,15 @@
   <ion-content>
     <div class="list">
       <label class="item item-input">
-        <input type="text" ng-model="addrInfo.name" placeholder="收件人姓名">
+        <input type="text" ng-model="addrInfo.name" placeholder="姓名">
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          身份证号：
+        </div>
+        <select ng-model="addrInfo.number">
+          <option ng-repeat="s in cardList">{{s.number}}</option>
+        </select>
       </label>
       <label class="item item-input">
         <input type="text" ng-model="addrInfo.mobile" placeholder="手机号码">
@@ -33,9 +41,10 @@
     </div>
 
     <div class="button-bar">
-      <button class="button button-full button-light"
-              style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;" ng-click="add()">确定
-      </button>
+      <a class="button button-full button-positive"
+         style="font-size:20px;margin-bottom: 0;" ng-click="add()">
+        确定
+      </a>
     </div>
 
     <div ng-show="addrInfo.showChoose">
