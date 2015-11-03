@@ -1,6 +1,6 @@
 (function () {
   angular.module('setting', ['starter.services'])
-    .controller('SettingCtrl', function ($scope, $state, $stateParams, $cordovaImagePicker, $ionicActionSheet, SettingApi) {
+    .controller('SettingCtrl', function ($scope, $state, $stateParams, $cordovaCamera, $ionicActionSheet, SettingApi) {
       function setDays() {
         $scope.birthdayInfo.years = [];
         for (var i = 1900; i < 2020; i++) {
@@ -80,31 +80,44 @@
       };
 
       var appendByCamera = function () {
-        navigator.camera.getPicture(function (result) {
-            alert(result);
-            $scope.images_list.push(result);
-            $scope.item.image = result;
-          }, function (err) {
-          }
-        )
+        var options = {
+          maximumImagesCount: 1,
+          width: 200,
+          height: 200,
+          quality: 80,
+          allowEdit: true,
+          destinationType: Camera.DestinationType.FILE_URL,
+          sourceType: Camera.PictureSourceType.CAMERA
+        };
+        $cordovaCamera.getPicture(options)
+          .then(function (results) {
+            alert(results);
+            $scope.images_list.push(results);
+            $scope.item.image = results;
+          }, function () {
+          }); 
       };
 
       //image picker
       var pickImage = function () {
         var options = {
           maximumImagesCount: 1,
-          width: 800,
-          height: 800,
-          quality: 80
+          width: 200,
+          height: 200,
+          quality: 80,
+          allowEdit: true,
+          destinationType: Camera.DestinationType.FILE_URI,
+          sourceType: Camera.PictureSourceType.PHOTOLIBRARY
         };
-
-        $cordovaImagePicker.getPictures(options)
+        $cordovaCamera.getPicture(options)
           .then(function (results) {
-            alert(results[0]);
-            $scope.images_list.push(results[0]);
-            $scope.item.image = results[0];
+            alert(results);
+            window.resolveLocalFileSystemURL(results, function(fileEntry) {
+                $scope.images_list.push(fileEntry.nativeURL);
+                $scope.item.image = fileEntry.nativeURL;
+            });
           }, function () {
-          });
+        });
       };
 
       $scope.$on('$ionicView.enter', function () {
@@ -114,39 +127,60 @@
       var onError = function (err) {
       };
 
+      function convertImgToBase64URL(url, callback, outputFormat){
+        var img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.onload = function(){
+          var canvas = document.createElement('CANVAS');
+          var ctx = canvas.getContext('2d');
+          canvas.height = this.height;
+          canvas.width = this.width;
+          ctx.drawImage(this, 0, 0);
+          var dataURL = canvas.toDataURL(outputFormat || 'image/jpg');
+          callback(dataURL);
+          canvas = null; 
+        };
+        img.src = url;
+      }
+
       $scope.save = function () {
-        $scope.images_list.push('/Users/xianlong/Downloads/aaa.png');
+        //$scope.images_list.push('/Users/xianlong/Downloads/aaa.png');
         if ($scope.images_list.length > 0) {
-          window.requestFileSystem(1, 0, function (fs) {
-            fs.root.getFile($scope.images_list.length[0], {create: false}, function (fileEntry) {
-              fileEntry.file(function (fl) {
-                alert(JSON.stringify(fl));
-                var fileReader = new FileReader();
-
-                fileReader.onloadend = function () {
-                  // 这个事件在读取结束后，无论成功或者失败都会触发
-                  if (fileReader.error) {
-                    alert('FileReader' + JSON.stringify(fileReader.error));
-                  } else {
-                    alert(JSON.stringify(fileReader.result));
-                    $scope.item.logo = fileReader.result;
-
-                    SettingApi.modifyMemberSetting($scope.item, function (result) {
-                      console.log(result);
-                    });
-                  }
-                };
-
-                fileReader.readAsBinaryString(file);
-              }, function(err) {
-                alert('FileEntry' + JSON.stringify(err));
-              });
-            }, function(err) {
-              alert('GetFile' + JSON.stringify(err));
-            });
-          }, function(err) {
-            alert('RequestFileSystem' + JSON.stringify(err));
+          convertImgToBase64URL($scope.images_list[0], function(base64Img){
+            //remove header: data:image/jpeg;base64,
+            var base64result = base64Img.result.substr(base64Img.result.indexOf(',') + 1);
+            console.log('converted',base64result);
+           // $scope.item.logo = base64result;
           });
+          // window.requestFileSystem(1, 0, function (fs) {
+          //   fs.root.getFile($scope.images_list.length[0], {create: false}, function (fileEntry) {
+          //     fileEntry.file(function (fl) {
+          //       alert(JSON.stringify(fl));
+          //       var fileReader = new FileReader();
+          //       fileReader.onloadend = function () {
+          //         // 这个事件在读取结束后，无论成功或者失败都会触发
+          //         if (fileReader.error) {
+          //           alert('FileReader' + JSON.stringify(fileReader.error));
+          //         } else {
+          //           alert(JSON.stringify(fileReader.result));
+          //           $scope.item.logo = fileReader.result;
+
+          //           SettingApi.modifyMemberSetting($scope.item, function (result) {
+          //             console.log(result);
+          //           });
+          //         }
+          //       };
+
+          //       fileReader.readAsBinaryString(file);
+          //     }, function(err) {
+          //       alert('FileEntry' + JSON.stringify(err));
+          //     });
+          //   }, function(err) {
+          //     alert('GetFile' + JSON.stringify(err));
+          //   });
+          // }, function(err) {
+          //   alert('RequestFileSystem' + JSON.stringify(err));
+          // });
           /*          fileSystem.root.getFile($scope.images_list[0], {
            create: false
            }, function (entry) {
@@ -175,7 +209,8 @@
            alert('FileSystem' + JSON.stringify(err));
            });*/
         }
-        else {
+        //else 
+        {
           SettingApi.modifyMemberSetting($scope.item, function (result) {
             console.log(result);
           });
