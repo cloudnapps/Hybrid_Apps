@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Cloudnapps. All rights reserved.
 //
 
+#import "CDVMapNavigator.h"
 #import "NaviTYMapViewController.h"
 #import <TYMapSDK/TYMapSDK.h>
 #import <TYLocationEngine/TYLocationEngine.h>
@@ -74,8 +75,6 @@
     _mapView = [[TYMapView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_mapView];
     
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    
     startFloor = endFloor = 0;
     startPoi = endPoi = nil;
     // Do any additional setup after loading the view.
@@ -98,8 +97,8 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"带我去", nil) style:UIBarButtonItemStylePlain target:self action:@selector(routeAction)];
     self.navigationItem.rightBarButtonItem.enabled = NO;
     
-    _menu = [[DropDownListView alloc] initWithFrame:CGRectMake(0, 0, 100, 64) dataSource:self delegate:self withTextColor:[UIColor blackColor] withBackgroundColor:[UIColor clearColor]];
-    [_menu setDropDownTextColor:[UIColor blackColor] withBackgroundColor:[UIColor whiteColor]];
+    _menu = [[DropDownListView alloc] initWithFrame:CGRectMake(0, 0, 100, 64) dataSource:self delegate:self withTextColor:THEME_FOREGROUND_COLOR withBackgroundColor:[UIColor clearColor]];
+    [_menu setDropDownTextColor:THEME_FOREGROUND_COLOR withBackgroundColor:THEME_BACKGROUND_COLOR];
     _menu.mSuperView = self.view;
     self.navigationItem.titleView = _menu;
     
