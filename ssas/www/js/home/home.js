@@ -3,12 +3,14 @@
     .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate, $ionicLoading,
                                             $rootScope, barcode, $cordovaInAppBrowser, userService, $ionicPopup,
                                             $state, $ionicPopover, $window, $interval, $ionicScrollDelegate,
-                                            HomeApi, SellerApi, $http) {
+                                            HomeApi, SellerApi, $http, shopApi) {
       $scope.homeInfo = {};
 
       $scope.sellerInfo = {};
 
       $scope.activityInfo = {};
+
+      $scope.goodsInfo = {};
 
       $scope.showBtns = false;
 
@@ -57,36 +59,64 @@
         event.stopPropagation();
       };
 
-      HomeApi.getHomeContent().then(function (result) {
-        $scope.homeInfo = result.data.data;
+      SellerApi.getSellerList(null, null, null, function (result) {
+        if (result.status === 0) {
+          $scope.sellerInfo.items = result.data;
+        }
+      });
 
-        $scope.slideimgs = $scope.homeInfo.once;
-        $scope.activityInfo = $scope.homeInfo.act_info;
+      $scope.getHomeInfo = function () {
+        HomeApi.getHomeContent().then(function (result) {
+          $scope.homeInfo = result.data.data;
 
-        /*$scope.activityInfo.updateDiff = function () {
+          $scope.slideimgs = $scope.homeInfo.once;
+          $scope.activityInfo = $scope.homeInfo.act_info;
 
-         var end_time = new Date($scope.activityInfo.end_time);
-         var now_time = new Date();
+          $scope.getProducts = function () {
+            var query = {
+              page: $scope.page,
+              filter: {
+                brand_id: $scope.homeInfo.goods_gallery[0].filter.brand,
+                cat_id: $scope.homeInfo.goods_gallery[0].filter.cat_id
+              }
+            };
 
-         var diff_time = (end_time.getTime() - now_time.getTime()) / 1000;
-         var diff_hour = parseInt(diff_time / (60 * 60));
-         var diff_minute = parseInt((diff_time - diff_hour * 60 * 60) / 60);
-         var diff_second = parseInt(diff_time - diff_hour * 60 * 60 - diff_minute * 60);
+            shopApi.getGallery(query).then(function (result) {
+              $scope.goodsInfo = result.data.data;
+            });
+          };
 
-         $scope.activityInfo.diff_time = diff_hour + ':' + diff_minute + ':' + diff_second;
-         };*/
+          $scope.getProducts();
 
-        $timeout(function () {
-          $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
-        }, 1000);
+          /*$scope.activityInfo.updateDiff = function () {
 
-        /*var promise = $interval(function () {
-         $scope.activityInfo.updateDiff();
-         }, 1000);
+           var end_time = new Date($scope.activityInfo.end_time);
+           var now_time = new Date();
 
-         $scope.$on('$destroy', function () {
-         $interval.cancel(promise);
-         });*/
+           var diff_time = (end_time.getTime() - now_time.getTime()) / 1000;
+           var diff_hour = parseInt(diff_time / (60 * 60));
+           var diff_minute = parseInt((diff_time - diff_hour * 60 * 60) / 60);
+           var diff_second = parseInt(diff_time - diff_hour * 60 * 60 - diff_minute * 60);
+
+           $scope.activityInfo.diff_time = diff_hour + ':' + diff_minute + ':' + diff_second;
+           };*/
+
+          $timeout(function () {
+            $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
+          }, 1000);
+
+          /*var promise = $interval(function () {
+           $scope.activityInfo.updateDiff();
+           }, 1000);
+
+           $scope.$on('$destroy', function () {
+           $interval.cancel(promise);
+           });*/
+        });
+      };
+
+      $scope.$on('$ionicView.beforeEnter', function () {
+        $scope.getHomeInfo();
       });
 
       $scope.openBtns = function () {
@@ -107,11 +137,6 @@
         }
       };
 
-      SellerApi.getSellerList(null, null, null, function (result) {
-        if (result.status === 0) {
-          $scope.sellerInfo.items = result.data;
-        }
-      });
 
       $scope.loginPortal = function () {
         hoko.checkConnection("http://dwz.cn/yes", function (result) {
@@ -221,7 +246,6 @@
         //s=s.toFixed(4);
         return s;
       }
-
 
       $scope.signedIn = function () {
         navigator.geolocation.getCurrentPosition(function (response) {

@@ -25,7 +25,7 @@
       </a>
     </div>
     <div class="col col-20 col-center find-item"
-      ui-sref="signin">
+         ui-sref="signin">
       <a>
         <img src="img/home/icon2.png"/>
         <span>签个到</span>
@@ -116,13 +116,14 @@
 
     <!-- 促销活动 -->
     <div class="index-prdt-cont">
-     <!-- <ion-scroll direction="x"> -->
-        <div class="row" style="padding: 0;">
-          <div class="col col-50 col-center pad-5"
-               ui-sref="product({productId: activityInfo.product_info[0].product_id})">
-            <div class="new-prdt">
-              <a>
-                <img ng-src="{{activityInfo.product_info[0].image}}">
+      <!-- <ion-scroll direction="x"> -->
+      <div class="row" style="padding: 0;">
+        <div class="col col-50 col-center pad-5"
+             ui-sref="product({productId: activityInfo.product_info[0].product_id})">
+          <div class="new-prdt">
+            <a>
+              <img ng-src="{{activityInfo.product_info[0].image}}">
+
               <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
               <div class="row" style="padding: 0 3px;">
                 <span class="col col-50 col-center pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
@@ -133,11 +134,11 @@
           </div>
         </div>
 
-          <div class="col col-50 col-center pad-5"
-               ui-sref="product({productId: activityInfo.product_info[0].product_id})">
-            <div class="new-prdt">
-              <a>
-                <img ng-src="{{activityInfo.product_info[0].image}}">
+        <div class="col col-50 col-center pad-5"
+             ui-sref="product({productId: activityInfo.product_info[0].product_id})">
+          <div class="new-prdt">
+            <a>
+              <img ng-src="{{activityInfo.product_info[0].image}}">
 
               <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
               <div class="row" style="padding: 0 3px;">
@@ -176,7 +177,8 @@
     </div>
 
     <div class="row" style="margin: 0;padding: 0; flex-wrap:wrap;">
-      <div class="col col-25 col-center prdt-logo-one-row" style="border-top: none;" ng-repeat="item in sellerInfo.items" ng-if="$index >= 4 && $index<8">
+      <div class="col col-25 col-center prdt-logo-one-row" style="border-top: none;"
+           ng-repeat="item in sellerInfo.items" ng-if="$index >= 4 && $index<8">
         <a class="logo-item" ui-sref="seller-detail({sellerId:item.seller_id})">
           <img ng-src="{{item.image}}"/>
         </a>
@@ -245,29 +247,33 @@
     </div>
 
     <div class="index-prdt-cont">
-      <div class="row" style="padding: 0;" ng-repeat="product in homeInfo.goods_gallery" ng-if="$index % 2 === 0">
-        <div class="col col-50 col-center pad-5" ng-if="$index < homeInfo.goods_gallery.length">
+      <div class="row" style="padding: 0;" ng-repeat="product in goodsInfo" ng-if="$index % 2 === 0">
+        <div class="col col-50 col-center pad-5" ng-if="$index < goodsInfo.length">
           <div class="new-prdt">
-            <a ui-sref="product({productId: homeInfo.goods_gallery[$index].product_id})">
-              <img ng-src="{{homeInfo.goods_gallery[$index].image}}">
+            <a ui-sref="product({productId: goodsInfo[$index].product_id})">
+              <img ng-src="{{goodsInfo[$index].image}}">
 
-              <div class="prdt-descb">{{homeInfo.goods_gallery[$index].name}}</div>
-              <!-- <div class="row" style="padding: 0;">
-                <span class="col col-center pri-pri" style="color: #666c70;font-size: 12px;text-align: center;">优惠价：{{homeInfo.goods_gallery[$index].price | currency: '￥'}}</span>
-              </div> -->
+              <div class="prdt-descb">{{goodsInfo[$index].name}}</div>
+              <div class="row" style="padding: 0;">
+                <span class="col col-center pri-pri" style="color: #666c70;font-size: 12px;text-align: center;">
+                  优惠价：{{goodsInfo[$index].price | currency: '￥'}}
+                </span>
+              </div>
             </a>
           </div>
         </div>
 
-        <div class="col col-50 col-center pad-5" ng-if="$index+1 < homeInfo.goods_gallery.length">
+        <div class="col col-50 col-center pad-5" ng-if="$index+1 < goodsInfo.length">
           <div class="new-prdt">
-            <a ui-sref="product({productId: homeInfo.goods_gallery[$index].product_id})">
-              <img ng-src="{{floor.product_info[$index+1].image}}">
+            <a ui-sref="product({productId: goodsInfo[$index].product_id})">
+              <img ng-src="{{goodsInfo[$index+1].image}}">
 
-              <div class="prdt-descb">{{homeInfo.goods_gallery[$index+1].name}}</div>
-              <!-- <div class="row" style="padding: 0;">
-                <span class="col col-center pri-pri">优惠价：{{homeInfo.goods_gallery[$index+1].price | currency: '￥'}}</span>
-              </div> -->
+              <div class="prdt-descb">{{goodsInfo[$index+1].name}}</div>
+              <div class="row" style="padding: 0;">
+                <span class="col col-center pri-pri">
+                  优惠价：{{goodsInfo[$index+1].price | currency: '￥'}}
+                </span>
+              </div>
             </a>
           </div>
         </div>
