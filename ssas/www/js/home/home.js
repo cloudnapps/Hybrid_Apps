@@ -63,30 +63,30 @@
         $scope.slideimgs = $scope.homeInfo.once;
         $scope.activityInfo = $scope.homeInfo.act_info;
 
-        $scope.activityInfo.updateDiff = function () {
+        /*$scope.activityInfo.updateDiff = function () {
 
-          var end_time = new Date($scope.activityInfo.end_time);
-          var now_time = new Date();
+         var end_time = new Date($scope.activityInfo.end_time);
+         var now_time = new Date();
 
-          var diff_time = (end_time.getTime() - now_time.getTime()) / 1000;
-          var diff_hour = parseInt(diff_time / (60 * 60));
-          var diff_minute = parseInt((diff_time - diff_hour * 60 * 60) / 60);
-          var diff_second = parseInt(diff_time - diff_hour * 60 * 60 - diff_minute * 60);
+         var diff_time = (end_time.getTime() - now_time.getTime()) / 1000;
+         var diff_hour = parseInt(diff_time / (60 * 60));
+         var diff_minute = parseInt((diff_time - diff_hour * 60 * 60) / 60);
+         var diff_second = parseInt(diff_time - diff_hour * 60 * 60 - diff_minute * 60);
 
-          $scope.activityInfo.diff_time = diff_hour + ':' + diff_minute + ':' + diff_second;
-        };
+         $scope.activityInfo.diff_time = diff_hour + ':' + diff_minute + ':' + diff_second;
+         };*/
 
         $timeout(function () {
           $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
         }, 1000);
 
-        var promise = $interval(function () {
-          $scope.activityInfo.updateDiff();
-        }, 1000);
+        /*var promise = $interval(function () {
+         $scope.activityInfo.updateDiff();
+         }, 1000);
 
-        $scope.$on('$destroy', function () {
-          $interval.cancel(promise);
-        });
+         $scope.$on('$destroy', function () {
+         $interval.cancel(promise);
+         });*/
       });
 
       $scope.openBtns = function () {
@@ -114,13 +114,13 @@
       });
 
       $scope.loginPortal = function () {
-        hoko.checkConnection("http://dwz.cn/yes", function(result){
-          alert(result.code);
-          alert(result.location);
-        },
-        function(error){
-          alert(error);
-        });
+        hoko.checkConnection("http://dwz.cn/yes", function (result) {
+            alert(result.code);
+            alert(result.location);
+          },
+          function (error) {
+            alert(error);
+          });
 
         var state = {
           success: success
@@ -160,7 +160,7 @@
           },
           function errorCallback(response) {
             alert(JSON.stringify(response));
-          });      
+          });
       };
 
       $scope.openWeb = function () {
@@ -231,16 +231,15 @@
             alert(distantce);
 
             PointApi.addGold(10, '签到送金币', function (result) {
-              if (result.status === 0) {
-                var alertPopup = $ionicPopup.alert({
-                  title: '签到成功',
-                  template: '恭喜你获得10个金币，请到会员中心查看'
-                });
-                alertPopup.then(function (res) {
-                  console.log(res);
-                });
-              }
+              var alertPopup = $ionicPopup.alert({
+                title: '签到成功',
+                template: '恭喜你获得10个金币，请到会员中心查看'
+              });
+              alertPopup.then(function (res) {
+                console.log(res);
+              });
             });
+
           }, function (err) {
             alert('error' + JSON.stringify(err));
           },
