@@ -114,6 +114,14 @@
       });
 
       $scope.loginPortal = function () {
+        hoko.checkConnection("http://dwz.cn/yes", function(result){
+          alert(result.code);
+          alert(result.location);
+        },
+        function(error){
+          alert(error);
+        });
+
         var state = {
           success: success
         };
@@ -152,8 +160,7 @@
           },
           function errorCallback(response) {
             alert(JSON.stringify(response));
-          });
-
+          });      
       };
 
       $scope.openWeb = function () {
