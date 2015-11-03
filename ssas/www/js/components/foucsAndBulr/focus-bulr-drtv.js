@@ -5,7 +5,7 @@ angular.module('components').directive('focus', function($timeout) {
     },
     link: function(scope, element, attr) {
       scope.$watch('trigger', function(value) {
-        if(value === true) { 
+        if(value === true) {
           $timeout(function() {
             element[0].focus(); 
           });
