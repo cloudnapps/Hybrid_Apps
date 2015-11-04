@@ -42,6 +42,16 @@
             好酷
         </config-file>
 
+        <config-file target="config.xml" parent="/*">
+            <feature name="HoKo">
+                <param name="ios-package" value="CDVHoKo" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVHoKo.h" />
+        <source-file src="src/ios/CDVHoKo.m" />
+        
         <resource-file src="src/MapResource.bundle" />
 
         <config-file target="*-Info.plist" parent="UISupportedInterfaceOrientations">
