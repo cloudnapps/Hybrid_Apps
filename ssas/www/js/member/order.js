@@ -103,15 +103,15 @@
 
       $scope.confirmOrder = function (item) {
         OrderApi.receiveOrder(item.order_id, function (result) {
-          if (result.status === 1) {
-            var alertPopup = $ionicPopup.alert({
-              title: '确认收货',
-              template: result.msg
-            });
-            alertPopup.then(function (res) {
-              console.log(res);
-            });
-          }
+          //if (result.status === 1) {
+          var alertPopup = $ionicPopup.alert({
+            title: '确认收货',
+            template: result.msg
+          });
+          alertPopup.then(function (res) {
+            console.log(res);
+          });
+          //}
         });
       };    
 
@@ -297,7 +297,7 @@
       });
 
       $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActive){
+        if ($scope.isActive) {
           $scope.loadMore();
         }
       });
@@ -345,7 +345,7 @@
       });
 
       $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActive){
+        if ($scope.isActive) {
           $scope.loadMore();
         }
       });
