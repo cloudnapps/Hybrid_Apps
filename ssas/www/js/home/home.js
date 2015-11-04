@@ -1,6 +1,6 @@
 (function () {
   angular.module('home', ['seller', 'point'])
-    .controller('HomeController', function ($scope, $timeout, $ionicSlideBoxDelegate, $ionicLoading,
+    .controller('HomeController', function ($scope, $ionicSlideBoxDelegate, $ionicLoading,
                                             $rootScope, barcode, $cordovaInAppBrowser, userService, $ionicPopup,
                                             $state, $ionicPopover, $window, $interval, $ionicScrollDelegate,
                                             HomeApi, SellerApi, $http, shopApi) {
@@ -88,6 +88,14 @@
 
           $scope.getProducts();
 
+          var promise = $interval(function () {
+            $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
+          }, 2000);
+
+          $scope.$on('$destroy', function () {
+            $interval.cancel(promise);
+          });
+
           /*$scope.activityInfo.updateDiff = function () {
 
            var end_time = new Date($scope.activityInfo.end_time);
@@ -100,10 +108,6 @@
 
            $scope.activityInfo.diff_time = diff_hour + ':' + diff_minute + ':' + diff_second;
            };*/
-
-          $timeout(function () {
-            $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
-          }, 1000);
 
           /*var promise = $interval(function () {
            $scope.activityInfo.updateDiff();
@@ -253,7 +257,6 @@
             var distantce = getDistance(response.coords.latitude, response.coords.longitude,
               lat_constant, long_constant);
             //alert(distantce);
-
             PointApi.addGold(10, '签到送金币', function (result) {
               var alertPopup = $ionicPopup.alert({
                 title: '签到成功',
@@ -263,7 +266,6 @@
                 console.log(res);
               });
             });
-
           }, function (err) {
             alert('error' + JSON.stringify(err));
           },
