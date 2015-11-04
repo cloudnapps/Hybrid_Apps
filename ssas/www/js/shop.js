@@ -252,7 +252,6 @@
 
         getProductGoodsSpec($scope.productId);
 
-        var currentSlide = 0;
         shopApi.getProduct($scope.productId).success(function (responseData) {
           if (responseData.status === 0) {
             $scope.point = responseData.data.point || {};
@@ -261,15 +260,6 @@
             $scope.comment = (responseData.comment || [])[0];
 
             var promise = $interval(function () {
-              $ionicSlideBoxDelegate.$getByHandle('slideimgs').slide(currentSlide
-                % $ionicSlideBoxDelegate.$getByHandle('slideimgs').slidesCount(), 2000);
-
-              currentSlide++;
-
-              /*if($ionicSlideBoxDelegate.$getByHandle('slideimgs').currentIndex() ===
-                $ionicSlideBoxDelegate.$getByHandle('slideimgs').slidesCount()) {
-                $ionicSlideBoxDelegate.$getByHandle('slideimgs').slide
-              }*/
               $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
             }, 2000);
 
