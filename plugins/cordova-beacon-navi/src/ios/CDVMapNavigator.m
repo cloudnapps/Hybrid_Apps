@@ -30,6 +30,10 @@
     [TYMapEnvironment setRootDirectoryForMapFiles:resourceBundle];
     
     [TYMapEnvironment initMapEnvironment];
+    
+    [[UINavigationBar appearance] setTintColor: THEME_FOREGROUND_COLOR];
+    [[UINavigationBar appearance] setBarTintColor: THEME_BACKGROUND_COLOR];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: THEME_FOREGROUND_COLOR}];
 }
 
 - (void)showMapNavigator:(CDVInvokedUrlCommand*)command

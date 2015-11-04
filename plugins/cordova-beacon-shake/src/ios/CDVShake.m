@@ -19,6 +19,7 @@
 #define GRAVITY 9.81
 #define TIME_INTERNVAL 0.5
 
+
 @interface CDVShake()
 {
     ShakeViewController* shakeViewController;
@@ -53,8 +54,7 @@
 {
     __weak CDVShake* weakSelf = self;
     [self.commandDelegate runInBackground:^{
-        if(shakeViewController == nil)
-            shakeViewController = [[ShakeViewController alloc] init];
+        shakeViewController = [[ShakeViewController alloc] init];
         UINavigationController* nav = [[UINavigationController alloc]
                     initWithRootViewController:shakeViewController];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -92,8 +92,10 @@
     [CAProximityManager shared].delegate = self;
     [[CAProximityManager shared] startMonitoring];
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close)];
     self.navigationItem.title = @"摇一摇";
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close)];
     [self loadGifView];
     
     self.view.backgroundColor = [UIColor colorWithWhite:74/255.0f alpha:1];
@@ -213,7 +215,7 @@
                [_motionManager stopAccelerometerUpdates];
                 _labelView.text = @"";
                 NSLog(@"没有发现推送信息");
-                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"检测结果" message:[NSString stringWithFormat:@"没有发现推送信息"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"很遗憾" message:[NSString stringWithFormat:@"没有发现推送信息"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alert show];
                 _isShaking = NO;
             }
@@ -222,7 +224,7 @@
        [_motionManager stopAccelerometerUpdates];
         _labelView.text = @"";
         NSLog(@"Error:%@", err);
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"检测结果" message:@"系统发生异常" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"很抱歉" message:@"系统发生异常" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         _isShaking = NO;
     }];
@@ -245,7 +247,7 @@
 #pragma mark - View rotation
 
 - (BOOL)shouldAutorotate {
-    return YES;
+    return NO;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
