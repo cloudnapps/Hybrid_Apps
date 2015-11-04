@@ -276,3 +276,8 @@ hr {
 .add-to-cart .button{
   line-height: 44px;
 }
+
+.cart-checkout .declare p {
+  white-space: normal;
+  font-size: .8em;
+}
