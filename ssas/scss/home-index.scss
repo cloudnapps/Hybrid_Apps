@@ -225,3 +225,14 @@
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg); 
 }
+
+.ion-record:before {
+  content: "\f21b"; 
+  font-size: 4pt;
+  color: red;
+}
+
+.bar .button.button-clear.icon-left:before {
+  font-size: 20px;
+  line-height: 32px; 
+}
