@@ -3,15 +3,18 @@
     <back-button></back-button>
   </ion-nav-buttons>
   <ion-content>
-    <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox"
-                   auto-play="true" slide-interval="1000"
-                   delegate-handle="slideimgs" does-continue="true">
-      <ion-slide ng-repeat="item in slideimgs">
-        <a href="#">
-          <img ng-src="{{item}}"/>
-        </a>
-      </ion-slide>
-    </ion-slide-box>
+    <div class="row" style="padding: 0px;margin: 0;width: 100%;">
+      <div class="col col-center" style="padding: 0px; width: 100%;">
+        <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox" ng-if="slideimgs.length"
+                       auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
+          <ion-slide ng-repeat="item in slideimgs" style="width: 100%;">
+            <a href="#">
+              <img ng-src="{{item}}"/>
+            </a>
+          </ion-slide>
+        </ion-slide-box>
+      </div>
+    </div>
     <hr style="margin: 0;border-color: #e5e5e5;">
     <section class="prdt-detail">
       <h5 class="prdt-name">{{product.name}} {{product.brief}}</h5>
@@ -69,7 +72,7 @@
 
     <hr style="margin: 0;border:none;border-top:10px solid #e5e5e5;">
 
-    <div  class="button button-clear button-full" style="align-content: center; color: #4c4c4c;">向上拖动，查看图文详情</div>
+    <div class="button button-clear button-full" style="align-content: center; color: #4c4c4c;">向上拖动，查看图文详情</div>
 
     <div ng-bind-html="html" class="product-intro"></div>
 
