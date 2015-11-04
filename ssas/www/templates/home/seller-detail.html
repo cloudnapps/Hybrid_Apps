@@ -2,19 +2,13 @@
   <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
   <ion-content>
     <div class="row seller-header" style="padding: 0;background-image: url('img/seller-index.jpg');">
-      <div class="row" style="padding: 0;position: absolute;top: 90px;left:10px;">
-        <div class="col col-34 col-center sel-logo" style="padding: 0 0 0 10px;">
+      <div class="row" style="padding: 0;position: absolute;top:105px;left:0;z-index: 999;height: 65px;">
+        <div class="col col-34 col-center sel-logo" style="padding:0;margin-left: 15px;height: 65px;background-color: #fff;overflow: hidden;max-width: 80px;">
           <img ng-src="{{item.once.image}}">
           <!--<span style="width:4em;margin-left: 5px;word-break: break-all;top: 20px;left: 77px;">{{item.once.name}}</span>-->
         </div>
-        <div class="col col-33 col-center" style="padding: 0;">
-          <!--button class="button button-assertive" style="min-width: 90px;min-height: 33px;line-height: 33px;"
-                  ng-click="addFavorite()">收藏店铺
-          </button-->
-        </div>
-        <div class="col col-33 col-center" style="padding: 0;">
-          <button class="button button-assertive" style="min-width: 90px;min-height: 33px;line-height: 33px;"
-                  ng-click="addFavorite()">收藏店铺
+        <div class="col col-67 col-center" style="padding: 0;text-align: right;">
+          <button class="button button-assertive" style="min-width: 90px;min-height: 33px;line-height: 33px;" ng-click="addFavorite()">收藏店铺
           </button>
         </div>
       </div>
