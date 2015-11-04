@@ -2,10 +2,17 @@
   <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
   <ion-content>
     <ion-list>
-      <a class="item item-icon-right" address-select="cart.addrlist" ng-model="cart.def_addr" ng-change="checkout()">
-        <h2 class="row"><div class="col">收件人: {{cart.def_addr.name}}</div><div class="col">电话: {{cart.def_addr.mobile}}</div></h2>
-        <div class="row"><div class="col"><p>收货地址: {{cart.def_addr.area}} {{cart.def_addr.addr}}</p></div></div>
-        <i class="icon ion-chevron-right"></i>
+      <a class="item item-icon-right" address-select="cart.addrlist" ng-model="cart.def_addr" ng-change="checkout()" style="padding-right: 40px;">
+        <div class="row" style="padding: 0;font-size: 14px;color: #444;">
+          <div class="col" style="padding: 0;">收件人: {{cart.def_addr.name}}</div>
+          <div class="col" style="padding: 0;text-align: right;">电话: {{cart.def_addr.mobile}}</div>
+        </div>
+        <div class="row" style="padding: 10px 0 0;">
+          <div class="col" style="padding: 0;">
+            <p style="color: #444;">收货地址: {{cart.def_addr.area}} {{cart.def_addr.addr}}</p>
+          </div>
+        </div>
+        <i class="icon ion-chevron-right" style="font-size: 16px;"></i>
       </a>
 
       <div class="item item-divider">
@@ -20,11 +27,12 @@
         <ion-item class="item item-thumbnail-left" style="padding: 15px 10px 15px 106px;" ng-repeat="good in seller.goods_list">
           <img style="top: 15px;" ng-src="{{good.thumbnail}}">
           <h2 style="color: #444;font-weight: 300;">{{good.name}}</h2>
-          <h3 style="color: #444;font-weight: 300;min-height: 16px;">{{good.spec}}</h3>
-          <div class="row" style="padding: 0;padding: 0;margin-top: 22px;">
+          <h3 style="color: #444;font-weight: 300; min-height: 16px;">{{good.spec}}</h3>
+          <div class="row" style="padding: 0;padding: 0; margin-top: 8px;">
             <div class="col col-60" style="padding: 0;color: #bd252c;">{{good.buy_price|currency:'￥'}}</div>
             <div class="col col-40" style="padding: 0;text-align: right;">x{{good.quantity}}</div>
           </div>
+          <div class="col" style="padding: 0; font-size: .8em">适用税率：{{good.taxRate}}% &nbsp; 税金：{{good.tax_price|currency:'￥'}}</div>
         </ion-item>
         <ion-item class="item" style="padding: 10px 0;border-bottom: 0;">
           <div class="row" style="padding: 0 10px 10px;font-size: 14px;">
@@ -47,6 +55,13 @@
           <div class="col" style="text-align: right;">订单总计: <span style="font-size: 18px;color: #bd252c;">{{cart.total_amount |currency:'￥'}}</span>
           </div>
         </div>
+      </ion-item>
+      <ion-item class="padding declare">
+        <p>税费说明:</p>
+        <p>①根据 海关总署公告2010年第43号 公告规定，个人物品申报，应征进口税税额在人民币50元（含50元）以下的，海关予以免征。</p>
+        <br>
+        <p>发票说明:</p>
+        <p>CTFHOKO全球购商品不支持开发票</p>
       </ion-item>
     </ion-list>
   </ion-content>
