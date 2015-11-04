@@ -95,7 +95,7 @@
     self.navigationItem.title = @"摇一摇";
     
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"关闭", nil) style:UIBarButtonItemStylePlain target:self action:@selector(close)];
     [self loadGifView];
     
     self.view.backgroundColor = [UIColor colorWithWhite:74/255.0f alpha:1];
