@@ -5,21 +5,13 @@
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;
-        $scope.hasMore = false;
-        $scope.filter = '';
       };
 
       $scope.getReceivers = function () {
         ReceiverApi.getReceiverList($scope.page, function (result) {
           if (result.data && result.data.addrlist) {
             $scope.items = $scope.items.concat(result.data.addrlist);
-            $scope.hasMore = true;
           }
-          else {
-            $scope.hasMore = false;
-          }
-
-          $scope.$broadcast('scroll.infiniteScrollComplete');
         });
       };
 
@@ -27,11 +19,6 @@
         $scope.init();
         $scope.getReceivers();
       });
-
-      $scope.loadMore = function () {
-        $scope.page++;
-        $scope.getReceivers();
-      };
 
       $scope.edit = function (item) {
         $state.go('receiver-change', {addrInfo: JSON.stringify(item)}, {reload: true});
