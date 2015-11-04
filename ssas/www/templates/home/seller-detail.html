@@ -45,7 +45,7 @@
           </div>
           <div class="col col-50 col-center pad-5" ng-if="$index+1 < products.length">
             <div class="new-prdt">
-              <a ui-sref="product({productId: floor.product_info[$index+1].product_id})">
+              <a ui-sref="product({productId: product_info[$index+1].product_id})">
                 <img ng-src="{{products[$index+1].image}}">
                 <div class="prdt-descb">{{products[$index+1].name}}</div>
               </a>
