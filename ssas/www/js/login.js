@@ -76,7 +76,7 @@
           $scope.userInfo.mobile, $scope.userInfo.signCode, function (result) {
             if (result.status === 1) {
               var alertPopup = $ionicPopup.alert({
-                title: '用户注册',
+                title: '注册失败',
                 template: result.msg
               });
               alertPopup.then(function (res) {

@@ -241,16 +241,18 @@
      * ProductDetailController
      */
     .controller('ProductDetailController',
-    ['$scope', '$timeout', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading', 'shopApi', 'cartApi', '$state', 'tabStateService',
-      function ($scope, $timeout, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading, shopApi, cartApi) {
+    ['$scope', '$interval', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading', 'shopApi', 'cartApi', '$state', 'tabStateService',
+      function ($scope, $interval, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading, shopApi, cartApi) {
 
         $scope.productId = $stateParams.productId;
         $scope.product = {};
+        $scope.html = '';
         $scope.showSpecModal = showSpecModal;
         $scope.getProductGoodsSpec = getProductGoodsSpec;
 
         getProductGoodsSpec($scope.productId);
 
+        var currentSlide = 0;
         shopApi.getProduct($scope.productId).success(function (responseData) {
           if (responseData.status === 0) {
             $scope.point = responseData.data.point || {};
@@ -258,15 +260,43 @@
             $scope.slideimgs = $scope.product.urls;
             $scope.comment = (responseData.comment || [])[0];
 
-            $timeout(function () {
-              $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
-            }, 1000);
+            var promise = $interval(function () {
+              $ionicSlideBoxDelegate.$getByHandle('slideimgs').slide(currentSlide
+                % $ionicSlideBoxDelegate.$getByHandle('slideimgs').slidesCount(), 2000);
 
-            $ionicSlideBoxDelegate.update();
+              currentSlide++;
+
+              /*if($ionicSlideBoxDelegate.$getByHandle('slideimgs').currentIndex() ===
+                $ionicSlideBoxDelegate.$getByHandle('slideimgs').slidesCount()) {
+                $ionicSlideBoxDelegate.$getByHandle('slideimgs').slide
+              }*/
+              $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
+            }, 2000);
+
+            $scope.$on('$destroy', function () {
+              $interval.cancel(promise);
+            });
 
             console.log('getProduct', responseData);
           }
         });
+
+        $scope.hasMore = true;
+        $scope.getIntrocution = function (goodsId) {
+          $scope.hasMore = false;
+          shopApi
+            .getProductIntro(goodsId)
+            .success(function (result) {
+              $scope.html = result && result.data && result.data.html || '';
+            })
+            .error(function (e) {
+              $scope.html = '';
+            });
+        };
+
+        $scope.loadMore = function () {
+          $scope.getIntrocution($scope.product.goods_id);
+        };
 
         function showSpecModal() {
           $ionicModal.fromTemplateUrl('templates/shop/shop-product-spec.html', {
@@ -299,28 +329,19 @@
             });
         }
 
+        function getProductIntroduction(goodsId) {
+          shopApi
+            .getProductIntro(goodsId)
+            .success(function (result) {
+              $scope.html = result && result.data && result.data.html || '';
+            });
+        }
+
         $scope.addToCart = function (product) {
           cartApi.addToCart(product);
         };
 
       }]) // end of ProductDetailController
-
-    .controller('ProductIntroController', function ($scope, $stateParams, shopApi) {
-
-      $scope.product = {
-        goods_id: $stateParams.id,
-        product_id: $stateParams.productId,
-        seller_id: $stateParams.sellerId
-      };
-
-      $scope.product.goods_id = 60;
-
-      shopApi
-        .getProductIntro($scope.product.goods_id)
-        .success(function (responseData) {
-          $scope.html = responseData && responseData.data && responseData.data.html || '';
-        });
-    }) // end of ProductIntroController
 
     .controller('ProductCommentController', function ($scope, $stateParams, shopApi) {
       console.log($stateParams.id);

@@ -82,16 +82,6 @@ angular.module('starter')
           		}
         	}
       	})
-      	// 产品图文详情
-      	.state('product-intro', {
-        	url: '/goods/:id/intro?productId&sellerId',
-        	views: {
-          		'main-view': {
-            		templateUrl: 'templates/shop/product-intro.html',
-            		controller: 'ProductIntroController'
-          		}
-        	}
-      	})
         // 商户列表
         .state('sellers', {
           url: '/sellers?keywords',

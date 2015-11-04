@@ -4,7 +4,8 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox"
-                   auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
+                   auto-play="true" slide-interval="1000"
+                   delegate-handle="slideimgs" does-continue="true">
       <ion-slide ng-repeat="item in slideimgs">
         <a href="#">
           <img ng-src="{{item}}"/>
@@ -47,10 +48,6 @@
       <div style="padding-left: 10px; font-size: 10px; color: #cccccc">{{comment.content}}</div>
     </div>
 
-    <a class="button button-clear button-full button-small icon ion-chevron-right icon-right prdt-std"
-       style="color: #4c4c4c;"
-       ui-sref="product-intro({id: product.goods_id, productId: productId, sellerId: product.seller_id})">查看产品图文详情</a>
-
     <hr style="margin: 0;border:none;border-top:10px solid #e5e5e5;">
 
     <div class="list">
@@ -69,6 +66,18 @@
         </div> -->
       </div>
     </div>
+
+    <hr style="margin: 0;border:none;border-top:10px solid #e5e5e5;">
+
+    <div  class="button button-clear button-full" style="align-content: center; color: #4c4c4c;">向上拖动，查看图文详情</div>
+
+    <div ng-bind-html="html" class="product-intro"></div>
+
+    <ion-infinite-scroll
+      ng-if="hasMore"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
     <div add-to-cart="product"></div>
