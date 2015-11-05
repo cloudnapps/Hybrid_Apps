@@ -1,6 +1,6 @@
 (function () {
   angular.module('login', ['starter.services'])
-    .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $ionicHistory, userService, LoginApi) {
+    .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $ionicHistory, $interval, userService, LoginApi, toastService) {
       $scope.userInfo = {};
 
       // 会员登录成功
@@ -36,8 +36,21 @@
           }
         });
       };
-
+      $scope.reSendCodeTime = 0;
       $scope.getSignCode = function () {
+
+        if(!/\d{11,11}/.test($scope.userInfo.mobile)) {
+          toastService.setToast('手机号码不正确');
+          return;
+        }
+
+        $scope.reSendCodeTime = 30;
+        timer = $interval(function () {
+          $scope.reSendCodeTime--;
+          if ($scope.reSendCodeTime <= 0) {
+            $interval.cancel(timer);
+          }
+        }, 1000);
         LoginApi.sendCode($scope.userInfo.mobile, 'signup', function (result) {
           var alertPopup = $ionicPopup.alert({
             title: '获取验证码',
