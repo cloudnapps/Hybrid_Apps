@@ -1,6 +1,6 @@
 <ion-view view-title="{{'login_title'|translate}}">
   <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
-  
+
   <ion-content>
 
     <div class="list card" style="box-shadow: none;margin-top: 10px;">
@@ -13,13 +13,13 @@
 
         <div class="list" style="margin-top:30px;">
           <div style="border-radius: 10px;border: 1px solid #cecece;">
-            
+
             <!-- 用户名 -->
             <div class="row" style="border-bottom: 1px solid #cecece;margin-top: 5px;">
               <i class="col col-20 col-center ion-person"></i>
               <input class="col col-80 col-center" type="text" ng-model="userInfo.name" style="padding: 0;" placeholder="请输入用户名（手机号）">
             </div>
-            
+
             <!-- 密码 -->
             <div class="row" style="margin-top:6px;">
               <i class="col col-20 col-center ion-locked"></i>
@@ -28,13 +28,13 @@
           </div>
 
 
-          <div class="row" style="padding: 0;height: 50px;font-size: 14px;">            
-            <!-- 记住密码 -->            
+          <div class="row" style="padding: 0;height: 50px;font-size: 14px;">
+            <!-- 记住密码 -->
             <div class="col col-50 col-center" style="text-align: left;">
               <input type="checkbox" ng-model="userInfo.remembered" style="font-size: 16px;">
-              <a href="" style="text-decoration: none;color: #666;">记住密码</a>
+              <a href="" style="text-decoration: none;color: #666;">记住我</a>
             </div>
-            
+
             <!-- 忘记密码 -->
             <div class="col col-50 col-center" style="text-align: right;padding: 0;">
               <a ui-sref="retrieve" style="text-decoration: none;color: #666;">忘记密码</a>

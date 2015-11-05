@@ -3,6 +3,7 @@
     .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $ionicHistory, $interval, userService, LoginApi, toastService) {
       $scope.userInfo = {};
       $scope.userInfo.isWechat = false;
+      $scope.userInfo.remembered = true;
 
       // 会员登录成功
       $scope.saveInfo = function (result) {
@@ -122,6 +123,7 @@
                 }
                 else {
                   $scope.userInfo.isWechat = true;
+                  $scope.userInfo.remembered = true;
                   $scope.saveInfo(result);
                 }
               });
