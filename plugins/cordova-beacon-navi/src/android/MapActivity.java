@@ -24,7 +24,9 @@ import android.widget.TextView;
 import com.esri.android.map.GraphicsLayer;
 import com.esri.core.geometry.Envelope;
 import com.esri.core.geometry.Point;
+import com.ty.locationengine.ble.TYBeacon;
 import com.ty.locationengine.ble.TYLocationManager;
+import com.ty.locationengine.ble.TYPublicBeacon;
 import com.ty.locationengine.ibeacon.BeaconRegion;
 import com.ty.mapdata.TYBuilding;
 import com.ty.mapdata.TYCity;
@@ -37,12 +39,16 @@ import com.ty.mapsdk.TYMapInfo;
 import com.ty.mapsdk.TYMapView;
 import com.ty.mapsdk.TYPictureMarkerSymbol;
 import com.ty.mapsdk.TYPoi;
-import com.ty.mapsdk.TYRouteManager;
+import com.ty.mapsdk.TYOfflineRouteManager;
 import com.ty.mapsdk.TYRoutePart;
 import com.ty.mapsdk.TYRouteResult;
 
-public class MapActivity extends Activity
-        implements TYLocationManager.TYLocationManagerListener, TYMapView.TYMapViewListenser, TYRouteManager.TYRouteManagerListener, ActionBar.OnNavigationListener {
+public class MapActivity 
+    extends Activity
+    implements TYLocationManager.TYLocationManagerListener,
+    TYMapView.TYMapViewListenser,
+    TYOfflineRouteManager.TYOfflineRouteManagerListener, 
+    ActionBar.OnNavigationListener {
 
     private static final String TAG = "MapActivity";
 
@@ -68,7 +74,7 @@ public class MapActivity extends Activity
     protected String floorNum;
 
     private TYLocationManager locationManager;
-    private TYRouteManager routeManager;
+    private TYOfflineRouteManager routeManager;
     private GraphicsLayer hintLayer;
 
     private TYLocalPoint mRouteBeginPoint;
@@ -120,8 +126,7 @@ public class MapActivity extends Activity
     }
 
     private void initRouteManager() {
-        routeManager = new TYRouteManager(currentBuilding,
-                TYMapEnvironment.defaultUserCredentials(), allMapInfos);
+        routeManager = new TYOfflineRouteManager(currentBuilding, allMapInfos);
         routeManager.addRouteManagerListener(this);
     }
 
@@ -215,9 +220,9 @@ public class MapActivity extends Activity
                 mRouteTargetPoint = getPoiCenter(poi);
             } else {
                 mRouteTargetPoint = null;
-            }
-            mapView.setHighlightPoiOnSelection(true);
+            }            
         }
+        mapView.setHighlightPoiOnSelection(true);
 
         if (mIsRouting) {
             mapView.showRouteResultOnCurrentFloor();
@@ -239,6 +244,16 @@ public class MapActivity extends Activity
         if (mIsRouting) {
             mapView.showRouteResultOnCurrentFloor();
         }
+    }
+
+    @Override
+    public void didRangedBeacons(TYLocationManager tyLocationManager, List<TYBeacon> list) {
+
+    }
+
+    @Override
+    public void didRangedLocationBeacons(TYLocationManager tyLocationManager, List<TYPublicBeacon> list) {
+
     }
 
     @Override
@@ -280,19 +295,9 @@ public class MapActivity extends Activity
         super.onPause();
         locationManager.stopUpdateLocation();
     }
-
+    
     @Override
-    public void didRetrieveDefaultRouteTaskParameters(TYRouteManager tyRouteManager) {
-        Log.d(TAG, "didRetrieveDefaultRouteTaskParameters");
-    }
-
-    @Override
-    public void didFailRetrieveDefaultRouteTaskParametersWithError(TYRouteManager tyRouteManager, Exception e) {
-        Log.d(TAG, "didFailRetrieveDefaultRouteTaskParametersWithError");
-    }
-
-    @Override
-    public void didSolveRouteWithResult(TYRouteManager tyRouteManager, TYRouteResult rs) {
+    public void didSolveRouteWithResult(TYOfflineRouteManager tyRouteManager, TYRouteResult rs) {
 
         hintLayer.removeAll();
 
@@ -315,7 +320,7 @@ public class MapActivity extends Activity
     }
 
     @Override
-    public void didFailSolveRouteWithError(TYRouteManager tyRouteManager, Exception e) {
+    public void didFailSolveRouteWithError(TYOfflineRouteManager tyRouteManager, Exception e) {
         Log.d(TAG, "didFailSolveRouteWithError");
     }
 
