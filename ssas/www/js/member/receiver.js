@@ -117,7 +117,8 @@
       };
 
       $scope.isFinishedAddress = function () {
-        if (!$scope.addrInfo.address.province || !$scope.addrInfo.address.city) {
+        if (!$scope.addrInfo.address.province || !$scope.addrInfo.address.city ||
+          ($scope.addrInfo.address.city.children.length && !$scope.addrInfo.address.district)) {
           return false;
         }
         else {
