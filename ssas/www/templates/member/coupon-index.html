@@ -1,0 +1,32 @@
+<ion-view view-title="{{'coupon_title'|translate}}" hide-tabs="true">
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate" ng-repeat="item in items"
+                type="item-text-wrap"
+                style="border-bottom: none; border-top-style: dashed;padding: 10px 5px 10px 15px;">
+        <div class="row" style="margin:0;padding: 0 15px 10px 10px;">
+          <div class="col col-20">
+            <img class="pic" ng-src="{{item.image}}">
+          </div>
+          <div class="col col-80" style="padding: 0;">
+            <h2 style="padding: 0px;margin-bottom: 10px;">{{item.name}}</h2>
+
+            <p><span style="float: left;">{{item.coupon_code}}</span></p>
+
+            <p><span style="float: left;">{{item.status}}</span></p>
+
+            <p><span style="float: left;">有效期：{{item.time}}</span></p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll
+      ng-if="hasMore"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

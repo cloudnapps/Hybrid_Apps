@@ -71,11 +71,12 @@ var translations_zh = {
   idcard_addbtn: '添加身份证',
   idcard_addtitle: '新建身份证',
 
-  //point & gold
+  //point & gold & coupon
   point_title: '我的积分',
   point_list: '积分记录',
   gold_title: '我的金币',
   gold_list: '金币记录',
+  coupon_title: '我的优惠券',
 
   //setting
   settng_title: '个人资料',

@@ -224,6 +224,16 @@ angular.module('starter')
             }
           }
         })
+        // 优惠券管理
+        .state('coupons', {
+          url: '/coupons',
+          views: {
+            'main-view': {
+              templateUrl: 'templates/member/coupon-index.html',
+              controller: 'CouponsCtrl'
+            }
+          }
+        })
         // 订单管理
         .state('orders', {
           url: '/orders?type',

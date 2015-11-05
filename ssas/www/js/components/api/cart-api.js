@@ -1,7 +1,6 @@
-
 angular.module('components')
   .factory('cartApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost', 'userService',
-    function($http, apiEndpoint, transformRequestAsFormPost, userService) {
+    function ($http, apiEndpoint, transformRequestAsFormPost, userService) {
 
       var addToCart = function (product) {
         console.log(product);
@@ -104,7 +103,7 @@ angular.module('components')
 
       var checkout = function (cart, nature) {
         var shipping, addr_id, card_id;
-        if(cart) {
+        if (cart) {
           shipping = [];
           angular.forEach(cart.aSelCart, function (seller) {
             shipping.push({seller_id: seller.seller_info.seller_id, shipping_id: seller.def_shipping.id});
@@ -140,7 +139,7 @@ angular.module('components')
           shipping.push({
             seller_id: (seller.seller_info || {}).seller_id,
             shipping_id: (seller.def_shipping || {}).id,
-            is_tax:false,
+            is_tax: false,
             tax_company: '',
             memo: seller.memo
           });
@@ -171,14 +170,54 @@ angular.module('components')
         return request;
       };
 
+      var addCoupon = function (couponId, nature) {
+        var data = {
+          coupon: couponId,
+          nature: nature,
+          member_id: userService.get('memberId'),
+          token: userService.get('token')
+        };
+
+        var request = $http({
+          method: 'post',
+          url: apiEndpoint.url + '/cart-addcoupon.html',
+          transformRequest: transformRequestAsFormPost,
+          data: data,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        });
+
+        return request;
+      };
+
+      var removeCoupon = function (sellerId, nature) {
+        var data = {
+          seller_id: sellerId,
+          nature: nature,
+          member_id: userService.get('memberId'),
+          token: userService.get('token')
+        };
+
+        var request = $http({
+          method: 'post',
+          url: apiEndpoint.url + '/cart-remove_coupon.html',
+          transformRequest: transformRequestAsFormPost,
+          data: data,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        });
+
+        return request;
+      };
+
       return {
-        addToCart : addToCart,
+        addToCart: addToCart,
         getCart: getCart,
         updateCart: updateCart,
         nocheck: nocheck,
         remove: remove,
         checkout: checkout,
-        createOrder: createOrder
+        createOrder: createOrder,
+        addCoupon: addCoupon,
+        removeCoupon: removeCoupon
       };
 
     }]);

@@ -1,8 +1,11 @@
 <ion-view class="cart-checkout" view-title="{{'cart_order_confirm'|translate}}" hide-tabs="true">
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
   <ion-content>
     <ion-list>
-      <a class="item item-icon-right" address-select="cart.addrlist" ng-model="cart.def_addr" ng-change="checkout()" style="padding-right: 40px;">
+      <a class="item item-icon-right" address-select="cart.addrlist" ng-model="cart.def_addr" ng-change="checkout()"
+         style="padding-right: 40px;">
         <div class="row" style="padding: 0;font-size: 14px;color: #444;">
           <div class="col" style="padding: 0;">收件人: {{cart.def_addr.name}}</div>
           <div class="col" style="padding: 0;text-align: right;">电话: {{cart.def_addr.mobile}}</div>
@@ -20,29 +23,56 @@
       <div ng-repeat="seller in cart.aSelCart">
         <ion-item class="item item-complex" style="border-top: 0;">
           <div class="item-content item-button-right" style="padding: 10px;height: 40px;clear: both;">
-            <span style="display: inline-block;width: 70%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{seller.seller_info.seller_name}}</span>
-            <a style="float: right;width: 30%;text-align: right;color: #bd252c;" shipping-select="seller.shipping_list" ng-model="seller.def_shipping" ng-change="checkout()">{{seller.def_shipping.name}} <i style="color: #444;" class="icon ion-chevron-right"></i></a>
+            <span
+              style="display: inline-block;width: 70%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{seller.seller_info.seller_name}}</span>
+            <a style="float: right;width: 30%;text-align: right;color: #bd252c;" shipping-select="seller.shipping_list"
+               ng-model="seller.def_shipping" ng-change="checkout()">{{seller.def_shipping.name}} <i
+              style="color: #444;" class="icon ion-chevron-right"></i></a>
           </div>
         </ion-item>
-        <ion-item class="item item-thumbnail-left" style="padding: 15px 10px 15px 106px;" ng-repeat="good in seller.goods_list">
+        <ion-item class="item item-thumbnail-left" style="padding: 15px 10px 15px 106px;"
+                  ng-repeat="good in seller.goods_list">
           <img style="top: 15px;" ng-src="{{good.thumbnail}}">
+
           <h2 style="color: #444;font-weight: 300;">{{good.name}}</h2>
+
           <h3 style="color: #444;font-weight: 300; min-height: 16px;">{{good.spec}}</h3>
+
           <div class="row" style="padding: 0;padding: 0; margin-top: 8px;">
             <div class="col col-60" style="padding: 0;color: #bd252c;">{{good.buy_price|currency:'￥'}}</div>
             <div class="col col-40" style="padding: 0;text-align: right;">x{{good.quantity}}</div>
           </div>
-          <div class="col" style="padding: 0; font-size: .8em">适用税率：{{good.taxRate}}% &nbsp; 税金：{{good.tax_price|currency:'￥'}}</div>
+          <div class="col" style="padding: 0; font-size: .8em">适用税率：{{good.taxRate}}% &nbsp;
+            税金：{{good.tax_price|currency:'￥'}}
+          </div>
         </ion-item>
         <ion-item class="item" style="padding: 10px 0;border-bottom: 0;">
           <div class="row" style="padding: 0 10px 10px;font-size: 14px;">
-            <div class="col col-50 col-center" style="padding: 0;">运费: <span style="color: #bd252c;">{{seller.def_shipping.price |currency:'￥'}}</span></div>
-            <div class="col col-50 col-center" style="float:right;padding: 0;text-align: right;">共计: <span style="color: #bd252c;">{{seller.total_amount |currency:'￥'}}</span></div>
+            <div class="col col-50 col-center" style="padding: 0;">运费: <span style="color: #bd252c;">{{seller.def_shipping.price |currency:'￥'}}</span>
+            </div>
+            <div class="col col-50 col-center" style="float:right;padding: 0;text-align: right;">共计: <span
+              style="color: #bd252c;">{{seller.total_amount |currency:'￥'}}</span></div>
           </div>
           <div class="row item-input" style="margin: 0;">
             <label class="item-input-wrapper text-stable" style="background-color: #fff;border: 1px solid #e5e5e5;">
               <input type="text" ng-model="seller.memo" placeholder="留言">
             </label>
+          </div>
+        </ion-item>
+        <ion-item class="item" style="padding: 10px 0;border-bottom: 0;">
+          <div class="row" style="padding: 0 10px 10px;font-size: 14px;">
+            <div class="col col-50 col-center" style="padding: 0;">优惠券:</div>
+          </div>
+          <div class="row row-no-padding" style="margin: 0;" ng-repeat="coupon in seller.coupon_lists">
+            <div class="col col-80 col-center" style="padding-left: 15px">
+              <h2 style="color: #444;font-weight: 300;">{{coupon.cpns_name}}</h2>
+            </div>
+            <div class="col col-20 col-center">
+              <label class="checkbox">
+                <input type="checkbox" class="selt-prdt" ng-model="coupon.selected"
+                       ng-change="changeCoupon(seller, coupon)">
+              </label>
+            </div>
           </div>
         </ion-item>
         <hr style="margin:0;height:1px;border:none;border-top:15px solid #f1f1f1;"/>
@@ -51,23 +81,30 @@
         <div>货款总计: {{cart.total_item_amount |currency:'￥'}}</div>
         <div>税费总计: {{cart.total_taxation_amount |currency:'￥'}}</div>
         <div class="row row-no-padding">
-          <div class="col"><div>运费总计: {{cart.total_freight |currency:'￥'}}</div></div>
+          <div class="col">
+            <div>运费总计: {{cart.total_freight |currency:'￥'}}</div>
+          </div>
           <div class="col" style="text-align: right;">订单总计: <span style="font-size: 18px;color: #bd252c;">{{cart.total_amount |currency:'￥'}}</span>
           </div>
         </div>
       </ion-item>
       <ion-item class="padding declare">
         <p>税费说明:</p>
+
         <p>①根据 海关总署公告2010年第43号 公告规定，个人物品申报，应征进口税税额在人民币50元（含50元）以下的，海关予以免征。</p>
         <br>
+
         <p>发票说明:</p>
+
         <p>CTFHOKO全球购商品不支持开发票</p>
       </ion-item>
     </ion-list>
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
     <div class="button-bar">
-      <button class="button" ng-disabled="!cart.def_addr" style="background-color: #bd252c;color: #fff;font-size: 18px;" ng-click="confirm()">{{'pay_now' | translate}}</button>
+      <button class="button" ng-disabled="!cart.def_addr" style="background-color: #bd252c;color: #fff;font-size: 18px;"
+              ng-click="confirm()">{{'pay_now' | translate}}
+      </button>
     </div>
   </ion-footer-bar>
 </ion-view>
