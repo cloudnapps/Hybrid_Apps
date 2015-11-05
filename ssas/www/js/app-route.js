@@ -248,7 +248,7 @@ angular.module('starter')
         .state('order-track', {
           url: '/track/:orderId',
           views: {
-            'tab-member': {
+            'main-view': {
               templateUrl: 'templates/member/order-track.html',
               controller: 'OrderTrackCtrl'
             }
