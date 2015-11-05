@@ -8,7 +8,7 @@
       </div>
       <div ng-show="select_setting" style="position: absolute;right: -9px;top: 48px;background-color: #bd252c;color: #fff;width: 88px;border-radius: 16px;padding: 10px 0;z-index: 999">
         <div class="pop-arrow"></div>
-        <div class="row row-center" style="padding: 0;margin: 5px 0 10px;">
+        <div class="row row-center" style="padding: 0;margin: 5px 0 10px;" ng-if="!currentUser.isWechat">
           <div class="col col-center" style="font-size: 16px;text-align:center;">
             <a style="color:#fff;display: block;text-decoration: none;" ui-sref="setting_changepwd">修改密码</a>
           </div>

@@ -2,6 +2,7 @@
   angular.module('login', ['starter.services'])
     .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $ionicHistory, $interval, userService, LoginApi, toastService) {
       $scope.userInfo = {};
+      $scope.userInfo.isWechat = false;
 
       // 会员登录成功
       $scope.saveInfo = function (result) {
@@ -11,6 +12,7 @@
         currentUser.token = result.data.token;
         currentUser.mobile = result.data.mobile;
         currentUser.isRemembered = $scope.userInfo.remembered;
+        currentUser.isWechat = $scope.userInfo.isWechat;
 
         userService.set(currentUser);
         if ($state.current.name === 'register') {
@@ -119,6 +121,7 @@
                   });
                 }
                 else {
+                  $scope.userInfo.isWechat = true;
                   $scope.saveInfo(result);
                 }
               });

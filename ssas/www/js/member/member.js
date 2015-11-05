@@ -20,6 +20,7 @@
       $scope.getUserInfo = function () {
         SettingApi.getMemberSetting(function (result) {
           $scope.currentUser = result.data;
+          $scope.currentUser.isWechat = userService.get('isWechat');
         });
       };
 
