@@ -44,35 +44,34 @@
       <ion-item ng-repeat="item in items" style="margin: -1px 0 0 0;padding: 0;border: none;">
         <div class="row" style="background-color: #f2f2f2;padding: 10px 15px 10px 10px;">
           <div class="col col-75" style="height: 100%; padding: 0px">
-            <p style="padding: 0px; height: 100%;">订单号：{{item.order_id}}</p>
+            <p style="padding: 0px; height: 100%;color: #4a4a4a;">订单号：{{item.order_id}}</p>
           </div>
 
           <div class="col col-25" style="height: 100%; padding: 0px" align="right">
-            <p style="padding: 0px; height: 100%;">{{item.time.substr(0, 10)}}</p>
+            <p style="padding: 0px; height: 100%;color: #4a4a4a;">{{item.time.substr(0, 10)}}</p>
           </div>
         </div>
 
         <div class="row" style="padding:10px;">
           <div class="col col-66" style="height: 100%; padding: 0px">
-            <p style="padding: 0px; height: 100%;">{{item.seller_name}}</p>
+            <p style="padding: 0px; height: 100%;color: #4a4a4a;">{{item.seller_name}}</p>
           </div>
 
           <div class="col col-34" style="height: 100%; padding: 0px" align="right">
-            <p style="padding: 0px; height: 100%;">{{item.status}}</p>
+            <p style="padding: 0px; height: 100%;color: #4a4a4a;">{{item.status}}</p>
           </div>
         </div>
 
         <div class="row" ng-repeat="product in item.products" style="margin:0;padding: 0 15px 10px 10px;">
-          <div class="col col-20">
+          <div class="col col-20" style="padding-left: 0;">
             <img class="pic" ng-src="{{product.url}}">
           </div>
           <div class="col col-80" style="padding: 0;">
-            <p style="padding: 0px;margin-bottom: 10px;">{{product.name}}</p>
-
+            <p style="padding: 0px;margin-bottom: 1px;color: #4a4a4a;">{{product.name}}</p>
+            <p style="color: #4a4a4a;">{{product.spec}}</p>
             <p>
-              <span style="float: left;">{{product.price | currency:'￥'}}</span>
-              <span>{{product.spec}}</span>
-              <span style="float: right;">x{{product.num}}</span>
+              <span style="float: left;color: #4a4a4a;">{{product.price | currency:'￥'}}</span>
+              <span style="float: right;color: #4a4a4a;">x{{product.num}}</span>
             </p>
           </div>
         </div>

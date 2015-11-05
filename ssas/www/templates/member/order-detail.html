@@ -11,8 +11,8 @@
 
     <div class="row" style="padding: 10px 5px 10px 15px;">
       <div class="col">
-        <p style="margin-bottom: 13px;color: #4a4b4d;">收件人：{{item.consignee.name}}<span style="float: right;"
-                                                                                        ng-if="item.mobile">电话：{{item.consignee.mobile}}</span>
+        <p style="margin-bottom: 13px;color: #4a4b4d;">收件人：{{item.consignee.name}}
+          <span style="float: right;" ng-if="item.mobile">电话：{{item.consignee.mobile}}</span>
         </p>
 
         <div class="row" style="padding: 0;">
@@ -38,15 +38,15 @@
     </div>
 
     <div ng-class="list" style="border: 1px solid #ddd;">
-      <ion-item ng-repeat="product in item.products" style="border-top: none;padding: 10px 16px;">
+      <ion-item ng-repeat="product in item.products" style="border-top: none;padding: 10px;">
         <div class="row" style="margin:0;padding: 0 15px 10px 0;">
           <div class="col col-20" style="padding: 0;height: 60px;">
-            <img style="width: 65px;height: 65px;" ng-src="{{product.url}}">
+            <img class="pic" ng-src="{{product.url}}">
           </div>
-          <div class="col col-80" style="padding: 0 0 0 10px;height: 65px;">
-            <p style="padding: 0px;margin-bottom: 25px;">{{product.name}}</p>
-
-            <p>
+          <div class="col col-80" style="padding: 0 0 0 10px;">
+            <p style="padding: 0px;margin-bottom: 1px;display: -webkit-box !important;overflow: hidden;white-space: normal;text-overflow: ellipsis;word-break: break-all;-webkit-box-orient: vertical;-webkit-line-clamp: 2;">{{product.name}}</p>
+            <p>{{product.spec}}</p>
+            <p style="clear: both;">
               <span style="float: left;">{{product.price | currency:'￥'}}</span>
               <span style="float: right;">x{{product.num}}</span>
             </p>

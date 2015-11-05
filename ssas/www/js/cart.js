@@ -115,6 +115,9 @@ angular.module('cart', ['components'])
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
         }
+        else {
+          $scope.back();
+        }
       })
         .finally(function () {
           $scope.$broadcast('$addressSelect.afterEnter');
@@ -125,8 +128,8 @@ angular.module('cart', ['components'])
     $scope.$on('$ionicView.afterEnter', $scope.checkout);
 
     $scope.changeCoupon = function (seller, coupon) {
-      if(coupon.selected){
-        cartApi.addCoupon(coupon.memc_code, $stateParams.nature).success(function(responseData) {
+      if (coupon.selected) {
+        cartApi.addCoupon(coupon.memc_code, $stateParams.nature).success(function (responseData) {
           var dataStatus = responseData.status;
           if (dataStatus === 0) {
             $scope.cart = responseData.data;
@@ -142,7 +145,7 @@ angular.module('cart', ['components'])
           });
       }
       else {
-        cartApi.removeCoupon(seller.seller_info.seller_id, $stateParams.nature).success(function(responseData) {
+        cartApi.removeCoupon(seller.seller_info.seller_id, $stateParams.nature).success(function (responseData) {
           var dataStatus = responseData.status;
           if (dataStatus === 0) {
             $scope.cart = responseData.data;

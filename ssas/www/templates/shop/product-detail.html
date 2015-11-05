@@ -2,13 +2,17 @@
   <ion-nav-buttons side="left">
     <back-button></back-button>
   </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <a class="button icon-left ion-android-cart button-clear" ng-click="userService.checkLogin('tab.cart')"></a>
+    </div>
+  </ion-nav-buttons>
   <ion-content>
     <div class="row" style="padding: 0px;margin: 0;width: 100%;">
       <div class="col col-center" style="padding: 0px; width: 100%;">
         <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox" ng-if="slideimgs.length"
                        auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
           <ion-slide ng-repeat="item in slideimgs" style="width: 100%;">
-            <a href="#">
+            <a>
               <img ng-src="{{item}}"/>
             </a>
           </ion-slide>

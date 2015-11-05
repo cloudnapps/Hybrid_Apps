@@ -27,7 +27,7 @@
                 <input type="checkbox" ng-model="seller.seller_info.selected" ng-change="toggleSeller(seller)">
               </label>
               <!--             <a class="item-content" href="#/tab/seller/{{seller.seller_info.seller_id}}">{{seller.seller_info.seller_name}}<i class="icon ion-chevron-right icon-accessory"></i></a> -->
-              <div>{{seller.seller_info.seller_name}}</div>
+              <div style="color: #4a4a4a;">{{seller.seller_info.seller_name}}</div>
             </div>
             <ion-option-button class="button-assertive"
                                ng-click="removeSeller(seller)">
@@ -48,12 +48,12 @@
                 </a>
 
                 <div class="good-info col">
-                  <h2 style="color:#444;font-size:14px;">{{good.name}}</h2>
+                  <h2 style="color:#4a4a4a;font-size:14px;">{{good.name}}</h2>
 
-                  <p>{{good.spec}}</p>
+                  <span>{{good.spec}}</span>
 
                   <p class="price">{{good.buy_price|currency:'￥'}}</p>
-                  <p style="padding: 0; font-size: .8em; margin-bottom: 5px;">适用税率：{{good.taxRate}}%</p>
+                  <p style="padding: 0; font-size: 12px;">适用税率：{{good.taxRate}}%</p>
                   <quantity-input ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
                 </div>
               </div>
