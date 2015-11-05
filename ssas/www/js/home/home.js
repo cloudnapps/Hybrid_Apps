@@ -142,11 +142,11 @@
 
       $scope.loginPortal = function () {
         hoko.checkConnection("http://dwz.cn/yes", function (result) {
-            alert(result.code);
-            alert(result.location);
+            //alert(result.code);
+            //alert(result.location);
           },
           function (error) {
-            alert(error);
+            //alert(error);
           });
 
         var state = {
@@ -157,21 +157,20 @@
       };
 
       var success = function (caller, args) {
-        alert('test loginPortal');
         $http({
           method: 'GET',
           url: 'http://192.168.10.249/quickauth.do?wlanacname=portal&wlanuserip=192.168.1.23&userid=test&passwd=8888&isapp=1'
         })
           .then(function successCallback(response) {
-            alert(JSON.stringify(response));
-            alert(userService.get('mobile'));
+            //alert(JSON.stringify(response));
+            //alert(userService.get('mobile'));
             $http({
               method: 'GET',
               url: 'https://securelogin.arubanetworks.com/auth/index.html/u?password=8888&username='
               + userService.get('mobile')
             })
               .then(function successCallback(response) {
-                alert(JSON.stringify(response));
+                //alert(JSON.stringify(response));
 
                 var alertPopup = $ionicPopup.alert({
                   title: '一键上网',
@@ -182,11 +181,11 @@
                 });
 
               }, function errorCallback(response) {
-                alert(JSON.stringify(response));
+                console.log(JSON.stringify(response));
               });
           },
           function errorCallback(response) {
-            alert(JSON.stringify(response));
+            console.log(JSON.stringify(response));
           });
       };
 
@@ -265,7 +264,7 @@
               });
             });
           }, function (err) {
-            alert('error' + JSON.stringify(err));
+            console.log(JSON.stringify(err));
           },
           {
             enableHighAccuracy: false,

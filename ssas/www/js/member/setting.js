@@ -91,7 +91,6 @@
         };
         $cordovaCamera.getPicture(options)
           .then(function (results) {
-            alert(results);
             $scope.images_list.push(results);
             $scope.item.image = results;
           }, function () {
@@ -111,7 +110,6 @@
         };
         $cordovaCamera.getPicture(options)
           .then(function (results) {
-            alert(results);
             window.resolveLocalFileSystemURL(results, function (fileEntry) {
               $scope.images_list.push(fileEntry.nativeURL);
               $scope.item.image = fileEntry.nativeURL;
@@ -123,7 +121,7 @@
       $scope.$on('$ionicView.enter', function () {
         $scope.init();
       });
-      
+
       function convertImgToBase64URL(url, callback, outputFormat) {
         var img = new Image();
         img.crossOrigin = 'Anonymous';

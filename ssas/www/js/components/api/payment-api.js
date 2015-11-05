@@ -13,7 +13,6 @@ angular.module('components')
             deferred.resolve(cb_success);
           },
           function (cb_failure) {
-            alert(cb_failure);
             deferred.reject(cb_failure);
           });
         return deferred.promise;
@@ -36,7 +35,6 @@ angular.module('components')
             deferred.resolve(cb_success);
           },
           function (cb_failure) {
-            alert(cb_failure);
             deferred.reject(cb_failure);
           });
         return deferred.promise;
