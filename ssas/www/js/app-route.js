@@ -363,6 +363,7 @@ angular.module('starter')
 
           .state('tab.cart-checkout', {
             url: '/cart-checkout?nature',
+            cache: false,
             views: {
               'tab-cart': {
                 templateUrl: 'templates/cart/cart-checkout.html',
