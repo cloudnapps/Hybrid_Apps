@@ -26,7 +26,7 @@
                style="background-color: #fff;"></label>
       </label>
       <label class="item item-input">
-        <input type="text" ng-model="addrInfo.addr" placeholder="详细地址">
+        <input type="text" ng-model="addrInfo.addr" placeholder="街道等具体地址">
       </label>
       <label class="item item-toggle" style="font-size: 14px;">
         设置为默认地址
@@ -57,7 +57,8 @@
             </button>
           </div>
           <div class="col col-50" align="right">
-            <button class="button button-clear button-positive" style="font-size:16px;" ng-click="saveAddress()">
+            <button class="button button-clear button-positive" style="font-size:16px;" ng-click="saveAddress()"
+                    ng-disabled="!addrInfo.address.province || !addrInfo.address.city">
               完成
             </button>
           </div>
