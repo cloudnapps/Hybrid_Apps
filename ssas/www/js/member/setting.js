@@ -1,6 +1,6 @@
 (function () {
   angular.module('setting', ['starter.services'])
-    .controller('SettingCtrl', function ($scope, $state, $stateParams, $cordovaCamera, $ionicActionSheet, SettingApi) {
+    .controller('SettingCtrl', function ($scope, $state, $stateParams, $cordovaCamera, $ionicActionSheet, $timeout, SettingApi) {
       function setDays() {
         $scope.birthdayInfo.years = [];
         for (var i = 1900; i < 2020; i++) {
@@ -18,12 +18,15 @@
         }
       }
 
+      // ion-content 创建了一个新的scope
+      $scope.model = {};
+
       $scope.init = function () {
         $scope.item = {};
-        $scope.isChanged = false;
+        $scope.model.isChanged = false;
 
-        $scope.showGender = false;
-        $scope.showBirthday = false;
+        $scope.model.showGender = false;
+        $scope.model.showBirthday = false;
 
         $scope.birthdayInfo = {};
         setDays();
@@ -40,14 +43,15 @@
 
       $scope.setGender = function (gender) {
         $scope.item.sex = gender;
-        $scope.isChanged = true;
+        $scope.model.isChanged = true;
       };
 
       $scope.setBirthday = function () {
         $scope.item.birthday = $scope.birthdayInfo.selectedYear +
           '-' + $scope.birthdayInfo.selectedMonth +
           '-' + $scope.birthdayInfo.selectedDay;
-        $scope.isChanged = true;
+        $scope.model.isChanged = true;
+        $scope.model.showBirthday = false;
       };
 
       $scope.images_list = [];

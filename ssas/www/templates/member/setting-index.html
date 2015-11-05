@@ -30,7 +30,7 @@
       </div-->
     </div>
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
-    <div class="row" style="padding: 0 20px;" ng-click="showGender = !showGender; showBirthday=false;">
+    <div class="row" style="padding: 0 20px;" ng-click="model.showGender = !model.showGender; model.showBirthday=false;">
       <div class="col col-90 col-center" style="padding: 0;height: 60px;line-height: 60px;font-size: 16px;">
         <div class="row" style="padding: 0;">
           <span class="col col-50 col-center" style="padding: 0;">性别</span>
@@ -40,15 +40,15 @@
       <div class="col col-10 col-center" style="padding: 0;height: 60px;line-height: 60px;text-align: right;"
            align="right">
         <a>
-          <i class="icon ion-chevron-right icon-accessory" ng-show="!showGender"></i>
-          <i class="icon ion-chevron-down icon-accessory" ng-show="showGender"></i>
+          <i class="icon ion-chevron-right icon-accessory" ng-show="!model.showGender"></i>
+          <i class="icon ion-chevron-down icon-accessory" ng-show="model.showGender"></i>
         </a>
       </div>
     </div>
 
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;" ng-show="showGender">
+    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;" ng-show="model.showGender">
 
-    <div class="button-bar" ng-show="showGender">
+    <div class="button-bar" ng-show="model.showGender">
       <a class="button button-clear" style="border: none;padding: 0; color: #000;" ng-click="setGender('gentle')">
         <span ng-class="{'set-gender': item.sex === 'gentle'}">男</span>
       </a>
@@ -59,7 +59,7 @@
 
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
 
-    <div class="row" style="padding: 0 20px;" ng-click="showBirthday = !showBirthday; showGender=false">
+    <div class="row" style="padding: 0 20px;" ng-click="model.showBirthday = !model.showBirthday; model.showGender=false">
       <div class="col col-90 col-center" style="padding: 0;height: 60px;line-height: 60px;font-size: 16px;">
         <div class="row" style="padding: 0;">
           <span class="col col-50 col-center" style="padding: 0;">生日</span>
@@ -69,15 +69,15 @@
       <div class="col col-10 col-center" style="padding: 0;height: 60px;line-height: 60px;text-align: right;"
            align="right">
         <a>
-          <i class="icon ion-chevron-right icon-accessory" ng-show="!showBirthday"></i>
-          <i class="icon ion-chevron-down icon-accessory" ng-show="showBirthday"></i>
+          <i class="icon ion-chevron-right icon-accessory" ng-show="!model.showBirthday"></i>
+          <i class="icon ion-chevron-down icon-accessory" ng-show="model.showBirthday"></i>
         </a>
       </div>
     </div>
 
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;" ng-show="showBirthday">
+    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;" ng-show="model.showBirthday">
 
-    <div ng-show="showBirthday">
+    <div ng-show="model.showBirthday">
       <div class="list">
         <label class="item item-input item-select">
           <div class="input-label">
