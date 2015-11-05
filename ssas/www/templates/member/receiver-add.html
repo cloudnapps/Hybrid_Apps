@@ -7,13 +7,9 @@
       <label class="item item-input">
         <input type="text" ng-model="addrInfo.name" placeholder="姓名">
       </label>
-      <label class="item item-input item-select">
-        <div class="input-label">
-          身份证号：
-        </div>
-        <select ng-model="addrInfo.number">
-          <option ng-repeat="s in cardList">{{s.number}}</option>
-        </select>
+      <label class="item item-input" ng-click="addrInfo.showIdCard=true; addrInfo.showChoose=false">
+        <input type="text" ng-model="addrInfo.number" placeholder="身份证号" readonly="readonly"
+               style="background-color: #fff;"></label>
       </label>
       <label class="item item-input">
         <input type="text" ng-model="addrInfo.mobile" placeholder="手机号码">
@@ -21,7 +17,7 @@
       <label class="item item-input">
         <input type="text" ng-model="addrInfo.zipcode" placeholder="邮政编码">
       </label>
-      <label class="item item-input" ng-click="addrInfo.showChoose=true">
+      <label class="item item-input" ng-click="addrInfo.showChoose=true;addrInfo.showIdCard=false">
         <input type="text" ng-model="addrInfo.area" placeholder="省市区县" readonly="readonly"
                style="background-color: #fff;"></label>
       </label>
@@ -88,6 +84,34 @@
           </div>
           <select ng-model="addrInfo.address.district" ng-options="ar.value for ar in addrInfo.address.city.children">
             <option value="">--请选择--</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div ng-show="addrInfo.showIdCard">
+      <div class="button-bar">
+        <div class="row">
+          <div class="col col-50">
+            <button class="button button-clear button-positive" style="font-size:16px;"
+                    ui-sref="idcard-change">
+              添加身份证
+            </button>
+          </div>
+          <div class="col col-50" align="right">
+            <button class="button button-clear button-positive" style="font-size:16px;" ng-click="saveIdCard()">
+              完成
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="list">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            身份证号：
+          </div>
+          <select ng-model="addrInfo.number">
+            <option ng-repeat="s in cardList">{{s.number}}</option>
           </select>
         </label>
       </div>

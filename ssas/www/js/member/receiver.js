@@ -141,6 +141,11 @@
 
         $scope.addrInfo.showChoose = false;
       };
+
+      $scope.addrInfo.showIdCard = false;
+      $scope.saveIdCard = function () {
+        $scope.addrInfo.showIdCard = false;
+      }
     })
 
     .factory('ReceiverApi', function ($http, apiEndpoint, userService, RegionApi, transformRequestAsFormPost) {
