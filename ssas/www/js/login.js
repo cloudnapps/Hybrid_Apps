@@ -19,9 +19,11 @@
         $scope.back();
         userService.goNext();
       };
-
+      $scope.clicked = false;
       $scope.login = function () {
+        $scope.clicked = true;
         LoginApi.loginUser($scope.userInfo.name, $scope.userInfo.password, function (result) {
+          $scope.clicked = false;
           if (result.status === 1) {
             var alertPopup = $ionicPopup.alert({
               title: '登录失败',
