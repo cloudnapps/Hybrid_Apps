@@ -1,11 +1,11 @@
 var exec = require('cordova/exec');
 
 var navi = {
-  showMapNavigator: function(poiID, floor) {
-    exec(null, null, 'Navi', 'showMapNavigator', [poiID, floor]);
+  showMapNavigator: function(poiID, floor, success, failure) {
+    exec(success, failure, 'Navi', 'showMapNavigator', [poiID, floor]);
   },
-  showShopMap: function(poiID, floor) {
-  	exec(null, null, 'Navi', 'showShopMap', [poiID, floor]);
+  showShopMap: function(poiID, floor, success, failure) {
+  	exec(success, failure, 'Navi', 'showShopMap', [poiID, floor]);
   }
 }
 

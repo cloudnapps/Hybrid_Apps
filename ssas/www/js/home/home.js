@@ -3,7 +3,7 @@
     .controller('HomeController', function ($scope, $ionicSlideBoxDelegate, $ionicLoading,
                                             $rootScope, barcode, $cordovaInAppBrowser, userService, $ionicPopup,
                                             $state, $ionicPopover, $window, $interval, $ionicScrollDelegate,
-                                            HomeApi, SellerApi, $http, shopApi) {
+                                            HomeApi, SellerApi, $http, shopApi, $ionicLoading) {
       $scope.homeInfo = {};
 
       $scope.sellerInfo = {};
@@ -206,7 +206,14 @@
       };
 
       $scope.showMap = function () {
-        navi.showMapNavigator("", "1"); //07550002F0110050
+        $ionicLoading.show();
+        navi.showMapNavigator("", "1",
+          function(){
+            $ionicLoading.hide();
+          },
+          function(){
+            $ionicLoading.hide();
+          });
       };
 
       $scope.shake = function () {

@@ -73,10 +73,12 @@ public class MapNavigator extends CordovaPlugin {
             intent.putExtra("poiID", args.getString(0));
             intent.putExtra("floorNum", args.getString(1));
             
-            mCordova.startActivityForResult(this, intent, 100);
+            mCordova.getActivity().startActivity(intent);
+            callbackContext.success();
+            return true;
         } else {
+            callbackContext.error("");
             return false;
         }
-        return true;
     }
 }

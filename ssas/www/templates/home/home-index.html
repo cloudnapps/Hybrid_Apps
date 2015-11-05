@@ -1,5 +1,4 @@
 <ion-view view-title="">
-
   <script id="shopPopover.html" type="text/ng-template">
     <ion-popover-view style="width: 80px; height: 100px;background:#ad1222; opacity: 1; top: 44px;">
       <ion-content>
@@ -46,7 +45,7 @@
   </ion-nav-buttons>
 
   <!-- body -->
-  <ion-content style="background-color: #fff;">
+  <ion-content style="background-color: #fff;">    
     <!--广告轮播图-->
     <div class="row" style="padding: 0px;margin: 0;width: 100%;">
       <div class="col col-center" style="padding: 0px; width: 100%;">
@@ -247,43 +246,42 @@
           </div>
         </div>
       </div>
-    </div>
-  </ion-content>
+    </div>    
+  </ion-content>  
 
   <!--发现-线下功能-->
-  <ion-content ng-show="showBtns">
-    <div class="row find-nav-bar">
-      <div class="col col-20 col-center find-item" ng-click="showMap()">
-        <a>
-          <img src="img/home/icon1.png"/>
-          <span>逛商场</span>
-        </a>
-      </div>
-      <div class="col col-20 col-center find-item"
-           ui-sref="signin">
-        <a>
-          <img src="img/home/icon2.png"/>
-          <span>签个到</span>
-        </a>
-      </div>
-      <div class="col col-20 col-center find-item" ng-click="shake()">
-        <a>
-          <img src="img/home/icon3.png"/>
-          <span>摇一摇</span>
-        </a>
-      </div>
-      <div class="col col-20 col-center find-item" ng-click="loginPortal()">
-        <a>
-          <img src="img/home/icon4.png"/>
-          <span>一键上网</span>
-        </a>
-      </div>
-      <div class="col col-20 col-center find-item" ng-click="openWeb()">
-        <a>
-          <img src="img/home/icon5.png"/>
-          <span>交通</span>
-        </a>
-      </div>
+    
+  <div class="row find-nav-bar has-header" ng-show="showBtns">        
+    <div class="col col-20 col-center find-item" ng-click="showMap()">
+      <a>
+        <img src="img/home/icon1.png"/>
+        <span>逛商场</span>
+      </a>
     </div>
-  </ion-content>
+    <div class="col col-20 col-center find-item"
+         ui-sref="signin">
+      <a>
+        <img src="img/home/icon2.png"/>
+        <span>签个到</span>
+      </a>
+    </div>
+    <div class="col col-20 col-center find-item" ng-click="shake()">
+      <a>
+        <img src="img/home/icon3.png"/>
+        <span>摇一摇</span>
+      </a>
+    </div>
+    <div class="col col-20 col-center find-item" ng-click="loginPortal()">
+      <a>
+        <img src="img/home/icon4.png"/>
+        <span>一键上网</span>
+      </a>
+    </div>
+    <div class="col col-20 col-center find-item" ng-click="openWeb()">
+      <a>
+        <img src="img/home/icon5.png"/>
+        <span>交通</span>
+      </a>
+    </div>
+  </div>
 </ion-view>
