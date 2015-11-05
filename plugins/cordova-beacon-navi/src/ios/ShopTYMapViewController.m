@@ -72,7 +72,7 @@
     
     [self initLocationSettings];
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"关闭", nil) style:UIBarButtonItemStylePlain target:self action:@selector(close)];
     
     if(_poiID)
     {
