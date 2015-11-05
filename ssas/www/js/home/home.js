@@ -119,9 +119,7 @@
         });
       };
 
-      $scope.$on('$ionicView.beforeEnter', function () {
-        $scope.getHomeInfo();
-      });
+      $scope.getHomeInfo();
 
       $scope.openBtns = function () {
         $scope.showBtns = !$scope.showBtns;

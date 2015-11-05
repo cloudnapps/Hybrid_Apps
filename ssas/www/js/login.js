@@ -41,7 +41,7 @@
       $scope.reSendCodeTime = 0;
       $scope.getSignCode = function () {
 
-        if(!/\d{11,11}/.test($scope.userInfo.mobile)) {
+        if (!/\d{11,11}/.test($scope.userInfo.mobile)) {
           toastService.setToast('手机号码不正确');
           return;
         }
@@ -125,11 +125,10 @@
             });
           },
           function (cb_failure) {
-            alert(cb_failure);
           });
       };
 
-      $scope.register = function() {
+      $scope.register = function () {
         $state.go('register');
       }
 
