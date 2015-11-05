@@ -116,7 +116,20 @@
         $scope.addrInfo.address.district = '';
       };
 
+      $scope.isFinishedAddress = function () {
+        if (!$scope.addrInfo.address.province || !$scope.addrInfo.address.city) {
+          return false;
+        }
+        else {
+          return true;
+        }
+      };
+
       $scope.saveAddress = function () {
+        if (!$scope.isFinishedAddress()) {
+          return;
+        }
+
         $scope.addrInfo.area = $scope.addrInfo.address.province.value + $scope.addrInfo.address.city.value;
         $scope.addrInfo.region_id = $scope.addrInfo.address.province.id + ',' + $scope.addrInfo.address.city.id;
 
