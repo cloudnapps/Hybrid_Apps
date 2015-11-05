@@ -229,7 +229,7 @@
             template: '两次输入的密码不一致'
           });
 
-          errorPopup.then(function (res) {
+          return errorPopup.then(function (res) {
             console.log(res);
           });
         }
@@ -246,7 +246,7 @@
             template: result.msg
           });
 
-          alertPopup.then(function (res) {
+          return alertPopup.then(function (res) {
             console.log(res);
 
             if (result.status === 0) {

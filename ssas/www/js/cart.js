@@ -115,6 +115,9 @@ angular.module('cart', ['components'])
       if (dataStatus === 0) {
         $scope.cart = responseData.data;
       }
+      else {
+        $scope.back();
+      }
     })
     .finally(function () {
       $scope.$broadcast('$addressSelect.afterEnter');
