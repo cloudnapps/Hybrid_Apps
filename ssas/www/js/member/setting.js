@@ -44,6 +44,7 @@
       $scope.setGender = function (gender) {
         $scope.item.sex = gender;
         $scope.model.isChanged = true;
+        $scope.model.showGender = false;
       };
 
       $scope.setBirthday = function () {

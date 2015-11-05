@@ -12,7 +12,7 @@
         <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox" ng-if="slideimgs.length"
                        auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
           <ion-slide ng-repeat="item in slideimgs" style="width: 100%;">
-            <a href="#">
+            <a>
               <img ng-src="{{item}}"/>
             </a>
           </ion-slide>
