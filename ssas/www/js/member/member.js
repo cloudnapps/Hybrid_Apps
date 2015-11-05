@@ -1,6 +1,7 @@
 (function () {
   angular.module('member', ['starter.services', 'login'])
-    .controller('MemberCtrl', function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService) {
+    .controller('MemberCtrl', 
+      function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService, $ionicActionSheet) {
       $scope.currentUser = {};
 
       // 勿删,控制设置隐藏 displayBlur selt_set
@@ -10,7 +11,23 @@
       };
 
       $scope.selt_set = function () {
-        $scope.select_setting = !$scope.select_setting;
+        // $scope.select_setting = !$scope.select_setting;
+        var hideSheet = $ionicActionSheet.show({
+          buttons:[
+            {text:'<i class="icon ion-unlocked clam"></i> 修改密码'}
+          ],
+          buttonClicked: function(index) {
+            $state.go('setting_changepwd');
+          },
+          destructiveText: '<i class="icon ion-power assertive"></i> 安全退出',
+          destructiveButtonClicked: function(){
+            $scope.logOut();
+          },
+          cancelText: '取消',
+          cancel: function() {
+          // add cancel code..
+          }         
+        });
       };
 
       $scope.$on('$ionicView.beforeEnter', function () {

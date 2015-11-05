@@ -1,30 +1,7 @@
-<ion-view view-title="{{'my'|translate}}" hide-tabs="false">
+<ion-view view-title="{{'my'|translate}}">
   <ion-nav-buttons side="right">
-    <div class="row row-center member-set" style="padding: 0px;margin-right: 10px;position: relative;">
-      <div class="col col-center" style="padding: 0px;" ng-click="selt_set()">
-        <a class="button button-clear">
-          <i class="icon ion-gear-b"></i>
-        </a>
-      </div>
-      <div ng-show="select_setting" style="position: absolute;right: -9px;top: 48px;background-color: #bd252c;color: #fff;width: 88px;border-radius: 16px;padding: 10px 0;z-index: 999">
-        <div class="pop-arrow"></div>
-        <div class="row row-center" style="padding: 0;margin: 5px 0 10px;" ng-if="!currentUser.isWechat">
-          <div class="col col-center" style="font-size: 16px;text-align:center;">
-            <a style="color:#fff;display: block;text-decoration: none;" ui-sref="setting_changepwd">修改密码</a>
-          </div>
-        </div>
-        <div class="row row-center" style="padding: 0;margin: 5px 0;">
-          <div class="col col-center" style="font-size: 16px;text-align:center;">
-            <a style="color:#fff;display: block;text-decoration: none;" ng-click="logOut()">安全退出</a>
-          </div>
-        </div>
-        <div>
-          <input focus="select_setting" ng-blur="displayBlur($event)" style="width: 0; height: 0; padding: 0;" type="text">
-        </div>
-      </div>
-    </div>
-  </ion-nav-buttons>
-
+    <a class="icon ion-gear-b button button-clear" ng-click="selt_set()"> </a>
+  </ion-nav-buttons>    
   <ion-content>
     <div class="row"
          style="padding: 0;background-color: #fff;background-image: url('img/me.jpg');background-position: 5% 50%;background-repeat: no-repeat;background-size: cover;background-origin:content-box;width: 100%;height:190px;position: relative;">
