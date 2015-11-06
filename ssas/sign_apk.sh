@@ -1,6 +1,6 @@
 #!/bin/sh
 
-APK="platforms/android/build/outputs/apk/android-debug.apk"
+APK="platforms/android/build/outputs/apk/android-armv7-debug.apk"
 APK_REL="android-release.apk"
 echo $APK
 KEY=ctfhoko-release.jks
