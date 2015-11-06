@@ -71,7 +71,7 @@
     },
     "cordova-plugin-geolocation",
     "cordova-plugin-file-transfer",
-    "cordova-plugin-camera"
+    "cordova-plugin-camera",
     "cordova-plugin-crosswalk-webview"
   ],
   "cordovaPlatforms": [
