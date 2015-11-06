@@ -391,7 +391,7 @@ angular.module('starter')
             }
           })
           .state('tab.order-payed', {
-            url: '/order-payed',
+            url: '/order-payed?isFailed',
             views: {
               'tab-cart': {
                 templateUrl: 'templates/cart/order-payed.html',

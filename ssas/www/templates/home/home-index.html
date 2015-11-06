@@ -62,7 +62,7 @@
     </div>
 
     <!--热门分类-->
-    <div class="row prdt-hot-sort" style="margin: 0;">
+    <div class="row prdt-hot-sort" style="margin: 0;" ng-if="!!homeInfo.cat_info.length">
       <div class="col col-20 col-center prdt-item" ng-repeat="category in homeInfo.cat_info"
            ui-sref="products({categoryId: category.cat_id})">
         <a>
@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <div class="row new-prdt-title" style="padding: 0;margin: 0;">
+    <div class="row new-prdt-title" style="padding: 0;margin: 0;" ng-if="!!activityInfo.product_info.length">
       <div class="col col-30 col-center camp-title-left">
         <div
           style="background-image: url('img/nav-bar-first.png');background-repeat: no-repeat;background-size: contain;height: 30px;width: 95%;">
@@ -83,7 +83,7 @@
     </div>
 
     <!-- 促销活动 -->
-    <div class="index-prdt-cont">
+    <div class="index-prdt-cont" ng-if="!!activityInfo.product_info.length">
       <!-- <ion-scroll direction="x"> -->
       <div class="row" style="padding: 0;">
         <div class="col col-50 col-center pad-5"
@@ -122,7 +122,7 @@
     </div>
 
     <!-- 商户列表 -->
-    <div class="row nav-bar-title" style="padding: 0 0 5px;margin: 0;">
+    <div class="row nav-bar-title" style="padding: 0 0 5px;margin: 0;" ng-if="!!sellerInfo.items.length">
       <div class="col col-30 col-center nav-title-left">
         <div
           style="background-image: url('img/nav-bar-seller.png');background-repeat: no-repeat;background-size: contain;height: 30px;width: 95%;">
@@ -136,7 +136,7 @@
     </div>
 
     <!-- 商标logo -->
-    <div class="row" style="margin: 3px 0 0;padding: 0; flex-wrap:wrap;">
+    <div class="row" style="margin: 3px 0 0;padding: 0; flex-wrap:wrap;" ng-if="!!sellerInfo.items.length">
       <div class="col col-25 col-center prdt-logo-one-row" ng-repeat="item in sellerInfo.items" ng-if="$index < 4">
         <a class="logo-item" ui-sref="seller-detail({sellerId:item.seller_id})">
           <img ng-src="{{item.image}}"/>
@@ -201,7 +201,7 @@
     </div>
 
     <!--猜你喜欢-->
-    <div class="row nav-bar-title" style="padding: 0;margin: 0;">
+    <div class="row nav-bar-title" style="padding: 0;margin: 0;" ng-if="!!goodsInfo.length">
       <div class="col col-30 col-center nav-title-left">
         <div
           style="background-image: url('img/nav-bar-last.png');background-repeat: no-repeat;background-size: contain;height: 30px;width: 95%;">
@@ -214,7 +214,7 @@
       </div>
     </div>
 
-    <div class="index-prdt-cont">
+    <div class="index-prdt-cont" ng-if="!!goodsInfo.length">
       <div class="row" style="padding: 0;" ng-repeat="product in goodsInfo" ng-if="$index % 2 === 0">
         <div class="col col-50 col-center pad-5" ng-if="$index < goodsInfo.length">
           <div class="new-prdt">

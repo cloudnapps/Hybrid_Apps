@@ -21,7 +21,12 @@
 
     <div class="button-bar">
       <div class="row">
-        <div class="col col-50" ui-sref="orders">
+        <div class="col col-50" ng-if="isFailed" ng-click="goOrder('nopay')">
+          <button class="button button-full button-positive" style="font-size:16px;">
+            待付款订单
+          </button>
+        </div>
+        <div class="col col-50" ng-if="!isFailed" ng-click="goOrder('all')">
           <button class="button button-full button-positive" style="font-size:16px;">
             全部订单
           </button>

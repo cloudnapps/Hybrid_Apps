@@ -152,7 +152,7 @@ angular.module('cart', ['components'])
           }
           else {
             coupon.selected = true;
-            toastService.setToast(responseData.msg)
+            toastService.setToast(responseData.msg);
           }
         })
           .finally(function () {
@@ -210,11 +210,17 @@ angular.module('cart', ['components'])
                   console.log(data);
                   $state.go('tab.order-payed');
                 }, function (err) {
-                  $ionicPopup.alert({
-                    title: '支付失败',
-                    template: err
-                  });
-                  return $q.reject();
+                  $ionicPopup
+                    .alert({
+                      title: '支付失败',
+                      template: err
+                    })
+                    .then(function(){
+                      $state.go('tab.order-payed', {
+                        isFailed: true
+                      });
+                    });
+                  // return $q.reject();
                 });
             });
         })
@@ -223,9 +229,19 @@ angular.module('cart', ['components'])
       $ionicLoading.hide();
     };
   })
-  .controller('OrderPayedController', function ($rootScope, $scope, $q, $ionicLoading, orderApi) {
+  .controller('OrderPayedController', function ($rootScope, $scope, $q, $ionicLoading, $state, $stateParams, orderApi) {
     var justCreatedOrder = $rootScope.justCreatedOrder;
     delete $rootScope.justCreatedOrder;
+
+    $scope.isFailed = $stateParams.isFailed || false;
+    alert($stateParams.isFailed);
+
+    $scope.goOrder = function(type){
+      $state.go('tab.home');
+      $state.go('orders', {
+        type: type || 'all'
+      });
+    };
 
     $scope.load = function () {
       $ionicLoading.show();
