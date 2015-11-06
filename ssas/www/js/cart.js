@@ -199,10 +199,9 @@ angular.module('cart', ['components'])
 
                 return $q.reject();
               }
-
               return paymentApi.pay(response.data.data)
                 .then(function (data) {
-                  console.log(data);
+                  alert(data);
                   $state.go('tab.order-payed');
                 }, function (err) {
                   $ionicPopup
@@ -224,18 +223,19 @@ angular.module('cart', ['components'])
       $ionicLoading.hide();
     };
   })
-  .controller('OrderPayedController', function ($rootScope, $scope, $q, $ionicLoading, $state, $stateParams, orderApi) {
+  .controller('OrderPayedController', function ($rootScope, $scope, $q, $ionicLoading, $state, $stateParams, $timeout, orderApi) {
     var justCreatedOrder = $rootScope.justCreatedOrder;
     delete $rootScope.justCreatedOrder;
 
     $scope.isFailed = $stateParams.isFailed || false;
-    alert($stateParams.isFailed);
 
     $scope.goOrder = function (type) {
       $state.go('tab.home');
-      $state.go('orders', {
-        type: type || 'all'
-      });
+      $timeout(function(){
+        $state.go('orders', {
+          type: type || 'all'
+        });
+      }, 10)
     };
 
     $scope.load = function () {

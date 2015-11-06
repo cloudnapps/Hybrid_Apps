@@ -392,6 +392,7 @@ angular.module('starter')
           })
           .state('tab.order-payed', {
             url: '/order-payed?isFailed',
+            cache: false,
             views: {
               'tab-cart': {
                 templateUrl: 'templates/cart/order-payed.html',
