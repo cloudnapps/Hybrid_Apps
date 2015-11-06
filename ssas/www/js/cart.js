@@ -139,7 +139,7 @@ angular.module('cart', ['components'])
           angular.forEach($scope.cart.aSelCart, function (sct) {
             angular.forEach(sct.coupon_lists, function (cp) {
               if (sct.def_coupon && (cp.memc_code === sct.def_coupon.memc_code)) {
-                cp.selected = true
+                cp.selected = true;
               }
               else {
                 cp.selected = false;
@@ -236,7 +236,7 @@ angular.module('cart', ['components'])
         $state.go('orders', {
           type: type || 'all'
         });
-      }, 10)
+      }, 10);
     };
 
     $scope.load = function () {
