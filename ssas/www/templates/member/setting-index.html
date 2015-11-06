@@ -78,12 +78,28 @@
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;" ng-show="model.showBirthday">
 
     <div ng-show="model.showBirthday">
+      <div class="button-bar">
+        <div class="row">
+          <div class="col col-50">
+            <button class="button button-clear button-positive" style="font-size:16px;"
+                    ng-disabled="!birthdayInfo.confirmEnable">
+              确定
+            </button>
+          </div>
+          <div class="col col-50" align="right">
+            <button class="button button-clear button-positive" style="font-size:16px;" ng-click="setBirthday()">
+              完成
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="list">
         <label class="item item-input item-select">
           <div class="input-label">
             年
           </div>
-          <select ng-model="birthdayInfo.selectedYear">
+          <select ng-model="birthdayInfo.selectedYear" ng-focus="birthdayInfo.confirmEnable=true"
+                  ng-blur="birthdayInfo.confirmEnable=false">
             <option ng-repeat="s in birthdayInfo.years">{{s}}</option>
           </select>
         </label>
@@ -91,7 +107,8 @@
           <div class="input-label">
             月
           </div>
-          <select ng-model="birthdayInfo.selectedMonth">
+          <select ng-model="birthdayInfo.selectedMonth" ng-focus="birthdayInfo.confirmEnable=true"
+                  ng-blur="birthdayInfo.confirmEnable=false">
             <option ng-repeat="sh in birthdayInfo.months">{{sh}}</option>
           </select>
         </label>
@@ -99,12 +116,13 @@
           <div class="input-label">
             日
           </div>
-          <select ng-model="birthdayInfo.selectedDay">
+          <select ng-model="birthdayInfo.selectedDay" ng-focus="birthdayInfo.confirmEnable=true"
+                  ng-blur="birthdayInfo.confirmEnable=false">
             <option ng-repeat="ar in birthdayInfo.days">{{ar}}</option>
           </select>
         </label>
       </div>
-      <div class="button-bar">
+<!--      <div class="button-bar">
         <div class="row">
           <div class="col col-100">
             <button class="button button-full button-positive" style="font-size:16px;" ng-click="setBirthday()">
@@ -112,7 +130,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
 
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">

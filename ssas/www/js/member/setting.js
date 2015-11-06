@@ -29,6 +29,7 @@
         $scope.model.showBirthday = false;
 
         $scope.birthdayInfo = {};
+        $scope.birthdayInfo.confirmEnable = false;
         setDays();
 
         SettingApi.getMemberSetting(function (result) {
