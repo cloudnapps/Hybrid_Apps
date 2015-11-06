@@ -29,3 +29,24 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "seller-index";
 @import "product";
 @import "cart";
+
+
+body>ion-nav-view {  
+  &[nav-view-direction="exit"] {
+    >ion-view {
+      &[nav-view="active"] {
+        /* 从tab跳到外面的动画 */
+        @include animation(slideInRight 250ms ease);    
+      }
+    }    
+  }
+
+  &[nav-view-direction="enter"]{
+    >ion-tabs.pane {
+      &[nav-view="active"] {
+      	/* 从其他跳回tab */
+        @include animation(slideInLeft 250ms ease);
+      }
+    }
+  }
+}
