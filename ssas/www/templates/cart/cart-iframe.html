@@ -1,4 +1,11 @@
 <ion-view class="cart" hide-tabs="true">
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <div class="row row-center" style="padding: 0px;margin-right: 10px;">
+      <div class="col col-center" style="padding: 0px;">
+        <button class="button button-clear icon ion-ios-home" ui-sref="tab.home">
+        </button>
+      </div>
+    </div>
+  </ion-nav-buttons>
   <my-iframe ng-if="!!html" html="html" class="has-header scroll-content"></my-iframe>
 </ion-view>
