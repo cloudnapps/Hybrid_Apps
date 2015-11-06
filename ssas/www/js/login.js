@@ -247,7 +247,6 @@
       function modifyMobile() {
         SettingApi.modifyMobileSetting($scope.currentUser.member_id, $scope.currentUser.token,
           $scope.userInfo.mobile, $scope.userInfo.signCode, function (result) {
-            alert(JSON.stringify(result));
             if (result.status === 0) {
               $scope.userInfo.isWechat = true;
               $scope.userInfo.remembered = true;
