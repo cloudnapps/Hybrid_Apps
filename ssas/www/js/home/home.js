@@ -95,27 +95,6 @@
           $scope.$on('$destroy', function () {
             $interval.cancel(promise);
           });
-
-          /*$scope.activityInfo.updateDiff = function () {
-
-           var end_time = new Date($scope.activityInfo.end_time);
-           var now_time = new Date();
-
-           var diff_time = (end_time.getTime() - now_time.getTime()) / 1000;
-           var diff_hour = parseInt(diff_time / (60 * 60));
-           var diff_minute = parseInt((diff_time - diff_hour * 60 * 60) / 60);
-           var diff_second = parseInt(diff_time - diff_hour * 60 * 60 - diff_minute * 60);
-
-           $scope.activityInfo.diff_time = diff_hour + ':' + diff_minute + ':' + diff_second;
-           };*/
-
-          /*var promise = $interval(function () {
-           $scope.activityInfo.updateDiff();
-           }, 1000);
-
-           $scope.$on('$destroy', function () {
-           $interval.cancel(promise);
-           });*/
         });
       };
 
@@ -141,14 +120,6 @@
 
 
       $scope.loginPortal = function () {
-        hoko.checkConnection("http://dwz.cn/yes", function (result) {
-            //alert(result.code);
-            //alert(result.location);
-          },
-          function (error) {
-            //alert(error);
-          });
-
         var state = {
           success: success
         };
@@ -157,36 +128,38 @@
       };
 
       var success = function (caller, args) {
-        $http({
-          method: 'GET',
-          url: 'http://192.168.10.249/quickauth.do?wlanacname=portal&wlanuserip=192.168.1.23&userid=test&passwd=8888&isapp=1'
-        })
-          .then(function successCallback(response) {
-            //alert(JSON.stringify(response));
-            //alert(userService.get('mobile'));
-            $http({
-              method: 'GET',
-              url: 'https://securelogin.arubanetworks.com/auth/index.html/u?password=8888&username='
-              + userService.get('mobile')
-            })
-              .then(function successCallback(response) {
-                //alert(JSON.stringify(response));
-
-                var alertPopup = $ionicPopup.alert({
-                  title: '一键上网',
-                  template: '联网成功'
-                });
-                alertPopup.then(function (res) {
-                  console.log(res);
-                });
-
-              }, function errorCallback(response) {
-                console.log(JSON.stringify(response));
-              });
+        var acIP;
+        hoko.checkConnection("http://www.baidu.com", function (result) {
+            acIP = result.location.split('/')[2];
           },
-          function errorCallback(response) {
-            console.log(JSON.stringify(response));
+          function (error) {
           });
+
+        if (!acIP) {
+          toastService.setToast('一键上网失败');
+        }
+        else {
+          var url = 'http://' + acIP + '/quickauth.do?wlanacname=portal&wlanuserip=192.168.1.23&userid=test&passwd=8888&isapp=1';
+          $http({
+            method: 'GET',
+            url: url
+          })
+            .then(function successCallback(response) {
+              $http({
+                method: 'GET',
+                url: 'https://securelogin.arubanetworks.com/auth/index.html/u?password=8888&username='
+                + userService.get('mobile')
+              })
+                .then(function successCallback(response) {
+                  toastService.setToast('一键上网成功');
+                }, function errorCallback(response) {
+                  console.log(JSON.stringify(response));
+                });
+            },
+            function errorCallback(response) {
+              console.log(JSON.stringify(response));
+            });
+        }
       };
 
       $scope.openWeb = function () {
@@ -208,10 +181,10 @@
       $scope.showMap = function () {
         $ionicLoading.show();
         navi.showMapNavigator("", "1",
-          function(){
+          function () {
             $ionicLoading.hide();
           },
-          function(){
+          function () {
             $ionicLoading.hide();
           });
       };
