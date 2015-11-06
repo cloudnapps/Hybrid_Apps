@@ -1,6 +1,6 @@
 (function () {
   angular.module('login', ['starter.services'])
-    .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $ionicHistory, $interval, userService, LoginApi, toastService) {
+    .controller('LoginCtrl', function ($rootScope, $scope, $state, $ionicPopup, $ionicHistory, $interval, userService, LoginApi, toastService) {
       $scope.userInfo = {};
       $scope.userInfo.isWechat = false;
       $scope.userInfo.remembered = true;
@@ -57,7 +57,7 @@
           }
         }, 1000);
         LoginApi.sendCode($scope.userInfo.mobile, 'signup', function (result) {
-          if(result.status === 1 && result.msg === '请填写正确的手机号码') {
+          if (result.status === 1 && result.msg === '请填写正确的手机号码') {
             $scope.reSendCodeTime = 0;
           }
           var alertPopup = $ionicPopup.alert({
@@ -127,9 +127,15 @@
                   });
                 }
                 else {
-                  $scope.userInfo.isWechat = true;
-                  $scope.userInfo.remembered = true;
-                  $scope.saveInfo(result);
+                  if (!result.data.mobile) {
+                    $rootScope.wxUser = result.data;
+                    $state.go('wxmobile');
+                  }
+                  else {
+                    $scope.userInfo.isWechat = true;
+                    $scope.userInfo.remembered = true;
+                    $scope.saveInfo(result);
+                  }
                 }
               });
             });
@@ -141,7 +147,6 @@
       $scope.register = function () {
         $state.go('register');
       }
-
     })
 
     .controller('RetrieveCtrl', function ($scope, $state, $interval, LoginApi, toastService) {
@@ -168,7 +173,7 @@
         }, 1000);
         LoginApi
           .sendCode($scope.userInfo.mobile, 'lost', function (data) {
-            if(result.status === 1 && result.msg === '请填写正确的手机号码') {
+            if (result.status === 1 && result.msg === '请填写正确的手机号码') {
               $scope.reSendCodeTime = 0;
             }
             toastService.setToast(data.msg);
@@ -202,6 +207,54 @@
               $scope.back();
             } else {
               toastService.setToast(data && data.msg || '修改失败');
+            }
+          });
+      }
+    })
+
+    .controller('WxMobileCtrl', function ($rootScope, $scope, $state, $interval, LoginApi, SettingApi, toastService) {
+      $scope.currentUser = $rootScope.wxUser;
+      delete $rootScope.wxUser;
+
+      $scope.userInfo = {};
+      $scope.sendCode = sendCode;
+      $scope.modifyMobile = modifyMobile;
+      $scope.reSendCodeTime = 0;
+
+      var timer = null;
+
+      function sendCode() {
+        if (!$scope.userInfo.mobile) {
+          toastService.setToast('请填写手机号');
+          return;
+        }
+        $scope.reSendCodeTime = 30;
+        timer = $interval(function () {
+          $scope.reSendCodeTime--;
+          if ($scope.reSendCodeTime === 0) {
+            $interval.cancel(timer);
+          }
+        }, 1000);
+        LoginApi
+          .sendCode($scope.userInfo.mobile, 'signup', function (data) {
+            if (result.status === 1 && result.msg === '请填写正确的手机号码') {
+              $scope.reSendCodeTime = 0;
+            }
+            toastService.setToast(data.msg);
+          });
+      }
+
+      function modifyMobile() {
+        SettingApi.modifyMobileSetting($scope.currentUser.member_id, $scope.currentUser.token,
+          $scope.userInfo.mobile, $scope.userInfo.signCode, function (result) {
+            alert(JSON.stringify(result));
+            if (result.status === 0) {
+              $scope.userInfo.isWechat = true;
+              $scope.userInfo.remembered = true;
+              $scope.saveInfo($scope.currentUser);
+            }
+            else {
+              toastService.setToast(result.msg);
             }
           });
       }

@@ -153,62 +153,6 @@
             console.log('converted', base64result);
             // $scope.item.logo = base64result;
           });
-          // window.requestFileSystem(1, 0, function (fs) {
-          //   fs.root.getFile($scope.images_list.length[0], {create: false}, function (fileEntry) {
-          //     fileEntry.file(function (fl) {
-          //       alert(JSON.stringify(fl));
-          //       var fileReader = new FileReader();
-          //       fileReader.onloadend = function () {
-          //         // 这个事件在读取结束后，无论成功或者失败都会触发
-          //         if (fileReader.error) {
-          //           alert('FileReader' + JSON.stringify(fileReader.error));
-          //         } else {
-          //           alert(JSON.stringify(fileReader.result));
-          //           $scope.item.logo = fileReader.result;
-
-          //           SettingApi.modifyMemberSetting($scope.item, function (result) {
-          //             console.log(result);
-          //           });
-          //         }
-          //       };
-
-          //       fileReader.readAsBinaryString(file);
-          //     }, function(err) {
-          //       alert('FileEntry' + JSON.stringify(err));
-          //     });
-          //   }, function(err) {
-          //     alert('GetFile' + JSON.stringify(err));
-          //   });
-          // }, function(err) {
-          //   alert('RequestFileSystem' + JSON.stringify(err));
-          // });
-          /*          fileSystem.root.getFile($scope.images_list[0], {
-           create: false
-           }, function (entry) {
-           entry.file(function (file) {
-           alert(JSON.stringify(file));
-           var fileReader = new FileReader();
-           fileReader.onloadend = function () {
-           // 这个事件在读取结束后，无论成功或者失败都会触发
-           if (fileReader.error) {
-           alert('FileReader' + JSON.stringify(fileReader.error));
-           } else {
-           alert(JSON.stringify(fileReader.result));
-           $scope.item.logo = fileReader.result;
-
-           SettingApi.modifyMemberSetting($scope.item, function (result) {
-           console.log(result);
-           });
-           }
-           };
-
-           fileReader.readAsBinaryString(file);
-           }, function (err) {
-           alert('Entry' + JSON.stringify(err));
-           });
-           }, function (err) {
-           alert('FileSystem' + JSON.stringify(err));
-           });*/
         }
         else {
           SettingApi.modifyMemberSetting($scope.item, function (result) {
@@ -223,8 +167,7 @@
     }
   )
 
-    .
-    controller('ChangePwdCtrl', function ($scope, $state, $ionicPopup, SettingApi, userService) {
+    .controller('ChangePwdCtrl', function ($scope, $state, $ionicPopup, SettingApi, userService) {
       $scope.pwdInfo = {};
 
       $scope.modify = function () {
@@ -387,6 +330,20 @@
         sendRequest(url, data, callback);
       };
 
+      var modifyMobileSetting = function (memberId, token, mobile, signCode, callback) {
+        var url = apiEndpoint.url + '/member-save_setting.html';
+        var data = {
+          member_id: memberId,
+          token: token,
+          params: {
+            mobile: mobile,
+            sign_code: signCode
+          }
+        };
+
+        sendRequest(url, data, callback);
+      };
+
       var modifyMemberPassword = function (passwordInfo, callback) {
         var url = apiEndpoint.url + '/member-security.html';
         var data = userService.getMember();
@@ -430,6 +387,7 @@
       return {
         getMemberSetting: getMemberSetting,
         modifyMemberSetting: modifyMemberSetting,
+        modifyMobileSetting: modifyMobileSetting,
         modifyMemberPassword: modifyMemberPassword,
         getIdCardList: getIdCardList,
         addIdCard: addIdCard,

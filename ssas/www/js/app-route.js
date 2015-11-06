@@ -135,6 +135,17 @@ angular.module('starter')
             }
           }
         })
+        // 找回密码
+        .state('wxmobile', {
+          url: '/wxmobile',
+          cache: false,
+          views: {
+            'main-view': {
+              templateUrl: 'templates/login/user-wxlogin-mobile.html',
+              controller: 'WxMobileCtrl'
+            }
+          }
+        })
         // 会员设置
         .state('settings', {
           url: '/settings',

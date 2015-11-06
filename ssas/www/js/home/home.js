@@ -127,39 +127,58 @@
         userService.checkLogin(state);
       };
 
+      function parseQueryString(url) {
+        var json = {};
+        var arr = url.substr(url.indexOf('?') + 1).split('&');
+        arr.forEach(function (item) {
+          var tmp = item.split('=');
+          json[tmp[0]] = tmp[1];
+        });
+        return json;
+      }
+
       var success = function (caller, args) {
         var acIP;
+        var params = {};
         hoko.checkConnection("http://www.baidu.com", function (result) {
+            alert(result.location);
             acIP = result.location.split('/')[2];
-          },
-          function (error) {
-          });
+            params = parseQueryString(result.location);
+            alert(JSON.stringify(params));
 
-        if (!acIP) {
-          toastService.setToast('一键上网失败');
-        }
-        else {
-          var url = 'http://' + acIP + '/quickauth.do?wlanacname=portal&wlanuserip=192.168.1.23&userid=test&passwd=8888&isapp=1';
-          $http({
-            method: 'GET',
-            url: url
-          })
-            .then(function successCallback(response) {
+            if (!acIP || !params) {
+              alert('一键上网失败');
+            }
+            else {
+              var url = 'http://' + acIP + '/quickauth.do?isapp=1&wlanacname=' + params.wlanacname +
+                '&wlanuserip=' + params.ip + '&userid=' + userService.get('mobile');
+              alert(url);
               $http({
                 method: 'GET',
-                url: 'https://securelogin.arubanetworks.com/auth/index.html/u?password=8888&username='
-                + userService.get('mobile')
+                url: url
               })
                 .then(function successCallback(response) {
-                  toastService.setToast('一键上网成功');
-                }, function errorCallback(response) {
-                  console.log(JSON.stringify(response));
+                  alert('step2' + JSON.stringify(response));
+                  $http({
+                    method: 'GET',
+                    url: 'https://securelogin.arubanetworks.com/auth/index.html/u?password=8888&username='
+                    + userService.get('mobile')
+                  })
+                    .then(function successCallback(response) {
+                      toastService.setToast('一键上网成功');
+                      alert('step3' + JSON.stringify(response));
+                    }, function errorCallback(response) {
+                      alert('step3' + JSON.stringify(response));
+                    });
+                },
+                function errorCallback(response) {
+                  alert('step2' + JSON.stringify(response));
                 });
-            },
-            function errorCallback(response) {
-              console.log(JSON.stringify(response));
-            });
-        }
+            }
+          },
+          function (error) {
+            alert(JSON.stringify(error));
+          });
       };
 
       $scope.openWeb = function () {
