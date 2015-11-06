@@ -36,7 +36,7 @@
     </div>
 
     <div class="button-bar">
-      <a class="button button-full button-positive" style="font-size:18px;" ng-click="submitUser()" ng-disabled="!userInfo.license">确定</a>
+      <a class="button button-full button-positive" style="font-size:18px;" ng-click="clicked || submitUser()" ng-disabled="!userInfo.license || clicked">确定</a>
     </div>
   </ion-content>
 </ion-view>

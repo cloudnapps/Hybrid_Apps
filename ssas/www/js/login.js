@@ -44,7 +44,7 @@
       $scope.reSendCodeTime = 0;
       $scope.getSignCode = function () {
 
-        if (!/\d{11,11}/.test($scope.userInfo.mobile)) {
+        if (!$scope.userInfo.mobile) {
           toastService.setToast('手机号码不正确');
           return;
         }
@@ -57,6 +57,9 @@
           }
         }, 1000);
         LoginApi.sendCode($scope.userInfo.mobile, 'signup', function (result) {
+          if(result.status === 1 && result.msg === '请填写正确的手机号码') {
+            $scope.reSendCodeTime = 0;
+          }
           var alertPopup = $ionicPopup.alert({
             title: '获取验证码',
             template: result.msg
@@ -89,9 +92,10 @@
             console.log(res);
           });
         }
-
+        $scope.clicked = true;
         LoginApi.submitUser($scope.userInfo.mobile, $scope.userInfo.password,
           $scope.userInfo.mobile, $scope.userInfo.signCode, function (result) {
+            $scope.clicked = false;
             if (result.status === 1) {
               var alertPopup = $ionicPopup.alert({
                 title: '注册失败',
@@ -102,6 +106,7 @@
               });
             }
             else {
+              toastService.setToast('注册成功');
               $scope.saveInfo(result);
             }
           });
@@ -151,7 +156,7 @@
 
       function sendCode() {
         if (!$scope.userInfo.mobile) {
-          toastService.setToast('请填写手机号~');
+          toastService.setToast('请填写手机号');
           return;
         }
         $scope.reSendCodeTime = 30;
@@ -163,6 +168,9 @@
         }, 1000);
         LoginApi
           .sendCode($scope.userInfo.mobile, 'lost', function (data) {
+            if(result.status === 1 && result.msg === '请填写正确的手机号码') {
+              $scope.reSendCodeTime = 0;
+            }
             toastService.setToast(data.msg);
           }, {
             type: 'lost'
