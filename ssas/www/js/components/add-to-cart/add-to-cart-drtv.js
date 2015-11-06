@@ -47,8 +47,13 @@ angular
             success: function() {
               cartApi
                 .addToCart($scope.product)
-                .then(function() {
-                  userService.checkLogin('tab.cart');
+                .then(function(data) {
+                  if(data && data.data && data.data.status === 1) {
+                    toastService.setToast(data.data.msg)
+                  }
+                  else if(data && data.data && data.data.status === 0) {
+                    userService.checkLogin('tab.cart');
+                  }
                 })
                 .catch(function() {});
             }

@@ -96,6 +96,7 @@
         };
         $scope.filter.keywords = $scope.keywords.value;
         clearData(true);
+        $scope.isSearch = true;
         $scope.getProducts();
       };
 
@@ -211,7 +212,7 @@
           delete $scope.filter.max_price;
           $scope.priceSection = {};
         }
-
+        $scope.isSearch = false;
         $scope.page = 1;
         $scope.products.length = 0;
       }

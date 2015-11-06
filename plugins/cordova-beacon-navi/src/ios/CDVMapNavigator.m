@@ -65,6 +65,8 @@
             [weakSelf.viewController presentViewController:nav animated:YES completion:nil];
         });
     }];
+    
+    [self sendCallbackResult:command.callbackId];
 }
 
 - (void)showShopMap:(CDVInvokedUrlCommand*)command
@@ -96,6 +98,15 @@
             [weakSelf.viewController presentViewController:nav animated:YES completion:nil];
         });
     }];
+    
+    [self sendCallbackResult:command.callbackId];
+}
+
+- (void) sendCallbackResult:(NSString*) callbackId
+{
+    CDVCommandStatus commandStatus = CDVCommandStatus_OK;
+    CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:commandStatus messageAsBool:true];
+    [self.commandDelegate sendPluginResult:commandResult callbackId:callbackId];
 }
 
 @end

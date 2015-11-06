@@ -201,8 +201,9 @@ angular.module('cart', ['components'])
               }
               return paymentApi.pay(response.data.data)
                 .then(function (data) {
-                  alert(data);
-                  $state.go('tab.order-payed');
+                  $state.go('tab.order-payed', {
+                    isFailed: (data && data.resultStatus === '6001')
+                  });
                 }, function (err) {
                   $ionicPopup
                     .alert({

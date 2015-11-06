@@ -1,5 +1,5 @@
 <div class="quantity-input">
-  <div class="dec-button" ng-click="ngModel = ngModel <= 0? 0 : ngModel - 1;updateModel();">-</div>
+  <div class="dec-button" ng-click="ngModel = ngModel <= 1 ? 1 : ngModel - 1;updateModel();">-</div>
   <input type="number" min="0" ng-model="ngModel" ng-change="updateModel();">
   <div class="inc-button" ng-click="ngModel = ngModel + 1;updateModel();">+</div>
 </div>
