@@ -18,16 +18,15 @@
         <i class="icon ion-chevron-right" style="font-size: 16px;"></i>
       </a>
 
-      <div class="item item-divider">
+      <hr style="margin: 0;border:none;border-top:30px solid #f1f1f1;"/>
       </div>
       <div ng-repeat="seller in cart.aSelCart">
         <ion-item class="item item-complex" style="border-top: 0;">
-          <div class="item-content item-button-right" style="padding: 10px;height: 40px;clear: both;">
-            <span
-              style="display: inline-block;width: 70%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{seller.seller_info.seller_name}}</span>
-            <a style="float: right;width: 30%;text-align: right;color: #bd252c;" shipping-select="seller.shipping_list"
-               ng-model="seller.def_shipping" ng-change="checkout()">{{seller.def_shipping.name}} <i
-              style="color: #444;" class="icon ion-chevron-right"></i></a>
+          <div class="row" style="padding: 10px;">
+            <div class="col col-70 col-cener" style="padding: 0;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{seller.seller_info.seller_name}}</div>
+            <div class="col col-30 col-center" style="padding: 0;text-align: right;color: #bd252c;" shipping-select="seller.shipping_list"
+            ng-model="seller.def_shipping" ng-change="checkout()">{{seller.def_shipping.name}} <i style="color: #444;" class="icon ion-chevron-right"></i>
+            </div>
           </div>
         </ion-item>
         <ion-item class="item item-thumbnail-left" style="padding: 15px 10px 15px 106px;"
@@ -88,15 +87,13 @@
           </div>
         </div>
       </ion-item>
-      <ion-item class="padding declare">
-        <p>税费说明:</p>
-
-        <p>①根据 海关总署公告2010年第43号 公告规定，个人物品申报，应征进口税税额在人民币50元（含50元）以下的，海关予以免征。</p>
-        <br>
-
-        <p>发票说明:</p>
-
-        <p>CTFHOKO全球购商品不支持开发票</p>
+      <ion-item class="padding">
+        <div class="declare">
+          <p>税费说明:</p>
+          <p>①根据 海关总署公告2010年第43号 公告规定，个人物品申报，应征进口税税额在人民币50元（含50元）以下的，海关予以免征。</p>
+          <p>发票说明:</p>
+          <p>CTFHOKO全球购商品不支持开发票</p> 
+        </div>
       </ion-item>
     </ion-list>
   </ion-content>
