@@ -38,6 +38,10 @@ body>ion-nav-view {
         /* 从tab跳到外面的动画 */
         @include animation(slideInRight 250ms ease);    
       }
+
+      &[nav-view="stage"] {
+        opacity: 0!important;
+      }
     }    
   }
 
