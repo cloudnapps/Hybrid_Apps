@@ -12,14 +12,14 @@
     <div class="row" style="padding: 10px 5px 10px 15px;">
       <div class="col">
         <p style="margin-bottom: 13px;color: #4a4b4d;">收件人：{{item.consignee.name}}
-          <span style="float: right;" ng-if="item.mobile">电话：{{item.consignee.mobile}}</span>
+          <span style="float: right;" ng-if="!!item.consignee.mobile">电话：{{item.consignee.mobile}}</span>
         </p>
 
         <div class="row" style="padding: 0;">
-          <div class="col col-25 col-center" style="padding: 0;">
-            <span style="font-size: 14px;color: #4a4b4d;">收件地址：</span>
+          <div>
+            <span style="max-width: 5em;font-size: 14px;color: #4a4b4d;">收件地址：</span>
           </div>
-          <div class="col col-75 col-center" style="word-break: break-all;max-width: 18em;white-space: normal;">
+          <div class="col col-center" style="word-break: break-all;max-width: 18em;white-space: normal;padding: 0;">
             <span style="font-size: 14px;color: #4a4b4d;">{{item.consignee.addr}}</span>
           </div>
         </div>
@@ -66,11 +66,11 @@
     </div>
 
     <div class="row" style="padding: 10px;">
-      <div class="col col-20 col-center" style="padding: 0;">
-        <span style="font-size: 14px;color: #4a4b4d;">留言：</span>
+      <div>
+        <span style="max-width: 3em;font-size: 14px;color: #4a4b4d;">留言：</span>
       </div>
-      <div class="col col-80 col-center" style="word-break: break-all;max-width: 20em;white-space: normal;">
-        <span style="font-size: 14px;">{{item.order_tax.order_mark}}</span>
+      <div class="col col-80 col-center" style="word-break: break-all;max-width: 20em;white-space: normal;padding: 0;">
+        <span style="font-size: 14px;color: #4a4b4d;">{{item.order_tax.order_mark}}</span>
       </div>
     </div>
 

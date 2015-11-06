@@ -152,7 +152,7 @@ angular.module('cart', ['components'])
           }
           else {
             coupon.selected = true;
-            toastService.setToast(responseData.msg)
+            toastService.setToast(responseData.msg);
           }
         })
           .finally(function () {
