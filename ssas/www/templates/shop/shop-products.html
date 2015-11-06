@@ -44,7 +44,11 @@
     </form>
   </ion-nav-title>
   <ion-content class="has-subheader">
-
+    <div ng-show="isSearch && (!products || !products.length)">
+      <div style="text-align: center; margin-top: 20px">
+        抱歉,没有找到商品
+      </div>
+    </div>
     <div class="index-prdt-cont">
       <div class="row" style="padding: 0;" ng-repeat="product in products" ng-if="$index % 2 === 0">
         <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
