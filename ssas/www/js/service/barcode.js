@@ -28,19 +28,19 @@ angular.module('starter')
 		 						} else {
 		 							toastService.setToast(response.msg);
 		 						}
-                }); // end of getProductIdByBarcode success
-		 		} else {
-		 			toastService.setToast('没有找到商品');
+                		}); // end of getProductIdByBarcode success
+		 			} else {
+		 				// toastService.setToast('没有找到商品');
 
-            	}// end of if
-            	isScanning = false;
-          }, // end of scan success
-          function () {
+            		}// end of if
+            		isScanning = false;
+          	}, // end of scan success
+          	function () {
           	
-          	toastService.setToast('扫码失败');
+          		toastService.setToast('扫码失败');
 
-          	isScanning = false;
-          } 
+          		isScanning = false;
+          	} 
           ); // end of cordova plugin
 		 } // end of scan function
 
