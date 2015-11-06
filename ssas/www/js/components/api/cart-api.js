@@ -102,7 +102,7 @@ angular.module('components')
       };
 
       var checkout = function (cart, nature) {
-        var shipping, addr_id, card_id;
+        var shipping, addr_id, card_id, coupons;
         if (cart) {
           shipping = [];
           angular.forEach(cart.aSelCart, function (seller) {
@@ -110,6 +110,28 @@ angular.module('components')
           });
           addr_id = (cart.def_addr || {}).addr_id;
           card_id = (cart.def_cardlist || {}).card_id;
+
+          coupons = [];
+          angular.forEach(cart.aSelCart, function (seller) {
+            angular.forEach(seller.coupon_lists, function (cp) {
+              if (cp.selected) {
+                if(cp.isNew) {
+                  coupons.push({
+                    seller_id: seller.seller_info.seller_id,
+                    memc_code: cp.memc_code,
+                    checked: true
+                  })
+                }
+                else {
+                  coupons.push({
+                    seller_id: seller.seller_info.seller_id,
+                    memc_code: cp.memc_code,
+                    checked: false
+                  })
+                }
+              }
+            });
+          })
         }
         var data = {
           shipping: shipping,
@@ -119,6 +141,10 @@ angular.module('components')
           nature: nature,
           token: userService.get('token')
         };
+
+        if (coupons) {
+          data.coupons = coupons;
+        }
 
         var request = $http({
           method: 'post',
@@ -132,7 +158,7 @@ angular.module('components')
       };
 
       var createOrder = function (cart) {
-        var shipping, addr_id, nature;
+        var shipping, addr_id, nature, coupons;
 
         shipping = [];
         angular.forEach(cart.aSelCart, function (seller) {
@@ -145,7 +171,15 @@ angular.module('components')
           });
         });
         addr_id = (cart.def_addr || {}).addr_id;
-        nature = cart.nature;
+
+        coupons = [];
+        angular.forEach(cart.aSelCart, function (seller) {
+          angular.forEach(seller.coupon_lists, function (cp) {
+            if (cp.selected) {
+              coupons.push({seller_id: seller.seller_info.seller_id, memc_code: cp.memc_code})
+            }
+          });
+        });
 
         console.log(cart);
 
@@ -158,6 +192,10 @@ angular.module('components')
           member_id: userService.get('memberId'),
           token: userService.get('token')
         };
+
+        if (coupons) {
+          data.coupons = coupons;
+        }
 
         var request = $http({
           method: 'post',

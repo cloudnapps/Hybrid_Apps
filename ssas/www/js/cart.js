@@ -127,39 +127,34 @@ angular.module('cart', ['components'])
 
     $scope.$on('$ionicView.afterEnter', $scope.checkout);
 
-    $scope.changeCoupon = function (seller, coupon) {
-      if (coupon.selected) {
-        cartApi.addCoupon(coupon.memc_code, $stateParams.nature).success(function (responseData) {
-          var dataStatus = responseData.status;
-          if (dataStatus === 0) {
-            $scope.cart = responseData.data;
-          }
-          else {
-            coupon.selected = false;
-            toastService.setToast(responseData && responseData.msg || '该优惠券不能使用');
-          }
-        })
-          .finally(function () {
-            $scope.$broadcast('$addressSelect.afterEnter');
-            $ionicLoading.hide();
+    $scope.changeCoupon = function (coupon) {
+      coupon.isNew = true;
+
+      $ionicLoading.show();
+      cartApi.checkout($scope.cart, $stateParams.nature).success(function (responseData) {
+        var dataStatus = responseData.status;
+        if (dataStatus === 0) {
+          $scope.cart = responseData.data;
+
+          angular.forEach($scope.cart.aSelCart, function (sct) {
+            angular.forEach(sct.coupon_lists, function (cp) {
+              if (sct.def_coupon && (cp.memc_code === sct.def_coupon.memc_code)) {
+                cp.selected = true
+              }
+              else {
+                cp.selected = false;
+              }
+            });
           });
-      }
-      else {
-        cartApi.removeCoupon(seller.seller_info.seller_id, $stateParams.nature).success(function (responseData) {
-          var dataStatus = responseData.status;
-          if (dataStatus === 0) {
-            $scope.cart = responseData.data;
-          }
-          else {
-            coupon.selected = true;
-            toastService.setToast(responseData.msg);
-          }
-        })
-          .finally(function () {
-            $scope.$broadcast('$addressSelect.afterEnter');
-            $ionicLoading.hide();
-          });
-      }
+        }
+        else {
+          toastService.toast('该优惠券不能使用');
+        }
+      })
+        .finally(function () {
+          $scope.$broadcast('$addressSelect.afterEnter');
+          $ionicLoading.hide();
+        });
     };
 
     $scope.confirm = function () {
@@ -215,7 +210,7 @@ angular.module('cart', ['components'])
                       title: '支付失败',
                       template: err
                     })
-                    .then(function(){
+                    .then(function () {
                       $state.go('tab.order-payed', {
                         isFailed: true
                       });
@@ -236,7 +231,7 @@ angular.module('cart', ['components'])
     $scope.isFailed = $stateParams.isFailed || false;
     alert($stateParams.isFailed);
 
-    $scope.goOrder = function(type){
+    $scope.goOrder = function (type) {
       $state.go('tab.home');
       $state.go('orders', {
         type: type || 'all'
