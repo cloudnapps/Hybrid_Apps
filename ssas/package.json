@@ -72,6 +72,7 @@
     "cordova-plugin-geolocation",
     "cordova-plugin-file-transfer",
     "cordova-plugin-camera"
+    "cordova-plugin-crosswalk-webview"
   ],
   "cordovaPlatforms": [
     "ios",
@@ -80,6 +81,16 @@
       "version": "",
       "locator": "ios2"
     },
-    "android"
+    "android",
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
+    },
+    {
+      "platform": "ios",
+      "version": "",
+      "locator": "ios"
+    }
   ]
 }
