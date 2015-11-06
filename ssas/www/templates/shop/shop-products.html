@@ -50,7 +50,9 @@
         <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
           <div class="new-prdt">
             <a ui-sref="product({productId:products[$index].product_id})">
-              <img ng-src="{{products[$index].image}}">
+              
+              <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div>
+              <!-- <img ng-src="{{products[$index].image}}"> -->
 
               <div class="prdt-descb">{{products[$index].name}}</div>
               <div class="row" style="padding: 0 5px 0px 5px;">
@@ -69,7 +71,9 @@
         <div class="col col-50 col-center pad-5" ng-if="$index+1 < products.length">
           <div class="new-prdt">
             <a ui-sref="product({productId:products[$index+1].product_id})">
-              <img ng-src="{{products[$index+1].image}}">
+              <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index+1].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div>
+
+              <!-- <img ng-src="{{products[$index+1].image}}"> -->
 
               <div class="prdt-descb">{{products[$index+1].name}}</div>
               <div class="row" style="padding: 0 5px 0px 5px;">
