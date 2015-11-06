@@ -334,6 +334,9 @@
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.cloudnapps.mall.ctfhoko"
         }
     },
     "dependent_plugins": {
