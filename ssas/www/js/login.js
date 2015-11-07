@@ -28,13 +28,7 @@
         LoginApi.loginUser($scope.userInfo.name, $scope.userInfo.password, function (result) {
           $scope.clicked = false;
           if (result.status === 1) {
-            var alertPopup = $ionicPopup.alert({
-              title: '登录失败',
-              template: '账户名或者密码不正确'
-            });
-            alertPopup.then(function (res) {
-              console.log(res);
-            });
+            toastService.setToast(result.msg);
           }
           else {
             $scope.saveInfo(result);
@@ -84,26 +78,14 @@
 
       $scope.submitUser = function () {
         if ($scope.userInfo.password !== $scope.userInfo.confirmPwd) {
-          var alertPopup = $ionicPopup.alert({
-            title: '注册失败',
-            template: '密码不匹配'
-          });
-          alertPopup.then(function (res) {
-            console.log(res);
-          });
+          toastService.setToast('密码不匹配');
         }
         $scope.clicked = true;
         LoginApi.submitUser($scope.userInfo.mobile, $scope.userInfo.password,
           $scope.userInfo.mobile, $scope.userInfo.signCode, function (result) {
             $scope.clicked = false;
             if (result.status === 1) {
-              var alertPopup = $ionicPopup.alert({
-                title: '注册失败',
-                template: result.msg
-              });
-              alertPopup.then(function (res) {
-                console.log(res);
-              });
+              toastService.setToast(result.msg);
             }
             else {
               toastService.setToast('注册成功');
@@ -118,15 +100,10 @@
             LoginApi.getOpenId(cb_success.code, function (result) {
               LoginApi.loginByWechatId(result.openid, function (result) {
                 if (result.status === 1) {
-                  var alertPopup = $ionicPopup.alert({
-                    title: '登录失败',
-                    template: '账户名或者密码不正确'
-                  });
-                  alertPopup.then(function (res) {
-                    console.log(res);
-                  });
+                  toastService.setToast(result.msg);
                 }
                 else {
+                  //alert(result.data.member_id);
                   if (!result.data.mobile) {
                     $rootScope.wxUser = result.data;
                     $state.go('wxmobile');
