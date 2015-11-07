@@ -92,6 +92,9 @@ var translations_zh = {
   complaint_newbtn: '新建投诉与建议',
   submit_comment: '发表评论',
 
+  reship: '退货退款',
+  refund: '仅退款',
+
   //good
   good_category: '商品分类',
   good_fav: '收藏商品',

@@ -24,6 +24,16 @@
         item.selected = true;
       };
 
+      $scope.saveReturnType = function () {
+        if ($scope.returnInfo.type === 'reship') {
+          $scope.returnInfo.typeDesc = '退货退款';
+        }
+        else if ($scope.returnInfo.type === 'refund') {
+          $scope.returnInfo.typeDesc = '仅退款';
+        }
+        $scope.returnInfo.showReturnType = false
+      };
+
       $scope.submitRequest = function () {
         if ($scope.returnInfo.isShip) {
           $scope.returnInfo.returnType = 'reship';

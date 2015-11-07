@@ -4,30 +4,14 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="list">
-
-      <label class="item item-input item-select">
-        <div class="input-label">
-          申请类型：
-        </div>
-        <select ng-model="returnInfo.type" ng-change="onTypeChanged()">
-          <option value="reship">退货退款</option>
-          <option value="refund">仅退款</option>
-        </select>
-      </label>
-      <label class="item item-input item-select">
-        <div class="input-label">
-          申请原因：
-        </div>
-        <select ng-model="returnInfo.title" ng-change="onReasonChanged()">
-          <option value="reason1">产品质量不行</option>
-          <option value="reason2">发货速度太慢</option>
-        </select>
+      <label class="item item-input" ng-click="returnInfo.showReturnType=true">
+        <input type="text" ng-model="returnInfo.typeDesc" readonly="readonly" placeholder="申请类型">
       </label>
       <label class="item item-input">
-        <div class="input-label">
-          申请说明：
-        </div>
-        <input type="text" ng-model="returnInfo.content">
+        <input type="text" ng-model="returnInfo.title" placeholder="申请原因">
+      </label>
+      <label class="item item-input">
+        <input type="text" ng-model="returnInfo.content" placeholder="申请说明">
       </label>
     </div>
 
@@ -61,6 +45,30 @@
               ng-click="submitRequest()">
         {{'return_addbtn'|translate}}
       </button>
+    </div>
+
+    <div ng-show="returnInfo.showReturnType">
+      <div class="button-bar">
+        <div class="row">
+          <div class="col col-100" align="right">
+            <button class="button button-clear button-positive" style="font-size:16px;"
+                    ng-click="saveReturnType()">
+              完成
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="list">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            申请类型：
+          </div>
+          <select ng-model="returnInfo.type">
+            <option value="reship">退货退款</option>
+            <option value="refund">仅退款</option>
+          </select>
+        </label>
+      </div>
     </div>
   </ion-content>
 </ion-view>
