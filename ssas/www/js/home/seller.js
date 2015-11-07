@@ -1,6 +1,6 @@
 (function () {
   angular.module('seller', [])
-      .controller('SellerListController', function ($scope, $state, $stateParams, $cordovaInAppBrowser, $cordovaBarcodeScanner, SellerApi) {
+    .controller('SellerListController', function ($scope, $state, $stateParams, $cordovaInAppBrowser, $cordovaBarcodeScanner, SellerApi) {
 
       $scope.keywords = {};
 
@@ -27,7 +27,7 @@
 
       $scope.init();
 
-      if($stateParams.keywords) {
+      if ($stateParams.keywords) {
         $scope.keywords.value = $stateParams.keywords;
         $scope.filter = {
           keywords: $scope.keywords.value
@@ -53,8 +53,9 @@
     }) // end of SellersListController
 
     .controller('SellerDetailController', function ($scope, $stateParams, $timeout, $ionicSlideBoxDelegate,
-                                                    SellerApi, shopApi, FavoriteApi, userService, toastService) {
-      $scope.init = function() {
+                                                    SellerApi, shopApi, FavoriteApi, userService, toastService,
+                                                    $interval) {
+      $scope.init = function () {
         $scope.products = [];
         $scope.allProducts = [];
         $scope.page = 1;
@@ -65,10 +66,19 @@
         $scope.item.title = '商户详情';
       };
 
-      $scope.getSeller = function(){
+      $scope.getSeller = function () {
         SellerApi.getSellerDetail($scope.sellerId, function (result) {
           $scope.item = result.data;
           $scope.item.title = $scope.item.once.name;
+          $scope.slideimgs = $scope.item.once.recommend;
+
+          var promise = $interval(function () {
+            $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
+          }, 2000);
+
+          $scope.$on('$destroy', function () {
+            $interval.cancel(promise);
+          });
 
           $scope.getProducts();
           $scope.showAdvertise();
@@ -103,26 +113,19 @@
         }
       };
 
-      function isLogin() {
-        if (!userService.isLogin()) {
-          // 跳转登录
-          userService.backIndex = $scope.tabIndex.shop;
-          $scope.tabStateGo($scope.tabIndex.member);
-          return false;
-        }
-        return true;
-      }
-
       $scope.addFavorite = function () {
-        if (!isLogin()) {
-          return;
-        }
+        var state = {
+          success: success
+        };
 
+        userService.checkLogin(state);
+      };
+
+      var success = function (caller, args) {
         FavoriteApi.addSellerFavorite($scope.sellerId, function (data) {
           if (data) {
             return toastService.setToast(data.msg);
           }
-          toastService.setToast('添加失败');
         });
       };
 
@@ -134,14 +137,28 @@
       $scope.showRecommend = function () {
         $scope.productType = 2;
         $scope.products = $scope.item.third;
+        $scope.hasMore = false;
       };
 
       $scope.showItem = function () {
         $scope.productType = 3;
         $scope.products = $scope.item.fourth;
+        $scope.hasMore = false;
       };
 
-      $scope.$on('$ionicView.beforeEnter', function(){
+      $scope.openItem = function (item) {
+        if (item.type === 'seller') {
+          $state.go('tab.seller_detail', {sellerId: item.id}, {reload: true});
+        }
+        else if (item.type === 'url') {
+          $window.location.href = item.outurl;
+        }
+        else if (item.type === 'product') {
+          $state.go('product', {productId: item.id});
+        }
+      };
+
+      $scope.$on('$ionicView.beforeEnter', function () {
         $scope.init();
         $scope.getSeller();
       });

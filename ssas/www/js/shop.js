@@ -320,14 +320,6 @@
             });
         }
 
-        function getProductIntroduction(goodsId) {
-          shopApi
-            .getProductIntro(goodsId)
-            .success(function (result) {
-              $scope.html = result && result.data && result.data.html || '';
-            });
-        }
-
         $scope.addToCart = function (product) {
           cartApi.addToCart(product);
         };
