@@ -39,7 +39,7 @@
 
     <div ng-class="list" style="border: 1px solid #ddd;">
       <ion-item ng-repeat="product in item.products" style="border-top: none;padding: 10px;">
-        <div class="row" style="margin:0;padding: 0 15px 10px 0;">
+        <div class="row" style="margin:0;padding: 0 15px 10px 0;" ui-sref="product({productId: product.product_id})">
           <div class="col col-20" style="padding: 0;height: 60px;">
             <img class="pic" ng-src="{{product.url}}">
           </div>
