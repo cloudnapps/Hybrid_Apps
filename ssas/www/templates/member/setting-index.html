@@ -59,7 +59,7 @@
 
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
 
-    <div class="row" style="padding: 0 20px;" ng-click="model.showBirthday = !model.showBirthday; model.showGender=false">
+    <div class="row" style="padding: 0 20px;" ng-click="model.showGender=false; showDatePicker()">
       <div class="col col-90 col-center" style="padding: 0;height: 60px;line-height: 60px;font-size: 16px;">
         <div class="row" style="padding: 0;">
           <span class="col col-50 col-center" style="padding: 0;">生日</span>
@@ -69,21 +69,20 @@
       <div class="col col-10 col-center" style="padding: 0;height: 60px;line-height: 60px;text-align: right;"
            align="right">
         <a>
-          <i class="icon ion-chevron-right icon-accessory" ng-show="!model.showBirthday"></i>
-          <i class="icon ion-chevron-down icon-accessory" ng-show="model.showBirthday"></i>
+          <i class="icon ion-chevron-right icon-accessory"></i>
         </a>
       </div>
     </div>
 
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;" ng-show="model.showBirthday">
+<!--    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;" ng-show="model.showBirthday">
 
-    <div ng-show="model.showBirthday">
+    <div ng-show="false">
       <div class="button-bar">
         <div class="row">
           <div class="col col-50">
             <button class="button button-clear button-positive" style="font-size:16px;"
-                    ng-disabled="!birthdayInfo.confirmEnable">
-              确定
+                    ng-click="model.showBirthday=false">
+              取消
             </button>
           </div>
           <div class="col col-50" align="right">
@@ -98,31 +97,30 @@
           <div class="input-label">
             年
           </div>
-          <select ng-model="birthdayInfo.selectedYear" ng-focus="birthdayInfo.confirmEnable=true"
-                  ng-blur="birthdayInfo.confirmEnable=false">
-            <option ng-repeat="s in birthdayInfo.years">{{s}}</option>
+          <select ng-model="birthdayInfo.selectedYear" ng-options="s for s in birthdayInfo.years"
+                  ng-change="onYearChanged()">
+            <option value="">&#45;&#45;请选择&#45;&#45;</option>
           </select>
         </label>
         <label class="item item-input item-select">
           <div class="input-label">
             月
           </div>
-          <select ng-model="birthdayInfo.selectedMonth" ng-focus="birthdayInfo.confirmEnable=true"
-                  ng-blur="birthdayInfo.confirmEnable=false">
-            <option ng-repeat="sh in birthdayInfo.months">{{sh}}</option>
+          <select ng-model="birthdayInfo.selectedMonth" ng-options="sh for sh in birthdayInfo.months"
+                  ng-change="onMonthChanged()">
+            <option value="">&#45;&#45;请选择&#45;&#45;</option>
           </select>
         </label>
         <label class="item item-input item-select">
           <div class="input-label">
             日
           </div>
-          <select ng-model="birthdayInfo.selectedDay" ng-focus="birthdayInfo.confirmEnable=true"
-                  ng-blur="birthdayInfo.confirmEnable=false">
-            <option ng-repeat="ar in birthdayInfo.days">{{ar}}</option>
+          <select ng-model="birthdayInfo.selectedDay" ng-options="ar for ar in birthdayInfo.days">
+            <option value="">&#45;&#45;请选择&#45;&#45;</option>
           </select>
         </label>
       </div>
-<!--      <div class="button-bar">
+&lt;!&ndash;      <div class="button-bar">
         <div class="row">
           <div class="col col-100">
             <button class="button button-full button-positive" style="font-size:16px;" ng-click="setBirthday()">
@@ -130,8 +128,8 @@
             </button>
           </div>
         </div>
-      </div>-->
-    </div>
+      </div>&ndash;&gt;
+    </div>-->
 
     <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
 

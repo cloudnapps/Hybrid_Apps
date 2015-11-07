@@ -72,7 +72,8 @@
     "cordova-plugin-geolocation",
     "cordova-plugin-file-transfer",
     "cordova-plugin-camera",
-    "cordova-plugin-crosswalk-webview"
+    "cordova-plugin-crosswalk-webview",
+    "cordova-plugin-datepicker"
   ],
   "cordovaPlatforms": [
     "ios",

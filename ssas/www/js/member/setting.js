@@ -29,7 +29,6 @@
         $scope.model.showBirthday = false;
 
         $scope.birthdayInfo = {};
-        $scope.birthdayInfo.confirmEnable = false;
         setDays();
 
         SettingApi.getMemberSetting(function (result) {
@@ -48,12 +47,29 @@
         $scope.model.showGender = false;
       };
 
-      $scope.setBirthday = function () {
-        $scope.item.birthday = $scope.birthdayInfo.selectedYear +
-          '-' + $scope.birthdayInfo.selectedMonth +
-          '-' + $scope.birthdayInfo.selectedDay;
+      function setBirthday(date) {
+        var month = date.getMonth() + 1;
+        $scope.item.birthday = date.getFullYear() +
+          '-' + month +
+          '-' +  date.getDate();
         $scope.model.isChanged = true;
         $scope.model.showBirthday = false;
+      }
+
+      $scope.showDatePicker = function () {
+        var options = {
+          date: new Date(),
+          mode: 'date'
+        };
+
+        function onSuccess(date) {
+          setBirthday(date);
+        }
+
+        function onError(error) {
+        }
+
+        datePicker.show(options, onSuccess, onError);
       };
 
       $scope.images_list = [];
@@ -103,7 +119,6 @@
           });
       };
 
-      //image picker
       var pickImage = function () {
         var options = {
           maximumImagesCount: 1,
@@ -123,10 +138,6 @@
           }, function () {
           });
       };
-
-      $scope.$on('$ionicView.enter', function () {
-        $scope.init();
-      });
 
       function convertImgToBase64URL(url, callback, outputFormat) {
         var img = new Image();
@@ -161,6 +172,10 @@
           });
         }
       };
+
+      $scope.$on('$ionicView.enter', function () {
+        $scope.init();
+      });
 
       $scope.$on('$ionicView.beforeLeave', function () {
         $scope.save();
