@@ -53,7 +53,7 @@
                   <span>{{good.spec}}</span>
 
                   <p class="price">{{good.buy_price|currency:'￥'}}</p>
-                  <p style="padding: 0; font-size: 12px;">适用税率：{{good.taxRate}}%</p>
+                  <p style="padding: 0; font-size: 12px;">适用税率：{{good.taxRate || 0}}%</p>
                   <quantity-input ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
                 </div>
               </div>

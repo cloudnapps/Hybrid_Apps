@@ -46,7 +46,7 @@
       <hr style="margin: 0;height:1px;border:none;border-top:5px solid #e5e5e5;"/>
       <div class="index-prdt-cont">
         <div class="row" style="padding: 0;" ng-repeat="product in products" ng-if="$index % 2 === 0">
-          <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
+          <!-- <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
             <div class="new-prdt">
               <a ui-sref="product({productId: products[$index].product_id})">
                 <img ng-src="{{products[$index].image}}">
@@ -54,8 +54,36 @@
                 <div class="prdt-descb">{{products[$index].name}}</div>
               </a>
             </div>
+          </div> -->
+          <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
+            <div class="new-prdt">
+              <a ui-sref="product({productId:products[$index].product_id})">             
+                <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div>
+                <div class="prdt-descb">{{products[$index].name}}</div>
+                <div class="row" style="padding: 0 5px 5px;">
+                  <span class="col pri-pri" style="color: #bd252c;font-size: 12px;text-align: left;">
+                    {{products[$index].price | currency: '￥'}}
+                  </span>
+                  <img ng-if="products[$index].nature !== 'normal'"style="text-align: right;min-height: 20px;width: 20px;height: 20px;border-radius: 50%;" ng-src="img/{{products[$index].nature}}.png">
+                </div>
+              </a>
+            </div>
           </div>
           <div class="col col-50 col-center pad-5" ng-if="$index+1 < products.length">
+            <div class="new-prdt">
+              <a ui-sref="product({productId:products[$index+1].product_id})"> 
+                <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index+1].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div>
+                <div class="prdt-descb">{{products[$index+1].name}}</div>
+                <div class="row" style="padding: 0 5px 5px;">
+                  <span class="col pri-pri" style="color: #bd252c;font-size: 12px;text-align: left;">
+                    {{products[$index+1].price | currency: '￥'}}
+                  </span>
+                  <img ng-if="products[$index+1].nature !== 'normal'"style="text-align: right;min-height: 20px;width: 20px;height: 20px;border-radius: 50%;" ng-src="img/{{products[$index+1].nature}}.png">
+                </div>
+              </a>
+            </div>
+          </div>
+          <!-- <div class="col col-50 col-center pad-5" ng-if="$index+1 < products.length">
             <div class="new-prdt">
               <a ui-sref="product({productId: products[$index+1].product_id})">
                 <img ng-src="{{products[$index+1].image}}">
@@ -63,7 +91,7 @@
                 <div class="prdt-descb">{{products[$index+1].name}}</div>
               </a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <ion-infinite-scroll
