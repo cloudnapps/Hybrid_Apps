@@ -4,33 +4,36 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="list">
-      <label class="item item-input">
+      <label class="item item-input"
+             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.name" placeholder="姓名">
       </label>
       <label class="item item-input"
-             style="background-color: #fff;">
+             style="background-color: #fff;"
+             ng-click="addrInfo.showIdCard=true; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.number" placeholder="身份证号" readonly="readonly"
-               style="background-color: #fff;"
-               ng-focus="addrInfo.showIdCard=true; addrInfo.showChoose=false"
-               ng-blur="addrInfo.showIdCard=false">
+               style="background-color: #fff;">
       </label>
-      </label>
-      <label class="item item-input">
+      <label class="item item-input"
+             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.mobile" placeholder="手机号码">
       </label>
-      <label class="item item-input">
+      <label class="item item-input"
+             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.zipcode" placeholder="邮政编码">
       </label>
       <label class="item item-input"
-             style="background-color: #fff;">
+             style="background-color: #fff;"
+             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=true">
         <input type="text" ng-model="addrInfo.area" placeholder="省市区县" readonly="readonly"
-               ng-focus="addrInfo.showChoose=true;addrInfo.showIdCard=false"
-               style="background-color: #fff;" ng-blur="addrInfo.showChoose=false"></label>
+               style="background-color: #fff;">
       </label>
-      <label class="item item-input">
+      <label class="item item-input"
+             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.addr" placeholder="街道等具体地址">
       </label>
-      <label class="item item-toggle" style="font-size: 14px;">
+      <label class="item item-toggle" style="font-size: 14px;"
+             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         设置为默认地址
         <label class="toggle">
           <input type="checkbox" ng-model="addrInfo.checked">

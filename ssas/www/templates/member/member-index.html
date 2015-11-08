@@ -1,7 +1,7 @@
 <ion-view view-title="{{'my'|translate}}">
   <ion-nav-buttons side="right">
     <a class="icon ion-gear-b button button-clear" ng-click="selt_set()"> </a>
-  </ion-nav-buttons>    
+  </ion-nav-buttons>
   <ion-content>
     <div class="row"
          style="padding: 0;background-color: #fff;background-image: url('img/me.jpg');background-position: 5% 50%;background-repeat: no-repeat;background-size: cover;background-origin:content-box;width: 100%;height:190px;position: relative;">
@@ -18,13 +18,14 @@
       </div>
       <div class="row" style="padding: 0px;margin-top: 145px;opacity: 0.7;">
         <div class="col col-50 col-center"
-             style="padding: 0px;background-color: #bd252c;    text-align: center;border-right: 1px solid #fff;">
-          <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;display: block;"
-             ui-sref="favorites({type:'goods'})">收藏的商品</a>
+             style="padding: 0px;background-color: #bd252c;    text-align: center;border-right: 1px solid #fff;"
+             ui-sref="favorites({type:'goods'})">
+          <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;display: block;">收藏的商品</a>
         </div>
-        <div class="col col-50 col-center" style="padding: 0px;background-color: #bd252c;text-align: center;">
-          <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;display: block;"
-             ui-sref="favorites({type:'sellers'})">收藏的店铺</a>
+        <div class="col col-50 col-center"
+             style="padding: 0px;background-color: #bd252c;text-align: center;"
+             ui-sref="favorites({type:'sellers'})">
+          <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;display: block;">收藏的店铺</a>
         </div>
       </div>
     </div>
