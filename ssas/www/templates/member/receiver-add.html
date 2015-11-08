@@ -7,10 +7,11 @@
       <label class="item item-input">
         <input type="text" ng-model="addrInfo.name" placeholder="姓名">
       </label>
-      <label class="item item-input" ng-click="addrInfo.showIdCard=true; addrInfo.showChoose=false"
+      <label class="item item-input"
              style="background-color: #fff;">
         <input type="text" ng-model="addrInfo.number" placeholder="身份证号" readonly="readonly"
                style="background-color: #fff;"
+               ng-focus="addrInfo.showIdCard=true; addrInfo.showChoose=false"
                ng-blur="addrInfo.showIdCard=false">
       </label>
       </label>
@@ -21,9 +22,9 @@
         <input type="text" ng-model="addrInfo.zipcode" placeholder="邮政编码">
       </label>
       <label class="item item-input"
-             ng-click="addrInfo.showChoose=true;addrInfo.showIdCard=false"
              style="background-color: #fff;">
         <input type="text" ng-model="addrInfo.area" placeholder="省市区县" readonly="readonly"
+               ng-focus="addrInfo.showChoose=true;addrInfo.showIdCard=false"
                style="background-color: #fff;" ng-blur="addrInfo.showChoose=false"></label>
       </label>
       <label class="item item-input">
