@@ -88,10 +88,11 @@
     <hr style="margin: 0;border:none;border-top:10px solid #f6f6f6;"/>
 
     <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ui-sref="points">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
+      <div class="col col-80 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
         <a style="color: #333333;text-decoration: none;">我的积分</a>
       </div>
-      <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
+      <div class="col col-20 col-center" style="padding: 0px;height: 40px;text-align: right;">
+        <span style="color: #B22222; font-size: 12px">{{currentUser.point}}</span>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
@@ -99,10 +100,11 @@
     <hr style="margin: 0;border:none;border-top:1px solid #f1f1f1;"/>
 
     <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ui-sref="golds">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
+      <div class="col col-80 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
         <a style="color: #333333;text-decoration: none;">我的金币</a>
       </div>
-      <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
+      <div class="col col-20 col-center" style="padding: 0px;height: 40px;text-align: right;">
+        <span style="color: #B22222; font-size: 12px">{{currentUser.gold_count}}</span>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
@@ -110,10 +112,11 @@
     <hr style="margin: 0;border:none;border-top:1px solid #f1f1f1;"/>
 
     <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ui-sref="coupons">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
+      <div class="col col-80 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
         <a style="color: #333333;text-decoration: none;">我的优惠券</a>
       </div>
-      <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
+      <div class="col col-20 col-center" style="padding: 0px;height: 40px;text-align: right;">
+        <span style="color: #B22222; font-size: 12px">{{currentUser.coupon_num}}</span>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
