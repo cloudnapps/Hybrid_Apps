@@ -1,4 +1,4 @@
-<div class="bar bar-subheader">  
+<div class="bar bar-subheader">
   <div class="row" style="padding: 0 0px;height: 40px;line-height: 40px;">
     <div class="col col-20"
          style="padding: 0px;text-align: center;height: 40px;font-size: 14px;" ng-click="switchOrder('all')" ng-class="{'switch-order':orderState === 1}">
@@ -62,7 +62,8 @@
           </div>
         </div>
 
-        <div class="row" ng-repeat="product in item.products" style="margin:0;padding: 0 15px 10px 10px;">
+        <div class="row" ng-repeat="product in item.products" style="margin:0;padding: 0 15px 10px 10px;"
+             ui-sref="order-detail({orderId: item.order_id})">
           <div class="col col-20" style="padding-left: 0;">
             <img class="pic" ng-src="{{product.url}}">
           </div>
