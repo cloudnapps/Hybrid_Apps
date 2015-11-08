@@ -242,8 +242,8 @@
      * ProductDetailController
      */
     .controller('ProductDetailController',
-    ['$scope', '$interval', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading', 'shopApi', 'cartApi', '$state', 'tabStateService',
-      function ($scope, $interval, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading, shopApi, cartApi) {
+    ['$scope', '$interval', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading', 'shopApi', 'cartApi', 'toastService',
+      function ($scope, $interval, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading, shopApi, cartApi, toastService) {
 
         $scope.productId = $stateParams.productId;
         $scope.product = {};
@@ -252,13 +252,16 @@
         $scope.getProductGoodsSpec = getProductGoodsSpec;
 
         getProductGoodsSpec($scope.productId);
+        $scope.good = {
+          quantity: 1
+        };
 
         shopApi.getProduct($scope.productId).success(function (responseData) {
           if (responseData.status === 0) {
             $scope.point = responseData.data.point || {};
             $scope.product = responseData.data.product;
             $scope.slideimgs = $scope.product.urls;
-            $scope.comment = (responseData.comment || [])[0];
+            $scope.comment = (responseData.data.comment || [])[0];
 
             var promise = $interval(function () {
               $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
@@ -327,17 +330,27 @@
               $scope.html = result && result.data && result.data.html || '';
             });
         }
-
+        
         $scope.addToCart = function (product) {
-          cartApi.addToCart(product);
+          product.num = $scope.good.quantity;
+          cartApi
+            .addToCart(product)
+            .then(function(data){
+              if(data && data.data && data.data.status === 0) {
+                $scope.hideModal();
+                return toastService.setToast(data.data.msg);
+              }
+              toastService.setToast(data && data.data && data.data.msg);
+            })
+            .catch(function(e){
+              console.log(e);
+              toastService.setToast('加入失败');
+            });
         };
 
       }]) // end of ProductDetailController
 
     .controller('ProductCommentController', function ($scope, $stateParams, shopApi) {
-      console.log($stateParams.id);
-      $stateParams.id = 16;  // goodsId 16为测试
-
       $scope.page = 0;
       $scope.comments = [];
       $scope.hasMore = true;
@@ -351,8 +364,8 @@
         shopApi
           .getProductComment(goodsId, $scope.page)
           .success(function (data) {
+            console.log(data);
             var comments = data && data.data || [];
-            console.log('comments/page', comments, $scope.page);
             if (!comments.length) {
               $scope.hasMore = false;
             }
