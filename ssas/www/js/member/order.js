@@ -1,15 +1,17 @@
 (function () {
   angular.module('order', ['starter.services'])
-    .controller('OrdersAllCtrl', function ($scope, $state, $stateParams, $ionicPopup, OrderApi) {
+    .controller('OrdersAllCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicLoading, OrderApi) {
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;
         $scope.hasMore = false;
         $scope.filter = {};
         $scope.orderState = 1;
+        $scope.type = 'all';
       };
 
       $scope.getOrders = function () {
+        $ionicLoading.show();
         OrderApi.getOrderList($scope.page, $scope.filter, function (result) {
           if (result.status === 1) {
             $scope.hasMore = false;
@@ -18,10 +20,11 @@
             $scope.hasMore = true;
             $scope.items = $scope.items.concat(result.data);
           }
-
+          $ionicLoading.hide();
           $scope.$broadcast('scroll.infiniteScrollComplete');
         });
       };
+
 
       $scope.switchOrder = function (type) {
         $scope.init();
@@ -59,13 +62,20 @@
             comment_status: 0
           };
         }
+        else {
+          type = 'all';
+          //全部
+          $scope.orderState = 1;
+          $scope.filter = {};
+        }
+        $scope.type = type;
 
         $scope.getOrders();
       };
 
       $scope.$on('$ionicView.beforeEnter', function () {
-        if ($stateParams.type) {
-          $scope.switchOrder($stateParams.type);
+        if ($scope.type || $stateParams.type) {
+          $scope.switchOrder($scope.type || $stateParams.type);
         }
       });
 
