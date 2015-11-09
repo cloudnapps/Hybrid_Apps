@@ -2,8 +2,7 @@
   <ion-nav-buttons side="right">
     <div class="row row-center" style="padding: 0px;margin-right: 10px;">
       <div class="col col-center" style="padding: 0px;">
-        <button class="button button-clear icon ion-ios-home" ui-sref="tab.home">
-        </button>
+        <button class="button button-clear icon ion-ios-home" ng-click="goHome()"></button>
       </div>
     </div>
   </ion-nav-buttons>
@@ -15,7 +14,8 @@
         <div>金额: <span class="assertive">{{item.order_info.final_amount | currency:'￥'}}</span></div>
       </ion-item>
       <div class="text-center padding">
-        感谢惠顾，我们将竭诚为您服务哦～
+        <div ng-if="!isFailed">感谢惠顾，我们将竭诚为您服务哦～</div>
+        <div ng-if="isFailed">感谢你的惠顾，本次支付失败，点击 “待付款订单”，您可进行重新付款</div>
       </div>
     </ion-list>
 

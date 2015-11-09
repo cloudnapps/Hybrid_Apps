@@ -168,6 +168,7 @@ angular.module('cart', ['components'])
     delete $rootScope.confirmedCart;
 
     $scope.pay = function (/*payment*/) {
+      
       $ionicLoading.show();
       cartApi.createOrder($scope.cart)
         .then(function (response) {
@@ -229,6 +230,13 @@ angular.module('cart', ['components'])
         $state.go('orders', {
           type: type || 'all'
         });
+      }, 10);
+    };
+
+    $scope.goHome = function(){
+      $state.go('tab.cart');
+      $timeout(function () {
+        $state.go('tab.home');
       }, 10);
     };
 
