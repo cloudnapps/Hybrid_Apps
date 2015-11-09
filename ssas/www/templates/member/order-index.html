@@ -76,6 +76,16 @@
             </p>
           </div>
         </div>
+
+        <div class="row" style="padding:10px;">
+          <div class="col col-33" style="height: 100%; padding: 0px">
+            <p style="padding: 0px; height: 100%;color: #4a4a4a;">共{{item.count}}个商品</p>
+          </div>
+
+          <div class="col col-67" style="height: 100%; padding: 0px" align="right">
+            <p style="padding: 0px; height: 100%;color: #4a4a4a;">合计{{item.final_amount | currency:'￥'}}(含运费含税)</p>
+          </div>
+        </div>
         <hr style="margin: 0;height:1px;border:none;border-top:3px solid #f2f2f2;"/>
         <div class="row" style="padding:10px;">
           <div style="width: 100%;">
