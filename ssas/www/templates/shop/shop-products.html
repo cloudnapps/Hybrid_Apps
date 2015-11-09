@@ -56,19 +56,13 @@
             <a ui-sref="product({productId:products[$index].product_id})">
               
               <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div>
-              <!-- <img ng-src="{{products[$index].image}}"> -->
-
-              <div class="prdt-descb">{{products[$index].name}}</div>
-              <div class="row" style="padding: 0 5px 5px;">
-                <span class="col pri-pri" style="color: #bd252c;font-size: 12px;text-align: left;">
-                  {{products[$index].price | currency: '￥'}}
-                </span>
-                <img style="text-align: right;display: inherit;min-height: 20px;width: 20px;height: 20px;border-radius: 50%;" ng-src="img/{{products[$index].nature}}.png">
-                <!-- <span class="nature"
-                      ng-class="{calm: products[$index].nature === 'bond', energized: products[$index].nature !== 'bond'}">
-                  {{products[$index].nature === 'bond' ? '保' : '直'}}
-                </span> -->
-              </div>
+              <div class="bg-color">
+                <div class="prdt-descb">{{products[$index].name}}</div>
+                <div class="row" style="padding: 5px 0;">
+                  <span class="col pri-pri" style="padding: 0;">{{products[$index].price | currency: '￥'}}</span>
+                  <img style="text-align: right;display: inherit;min-height: 20px;width: 20px;height: 20px;border-radius: 50%;" ng-src="img/{{products[$index].nature}}.png">
+                </div>
+              </div>  
             </a>
           </div>
         </div>
@@ -78,18 +72,12 @@
             <a ui-sref="product({productId:products[$index+1].product_id})">
               <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index+1].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div>
 
-              <!-- <img ng-src="{{products[$index+1].image}}"> -->
-
-              <div class="prdt-descb">{{products[$index+1].name}}</div>
-              <div class="row" style="padding: 0 5px 5px;">
-                <span class="col pri-pri" style="color: #bd252c;font-size: 12px;text-align: left;">
-                  {{products[$index+1].price | currency: '￥'}}
-                </span>
-                <img style="text-align: right;display: inherit;min-height: 20px;width: 20px;height: 20px;border-radius: 50%;" ng-src="img/{{products[$index+1].nature}}.png">
-                <!-- <span class="nature"
-                      ng-class="{calm: products[$index+1].nature === 'bond', energized: products[$index+1].nature !== 'bond'}">
-                  {{products[$index+1].nature === 'bond' ? '保' : '直'}}
-                </span> -->
+              <div class="bg-color">
+                <div class="prdt-descb">{{products[$index+1].name}}</div>
+                <div class="row" style="padding: 5px 0;">
+                  <span class="col pri-pri" style="padding: 0;">{{products[$index+1].price | currency: '￥'}}</span>
+                  <img style="text-align: right;display: inherit;min-height: 20px;width: 20px;height: 20px;border-radius: 50%;" ng-src="img/{{products[$index+1].nature}}.png">
+                </div>
               </div>
             </a>
           </div>
