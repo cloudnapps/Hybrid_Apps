@@ -5,21 +5,35 @@
   <ion-content class="padding">
     <div ng-repeat="spec in goodsSpec.spec" style="padding-left: 10px">
       <h5>{{spec.type}}</h5>
+
       <div class="row" style="flex-wrap:wrap">
         <div class="col col-33 text-center" ng-repeat="value in spec.value">
-          <button class="spec text-center button button-clear" ng-class="{'button-positive': value.is_default}" ng-click="value.is_default || getProductGoodsSpec(value.product_id, true)">{{value.name}}</button>
+          <button class="spec text-center button button-clear" ng-class="{'button-positive': value.is_default}"
+                  ng-click="value.is_default || getProductGoodsSpec(value.product_id, true)">{{value.name}}
+          </button>
         </div>
       </div>
     </div>
+
     <div style="padding-left: 10px">
       <h5>数量</h5>
       <quantity-input ng-model="good.quantity"></quantity-input>
     </div>
-  </ion-content>
-  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
-    <div class="button-bar">
-      <button class="button button-dark" ng-click="hideModal()">返回</button>
-      <button class="button button-energized" ng-click="addToCart(goodsSpec.product_info)">{{'product_cart' | translate}}</button>
+
+    <div class="button-bar" style="padding: 0px;">
+      <div class="row">
+        <div class="col col-50">
+          <button class="button button-full button-dark" ng-click="hideModal()">返回</button>
+        </div>
+        <div class="col col-50">
+          <button class="button button-full button-energized" ng-click="addToCart(goodsSpec.product_info)">
+            {{'product_cart' | translate}}
+          </button>
+        </div>
+      </div>
     </div>
+  </ion-content>
+  <ion-footer-bar align-title="center" class="bar-stable" >
+
   </ion-footer-bar>
 </ion-modal-view>
