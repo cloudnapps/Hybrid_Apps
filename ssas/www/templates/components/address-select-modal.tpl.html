@@ -7,8 +7,18 @@
       <label class="item item-radio radio" ng-repeat="item in items">
         <input type="radio" name="group" ng-click="hideModal();" ng-change="updateModel();" ng-model="model.selected" ng-value="item">
         <div class="item-content">
-          <h2 class="row"><div class="col">收件人: {{item.name}}</div><div class="col">电话: {{item.mobile}}</div></h2>
-          <div class="row"><div class="col"><p>收货地址: {{item.area}} {{item.addr}}</p></div></div>
+          <h2 class="row" style="padding: 0;">
+            <div class="col" style="padding: 0;">收件人: {{item.name}}</div>
+            <div class="col" style="padding: 0;">电话: {{item.mobile}}</div>
+          </h2>
+          <div class="row" style="padding: 0;margin-top: 5px;">
+            <div>
+              <span style="min-width: 5em;color: #000;">收货地址: </span>
+            </div>
+            <div class="col col-center" style="padding: 0;margin-left: 4px;">
+              <span style="color: #000;display: -webkit-box !important;overflow: hidden;white-space: normal;text-overflow: ellipsis;word-break: break-all;-webkit-box-orient: vertical;-webkit-line-clamp: 2;">{{item.area}} {{item.addr}}</span>
+            </div>
+          </div>
         </div>
         <i class="radio-icon ion-checkmark"></i>
       </label>
