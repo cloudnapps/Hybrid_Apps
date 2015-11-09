@@ -4,12 +4,15 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right"
+      <ion-item class="item-remove-animate item-icon-right"
                 ng-repeat="item in items" type="item-text-wrap"
-                style="padding: 10px 40px 15px 20px;" ui-sref="return-detail">
-        <h2 style="font-size: 18px;color: #4c4b4d;">{{item.time}}</h2>
+                style="border-bottom: none; border-top-style: dashed;padding: 1px 0px 1px 0px;"
+                ui-sref="return-detail({returnId: item.return_id})">
+        <p style="margin-bottom: 3px;color: #4a4b4d;">收件人：{{item.time}}</p>
 
-        <p style="font-size: 18px;margin-top: 10px;color: #4c4b4d;">{{item.order_id}} - {{item.status}}</p>
+        <p style="margin-bottom: 3px;color: #4a4b4d;">订单号：{{item.order_id}}</p>
+
+        <p style="margin-bottom: 3px;color: #4a4b4d;">状态：{{item.status}}</p>
         <a>
           <i class="icon ion-chevron-right icon-accessory"></i>
         </a>

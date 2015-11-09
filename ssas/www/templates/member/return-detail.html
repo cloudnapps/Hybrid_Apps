@@ -1,33 +1,48 @@
 <ion-view view-title="售后详情" hide-tabs="true">
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
   <ion-content>
-    <div style="height: 44px">
-    </div>
-    <div class="list card" style="margin: 0;box-shadow: none;">
-      <div class="item item-body">
+    <div class="row" style="padding: 5px 5px 5px 5px;">
+      <div class="col">
         <p style="margin: 10px 0;color: #4c4b4d;">{{item.title.status}} {{item.title.type}}</p>
 
         <p style="margin: 10px 0;color: #4c4b4d;">{{item.title.time}}</p>
       </div>
-      <div class="item item-body">
+    </div>
+
+    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #f2f2f2;"/>
+
+    <div class="row" style="padding: 5px 5px 5px 5px;">
+      <div class="col">
         <p style="margin: 10px 0;color: #4c4b4d;">退款类型：{{item.title.type}}</p>
 
-        <p style="margin: 10px 0;color: #4c4b4d;">退款原因：{{item.title.type}}</p>
+        <p style="margin: 10px 0;color: #4c4b4d;">退款原因：{{item.title.title}}</p>
 
-        <p style="margin: 10px 0;color: #4c4b4d;">退款说明：{{item.title.type}}</p>
+        <p style="margin: 10px 0;color: #4c4b4d;">退款说明：{{item.title.content}}</p>
       </div>
-      <div class="item item-body">
-        <ion-list>
-          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="pro in item.product"
-                    type="item-text-wrap">
-            <img style="border-radius: 0;" ng-src="{{item.image}}">
+    </div>
 
-            <h2 style="color:#666c70;font-size: 14px;margin-bottom: 5px;">{{pro.name}}</h2>
+    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #f2f2f2;"/>
 
-            <p style="color: #c9000b;">{{pro.price | currency: '￥'}}</p>
-          </ion-item>
-        </ion-list>
-      </div>
+    <div ng-class="list" style="border: 1px solid #ddd;">
+      <ion-item ng-repeat="pro in item.product" style="border-top: none;padding: 10px;">
+        <div class="row" style="margin:0;padding: 0 15px 10px 0;" ui-sref="product({pro: product.product_id})">
+          <div class="col col-20" style="padding: 0;height: 60px;">
+            <img class="pic" ng-src="{{pro.image}}">
+          </div>
+          <div class="col col-80" style="padding: 0 0 0 10px;">
+            <p
+              style="padding: 0px;margin-bottom: 1px;display: -webkit-box !important;overflow: hidden;white-space: normal;text-overflow: ellipsis;word-break: break-all;-webkit-box-orient: vertical;-webkit-line-clamp: 2;">
+              {{pro.name}}</p>
+
+            <p style="clear: both;">
+              <span style="float: left;">{{pro.price | currency:'￥'}}</span>
+              <span style="float: right;">x{{pro.num}}</span>
+            </p>
+          </div>
+        </div>
+      </ion-item>
     </div>
   </ion-content>
 </ion-view>
