@@ -26,14 +26,17 @@
   <!-- search -->
   <ion-nav-title style="margin: 0;">
     <form ng-submit="search()">
-      <div class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
-        <div style="line-height: 28px;color: #999;">
+      <div class="row row-center">
+        <div class="item item-input"
+             style="margin: 0px 0;padding: 0 0 0 3px;border-radius: 7px;border: none;">
+          <div style="line-height: 28px;color: #999;">
           <span ng-click="openPopover()" style="font-weight: 300;font-size: 14px;">{{!kind ? '商品' : '商户'}}<i
             class="icon ion-arrow-down-b"></i>&nbsp;&nbsp;</span>
+          </div>
+          <input type="search" ng-model="keywords.value" style="height: 28px;padding-left: 6px;">
         </div>
-        <input type="search" ng-model="keywords.value" style="height: 28px;padding-left: 5px;">
+        <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
       </div>
-      <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
     </form>
   </ion-nav-title>
 
