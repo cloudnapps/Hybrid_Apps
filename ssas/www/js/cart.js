@@ -224,7 +224,8 @@ angular.module('cart', ['components'])
       $ionicLoading.hide();
     };
   })
-  .controller('OrderPayedController', function ($rootScope, $scope, $q, $ionicLoading, $state, $stateParams, $timeout, orderApi) {
+  .controller('OrderPayedController', function ($rootScope, $scope, $q, $ionicLoading, $state, $stateParams, $timeout,
+                                                orderApi, HomeApi, shopApi) {
     var justCreatedOrder = $rootScope.justCreatedOrder;
     delete $rootScope.justCreatedOrder;
 
@@ -232,7 +233,7 @@ angular.module('cart', ['components'])
 
     $scope.goOrder = function (type) {
       $state.go('tab.home');
-      $timeout(function(){
+      $timeout(function () {
         $state.go('orders', {
           type: type || 'all'
         });
@@ -261,6 +262,32 @@ angular.module('cart', ['components'])
     };
 
     $scope.load();
+
+    $scope.homeInfo = {};
+    $scope.goodsInfo = {};
+    $scope.getHomeInfo = function () {
+      HomeApi.getHomeContent().then(function (result) {
+        $scope.homeInfo = result.data.data;
+
+        $scope.getProducts = function () {
+          var query = {
+            page: $scope.page,
+            filter: {
+              brand_id: $scope.homeInfo.goods_gallery[0].filter.brand,
+              cat_id: $scope.homeInfo.goods_gallery[0].filter.cat_id
+            }
+          };
+
+          shopApi.getGallery(query).then(function (result) {
+            $scope.goodsInfo = result.data.data;
+          });
+        };
+
+        $scope.getProducts();
+      })
+    };
+
+    $scope.getHomeInfo();
   })
   .controller('iframeController', function ($rootScope, $scope) {
     $scope.html = $rootScope.micbcpayData;
