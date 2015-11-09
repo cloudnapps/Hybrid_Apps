@@ -153,7 +153,6 @@
       });
 
       $scope.pay = function (payment) {
-        
         $ionicLoading.show();
 
         var order = {
@@ -181,7 +180,8 @@
             return paymentApi.pay(response.data.data)
               .then(function (data) {
                 $ionicPopup.alert({
-                  title: '支付成功'
+                  title: '支付成功',
+                  template: '感谢惠顾，我们将竭诚为您服务哦～'
                 })
                 .then(function(){
                   $scope.back();

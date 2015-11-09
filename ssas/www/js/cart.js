@@ -203,16 +203,10 @@ angular.module('cart', ['components'])
 
               return paymentApi.pay(response.data.data)
                 .then(function (data) {
-                  $state.go('tab.order-payed');
+                  return $state.go('tab.order-payed');
                 }, function (err) {
-                  $ionicPopup.alert({
-                    title: '支付失败',
-                    template: err
-                  })
-                  .then(function () {
-                    $state.go('tab.order-payed', {
-                      status: 'failed'
-                    });
+                  return $state.go('tab.order-payed', {
+                    status: 'failed'
                   });
                 });
               });
