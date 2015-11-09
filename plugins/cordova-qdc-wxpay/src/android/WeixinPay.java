@@ -90,7 +90,7 @@ public class WeixinPay extends CordovaPlugin {
 			if (packageValue == null || "".equals(packageValue)) {
 				LOG.e(LOG_TAG, "packageValue is empty", new NullPointerException());
 				ret = false;
-	            PluginResult result = new PluginResult(PluginResult.Status.OK, "packageValue is empty");
+	            PluginResult result = new PluginResult(PluginResult.Status.ERROR, "packageValue is empty");
 	            result.setKeepCallback(true);
 	            cbContext.sendPluginResult(result);
 				return ret;

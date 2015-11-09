@@ -151,9 +151,9 @@
         // save the callback id
         self.currentCallbackId = command.callbackId;
         
-        CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"调起成功"];
+        //CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"调起成功"];
         
-        [self.commandDelegate sendPluginResult:commandResult callbackId:command.callbackId];
+        //[self.commandDelegate sendPluginResult:commandResult callbackId:command.callbackId];
     }];
 }
 
