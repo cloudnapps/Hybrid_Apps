@@ -148,7 +148,8 @@ angular.module('cart', ['components'])
           });
         }
         else {
-          toastService.toast('该优惠券不能使用');
+          coupon.selected = false;
+          toastService.setToast(responseData.msg);
         }
       })
         .finally(function () {

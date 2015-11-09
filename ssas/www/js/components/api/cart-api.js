@@ -113,25 +113,17 @@ angular.module('components')
 
           coupons = [];
           angular.forEach(cart.aSelCart, function (seller) {
-            angular.forEach(seller.coupon_lists, function (cp) {
-              if (cp.selected) {
-                if(cp.isNew) {
+              angular.forEach(seller.coupon_lists, function (cp) {
+                if (cp.isNew) {
                   coupons.push({
                     seller_id: seller.seller_info.seller_id,
                     memc_code: cp.memc_code,
                     checked: true
                   })
                 }
-                else {
-                  coupons.push({
-                    seller_id: seller.seller_info.seller_id,
-                    memc_code: cp.memc_code,
-                    checked: false
-                  })
-                }
-              }
-            });
-          })
+              });
+            }
+          )
         }
         var data = {
           shipping: shipping,
