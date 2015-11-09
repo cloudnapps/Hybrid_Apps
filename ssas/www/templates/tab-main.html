@@ -6,23 +6,23 @@ navigation history that also transitions its views in and out.
 <ion-tabs ng-class="{'tabs-item-hide': $root.hideTabs}" class="tabs-icon-top tabs-color-active-positive tabs-bottom">
 
   <!-- Home Tab -->
-  <ion-tab title="{{'home'|translate}}" icon-off="ion-ios-home" icon-on="ion-ios-home" href="#/tab/home">
+  <ion-tab title="{{'home'|translate}}" icon-off="icon-btn-4" icon-on="icon-btn-4" href="#/tab/home">
     <ion-nav-view name="tab-home"></ion-nav-view>
   </ion-tab>
 
   <!-- Shop Tab -->
-  <ion-tab title="{{'shop'|translate}}" icon-off="ion-clipboard" icon-on="ion-clipboard" href="#/tab/categories">
+  <ion-tab title="{{'shop'|translate}}" icon-off="icon-btn-3" icon-on="icon-btn-3" href="#/tab/categories">
     <ion-nav-view name="tab-shop"></ion-nav-view>
   </ion-tab>
 
    <!-- Cart Tab -->
-  <ion-tab title="{{'cart'|translate}}" icon-off="ion-android-cart" icon-on="ion-android-cart"
+  <ion-tab title="{{'cart'|translate}}" icon-off="icon-btn-2" icon-on="icon-btn-2"
     ng-click="userService.checkLogin('tab.cart')">
     <ion-nav-view name="tab-cart"></ion-nav-view>
   </ion-tab>
 
   <!-- Member Tab -->
-  <ion-tab title="{{'my'|translate}}" icon-off="ion-android-person" icon-on="ion-android-person"
+  <ion-tab title="{{'my'|translate}}" icon-off="icon-btn-1" icon-on="icon-btn-1"
            ng-click="userService.checkLogin('tab.member')">
     <ion-nav-view name="tab-member"></ion-nav-view>
   </ion-tab>
