@@ -38,20 +38,24 @@
     <hr style="margin: 0;border-color: #c8c8c8;">
     <div class="prdt-tax">税率: <label class="tax-pri">{{product.tax_rate * 100}}%</label></div>
     <div class="prdt-tax">税金: <label class="tax-pri">{{product.tax_price|currency:'￥'}}</label></div>
+    <div class="prdt-tax">
+      <div class="declare">
+        <p>税费说明:</p>
+        <p>①中华人民共和国进境物品完税价格表，本商品适用税率为{{product.tax_rate * 100}}%</p>
+        <p>①根据 海关总署公告2010年第43号 公告规定，个人物品申报，应征进口税税额在人民币50元（含50元）以下的，海关予以免征。</p>
+      </div>
+    </div>
     <hr style="margin: 0;border-color: #c8c8c8;padding-top: 10px;">
     <a class="button button-clear button-full button-small icon ion-chevron-right icon-right prdt-std"
        ng-click="showSpecModal()" style="color: #4c4c4c;">选择规格</a>
+    <hr style="margin: 0;border-color: #c8c8c8;padding:0;">
 
-    <div ng-hide="true" ui-sref="tab.comments({id:product.goods_id})">
-      <a class="button button-clear button-full button-small icon ion-chevron-right icon-right"
-         style="text-align: left; color: #000">{{'comment'|translate}}
-      </a>
-
+    <div ui-sref="comments({id:product.goods_id})" style="color: #4c4c4c;">
+      <div class="padding" style="text-align: left;">{{'comment'|translate}}
+      </div>
       <div style="padding-left: 10px; font-size: 5px;">好评{{product.high_point}}% 已有{{product.count}}人购买</div>
-      <br>
-
-      <div style="padding-left: 10px; font-size: 10px; color: #cccccc">{{comment.name}}</div>
-      <div style="padding-left: 10px; font-size: 10px; color: #cccccc">{{comment.content}}</div>
+      <a class="button button-clear button-full button-small icon ion-chevron-right icon-right" style="padding-left: 10px; font-size: 10px; color: #989898; text-align: left; margin: 0; margin-top: 6px;">{{comment.name || '暂无评论'}}</a>
+      <div style="padding-left: 10px; font-size: 10px; color: #989898" ng-show="comment.name">{{comment.content}}</div>
     </div>
 
     <hr style="margin: 0;border:none;border-top:10px solid #f6f6f6;">
@@ -78,6 +82,6 @@
     </ion-infinite-scroll>
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
-    <div add-to-cart="product"></div>
+    <div add-to-cart="product" show-spec-modal="showSpecModal" ></div>
   </ion-footer-bar>
 </ion-view>

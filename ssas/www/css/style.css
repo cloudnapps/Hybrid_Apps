@@ -282,3 +282,7 @@ hr {
   font-size: 9pt;
   color: #9b9b9b;
 }
+
+.comment p {
+  white-space: normal;
+}

@@ -76,12 +76,22 @@ angular.module('starter')
       	.state('product', {
         	url: '/products/:productId',
         	views: {
-          		'main-view': {
-            		templateUrl: 'templates/shop/product-detail.html',
-            		controller: 'ProductDetailController'
-          		}
+        		'main-view': {
+          		templateUrl: 'templates/shop/product-detail.html',
+          		controller: 'ProductDetailController'
+        		}
         	}
       	})
+        // 商品详情 评论
+        .state('comments', {
+          url: '/comments/:id',
+          views: {
+              'main-view': {
+                templateUrl: 'templates/shop/product-comment.html',
+                controller: 'ProductCommentController'
+              }
+          }
+        })
         // 商户列表
         .state('sellers', {
           url: '/sellers?keywords',

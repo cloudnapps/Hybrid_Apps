@@ -61,7 +61,7 @@ var translations_zh = {
   product_detail: '商品详情',
   mkt_price: '市场价格',
 
-  comment: '评论',
+  comment: '商品评价',
 
   //receiver & idcard
   rec_title: '地址管理',

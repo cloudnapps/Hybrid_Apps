@@ -12,7 +12,7 @@ angular.module('components')
           scope.$eval(attrs.ngChange);
         });
         ctrl.$render = function () {
-            scope.ngModel = ctrl.$viewValue;
+          scope.ngModel = ctrl.$viewValue;
         };
       }
     };
