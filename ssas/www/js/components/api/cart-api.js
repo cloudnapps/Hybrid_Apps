@@ -7,7 +7,7 @@ angular.module('components')
         var data = {
           product_id: product.product_id,
           goods_id: product.goods_id,
-          num: 1,
+          num: product.num || 1,
           member_id: userService.get('memberId'),
           token: userService.get('token')
         };
