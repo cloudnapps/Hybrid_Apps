@@ -133,7 +133,7 @@
     })
 
     .controller('OrderPayCtrl', function ($scope, $stateParams, $rootScope, $ionicLoading, $ionicPopup,
-                                          $q, orderApi, OrderApi, paymentApi) {
+                                          $q, $state, orderApi, OrderApi, paymentApi) {
       $scope.cart = {};
       $scope.orderId = $stateParams.orderId;
 
@@ -172,17 +172,13 @@
 
             return paymentApi.pay(response.data.data)
               .then(function (data) {
-                alert('order.js   success ' + data);
+                $state.go('tab.order-payed', {
+                  isFailed: false
+                });
               }, function (err) {
-                alert('order.js  error  ' + err);
                 $ionicPopup.alert({
                   title: '支付失败',
                   template: err
-                })
-                .then(function () {
-                  $state.go('tab.order-payed', {
-                    isFailed: true
-                  });
                 });
               });
           });

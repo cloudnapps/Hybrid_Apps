@@ -202,9 +202,10 @@ angular.module('cart', ['components'])
               }
               return paymentApi.pay(response.data.data)
                 .then(function (data) {
-                  alert('cart.js    success ' + data);
+                  $state.go('tab.order-payed', {
+                    isFailed: false
+                  });
                 }, function (err) {
-                  alert('cart.js   error ' + err);
                   $ionicPopup.alert({
                     title: '支付失败',
                     template: err
