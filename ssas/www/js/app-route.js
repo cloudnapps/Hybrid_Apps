@@ -412,7 +412,7 @@ angular.module('starter')
             }
           })
           .state('tab.order-payed', {
-            url: '/order-payed?isFailed',
+            url: '/order-payed?status',
             cache: false,
             views: {
               'tab-cart': {

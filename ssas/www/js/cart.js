@@ -200,11 +200,10 @@ angular.module('cart', ['components'])
 
                 return $q.reject();
               }
+
               return paymentApi.pay(response.data.data)
                 .then(function (data) {
-                  $state.go('tab.order-payed', {
-                    isFailed: false
-                  });
+                  $state.go('tab.order-payed');
                 }, function (err) {
                   $ionicPopup.alert({
                     title: '支付失败',
@@ -212,7 +211,7 @@ angular.module('cart', ['components'])
                   })
                   .then(function () {
                     $state.go('tab.order-payed', {
-                      isFailed: true
+                      status: 'failed'
                     });
                   });
                 });
@@ -228,7 +227,7 @@ angular.module('cart', ['components'])
     var justCreatedOrder = $rootScope.justCreatedOrder;
     delete $rootScope.justCreatedOrder;
 
-    $scope.isFailed = $stateParams.isFailed || false;
+    $scope.isFailed = $stateParams.status === 'failed';
 
     $scope.goOrder = function (type) {
       $state.go('tab.home');
