@@ -134,6 +134,14 @@
       display: inline-block;
       padding: 0px 0px 0px 10px;
       font-size: 14px;
+      
+      .sub-title {
+        display: block;
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
 
       p {
         height: 14px;

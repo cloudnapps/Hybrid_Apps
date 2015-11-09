@@ -8,23 +8,17 @@
     </div>
 
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" ng-if="item.checked"
-                type="item-text-wrap" ng-click="edit(item)"
-                style="border-bottom: none; border-top-style: dashed;padding: 1px 0px 1px 0px;">
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" ng-if="item.checked" type="item-text-wrap" ng-click="edit(item)" style="border-bottom: none; border-top-style: dashed;padding: 1px 0px 1px 0px;">
         <div class="row" style="padding: 0;">
           <div class="col col-90" style="padding: 0;">
             <p style="margin-bottom: 3px;color: #4a4b4d;">收件人：{{item.name}}</p>
-
             <p style="margin-bottom: 3px;color: #4a4b4d;" ng-if="!!item.mobile">手机号码：{{item.mobile}}</p>
-
             <p style="margin-bottom: 3px;color: #4a4b4d;">身份证号：{{item.number}}</p>
-
             <div class="row" style="padding: 0;">
               <div>
                 <span style="min-width: 5em;font-size: 14px;color: #4a4b4d;">收件地址：</span>
               </div>
-              <div class="col col-center"
-                   style="padding: 0;word-break: break-all;min-width: 11em;white-space: normal;">
+              <div class="col col-center" style="padding: 0;word-break: break-all;max-width: 11em;white-space: normal;">
                 <span style="font-size: 14px;">{{item.area}}{{item.addr}}</span>
               </div>
             </div>
@@ -45,23 +39,17 @@
     <hr style="margin: 5px 0;height:1px;border:none;border-top:10px solid #f1f1f1;"/>
 
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" ng-if="!item.checked"
-                type="item-text-wrap" ng-click="edit(item)"
-                style="border-bottom: none; border-top-style: dashed;padding: 1px 0px 1px 0px;">
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" ng-if="!item.checked" type="item-text-wrap" ng-click="edit(item)" style="border-bottom: none; border-top-style: dashed;padding: 1px 0px 1px 0px;">
         <div class="row" style="padding: 0;">
           <div class="col col-90" style="padding: 0;">
             <p style="margin-bottom: 3px;color: #4a4b4d;">收件人：{{item.name}}</p>
-
             <p style="margin-bottom: 3px;color: #4a4b4d;" ng-if="!!item.mobile">手机号码：{{item.mobile}}</p>
-
             <p style="margin-bottom: 3px;color: #4a4b4d;">身份证号：{{item.number}}</p>
-
             <div class="row" style="padding: 0;">
               <div>
                 <span style="min-width: 5em;font-size: 14px;color: #4a4b4d;">收件地址：</span>
               </div>
-              <div class="col col-center"
-                   style="padding: 0;word-break: break-all;min-width: 11em;white-space: normal;">
+              <div class="col col-center" style="padding: 0;word-break: break-all;max-width: 11em;white-space: normal;">
                 <span style="font-size: 14px;">{{item.area}}{{item.addr}}</span>
               </div>
             </div>
