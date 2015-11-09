@@ -53,6 +53,7 @@
                   <span>{{good.spec}}</span>
 
                   <p class="price">{{good.buy_price|currency:'￥'}}</p>
+
                   <p style="padding: 0; font-size: 12px;">适用税率：{{good.taxRate || 0}}%</p>
                   <quantity-input ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
                 </div>
@@ -63,18 +64,18 @@
             </ion-option-button>
           </ion-item>
         </div>
-        <ion-item class="item checkout-warning" ng-show="nature.exceed_limit">
+        <ion-item class="item checkout-warning" ng-show="nature.lock_btn">
           <div class="item-content">
-            <h2 class="text-center positive warning-text">抱歉，您已超过海关限额¥1000，请选择部分商品进行结算</h2>
+            <h2 class="text-left positive warning-text">抱歉，您已超过海关限额{{nature.exceed_limit}}元，请选择部分商品进行结算</h2>
 
             <div class="detail">
               <p>海关规定</p>
 
-              <p>① 消费者购买进口商品，以“个人自用，合理数量”为原则，每单最大购买金额不得超过1000元人民币（不含关税）。</p>
+              <p>① 消费者购买进口商品，以“个人自用，合理数量”为原则，每单最大购买金额不得超过{{nature.exceed_limit}}元人民币（不含关税）。</p>
 
-              <p>② 如有优惠活动，则1000元限值适用于订单优惠后的金额。</p>
+              <p>② 如有优惠活动，则{{nature.exceed_limit}}元限值适用于订单优惠后的金额。</p>
 
-              <p>③ 如果订单只汉单件不可分割商品，则可以超过1000元限值。</p>
+              <p>③ 如果订单只含单件不可分割商品，则可以超过{{nature.exceed_limit}}元限值。</p>
             </div>
           </div>
         </ion-item>
@@ -89,7 +90,7 @@
             </div>
             <button class="col-30 button button-full button-positive" style="margin:0;"
                     ui-sref="tab.cart-checkout({nature: natureKey})"
-                    ng-disabled="nature.item_amount<0.01">
+                    ng-disabled="nature.item_amount<0.01 || nature.lock_btn">
               {{'cart_checkout'|translate}}
             </button>
           </div>
