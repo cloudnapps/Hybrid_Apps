@@ -91,8 +91,7 @@
     
     [self initRouteSettings];
     
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(close)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"关闭", nil) style:UIBarButtonItemStylePlain target:self action:@selector(close)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"带我去", nil) style:UIBarButtonItemStylePlain target:self action:@selector(routeAction)];
     self.navigationItem.rightBarButtonItem.enabled = NO;
