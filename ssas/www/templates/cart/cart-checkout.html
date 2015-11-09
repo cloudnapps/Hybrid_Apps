@@ -7,14 +7,19 @@
       <a class="item item-icon-right" address-select="cart.addrlist" ng-model="cart.def_addr" ng-change="checkout()"
          style="padding-right: 40px;">
         <div class="row" style="padding: 0;font-size: 14px;color: #444;">
-          <div class="col" style="padding: 0;">收件人: {{cart.def_addr.name}}</div>
-          <div class="col" style="padding: 0;text-align: right;">电话: {{cart.def_addr.mobile}}</div>
+          <div class="col" style="padding: 0;">收件人： {{cart.def_addr.name}}</div>
+          <div class="col" style="padding: 0;text-align: right;">电话：{{cart.def_addr.mobile}}</div>
         </div>
+        
         <div class="row" style="padding: 10px 0 0;">
-          <div class="col" style="padding: 0;">
-            <p style="color: #444;">收货地址: {{cart.def_addr.area}} {{cart.def_addr.addr}}</p>
+          <div>
+            <span style="min-width: 5em;font-size: 14px;color: #4a4b4d;">收件地址：</span>
+          </div>
+          <div class="col col-center" style="padding: 0;word-break: break-all;max-width: 12em;white-space: normal;">
+            <span style="font-size: 14px;color: #444;">{{cart.def_addr.area}} {{cart.def_addr.addr}}</span>
           </div>
         </div>
+
         <i class="icon ion-chevron-right" style="font-size: 16px;"></i>
       </a>
 
@@ -60,7 +65,7 @@
         </ion-item>
         <ion-item class="item" style="padding: 10px 0;border-bottom: 0;">
           <div class="row" style="padding: 0 10px 10px;font-size: 14px;">
-            <div class="col col-50 col-center" style="padding: 0;">优惠券:</div>
+            <div class="col col-50 col-center" style="padding: 0;">优惠券：</div>
           </div>
           <div class="row row-no-padding" style="margin: 0;" ng-repeat="coupon in seller.coupon_lists">
             <div class="col col-80 col-center" style="padding-left: 15px">
@@ -77,13 +82,13 @@
         <hr style="margin:0;height:1px;border:none;border-top:15px solid #f1f1f1;"/>
       </div>
       <ion-item class="item item-complex summary" style="padding:10px;">
-        <div>货款总计: {{cart.total_item_amount |currency:'￥'}}</div>
-        <div>税费总计: {{cart.total_taxation_amount |currency:'￥'}}</div>
+        <div>货款总计：{{cart.total_item_amount |currency:'￥'}}</div>
+        <div>税费总计：{{cart.total_taxation_amount |currency:'￥'}}</div>
         <div class="row row-no-padding">
           <div class="col">
-            <div>运费总计: {{cart.total_freight |currency:'￥'}}</div>
+            <div>运费总计：{{cart.total_freight |currency:'￥'}}</div>
           </div>
-          <div class="col" style="text-align: right;">订单总计: <span style="font-size: 18px;color: #bd252c;">{{cart.total_amount |currency:'￥'}}</span>
+          <div class="col" style="text-align: right;">订单总计：<span style="font-size: 18px;color: #bd252c;">{{cart.total_amount |currency:'￥'}}</span>
           </div>
         </div>
       </ion-item>
