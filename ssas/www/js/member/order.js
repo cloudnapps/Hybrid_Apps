@@ -1,5 +1,5 @@
 (function () {
-  angular.module('order', ['starter.services'])   
+  angular.module('order', ['starter.services'])
     .controller('OrdersAllCtrl', function ($scope, $state, $stateParams, $ionicPopup, OrderApi) {
       $scope.init = function () {
         $scope.items = [];
@@ -63,14 +63,16 @@
         $scope.getOrders();
       };
 
-      if ($stateParams.type) {
-        $scope.switchOrder($stateParams.type);
-      }
+      $scope.$on('$ionicView.beforeEnter', function () {
+        if ($stateParams.type) {
+          $scope.switchOrder($stateParams.type);
+        }
+      });
 
       $scope.loadMore = function () {
         $scope.page++;
         $scope.getOrders();
-      };      
+      };
 
       $scope.cancelOrder = function (item) {
         var myPopup = $ionicPopup.show({
@@ -113,7 +115,7 @@
           });
           //}
         });
-      };    
+      };
 
       $scope.payOrder = function (item) {
         $state.go('order-pay', {orderId: item.order_id}, {reload: true});

@@ -6,7 +6,7 @@
         $scope.page = 1;
         $scope.hasMore = false;
         $scope.filter = '';
-	      $scope.favoriteState =1;
+        $scope.favoriteState = 1;
       };
 
       $scope.getFavorities = function () {
@@ -28,19 +28,21 @@
 
         $scope.filter = type;
 
-        if(type == 'sellers') {
+        if (type == 'sellers') {
           $scope.favoriteState = 1;
         }
-        else if(type == 'goods') {
+        else if (type == 'goods') {
           $scope.favoriteState = 2;
         }
 
         $scope.getFavorities();
       };
 
-      if ($stateParams.type) {
-        $scope.switchFavorities($stateParams.type);
-      }
+      $scope.$on('$ionicView.beforeEnter', function () {
+        if ($stateParams.type) {
+          $scope.switchFavorities($stateParams.type);
+        }
+      });
 
       $scope.loadMore = function () {
         $scope.page++;
