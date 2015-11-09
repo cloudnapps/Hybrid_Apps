@@ -170,13 +170,18 @@
 
             return paymentApi.pay(response.data.data)
               .then(function (data) {
-                console.log(data);
+                alert('order.js   success ' + data);
               }, function (err) {
+                alert('order.js  error  ' + err);
                 $ionicPopup.alert({
                   title: '支付失败',
                   template: err
+                })
+                .then(function () {
+                  $state.go('tab.order-payed', {
+                    isFailed: true
+                  });
                 });
-                return $q.reject();
               });
           });
 
