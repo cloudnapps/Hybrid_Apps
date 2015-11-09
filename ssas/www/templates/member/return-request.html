@@ -4,14 +4,26 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="list">
-      <label class="item item-input" ng-click="returnInfo.showReturnType=true; returnInfo.showReturnTitle=false">
-        <input type="text" ng-model="returnInfo.typeDesc" readonly="readonly" placeholder="申请类型">
+      <label class="item item-input">
+        <div class="col col-25 col-center">
+          申请类型：
+        </div>
+        <input type="text" ng-model="returnInfo.typeDesc" readonly="readonly"
+               ng-click="returnInfo.showReturnType=true; returnInfo.showReturnTitle=false">
       </label>
-      <label class="item item-input" ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=true">
-        <input type="text" ng-model="returnInfo.title" readonly="readonly" placeholder="申请原因">
+      <label class="item item-input">
+        <div class="col col-25 col-center">
+          申请原因：
+        </div>
+        <input type="text" ng-model="returnInfo.title" readonly="readonly"
+               ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=true">
       </label>
-      <label class="item item-input" ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=false">
-        <input type="text" ng-model="returnInfo.content" placeholder="申请说明">
+      <label class="item item-input">
+        <div class="col col-25 col-center">
+          申请说明：
+        </div>
+        <input type="text" ng-model="returnInfo.content"
+               ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=false">
       </label>
     </div>
 
