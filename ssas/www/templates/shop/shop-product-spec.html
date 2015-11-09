@@ -6,8 +6,9 @@
     <div ng-repeat="spec in goodsSpec.spec" style="padding-left: 10px">
       <h5>{{spec.type}}</h5>
       <div class="row" style="flex-wrap:wrap">
-        <a class="col col-33 text-center button button-clear" ng-repeat="value in spec.value" ng-class="{'button-positive': value.is_default}" ng-click="value.is_default || getProductGoodsSpec(value.product_id, true)">{{value.name}}
-        </a>
+        <div class="col col-33 text-center" ng-repeat="value in spec.value">
+          <button class="spec text-center button button-clear" ng-class="{'button-positive': value.is_default}" ng-click="value.is_default || getProductGoodsSpec(value.product_id, true)">{{value.name}}</button>
+        </div>
       </div>
     </div>
     <div style="padding-left: 10px">

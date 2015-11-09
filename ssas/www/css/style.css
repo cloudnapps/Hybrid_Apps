@@ -54,6 +54,23 @@ hr {
   min-height: auto;
 }
 
+.product-spec .spec {
+  font-size: 12px; 
+  margin: 0 2px; 
+  min-height: 27px;
+  line-height: 30px;
+  padding: 0 18px; 
+  border: 1px solid #4A4A4A;
+  color: #4A4A4A;
+  border-radius: 5pt;
+}
+
+.product-spec .spec.button-positive {
+  color: #fff;
+  background: #BD252C;
+  border: 1px solid #BD252C;
+}
+
 .modal-backdrop.active {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }

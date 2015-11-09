@@ -7,7 +7,6 @@
         $scope.hasMore = false;
         $scope.filter = {};
         $scope.orderState = 1;
-        $scope.type = 'all';
       };
 
       $scope.getOrders = function () {
@@ -154,6 +153,7 @@
       });
 
       $scope.pay = function (payment) {
+        
         $ionicLoading.show();
 
         var order = {
@@ -164,7 +164,6 @@
         orderApi.getPayInfo(order)
           .then(function (response) {
             console.log(order, order.pay_app_id);
-
             if (order.pay_app_id === 'micbcpay') {
               console.log(response);
               $rootScope.micbcpayData = response.data;
@@ -179,11 +178,13 @@
 
               return $q.reject();
             }
-
             return paymentApi.pay(response.data.data)
               .then(function (data) {
-                $state.go('tab.order-payed', {
-                  isFailed: false
+                $ionicPopup.alert({
+                  title: '支付成功'
+                })
+                .then(function(){
+                  $scope.back();
                 });
               }, function (err) {
                 $ionicPopup.alert({
