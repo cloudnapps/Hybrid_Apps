@@ -892,6 +892,13 @@ parentViewController:(UIViewController*)parentViewController
 }
 
 //--------------------------------------------------------------------------
+
+#define RETICLE_SIZE    500.0f
+#define RETICLE_WIDTH    2.0f
+#define RETICLE_OFFSET   60.0f
+#define RETICLE_ALPHA     0.4f
+
+//--------------------------------------------------------------------------
 - (UIView*)buildOverlayView {
     
     if ( nil != self.alternateXib )
@@ -910,11 +917,11 @@ parentViewController:(UIViewController*)parentViewController
     toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     
     id cancelButton = [[UIBarButtonItem alloc]
-                       initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                       initWithTitle:NSLocalizedString(@"取消", nil)
+                       style:UIBarButtonItemStylePlain
                        target:(id)self
                        action:@selector(cancelButtonPressed:)
                        ];
-    
     
     id flexSpace = [[UIBarButtonItem alloc]
                     initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
@@ -974,15 +981,27 @@ parentViewController:(UIViewController*)parentViewController
     
     [overlayView addSubview: reticleView];
     
+    CGFloat originX = rectArea.size.width/(RETICLE_SIZE+2*RETICLE_OFFSET)*RETICLE_OFFSET;
+    CGFloat rectWidth = rectArea.size.width/(RETICLE_SIZE+2*RETICLE_OFFSET)*RETICLE_SIZE;
+    
+    UIView *movingView = [[UIView alloc] initWithFrame:CGRectMake(originX, (rootViewHeight - rectArea.size.width)/2.0f + originX + 10.0f, rectWidth, 2.0f)];
+    
+    movingView.backgroundColor = [UIColor greenColor];
+    
+    CABasicAnimation *animation = [CABasicAnimation
+                                   animationWithKeyPath:@"position"];
+    
+    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(movingView.center.x, rectWidth+movingView.frame.origin.y-20.0f)];
+    animation.duration = 4.0;
+    animation.repeatCount = HUGE_VAL;
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    [movingView.layer addAnimation:animation forKey:@"position"];
+    
+    [overlayView addSubview:movingView];
+    
     return overlayView;
 }
-
-//--------------------------------------------------------------------------
-
-#define RETICLE_SIZE    500.0f
-#define RETICLE_WIDTH    10.0f
-#define RETICLE_OFFSET   60.0f
-#define RETICLE_ALPHA     0.4f
 
 //-------------------------------------------------------------------------
 // builds the green box and red line
@@ -993,18 +1012,18 @@ parentViewController:(UIViewController*)parentViewController
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     if (self.processor.is1D) {
-        UIColor* color = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:RETICLE_ALPHA];
-        CGContextSetStrokeColorWithColor(context, color.CGColor);
-        CGContextSetLineWidth(context, RETICLE_WIDTH);
-        CGContextBeginPath(context);
-        CGFloat lineOffset = RETICLE_OFFSET+(0.5*RETICLE_WIDTH);
-        CGContextMoveToPoint(context, lineOffset, RETICLE_SIZE/2);
-        CGContextAddLineToPoint(context, RETICLE_SIZE-lineOffset, 0.5*RETICLE_SIZE);
-        CGContextStrokePath(context);
+//        UIColor* color = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:RETICLE_ALPHA];
+//        CGContextSetStrokeColorWithColor(context, color.CGColor);
+//        CGContextSetLineWidth(context, RETICLE_WIDTH);
+//        CGContextBeginPath(context);
+//        CGFloat lineOffset = RETICLE_OFFSET+(0.5*RETICLE_WIDTH);
+//        CGContextMoveToPoint(context, lineOffset, RETICLE_SIZE/2);
+//        CGContextAddLineToPoint(context, RETICLE_SIZE-lineOffset, 0.5*RETICLE_SIZE);
+//        CGContextStrokePath(context);
     }
     
     if (self.processor.is2D) {
-        UIColor* color = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:RETICLE_ALPHA];
+        UIColor* color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:RETICLE_ALPHA];
         CGContextSetStrokeColorWithColor(context, color.CGColor);
         CGContextSetLineWidth(context, RETICLE_WIDTH);
         CGContextStrokeRect(context,
