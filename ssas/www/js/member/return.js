@@ -1,7 +1,7 @@
 (function () {
   angular.module('return', ['starter.services'])
 
-    .controller('ReturnRequestCtrl', function ($scope, $stateParams, $ionicPopup, $state, ReturnApi) {
+    .controller('ReturnRequestCtrl', function ($scope, $stateParams, $ionicPopup, $state, ReturnApi, toastService) {
       $scope.returnInfo = {};
       $scope.returnInfo.product = {};
 
@@ -34,6 +34,10 @@
         $scope.returnInfo.showReturnType = false
       };
 
+      $scope.saveReturnTitle = function () {
+        $scope.returnInfo.showReturnTitle = false
+      };
+
       $scope.submitRequest = function () {
         if ($scope.returnInfo.isShip) {
           $scope.returnInfo.returnType = 'reship';
@@ -45,23 +49,18 @@
         var i;
         for (i in $scope.orderInfo.product) {
           if ($scope.orderInfo.product[i].selected) {
-            $scope.returnInfo.product.id = $scope.orderInfo.products[i].product_id;
-            $scope.returnInfo.product.num = $scope.orderInfo.products[i].num;
+            $scope.returnInfo.product.id = $scope.orderInfo.product[i].product_id;
+            $scope.returnInfo.product.num = $scope.orderInfo.product[i].num;
           }
         }
 
-        $scope.returnInfo.products = [
-          {
-            product_id: '542',
-            num: '1'
-          }
-        ];
-
         ReturnApi.addReturnRequest($scope.orderInfo.order_id, $scope.returnInfo.returnType,
-          $scope.returnInfo.title, $scope.returnInfo.content, $scope.returnInfo.products,
+          $scope.returnInfo.title, $scope.returnInfo.content, $scope.returnInfo.product,
           function (result) {
+            toastService.setToast(result.msg);
+
             if (result.status === 0) {
-              $state.go('return_list', {}, {reload: true});
+              $state.go('returns', {}, {reload: true});
             }
           });
       };

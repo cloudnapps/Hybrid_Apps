@@ -207,7 +207,7 @@
       });
     })
 
-    .controller('CommentRequestCtrl', function ($scope, $stateParams, OrderApi) {
+    .controller('CommentRequestCtrl', function ($scope, $stateParams, toastService, OrderApi) {
       // 初始商户四项评分为 5星
       $scope.item_0_level = 5;
       $scope.item_1_level = 5;
@@ -260,14 +260,11 @@
       };
 
       $scope.submitRequest = function () {
-        OrderApi.getMemberRate($scope.commentInfo, function (result) {
-          var alertPopup = $ionicPopup.alert({
-            title: '确认收货',
-            template: result.msg
-          });
-          alertPopup.then(function (res) {
-            console.log(res);
-          });
+        OrderApi.saveMemberRate($scope.commentInfo, function (result) {
+          toastService.setToast(result.msg);
+          if (result.status === 0) {
+            $scope.back();
+          }
         })
       };
     })
