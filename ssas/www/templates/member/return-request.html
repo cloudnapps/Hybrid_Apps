@@ -4,13 +4,13 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="list">
-      <label class="item item-input" ng-click="returnInfo.showReturnType=true">
+      <label class="item item-input" ng-click="returnInfo.showReturnType=true; returnInfo.showReturnTitle=false">
         <input type="text" ng-model="returnInfo.typeDesc" readonly="readonly" placeholder="申请类型">
       </label>
-      <label class="item item-input">
-        <input type="text" ng-model="returnInfo.title" placeholder="申请原因">
+      <label class="item item-input" ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=true">
+        <input type="text" ng-model="returnInfo.title" readonly="readonly" placeholder="申请原因">
       </label>
-      <label class="item item-input">
+      <label class="item item-input" ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=false">
         <input type="text" ng-model="returnInfo.content" placeholder="申请说明">
       </label>
     </div>
@@ -64,8 +64,33 @@
             申请类型：
           </div>
           <select ng-model="returnInfo.type">
-            <option value="reship">退货退款</option>
+            <option value="reship" ng-if="orderInfo.return_type==='reship'">退货退款</option>
             <option value="refund">仅退款</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div ng-show="returnInfo.showReturnTitle">
+      <div class="button-bar">
+        <div class="row">
+          <div class="col col-100" align="right">
+            <button class="button button-clear button-positive" style="font-size:16px;"
+                    ng-click="saveReturnTitle()">
+              完成
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="list">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            申请原因：
+          </div>
+          <select ng-model="returnInfo.title">
+            <option>质量原因</option>
+            <option>物实不符</option>
+            <option>现在不想购买</option>
           </select>
         </label>
       </div>
