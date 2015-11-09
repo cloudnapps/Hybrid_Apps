@@ -15,7 +15,7 @@
       </ion-content>
     </ion-popover-view>
   </script>
-  
+
   <!-- barcode scan -->
   <ion-nav-buttons side="left">
     <a class="button button-icon" style="padding: 0;" ng-click="barcodeScan()">
@@ -45,7 +45,7 @@
   </ion-nav-buttons>
 
   <!-- body -->
-  <ion-content style="background-color: #fff;">    
+  <ion-content style="background-color: #fff;">
     <!--广告轮播图-->
     <div class="row" style="padding: 0px;margin: 0;width: 100%;">
       <div class="col col-center" style="padding: 0px; width: 100%;">
@@ -178,7 +178,7 @@
 
                 <div class="prdt-descb">{{floor.product_info[$index].name}}</div>
                 <div class="row" style="padding: 0;">
-                  <span class="col col-center pri-pri" style="color: #666c70;font-size: 12px;text-align: center;">优惠价：{{floor.product_info[$index].price | currency: '￥'}}</span>
+                  <span class="col col-center pri-pri" style="color: #bd252c;font-size: 12px;text-align: left;">{{floor.product_info[$index].price | currency: '￥'}}</span>
                 </div>
               </a>
             </div>
@@ -191,7 +191,7 @@
 
                 <div class="prdt-descb">{{floor.product_info[$index+1].name}}</div>
                 <div class="row" style="padding: 0;">
-                  <span class="col col-center pri-pri" style="color: #666c70;font-size: 12px;text-align: center;">优惠价：{{floor.product_info[$index+1].price | currency: '￥'}}</span>
+                  <span class="col col-center pri-pri" style="color: #bd252c;font-size: 12px;text-align: left;">{{floor.product_info[$index+1].price | currency: '￥'}}</span>
                 </div>
               </a>
             </div>
@@ -246,12 +246,12 @@
           </div>
         </div>
       </div>
-    </div>    
-  </ion-content>  
+    </div>
+  </ion-content>
 
   <!--发现-线下功能-->
-    
-  <div class="row find-nav-bar has-header" ng-show="showBtns">        
+
+  <div class="row find-nav-bar has-header" ng-show="showBtns">
     <div class="col col-20 col-center find-item" ng-click="showMap()">
       <a>
         <img src="img/home/icon1.png"/>
