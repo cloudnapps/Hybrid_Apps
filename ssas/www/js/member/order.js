@@ -178,12 +178,10 @@
 
               return $q.reject();
             }
-
             return paymentApi.pay(response.data.data)
               .then(function (data) {
                 $ionicPopup.alert({
-                  title: '支付成功',
-                  template: data
+                  title: '支付成功'
                 })
                 .then(function(){
                   $scope.back();
