@@ -76,7 +76,6 @@
     "cordova-plugin-datepicker"
   ],
   "cordovaPlatforms": [
-    "ios",
     {
       "platform": "ios2",
       "version": "",
@@ -88,10 +87,6 @@
       "version": "",
       "locator": "android"
     },
-    {
-      "platform": "ios",
-      "version": "",
-      "locator": "ios"
-    }
+    "ios"
   ]
 }
