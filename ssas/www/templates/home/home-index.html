@@ -53,7 +53,7 @@
       on-refresh="doRefresh()">
     </ion-refresher>
     <!--广告轮播图-->
-    <div class="row" style="padding: 0px;margin: 0 auto;height: 165px;">
+    <div class="row" ng-if="slideimgs.length" style="padding: 0px;margin: 0 auto;height: 165px;">
       <div class="col col-center" style="padding: 0px; height: 165px;;">
         <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox" style="height: 165px;"
                        ng-if="slideimgs.length"
