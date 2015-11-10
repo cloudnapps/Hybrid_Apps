@@ -4,8 +4,7 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="list">
-      <label class="item item-input"
-             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
+      <label class="item item-input" style="background-color: #fff;" ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.name" placeholder="姓名">
       </label>
       <label class="item item-input"
@@ -14,12 +13,10 @@
         <input type="text" ng-model="addrInfo.number" placeholder="身份证号" readonly="readonly"
                style="background-color: #fff;">
       </label>
-      <label class="item item-input"
-             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
+      <label class="item item-input" style="background-color: #fff;" ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.mobile" placeholder="手机号码">
       </label>
-      <label class="item item-input"
-             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
+      <label class="item item-input" style="background-color: #fff;" ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.zipcode" placeholder="邮政编码">
       </label>
       <label class="item item-input"
@@ -28,8 +25,7 @@
         <input type="text" ng-model="addrInfo.area" placeholder="省市区县" readonly="readonly"
                style="background-color: #fff;">
       </label>
-      <label class="item item-input"
-             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
+      <label class="item item-input" style="background-color: #fff;" ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.addr" placeholder="街道等具体地址">
       </label>
       <label class="item item-toggle" style="font-size: 14px;"
@@ -102,8 +98,7 @@
       <div class="button-bar">
         <div class="row">
           <div class="col col-50">
-            <button class="button button-clear button-positive" style="font-size:16px;"
-                    ui-sref="idcard-change">
+            <button class="button button-clear button-positive" style="font-size:16px;padding: 0;" ui-sref="idcard-change">
               添加身份证
             </button>
           </div>
@@ -115,7 +110,7 @@
         </div>
       </div>
       <div class="list">
-        <label class="item item-input item-select">
+        <label class="item item-input item-select" style="padding: 10px;">
           <div class="input-label">
             身份证号：
           </div>
