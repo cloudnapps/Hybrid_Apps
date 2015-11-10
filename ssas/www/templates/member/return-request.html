@@ -1,57 +1,62 @@
-<ion-view view-title="{{'return_title'|translate}}" hide-tabs="true">
+<ion-view class="cart" view-title="{{'return_title'|translate}}" hide-tabs="true">
   <ion-nav-buttons side="left">
     <back-button></back-button>
   </ion-nav-buttons>
   <ion-content>
-    <div class="list">
-      <label class="item item-input">
-        <div class="col col-25 col-center">
-          申请类型：
+    <div class="list" style="margin-bottom: 0;">
+      <div class="row" style="padding: 10px 20px;border-bottom: 1px solid #c8c8c8;">
+        <span style="font-size: 16px;min-width: 5em;display: block;line-height: 34px;color: #4a4a4a;">申请类型：</span>
+        <div class="col" style="padding: 0">
+          <input type="text" ng-model="returnInfo.typeDesc" readonly="readonly" ng-click="returnInfo.showReturnType=true; returnInfo.showReturnTitle=false" style="width: 100%;padding: 0 5px 0 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
         </div>
-        <input type="text" ng-model="returnInfo.typeDesc" readonly="readonly"
-               ng-click="returnInfo.showReturnType=true; returnInfo.showReturnTitle=false">
-      </label>
-      <label class="item item-input">
-        <div class="col col-25 col-center">
-          申请原因：
+        <i class="icon ion-chevron-down icon-accessory" style="min-width: 1em;font-size: 16px;line-height: 34px;color: #4a4a4a;"></i>
+      </div>
+      
+      <div class="row" style="padding: 10px 20px;margin: 0;border-bottom: 1px solid #c8c8c8;">
+        <span style="font-size: 16px;min-width: 5em;display: block;line-height: 34px;color: #4a4a4a;">申请原因：</span>
+        <div class="col" style="padding: 0">
+          <input type="text" ng-model="returnInfo.title" readonly="readonly"
+               ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=true" style="width: 100%;padding: 0 5px 0 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
         </div>
-        <input type="text" ng-model="returnInfo.title" readonly="readonly"
-               ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=true">
-      </label>
-      <label class="item item-input">
-        <div class="col col-25 col-center">
-          申请说明：
+        <i class="icon ion-chevron-down icon-accessory" style="min-width: 1em;font-size: 16px;line-height: 34px;color: #4a4a4a;"></i>
+      </div>
+
+      <div class="row" style="padding: 10px 20px;margin: 0;border-bottom: 1px solid #c8c8c8;">
+        <span style="font-size: 16px;min-width: 5em;display: block;line-height: 34px;color: #4a4a4a;">申请说明：</span>
+        <div class="col" style="padding: 0">
+          <input type="text" ng-model="returnInfo.content" ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=false" style="width: 100%;padding: 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
         </div>
-        <input type="text" ng-model="returnInfo.content"
-               ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=false">
-      </label>
+      </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="padding: 10px;font-size: 16px;color: #4a4a4a;">
       选择相关商品
     </div>
-    <ion-item class="good item" ng-repeat="item in orderInfo.product">
-      <div class="row row-no-padding">
-        <div class="col col-10 col-center">
-          <label class="checkbox">
-            <input type="checkbox" class="selt-prdt" ng-model="item.selected">
-          </label>
-        </div>
-        <div class="col col-20 col-center">
-          <img style="height: 40px;width: 100%" ng-src="{{item.image}}">
-        </div>
+    <ion-item class="good item" style="border-top: none;" ng-repeat="item in orderInfo.product">
+      <div class="item-checkbox">
+        <label class="checkbox">
+          <input type="checkbox" class="selt-prdt" ng-model="item.selected" ng-change="toggleGood(good)">
+        </label>
 
-        <div class="good-info col">
-          <h2 style="color:#444;font-size:14px;">{{item.name}}</h2>
+        <div class="row row-no-padding">
+          <a class="good-thumbnail-test">
+            <img class="vertical-align-middle" ng-src="{{item.image}}">
+          </a>
 
-          <p>{{item.spec}}</p>
+          <div class="good-info col">
+            <h2 style="color:#4a4a4a;font-size:14px;">{{item.name}}</h2>
 
-          <p class="price">{{item.price | currency:'￥'}}</p>
-          <quantity-input ng-model="item.num" ng-change="updateGoodQuantity(item)"></quantity-input>
+            <span class="sub-title" style="line-height: 14px;height: 14px;">{{item.spec}}</span>
+
+            <p class="price">{{item.price|currency:'￥'}}</p>
+
+            <quantity-input ng-model="item.num" ng-change="updateGoodQuantity(item)"></quantity-input>
+          </div>
         </div>
       </div>
     </ion-item>
-    <div class="button-bar">
+
+    <div class="button-bar" style="margin-top:20px;">
       <button class="button button-full button-positive"
               style="font-size:20px;margin-bottom: 0;"
               ng-click="submitRequest()">
