@@ -312,10 +312,6 @@
           $scope.loadMore();
         }
       });
-
-      $scope.requestReturn = function (item) {
-        $state.go('return-request', {orderId: item.order_id}, {reload: true});
-      };
     })
 
     .controller('OrderComplaintCtrl', function ($scope, $state, OrderApi) {

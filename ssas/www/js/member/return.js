@@ -60,7 +60,7 @@
             toastService.setToast(result.msg);
 
             if (result.status === 0) {
-              $state.go('returns', {}, {reload: true});
+              $scope.back(-2);
             }
           });
       };

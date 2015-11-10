@@ -51,8 +51,10 @@
         </div>
         <hr style="margin: 0;height:1px;border:none;border-top:3px solid #f2f2f2;"/>
         <div class="row" style="padding:10px;">
-          <div style="width: 100%;">
-            <button class="button button-positive" style="font-size:14px;border-color:#bd252c;float:right;margin: 0 2px;min-height: 27px;line-height: 30px;" ng-click="requestReturn(item)">申请售后
+          <div style="width: 100%;" ui-sref="return-request({orderId: item.order_id})">
+            <button class="button button-positive"
+                    style="font-size:14px;border-color:#bd252c;float:right;margin: 0 2px;min-height: 27px;line-height: 30px;">
+              申请售后
             </button>
           </div>
         </div>

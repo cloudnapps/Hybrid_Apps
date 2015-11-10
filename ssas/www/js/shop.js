@@ -330,24 +330,24 @@
               $scope.html = result && result.data && result.data.html || '';
             });
         }
-        
+
         $scope.addToCart = function (product) {
-          if(!userService.isLogin()) {
+          if (!userService.isLogin()) {
             $scope.hideModal();
           }
           userService.checkLogin({
-            success: function() {
+            success: function () {
               product.num = $scope.good.quantity;
               cartApi
                 .addToCart(product)
-                .then(function(data){
-                  if(data && data.data && data.data.status === 0) {
+                .then(function (data) {
+                  if (data && data.data && data.data.status === 0) {
                     $scope.hideModal();
                     return toastService.setToast(data.data.msg);
                   }
                   toastService.setToast(data && data.data && data.data.msg || '加入失败');
                 })
-                .catch(function(e){
+                .catch(function (e) {
                   console.log(e);
                   toastService.setToast('加入失败');
                 });
