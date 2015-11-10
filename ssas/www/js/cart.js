@@ -1,6 +1,6 @@
 angular.module('cart', ['components'])
 
-  .controller('CartController', function ($scope, $state, $ionicLoading, cartApi, tabStateService, userService) {
+  .controller('CartController', function ($scope, $state, $stateParams, $ionicLoading, cartApi, tabStateService, userService) {
 
     $scope.$on('$ionicView.beforeEnter', function () {
       userService.checkLogin('tab.cart');
@@ -12,6 +12,15 @@ angular.module('cart', ['components'])
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
+
+          if ($stateParams.productId && $stateParams.nature) {
+            if ($stateParams.nature === 'bond') {
+              directCheckout($scope.cart.natureCart.bond, $stateParams.productId, $stateParams.nature);
+            }
+            else if ($stateParams.nature === 'direct_mail') {
+              directCheckout($scope.cart.natureCart.direct_mail, $stateParams.productId, $stateParams.nature);
+            }
+          }
         }
       })
         .finally(function () {
@@ -106,6 +115,32 @@ angular.module('cart', ['components'])
     $scope.removeGood = function (good) {
       $scope.removeGoods([good]);
     };
+
+    var directCheckout = function (nature, productId, natureKey) {
+      angular.forEach(nature.aSelCart, function (seller) {
+          angular.forEach(seller.goods_list, function (good) {
+            var pId = '' + good.product_id;
+            if (pId === productId) {
+              if (!good.selected) {
+                good.selected = true;
+                $scope.toggleGood(good);
+              }
+
+              if (good.quantity !== 1) {
+                good.quantity = 1;
+                $scope.updateGoodQuantity(good);
+              }
+            }
+            else if (pId !== productId && good.selected) {
+              good.selected = false;
+              $scope.toggleGood(good);
+            }
+          });
+        }
+      );
+
+      $state.go('tab.cart-checkout', {nature: natureKey}, {reload: true});
+    };
   }) // end of CartController
   .controller('CartCheckoutController', function ($rootScope, $scope, toastService, $state, $stateParams, $ionicModal, $ionicLoading, cartApi) {
     $scope.checkout = function () {
@@ -168,7 +203,7 @@ angular.module('cart', ['components'])
     delete $rootScope.confirmedCart;
 
     $scope.pay = function (/*payment*/) {
-      
+
       $ionicLoading.show();
       cartApi.createOrder($scope.cart)
         .then(function (response) {
@@ -210,7 +245,7 @@ angular.module('cart', ['components'])
                     status: 'failed'
                   });
                 });
-              });
+            });
         })
         .finally(function () {
           $ionicLoading.hide();
@@ -233,7 +268,7 @@ angular.module('cart', ['components'])
       }, 10);
     };
 
-    $scope.goHome = function(){
+    $scope.goHome = function () {
       $state.go('tab.cart');
       $timeout(function () {
         $state.go('tab.home');
