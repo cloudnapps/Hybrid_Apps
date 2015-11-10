@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?t6omib');
-	src:url('fonts/icomoon.eot?t6omib#iefix') format('embedded-opentype'),
-		url('fonts/icomoon.ttf?t6omib') format('truetype'),
-		url('fonts/icomoon.woff?t6omib') format('woff'),
-		url('fonts/icomoon.svg?t6omib#icomoon') format('svg');
+	src:url('fonts/icomoon.eot?mn1xi6');
+	src:url('fonts/icomoon.eot?mn1xi6#iefix') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?mn1xi6') format('truetype'),
+		url('fonts/icomoon.woff?mn1xi6') format('woff'),
+		url('fonts/icomoon.svg?mn1xi6#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -39,6 +39,7 @@
 	font-size: 24px;
 	content: "\e903";
 }
+
 
 .tab-item .icon {
 	line-height: 75%;
