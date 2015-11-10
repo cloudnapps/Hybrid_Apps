@@ -24,15 +24,23 @@
 }
 
 .icon-btn-1:before {
+	font-size: 24px;
 	content: "\e900";
 }
 .icon-btn-2:before {
+	font-size: 24px;
 	content: "\e901";
 }
 .icon-btn-3:before {
+	font-size: 24px;
 	content: "\e902";
 }
 .icon-btn-4:before {
+	font-size: 24px;
 	content: "\e903";
+}
+
+.tab-item .icon {
+	line-height: 75%;
 }
 

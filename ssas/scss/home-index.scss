@@ -259,9 +259,12 @@
     display: block;
     width: 100%;
 
-    img {
+    .bg-img {
       width: 100%;
       display: block;
+      margin: 0 auto;
+      max-height: 56px;
+      min-height: 56px;
     }
   }
 }
@@ -298,4 +301,15 @@
   font-size: 22px;
   min-width: 26px;
   line-height: 32px; 
+}
+ion-tabs.tabs-color-active-positive .tab-item {
+  color: #fff;
+  font-weight: 700;
+  background-color: #d0101b;
+  opacity: 1;
+}
+ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
+  color: #fff;
+  font-weight: 700;
+  background-color: #971e23;
 }

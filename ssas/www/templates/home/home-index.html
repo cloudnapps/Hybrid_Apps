@@ -155,7 +155,7 @@
     <div class="row" style="margin: 3px 0 0;padding: 0; flex-wrap:wrap;" ng-if="!!sellerInfo.items.length">
       <div class="col col-25 col-center prdt-logo-one-row" ng-repeat="item in sellerInfo.items" ng-if="$index < 4">
         <a class="logo-item" ui-sref="seller-detail({sellerId:item.seller_id})">
-          <img ng-src="{{item.image}}"/>
+          <img class="bg-img" ng-src="{{item.image}}"/>
         </a>
       </div>
     </div>
@@ -164,7 +164,7 @@
       <div class="col col-25 col-center prdt-logo-one-row" style="border-top: none;"
            ng-repeat="item in sellerInfo.items" ng-if="$index >= 4 && $index<8">
         <a class="logo-item" ui-sref="seller-detail({sellerId:item.seller_id})">
-          <img ng-src="{{item.image}}"/>
+          <img class="bg-img" ng-src="{{item.image}}"/>
         </a>
       </div>
     </div>
