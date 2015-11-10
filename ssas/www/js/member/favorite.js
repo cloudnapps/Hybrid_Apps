@@ -39,7 +39,7 @@
       };
 
       $scope.$on('$ionicView.beforeEnter', function () {
-        if ($stateParams.type) {
+        if ($stateParams.type && $stateParams.type !== $scope.filter) {
           $scope.switchFavorities($stateParams.type);
         }
       });

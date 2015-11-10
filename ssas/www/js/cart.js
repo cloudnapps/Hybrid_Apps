@@ -144,7 +144,7 @@ angular.module('cart', ['components'])
           });
         }
       );
-      
+
       $state.go('tab.cart-checkout', {nature: natureKey}, {reload: true});
     };
   }) // end of CartController

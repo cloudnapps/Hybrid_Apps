@@ -73,8 +73,8 @@
       };
 
       $scope.$on('$ionicView.beforeEnter', function () {
-        if ($scope.type || $stateParams.type) {
-          $scope.switchOrder($scope.type || $stateParams.type);
+        if ($stateParams.type && $scope.type !== $stateParams.type) {
+          $scope.switchOrder($stateParams.type);
         }
       });
 
@@ -183,9 +183,9 @@
                   title: '支付成功',
                   template: '感谢惠顾，我们将竭诚为您服务哦～'
                 })
-                .then(function(){
-                  $scope.back();
-                });
+                  .then(function () {
+                    $scope.back();
+                  });
               }, function (err) {
                 $ionicPopup.alert({
                   title: '支付失败',
