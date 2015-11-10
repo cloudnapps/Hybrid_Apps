@@ -1,6 +1,7 @@
 angular.module('cart', ['components'])
 
-  .controller('CartController', function ($scope, $state, $stateParams, $ionicLoading, cartApi, tabStateService, userService) {
+  .controller('CartController', function ($scope, $state, $stateParams, $ionicHistory,
+                                          $ionicLoading, cartApi, tabStateService, userService) {
 
     $scope.$on('$ionicView.beforeEnter', function () {
       userService.checkLogin('tab.cart');
@@ -14,11 +15,16 @@ angular.module('cart', ['components'])
           $scope.cart = responseData.data;
 
           if ($stateParams.productId && $stateParams.nature) {
-            if ($stateParams.nature === 'bond') {
-              directCheckout($scope.cart.natureCart.bond, $stateParams.productId, $stateParams.nature);
+            if (!$ionicHistory.forwardView()) {
+              if ($stateParams.nature === 'bond') {
+                directCheckout($scope.cart.natureCart.bond, $stateParams.productId, $stateParams.nature);
+              }
+              else if ($stateParams.nature === 'direct_mail') {
+                directCheckout($scope.cart.natureCart.direct_mail, $stateParams.productId, $stateParams.nature);
+              }
             }
-            else if ($stateParams.nature === 'direct_mail') {
-              directCheckout($scope.cart.natureCart.direct_mail, $stateParams.productId, $stateParams.nature);
+            else {
+              $scope.back();
             }
           }
         }
@@ -138,7 +144,7 @@ angular.module('cart', ['components'])
           });
         }
       );
-
+      
       $state.go('tab.cart-checkout', {nature: natureKey}, {reload: true});
     };
   }) // end of CartController
