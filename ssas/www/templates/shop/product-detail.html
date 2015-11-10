@@ -42,12 +42,23 @@
       <div class="declare">
         <p>税费说明:</p>
         <p>①中华人民共和国进境物品完税价格表，本商品适用税率为{{product.tax_rate * 100}}%</p>
-        <p>①根据 海关总署公告2010年第43号 公告规定，个人物品申报，应征进口税税额在人民币50元（含50元）以下的，海关予以免征。</p>
+        <p>②根据 海关总署公告2010年第43号 公告规定，个人物品申报，应征进口税税额在人民币50元（含50元）以下的，海关予以免征。</p>
       </div>
     </div>
     <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
-    <a class="button button-clear button-full button-small icon ion-chevron-right icon-right prdt-std"
-       ng-click="showSpecModal()" style="color: #4c4c4c;">选择规格</a>
+    <!-- <div class="button button-clear button-full button-small icon ion-chevron-right icon-right prdt-std" >
+      <a style="color: #4c4c4c;">选择规格</a>
+    </div> -->
+
+    <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ng-click="showSpecModal()">
+      <div class="col col-80 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
+        <a style="color: #333333;text-decoration: none;">选择规格</a>
+      </div>
+      <div class="col col-20 col-center" style="padding: 0px;height: 40px;text-align: right;">
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+    </div>
+    
     <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
 
     <div class="row" style="color: #4c4c4c;">
