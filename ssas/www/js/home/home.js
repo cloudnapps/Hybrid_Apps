@@ -5,7 +5,6 @@
                                             $state, $ionicPopover, $window, $interval, $ionicScrollDelegate,
                                             HomeApi, SellerApi, $http, shopApi, $ionicLoading) {
       $scope.homeInfo = {};
-
       $scope.sellerInfo = {};
 
       $scope.activityInfo = {};
@@ -41,6 +40,10 @@
       $scope.$on('popover.removed', function () {
         // Execute action
       });
+
+      $scope.doRefresh = function(){
+        $scope.getHomeInfo();
+      };
 
       $scope.changeSearchKind = function (kind) {
         $scope.popover.hide();
@@ -95,7 +98,11 @@
           $scope.$on('$destroy', function () {
             $interval.cancel(promise);
           });
-        });
+        })
+        .finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+         });
       };
 
       $scope.getHomeInfo();

@@ -51,7 +51,7 @@ hr {
 .product-spec.modal {
   bottom: 0;
   top: 20%;
-  min-height: auto;
+  min-height: 0;
 }
 
 .product-spec .spec {

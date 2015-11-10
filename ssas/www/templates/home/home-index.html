@@ -48,6 +48,10 @@
 
   <!-- body -->
   <ion-content style="background-color: #fff;">
+    <ion-refresher
+      pulling-text="下拉刷新"
+      on-refresh="doRefresh()">
+    </ion-refresher>
     <!--广告轮播图-->
     <div class="row" style="padding: 0px;margin: 0 auto;height: 165px;">
       <div class="col col-center" style="padding: 0px; height: 165px;;">
