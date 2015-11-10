@@ -27,7 +27,7 @@
             <div class="col-50">
               <button class="button button-block"
                       style="background:#bd252c;border-radius: 0;color:white; padding: 0;height: 30px;margin-top: 5px;line-height: 30px;border: none"
-                      ng-disabled="reSendCodeTime > 0" ng-click="reSendCodeTime > 0 || sendCode()">
+                      ng-disabled="reSendCodeTime > 0" ng-click="reSendCodeTime > 0 || getSignCode()">
                 {{reSendCodeTime <= 0 ? '发送验证码' : ('重新发送(' + reSendCodeTime + ')')}}
               </button>
             </div>

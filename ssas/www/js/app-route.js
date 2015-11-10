@@ -147,12 +147,12 @@ angular.module('starter')
         })
         // 找回密码
         .state('wxmobile', {
-          url: '/wxmobile',
+          url: '/wxmobile?data',
           cache: false,
           views: {
             'main-view': {
               templateUrl: 'templates/login/user-wxlogin-mobile.html',
-              controller: 'WxMobileCtrl'
+              controller: 'LoginCtrl'
             }
           }
         })

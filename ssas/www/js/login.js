@@ -1,6 +1,7 @@
 (function () {
   angular.module('login', ['starter.services'])
-    .controller('LoginCtrl', function ($rootScope, $scope, $state, $ionicPopup, $ionicHistory, $interval, userService, LoginApi, toastService) {
+    .controller('LoginCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicHistory,
+                                       $interval, userService, LoginApi, toastService, SettingApi) {
       $scope.userInfo = {};
       $scope.userInfo.isWechat = false;
       $scope.userInfo.remembered = true;
@@ -16,7 +17,8 @@
         currentUser.isWechat = $scope.userInfo.isWechat;
 
         userService.set(currentUser);
-        if ($state.current.name === 'register') {
+        if ($state.current.name === 'register'
+          || $state.current.name === 'wxmobile') {
           $scope.back();
         }
         $scope.back();
@@ -37,7 +39,6 @@
       };
       $scope.reSendCodeTime = 0;
       $scope.getSignCode = function () {
-
         if (!$scope.userInfo.mobile) {
           toastService.setToast('手机号码不正确');
           return;
@@ -103,10 +104,8 @@
                   toastService.setToast(result.msg);
                 }
                 else {
-                  //alert(result.data.member_id);
                   if (!result.data.mobile) {
-                    $rootScope.wxUser = result.data;
-                    $state.go('wxmobile');
+                    $state.go('wxmobile', {data: JSON.stringify(result.data)}, {reload: true});
                   }
                   else {
                     $scope.userInfo.isWechat = true;
@@ -119,6 +118,24 @@
           },
           function (cb_failure) {
           });
+      };
+
+      $scope.modifyMobile = function () {
+        if ($stateParams.data) {
+          var wxUser = {};
+          wxUser.data = JSON.parse($stateParams.data);
+          SettingApi.modifyMobileSetting(wxUser.data.member_id, wxUser.data.token,
+            $scope.userInfo.mobile, $scope.userInfo.signCode, function (result) {
+              if (result.status === 0) {
+                $scope.userInfo.isWechat = true;
+                $scope.userInfo.remembered = true;
+                $scope.saveInfo(wxUser);
+              }
+              else {
+                toastService.setToast(result.msg);
+              }
+            });
+        }
       };
 
       $scope.register = function () {
@@ -184,53 +201,6 @@
               $scope.back();
             } else {
               toastService.setToast(data && data.msg || '修改失败');
-            }
-          });
-      }
-    })
-
-    .controller('WxMobileCtrl', function ($rootScope, $scope, $state, $interval, LoginApi, SettingApi, toastService) {
-      $scope.currentUser = $rootScope.wxUser;
-      delete $rootScope.wxUser;
-
-      $scope.userInfo = {};
-      $scope.sendCode = sendCode;
-      $scope.modifyMobile = modifyMobile;
-      $scope.reSendCodeTime = 0;
-
-      var timer = null;
-
-      function sendCode() {
-        if (!$scope.userInfo.mobile) {
-          toastService.setToast('请填写手机号');
-          return;
-        }
-        $scope.reSendCodeTime = 30;
-        timer = $interval(function () {
-          $scope.reSendCodeTime--;
-          if ($scope.reSendCodeTime === 0) {
-            $interval.cancel(timer);
-          }
-        }, 1000);
-        LoginApi
-          .sendCode($scope.userInfo.mobile, 'signup', function (data) {
-            if (result.status === 1 && result.msg === '请填写正确的手机号码') {
-              $scope.reSendCodeTime = 0;
-            }
-            toastService.setToast(data.msg);
-          });
-      }
-
-      function modifyMobile() {
-        SettingApi.modifyMobileSetting($scope.currentUser.member_id, $scope.currentUser.token,
-          $scope.userInfo.mobile, $scope.userInfo.signCode, function (result) {
-            if (result.status === 0) {
-              $scope.userInfo.isWechat = true;
-              $scope.userInfo.remembered = true;
-              $scope.saveInfo($scope.currentUser);
-            }
-            else {
-              toastService.setToast(result.msg);
             }
           });
       }

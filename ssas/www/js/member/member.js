@@ -12,7 +12,7 @@
 
       $scope.selt_set = function () {
         // $scope.select_setting = !$scope.select_setting;
-        if($scope.currentUser.isWechat){
+        if(!$scope.currentUser || $scope.currentUser.isWechat){
           var hideSheet = $ionicActionSheet.show({
             destructiveText: '<i class="icon ion-power assertive"></i> 安全退出',
             destructiveButtonClicked: function(){
