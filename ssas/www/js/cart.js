@@ -238,9 +238,9 @@ angular.module('cart', ['components'])
               }
 
               return paymentApi.pay(response.data.data)
-                .then(function (data) {
+                .then(function () {
                   return $state.go('tab.order-payed');
-                }, function (err) {
+                }, function () {
                   return $state.go('tab.order-payed', {
                     status: 'failed'
                   });
@@ -319,7 +319,7 @@ angular.module('cart', ['components'])
         };
 
         $scope.getProducts();
-      })
+      });
     };
 
     $scope.getHomeInfo();
