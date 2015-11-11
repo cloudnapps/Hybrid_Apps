@@ -101,11 +101,6 @@
         $scope.getProducts();
       };
 
-      if ($stateParams.keywords) {
-        $scope.keywords.value = $stateParams.keywords;
-        $scope.search();
-      }
-
       $scope.clearSearch = function (event) {
         $scope.filter = {
           cat_id: $scope.filter.cat_id
@@ -147,7 +142,6 @@
         clearData();
         $scope.getProducts();
       };
-
 
       $scope.showSpecModal = function showSpecModal() {
         $scope.orderState = 4;
@@ -232,7 +226,13 @@
 
       getGalleryFilter();
 
-      $scope.getProducts();
+      if ($stateParams.keywords) {
+        $scope.keywords.value = $stateParams.keywords;
+        $scope.search();
+      }
+      else {
+        $scope.getProducts();
+      }
     }) // end of ShopController
 
     /*
@@ -324,14 +324,6 @@
             .error(function (e) {
               $ionicLoading.hide();
               console.log(e);
-            });
-        }
-
-        function getProductIntroduction(goodsId) {
-          shopApi
-            .getProductIntro(goodsId)
-            .success(function (result) {
-              $scope.html = result && result.data && result.data.html || '';
             });
         }
 
