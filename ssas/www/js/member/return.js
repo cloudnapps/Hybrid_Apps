@@ -68,7 +68,7 @@
       };
 
       $scope.getReturnList = function () {
-        ReturnApi.getReturnList(null, null, function (result) {
+        ReturnApi.getReturnList($scope.page, $scope.filter, function (result) {
           if (result.status === 1) {
             $scope.hasMore = false;
           }
