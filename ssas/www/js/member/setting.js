@@ -59,7 +59,8 @@
       $scope.showDatePicker = function () {
         var options = {
           date: new Date(),
-          mode: 'date'
+          mode: 'date',
+          locale: 'zh_CN'
         };
 
         function onSuccess(date) {
