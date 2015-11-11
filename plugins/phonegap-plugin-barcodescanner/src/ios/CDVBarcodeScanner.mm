@@ -110,6 +110,16 @@
 // unsafe_unretained is equivalent to assign - used to prevent retain cycles in the property below
 @property (nonatomic, unsafe_unretained) id orientationDelegate;
 
+@property(nonatomic)            CGRect                      bounds;
+@property(nonatomic,strong)     UIView *holeView;
+@property(nonatomic,assign) CGFloat  kRadius;
+@property (nonatomic,strong)CALayer *scanLayer;
+@property (nonatomic,strong)NSTimer *timer;
+@property (nonatomic,strong)    UIToolbar* toolbar;
+@property (nonatomic,strong)  UIView *boxView;
+
+
+
 - (id)initWithProcessor:(CDVbcsProcessor*)processor alternateOverlay:(NSString *)alternateXib;
 - (void)startCapturing;
 - (UIView*)buildOverlayView;
@@ -123,6 +133,7 @@
 // plugin class
 //------------------------------------------------------------------------------
 @implementation CDVBarcodeScanner
+
 
 //--------------------------------------------------------------------------
 - (NSString*)isScanNotPossible {
@@ -824,6 +835,8 @@ parentViewController:(UIViewController*)parentViewController
 //--------------------------------------------------------------------------
 - (void)loadView {
     self.view = [[UIView alloc] initWithFrame: self.processor.parentViewController.view.frame];
+    //阴影背景
+    [self addHoleSubview];
     
     // setup capture preview layer
     AVCaptureVideoPreviewLayer* previewLayer = self.processor.previewLayer;
@@ -848,7 +861,58 @@ parentViewController:(UIViewController*)parentViewController
     // this fixes the bug when the statusbar is landscape, and the preview layer
     // starts up in portrait (not filling the whole view)
     self.processor.previewLayer.frame = self.view.bounds;
+    
+    
+
+    
 }
+//-----------------------------------------------------------半透明背景
+
+
+#define RETICLE_SIZE    500.0f
+#define RETICLE_WIDTH    2.0f
+#define RETICLE_OFFSET   60.0f
+#define RETICLE_ALPHA     0.4f
+
+- (void)addHoleSubview {
+    _holeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - _toolbar.bounds.size.height)];
+    _holeView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.6];
+    _holeView.autoresizingMask = 0;
+    [self.view addSubview:_holeView];
+    [self addMaskToHoleView];
+}
+- (void)addMaskToHoleView {
+    _bounds = _holeView.bounds;
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = _bounds;
+    maskLayer.fillColor = [UIColor whiteColor].CGColor;
+    CGRect  rectArea       = CGRectMake(0, self.view.bounds.size.height - _toolbar.bounds.size.height, self.view.bounds.size.width, _toolbar.bounds.size.height);
+
+    CGFloat rectWidth = rectArea.size.width/(RETICLE_SIZE+2*RETICLE_OFFSET)*RETICLE_SIZE;
+
+    _kRadius = rectWidth / 2;
+    CGRect const circleRect = CGRectMake(CGRectGetMidX(_bounds) - _kRadius,
+                                         CGRectGetMidY(_bounds) - _kRadius,
+                                         2 * _kRadius, 2 * _kRadius);
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:circleRect];
+    [path appendPath:[UIBezierPath bezierPathWithRect:_bounds]];
+    maskLayer.path = path.CGPath;
+    maskLayer.fillRule = kCAFillRuleEvenOdd;
+    
+    _holeView.layer.mask = maskLayer;
+    //设置遮罩层的位置
+
+    _boxView = [[UIView alloc]initWithFrame:circleRect];
+    [self.view addSubview:_boxView];
+    
+    
+
+}
+
+
+
+
+
 
 //--------------------------------------------------------------------------
 - (void)viewDidAppear:(BOOL)animated {
@@ -893,10 +957,7 @@ parentViewController:(UIViewController*)parentViewController
 
 //--------------------------------------------------------------------------
 
-#define RETICLE_SIZE    500.0f
-#define RETICLE_WIDTH    2.0f
-#define RETICLE_OFFSET   60.0f
-#define RETICLE_ALPHA     0.4f
+
 
 //--------------------------------------------------------------------------
 - (UIView*)buildOverlayView {
@@ -913,8 +974,8 @@ parentViewController:(UIViewController*)parentViewController
     overlayView.autoresizingMask    = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     overlayView.opaque              = NO;
 
-    UIToolbar* toolbar = [[UIToolbar alloc] init];
-    toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    _toolbar = [[UIToolbar alloc] init];
+    _toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     
     id cancelButton = [[UIBarButtonItem alloc]
                        initWithTitle:NSLocalizedString(@"取消", nil)
@@ -944,21 +1005,21 @@ parentViewController:(UIViewController*)parentViewController
     
     toolbar.items = [NSArray arrayWithObjects:flexSpace,cancelButton,flexSpace, flipCamera ,shutterButton,nil];
 #else
-    toolbar.items = [NSArray arrayWithObjects:flexSpace,cancelButton,flexSpace, flipCamera,nil];
+    _toolbar.items = [NSArray arrayWithObjects:flexSpace,cancelButton,flexSpace, flipCamera,nil];
 #endif
     bounds = overlayView.bounds;
     
-    [toolbar sizeToFit];
-    CGFloat toolbarHeight  = [toolbar frame].size.height;
+    [_toolbar sizeToFit];
+    CGFloat toolbarHeight  = [_toolbar frame].size.height;
     CGFloat rootViewHeight = CGRectGetHeight(bounds);
     CGFloat rootViewWidth  = CGRectGetWidth(bounds);
     CGRect  rectArea       = CGRectMake(0, rootViewHeight - toolbarHeight, rootViewWidth, toolbarHeight);
-    [toolbar setFrame:rectArea];
+    [_toolbar setFrame:rectArea];
     
-    [overlayView addSubview: toolbar];
+    [overlayView addSubview: _toolbar];
     
-    UIImage* reticleImage = [self buildReticleImage];
-    UIView* reticleView = [[UIImageView alloc] initWithImage: reticleImage];
+//    UIImage* reticleImage = [self buildReticleImage];
+//    UIView* reticleView = [[UIImageView alloc] initWithImage: reticleImage];
     CGFloat minAxis = MIN(rootViewHeight, rootViewWidth);
     
     rectArea = CGRectMake(
@@ -968,37 +1029,48 @@ parentViewController:(UIViewController*)parentViewController
                           minAxis
                           );
     
-    [reticleView setFrame:rectArea];
+//    [reticleView setFrame:rectArea];
+//    
+//    reticleView.opaque           = NO;
+//    reticleView.contentMode      = UIViewContentModeScaleAspectFit;
+//    reticleView.autoresizingMask = 0
+//    | UIViewAutoresizingFlexibleLeftMargin
+//    | UIViewAutoresizingFlexibleRightMargin
+//    | UIViewAutoresizingFlexibleTopMargin
+//    | UIViewAutoresizingFlexibleBottomMargin
+//    ;
     
-    reticleView.opaque           = NO;
-    reticleView.contentMode      = UIViewContentModeScaleAspectFit;
-    reticleView.autoresizingMask = 0
-    | UIViewAutoresizingFlexibleLeftMargin
-    | UIViewAutoresizingFlexibleRightMargin
-    | UIViewAutoresizingFlexibleTopMargin
-    | UIViewAutoresizingFlexibleBottomMargin
-    ;
+//    [overlayView addSubview: reticleView];
     
-    [overlayView addSubview: reticleView];
     
-    CGFloat originX = rectArea.size.width/(RETICLE_SIZE+2*RETICLE_OFFSET)*RETICLE_OFFSET;
-    CGFloat rectWidth = rectArea.size.width/(RETICLE_SIZE+2*RETICLE_OFFSET)*RETICLE_SIZE;
     
-    UIView *movingView = [[UIView alloc] initWithFrame:CGRectMake(originX, (rootViewHeight - rectArea.size.width)/2.0f + originX + 10.0f, rectWidth, 2.0f)];
+//    CGFloat originX = rectArea.size.width/(RETICLE_SIZE+2*RETICLE_OFFSET)*RETICLE_OFFSET;
+//    CGFloat rectWidth = rectArea.size.width/(RETICLE_SIZE+2*RETICLE_OFFSET)*RETICLE_SIZE;
     
-    movingView.backgroundColor = [UIColor greenColor];
+    
+    //(rootViewHeight - rectArea.size.width)/2.0f + originX
+    UIView *movingView = [[UIView alloc] initWithFrame:CGRectMake(0,-_boxView.bounds.size.height,  _boxView.bounds.size.width, _boxView.bounds.size.height)];
+
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:movingView.bounds];
+    imageView.image = [UIImage imageNamed:@"scan_move"];
+    imageView.clipsToBounds = YES;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [movingView addSubview: imageView];
     
     CABasicAnimation *animation = [CABasicAnimation
-                                   animationWithKeyPath:@"position"];
+                                   animationWithKeyPath:@"transform.translation.y"];
     
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(movingView.center.x, rectWidth+movingView.frame.origin.y-20.0f)];
-    animation.duration = 4.0;
+//    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(movingView.center.x, _boxView.center.y)];
+//    animation.keyPath = @"position";
+    animation.byValue = @(movingView.bounds.size.height);
+    
+    animation.duration = 1.0f;
     animation.repeatCount = HUGE_VAL;
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
-    [movingView.layer addAnimation:animation forKey:@"position"];
-    
-    [overlayView addSubview:movingView];
+    [movingView.layer addAnimation:animation forKey:@"moving"];
+    _boxView.clipsToBounds = YES;
+    [_boxView addSubview:movingView];
     
     return overlayView;
 }
@@ -1006,40 +1078,42 @@ parentViewController:(UIViewController*)parentViewController
 //-------------------------------------------------------------------------
 // builds the green box and red line
 //-------------------------------------------------------------------------
-- (UIImage*)buildReticleImage {
-    UIImage* result;
-    UIGraphicsBeginImageContext(CGSizeMake(RETICLE_SIZE, RETICLE_SIZE));
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    if (self.processor.is1D) {
-//        UIColor* color = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:RETICLE_ALPHA];
-//        CGContextSetStrokeColorWithColor(context, color.CGColor);
-//        CGContextSetLineWidth(context, RETICLE_WIDTH);
-//        CGContextBeginPath(context);
-//        CGFloat lineOffset = RETICLE_OFFSET+(0.5*RETICLE_WIDTH);
-//        CGContextMoveToPoint(context, lineOffset, RETICLE_SIZE/2);
-//        CGContextAddLineToPoint(context, RETICLE_SIZE-lineOffset, 0.5*RETICLE_SIZE);
-//        CGContextStrokePath(context);
-    }
-    
-    if (self.processor.is2D) {
-        UIColor* color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:RETICLE_ALPHA];
-        CGContextSetStrokeColorWithColor(context, color.CGColor);
-        CGContextSetLineWidth(context, RETICLE_WIDTH);
-        CGContextStrokeRect(context,
-                            CGRectMake(
-                                       RETICLE_OFFSET,
-                                       RETICLE_OFFSET,
-                                       RETICLE_SIZE-2*RETICLE_OFFSET,
-                                       RETICLE_SIZE-2*RETICLE_OFFSET
-                                       )
-                            );
-    }
-    
-    result = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return result;
-}
+//- (UIImage*)buildReticleImage {
+//    UIImage* result;
+//    UIGraphicsBeginImageContext(CGSizeMake(RETICLE_SIZE, RETICLE_SIZE));
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    
+//    if (self.processor.is1D) {
+////        UIColor* color = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:RETICLE_ALPHA];
+////        CGContextSetStrokeColorWithColor(context, color.CGColor);
+////        CGContextSetLineWidth(context, RETICLE_WIDTH);
+////        CGContextBeginPath(context);
+////        CGFloat lineOffset = RETICLE_OFFSET+(0.5*RETICLE_WIDTH);
+////        CGContextMoveToPoint(context, lineOffset, RETICLE_SIZE/2);
+////        CGContextAddLineToPoint(context, RETICLE_SIZE-lineOffset, 0.5*RETICLE_SIZE);
+////        CGContextStrokePath(context);
+//    }
+//    
+////    if (self.processor.is2D) {
+////        UIColor* color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:RETICLE_ALPHA];
+////        UIColor *color = [UIColor clearColor];
+////        CGContextSetStrokeColorWithColor(context, color.CGColor);
+//////        CGContextSetLineWidth(context, RETICLE_WIDTH);
+////        CGContextStrokeRect(context,
+////                            CGRectMake(
+////                                       RETICLE_OFFSET,
+////                                       RETICLE_OFFSET,
+////                                       RETICLE_SIZE-2*RETICLE_OFFSET,
+////                                       RETICLE_SIZE-2*RETICLE_OFFSET
+////                                       )
+////                            );
+////    }
+////    
+////    result = UIGraphicsGetImageFromCurrentImageContext();
+////    UIGraphicsEndImageContext();
+////    
+//    return result;
+//}
 
 #pragma mark CDVBarcodeScannerOrientationDelegate
 
