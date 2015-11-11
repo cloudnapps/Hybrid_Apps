@@ -64,7 +64,7 @@ angular.module('starter')
       	})
       	// 商品列表
       	.state('products', {
-        	url: '/products?categoryId&keywords',
+        	url: '/products?categoryId&keywords&brand',
         	views: {
           		'main-view': {
             		templateUrl: 'templates/shop/shop-products.html',

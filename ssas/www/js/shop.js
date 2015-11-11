@@ -53,13 +53,14 @@
       //$scope.$on('$ionicView.enter', function(e) {
       //});
 
-
       $scope.products = [];
       $scope.page = 1;
       $scope.categoryId = $stateParams.categoryId;
+      $scope.brandId = $stateParams.brand;
       $scope.keywords = {value: ''};
       $scope.filter = {};
       $scope.filter.cat_id = $scope.categoryId;
+      $scope.filter.brand = $scope.brandId;
       $scope.hasMore = false;
       $scope.isShowGalleryFilter = false;
       $scope.priceSection = {};
@@ -232,10 +233,6 @@
       getGalleryFilter();
 
       $scope.getProducts();
-      // $scope.chats = Chats.all();
-      // $scope.remove = function(chat) {
-      //   Chats.remove(chat);
-      // };
     }) // end of ShopController
 
     /*

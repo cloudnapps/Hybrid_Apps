@@ -25,8 +25,8 @@
 
   <!-- search -->
   <ion-nav-title>
-    <form ng-submit="search()" 
-    style="background:#fff; border-radius: 7px;border: none; line-height:34px; text-align:left; padding: 0 5px 0 5px; margin:5px 0;">     
+    <form ng-submit="search()"
+          style="background:#fff; border-radius: 7px;border: none; line-height:34px; text-align:left; padding: 0 5px 0 5px; margin:5px 0;">
       <div style="float:left; color:#000; font-size: 14px">
         <select style="-webkit-appearance:none;-moz-appearance:none;appearance:none; border:none; background:none">
           <option>商品</option>
@@ -34,10 +34,12 @@
         </select><i class="icon ion-arrow-down-b"></i>&nbsp;
       </div>
       <i class="icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)" style="float:right;"></i>
+
       <div style="margin:0 1.4em 0 2.1em">
-        <input type="search" ng-model="keywords.value" style="display:inline-block;width:100%; padding:0; border:none; backgroud: transparent">
+        <input type="search" ng-model="keywords.value"
+               style="display:inline-block;width:100%; padding:0; border:none; backgroud: transparent">
       </div>
-      
+
     </form>
   </ion-nav-title>
 
@@ -98,6 +100,7 @@
           <div class="new-prdt">
             <a>
               <img ng-src="{{activityInfo.product_info[0].image}}">
+
               <div class="bg-color">
                 <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
                 <span class="pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
@@ -112,6 +115,7 @@
           <div class="new-prdt">
             <a>
               <img ng-src="{{activityInfo.product_info[0].image}}">
+
               <div class="bg-color">
                 <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
 
@@ -127,6 +131,7 @@
           <div class="new-prdt">
             <a>
               <img ng-src="{{activityInfo.product_info[0].image}}">
+
               <div class="bg-color">
                 <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
                 <span class="pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
@@ -193,6 +198,7 @@
             <div class="new-prdt">
               <a ui-sref="product({productId:floor.product_info[$index].product_id})">
                 <img ng-src="{{floor.product_info[$index].image}}">
+
                 <div class="bg-color">
                   <div class="prdt-descb">{{floor.product_info[$index].name}}</div>
                   <span class="pri-pri">{{floor.product_info[$index].price | currency: '￥'}}</span>
@@ -205,6 +211,7 @@
             <div class="new-prdt">
               <a ui-sref="product({productId:floor.product_info[$index+1].product_id})">
                 <img ng-src="{{floor.product_info[$index+1].image}}">
+
                 <div class="bg-color">
                   <div class="prdt-descb">{{floor.product_info[$index+1].name}}</div>
                   <span class="pri-pri">{{floor.product_info[$index+1].price | currency: '￥'}}</span>
@@ -225,8 +232,9 @@
         </div>
       </div>
       <div class="col col-70 col-center nav-title-right">
-        <a ui-sref="tab.categories">更多<span>>></span></a>
-        </span>
+        <a ui-sref="products({categoryId: homeInfo.goods_gallery[0].filter.cat_id, brand: homeInfo.goods_gallery[0].filter.brand})">
+          更多<span>>></span>
+        </a>
       </div>
     </div>
 
@@ -236,9 +244,10 @@
           <div class="new-prdt">
             <a ui-sref="product({productId: goodsInfo[$index].product_id})">
               <img ng-src="{{goodsInfo[$index].image}}">
+
               <div class="bg-color">
-                  <div class="prdt-descb">{{goodsInfo[$index].name}}</div>
-                  <span class="pri-pri">{{goodsInfo[$index].price | currency: '￥'}}</span>
+                <div class="prdt-descb">{{goodsInfo[$index].name}}</div>
+                <span class="pri-pri">{{goodsInfo[$index].price | currency: '￥'}}</span>
               </div>
             </a>
           </div>
@@ -248,9 +257,10 @@
           <div class="new-prdt">
             <a ui-sref="product({productId: goodsInfo[$index+1].product_id})">
               <img ng-src="{{goodsInfo[$index+1].image}}">
+
               <div class="bg-color">
-                  <div class="prdt-descb">{{goodsInfo[$index+1].name}}</div>
-                  <span class="pri-pri">{{goodsInfo[$index+1].price | currency: '￥'}}</span>
+                <div class="prdt-descb">{{goodsInfo[$index+1].name}}</div>
+                <span class="pri-pri">{{goodsInfo[$index+1].price | currency: '￥'}}</span>
               </div>
             </a>
           </div>

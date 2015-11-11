@@ -1,4 +1,5 @@
-<ion-view class="cart" view-title="{{ isFailed ? 'order_payed_failed' : 'order_payed'|translate}}" hide-tabs="true" hide-back-button="true">
+<ion-view class="cart" view-title="{{ isFailed ? 'order_payed_failed' : 'order_payed'|translate}}" hide-tabs="true"
+          hide-back-button="true">
   <ion-nav-buttons side="right">
     <div class="row row-center" style="padding: 0px;margin-right: 10px;">
       <div class="col col-center" style="padding: 0px;">
@@ -48,8 +49,9 @@
         </div>
       </div>
       <div class="col col-70 col-center nav-title-right">
-        <a ui-sref="tab.categories">更多<span>>></span></a>
-        </span>
+        <a ui-sref="products({categoryId: homeInfo.goods_gallery[0].filter.cat_id, brand: homeInfo.goods_gallery[0].filter.brand})">
+          更多<span>>></span>
+        </a>
       </div>
     </div>
 

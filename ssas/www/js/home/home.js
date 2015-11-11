@@ -79,7 +79,7 @@
             var query = {
               page: $scope.page,
               filter: {
-                brand_id: $scope.homeInfo.goods_gallery[0].filter.brand,
+                brand: $scope.homeInfo.goods_gallery[0].filter.brand,
                 cat_id: $scope.homeInfo.goods_gallery[0].filter.cat_id
               }
             };

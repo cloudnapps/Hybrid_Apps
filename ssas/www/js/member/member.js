@@ -1,31 +1,31 @@
 (function () {
   angular.module('member', ['starter.services', 'login'])
     .controller('MemberCtrl',
-      function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService, $ionicActionSheet, orderStateService) {
+    function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService, $ionicActionSheet, orderStateService) {
       $scope.currentUser = {};
 
 
-      $scope.goOrders = function(type){
+      $scope.goOrders = function (type) {
         orderStateService.set(type);
         $state.go('orders');
       };
 
       // 勿删,控制设置隐藏 displayBlur selt_set
       $scope.select_setting = false;
-      $scope.displayBlur = function(event) {
+      $scope.displayBlur = function (event) {
         $scope.select_setting = false;
       };
 
       $scope.selt_set = function () {
         // $scope.select_setting = !$scope.select_setting;
-        if(!$scope.currentUser || $scope.currentUser.isWechat){
+        if (!$scope.currentUser || $scope.currentUser.isWechat) {
           var hideSheet = $ionicActionSheet.show({
             destructiveText: '<i class="icon ion-power assertive"></i> 安全退出',
-            destructiveButtonClicked: function(){
+            destructiveButtonClicked: function () {
               $scope.logOut();
             },
             cancelText: '取消',
-            cancel: function() {
+            cancel: function () {
               // add cancel code..
             }
           });
