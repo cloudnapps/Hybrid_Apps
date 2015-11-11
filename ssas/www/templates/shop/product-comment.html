@@ -2,6 +2,9 @@
   <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
   <ion-content>
     <ion-list>
+      <ion-item class="comment" ng-if="!comments.length">
+        <h2 style="text-align: center;color: #4a4a4a;">对不起, 本商品暂无评论 !</h2>
+      </ion-item>
       <ion-item class="comment" ng-repeat="comment in comments" type="item-text-wrap">
         <h2 style="color: #4a4a4a;">{{comment.name}}</h2>
         <p style="color: #4a4a4a;">{{comment.content}}</p>

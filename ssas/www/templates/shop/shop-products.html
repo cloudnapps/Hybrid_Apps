@@ -1,32 +1,20 @@
 <div class="bar bar-subheader">
   <div class="row" style="padding: 0 0px;height: 40px;line-height: 40px;">
     <div class="col col-25"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
-         ng-click="changeOrder()"
-         ng-class="{'selt':orderState === 1}">
-      <a class="">综合</a>
+         style="padding: 0px;text-align: center;height: 40px;font-size: 16px;" ng-click="changeOrder()" ng-class="{'selt':orderState === 1}">
+      <a>综合</a>
     </div>
     <div class="col col-25"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
-         ng-class="{'ion-arrow-up-c': orderBy === 'buy_count asc',
-                      'ion-arrow-down-c': orderBy === 'buy_count desc',
-                      'selt':orderState === 2}"
-         ng-click="changeOrder('buy_count')">
-      <a class="">销量</a>
+         style="padding: 0px;text-align: center;height: 40px;font-size: 16px;" ng-class="{'ion-arrow-up-c': orderBy === 'buy_count asc', 'ion-arrow-down-c': orderBy === 'buy_count desc', 'selt':orderState === 2}" ng-click="changeOrder('buy_count')">
+      <a>销量</a>
     </div>
     <div class="col col-25"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
-         ng-class="{'ion-arrow-up-c': orderBy === 'price asc',
-                      'ion-arrow-down-c': orderBy === 'price desc',
-                      'selt':orderState === 3}"
-         ng-click="changeOrder('price')">
-      <a class="">价格</a>
+         style="padding: 0px;text-align: center;height: 40px;font-size: 16px;" ng-class="{'ion-arrow-up-c': orderBy === 'price asc', 'ion-arrow-down-c': orderBy === 'price desc', 'selt':orderState === 3}" ng-click="changeOrder('price')">
+      <a>价格</a>
     </div>
     <div class="col col-25"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
-         ng-click="showSpecModal()"
-         ng-class="{'selt':orderState === 4}">
-      <a class="">筛选</a>
+         style="padding: 0px;text-align: center;height: 40px;font-size: 16px;" ng-click="showSpecModal()" ng-class="{'selt':orderState === 4}">
+      <a>筛选</a>
     </div>
   </div>
 </div>
