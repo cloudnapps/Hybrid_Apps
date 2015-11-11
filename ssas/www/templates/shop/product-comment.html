@@ -3,10 +3,10 @@
   <ion-content>
     <ion-list>
       <ion-item class="comment" ng-repeat="comment in comments" type="item-text-wrap">
-        <h2>{{comment.name}}</h2>
-        <p>{{comment.content}}</p>
-        <div ng-repeat="reply in comment.reply" class="padding" style="background-color: #ccc;">
-          <p>{{reply.op_name}}:{{reply.content}}</p>
+        <h2 style="color: #4a4a4a;">{{comment.name}}</h2>
+        <p style="color: #4a4a4a;">{{comment.content}}</p>
+        <div ng-repeat="reply in comment.reply" class="padding" style="background-color: #c8c8c8;">
+          <p style="color: #4a4a4a;">{{reply.op_name}}: {{reply.content}}</p>
         </div>
       </ion-item>
     </ion-list>
