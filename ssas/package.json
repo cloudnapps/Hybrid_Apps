@@ -73,7 +73,7 @@
       "locator": "../plugins/phonegap-plugin-barcodescanner",
       "id": "phonegap-plugin-barcodescanner"
     }
-  ],
+  ], 
   "cordovaPlatforms": [
     "android",
     {
