@@ -2,22 +2,19 @@
   <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-right" type="item-text-wrap"
-                style="border-bottom: none;padding: 20px 10px 15px 20px;">
+      <ion-item class="item-remove-animate item-icon-right" type="item-text-wrap" style="border-bottom: none;padding: 20px 10px 15px 20px;">
         <div class="row" style="padding: 0;">
-          <div class="col col-90">
-            <p style="margin-bottom: 13px;color: #111;">
+          <div class="col col-center">
+            <p style="margin-bottom: 10px;color: #4a4a4a;">
               收件人：{{orderInfo.consignee.name}}
-              <span style="float: right;" ng-if="item.mobile">电话：{{orderInfo.consignee.mobile}}</span>
+              <span style="float: right;" ng-if="orderInfo.consignee.mobile">电话：{{orderInfo.consignee.mobile}}</span>
             </p>
-
             <div class="row" style="padding: 0;">
-              <div class="col col-20" style="padding: 0;">
-                <span style="font-size: 14px;color: #111;">收件地址：</span>
+              <div>
+                <span style="max-width: 5em;font-size: 14px;color: #4a4b4d;">收件地址：</span>
               </div>
-              <div class="col col-80"
-                   style="padding: 0 0 0 7px;word-break: break-all;max-width: 16em;white-space: normal;">
-                <span style="font-size: 14px;color: #111;">{{orderInfo.consignee.addr}}</span>
+              <div class="col col-center" style="word-break: break-all;max-width: 18em;white-space: normal;padding: 0;">
+                <span style="font-size: 14px;color: #4a4b4d;">{{orderInfo.consignee.addr}}</span>
               </div>
             </div>
           </div>
@@ -25,7 +22,7 @@
       </ion-item>
     </ion-list>
 
-    <hr style="margin: 0;height:10px;border:none;border-top:10px solid #f1f1f1;"/>
+    <hr style="margin: 0;height:10px;border:none;border-top:10px solid #f4f4f4;"/>
 
     <div class="user-order-track">
       <ul class="user-track-ul">
