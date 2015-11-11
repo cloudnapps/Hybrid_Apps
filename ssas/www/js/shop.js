@@ -270,9 +270,11 @@
 
             console.log('getProduct', responseData);
           }
+
+          $scope.hasMore = true;
         });
 
-        $scope.hasMore = true;
+        $scope.hasMore = false;
         $scope.getIntrocution = function (goodsId) {
           $scope.hasMore = false;
           shopApi
@@ -286,7 +288,12 @@
         };
 
         $scope.loadMore = function () {
-          $scope.getIntrocution($scope.product.goods_id);
+          if ($scope.product && $scope.product.goods_id) {
+            $scope.getIntrocution($scope.product.goods_id);
+          }
+          else {
+            $scope.hasMore = false;
+          }
         };
 
         function showSpecModal() {
