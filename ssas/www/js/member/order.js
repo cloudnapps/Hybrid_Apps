@@ -1,6 +1,7 @@
 (function () {
   angular.module('order', ['starter.services'])
-    .controller('OrdersAllCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicLoading, OrderApi) {
+    .controller('OrdersAllCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicLoading, OrderApi, orderStateService) {
+
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;
@@ -67,15 +68,13 @@
           $scope.orderState = 1;
           $scope.filter = {};
         }
-        $scope.type = type;
-
+        
+        orderStateService.set(type);
         $scope.getOrders();
       };
 
       $scope.$on('$ionicView.beforeEnter', function () {
-        if ($stateParams.type && $scope.type !== $stateParams.type) {
-          $scope.switchOrder($stateParams.type);
-        }
+        $scope.switchOrder(orderStateService.get());
       });
 
       $scope.loadMore = function () {

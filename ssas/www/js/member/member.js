@@ -1,8 +1,14 @@
 (function () {
   angular.module('member', ['starter.services', 'login'])
     .controller('MemberCtrl',
-      function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService, $ionicActionSheet) {
+      function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService, $ionicActionSheet, orderStateService) {
       $scope.currentUser = {};
+
+
+      $scope.goOrders = function(type){
+        orderStateService.set(type);
+        $state.go('orders');
+      };
 
       // 勿删,控制设置隐藏 displayBlur selt_set
       $scope.select_setting = false;

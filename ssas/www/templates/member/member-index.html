@@ -35,7 +35,7 @@
     <div class="row" style="padding: 0;height: 40px;line-height: 40px;">
       <div class="col col-20"
            style="padding: 0;text-align: center;height: 40px;font-size: 14px;"
-           ui-sref="orders({type: 'nopay'})">
+           ng-click="goOrders('nopay')">
         <a class="" style="color: #333333;text-decoration: none;">待付款</a>
       </div>
       <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
@@ -43,7 +43,7 @@
       </div>
       <div class="col col-20"
            style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
-           ui-sref="orders({type: 'noship'})">
+           ng-click="goOrders('noship')">
         <a class="" style="color: #333333;text-decoration: none;">待发货</a>
       </div>
       <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
@@ -51,7 +51,7 @@
       </div>
       <div class="col col-20"
            style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
-           ui-sref="orders({type: 'shipped'})">
+           ng-click="goOrders('shipped')">
         <a class="" style="color: #333333;text-decoration: none;">待收货</a>
       </div>
       <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
@@ -59,7 +59,7 @@
       </div>
       <div class="col col-20"
            style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
-           ui-sref="orders({type: 'commenting'})">
+           ng-click="goOrders('commenting')">
         <a class="" style="color: #333333;text-decoration: none;">待评论</a>
       </div>
       <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
@@ -76,7 +76,7 @@
 
     <div class="row"
          style="padding: 0 10px;height: 40px;line-height: 40px;"
-         ui-sref="orders({type: 'all'})">
+         ng-click="goOrders('all')">
       <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
         <a style="color: #333333;text-decoration: none;">全部订单</a>
       </div>
