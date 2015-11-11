@@ -25,11 +25,11 @@
       };
 
       $scope.saveReturnType = function () {
-        if ($scope.returnInfo.type === 'reship') {
-          $scope.returnInfo.typeDesc = '退货退款';
+        if ($scope.returnInfo.typeDesc === '退货退款') {
+          $scope.returnInfo.type = 'reship';
         }
-        else if ($scope.returnInfo.type === 'refund') {
-          $scope.returnInfo.typeDesc = '仅退款';
+        else if ($scope.returnInfo.typeDesc === '仅退款') {
+          $scope.returnInfo.type = 'refund';
         }
         $scope.returnInfo.showReturnType = false
       };
@@ -39,13 +39,6 @@
       };
 
       $scope.submitRequest = function () {
-        if ($scope.returnInfo.isShip) {
-          $scope.returnInfo.returnType = 'reship';
-        }
-        else {
-          $scope.returnInfo.returnType = 'refund';
-        }
-
         var i;
         for (i in $scope.orderInfo.product) {
           if ($scope.orderInfo.product[i].selected) {
@@ -54,7 +47,7 @@
           }
         }
 
-        ReturnApi.addReturnRequest($scope.orderInfo.order_id, $scope.returnInfo.returnType,
+        ReturnApi.addReturnRequest($scope.orderInfo.order_id, $scope.returnInfo.type,
           $scope.returnInfo.title, $scope.returnInfo.content, $scope.returnInfo.product,
           function (result) {
             toastService.setToast(result.msg);
@@ -67,11 +60,36 @@
     })
 
     .controller('ReturnListCtrl', function ($scope, $state, ReturnApi) {
-      $scope.items = [];
+      $scope.init = function () {
+        $scope.items = [];
+        $scope.page = 1;
+        $scope.hasMore = false;
+        $scope.filter = '';
+      };
 
-      ReturnApi.getReturnList(null, null, function (result) {
-        $scope.items = result.data;
+      $scope.getReturnList = function () {
+        ReturnApi.getReturnList(null, null, function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.hasMore = true;
+            $scope.items = $scope.items.concat(result.data);
+          }
+
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
+      };
+
+      $scope.$on('$ionicView.beforeEnter', function () {
+        $scope.init();
+        $scope.getReturnList();
       });
+
+      $scope.loadMore = function () {
+        $scope.page++;
+        $scope.getReturnList();
+      };
     })
 
     .controller('ReturnDetailCtrl', function ($scope, $stateParams, ReturnApi) {

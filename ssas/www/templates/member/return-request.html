@@ -6,25 +6,35 @@
     <div class="list" style="margin-bottom: 0;">
       <div class="row" style="padding: 10px 20px;border-bottom: 1px solid #c8c8c8;">
         <span style="font-size: 16px;min-width: 5em;display: block;line-height: 34px;color: #4a4a4a;">申请类型：</span>
+
         <div class="col" style="padding: 0">
-          <input type="text" ng-model="returnInfo.typeDesc" readonly="readonly" ng-click="returnInfo.showReturnType=true; returnInfo.showReturnTitle=false" style="width: 100%;padding: 0 5px 0 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
+          <input type="text" ng-model="returnInfo.typeDesc" readonly="readonly"
+                 ng-click="returnInfo.showReturnType=true; returnInfo.showReturnTitle=false"
+                 style="width: 100%;padding: 0 5px 0 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
         </div>
-        <i class="icon ion-chevron-down icon-accessory" style="min-width: 1em;font-size: 16px;line-height: 34px;color: #4a4a4a;"></i>
+        <i class="icon ion-chevron-down icon-accessory"
+           style="min-width: 1em;font-size: 16px;line-height: 34px;color: #4a4a4a;"></i>
       </div>
-      
+
       <div class="row" style="padding: 10px 20px;margin: 0;border-bottom: 1px solid #c8c8c8;">
         <span style="font-size: 16px;min-width: 5em;display: block;line-height: 34px;color: #4a4a4a;">申请原因：</span>
+
         <div class="col" style="padding: 0">
           <input type="text" ng-model="returnInfo.title" readonly="readonly"
-               ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=true" style="width: 100%;padding: 0 5px 0 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
+                 ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=true"
+                 style="width: 100%;padding: 0 5px 0 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
         </div>
-        <i class="icon ion-chevron-down icon-accessory" style="min-width: 1em;font-size: 16px;line-height: 34px;color: #4a4a4a;"></i>
+        <i class="icon ion-chevron-down icon-accessory"
+           style="min-width: 1em;font-size: 16px;line-height: 34px;color: #4a4a4a;"></i>
       </div>
 
       <div class="row" style="padding: 10px 20px;margin: 0;border-bottom: 1px solid #c8c8c8;">
         <span style="font-size: 16px;min-width: 5em;display: block;line-height: 34px;color: #4a4a4a;">申请说明：</span>
+
         <div class="col" style="padding: 0">
-          <input type="text" ng-model="returnInfo.content" ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=false" style="width: 100%;padding: 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
+          <input type="text" ng-model="returnInfo.content"
+                 ng-click="returnInfo.showReturnType=false; returnInfo.showReturnTitle=false"
+                 style="width: 100%;padding: 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
         </div>
       </div>
     </div>
@@ -80,9 +90,9 @@
           <div class="input-label">
             申请类型：
           </div>
-          <select ng-model="returnInfo.type">
-            <option value="reship" ng-if="orderInfo.return_type==='reship'">退货退款</option>
-            <option value="refund">仅退款</option>
+          <select ng-model="returnInfo.typeDesc">
+            <option ng-if="orderInfo.return_type==='reship'">退货退款</option>
+            <option>仅退款</option>
           </select>
         </label>
       </div>
