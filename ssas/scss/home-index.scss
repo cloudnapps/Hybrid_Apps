@@ -302,6 +302,10 @@
   min-width: 26px;
   line-height: 32px; 
 }
+.tabs {
+  padding: 0;
+}
+
 ion-tabs.tabs-color-active-positive .tab-item {
   color: #fff;
   font-weight: 700;
