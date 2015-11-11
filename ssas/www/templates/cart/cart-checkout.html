@@ -6,7 +6,7 @@
     <ion-list>
       <a class="item item-icon-right" address-select="cart.addrlist" ng-model="cart.def_addr" ng-change="checkout()"
          style="padding-right: 40px;">
-        <div class="row" style="padding: 0;font-size: 14px;color: #444;">
+        <div class="row" style="padding: 0;font-size: 14px;color: #4a4a4a;">
           <div class="col" style="padding: 0;">收件人： {{cart.def_addr.name}}</div>
           <div class="col" style="padding: 0;text-align: right;">电话：{{cart.def_addr.mobile}}</div>
         </div>
@@ -16,7 +16,7 @@
             <span style="min-width: 5em;font-size: 14px;color: #4a4b4d;">收件地址：</span>
           </div>
           <div class="col col-center" style="padding: 0;margin-top: 2px;">
-            <span style="font-size: 14px;color: #444;display: -webkit-box !important;overflow: hidden;white-space: normal;text-overflow: ellipsis;word-break: break-all;-webkit-box-orient: vertical;-webkit-line-clamp: 2;">{{cart.def_addr.area}} {{cart.def_addr.addr}}</span>
+            <span style="font-size: 14px;color: #4a4a4a;display: -webkit-box !important;overflow: hidden;white-space: normal;text-overflow: ellipsis;word-break: break-all;-webkit-box-orient: vertical;-webkit-line-clamp: 2;">{{cart.def_addr.area}} {{cart.def_addr.addr}}</span>
           </div>
         </div>
 
@@ -30,7 +30,7 @@
           <div class="row" style="padding: 10px;">
             <div class="col col-70 col-cener" style="padding: 0;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{seller.seller_info.seller_name}}</div>
             <div class="col col-30 col-center" style="padding: 0;text-align: right;color: #bd252c;" shipping-select="seller.shipping_list"
-            ng-model="seller.def_shipping" ng-change="checkout()">{{seller.def_shipping.name}} <i style="color: #444;" class="icon ion-chevron-right"></i>
+            ng-model="seller.def_shipping" ng-change="checkout()">{{seller.def_shipping.name}} <i style="color: #4a4a4a;" class="icon ion-chevron-right"></i>
             </div>
           </div>
         </ion-item>
@@ -38,9 +38,9 @@
                   ng-repeat="good in seller.goods_list">
           <img style="top: 15px;" ng-src="{{good.thumbnail}}">
 
-          <h2 style="color: #444;font-weight: 300;">{{good.name}}</h2>
+          <h2 style="color: #4a4a4a;font-weight: 300;">{{good.name}}</h2>
 
-          <h3 style="color: #444;font-weight: 300; min-height: 16px;">{{good.spec}}</h3>
+          <h3 style="color: #4a4a4a;font-weight: 300; min-height: 16px;">{{good.spec}}</h3>
 
           <div class="row" style="padding: 0;padding: 0; margin-top: 8px;">
             <div class="col col-60" style="padding: 0;color: #bd252c;">{{good.buy_price|currency:'￥'}}</div>
@@ -64,14 +64,14 @@
           </div>
         </ion-item>
         <ion-item class="item" style="padding: 10px 0;border-bottom: 0;">
-          <div class="row" style="padding: 0 10px 10px;font-size: 14px;">
-            <div class="col col-50 col-center" style="padding: 0;">优惠券：</div>
+          <div class="row">
+            <div class="col col-center" style="font-size: 14px;">优惠券：</div>
           </div>
           <div class="row row-no-padding" style="margin: 0;" ng-repeat="coupon in seller.coupon_lists">
             <div class="col col-80 col-center" style="padding-left: 15px">
-              <h2 style="color: #444;font-weight: 300;">{{coupon.cpns_name}}</h2>
+              <h3 style="color: #4a4a4a;font-weight: 300;">{{coupon.cpns_name}}</h3>
             </div>
-            <div class="col col-20 col-center">
+            <div class="col col-20 col-center" style="text-align: center;">
               <label class="checkbox">
                 <input type="checkbox" class="selt-prdt" ng-model="coupon.selected"
                        ng-change="changeCoupon(coupon)">
