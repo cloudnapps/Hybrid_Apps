@@ -3,7 +3,7 @@
     <back-button></back-button>
   </ion-nav-buttons>
   <ion-nav-buttons side="right">
-    <a class="button icon-left ion-android-cart button-clear" ng-click="userService.checkLogin('tab.cart')"></a>
+    <a class="button icon-left icon-btn-2 button-clear" ng-click="userService.checkLogin('tab.cart')"></a>
     </div>
   </ion-nav-buttons>
   <ion-content>
@@ -58,7 +58,7 @@
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
-    
+
     <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
 
     <div class="row" style="color: #4c4c4c;">
@@ -72,7 +72,7 @@
     <div class="row" ui-sref="comments({id:product.goods_id})">
       <div class="col col-90 col-center">
         <p style="margin-bottom: 1px;color: #9b9b9b;font-size: 10px;">{{comment.name || '暂无评论'}}</p>
-        <p style="margin: 0;color: #9b9b9b;font-size: 10px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" ng-show="comment.name">{{comment.content}}</p>   
+        <p style="margin: 0;color: #9b9b9b;font-size: 10px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" ng-show="comment.name">{{comment.content}}</p>
       </div>
       <div class="col col-10 col-center" style="text-align: right;">
         <i class="icon ion-chevron-right icon-right"></i>
