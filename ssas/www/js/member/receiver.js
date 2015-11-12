@@ -15,8 +15,10 @@
         });
       };
 
-      $scope.init();
-      $scope.getReceivers();
+      $scope.$on('$ionicView.beforeEnter', function () {
+        $scope.init();
+        $scope.getReceivers();
+      });
 
       $scope.edit = function (item) {
         $state.go('receiver-change', {addrInfo: JSON.stringify(item)}, {reload: true});
