@@ -1,17 +1,19 @@
 (function () {
   angular.module('receiver', ['starter.services', 'region'])
 
-    .controller('ReceiversCtrl', function ($scope, $state, $ionicPopup, ReceiverApi) {
+    .controller('ReceiversCtrl', function ($scope, $state, $ionicPopup, $ionicLoading, ReceiverApi) {
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;
       };
 
       $scope.getReceivers = function () {
+        $ionicLoading.show();
         ReceiverApi.getReceiverList($scope.page, function (result) {
           if (result.data && result.data.addrlist) {
             $scope.items = $scope.items.concat(result.data.addrlist);
           }
+          $ionicLoading.hide();
         });
       };
 
