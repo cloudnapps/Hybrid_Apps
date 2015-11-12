@@ -1,6 +1,7 @@
 (function () {
   angular.module('order', ['starter.services'])
-    .controller('OrdersAllCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicLoading, OrderApi, orderStateService) {
+    .controller('OrdersAllCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicLoading,
+                                           toastService, OrderApi, orderStateService) {
 
       $scope.init = function () {
         $scope.items = [];
@@ -68,7 +69,7 @@
           $scope.orderState = 1;
           $scope.filter = {};
         }
-        
+
         orderStateService.set(type);
         $scope.getOrders();
       };
@@ -94,13 +95,11 @@
               onTap: function () {
                 OrderApi.deleteOrder(item.order_id, function (result) {
                   if (result.status === 1) {
-                    var alertPopup = $ionicPopup.alert({
-                      title: '取消订单',
-                      template: result.msg
-                    });
-                    alertPopup.then(function (res) {
-                      console.log(res);
-                    });
+                    toastService.setToast(result.msg);
+                  }
+                  else {
+                    toastService.setToast(result.msg);
+                    $state.go('.', {}, {reload: true});
                   }
                 });
               }
