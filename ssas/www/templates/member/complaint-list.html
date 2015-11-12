@@ -1,5 +1,7 @@
 <ion-view view-title="投诉列表" hide-tabs="true">
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
   <ion-content>
     <div style="height: 44px">
     </div>
@@ -14,9 +16,13 @@
         </a>
       </ion-item>
     </ion-list>
-    <div class="button-bar" ng-click="request()">
-      <a class="button button-full button-light"
-         style="font-size:20px;background-color: #568baa;color: #fff;margin-bottom: 0;border: none;" href="">{{'complaint_newbtn'|translate}}</a>
-    </div>
   </ion-content>
+  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
+    <div class="button-bar">
+      <button class="button button-positive" style="font-size: 18px;"
+              ng-click="request()">
+        {{'complaint_newbtn'|translate}}
+      </button>
+    </div>
+  </ion-footer-bar>
 </ion-view>

@@ -1,5 +1,7 @@
 <ion-view view-title="{{'register_title'|translate}}">
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
   <ion-content>
     <div class="list">
       <!-- 手机号 -->
@@ -11,7 +13,10 @@
       <div class="item item-input" style="padding: 0 0 0 16px;position: relative;">
         <span class="input-label" style="max-width: 4em;color: #333;padding: 13px 10px 12px 0;">验证码：</span>
         <input type="number" ng-model="userInfo.signCode" style="padding-right: 112px;">
-        <button style="font-size:14px;position: absolute;right: 0;width: 100px;height: 45px;background-color: #bd252c;border: 1px solid #bd252c;color: #fff;font-weight: 500;" ng-click="getSignCode()">{{reSendCodeTime <= 0 ? '获取验证码' : ('重新发送(' + reSendCodeTime + ')')}}</button>
+        <button
+          style="font-size:14px;position: absolute;right: 0;width: 100px;height: 45px;background-color: #bd252c;border: 1px solid #bd252c;color: #fff;font-weight: 500;"
+          ng-click="getSignCode()">{{reSendCodeTime <= 0 ? '获取验证码' : ('重新发送(' + reSendCodeTime + ')')}}
+        </button>
       </div>
       <!-- 密码 -->
       <label class="item item-input">
@@ -27,18 +32,25 @@
       <div class="item item-input">
         <label class="toggle">
           <input type="checkbox" ng-model="userInfo.license">
+
           <div class="track">
             <div class="handle"></div>
           </div>
         </label>
+
         <div style="position: relative;color: #333;margin-left: 5px;font-size: 14px;">
           同意<a ui-sref="usercopyright" style="text-decoration: none;margin-left: 2px;color: #bd252c;">用户注册协议</a>
         </div>
       </div>
     </div>
-
-    <div class="button-bar">
-      <a class="button button-full button-positive" style="font-size:18px;" ng-click="clicked || submitUser()" ng-disabled="!userInfo.license || clicked">确定</a>
-    </div>
   </ion-content>
+  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
+    <div class="button-bar">
+      <button class="button button-positive" style="font-size: 18px;"
+              ng-click="clicked || submitUser()"
+              ng-disabled="!userInfo.license || clicked">
+        确定
+      </button>
+    </div>
+  </ion-footer-bar>
 </ion-view>

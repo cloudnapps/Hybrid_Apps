@@ -167,7 +167,7 @@
         }, 1000);
         LoginApi
           .sendCode($scope.userInfo.mobile, 'lost', function (data) {
-            if (result.status === 1 && result.msg === '请填写正确的手机号码') {
+            if (data.status === 1 && data.msg === '请填写正确的手机号码') {
               $scope.reSendCodeTime = 0;
             }
             toastService.setToast(data.msg);

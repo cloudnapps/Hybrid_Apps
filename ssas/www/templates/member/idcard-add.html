@@ -1,5 +1,7 @@
 <ion-view view-title="{{title}}" hide-tabs="true">
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
   <ion-content>
     <div class="list">
       <label class="item item-input">
@@ -18,12 +20,17 @@
           </div>
         </label>
       </label>
-      <p style="padding: 10px 5px;text-align: center;font-size: 12px;margin: 0;color: #4a4a4a;">身份证填写后将无法进行更改或删除, 请确认信息的正确</p>
+
+      <p style="padding: 10px 5px;text-align: center;font-size: 12px;margin: 0;color: #4a4a4a;">身份证填写后将无法进行更改或删除,
+        请确认信息的正确</p>
     </div>
+  </ion-content>
+  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
     <div class="button-bar">
-      <button class="button button-full button-positive" style="font-size:20px;margin-bottom: 0;" ng-click="add()">
+      <button class="button button-positive" style="font-size: 18px;"
+              ng-click="add()">
         确定
       </button>
     </div>
-  </ion-content>
+  </ion-footer-bar>
 </ion-view>
