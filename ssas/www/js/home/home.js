@@ -41,7 +41,7 @@
         // Execute action
       });
 
-      $scope.doRefresh = function(){
+      $scope.doRefresh = function () {
         $scope.getHomeInfo();
       };
 
@@ -99,10 +99,10 @@
             $interval.cancel(promise);
           });
         })
-        .finally(function() {
-           // Stop the ion-refresher from spinning
-           $scope.$broadcast('scroll.refreshComplete');
-         });
+          .finally(function () {
+            // Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
+          });
       };
 
       $scope.getHomeInfo();
@@ -232,7 +232,7 @@
       });
     }) // end of ActivityController
 
-    .controller('SigninController', function ($scope, $ionicPopup, $cordovaGeolocation, PointApi) {
+    .controller('SigninController', function ($scope, toastService, $cordovaGeolocation, PointApi) {
       var lat_constant = 31,
         long_constant = 121;
 
@@ -261,13 +261,12 @@
               lat_constant, long_constant);
             //alert(distantce);
             PointApi.addGold(10, '签到送金币', function (result) {
-              var alertPopup = $ionicPopup.alert({
-                title: '签到成功',
-                template: '恭喜你获得10个金币，请到会员中心查看'
-              });
-              alertPopup.then(function (res) {
-                console.log(res);
-              });
+              if (result.status === 0) {
+                toastService.setToast('恭喜你获得10个金币，请到会员中心查看');
+              }
+              else {
+                toastService.setToast(result.msg);
+              }
             });
           }, function (err) {
             console.log(JSON.stringify(err));
