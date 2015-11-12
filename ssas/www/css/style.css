@@ -303,3 +303,9 @@ hr {
 .comment p {
   white-space: normal;
 }
+.bar .title {
+  margin: 0;
+}
+.bar .buttons-left span {
+  right: 0;
+}

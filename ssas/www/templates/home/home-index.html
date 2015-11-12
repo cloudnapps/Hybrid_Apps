@@ -25,21 +25,22 @@
 
   <!-- search -->
   <ion-nav-title>
-    <form ng-submit="search()"
-          style="background:#fff; border-radius: 7px;border: none; line-height:34px; text-align:left; padding: 0 5px 0 5px; margin:5px 0;">
-      <div style="float:left; color:#000; font-size: 14px">
-        <select style="-webkit-appearance:none;-moz-appearance:none;appearance:none; border:none; background:none">
-          <option>商品</option>
-          <option>商户</option>
-        </select><i class="icon ion-arrow-down-b"></i>&nbsp;
-      </div>
-      <i class="icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)" style="float:right;"></i>
+    <form ng-submit="search()" style="background:#fff; border-radius: 7px;margin-top: 8px;">
+      <div class="row" style="padding:0;line-height: 30px;">
+        <span style="min-width: 4em;max-width: 4em;color:#000; display: inline-block;font-size: 14px">
+          <select style="-webkit-appearance:none;-moz-appearance:none;appearance:none; border:none; background:none;padding-right: 0;">
+            <option>商品</option>
+            <option>商户</option>
+          </select>
+          <i class="icon ion-arrow-down-b"></i>&nbsp;
+        </span>
 
-      <div style="margin:0 1.4em 0 2.1em">
-        <input type="search" ng-model="keywords.value"
-               style="display:inline-block;width:100%; padding:0; border:none; backgroud: transparent">
+        <span class="col col-center" style="padding: 0;">
+          <input type="search" ng-model="keywords.value" style="border:none; backgroud: transparent;width: 100%;max-height: 30px;
+    padding: 0px;" />
+        </span>
+        <i class="icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)" style="padding: 0 5px;min-width: 1.2em;max-width: 1.2em;"></i>
       </div>
-
     </form>
   </ion-nav-title>
 
