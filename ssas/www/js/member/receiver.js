@@ -29,7 +29,9 @@
       $scope.remove = function (item) {
         var confirmPopup = $ionicPopup.confirm({
           title: '删除收货地址',
-          template: '是否真的需要删除收货地址?'
+          template: '您是否真的要删除该收货地址?',
+          cancelText: '取消', // String (默认: 'Cancel')。一个取消按钮的文字。
+          okText: '确定' // String (默认: 'OK')。OK按钮的文字。
         });
 
         confirmPopup.then(function (res) {

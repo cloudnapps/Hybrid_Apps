@@ -14,6 +14,35 @@
         <input type="text" ng-model="addrInfo.number" placeholder="身份证号" readonly="readonly"
                style="background-color: #fff;">
       </label>
+
+      <div ng-show="addrInfo.showIdCard">
+        <div class="button-bar">
+          <div class="row">
+            <div class="col col-50">
+              <button class="button button-clear button-positive" style="font-size:16px;padding: 0;"
+                      ui-sref="idcard-change">
+                添加身份证
+              </button>
+            </div>
+            <div class="col col-50" align="right">
+              <button class="button button-clear button-positive" style="font-size:16px;" ng-click="saveIdCard()">
+                完成
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="list">
+          <label class="item item-input item-select" style="padding: 10px;">
+            <div class="input-label">
+              身份证号：
+            </div>
+            <select ng-model="addrInfo.number" focus="addrInfo.focusIdCard">
+              <option ng-repeat="s in cardList">{{s.number}}</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
       <label class="item item-input" style="background-color: #fff;"
              ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.mobile" placeholder="手机号码">
@@ -28,12 +57,59 @@
         <input type="text" ng-model="addrInfo.area" placeholder="省市区县" readonly="readonly"
                style="background-color: #fff;">
       </label>
+
+      <div ng-show="addrInfo.showChoose">
+        <div class="button-bar">
+          <div class="row">
+            <div class="col col-50">
+              <button class="button button-clear button-positive" style="font-size:16px;"
+                      ng-click="addrInfo.showChoose=false; addrInfo.focusChoose=false">
+                取消
+              </button>
+            </div>
+            <div class="col col-50" align="right">
+              <button class="button button-clear button-positive" style="font-size:16px;" ng-click="saveAddress()">
+                完成
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="list">
+          <label class="item item-input item-select">
+            <div class="input-label">
+              省/直辖市
+            </div>
+            <select ng-model="addrInfo.address.province" ng-options="s.value for s in provinces"
+                    ng-change="onProvinceChanged()"
+                    focus="addrInfo.focusChoose">
+              <option value="">--请选择--</option>
+            </select>
+          </label>
+          <label class="item item-input item-select" ng-show="addrInfo.address.province.children.length">
+            <div class="input-label">
+              市/区
+            </div>
+            <select ng-model="addrInfo.address.city" ng-options="sh.value for sh in addrInfo.address.province.children"
+                    ng-change="onCityChanged()">
+              <option value="">--请选择--</option>
+            </select>
+          </label>
+          <label class="item item-input item-select" ng-show="addrInfo.address.city.children.length">
+            <div class="input-label">
+              县/镇
+            </div>
+            <select ng-model="addrInfo.address.district" ng-options="ar.value for ar in addrInfo.address.city.children">
+              <option value="">--请选择--</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
       <label class="item item-input" style="background-color: #fff;"
              ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.addr" placeholder="街道等具体地址">
       </label>
-      <label class="item item-toggle" style="font-size: 14px;"
-             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
+      <label class="item item-toggle" style="font-size: 14px;">
         设置为默认地址
         <label class="toggle">
           <input type="checkbox" ng-model="addrInfo.checked">
@@ -43,81 +119,6 @@
           </div>
         </label>
       </label>
-    </div>
-
-    <div ng-show="addrInfo.showChoose">
-      <div class="button-bar">
-        <div class="row">
-          <div class="col col-50">
-            <button class="button button-clear button-positive" style="font-size:16px;"
-                    ng-click="addrInfo.showChoose=false; addrInfo.focusChoose=false">
-              取消
-            </button>
-          </div>
-          <div class="col col-50" align="right">
-            <button class="button button-clear button-positive" style="font-size:16px;" ng-click="saveAddress()">
-              完成
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="list">
-        <label class="item item-input item-select">
-          <div class="input-label">
-            省/直辖市
-          </div>
-          <select ng-model="addrInfo.address.province" ng-options="s.value for s in provinces"
-                  ng-change="onProvinceChanged()"
-                  focus="addrInfo.focusChoose">
-            <option value="">--请选择--</option>
-          </select>
-        </label>
-        <label class="item item-input item-select" ng-show="addrInfo.address.province.children.length">
-          <div class="input-label">
-            市/区
-          </div>
-          <select ng-model="addrInfo.address.city" ng-options="sh.value for sh in addrInfo.address.province.children"
-                  ng-change="onCityChanged()">
-            <option value="">--请选择--</option>
-          </select>
-        </label>
-        <label class="item item-input item-select" ng-show="addrInfo.address.city.children.length">
-          <div class="input-label">
-            县/镇
-          </div>
-          <select ng-model="addrInfo.address.district" ng-options="ar.value for ar in addrInfo.address.city.children">
-            <option value="">--请选择--</option>
-          </select>
-        </label>
-      </div>
-    </div>
-
-    <div ng-show="addrInfo.showIdCard">
-      <div class="button-bar">
-        <div class="row">
-          <div class="col col-50">
-            <button class="button button-clear button-positive" style="font-size:16px;padding: 0;"
-                    ui-sref="idcard-change">
-              添加身份证
-            </button>
-          </div>
-          <div class="col col-50" align="right">
-            <button class="button button-clear button-positive" style="font-size:16px;" ng-click="saveIdCard()">
-              完成
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="list">
-        <label class="item item-input item-select" style="padding: 10px;">
-          <div class="input-label">
-            身份证号：
-          </div>
-          <select ng-model="addrInfo.number" focus="addrInfo.focusIdCard">
-            <option ng-repeat="s in cardList">{{s.number}}</option>
-          </select>
-        </label>
-      </div>
     </div>
   </ion-content>
 
