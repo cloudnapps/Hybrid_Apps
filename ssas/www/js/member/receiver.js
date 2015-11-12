@@ -68,6 +68,7 @@
       });
 
       $scope.addrInfo.showChoose = false;
+      $scope.addrInfo.focusChoose = false;
       if (!$scope.addrInfo.address) {
         $scope.addrInfo.address = {};
       }
@@ -138,11 +139,14 @@
         }
 
         $scope.addrInfo.showChoose = false;
+        $scope.addrInfo.focusChoose = false;
       };
 
       $scope.addrInfo.showIdCard = false;
+      $scope.addrInfo.focusIdCard = false;
       $scope.saveIdCard = function () {
         $scope.addrInfo.showIdCard = false;
+        $scope.addrInfo.focusIdCard = false;
       }
     })
 

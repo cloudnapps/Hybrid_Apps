@@ -4,28 +4,32 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="list">
-      <label class="item item-input" style="background-color: #fff;" ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
+      <label class="item item-input" style="background-color: #fff;"
+             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.name" placeholder="姓名">
       </label>
       <label class="item item-input"
              style="background-color: #fff;"
-             ng-click="addrInfo.showIdCard=true; addrInfo.showChoose=false">
+             ng-click="addrInfo.showIdCard=true; addrInfo.showChoose=false; addrInfo.focusIdCard=true">
         <input type="text" ng-model="addrInfo.number" placeholder="身份证号" readonly="readonly"
                style="background-color: #fff;">
       </label>
-      <label class="item item-input" style="background-color: #fff;" ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
+      <label class="item item-input" style="background-color: #fff;"
+             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.mobile" placeholder="手机号码">
       </label>
-      <label class="item item-input" style="background-color: #fff;" ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
+      <label class="item item-input" style="background-color: #fff;"
+             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.zipcode" placeholder="邮政编码">
       </label>
       <label class="item item-input"
              style="background-color: #fff;"
-             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=true">
+             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=true; addrInfo.focusChoose=true">
         <input type="text" ng-model="addrInfo.area" placeholder="省市区县" readonly="readonly"
                style="background-color: #fff;">
       </label>
-      <label class="item item-input" style="background-color: #fff;" ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
+      <label class="item item-input" style="background-color: #fff;"
+             ng-click="addrInfo.showIdCard=false; addrInfo.showChoose=false">
         <input type="text" ng-model="addrInfo.addr" placeholder="街道等具体地址">
       </label>
       <label class="item item-toggle" style="font-size: 14px;"
@@ -41,19 +45,12 @@
       </label>
     </div>
 
-    <div class="button-bar">
-      <a class="button button-full button-positive"
-         style="font-size:20px;margin-bottom: 0;" ng-click="add()">
-        确定
-      </a>
-    </div>
-
     <div ng-show="addrInfo.showChoose">
       <div class="button-bar">
         <div class="row">
           <div class="col col-50">
             <button class="button button-clear button-positive" style="font-size:16px;"
-                    ng-click="addrInfo.showChoose=false">
+                    ng-click="addrInfo.showChoose=false; addrInfo.focusChoose=false">
               取消
             </button>
           </div>
@@ -70,7 +67,8 @@
             省/直辖市
           </div>
           <select ng-model="addrInfo.address.province" ng-options="s.value for s in provinces"
-                  ng-change="onProvinceChanged()">
+                  ng-change="onProvinceChanged()"
+                  focus="addrInfo.focusChoose">
             <option value="">--请选择--</option>
           </select>
         </label>
@@ -98,7 +96,8 @@
       <div class="button-bar">
         <div class="row">
           <div class="col col-50">
-            <button class="button button-clear button-positive" style="font-size:16px;padding: 0;" ui-sref="idcard-change">
+            <button class="button button-clear button-positive" style="font-size:16px;padding: 0;"
+                    ui-sref="idcard-change">
               添加身份证
             </button>
           </div>
@@ -114,11 +113,21 @@
           <div class="input-label">
             身份证号：
           </div>
-          <select ng-model="addrInfo.number">
+          <select ng-model="addrInfo.number" focus="addrInfo.focusIdCard">
             <option ng-repeat="s in cardList">{{s.number}}</option>
           </select>
         </label>
       </div>
     </div>
   </ion-content>
+
+  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
+    <div class="button-bar">
+      <button class="button"
+              style="background-color: #bd252c;color: #fff;font-size: 18px;"
+              ng-click="add()">
+        确定
+      </button>
+    </div>
+  </ion-footer-bar>
 </ion-view>
