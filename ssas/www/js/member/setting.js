@@ -51,7 +51,7 @@
         var month = date.getMonth() + 1;
         $scope.item.birthday = date.getFullYear() +
           '-' + month +
-          '-' +  date.getDate();
+          '-' + date.getDate();
         $scope.model.isChanged = true;
         $scope.model.showBirthday = false;
       }
@@ -60,7 +60,11 @@
         var options = {
           date: new Date(),
           mode: 'date',
-          locale: 'zh_CN'
+          locale: 'zh_CN',
+          doneButtonLabel: '完成',
+          doneButtonColor: '#007AFF',
+          cancelButtonLabel: '取消',
+          cancelButtonColor: '#007AFF'
         };
 
         function onSuccess(date) {
