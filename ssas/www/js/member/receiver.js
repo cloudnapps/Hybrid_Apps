@@ -1,7 +1,7 @@
 (function () {
   angular.module('receiver', ['starter.services', 'region'])
 
-    .controller('ReceiversCtrl', function ($scope, $state, $ionicPopup, $ionicLoading, ReceiverApi) {
+    .controller('ReceiversCtrl', function ($scope, $state, toastService, $ionicPopup, $ionicLoading, ReceiverApi) {
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;
@@ -35,13 +35,13 @@
         confirmPopup.then(function (res) {
           if (res) {
             ReceiverApi.deleteReceiver(item.addr_id, function (result) {
-              var alertPopup = $ionicPopup.alert({
-                title: '删除收货地址',
-                template: result.msg
-              });
-              alertPopup.then(function (res) {
-                console.log(res);
-              });
+              if (result.status === 1) {
+                toastService.setToast(result.msg);
+              }
+              else {
+                toastService.setToast(result.msg);
+                $state.go('.', {}, {reload: true});
+              }
             });
           }
         });
