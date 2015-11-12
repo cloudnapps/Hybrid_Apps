@@ -1,4 +1,4 @@
-/* 发现 start */ 
+/* 发现 start */
 .find-nav-bar {
   position: absolute;
   z-index: 999;
@@ -20,12 +20,12 @@
         display: block;
         margin: 0 auto;
         width: 35px;
-        height: 35px; 
+        height: 35px;
       }
 
       span {
         display: inline-block;
-        margin-top: 4px; 
+        margin-top: 4px;
         margin-bottom: 0;
         color: #666;
         font-size: 12px;
@@ -53,12 +53,12 @@
         margin: 0 auto;
         width: 40px;
         height: 40px;
-        border-radius: 50%; 
+        border-radius: 50%;
       }
 
       span {
         display: inline-block;
-        margin-top: 10px; 
+        margin-top: 10px;
         margin-bottom: 0;
         color: #666;
         font-size: 12px;
@@ -121,7 +121,7 @@
         width: 100%;
         max-width: 98px;
         max-height: 98px;
-        min-height: 98px; 
+        min-height: 98px;
       }
       .bg-color {
         background-color: #f8f8f8;
@@ -140,7 +140,7 @@
         color: #333;
         line-height: 14px;
         height: 28px;
-      } 
+      }
       .pri-pri {
         margin-top: 5px;
         display: block;
@@ -181,9 +181,9 @@
         width: 100%;
         max-width: 150px;
         max-height: 150px;
-        min-height: 150px; 
+        min-height: 150px;
       }
-      
+
       .bg-color {
         background-color: #f8f8f8;
         padding: 5px 3px 0;
@@ -202,7 +202,7 @@
         color: #333;
         line-height: 14px;
         height: 28px;
-      } 
+      }
       .pri-pri {
         margin-top: 5px;
         text-align: left;
@@ -255,16 +255,16 @@
   border-right: 1px solid #eee;
   border-bottom: 1px solid #eee;
   .logo-item {
-    padding: 0;
+    padding-bottom: 50%;
+    height: 0;
     display: block;
+    overflow: hidden;
     width: 100%;
 
     .bg-img {
       width: 100%;
       display: block;
       margin: 0 auto;
-      max-height: 56px;
-      min-height: 56px;
     }
   }
 }
@@ -276,7 +276,7 @@
   top: -17px;
   width: 30px;
   height: 19px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 .platform-ios .popover-arrow:after {
   position: absolute;
@@ -288,11 +288,11 @@
   border-radius: 3px;
   content: '';
   -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg); 
+  transform: rotate(-45deg);
 }
 
 .ion-record:before {
-  content: "\f21b"; 
+  content: "\f21b";
   font-size: 6pt;
   color: #802a2c;
 }
@@ -300,7 +300,7 @@
 .bar .button.button-clear.icon-left:before {
   font-size: 22px;
   min-width: 26px;
-  line-height: 32px; 
+  line-height: 32px;
 }
 .tabs {
   padding: 0;
