@@ -18,10 +18,10 @@
       </config-file> 
 
       <config-file target="res/values-zh-rCN/strings.xml" parent="/resources">
-        <string name="app_name">好酷</string>
+        <string name="app_name">CTFHOKO</string>
       </config-file>        
       <config-file target="res/values-zh-rTW/strings.xml" parent="/resources">
-        <string name="app_name">好酷</string>
+        <string name="app_name">CTFHOKO</string>
       </config-file>        
       
       <source-file src="libs/android/android-support-v4.jar" target-dir="libs"></source-file>
@@ -39,7 +39,7 @@
     <!-- ios -->
     <platform name="ios">
         <config-file target="*-Info.plist" parent="CFBundleDisplayName">
-            好酷
+            CTFHOKO
         </config-file>
         <config-file target="*-Info.plist" parent="CFBundleDevelopmentRegion">
             zh_CN
