@@ -24,15 +24,17 @@
         <input type="password" ng-model="userInfo.confirmPwd">
       </label>
       <!-- 注册条款 -->
-      <label class="item item-input">
+      <div class="item item-input">
         <label class="toggle">
           <input type="checkbox" ng-model="userInfo.license">
           <div class="track">
             <div class="handle"></div>
           </div>
         </label>
-        <label style="position: relative;color: #333;margin-left: 5px;font-size: 14px;"> 同意<a href="" style="text-decoration: none;margin-left: 2px;color: #bd252c;">注册条款</a></label>
-      </label>
+        <div style="position: relative;color: #333;margin-left: 5px;font-size: 14px;">
+          同意<a ui-sref="usercopyright" style="text-decoration: none;margin-left: 2px;color: #bd252c;">用户注册协议</a>
+        </div>
+      </div>
     </div>
 
     <div class="button-bar">

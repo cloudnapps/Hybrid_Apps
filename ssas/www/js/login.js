@@ -206,6 +206,10 @@
       }
     })
 
+    .controller('RegisterController', function ($scope) {
+
+    })
+
     .factory('LoginApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
       console.log(apiEndpoint);
 

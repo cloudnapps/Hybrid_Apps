@@ -33,6 +33,7 @@ var translations_zh = {
   login_title: '登录',
   register_title: '新用户注册',
   retrieve_password: '找回密码',
+  copyright_title: '注册协议',
 
   //seller
   seller_title: '商户列表',
