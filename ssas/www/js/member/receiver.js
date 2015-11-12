@@ -56,6 +56,7 @@
       }
       else {
         $scope.addrInfo = {};
+        $scope.addrInfo.checked = true;
         $scope.title = '新建收货地址';
       }
 

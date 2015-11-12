@@ -272,6 +272,7 @@
       }
       else {
         $scope.idCardInfo = {};
+        $scope.idCardInfo.is_default = true;
         $scope.title = '新建身份证';
       }
 

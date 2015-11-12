@@ -10,7 +10,7 @@
     <ion-list>
       <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items"
                 ng-if="!!item && !!item.is_default"
-                type="item-text-wrap"
+                type="item-text-wrap" ng-click="setDefault(item)"
                 style="border-bottom: none; border-top-style: dashed;padding: 10px 5px 10px 15px;">
         <div class="row" style="padding: 0;">
           <div class="col col-90">
@@ -30,7 +30,8 @@
     <hr style="margin:5px 0;height:1px;border:none;border-top:10px solid #f1f1f1;"/>
 
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items" ng-if="!!item && !item.is_default"
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items"
+                ng-if="!!item && !item.is_default"
                 type="item-text-wrap" ng-click="setDefault(item)"
                 style="padding: 10px 5px 10px 15px;border-top: none;border-bottom-color: #ddd;border-bottom-style: solid;margin-bottom: 2px;">
         <div class="row" style="padding: 0;">
