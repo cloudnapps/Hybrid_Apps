@@ -33,19 +33,19 @@
 
     <div class="row member-bar">
       <div class="col col-20 member-bar-item" ng-click="goOrders('nopay')">
-        <a class="bar-item-content">待付款<span class="content-num">12</span></a>
+        <a class="bar-item-content">待付款<span class="content-num" ng-if="currentUser.wait_pay_count>0">{{currentUser.wait_pay_count}}</span></a>
       </div>
       <div class="col member-bar-line">|</div>
       <div class="col col-20 member-bar-item" ng-click="goOrders('noship')">
-        <a class="bar-item-content">待发货</a>
+        <a class="bar-item-content">待发货<span class="content-num" ng-if="currentUser.wait_ship_count>0">{{currentUser.wait_ship_count}}</span></a>
       </div>
       <div class="col member-bar-line">|</div>
       <div class="col col-20 member-bar-item" ng-click="goOrders('shipped')">
-        <a class="bar-item-content">待收货<span class="content-num">5</span></a>
+        <a class="bar-item-content">待收货<span class="content-num" ng-if="currentUser.wait_confirm_count>0">{{currentUser.wait_confirm_count}}</span></a>
       </div>
       <div class="col member-bar-line">|</div>
       <div class="col col-20 member-bar-item" ng-click="goOrders('commenting')">
-        <a class="bar-item-content">待评论</a>
+        <a class="bar-item-content">待评论<span class="content-num" ng-if="currentUser.wait_rate_count>0">{{currentUser.wait_rate_count}}</span></a>
       </div>
       <div class="col member-bar-line">|</div>
       <div class="col col-20 member-bar-item" ui-sref="returns">
