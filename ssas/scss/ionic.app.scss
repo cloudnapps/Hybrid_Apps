@@ -21,6 +21,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+@import "tool";
 @import "hide-tabs";
 @import "quantity-input";
 @import "components";
@@ -29,6 +30,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "seller-index";
 @import "product";
 @import "cart";
+@import "member";
 
 
 body>ion-nav-view {  
