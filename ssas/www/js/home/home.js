@@ -1,9 +1,9 @@
 (function () {
   angular.module('home', ['seller', 'point'])
-    .controller('HomeController', function ($scope, $ionicSlideBoxDelegate, $ionicLoading,
+    .controller('HomeController', function ($scope, $ionicSlideBoxDelegate, $ionicLoading, toastService,
                                             $rootScope, barcode, $cordovaInAppBrowser, userService, $ionicPopup,
                                             $state, $ionicPopover, $window, $interval, $ionicScrollDelegate,
-                                            HomeApi, SellerApi, $http, shopApi, $ionicLoading) {
+                                            HomeApi, SellerApi, $http, shopApi) {
       $scope.homeInfo = {};
       $scope.sellerInfo = {};
 
@@ -148,24 +148,24 @@
         var acIP;
         var params = {};
         hoko.checkConnection("http://www.baidu.com", function (result) {
-            alert(result.location);
+            //alert(result.location);
             acIP = result.location.split('/')[2];
             params = parseQueryString(result.location);
             alert(JSON.stringify(params));
 
             if (!acIP || !params) {
-              alert('一键上网失败');
+              toastService.setToast('一键上网失败');
             }
             else {
               var url = 'http://' + acIP + '/quickauth.do?isapp=1&wlanacname=' + params.wlanacname +
                 '&wlanuserip=' + params.ip + '&userid=' + userService.get('mobile');
-              alert(url);
+              //alert(url);
               $http({
                 method: 'GET',
                 url: url
               })
                 .then(function successCallback(response) {
-                  alert('step2' + JSON.stringify(response));
+                  //alert('step2' + JSON.stringify(response));
                   $http({
                     method: 'GET',
                     url: 'https://securelogin.arubanetworks.com/auth/index.html/u?password=8888&username='
@@ -173,18 +173,18 @@
                   })
                     .then(function successCallback(response) {
                       toastService.setToast('一键上网成功');
-                      alert('step3' + JSON.stringify(response));
+                      //alert('step3' + JSON.stringify(response));
                     }, function errorCallback(response) {
-                      alert('step3' + JSON.stringify(response));
+                      //alert('step3' + JSON.stringify(response));
                     });
                 },
                 function errorCallback(response) {
-                  alert('step2' + JSON.stringify(response));
+                  //alert('step2' + JSON.stringify(response));
                 });
             }
           },
           function (error) {
-            alert(JSON.stringify(error));
+            //alert(JSON.stringify(error));
           });
       };
 
