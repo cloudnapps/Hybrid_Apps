@@ -7,7 +7,7 @@
       <!-- 手机号 -->
       <label class="item item-input">
         <span class="input-label" style="max-width: 5em;color: #333;">手机号码：</span>
-        <input type="number" ng-model="userInfo.mobile" placeholder="请输入手机号码">
+        <input type="tel" ng-model="userInfo.mobile" placeholder="请输入手机号码">
       </label>
       <!-- 验证码 -->
       <div class="item item-input" style="padding: 0 0 0 16px;position: relative;">
@@ -21,12 +21,12 @@
       <!-- 密码 -->
       <label class="item item-input">
         <span class="input-label" style="max-width: 5em;color: #333;">输入密码：</span>
-        <input type="password" ng-model="userInfo.password">
+        <input type="password" ng-model="userInfo.password" placeholder="密码不少于6位">
       </label>
       <!-- 确认密码 -->
       <label class="item item-input">
         <span class="input-label" style="max-width: 5em;color: #333;">确认密码：</span>
-        <input type="password" ng-model="userInfo.confirmPwd">
+        <input type="password" ng-model="userInfo.confirmPwd" placeholder="请再次输入密码">
       </label>
       <!-- 注册条款 -->
       <div class="item item-input">

@@ -4,7 +4,6 @@
     function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService, $ionicActionSheet, orderStateService) {
       $scope.currentUser = {};
 
-
       $scope.goOrders = function (type) {
         orderStateService.set(type);
         $state.go('orders');
