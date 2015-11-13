@@ -162,7 +162,7 @@
             if (order.pay_app_id === 'micbcpay') {
               console.log(response);
               $rootScope.micbcpayData = response.data;
-              $scope.tabStateGo($scope.tabIndex.cart, 'tab.iframe');
+              $state.go('iframe');
               return;
             }
             if (response.data.status !== 0) {
@@ -173,19 +173,13 @@
 
               return $q.reject();
             }
+
             return paymentApi.pay(response.data.data)
-              .then(function (data) {
-                $ionicPopup.alert({
-                  title: '支付成功',
-                  template: '感谢惠顾，我们将竭诚为您服务哦～'
-                })
-                  .then(function () {
-                    $scope.back();
-                  });
-              }, function (err) {
-                $ionicPopup.alert({
-                  title: '支付失败',
-                  template: err
+              .then(function () {
+                return $state.go('tab.order-payed');
+              }, function () {
+                return $state.go('tab.order-payed', {
+                  status: 'failed'
                 });
               });
           });
