@@ -3,32 +3,43 @@
     <a class="button button-icon" ng-click="barcodeScan()"><img src="img/home/scan.png" style="width: 67%"></a>
   </ion-nav-buttons>
   <ion-pane class="row">
-		<!-- left category list -->
-		<div class="col col-25 view" style="width:84%;border-right: 1px solid #ddd;">
-			<ion-content>
-				<ion-list>
-					<ion-item 	class="item item-thumbnail-top"
-								ng-repeat="cate in categories"
-								type="item-text-wrap"
-								style="padding:6px 0 0;text-align: center;"
-								ng-click="populateSubCategories(cate.cat_id, $index)">
-						<img style="width:60%;margin: 0 auto;"ng-src="{{cate.image.replace(' ', '') || 'img/3.pic.jpg'}}">
-						<h2 style="margin-top: 2px;font-size:14px;padding: 5px 0;text-align:center;text-overflow:clip;" ng-class="{'click-assertive': $index === index }">{{cate.cat_name}}</h2>
-					</ion-item>
-				</ion-list>
-	    	</ion-content>
-		</div>
-		<!-- right sub-category grid -->
-		<div class="col col-75 col-offset-25 view" style="">
-			<ion-content class="has-header has-tabs">
-	    		<div ng-repeat="sub in subCategories">
-	    			<h5 ng-click="false && navToProductList(sub.cat_id)" class="sub-categories">{{sub.cat_name}}</h5>
-	    			<div class="row">
-	    				<div class="col col-33 col-style" ng-repeat="sub3 in sub.lv3Arr" ui-sref="products({categoryId: sub3.cat_id})">{{sub3.cat_name}}</div>
-	    			</div>
-	    			<hr>
-	    		</div>
-			</ion-content>
-		</div>
-	</ion-pane>
+    <!-- left category list -->
+    <div class="col col-25 view" style="width:84%;border-right: 1px solid #ddd;">
+      <ion-content>
+        <ion-list>
+          <ion-item class="item item-thumbnail-top"
+                    ng-repeat="cate in categories"
+                    type="item-text-wrap"
+                    style="padding:6px 0 0;text-align: center;"
+                    ng-click="populateSubCategories(cate.cat_id, $index)">
+            <img style="width:60%;margin: 0 auto;" ng-src="{{cate.image.replace(' ', '') || 'img/3.pic.jpg'}}">
+
+            <h2 style="margin-top: 2px;font-size:14px;padding: 5px 0;text-align:center;text-overflow:clip;"
+                ng-class="{'click-assertive': $index === index }">{{cate.cat_name}}</h2>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </div>
+    <!-- right sub-category grid -->
+    <div class="col col-75 col-offset-25 view" style="">
+      <ion-content class="has-header has-tabs">
+        <div ng-repeat="sub in subCategories">
+          <h5 ng-click="false && navToProductList(sub.cat_id)" class="sub-categories">{{sub.cat_name}}</h5>
+
+          <div class="row" ng-repeat="sub3 in sub.lv3Arr" ng-if="$index % 3 === 0">
+            <div class="col col-33 col-style" ui-sref="products({categoryId: sub.lv3Arr[$index].cat_id})">
+              {{sub.lv3Arr[$index].cat_name}}
+            </div>
+            <div class="col col-33 col-style" ui-sref="products({categoryId: sub.lv3Arr[$index+1].cat_id})">
+              {{sub.lv3Arr[$index+1].cat_name}}
+            </div>
+            <div class="col col-33 col-style" ui-sref="products({categoryId: sub.lv3Arr[$index+2].cat_id})">
+              {{sub.lv3Arr[$index+2].cat_name}}
+            </div>
+          </div>
+          <hr>
+        </div>
+      </ion-content>
+    </div>
+  </ion-pane>
 </ion-view>
