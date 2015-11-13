@@ -12,7 +12,6 @@
         </div>
         <div class="col col-67 col-center" style="padding: 0;font-size: 14px;color: #333333;margin: 46px 0 0 14px;">
           <p>{{currentUser.login_name}}</p>
-
           <p>会员等级：{{currentUser.lv_name}}</p>
         </div>
       </div>
@@ -30,121 +29,97 @@
       </div>
     </div>
 
-    <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
+    <hr class="hr-line-1" />
 
-    <div class="row member-bar" style="padding: 0;">
+    <div class="row member-bar">
       <div class="col col-20 member-bar-item" ng-click="goOrders('nopay')">
         <a class="bar-item-content">待付款<span class="content-num">12</span></a>
       </div>
-      <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
-        |
-      </div>
+      <div class="col member-bar-line">|</div>
       <div class="col col-20 member-bar-item" ng-click="goOrders('noship')">
         <a class="bar-item-content">待发货</a>
       </div>
-      <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
-        |
-      </div>
+      <div class="col member-bar-line">|</div>
       <div class="col col-20 member-bar-item" ng-click="goOrders('shipped')">
         <a class="bar-item-content">待收货<span class="content-num">5</span></a>
       </div>
-      <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
-        |
-      </div>
+      <div class="col member-bar-line">|</div>
       <div class="col col-20 member-bar-item" ng-click="goOrders('commenting')">
         <a class="bar-item-content">待评论</a>
       </div>
-      <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
-        |
-      </div>
+      <div class="col member-bar-line">|</div>
       <div class="col col-20 member-bar-item" ui-sref="returns">
         <a class="bar-item-content">售后</a>
       </div>
     </div>
 
-    <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
+    <hr class="hr-line-1" />
 
-    <div class="row"
-         style="padding: 0 10px;height: 40px;line-height: 40px;"
-         ng-click="goOrders('all')">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
-        <a style="color: #333333;text-decoration: none;">全部订单</a>
+    <div class="row main-fun" ng-click="goOrders('all')">
+      <div class="col col-90 col-center fun-item">
+        <a class="fun-item-text">全部订单</a>
       </div>
-      <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
+      <div class="col col-10 col-center fun-item-arrow">
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
 
-    <hr style="margin: 0;border:none;border-top:10px solid #f6f6f6;"/>
+    <hr class="hr-line-10" />
 
-    <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ui-sref="points">
-      <div class="col col-80 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
-        <a style="color: #333333;text-decoration: none;">我的积分</a>
+    <div class="row main-fun" ui-sref="points">
+      <div class="col col-80 col-center fun-item">
+        <a class="fun-item-text">我的积分</a>
       </div>
-      <div class="col col-20 col-center" style="padding: 0px;height: 40px;text-align: right;">
-        <span style="color: #bd252c; font-size: 12px;margin-right: 5px;">{{currentUser.point}}</span>
+      <div class="col col-20 col-center fun-item-arrow">
+        <span class="fun-item-arrow-num">{{currentUser.point}}</span>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
 
-    <hr style="margin: 0;border:none;border-top:1px solid #f1f1f1;"/>
+    <hr class="hr-line-2" />
 
-    <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ui-sref="golds">
-      <div class="col col-80 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
-        <a style="color: #333333;text-decoration: none;">我的金币</a>
+    <div class="row main-fun" ui-sref="golds">
+      <div class="col col-80 col-center fun-item">
+        <a class="fun-item-text">我的金币</a>
       </div>
-      <div class="col col-20 col-center" style="padding: 0px;height: 40px;text-align: right;">
-        <span style="color: #bd252c; font-size: 12px;margin-right: 5px;">{{currentUser.gold_count}}</span>
+      <div class="col col-20 col-center fun-item-arrow">
+        <span class="fun-item-arrow-num">{{currentUser.gold_count}}</span>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
 
-    <hr style="margin: 0;border:none;border-top:1px solid #f1f1f1;"/>
+    <hr class="hr-line-2" />
 
-    <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ui-sref="coupons">
-      <div class="col col-80 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
-        <a style="color: #333333;text-decoration: none;">我的优惠券</a>
+    <div class="row main-fun" ui-sref="coupons">
+      <div class="col col-80 col-center fun-item">
+        <a class="fun-item-text">我的优惠券</a>
       </div>
-      <div class="col col-20 col-center" style="padding: 0px;height: 40px;text-align: right;">
-        <span style="color: #bd252c; font-size: 12px;margin-right: 5px;">{{currentUser.coupon_num}}</span>
+      <div class="col col-20 col-center fun-item-arrow">
+        <span class="fun-item-arrow-num">{{currentUser.coupon_num}}</span>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
 
-    <hr style="margin: 0;border:none;border-top:10px solid #f6f6f6;"/>
+    <hr class="hr-line-10" />
 
-    <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ui-sref="receivers">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
-        <a style="color: #333333;text-decoration: none;">收货地址管理</a>
+    <div class="row main-fun" ui-sref="receivers">
+      <div class="col col-90 col-center fun-item">
+        <a class="fun-item-text">收货地址管理</a>
       </div>
-      <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
+      <div class="col col-10 col-center fun-item-arrow">
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
 
-    <hr style="margin: 0;border:none;border-top:1px solid #f1f1f1;"/>
+    <hr class="hr-line-2" />
 
-    <!-- 身份证管理 -->
-    <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;"
-         ui-sref="idcards">
-      <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
-        <a style="color: #333333;text-decoration: none;">身份证管理</a>
+    <div class="row main-fun" ui-sref="idcards">
+      <div class="col col-90 col-center fun-item">
+        <a class="fun-item-text">身份证管理</a>
       </div>
-      <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
+      <div class="col col-10 col-center fun-item-arrow">
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
-
-    <!--    <hr style="margin: 0;height:10px;border:none;border-top:10px solid #f1f1f1;"/>
-
-        <div class="row" style="padding: 0 20px;height: 40px;line-height: 40px;">
-          <div class="col col-90 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
-            <a style="color: #333333;text-decoration: none;" href="#/tab/favorites?type=goods">我的收藏</a>
-          </div>
-          <div class="col col-10 col-center" style="padding: 0px;height: 40px;text-align: right;">
-            <i class="icon ion-chevron-right icon-accessory"></i>
-          </div>
-        </div>-->
-
   </ion-content>
 </ion-view>

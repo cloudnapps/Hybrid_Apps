@@ -1,33 +1,83 @@
+$text-color: #4a4a4a;
+$red-color: #bd252c;
+
+.hr-line-1 {
+  @include hr-divide-line(1px, #c8c8c8);
+}
+
+.hr-line-2 {
+  @include hr-divide-line(1px, #f1f1f1);
+}
+
+.hr-line-10 {
+  @include hr-divide-line(10px, #f6f6f6);
+}
 
 .member-bar {
   height: 40px;
   line-height: 40px;
+  padding:0;
+  
+  .member-bar-line {
+    padding: 0;
+    text-align: center;
+    color: $text-color;
+  }
 
   .member-bar-item {
     padding: 0;
     text-align: center;
     height: 40px;
     font-size: 14px;
+
+    .bar-item-content {
+      color: $text-color;
+      text-decoration: none;
+      position:relative;
+
+      .content-num {
+        position: absolute;
+        right: -10px;
+        top: -7px;
+        width: 15px;
+        height: 15px;
+        background: $red-color;
+        overflow: hidden;
+        @include border-radius(50%);
+        color: #fff;
+        text-align: center;
+        line-height: 16px;
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+.main-fun {
+  padding: 0 10px;
+  height: 40px;
+  line-height: 40px;
+
+  .fun-item {
+    padding: 0px;
+    height: 40px;
+    font-size: 14px;
+
+    .fun-item-text {
+      color: $text-color;
+      text-decoration: none;
+    }
   }
 
-  .bar-item-content {
-    color: #333333;
-    text-decoration: none;
-    position:relative;
+  .fun-item-arrow {
+    padding: 0px;
+    height: 40px;
+    text-align: right;
 
-    .content-num {
-      position: absolute;
-      right: -10px;
-      top: -7px;
-      width: 15px;
-      height: 15px;
-      background: #bd252c;
-      overflow: hidden;
-      @include border-radius(50%);
-      color: #fff;
-      text-align: center;
-      line-height: 16px;
-      font-size: 10px;
+    .fun-item-arrow-num {
+      color: $red-color;
+      font-size: 12px;
+      margin-right: 5px;
     }
   }
 }

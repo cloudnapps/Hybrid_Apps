@@ -1,7 +1,15 @@
+// 圆角
 @mixin border-radius ($radius) {
   -webkit-border-radius: $radius;
   -ms-border-radius: $radius;
   -moz-border-radius: $radius;
   -o-border-radius: $radius;
   border-radius: $radius;
+}
+
+// hr 分割线
+@mixin hr-divide-line ($width, $color) {
+  margin: 0;
+  border: none;
+  border-top: $width solid $color;
 }
