@@ -1,0 +1,33 @@
+
+.member-bar {
+  height: 40px;
+  line-height: 40px;
+
+  .member-bar-item {
+    padding: 0;
+    text-align: center;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .bar-item-content {
+    color: #333333;
+    text-decoration: none;
+    position:relative;
+
+    .content-num {
+      position: absolute;
+      right: -10px;
+      top: -7px;
+      width: 15px;
+      height: 15px;
+      background: #bd252c;
+      overflow: hidden;
+      @include border-radius(50%);
+      color: #fff;
+      text-align: center;
+      line-height: 16px;
+      font-size: 10px;
+    }
+  }
+}

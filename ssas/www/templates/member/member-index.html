@@ -32,43 +32,33 @@
 
     <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
 
-    <div class="row" style="padding: 0;height: 40px;line-height: 40px;">
-      <div class="col col-20"
-           style="padding: 0;text-align: center;height: 40px;font-size: 14px;"
-           ng-click="goOrders('nopay')">
-        <a class="" style="color: #333333;text-decoration: none;">待付款</a>
+    <div class="row member-bar" style="padding: 0;">
+      <div class="col col-20 member-bar-item" ng-click="goOrders('nopay')">
+        <a class="bar-item-content">待付款<span class="content-num">12</span></a>
       </div>
       <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
         |
       </div>
-      <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
-           ng-click="goOrders('noship')">
-        <a class="" style="color: #333333;text-decoration: none;">待发货</a>
+      <div class="col col-20 member-bar-item" ng-click="goOrders('noship')">
+        <a class="bar-item-content">待发货</a>
       </div>
       <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
         |
       </div>
-      <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
-           ng-click="goOrders('shipped')">
-        <a class="" style="color: #333333;text-decoration: none;">待收货</a>
+      <div class="col col-20 member-bar-item" ng-click="goOrders('shipped')">
+        <a class="bar-item-content">待收货<span class="content-num">5</span></a>
       </div>
       <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
         |
       </div>
-      <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
-           ng-click="goOrders('commenting')">
-        <a class="" style="color: #333333;text-decoration: none;">待评论</a>
+      <div class="col col-20 member-bar-item" ng-click="goOrders('commenting')">
+        <a class="bar-item-content">待评论</a>
       </div>
       <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
         |
       </div>
-      <div class="col col-20"
-           style="padding: 0px;text-align: center;height: 40px;font-size: 14px;"
-           ui-sref="returns">
-        <a class="" style="color: #333333;text-decoration: none;">售后</a>
+      <div class="col col-20 member-bar-item" ui-sref="returns">
+        <a class="bar-item-content">售后</a>
       </div>
     </div>
 
