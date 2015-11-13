@@ -6,7 +6,6 @@
   left: 0;
   padding: 10px 0;
   background-color: #fff;
-  border-bottom: 1px solid #000;
 
   .find-item {
     padding: 0;
@@ -38,7 +37,7 @@
 .prdt-hot-sort {
   padding: 0;
   background-color: #fff;
-  border-top: 1px solid #000;
+  // border-top: 1px solid #000;
 
   .prdt-item {
     padding: 0;
@@ -58,7 +57,7 @@
 
       span {
         display: inline-block;
-        margin-top: 10px;
+        margin-top: 5px;
         margin-bottom: 0;
         color: #666;
         font-size: 12px;

@@ -58,14 +58,14 @@
       on-refresh="doRefresh()">
     </ion-refresher>
     <!--广告轮播图-->
-    <div class="row" ng-if="slideimgs.length" style="padding: 0px;margin: 0 auto;height: 165px;">
-      <div class="col col-center" style="padding: 0px; height: 165px;;">
-        <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox" style="height: 165px;"
+    <div class="row" ng-if="slideimgs.length" style="padding: 0px;margin: 0 auto;width: 100%;">
+      <div class="col col-center" style="padding: 0px; width: 100%;;">
+        <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox" style="width: 100%;"
                        ng-if="slideimgs.length"
-                       auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
-          <ion-slide ng-repeat="item in slideimgs" style="height: 165px;" ng-click="openItem(item)">
-            <a href="#" style="display: block;text-align: center;height: 165px;">
-              <img style="height: 165px;" ng-src="{{item.image}}">
+                       auto-play="false" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
+          <ion-slide ng-repeat="item in slideimgs" style="width: 100%;" ng-click="openItem(item)">
+            <a href="#" style="display: block;text-align: center;width: 100%;">
+              <img style="width: 100%;" ng-src="{{item.image}}">
             </a>
           </ion-slide>
         </ion-slide-box>
@@ -73,7 +73,7 @@
     </div>
 
     <!--热门分类-->
-    <div class="row prdt-hot-sort" style="margin: 0;" ng-if="!!homeInfo.cat_info.length">
+    <div class="row prdt-hot-sort" ng-if="!!homeInfo.cat_info.length">
       <div class="col col-20 col-center prdt-item" ng-repeat="category in homeInfo.cat_info"
            ui-sref="products({categoryId: category.cat_id})">
         <a>
