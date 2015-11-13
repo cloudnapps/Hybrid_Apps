@@ -84,7 +84,7 @@
       };
 
       $scope.cancelOrder = function (item) {
-        var myPopup = $ionicPopup.show({
+        $ionicPopup.show({
           title: '取消订单',
           template: '您确定取消此订单吗？取消后，如您想购买需再次生成订单后方可购买哦~~',
           buttons: [
@@ -106,8 +106,6 @@
             }
           ]
         });
-
-        console.log(myPopup);
       };
 
       $scope.confirmOrder = function (item) {
@@ -131,10 +129,55 @@
       };
     })
 
-    .controller('OrderDetailCtrl', function ($scope, $stateParams, OrderApi) {
+    .controller('OrderDetailCtrl', function ($scope, $stateParams, $state, $ionicPopup, toastService, OrderApi) {
       OrderApi.getOrderDetail($stateParams.orderId, function (result) {
         $scope.item = result.data;
       });
+
+      $scope.cancelOrder = function (item) {
+        $ionicPopup.show({
+          title: '取消订单',
+          template: '您确定取消此订单吗？取消后，如您想购买需再次生成订单后方可购买哦~~',
+          buttons: [
+            {text: '我后悔了'},
+            {
+              text: '<b>确定</b>',
+              type: 'button-positive',
+              onTap: function () {
+                OrderApi.deleteOrder(item.order_id, function (result) {
+                  if (result.status === 1) {
+                    toastService.setToast(result.msg);
+                  }
+                  else {
+                    toastService.setToast(result.msg);
+                    $state.go('.', {}, {reload: true});
+                  }
+                });
+              }
+            }
+          ]
+        });
+      };
+
+      $scope.confirmOrder = function (item) {
+        OrderApi.receiveOrder(item.order_id, function (result) {
+          if (result.status === 1) {
+            toastService.setToast(result.msg);
+          }
+          else {
+            toastService.setToast(result.msg);
+            $state.go('.', {}, {reload: true});
+          }
+        });
+      };
+
+      $scope.payOrder = function (item) {
+        $state.go('order-pay', {orderId: item.order_id}, {reload: true});
+      };
+
+      $scope.commentOrder = function (item) {
+        $state.go('order-comment', {orderId: item.order_id}, {reload: true});
+      };
     })
 
     .controller('OrderPayCtrl', function ($scope, $stateParams, $rootScope, $ionicLoading, $ionicPopup,
