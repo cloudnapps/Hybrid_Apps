@@ -129,12 +129,21 @@
       };
     })
 
-    .controller('OrderDetailCtrl', function ($scope, $stateParams, $state, $ionicPopup, toastService, OrderApi) {
-      OrderApi.getOrderDetail($stateParams.orderId, function (result) {
-        $scope.item = result.data;
+    .controller('OrderDetailCtrl', function ($scope, $stateParams, $state, $ionicPopup, toastService,
+                                             $ionicLoading, OrderApi) {
+      $scope.getOrder = function () {
+        $ionicLoading.show();
+        OrderApi.getOrderDetail($stateParams.orderId, function (result) {
+          $scope.item = result.data;
+          $ionicLoading.hide();
+        });
+      };
+
+      $scope.$on('$ionicView.beforeEnter', function () {
+        $scope.getOrder();
       });
 
-      $scope.cancelOrder = function (item) {
+      $scope.cancelOrder = function () {
         $ionicPopup.show({
           title: '取消订单',
           template: '您确定取消此订单吗？取消后，如您想购买需再次生成订单后方可购买哦~~',
@@ -144,7 +153,7 @@
               text: '<b>确定</b>',
               type: 'button-positive',
               onTap: function () {
-                OrderApi.deleteOrder(item.order_id, function (result) {
+                OrderApi.deleteOrder($scope.item.order_title.order_id, function (result) {
                   if (result.status === 1) {
                     toastService.setToast(result.msg);
                   }
@@ -159,8 +168,8 @@
         });
       };
 
-      $scope.confirmOrder = function (item) {
-        OrderApi.receiveOrder(item.order_id, function (result) {
+      $scope.confirmOrder = function () {
+        OrderApi.receiveOrder($scope.item.order_title.order_id, function (result) {
           if (result.status === 1) {
             toastService.setToast(result.msg);
           }
@@ -171,12 +180,12 @@
         });
       };
 
-      $scope.payOrder = function (item) {
-        $state.go('order-pay', {orderId: item.order_id}, {reload: true});
+      $scope.payOrder = function () {
+        $state.go('order-pay', {orderId: $scope.item.order_title.order_id}, {reload: true});
       };
 
-      $scope.commentOrder = function (item) {
-        $state.go('order-comment', {orderId: item.order_id}, {reload: true});
+      $scope.commentOrder = function () {
+        $state.go('order-comment', {orderId: $scope.item.order_title.order_id}, {reload: true});
       };
     })
 
