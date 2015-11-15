@@ -1,6 +1,7 @@
 (function () {
   angular.module('favorite', ['starter.services'])
-    .controller('FavoritesCtrl', function ($scope, $stateParams, $ionicPopup, $ionicHistory, FavoriteApi) {
+    .controller('FavoritesCtrl', function ($scope, $state, $stateParams, $ionicPopup,
+                                           toastService, favoriteStateService, FavoriteApi) {
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;
@@ -35,13 +36,12 @@
           $scope.favoriteState = 2;
         }
 
+        favoriteStateService.set(type);
         $scope.getFavorities();
       };
 
       $scope.$on('$ionicView.beforeEnter', function () {
-        if ($stateParams.type && $stateParams.type !== $scope.filter) {
-          $scope.switchFavorities($stateParams.type);
-        }
+        $scope.switchFavorities(favoriteStateService.get());
       });
 
       $scope.loadMore = function () {
@@ -52,31 +52,33 @@
       $scope.remove = function (item) {
         var confirmPopup = $ionicPopup.confirm({
           title: '删除收藏',
-          template: '是否真的需要删除收藏?'
+          template: '是否真的需要删除收藏?',
+          cancelText: '取消', // String (默认: 'Cancel')。一个取消按钮的文字。
+          okText: '确定' // String (默认: 'OK')。OK按钮的文字。
         });
 
         confirmPopup.then(function (res) {
           if (res) {
             if ($scope.filter === 'sellers') {
               FavoriteApi.deleteSellerFavorite(item.seller_id, function (result) {
-                var alertPopup = $ionicPopup.alert({
-                  title: '删除收藏',
-                  template: result.msg
-                });
-                alertPopup.then(function () {
-                  $ionicHistory.goBack();
-                });
+                if (result.status === 1) {
+                  toastService.setToast(result.msg);
+                }
+                else {
+                  toastService.setToast(result.msg);
+                  $state.go('.', {}, {reload: true});
+                }
               });
             }
             else {
               FavoriteApi.deleteGoodsFavorite(item.goods_id, function (result) {
-                var alertPopup = $ionicPopup.alert({
-                  title: '删除收藏',
-                  template: result.msg
-                });
-                alertPopup.then(function () {
-                  $ionicHistory.goBack();
-                });
+                if (result.status === 1) {
+                  toastService.setToast(result.msg);
+                }
+                else {
+                  toastService.setToast(result.msg);
+                  $state.go('.', {}, {reload: true});
+                }
               });
             }
           }

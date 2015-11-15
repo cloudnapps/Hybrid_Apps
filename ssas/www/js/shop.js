@@ -2,7 +2,7 @@
   'use strict';
   var shop = angular.module('shop', ['components', 'seller']);
 
-  shop.controller('CategoryController', function ($scope, $state, shopApi, toastService) {
+  shop.controller('CategoryController', function ($scope, $state, shopApi) {
     $scope.categoryObj = {};
     $scope.categories = [];
     $scope.subCategories = [];
@@ -244,6 +244,7 @@
 
         $scope.productId = $stateParams.productId;
         $scope.product = {};
+        $scope.product.favTitle = $scope.product.good_has_fav ? '已收藏': '收藏';
         $scope.html = '';
         $scope.showSpecModal = showSpecModal;
         $scope.getProductGoodsSpec = getProductGoodsSpec;
@@ -257,6 +258,7 @@
           if (responseData.status === 0) {
             $scope.point = responseData.data.point || {};
             $scope.product = responseData.data.product;
+            $scope.product.favTitle = $scope.product.good_has_fav ? '已收藏': '收藏';
             $scope.slideimgs = $scope.product.urls;
             $scope.comment = (responseData.data.comment || [])[0];
 
@@ -384,8 +386,8 @@
 
     }) // end of ProductCommentController
 
-    .factory('shopApi', ['$http', 'apiEndpoint', 'transformRequestAsFormPost',
-      function ($http, apiEndpoint, transformRequestAsFormPost) {
+    .factory('shopApi', ['$http', 'userService', 'apiEndpoint', 'transformRequestAsFormPost',
+      function ($http, userService, apiEndpoint, transformRequestAsFormPost) {
 
         var getGallery = function (data) {
           var request = $http({
@@ -417,7 +419,12 @@
         };
 
         var getProduct = function (productId) {
-          var data = {'product_id': productId};
+          var data = {
+            product_id: productId,
+            member_id: userService.get('memberId'),
+            token: userService.get('token')
+          };
+
           var request = $http({
             method: 'post',
             url: apiEndpoint.url + '/product.html',

@@ -22,47 +22,52 @@
 
         <div ng-repeat="seller in nature.aSelCart">
           <ion-item class="seller item">
-            <div class="item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="seller.seller_info.selected" ng-change="toggleSeller(seller)">
-              </label>
-              <!--             <a class="item-content" href="#/tab/seller/{{seller.seller_info.seller_id}}">{{seller.seller_info.seller_name}}<i class="icon ion-chevron-right icon-accessory"></i></a> -->
-              <div style="color: #4a4a4a;">{{seller.seller_info.seller_name}}</div>
-            </div>
-            <ion-option-button class="button-assertive"
-                               ng-click="removeSeller(seller)">
-              {{'remove' | translate}}
-            </ion-option-button>
-
-          </ion-item>
-          <ion-item class="good item" ng-repeat="good in seller.goods_list">
-            <div class="item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" class="selt-prdt" ng-model="good.selected" ng-change="toggleGood(good)">
-              </label>
-
-              <div class="row row-no-padding">
-                <a class="good-thumbnail-test" ui-sref="product({productId: good.product_id})">
-                  <img class="vertical-align-middle" ng-src="{{good.thumbnail}}">
-                  <!-- <div class="vertical-align-middle" style="border:solid 1px; width:80px;height:80px;">test</div> -->
+            <div class="row">
+              <div class="item-checkbox  col col-70">
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="seller.seller_info.selected" ng-change="toggleSeller(seller)">
+                </label>
+                <!--             <a class="item-content" href="#/tab/seller/{{seller.seller_info.seller_id}}">{{seller.seller_info.seller_name}}<i class="icon ion-chevron-right icon-accessory"></i></a> -->
+                <div style="color: #4a4a4a;">{{seller.seller_info.seller_name}}</div>
+              </div>
+              <div align="right" class="col col-30">
+                <a class="button-assertive" ng-click="removeSeller(seller)">
+                  {{'remove' | translate}}
                 </a>
-
-                <div class="good-info col">
-                  <h2 style="color:#4a4a4a;font-size:14px;">{{good.name}}</h2>
-
-                  <span class="sub-title">{{good.spec}}</span>
-
-                  <p class="price">{{good.buy_price|currency:'￥'}}</p>
-
-                  <p style="padding: 0; font-size: 12px;">适用税率：{{good.taxRate || 0}}%</p>
-                  <quantity-input ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
-                </div>
               </div>
             </div>
-            <ion-option-button class="button-assertive" ng-click="removeGood(good)">
-              {{'remove' | translate}}
-            </ion-option-button>
           </ion-item>
+          <ion-list delegate-handle="aaa">
+            <ion-item class="good item" ng-repeat="good in seller.goods_list">
+              <div class="item-checkbox">
+                <label class="checkbox">
+                  <input type="checkbox" class="selt-prdt" ng-disabled="good.store === 0" ng-model="good.selected" ng-change="toggleGood(good)">
+                </label>
+
+                <div class="row row-no-padding">
+                  <a class="good-thumbnail-test" ui-sref="product({productId: good.product_id})">
+                    <img class="vertical-align-middle" ng-src="{{good.thumbnail}}">
+                    <!-- <div class="vertical-align-middle" style="border:solid 1px; width:80px;height:80px;">test</div> -->
+                  </a>
+
+                  <div class="good-info col">
+                    <h2 style="color:#4a4a4a;font-size:14px;">{{good.name}}</h2>
+
+                    <span class="sub-title">{{good.spec}}</span>
+
+                    <p class="price">{{good.buy_price|currency:'￥'}}</p>
+
+                    <p style="padding: 0; font-size: 12px;">适用税率：{{good.taxRate || 0}}%</p>
+                    <quantity-input ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
+                  </div>
+                </div>
+              </div>
+              <ion-option-button class="button-assertive" ng-click="removeGood(good)">
+                {{'remove' | translate}}
+              </ion-option-button>
+              <ion-delete-button class="ion-minus-circled"></ion-delete-button>
+            </ion-item>
+          </ion-list>
         </div>
         <ion-item class="item checkout-warning" ng-show="nature.lock_btn">
           <div class="item-content">

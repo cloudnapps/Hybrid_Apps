@@ -1,12 +1,18 @@
 (function () {
   angular.module('member', ['starter.services', 'login'])
     .controller('MemberCtrl',
-    function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService, $ionicActionSheet, orderStateService) {
+    function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService, $ionicActionSheet,
+              orderStateService, favoriteStateService) {
       $scope.currentUser = {};
 
       $scope.goOrders = function (type) {
         orderStateService.set(type);
         $state.go('orders');
+      };
+
+      $scope.goFavorites = function (type) {
+        favoriteStateService.set(type);
+        $state.go('favorites');
       };
 
       // 勿删,控制设置隐藏 displayBlur selt_set

@@ -3,7 +3,7 @@
     <div class="col-40 small-button">
       <div class="row">
         <div class="col-50">
-          <button class="button" ng-click="addGoodsFavorite()">收藏</button>
+          <button class="button" ng-disabled="product.good_has_fav" ng-click="addGoodsFavorite()">{{product.favTitle}}</button>
         </div>
         <div class="col-50">
           <button class="button" ui-sref="seller-detail({sellerId: product.seller_id})">进店</button>

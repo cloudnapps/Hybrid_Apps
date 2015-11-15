@@ -18,12 +18,12 @@
       <div class="row" style="padding: 0px;margin-top: 145px;opacity: 0.7;">
         <div class="col col-50 col-center"
              style="padding: 0px;background-color: #bd252c;text-align: center;border-right: 1px solid #fff;"
-             ui-sref="favorites({type:'sellers'})">
+             ng-click="goFavorites('sellers')">
           <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;display: block;">收藏的店铺</a>
         </div>
         <div class="col col-50 col-center"
              style="padding: 0px;background-color: #bd252c;text-align: center;"
-             ui-sref="favorites({type:'goods'})">
+             ng-click="goFavorites('goods')">
           <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;display: block;">收藏的商品</a>
         </div>
       </div>

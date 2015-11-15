@@ -9,7 +9,7 @@ angular
         showSpecModal: '=showSpecModal'
       },
       replace: true,
-      controller: function ($scope, cartApi, FavoriteApi, toastService, tabStateService, userService) {
+      controller: function ($scope, $state, cartApi, FavoriteApi, toastService, tabStateService, userService) {
         // 跨tab之间的跳转
         $scope.tabIndex = tabStateService.tabIndex;
         $scope.tabStateGo = tabStateService.go;
@@ -17,13 +17,17 @@ angular
         $scope.addGoodsFavorite = function () {
           userService.checkLogin({
             success: function () {
-              FavoriteApi
-                .addGoodsFavorite([$scope.product.goods_id], function (data) {
-                  if (data) {
-                    return toastService.setToast(data.msg);
-                  }
-                  toastService.setToast('添加失败');
-                });
+              FavoriteApi.addGoodsFavorite([$scope.product.goods_id], function (data) {
+                if (data.status === 1) {
+                  toastService.setToast(data.msg);
+                  $scope.product.good_has_fav = true;
+                  $scope.product.favTitle = $scope.product.good_has_fav ? '已收藏' : '收藏';
+                  $state.go('.', {}, {reload: true});
+                }
+                else {
+                  toastService.setToast(data.msg);
+                }
+              });
             }
           });
 

@@ -64,12 +64,14 @@
         $scope.sellerId = $stateParams.sellerId;
         $scope.item = {};
         $scope.item.title = '商户详情';
+        $scope.item.favTitle = '收藏店铺';
       };
 
       $scope.getSeller = function () {
         SellerApi.getSellerDetail($scope.sellerId, function (result) {
           $scope.item = result.data;
           $scope.item.title = $scope.item.once.name;
+          $scope.item.favTitle = $scope.item.once.seller_has_fav? '已收藏' : '收藏店铺';
           $scope.slideimgs = $scope.item.once.recommend;
 
           var promise = $interval(function () {
@@ -124,7 +126,10 @@
       var success = function (caller, args) {
         FavoriteApi.addSellerFavorite($scope.sellerId, function (data) {
           if (data) {
-            return toastService.setToast(data.msg);
+            toastService.setToast(data.msg);
+            $scope.item.once.seller_has_fav = true;
+            $scope.item.favTitle = $scope.item.once.seller_has_fav ? '已收藏' : '收藏店铺';
+            $state.go('.', {}, {reload: true});
           }
         });
       };
@@ -164,7 +169,7 @@
       });
     })
 
-    .factory('SellerApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
+    .factory('SellerApi', function ($http, apiEndpoint, userService, transformRequestAsFormPost) {
       var sendRequest = function (url, data, callback) {
         var request = $http({
           method: 'post',
@@ -204,7 +209,9 @@
       var getSellerDetail = function (sellerId, callback) {
         var url = apiEndpoint.url + '/seller.html';
         var data = {
-          seller_id: sellerId
+          seller_id: sellerId,
+          member_id: userService.get('memberId'),
+          token: userService.get('token')
         };
 
         sendRequest(url, data, callback);

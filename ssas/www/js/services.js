@@ -189,6 +189,17 @@ angular.module('starter.services', [])
     };
   })
 
+  .service('favoriteStateService', function(){
+    var currentStateType = null;
+    this.set = function(stateName){
+      currentStateType = stateName;
+    };
+
+    this.get = function(){
+      return currentStateType || 'sellers';
+    };
+  })
+
   .service('tabStateService', function ($timeout, $ionicTabsDelegate, $state) {
     /**
      * 跨tab页面跳转

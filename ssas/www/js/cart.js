@@ -1,6 +1,6 @@
 angular.module('cart', ['components'])
 
-  .controller('CartController', function ($scope, $state, $stateParams, $ionicHistory,
+  .controller('CartController', function ($scope, $state, $stateParams, $ionicHistory, $ionicListDelegate,
                                           $ionicLoading, cartApi, tabStateService, userService) {
 
     $scope.$on('$ionicView.beforeEnter', function () {
@@ -64,8 +64,14 @@ angular.module('cart', ['components'])
 
     $scope.toggleSeller = function (seller) {
       angular.forEach(seller.goods_list, function (item) {
-        item.selected = seller.seller_info.selected;
+        if (item.store > 0) {
+          item.selected = seller.seller_info.selected;
+        }
+        else {
+          item.selected = false;
+        }
       });
+
       $scope.toggleGoods(seller.goods_list);
     };
 

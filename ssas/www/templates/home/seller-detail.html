@@ -10,7 +10,8 @@
         </div>
         <div class="col col-67 col-center" style="padding: 0;text-align: right;">
           <button class="button button-assertive" style="min-width: 90px;min-height: 33px;line-height: 33px;"
-                  ng-click="addFavorite()">收藏店铺
+                  ng-click="addFavorite()"
+                  ng-disabled="item.once.seller_has_fav">{{item.favTitle}}
           </button>
         </div>
       </div>
@@ -46,7 +47,7 @@
         <div class="row" style="padding: 0;" ng-repeat="product in products" ng-if="$index % 2 === 0">
           <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
             <div class="new-prdt">
-              <a ui-sref="product({productId:products[$index].product_id})">  <img class="prdt-img" ng-src="{{products[$index].image}}">         
+              <a ui-sref="product({productId:products[$index].product_id})">  <img class="prdt-img" ng-src="{{products[$index].image}}">
                 <!-- <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div> -->
                 <div class="bg-color">
                   <div class="prdt-descb">{{products[$index].name}}</div>
