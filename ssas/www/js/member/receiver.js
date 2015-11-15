@@ -54,6 +54,7 @@
                                              ReceiverApi) {
       if ($stateParams.addrInfo) {
         $scope.addrInfo = JSON.parse($stateParams.addrInfo);
+        $scope.addrInfo.mobile = parseInt($scope.addrInfo.mobile);
         $scope.title = '更新收货地址';
       }
       else {
@@ -112,49 +113,6 @@
       ReceiverApi.getRegionInfo(function (result) {
         $scope.provinces = result;
       });
-
-      $scope.onProvinceChanged = function () {
-        $scope.addrInfo.address.city = '';
-        $scope.addrInfo.address.district = '';
-      };
-
-      $scope.onCityChanged = function () {
-        $scope.addrInfo.address.district = '';
-      };
-
-      $scope.isFinishedAddress = function () {
-        if (!$scope.addrInfo.address.province || !$scope.addrInfo.address.city ||
-          ($scope.addrInfo.address.city.children && $scope.addrInfo.address.city.children.length && !$scope.addrInfo.address.district)) {
-          return false;
-        }
-        else {
-          return true;
-        }
-      };
-
-      $scope.saveAddress = function () {
-        if (!$scope.isFinishedAddress()) {
-          return;
-        }
-
-        $scope.addrInfo.area = $scope.addrInfo.address.province.value + $scope.addrInfo.address.city.value;
-        $scope.addrInfo.region_id = $scope.addrInfo.address.province.id + ',' + $scope.addrInfo.address.city.id;
-
-        if ($scope.addrInfo.address.district) {
-          $scope.addrInfo.region_id = $scope.addrInfo.region_id + ',' + $scope.addrInfo.address.district.id;
-          $scope.addrInfo.area = $scope.addrInfo.area + $scope.addrInfo.address.district.value;
-        }
-
-        $scope.addrInfo.showChoose = false;
-        $scope.addrInfo.focusChoose = false;
-      };
-
-      $scope.addrInfo.showIdCard = false;
-      $scope.addrInfo.focusIdCard = false;
-      $scope.saveIdCard = function () {
-        $scope.addrInfo.showIdCard = false;
-        $scope.addrInfo.focusIdCard = false;
-      }
     })
 
     .factory('ReceiverApi', function ($http, apiEndpoint, userService, RegionApi, transformRequestAsFormPost) {

@@ -6,8 +6,8 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home', 'shop', 'cart',
-  'member', 'order', 'receiver', 'favorite', 'return', 'setting', 'login', 'point', 'seller', 'complaint',  'coupon',
-  'ngIOS9UIWebViewPatch'])
+  'member', 'order', 'receiver', 'favorite', 'return', 'setting', 'login', 'point', 'seller', 'complaint', 'coupon',
+  'ngIOS9UIWebViewPatch', 'ionic-citydata', 'ionic-citypicker'])
   //For the real endpoint, we'd use this
   .run(function ($ionicPlatform, $translate, userService, $rootScope, barcode, $ionicHistory) {
     $ionicPlatform.ready(function () {
@@ -34,7 +34,7 @@ var app = angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.transla
 
     userService.initFromLocal();
 
-    $rootScope.back = function(){
+    $rootScope.back = function () {
       $ionicHistory.goBack.apply($ionicHistory, arguments);
     };
     $rootScope.checkLogin = userService.checkLogin;

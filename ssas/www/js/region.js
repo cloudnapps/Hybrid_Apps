@@ -1,9 +1,7 @@
-(function(){
+(function () {
   angular.module('region', [])
 
     .factory('RegionApi', function ($http, apiEndpoint, transformRequestAsFormPost) {
-      console.log(apiEndpoint);
-
       var sendRequest = function (url, data, callback) {
         var request = $http({
           method: 'post',
