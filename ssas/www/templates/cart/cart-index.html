@@ -5,8 +5,8 @@
       <div class="nature-{{natureKey}}" ng-repeat="(natureKey, nature) in cart.natureCart">
         <ion-item class="item item-divider" ng-if="!$first"></ion-item>
         <ion-item class="nature item" style="padding: 0;">
-          <div class="row" style="padding: 0;">
-            <div class="item-checkbox col col-70 col-center" style="padding: 0;">
+          <div class="row" style="padding: 0 0 0 40px;">
+            <div class="item-checkbox col col-70 col-center" style="margin-left: 0;">
               <label class="checkbox">
                 <input type="checkbox" ng-model="nature.selected" ng-change="toggleNature(nature)">
               </label>
@@ -16,11 +16,8 @@
                     ng-if="natureKey === 'bond'">{{'bond_place'|translate}}</span>
               </div>
             </div>
-            <div class="col col-30 col-center" style="padding: 0;">
-              <button class="button-clear button-full" ng-click="editNature(nature)"
-                      style="font-size: 14px" >
-                {{headerBtnTitle}}
-              </button>
+            <div class="col col-30 col-center" style="padding: 0 10px 0 0;">
+              <span ng-click="editNature(nature)" style="font-size: 14px;line-height: 36px;text-align: right;display: block;">{{headerBtnTitle}}</span>
             </div>
           </div>
         </ion-item>
@@ -95,9 +92,7 @@
                 <span style="margin-top: 2px;">共计: {{nature.total_item_amount |currency:'￥'}} (不含运费)</span>
               </div>
             </div>
-            <button class="col-30 button button-full button-positive" style="margin:0;"
-                    ui-sref="tab.cart-checkout({nature: natureKey})"
-                    ng-disabled="nature.item_amount<0.01 || nature.lock_btn">
+            <button class="col-30 button button-full button-positive" style="margin:0;" ui-sref="tab.cart-checkout({nature: natureKey})" ng-disabled="nature.item_amount<0.01 || nature.lock_btn">
               {{'cart_checkout'|translate}}
             </button>
           </div>
