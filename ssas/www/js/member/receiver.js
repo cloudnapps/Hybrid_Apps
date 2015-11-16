@@ -71,9 +71,20 @@
         });
       };
 
-      $scope.$on('$ionicView.beforeEnter', function () {
-        $scope.loadCardList();
-      });
+      $scope.loadCardList();
+
+      $scope.showSpecModal = function () {
+        $ionicModal.fromTemplateUrl('templates/member/receiver-idcard-list.html', {
+          scope: $scope
+        }).then(function (modal) {
+          $scope.modal = modal;
+          $scope.modal.show();
+          $scope.hideModal = function () {
+            $scope.modal.hide();
+            $scope.modal.remove();
+          };
+        });
+      };
 
       $scope.addrInfo.showChoose = false;
       $scope.addrInfo.focusChoose = false;
@@ -110,9 +121,10 @@
         });
       };
 
-      ReceiverApi.getRegionInfo(function (result) {
+/*      ReceiverApi.getRegionInfo(function (result) {
         $scope.provinces = result;
-      });
+        alert(JSON.stringify($scope.provinces[0]));
+      });*/
     })
 
     .factory('ReceiverApi', function ($http, apiEndpoint, userService, RegionApi, transformRequestAsFormPost) {

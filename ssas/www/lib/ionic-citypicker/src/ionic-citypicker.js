@@ -1,7 +1,7 @@
 "use strict";
-var app = angular.module('ionic-citypicker', ['ionic']);
-app.directive('ionicCityPicker', ['$ionicPopup', '$timeout', 'CityPickerService', '$ionicScrollDelegate', '$ionicModal',
-  function ($ionicPopup, $timeout, CityPickerService, $ionicScrollDelegate, $ionicModal) {
+var app = angular.module('ionic-citypicker', ['ionic', 'receiver']);
+app.directive('ionicCityPicker', ['$ionicPopup', '$timeout', 'CityPickerService', '$ionicScrollDelegate', '$ionicModal', 'ReceiverApi',
+  function ($ionicPopup, $timeout, CityPickerService, $ionicScrollDelegate, $ionicModal, ReceiverApi) {
     return {
       restrict: 'AE',
       template: '<input type="text" style="width: 100%" placeholder={{vm.placeholder}} ng-model="citydata.area"  class={{vm.cssClass}} readonly>',
@@ -23,7 +23,13 @@ app.directive('ionicCityPicker', ['$ionicPopup', '$timeout', 'CityPickerService'
         vm.barCssClass = attrs.barCssClass || "bar-dark";
         vm.backdrop = scope.$eval(scope.backdrop) || false;
         vm.backdropClickToClose = scope.$eval(scope.backdropClickToClose) || false;
-        vm.cityData = CityPickerService.cityList;
+        vm.cityData = []; //CityPickerService.cityList;
+
+        ReceiverApi.getRegionInfo(function (result) {
+          vm.cityData = result;
+        });
+
+
         vm.tag = attrs.tag || "-";
         vm.returnOk = function () {
           citypickerModel && citypickerModel.hide();
