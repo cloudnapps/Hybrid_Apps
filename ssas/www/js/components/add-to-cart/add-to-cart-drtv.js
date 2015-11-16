@@ -18,7 +18,7 @@ angular
           userService.checkLogin({
             success: function () {
               FavoriteApi.addGoodsFavorite([$scope.product.goods_id], function (data) {
-                if (data.status === 1) {
+                if (data.status === 0) {
                   toastService.setToast(data.msg);
                   $scope.product.good_has_fav = true;
                   $scope.product.favTitle = $scope.product.good_has_fav ? '已收藏' : '收藏';
