@@ -4,44 +4,46 @@
     <ion-list ng-if="!!cart">
       <div class="nature-{{natureKey}}" ng-repeat="(natureKey, nature) in cart.natureCart">
         <ion-item class="item item-divider" ng-if="!$first"></ion-item>
-        <ion-item class="nature item">
-          <div class="item-checkbox">
-            <label class="checkbox">
-              <input type="checkbox" ng-model="nature.selected" ng-change="toggleNature(nature)">
-            </label>
+        <ion-item class="nature item" style="padding: 0;">
+          <div class="row" style="padding: 0;">
+            <div class="item-checkbox col col-70 col-center" style="padding: 0;">
+              <label class="checkbox">
+                <input type="checkbox" ng-model="nature.selected" ng-change="toggleNature(nature)">
+              </label>
 
-            <div class="item-name">{{natureKey|translate}}
+              <div class="item-name">{{natureKey|translate}}
               <span style="font-size: 10px;padding-left: 0.5em;"
-                    ng-if="natureKey === 'bond'">{{'bond_place'|translate}}</span></div>
+                    ng-if="natureKey === 'bond'">{{'bond_place'|translate}}</span>
+              </div>
+            </div>
+            <div class="col col-30 col-center" style="padding: 0;">
+              <button class="button-clear button-full" ng-click="editNature(nature)"
+                      style="font-size: 14px" >
+                {{headerBtnTitle}}
+              </button>
+            </div>
           </div>
-
-          <ion-option-button class="button-assertive" ng-click="removeNature(nature)">
-            {{'remove' | translate}}
-          </ion-option-button>
         </ion-item>
 
         <div ng-repeat="seller in nature.aSelCart">
           <ion-item class="seller item">
-            <div class="row">
-              <div class="item-checkbox  col col-70">
-                <label class="checkbox">
-                  <input type="checkbox" ng-model="seller.seller_info.selected" ng-change="toggleSeller(seller)">
-                </label>
-                <!--             <a class="item-content" href="#/tab/seller/{{seller.seller_info.seller_id}}">{{seller.seller_info.seller_name}}<i class="icon ion-chevron-right icon-accessory"></i></a> -->
-                <div style="color: #4a4a4a;">{{seller.seller_info.seller_name}}</div>
-              </div>
-              <div align="right" class="col col-30">
-                <a class="button-assertive" ng-click="removeSeller(seller)">
-                  {{'remove' | translate}}
-                </a>
-              </div>
+            <div class="item-checkbox">
+              <label class="checkbox">
+                <input type="checkbox" ng-model="seller.seller_info.selected" ng-change="toggleSeller(seller)">
+              </label>
+
+              <div style="color: #4a4a4a;">{{seller.seller_info.seller_name}}</div>
             </div>
+            <ion-option-button class="button-assertive" ng-click="removeSeller(seller)">
+              {{'remove' | translate}}
+            </ion-option-button>
           </ion-item>
-          <ion-list delegate-handle="aaa">
+          <ion-list>
             <ion-item class="good item" ng-repeat="good in seller.goods_list">
               <div class="item-checkbox">
                 <label class="checkbox">
-                  <input type="checkbox" class="selt-prdt" ng-disabled="good.store === 0" ng-model="good.selected" ng-change="toggleGood(good)">
+                  <input type="checkbox" class="selt-prdt" ng-disabled="good.store === 0" ng-model="good.selected"
+                         ng-change="toggleGood(good)">
                 </label>
 
                 <div class="row row-no-padding">
@@ -84,7 +86,7 @@
             </div>
           </div>
         </ion-item>
-        <ion-item class="item item-complex">
+        <ion-item class="item item-complex" ng-show="!isEdit">
           <div class="row row-no-padding">
             <div class="col car-tol-price">
               <div class="item-content car-cont">
@@ -97,6 +99,17 @@
                     ui-sref="tab.cart-checkout({nature: natureKey})"
                     ng-disabled="nature.item_amount<0.01 || nature.lock_btn">
               {{'cart_checkout'|translate}}
+            </button>
+          </div>
+        </ion-item>
+        <ion-item class="item item-complex" ng-show="isEdit">
+          <div class="row row-no-padding">
+            <div class="col car-tol-price">
+            </div>
+            <button class="col-30 button button-full button-positive" style="margin:0;"
+                    ng-disabled="nature.item_amount<0.01"
+                    ng-click="removeNature(nature)">
+              {{'remove'|translate}}
             </button>
           </div>
         </ion-item>

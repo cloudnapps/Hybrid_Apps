@@ -7,6 +7,9 @@ angular.module('cart', ['components'])
       userService.checkLogin('tab.cart');
     });
 
+    $scope.isEdit = false;
+    $scope.headerBtnTitle = '编辑';
+
     $scope.load = function () {
       $ionicLoading.show();
       cartApi.getCart().success(function (responseData) {
@@ -105,16 +108,28 @@ angular.module('cart', ['components'])
         });
     };
 
+    $scope.editNature = function (nature) {
+      $scope.isEdit = !$scope.isEdit;
+
+      $scope.headerBtnTitle = $scope.isEdit ? '完成' : '编辑';
+    };
+
     $scope.removeNature = function (nature) {
-      var goods = [];
-      angular.forEach(nature.aSelCart, function (seller) {
-        seller.seller_info.selected = nature.selected;
-        angular.forEach(seller.goods_list, function (item) {
-          item.selected = seller.seller_info.selected;
-          goods.push(item);
+      if ($scope.isEdit) {
+        var goods = [];
+        angular.forEach(nature.aSelCart, function (seller) {
+          angular.forEach(seller.goods_list, function (item) {
+            if (item.selected) {
+              goods.push(item);
+            }
+          });
         });
-      });
-      $scope.removeGoods(goods);
+        $scope.removeGoods(goods);
+
+        $scope.isEdit = false;
+      }
+
+      $scope.headerBtnTitle = $scope.isEdit ? '完成' : '编辑';
     };
 
     $scope.removeSeller = function (seller) {
