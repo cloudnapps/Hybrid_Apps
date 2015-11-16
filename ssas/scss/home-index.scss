@@ -68,6 +68,9 @@
 /* 热门分类 end */
 /* 新品特惠 start*/
 .new-prdt-title {
+  padding: 0;
+  margin: 0;
+
   .camp-title-left {
    padding: 0;
    margin: 0;
@@ -160,7 +163,6 @@
 
 /* 楼层循环 */
 .index-prdt-cont {
-  padding-top: 5px;
   .pad-5 {
     padding: 3px 1px 10px;
   }
@@ -215,6 +217,9 @@
 /* 新品特惠 end*/
 /* 热门标签 start*/
 .nav-bar-title {
+  padding: 0 0 5px;
+  margin: 0;
+
   .nav-title-left{
    padding: 0;
    margin: 0;

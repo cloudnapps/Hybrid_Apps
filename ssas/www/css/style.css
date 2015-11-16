@@ -314,3 +314,7 @@ hr {
 input[readonly]:not(.cloned-text-input) {
   background-color: #fff;
 }
+.row + .row {
+  margin-top: 0;
+  padding-top: 0;
+}
