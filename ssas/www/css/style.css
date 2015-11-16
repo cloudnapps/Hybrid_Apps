@@ -96,7 +96,7 @@ hr {
   width: 20px;
   height: 20px;
   vertical-align: middle;
-  background-color: #cfcfcf;
+  background-color: #c8c8c8;
   border-radius: 50%;
   top: 0;
   left: -10px;
@@ -120,14 +120,14 @@ hr {
 
 .user-order-track .track-location {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   color: #4a4b4d;
 }
 
 .user-order-track .track-time {
   margin: 3px 0 0;
   padding-bottom: 20px;
-  font-size: 16px;
+  font-size: 14px;
   color: #4a4b4d;
 }
 
