@@ -50,8 +50,8 @@
       };
     })
 
-    .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicHistory,
-                                             ReceiverApi) {
+    .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, toastService,
+                                             $ionicModal, ReceiverApi) {
       if ($stateParams.addrInfo) {
         $scope.addrInfo = JSON.parse($stateParams.addrInfo);
         $scope.addrInfo.mobile = parseInt($scope.addrInfo.mobile);
@@ -86,12 +86,6 @@
         });
       };
 
-      $scope.addrInfo.showChoose = false;
-      $scope.addrInfo.focusChoose = false;
-      if (!$scope.addrInfo.address) {
-        $scope.addrInfo.address = {};
-      }
-
       $scope.add = function () {
         var addrInfo = {
           'addr_id': $scope.addrInfo.addr_id,
@@ -106,25 +100,13 @@
         };
 
         ReceiverApi.addReceiver(addrInfo, function (result) {
+          toastService.setToast(result.msg);
+
           if (result.status === 0) {
-            $ionicHistory.goBack();
-          }
-          else {
-            var alertPopup = $ionicPopup.alert({
-              title: '添加收货地址',
-              template: result.msg
-            });
-            alertPopup.then(function (res) {
-              console.log(res);
-            });
+            $scope.back();
           }
         });
       };
-
-/*      ReceiverApi.getRegionInfo(function (result) {
-        $scope.provinces = result;
-        alert(JSON.stringify($scope.provinces[0]));
-      });*/
     })
 
     .factory('ReceiverApi', function ($http, apiEndpoint, userService, RegionApi, transformRequestAsFormPost) {

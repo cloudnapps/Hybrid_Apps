@@ -9,14 +9,12 @@
       </label>
 
       <div class="item item-input"
-           style="background-color: #fff;"
-           ng-click="addrInfo.showChoose=false; ">
+           style="background-color: #fff;">
         <div class="col col-80" style="padding: 0px">
           <input type="text" ng-model="addrInfo.number" placeholder="请输入身份证号">
         </div>
-        <div class="col col-20" style="padding: 0px" ng-show="false">
-          <button class="button button-clear button-positive" style="font-size: 14px" ng-click="showSpecModal()">选择
-          </button>
+        <div class="col col-20" style="padding: 0px;" ng-show="cardList && cardList.length > 0">
+          <span ng-click="showSpecModal()" style="font-size: 14px;line-height: 36px;text-align: right;display: block; margin-right: 10px">选择</span>
         </div>
       </div>
 
@@ -52,6 +50,7 @@
 
       <div class="detail" style="padding-left: 5px">
         <p>身份证说明</p>
+
         <p>由于法规要求，跨境购物需要您填写收件人身份证信息。收件人请使用和身份证号对应的真实姓名，否则您购买的物品将无法通过海关检查!</p>
       </div>
     </div>
