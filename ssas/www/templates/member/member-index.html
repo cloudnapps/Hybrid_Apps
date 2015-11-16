@@ -3,33 +3,28 @@
     <a class="icon ion-gear-b button button-clear" ng-click="selt_set()"> </a>
   </ion-nav-buttons>
   <ion-content>
-    <div class="row"
-         style="padding: 0;background-color: #fff;background-image: url('img/me.jpg');background-position: 5% 50%;background-repeat: no-repeat;background-size: cover;background-origin:content-box;width: 100%;height:190px;position: relative;">
-      <div class="row" style="padding: 0;position:absolute;top: 33px;padding-left: 16px;margin-top: 2px;"
-           ui-sref="settings">
-        <div class="col col-33 col-center" style="text-align: center;padding: 0;">
-          <img ng-src="{{currentUser.image}}" style="height: 100px;width: 100px;border-radius: 50% 50%;">
+    <div class="row member-header-bgm">
+      <div class="row mem-user-info" ui-sref="settings">
+        <div class="col col-33 user-info-logo">
+          <img ng-src="{{currentUser.image}}">
         </div>
-        <div class="col col-67 col-center" style="padding: 0;font-size: 14px;color: #333333;margin: 46px 0 0 14px;">
+        <div class="col col-67 user-info-msg">
           <p>{{currentUser.login_name}}</p>
           <p>会员等级：{{currentUser.lv_name}}</p>
         </div>
       </div>
-      <div class="row" style="padding: 0px;margin-top: 145px;opacity: 0.7;">
-        <div class="col col-50 col-center"
-             style="padding: 0px;background-color: #bd252c;text-align: center;border-right: 1px solid #fff;"
-             ng-click="goFavorites('sellers')">
-          <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;display: block;">收藏的店铺</a>
+      <hr class="hr-line-0" />
+      <div class="row member-collect">
+        <div class="col col-50 colt-item" ng-click="goFavorites('sellers')">
+          <a class="colt-text" href="">收藏的店铺</a>
         </div>
-        <div class="col col-50 col-center"
-             style="padding: 0px;background-color: #bd252c;text-align: center;"
-             ng-click="goFavorites('goods')">
-          <a class="button button-clear " style="font-size:16px;padding: 0;border: none;color: #fff;display: block;">收藏的商品</a>
+        <div class="col col-50 colt-item" ng-click="goFavorites('goods')">
+          <a class="colt-text">收藏的商品</a>
         </div>
       </div>
     </div>
-
-    <hr class="hr-line-1" />
+    
+    <hr class="hr-line-0" />
 
     <div class="row member-bar">
       <div class="col col-20 member-bar-item" ng-click="goOrders('nopay')">
@@ -56,10 +51,10 @@
     <hr class="hr-line-1" />
 
     <div class="row main-fun" ng-click="goOrders('all')">
-      <div class="col col-90 col-center fun-item">
+      <div class="col col-90 fun-item">
         <a class="fun-item-text">全部订单</a>
       </div>
-      <div class="col col-10 col-center fun-item-arrow">
+      <div class="col col-10 fun-item-arrow">
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
@@ -67,10 +62,10 @@
     <hr class="hr-line-10" />
 
     <div class="row main-fun" ui-sref="points">
-      <div class="col col-80 col-center fun-item">
+      <div class="col col-80 fun-item">
         <a class="fun-item-text">我的积分</a>
       </div>
-      <div class="col col-20 col-center fun-item-arrow">
+      <div class="col col-20 fun-item-arrow">
         <span class="fun-item-arrow-num">{{currentUser.point}}</span>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
@@ -79,10 +74,10 @@
     <hr class="hr-line-2" />
 
     <div class="row main-fun" ui-sref="golds">
-      <div class="col col-80 col-center fun-item">
+      <div class="col col-80 fun-item">
         <a class="fun-item-text">我的金币</a>
       </div>
-      <div class="col col-20 col-center fun-item-arrow">
+      <div class="col col-20 fun-item-arrow">
         <span class="fun-item-arrow-num">{{currentUser.gold_count}}</span>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
@@ -91,10 +86,10 @@
     <hr class="hr-line-2" />
 
     <div class="row main-fun" ui-sref="coupons">
-      <div class="col col-80 col-center fun-item">
+      <div class="col col-80 fun-item">
         <a class="fun-item-text">我的优惠券</a>
       </div>
-      <div class="col col-20 col-center fun-item-arrow">
+      <div class="col col-20 fun-item-arrow">
         <span class="fun-item-arrow-num">{{currentUser.coupon_num}}</span>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
@@ -103,10 +98,10 @@
     <hr class="hr-line-10" />
 
     <div class="row main-fun" ui-sref="receivers">
-      <div class="col col-90 col-center fun-item">
+      <div class="col col-90 fun-item">
         <a class="fun-item-text">收货地址管理</a>
       </div>
-      <div class="col col-10 col-center fun-item-arrow">
+      <div class="col col-10 fun-item-arrow">
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
@@ -114,10 +109,10 @@
     <hr class="hr-line-2" />
 
     <div class="row main-fun" ui-sref="idcards">
-      <div class="col col-90 col-center fun-item">
+      <div class="col col-90 fun-item">
         <a class="fun-item-text">身份证管理</a>
       </div>
-      <div class="col col-10 col-center fun-item-arrow">
+      <div class="col col-10 fun-item-arrow">
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>

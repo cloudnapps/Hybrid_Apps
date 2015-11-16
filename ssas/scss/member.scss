@@ -1,5 +1,9 @@
 $text-color: #4a4a4a;
 $red-color: #bd252c;
+$white-color: #fff;
+.hr-line-0 {
+  @include hr-divide-line(0, $white-color);
+}
 
 .hr-line-1 {
   @include hr-divide-line(1px, #c8c8c8);
@@ -44,7 +48,7 @@ $red-color: #bd252c;
         background: $red-color;
         overflow: hidden;
         @include border-radius(50%);
-        color: #fff;
+        color: $white-color;
         text-align: center;
         line-height: 16px;
         font-size: 10px;
@@ -59,7 +63,7 @@ $red-color: #bd252c;
   line-height: 40px;
 
   .fun-item {
-    padding: 0px;
+    padding: 0;
     height: 40px;
     font-size: 14px;
 
@@ -70,7 +74,7 @@ $red-color: #bd252c;
   }
 
   .fun-item-arrow {
-    padding: 0px;
+    padding: 0;
     height: 40px;
     text-align: right;
 
@@ -78,6 +82,71 @@ $red-color: #bd252c;
       color: $red-color;
       font-size: 12px;
       margin-right: 5px;
+    }
+  }
+}
+
+.member-collect {
+  padding: 0;
+  margin-top: 141px;
+  @include opacity(0.7);
+
+  .colt-item {
+    padding: 0px;
+    background-color: $red-color;
+    text-align: center;
+
+    &:first-child {
+      border-right: 1px solid $white-color;
+    }
+
+    .colt-text {
+      line-height: 49px;
+      display: block;
+      font-size:16px;
+      padding: 0;
+      text-decoration: none;
+      color: $white-color;
+      font-weight: 500;
+    }
+  }
+}
+
+.member-header-bgm {
+  padding: 0;
+  background-color: $white-color;
+  background-image: url('../img/me.jpg');
+  background-position: 5% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-origin:content-box;
+  width: 100%;
+  height:190px;
+  position: relative;
+
+  .mem-user-info {
+    padding: 0;
+    position:absolute;
+    top: 33px;
+    padding-left: 16px;
+    margin-top: 2px;
+
+    .user-info-logo {
+      text-align: center;
+      padding: 0;
+
+      img {
+        height: 100px;
+        width: 100px;
+        @include border-radius(50%);
+      }
+    }
+
+    .user-info-msg {
+      padding: 0;
+      font-size: 14px;
+      color: $text-color;
+      margin: 46px 0 0 14px;
     }
   }
 }

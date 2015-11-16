@@ -13,3 +13,9 @@
   border: none;
   border-top: $width solid $color;
 }
+
+// 透明度兼容性
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  filter: alpha(opacity=$opacity * 100);
+}
