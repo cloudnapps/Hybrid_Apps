@@ -8,7 +8,7 @@
         <input type="radio" name="group" ng-model="addrInfo.number" ng-value="idcard.number">
 
         <div class="item-content">
-          {{idcard.number}}
+          <p>{{idcard.number}} <span style="font-size: 14px">({{idcard.full_name}})</span></p>
         </div>
         <i class="radio-icon ion-checkmark"></i>
       </label>
@@ -17,7 +17,7 @@
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
     <div class="button-bar">
       <button class="button button-dark" ng-click="hideModal()">返回</button>
-      <button class="button button-energized" ng-click="hideModal()">确定</button>
+      <button class="button button-energized" ng-click="selectIdCard(); hideModal()">确定</button>
     </div>
   </ion-footer-bar>
 </ion-modal-view>

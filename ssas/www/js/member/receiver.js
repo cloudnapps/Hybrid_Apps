@@ -86,6 +86,14 @@
         });
       };
 
+      $scope.selectIdCard = function () {
+        angular.forEach($scope.cardList, function(item){
+          if(item.number === $scope.addrInfo.number) {
+            $scope.addrInfo.name = item.full_name;
+          }
+        })
+      };
+
       $scope.add = function () {
         var addrInfo = {
           'addr_id': $scope.addrInfo.addr_id,
