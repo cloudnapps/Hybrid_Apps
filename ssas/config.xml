@@ -17,10 +17,10 @@
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name="deployment-target" value="8.0" />
-  <preference name="serverURL" value="https://demo.ibeacon.cloudnapps.com" />
-  <preference name="appKey" value="55e556e837b5268c0565a077" />
-  <preference name="appSecret" value="fbb45ff6-7441-4e9c-8522-06c4ee3fe5f0" />  
-  <preference name="beaconUUID" value="1397E5D0-E1C7-472F-A1B4-8A2078014CED" />
+  <preference name="serverURL" value="http://ibeacon.ctfhoko.com" />
+  <preference name="appKey" value="5647580b821ffd323a9141c7" />
+  <preference name="appSecret" value="93522031-80b1-4aff-828f-d2bf2795400f" />  
+  <preference name="beaconUUID" value="E5430ADC-59EC-4815-90E1-9A19970B9F16" />
   <preference name="cityID" value="0755" />
   <preference name="buildingID" value="07550002" />
   <preference name="userID" value="ty4e13f85911a44a75" />
