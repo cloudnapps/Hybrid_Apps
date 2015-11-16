@@ -303,9 +303,14 @@ hr {
 .comment p {
   white-space: normal;
 }
+
+/* 勿删 */
 .bar .title {
   margin: 0;
 }
 .bar .buttons-left span {
   right: 0;
+}
+input[readonly]:not(.cloned-text-input) {
+  background-color: #fff;
 }
