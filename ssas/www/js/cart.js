@@ -110,7 +110,7 @@ angular.module('cart', ['components'])
 
     $scope.editNature = function (nature) {
       $scope.isEdit = !$scope.isEdit;
-
+      console.log(nature);
       $scope.headerBtnTitle = $scope.isEdit ? '完成' : '编辑';
     };
 

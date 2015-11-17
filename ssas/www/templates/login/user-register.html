@@ -3,44 +3,42 @@
     <back-button></back-button>
   </ion-nav-buttons>
   <ion-content>
-    <div class="list">
+    <div class="list user-register">
       <!-- 手机号 -->
-      <label class="item item-input">
-        <span class="input-label" style="max-width: 5em;color: #333;">手机号码：</span>
-        <input type="tel" ng-model="userInfo.mobile" placeholder="请输入手机号码">
+      <label class="item item-input form-item">
+        <span class="input-label form-label">手机号码：</span>
+        <input type="tel" class="form-tip" ng-model="userInfo.mobile" placeholder="请输入手机号码">
       </label>
       <!-- 验证码 -->
-      <div class="item item-input" style="padding: 0 0 0 16px;position: relative;">
-        <span class="input-label" style="max-width: 4em;color: #333;padding: 13px 10px 12px 0;">验证码：</span>
-        <input type="number" ng-model="userInfo.signCode" style="padding-right: 112px;">
-        <button
-          style="font-size:14px;position: absolute;right: 0;width: 100px;height: 45px;background-color: #bd252c;border: 1px solid #bd252c;color: #fff;font-weight: 500;"
-          ng-click="getSignCode()">{{reSendCodeTime <= 0 ? '获取验证码' : ('重新发送(' + reSendCodeTime + ')')}}
-        </button>
+      <div class="row" style="padding: 0;">
+        <div class="col form-item" style="display: inherit;">
+          <span class="form-label">验证码：</span>
+          <input type="number" class="form-tip" placeholder="验证码" ng-model="userInfo.signCode"/>
+        </div>
+        <div class="send-code">
+          <button class="code-num" ng-click="getSignCode()">{{reSendCodeTime <= 0 ? '获取验证码' : ('重新发送(' + reSendCodeTime + ')')}}
+          </button>
+        </div>
       </div>
       <!-- 密码 -->
-      <label class="item item-input">
-        <span class="input-label" style="max-width: 5em;color: #333;">输入密码：</span>
-        <input type="password" ng-model="userInfo.password" placeholder="密码不少于6位">
+      <label class="item item-input form-item">
+        <span class="input-label form-label">输入密码：</span>
+        <input type="password" class="form-tip" ng-model="userInfo.password" placeholder="密码不少于6位">
       </label>
       <!-- 确认密码 -->
-      <label class="item item-input">
-        <span class="input-label" style="max-width: 5em;color: #333;">确认密码：</span>
-        <input type="password" ng-model="userInfo.confirmPwd" placeholder="请再次输入密码">
+      <label class="item item-input form-item">
+        <span class="input-label form-label">确认密码：</span>
+        <input type="password" class="form-tip" ng-model="userInfo.confirmPwd" placeholder="请再次输入密码">
       </label>
       <!-- 注册条款 -->
-      <div class="item item-input">
+      <div class="item item-input" style="padding-left: 10px;">
         <label class="toggle">
           <input type="checkbox" ng-model="userInfo.license">
-
           <div class="track">
             <div class="handle"></div>
           </div>
         </label>
-
-        <div style="position: relative;color: #333;margin-left: 5px;font-size: 14px;">
-          同意<a ui-sref="usercopyright" style="text-decoration: none;margin-left: 2px;color: #bd252c;">用户注册协议</a>
-        </div>
+        <div class="cp-item">同意<a ui-sref="usercopyright">用户注册协议</a></div>
       </div>
     </div>
   </ion-content>
