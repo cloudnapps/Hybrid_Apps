@@ -52,7 +52,7 @@
       };
     }) // end of SellersListController
 
-    .controller('SellerDetailController', function ($scope, $stateParams, $timeout, $ionicSlideBoxDelegate,
+    .controller('SellerDetailController', function ($scope, $state, $stateParams, $timeout, $ionicSlideBoxDelegate,
                                                     SellerApi, shopApi, FavoriteApi, userService, toastService,
                                                     $interval) {
       $scope.init = function () {
@@ -71,7 +71,7 @@
         SellerApi.getSellerDetail($scope.sellerId, function (result) {
           $scope.item = result.data;
           $scope.item.title = $scope.item.once.name;
-          $scope.item.favTitle = $scope.item.once.seller_has_fav? '已收藏' : '收藏店铺';
+          $scope.item.favTitle = $scope.item.once.seller_has_fav ? '已收藏' : '收藏店铺';
           $scope.slideimgs = $scope.item.once.recommend;
 
           var promise = $interval(function () {
