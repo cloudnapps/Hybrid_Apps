@@ -13,7 +13,7 @@
           <span ng-click="showSpecModal()" style="font-size: 14px;line-height: 36px;text-align: right;display: block; margin-right: 10px">选择</span>
         </div>
       </div>
-      
+
       <label class="item item-input" style="background-color: #fff;">
         <input type="text" ng-model="addrInfo.name" placeholder="请输入姓名">
       </label>
@@ -56,7 +56,8 @@
     <div class="button-bar">
       <button class="button button-positive"
               style="font-size: 18px;"
-              ng-click="add()">
+              ng-click="clicked || add()"
+              ng-disabled="clicked">
         确定
       </button>
     </div>

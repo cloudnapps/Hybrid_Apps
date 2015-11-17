@@ -94,7 +94,10 @@
         })
       };
 
+      $scope.clicked = false;
       $scope.add = function () {
+        $scope.clicked = true;
+
         var addrInfo = {
           'addr_id': $scope.addrInfo.addr_id,
           'region_id': $scope.addrInfo.region_id,
@@ -108,6 +111,8 @@
         };
 
         ReceiverApi.addReceiver(addrInfo, function (result) {
+          $scope.clicked = false;
+
           toastService.setToast(result.msg);
 
           if (result.status === 0) {

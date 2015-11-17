@@ -24,6 +24,7 @@
         $scope.back();
         userService.goNext();
       };
+
       $scope.clicked = false;
       $scope.login = function () {
         $scope.clicked = true;
@@ -37,6 +38,7 @@
           }
         });
       };
+
       $scope.reSendCodeTime = 0;
       $scope.getSignCode = function () {
         if (!$scope.userInfo.mobile) {
@@ -96,8 +98,10 @@
       };
 
       $scope.logonByWechat = function () {
+        $scope.clicked = true;
         var scope = 'snsapi_userinfo';
         wechat.auth(scope, function (cb_success) {
+            $scope.clicked = false;
             LoginApi.getOpenId(cb_success.code, function (result) {
               LoginApi.loginByWechatId(result.openid, function (result) {
                 if (result.status === 1) {
@@ -117,6 +121,7 @@
             });
           },
           function (cb_failure) {
+            $scope.clicked = false;
           });
       };
 

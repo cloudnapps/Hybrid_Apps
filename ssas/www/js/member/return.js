@@ -20,25 +20,17 @@
         }
       });
 
-      $scope.select = function (item) {
-        item.selected = true;
-      };
+      $scope.clicked = false;
+      $scope.submitRequest = function () {
+        $scope.clicked = true;
 
-      $scope.saveReturnType = function () {
         if ($scope.returnInfo.typeDesc === '退货退款') {
           $scope.returnInfo.type = 'reship';
         }
         else if ($scope.returnInfo.typeDesc === '仅退款') {
           $scope.returnInfo.type = 'refund';
         }
-        $scope.returnInfo.showReturnType = false
-      };
 
-      $scope.saveReturnTitle = function () {
-        $scope.returnInfo.showReturnTitle = false
-      };
-
-      $scope.submitRequest = function () {
         var i;
         for (i in $scope.orderInfo.product) {
           if ($scope.orderInfo.product[i].selected) {
@@ -50,6 +42,7 @@
         ReturnApi.addReturnRequest($scope.orderInfo.order_id, $scope.returnInfo.type,
           $scope.returnInfo.title, $scope.returnInfo.content, $scope.returnInfo.product,
           function (result) {
+            $scope.clicked = false;
             toastService.setToast(result.msg);
 
             if (result.status === 0) {

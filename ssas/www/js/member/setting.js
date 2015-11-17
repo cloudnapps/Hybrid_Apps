@@ -276,10 +276,14 @@
         $scope.title = '新建身份证';
       }
 
-
+      $scope.clicked = false;
       $scope.add = function () {
+        $scope.clicked = true;
+
         if ($scope.idCardInfo.card_id) {
           SettingApi.setDefaultIdCard($scope.idCardInfo.card_id, function (result) {
+            $scope.clicked = false;
+
             toastService.setToast(result.msg);
 
             if (result.status === 0) {
@@ -295,6 +299,8 @@
           };
 
           SettingApi.addIdCard(data, function (result) {
+            $scope.clicked = false;
+
             toastService.setToast(result.msg);
 
             if (result.status === 0) {

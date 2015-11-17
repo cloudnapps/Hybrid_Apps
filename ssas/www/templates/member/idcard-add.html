@@ -27,11 +27,10 @@
 
     <div class="button-bar">
       <button class="button button-positive" style="font-size: 18px;"
-              ng-click="add()">
+              ng-click="clicked || add()"
+              ng-disabled="clicked">
         确定
       </button>
     </div>
   </ion-content>
-  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
-  </ion-footer-bar>
 </ion-view>

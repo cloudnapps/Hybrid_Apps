@@ -42,7 +42,7 @@
     <ion-item class="good item" style="border-top: none;" ng-repeat="item in orderInfo.product">
       <div class="item-checkbox">
         <label class="checkbox">
-          <input type="checkbox" class="selt-prdt" ng-model="item.selected" ng-change="toggleGood(good)">
+          <input type="checkbox" class="selt-prdt" ng-model="item.selected">
         </label>
 
         <div class="row row-no-padding">
@@ -63,33 +63,11 @@
         </div>
       </div>
     </ion-item>
-
-    <div ng-show="returnInfo.showReturnTitle">
-      <div class="button-bar">
-        <div class="row">
-          <div class="col col-100" align="right">
-            <button class="button button-clear button-positive" style="font-size:16px;"
-                    ng-click="saveReturnTitle()">
-              完成
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="list">
-        <label class="item item-select">
-          <select ng-model="returnInfo.title">
-            <option>质量原因</option>
-            <option>物实不符</option>
-            <option>现在不想购买</option>
-          </select>
-        </label>
-      </div>
-    </div>
-
     <div class="button-bar">
       <button class="button button-positive"
               style="font-size: 18px;"
-              ng-click="submitRequest()">
+              ng-click="clicked || submitRequest()"
+              ng-disabled="clicked">
         {{'return_addbtn'|translate}}
       </button>
     </div>

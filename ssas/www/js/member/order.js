@@ -302,8 +302,13 @@
         $scope.commentInfo.seller_point[3].value = level;
       };
 
+      $scope.clicked = false;
       $scope.submitRequest = function () {
+        $scope.clicked = true;
+
         OrderApi.saveMemberRate($scope.commentInfo, function (result) {
+          $scope.clicked = false;
+
           toastService.setToast(result.msg);
           if (result.status === 0) {
             $scope.back();
