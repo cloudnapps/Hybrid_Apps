@@ -2,7 +2,7 @@
   angular.module('home', ['seller', 'point'])
     .controller('HomeController', function ($scope, $ionicSlideBoxDelegate, $ionicLoading, toastService,
                                             $rootScope, barcode, $cordovaInAppBrowser, userService, $ionicPopup,
-                                            $state, $ionicPopover, $window, $interval, $ionicScrollDelegate,
+                                            $state, $ionicPopover, $window, $interval, $ionicScrollDelegate, $timeout,
                                             HomeApi, SellerApi, $http, shopApi) {
       $scope.homeInfo = {};
       $scope.sellerInfo = {};
@@ -72,7 +72,10 @@
         HomeApi.getHomeContent().then(function (result) {
           $scope.homeInfo = result.data.data;
 
-          $scope.slideimgs = $scope.homeInfo.once;
+          $scope.slideimgs = [];
+          $timeout(function(){
+            $scope.slideimgs = $scope.homeInfo.once;
+          }, 0);
           $scope.activityInfo = $scope.homeInfo.act_info;
 
           $scope.getProducts = function () {
