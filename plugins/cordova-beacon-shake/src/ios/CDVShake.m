@@ -166,6 +166,47 @@
         CAWebSiteCampaign *webSiteCampaign = (CAWebSiteCampaign *)campaign;
         [self showWebSiteCampaign:webSiteCampaign];
     }
+    else if([campaign isKindOfClass:[CAPictureCampaign class]])
+    {
+        CAPictureCampaign* picCampaign = (CAPictureCampaign *)campaign;
+        [self showPictureCampaign:picCampaign];
+    }
+}
+
+//picture
+- (void)showPictureCampaign:(CAPictureCampaign *)picCampaign
+{
+    BOOL bHeavyMotion = NO;
+    CGFloat acceleration1 = _motionManager.accelerometerData.acceleration.x;
+    CGFloat acceleration2 = _motionManager.accelerometerData.acceleration.y;
+    CGFloat acceleration3 = _motionManager.accelerometerData.acceleration.z;
+    if(fabs(acceleration1) > 1.0f || fabs(acceleration2) > 1.0f || fabs(acceleration3) > 1.1f )
+    {
+        bHeavyMotion = YES;
+    }
+    if((bHeavyMotion || _tryCount == 0) && [_prevCampaginId isEqualToString: picCampaign.cid] && _tryCount < MAX_RETRY)
+    {
+        _tryCount += 1;
+        [self performSelector:@selector(shake) withObject:nil  afterDelay:TIME_INTERNVAL*2];
+    }
+    else
+    {
+        [_motionManager stopAccelerometerUpdates];
+        _labelView.text = @"";
+        _prevCampaginId = picCampaign.cid;
+        WebViewController* web = [[WebViewController alloc] init];
+        web.title = picCampaign.name;
+        if (picCampaign.imageURLs) 
+        {
+            NSArray *imageArray = picCampaign.imageURLs;
+            if (imageArray.count) 
+            {
+                web.url = imageArray[0];
+                web.campaign = picCampaign;
+                [self.navigationController pushViewController:web animated:YES];
+            }
+        }
+    }
 }
 
 //web site
