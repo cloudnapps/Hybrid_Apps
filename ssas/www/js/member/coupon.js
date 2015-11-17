@@ -1,18 +1,33 @@
 (function () {
   angular.module('coupon', ['starter.services'])
 
-    .controller('CouponsCtrl', function ($scope, $state, $ionicPopup, CouponApi) {
+    .controller('CouponsCtrl', function ($scope, $state, $ionicPopup, $ionicLoading, CouponApi) {
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;
+        $scope.hasMore = false;
       };
 
       $scope.getCoupons = function () {
+        $ionicLoading.show();
         CouponApi.getCouponList($scope.page, function (result) {
-          if (result.data) {
+          $ionicLoading.hide();
+
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.hasMore = true;
             $scope.items = $scope.items.concat(result.data);
           }
+
+          $scope.$broadcast('scroll.infiniteScrollComplete');
         });
+      };
+
+      $scope.loadMore = function () {
+        $scope.page++;
+        $scope.getCoupons();
       };
 
       $scope.$on('$ionicView.beforeEnter', function () {
