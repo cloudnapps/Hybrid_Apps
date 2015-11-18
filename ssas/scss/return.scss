@@ -1,0 +1,49 @@
+
+.hr-ret-line-1 {
+  @include hr-divide-line(1px, #f2f2f2);
+}
+.ret-order {
+  border-bottom-style: dashed;
+  padding: 1px 0px 1px 0px;
+
+  .ret-order-item {
+    margin-bottom: 3px;
+    color: #4a4a4a;
+  }
+}
+
+.ret-detail {
+  .ret-state, .ret-reason {
+    margin: 10px 0;
+    color: #4a4a4a;
+  }
+
+  .ret-prdt {
+    border: 1px solid #ddd;
+
+    .ret-prdt-item {
+      border-top: none;
+      padding: 10px;
+
+      .ret-wrap {
+        margin: 0;
+        padding: 0 15px 10px 0;
+
+        .ret-img {
+          padding: 0;
+          height: 60px;
+        }
+
+        .ret-spec {
+          padding: 0 0 0 10px;
+
+          .prdt-name {
+            padding: 0px;
+            margin-bottom: 1px;
+            @include inmoreline(2);
+          }
+        }
+      }
+    }
+  }
+}

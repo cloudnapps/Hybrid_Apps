@@ -19,3 +19,14 @@
   opacity: $opacity;
   filter: alpha(opacity=$opacity * 100);
 }
+
+// 多行文本溢出
+@mixin inmoreline($line) {
+  display: -webkit-box !important;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+}
