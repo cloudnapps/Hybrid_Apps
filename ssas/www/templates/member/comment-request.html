@@ -59,14 +59,12 @@
         </div>
       </div>
     </div>
-    <div class="row" style="padding: 0;">
-      <div class="col col-100 col-center" style="padding: 0;">
-        <button class="button button-full" style="font-size:18px;background-color: #bd252c;color: #fff;"
-                ng-click="clicked || submitRequest()"
-                ng-disabled="clicked">
-          {{'submit_comment'|translate}}
-        </button>
-      </div>
-    </div>
   </ion-content>
+  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
+    <div class="button-bar">
+      <button class="button button-positive" style="font-size: 18px;"
+              ng-click="clicked || submitRequest()"
+              ng-disabled="clicked">{{'submit_comment'|translate}}</button>
+    </div>
+  </ion-footer-bar>
 </ion-view>
