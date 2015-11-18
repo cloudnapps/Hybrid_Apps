@@ -53,6 +53,10 @@
       "id": "com.qdc.plugins.alipay"
     },
     {
+      "locator": "../plugins/cordova-qdc-wxpay",
+      "id": "com.qdc.plugins.wxpay"
+    },
+    {
       "locator": "../plugins/cordova-project-related",
       "id": "com.cloudnapps.project.related"
     },
@@ -73,7 +77,7 @@
       "locator": "../plugins/phonegap-plugin-barcodescanner",
       "id": "phonegap-plugin-barcodescanner"
     }
-  ], 
+  ],
   "cordovaPlatforms": [
     "android",
     {

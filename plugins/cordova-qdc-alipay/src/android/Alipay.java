@@ -133,7 +133,10 @@ public class Alipay extends CordovaPlugin {
 
 					PluginResult result = new PluginResult(
 							PluginResult.Status.OK, resJo.toString());
-					result.setKeepCallback(true);
+					if（resJo.optString("resultStatus").equals("9000"))
+						result.setKeepCallback(true);
+					else
+						result.setKeepCallback(false);
 					cbContext.sendPluginResult(result);
 				}
 			};
