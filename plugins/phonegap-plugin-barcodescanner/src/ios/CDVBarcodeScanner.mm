@@ -1002,10 +1002,10 @@ parentViewController:(UIViewController*)parentViewController
                         target:(id)self
                         action:@selector(shutterButtonPressed)
                         ];
-    
-    toolbar.items = [NSArray arrayWithObjects:flexSpace,cancelButton,flexSpace, flipCamera ,shutterButton,nil];
+    //flipCamera
+    toolbar.items = [NSArray arrayWithObjects:flexSpace,cancelButton,flexSpace,shutterButton,nil];
 #else
-    _toolbar.items = [NSArray arrayWithObjects:flexSpace,cancelButton,flexSpace, flipCamera,nil];
+    _toolbar.items = [NSArray arrayWithObjects:flexSpace,cancelButton,flexSpace,nil];
 #endif
     bounds = overlayView.bounds;
     
