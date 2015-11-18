@@ -2,40 +2,34 @@
   <ion-nav-buttons side="left">
     <back-button></back-button>
   </ion-nav-buttons>
-  <ion-content>
-    <div class="row" style="padding: 5px 5px 5px 5px;">
+  <ion-content class="ret-detail">
+    <div class="row">
       <div class="col">
-        <p style="margin: 10px 0;color: #4c4b4d;">{{item.title.status}} {{item.title.type}}</p>
-
-        <p style="margin: 10px 0;color: #4c4b4d;">{{item.title.time}}</p>
+        <p class="ret-state">{{item.title.status}} {{item.title.type}}</p>
+        <p class="ret-state">{{item.title.time}}</p>
       </div>
     </div>
 
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #f2f2f2;"/>
+    <hr class="hr-ret-line-1" />
 
-    <div class="row" style="padding: 5px 5px 5px 5px;">
+    <div class="row">
       <div class="col">
-        <p style="margin: 10px 0;color: #4c4b4d;">退款类型：{{item.title.type}}</p>
-
-        <p style="margin: 10px 0;color: #4c4b4d;">退款原因：{{item.title.title}}</p>
-
-        <p style="margin: 10px 0;color: #4c4b4d;">退款说明：{{item.title.content}}</p>
+        <p class="ret-reason">退款类型：{{item.title.type}}</p>
+        <p class="ret-reason">退款原因：{{item.title.title}}</p>
+        <p class="ret-reason">退款说明：{{item.title.content}}</p>
       </div>
     </div>
 
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #f2f2f2;"/>
+    <hr class="hr-ret-line-1" />
 
-    <div ng-class="list" style="border: 1px solid #ddd;">
-      <ion-item ng-repeat="pro in item.product" style="border-top: none;padding: 10px;">
-        <div class="row" style="margin:0;padding: 0 15px 10px 0;" ui-sref="product({pro: product.product_id})">
-          <div class="col col-20" style="padding: 0;height: 60px;">
+    <div class="ret-prdt">
+      <ion-item ng-repeat="pro in item.product" class="ret-prdt-item">
+        <div class="row ret-wrap" ui-sref="product({pro: product.product_id})">
+          <div class="col col-20 ret-img">
             <img class="pic" ng-src="{{pro.image}}">
           </div>
-          <div class="col col-80" style="padding: 0 0 0 10px;">
-            <p
-              style="padding: 0px;margin-bottom: 1px;display: -webkit-box !important;overflow: hidden;white-space: normal;text-overflow: ellipsis;word-break: break-all;-webkit-box-orient: vertical;-webkit-line-clamp: 2;">
-              {{pro.name}}</p>
-
+          <div class="col col-80 ret-spec">
+            <p class="prdt-name">{{pro.name}}</p>
             <p style="clear: both;">
               <span style="float: left;">{{pro.price | currency:'￥'}}</span>
               <span style="float: right;">x{{pro.num}}</span>
