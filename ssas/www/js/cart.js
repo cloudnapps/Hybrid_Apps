@@ -226,8 +226,12 @@ angular.module('cart', ['components'])
     };
   })
   .controller('CartPaymentController', function ($rootScope, $scope, $state, $ionicModal, $ionicPopup, $ionicLoading, cartApi, orderApi, paymentApi, $q) {
-    $scope.cart = $rootScope.confirmedCart;
-    delete $rootScope.confirmedCart;
+    $scope.init = function () {
+      $scope.cart = $rootScope.confirmedCart;
+      delete $rootScope.confirmedCart;
+    };
+
+    $scope.$on('$ionicView.beforeEnter', $scope.init);
 
     $scope.pay = function (/*payment*/) {
 
@@ -237,7 +241,8 @@ angular.module('cart', ['components'])
           if (response.data.status !== 0) {
             $ionicPopup.alert({
               title: '未能创建订单',
-              template: response.data.msg
+              template: response.data.msg,
+              okText: '确定' // String (默认: 'OK')。OK按钮的文字。
             });
 
             return $q.reject();
@@ -258,7 +263,8 @@ angular.module('cart', ['components'])
               if (response.data.status !== 0) {
                 $ionicPopup.alert({
                   title: '未能获取支付信息',
-                  template: response.data.msg
+                  template: response.data.msg,
+                  okText: '确定' // String (默认: 'OK')。OK按钮的文字。
                 });
 
                 return $q.reject();
