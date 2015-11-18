@@ -21,8 +21,10 @@
              NSLog(@"result = %@", resultDic);
              
              NSString *jsonString = [self jsonStringWithDictionary:resultDic];
-             
-             [self successWithCallbackID:self.currentCallbackId withMessage:jsonString];
+             if([resultDic[@"resultStatus"] isEqualToString:@"9000"])
+                 [self successWithCallbackID:self.currentCallbackId withMessage:jsonString];
+             else
+                 [self failWithCallbackID:self.currentCallbackId withMessage:jsonString];
          }];
     }
 }
@@ -75,8 +77,10 @@
            NSLog(@"reslut = %@", resultDic);
 
            NSString *jsonString = [self jsonStringWithDictionary:resultDic];
-
-           [self successWithCallbackID:self.currentCallbackId withMessage:jsonString];
+           if([resultDic[@"resultStatus"] isEqualToString:@"9000"])
+               [self successWithCallbackID:self.currentCallbackId withMessage:jsonString];
+           else
+               [self failWithCallbackID:self.currentCallbackId withMessage:jsonString];
        }];
     }];
 }
