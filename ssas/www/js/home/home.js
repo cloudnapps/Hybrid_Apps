@@ -73,7 +73,7 @@
           $scope.homeInfo = result.data.data;
 
           $scope.slideimgs = [];
-          $timeout(function(){
+          $timeout(function () {
             $scope.slideimgs = $scope.homeInfo.once;
           }, 0);
           $scope.activityInfo = $scope.homeInfo.act_info;
@@ -236,49 +236,59 @@
     }) // end of ActivityController
 
     .controller('SigninController', function ($scope, toastService, $cordovaGeolocation, PointApi) {
-      var lat_constant = 31,
-        long_constant = 121;
+      /*      var lat_constant = 31,
+       long_constant = 121;
 
-      function radius(d) {
-        return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
-      }
+       function radius(d) {
+       return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+       }
 
-      //计算距离，参数分别为第一点的纬度，经度；第二点的纬度，经度
-      function getDistance(lat1, lng1, lat2, lng2) {
-        var radLat1 = radius(lat1);
-        var radLat2 = radius(lat2);
-        var a = radLat1 - radLat2;
-        var b = radius(lng1) - radius(lng2);
-        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
-            Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
-        s = s * 6378.137;// EARTH_RADIUS;
-        s = Math.round(s * 10000) / 10000; //输出为公里
-        //s=s.toFixed(4);
-        return s;
-      }
+       //计算距离，参数分别为第一点的纬度，经度；第二点的纬度，经度
+       function getDistance(lat1, lng1, lat2, lng2) {
+       var radLat1 = radius(lat1);
+       var radLat2 = radius(lat2);
+       var a = radLat1 - radLat2;
+       var b = radius(lng1) - radius(lng2);
+       var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
+       Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+       s = s * 6378.137;// EARTH_RADIUS;
+       s = Math.round(s * 10000) / 10000; //输出为公里
+       //s=s.toFixed(4);
+       return s;
+       }*/
 
       $scope.signedIn = function () {
-        navigator.geolocation.getCurrentPosition(function (response) {
-            //alert(JSON.stringify(response));
-            var distantce = getDistance(response.coords.latitude, response.coords.longitude,
-              lat_constant, long_constant);
-            //alert(distantce);
-            PointApi.addGold(10, '签到送金币', function (result) {
-              if (result.status === 0) {
-                toastService.setToast('恭喜你获得10个金币，请到会员中心查看');
-              }
-              else {
-                toastService.setToast(result.msg);
-              }
-            });
-          }, function (err) {
-            console.log(JSON.stringify(err));
-          },
-          {
-            enableHighAccuracy: false,
-            timeout: 60 * 1000,
-            maximumAge: 1000 * 60 * 10
-          });
+        PointApi.addGold(10, '签到送金币', function (result) {
+          if (result.status === 0) {
+            var msg = '签到成功，恭喜您获得' + result.data.gold_num + '个金币，请到会员中心查看';
+            toastService.setToast(msg);
+          }
+          else {
+            toastService.setToast(result.msg);
+          }
+        });
+
+        /*navigator.geolocation.getCurrentPosition(function (response) {
+         //alert(JSON.stringify(response));
+         var distantce = getDistance(response.coords.latitude, response.coords.longitude,
+         lat_constant, long_constant);
+         //alert(distantce);
+         PointApi.addGold(10, '签到送金币', function (result) {
+         if (result.status === 0) {
+         toastService.setToast('恭喜你获得10个金币，请到会员中心查看');
+         }
+         else {
+         toastService.setToast(result.msg);
+         }
+         });
+         }, function (err) {
+         console.log(JSON.stringify(err));
+         },
+         {
+         enableHighAccuracy: false,
+         timeout: 60 * 1000,
+         maximumAge: 1000 * 60 * 10
+         });*/
       };
     }) // end of SigninController
 
