@@ -1,5 +1,5 @@
 /* 商户首页 */
-.collected {
+.collected, .handle {
   cursor: default !important;
   pointer-events: none;
 }
@@ -19,6 +19,33 @@
     img {
       width: 80px;
     }
+  }
+  .sel-collect-wrap {
+    padding: 0;
+    position: absolute;
+    z-index: 200;
+    width: 90px;
+    height: 45px;
+    top: 114px;
+    right: 10px;
+    text-align: center;
+    color: #fff;
+    font-weight: 500;
+    background-color: #ef473a;
+    border-radius: 5px;
+    
+    .col-ion-start {
+      font-size: 24px;
+    }
+    .col-state {
+      display: block;
+      font-size: 16px;
+      margin-top: -3px;
+    }
+  }
+  .sel-stated {
+    color: #ef473a;
+    background-color: #e5e5e5;
   }
 }
 .seller-nav {

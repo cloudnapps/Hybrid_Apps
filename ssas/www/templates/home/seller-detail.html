@@ -3,17 +3,17 @@
     <back-button></back-button>
   </ion-nav-buttons>
   <ion-content>
-    <div class="row seller-header" style="padding: 0;background-image: url('img/seller-index.jpg');">
-      <div class="row" style="padding: 0;position: absolute;top:105px;left:0;z-index: 999;height: 65px;">
+    <div class="row seller-header" style="padding: 0;position: relative;background-image: url('img/seller-index.jpg');">
+      <div class="row" style="padding: 0;position: absolute;top:105px;left:0;z-index: 100;height: 65px;">
         <div class="col col-34 col-center sel-logo"
              style="padding:0;margin-left: 15px;height: 65px;background-color: #fff;overflow: hidden;max-width: 80px;background-image: url({{item.once.image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;">
         </div>
-        <div class="col col-67 col-center" style="padding: 0;text-align: right;">
-          <button class="button button-assertive" style="min-width: 90px;min-height: 33px;line-height: 33px;"
-                  ng-click="addFavorite()"
-                  ng-class="{'collected': item.once.seller_has_fav === true}">{{item.favTitle}}
-          </button>
-        </div>
+        <div class="col col-67 col-center" style="padding: 0;"></div>
+      </div>
+      <div class="sel-collect-wrap" ng-class="{'sel-stated': item.once.seller_has_fav === true}">
+        <i class="icon ion-ios-star col-ion-start"></i>
+        <span class="col-state" ng-click="addFavorite()">{{item.favTitle}}
+        </span>
       </div>
     </div>
     <div class="row seller-nav" style="padding: 0;margin: 0;">
@@ -48,8 +48,7 @@
         <div class="row" style="padding: 0;" ng-repeat="product in products" ng-if="$index % 2 === 0">
           <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
             <div class="new-prdt">
-              <a ui-sref="product({productId:products[$index].product_id})"> <img class="prdt-img"
-                                                                                  ng-src="{{products[$index].image}}">
+              <a ui-sref="product({productId:products[$index].product_id})"> <img class="prdt-img" ng-src="{{products[$index].image}}">
                 <!-- <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div> -->
                 <div class="bg-color">
                   <div class="prdt-descb">{{products[$index].name}}</div>
@@ -71,8 +70,7 @@
                   <div class="prdt-descb">{{products[$index+1].name}}</div>
                   <div class="row" style="padding: 5px 0;">
                     <span class="col pri-pri" style="padding: 0;">{{products[$index+1].price | currency: '￥'}}</span>
-                    <img class="sell-type" ng-if="products[$index+1].nature !== 'normal'"
-                         ng-src="img/{{products[$index+1].nature}}.png">
+                    <img class="sell-type" ng-if="products[$index+1].nature !== 'normal'" ng-src="img/{{products[$index+1].nature}}.png">
                   </div>
                 </div>
               </a>
