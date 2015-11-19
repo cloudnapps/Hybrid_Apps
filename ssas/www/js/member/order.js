@@ -109,14 +109,27 @@
       };
 
       $scope.confirmOrder = function (item) {
-        OrderApi.receiveOrder(item.order_id, function (result) {
-          if (result.status === 1) {
-            toastService.setToast(result.msg);
-          }
-          else {
-            toastService.setToast(result.msg);
-            $state.go('.', {}, {reload: true});
-          }
+        $ionicPopup.show({
+          title: '确认收货',
+          template: '您确定已收货吗？',
+          buttons: [
+            {text: '取消'},
+            {
+              text: '<b>确定</b>',
+              type: 'button-positive',
+              onTap: function () {
+                OrderApi.receiveOrder(item.order_id, function (result) {
+                  if (result.status === 1) {
+                    toastService.setToast(result.msg);
+                  }
+                  else {
+                    toastService.setToast(result.msg);
+                    $state.go('.', {}, {reload: true});
+                  }
+                });
+              }
+            }
+          ]
         });
       };
 
