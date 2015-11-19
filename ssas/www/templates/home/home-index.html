@@ -28,7 +28,8 @@
     <form ng-submit="search()" style="background:#fff; border-radius: 7px;margin-top: 8px;">
       <div class="row" style="padding:0;line-height: 30px;">
         <span style="min-width: 4em;max-width: 4em;color:#000; display: inline-block;font-size: 14px">
-          <select style="-webkit-appearance:none;-moz-appearance:none;appearance:none; border:none; background:none;padding-right: 0;">
+          <select
+            style="-webkit-appearance:none;-moz-appearance:none;appearance:none; border:none; background:none;padding-right: 0;">
             <option>商品</option>
             <option>商户</option>
           </select>
@@ -37,9 +38,10 @@
 
         <span class="col col-center" style="padding: 0;">
           <input type="search" ng-model="keywords.value" style="border:none; backgroud: transparent;width: 100%;max-height: 30px;
-    padding: 0px;" />
+    padding: 0px;"/>
         </span>
-        <i class="icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)" style="padding: 0 5px;min-width: 1.2em;max-width: 1.2em;"></i>
+        <i class="icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"
+           style="padding: 0 5px;min-width: 1.2em;max-width: 1.2em;"></i>
       </div>
     </form>
   </ion-nav-title>
@@ -104,39 +106,61 @@
 
               <div class="bg-color">
                 <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
-                <span class="pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
-                <span class="pri-ori">{{activityInfo.product_info[0].price | currency: '￥'}}</span>
+
+                <div class="row" style="padding: 0">
+                  <div class="col col-50"  align="left" style="padding: 0">
+                    <span class="pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
+                  </div>
+                  <div class="col col-50" align="right" style="padding: 0">
+                    <span class="pri-ori">{{activityInfo.product_info[0].price | currency: '￥'}}</span>
+                  </div>
+                </div>
               </div>
             </a>
           </div>
         </div>
 
         <div class="col col-33 col-center pad-5"
-             ui-sref="product({productId: activityInfo.product_info[0].product_id})">
+             ui-sref="product({productId: activityInfo.product_info[0].product_id})"
+             ng-if="activityInfo.product_info.length > 1">
           <div class="new-prdt">
             <a>
-              <img ng-src="{{activityInfo.product_info[0].image}}">
+              <img ng-src="{{activityInfo.product_info[1].image}}">
 
               <div class="bg-color">
-                <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
+                <div class="prdt-descb">{{activityInfo.product_info[1].name}}</div>
 
-                <span class="pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
-                <span class="pri-ori">{{activityInfo.product_info[0].price | currency: '￥'}}</span>
+                <div class="row" style="padding: 0">
+                  <div class="col col-50" align="left" style="padding: 0">
+                    <span class="pri-pri">{{activityInfo.product_info[1].activity_price | currency: '￥'}}</span>
+                  </div>
+                  <div class="col col-50" align="right" style="padding: 0">
+                    <span class="pri-ori">{{activityInfo.product_info[1].price | currency: '￥'}}</span>
+                  </div>
+                </div>
               </div>
             </a>
           </div>
         </div>
 
         <div class="col col-33 col-center pad-5"
-             ui-sref="product({productId: activityInfo.product_info[0].product_id})">
+             ui-sref="product({productId: activityInfo.product_info[0].product_id})"
+             ng-if="activityInfo.product_info.length > 2">
           <div class="new-prdt">
             <a>
-              <img ng-src="{{activityInfo.product_info[0].image}}">
+              <img ng-src="{{activityInfo.product_info[2].image}}">
 
               <div class="bg-color">
-                <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
-                <span class="pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
-                <span class="pri-ori">{{activityInfo.product_info[0].price | currency: '￥'}}</span>
+                <div class="prdt-descb">{{activityInfo.product_info[2].name}}</div>
+
+                <div class="row" style="padding: 0">
+                  <div class="col col-50" align="left" style="padding: 0">
+                    <span class="pri-pri">{{activityInfo.product_info[2].activity_price | currency: '￥'}}</span>
+                  </div>
+                  <div class="col col-50" align="right" style="padding: 0">
+                    <span class="pri-ori">{{activityInfo.product_info[2].price | currency: '￥'}}</span>
+                  </div>
+                </div>
               </div>
             </a>
           </div>
@@ -233,7 +257,8 @@
         </div>
       </div>
       <div class="col col-70 col-center nav-title-right">
-        <a ui-sref="products({categoryId: homeInfo.goods_gallery[0].filter.cat_id, brand: homeInfo.goods_gallery[0].filter.brand})">
+        <a
+          ui-sref="products({categoryId: homeInfo.goods_gallery[0].filter.cat_id, brand: homeInfo.goods_gallery[0].filter.brand})">
           更多<span>>></span>
         </a>
       </div>
