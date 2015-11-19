@@ -9,6 +9,7 @@
       </div>
       <div class="col col-80" style="padding: 0;">
         <p style="padding: 0px;margin-bottom: 1px;color: #4a4a4a;">{{goodsSpec.product_info.name}}</p>
+
         <p>
           <span style="float: left;color: #4a4a4a;">{{goodsSpec.product_info.price | currency:'￥'}}</span>
           <span style="float: right;color: #4a4a4a;">库存：{{goodsSpec.product_info.store}}</span>
@@ -19,14 +20,17 @@
     <div class="padding">
       <div ng-repeat="spec in goodsSpec.spec">
         <h5>{{spec.type}}</h5>
+
         <div class="row" style="flex-wrap:wrap;">
           <div class="text-center" ng-repeat="value in spec.value">
-            <button class="spec text-center button button-clear" ng-class="{'button-positive': value.is_default}" ng-click="value.is_default || getProductGoodsSpec(value.product_id, true)" style="padding: 0; margin: 5px;">{{value.name}}
+            <button class="spec text-center button button-clear" ng-class="{'button-positive': value.is_default}"
+                    ng-click="value.is_default || getProductGoodsSpec(value.product_id, true)"
+                    style="padding: 0; margin: 5px;">{{value.name}}
             </button>
           </div>
         </div>
       </div>
-    <!-- <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;" /> -->
+      <!-- <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;" /> -->
     </div>
     <div class="row padding">
       <div class="col-40 col-center" style="font-size: 14px; color: #000; font-weight: 500;">数量</div>
@@ -38,7 +42,11 @@
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
     <div class="button-bar">
       <button class="button button-dark" ng-click="hideModal()">返回</button>
-      <button class="button button-energized" ng-click="addToCart(goodsSpec.product_info)">{{'product_cart' | translate}}</button>
+      <button class="button" style="font-size: 16px;"
+              ng-class="{'bar-stable handle': goodsSpec.product_info.store === 0,'button-energized': goodsSpec.product_info.store !== 0}"
+              ng-disabled="goodsSpec.product_info.store === 0" ng-click="addToCart(goodsSpec.product_info)">
+        {{'product_cart' | translate}}
+      </button>
     </div>
   </ion-footer-bar>
 </ion-modal-view>
