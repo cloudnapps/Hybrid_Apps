@@ -2,6 +2,9 @@
   <ion-nav-buttons side="right">
     <span ng-click="editNature()" style="font-size: 14px;line-height: 36px;text-align: right;display: block;">{{headerBtnTitle}}</span>
   </ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
   <ion-content>
     <div class="text-center padding" ng-if="cartLoaded && !cart"><img style="width:80%;" src="img/no-cart.jpg"></div>
     <ion-list ng-if="!!cart">

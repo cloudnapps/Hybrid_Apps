@@ -393,7 +393,6 @@ angular.module('starter')
       // 购物车首页
       .state('tab.cart', {
         url: '/cart?productId&nature',
-        cache: false,
         views: {
           'tab-cart': {
             templateUrl: 'templates/cart/cart-index.html',

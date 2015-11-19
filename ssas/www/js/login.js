@@ -6,6 +6,10 @@
       $scope.userInfo.isWechat = false;
       $scope.userInfo.remembered = true;
 
+      if(userService.isLogin()){
+        $scope.back();
+      }
+
       // 会员登录成功
       $scope.saveInfo = function (result) {
         var currentUser = {};

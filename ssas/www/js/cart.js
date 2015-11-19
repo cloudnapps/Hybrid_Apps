@@ -4,7 +4,7 @@ angular.module('cart', ['components'])
                                           $ionicLoading, cartApi, tabStateService, userService) {
 
     $scope.$on('$ionicView.beforeEnter', function () {
-      userService.checkLogin('tab.cart');
+      $scope.load();
     });
 
     $scope.isEdit = false;
