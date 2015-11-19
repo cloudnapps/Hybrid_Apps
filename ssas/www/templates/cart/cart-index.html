@@ -96,7 +96,7 @@
               </div>
             </div>
             <button class="col-30 button button-full button-positive" style="margin:0;" ui-sref="tab.cart-checkout({nature: natureKey})" ng-disabled="nature.item_amount<0.01 || nature.lock_btn">
-              {{'cart_checkout'|translate}}
+              {{'cart_checkout'|translate}}({{nature.cart_num}})
             </button>
           </div>
         </ion-item>
