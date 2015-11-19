@@ -31,6 +31,10 @@
       <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
     </form>
   </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <a class="button icon-left icon-btn-4 button-clear" ui-sref="tab.home"></a>
+    </div>
+  </ion-nav-buttons>
   <ion-content class="has-subheader">
     <div ng-show="isSearch && (!products || !products.length)">
       <div style="text-align: center; margin-top: 20px">
@@ -50,7 +54,7 @@
                   <span class="col pri-pri" style="padding: 0;">{{products[$index].price | currency: '￥'}}</span>
                   <img class="sell-type" ng-if="products[$index].nature !== 'normal'" ng-src="img/{{products[$index].nature}}.png">
                 </div>
-              </div>  
+              </div>
             </a>
           </div>
         </div>
