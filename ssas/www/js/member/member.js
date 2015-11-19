@@ -70,5 +70,11 @@
         userService.logOut();
         $state.go('tab.home');
       };
+
+      $scope.callService = function() {
+        phonedialer.dial("400-1398888", function(err) {
+          console.log(err);
+        });
+      }
     });
 })();

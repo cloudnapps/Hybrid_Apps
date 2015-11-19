@@ -76,15 +76,14 @@
     {
       "locator": "../plugins/phonegap-plugin-barcodescanner",
       "id": "phonegap-plugin-barcodescanner"
+    },
+    {
+      "locator": "https://github.com/j-mcnally/PhoneGap-ios-PhoneDialer",
+      "id": "com.phonegap.core.phonedialer"
     }
   ],
   "cordovaPlatforms": [
     "android",
-    {
-      "platform": "android",
-      "version": "",
-      "locator": "android"
-    },
     "ios"
   ]
 }
