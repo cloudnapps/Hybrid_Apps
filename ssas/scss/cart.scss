@@ -214,3 +214,9 @@
     }
   }
 }
+
+.cart-disabled {
+  @include opacity(0.4);
+  cursor: default !important;
+  pointer-events: none;
+}

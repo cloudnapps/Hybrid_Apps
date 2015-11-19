@@ -40,9 +40,9 @@
           </ion-item>
           <ion-list>
             <ion-item class="good item" ng-repeat="good in seller.goods_list">
-              <div class="item-checkbox">
+              <div class="item-checkbox" ng-class="{'cart-disabled': good.store === 0}">
                 <label class="checkbox">
-                  <input type="checkbox" class="selt-prdt" ng-disabled="good.store === 0" ng-model="good.selected"
+                  <input type="checkbox" class="selt-prdt" ng-model="good.selected"
                          ng-change="toggleGood(good)">
                 </label>
 
