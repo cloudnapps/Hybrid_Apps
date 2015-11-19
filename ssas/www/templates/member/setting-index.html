@@ -12,7 +12,7 @@
            align="right">
       </div>
     </div>
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
+    <hr style="margin: 0;border:none;border-top:1px solid #ccc;">
     <div class="row" style="padding: 0 20px;" > <!--ng-click="addAttachment()"-->
       <div class="col col-90 col-center" style="padding: 0;font-size: 16px;">
         <div class="row" style="padding: 0;line-height: 60px;height: 60px;">
@@ -29,7 +29,7 @@
         </a>
       </div-->
     </div>
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
+    <hr style="margin: 0;border:none;border-top:1px solid #ccc;">
     <div class="row" style="padding: 0 20px;" ng-click="model.showGender = !model.showGender; model.showBirthday=false;">
       <div class="col col-90 col-center" style="padding: 0;height: 60px;line-height: 60px;font-size: 16px;">
         <div class="row" style="padding: 0;">
@@ -46,18 +46,16 @@
       </div>
     </div>
 
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;" ng-show="model.showGender">
-
     <div class="button-bar" ng-show="model.showGender">
-      <a class="button button-clear" style="border: none;padding: 0; color: #000;" ng-click="setGender('gentle')">
-        <span ng-class="{'set-gender': item.sex === 'gentle'}">男</span>
+      <a class="sex-choose" ng-class="{'set-gender': item.sex === 'gentle'}" ng-click="setGender('gentle')">
+        <span>男</span>
       </a>
-      <a class="button button-clear" style="border: none;padding: 0;color: #000;" ng-click="setGender('lady')">
-        <span ng-class="{'set-gender': item.sex === 'lady'}">女</span>
+      <a class="sex-choose" ng-class="{'set-gender': item.sex === 'lady'}" ng-click="setGender('lady')">
+        <span>女</span>
       </a>
     </div>
 
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
+    <hr style="margin: 0;border:none;border-top:1px solid #ccc;">
 
     <div class="row" style="padding: 0 20px;" ng-click="model.showGender=false; showDatePicker()">
       <div class="col col-90 col-center" style="padding: 0;height: 60px;line-height: 60px;font-size: 16px;">
@@ -74,7 +72,7 @@
       </div>
     </div>
 
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
+    <hr style="margin: 0;border:none;border-top:1px solid #ccc;">
 
     <div class="row" style="padding: 0 20px;">
       <div class="col col-90 col-center" style="padding: 0;height: 60px;line-height: 60px;font-size: 16px;">
@@ -87,6 +85,6 @@
            align="right">
       </div>
     </div>
-    <hr style="margin: 0;height:1px;border:none;border-top:1px solid #ccc;">
+    <hr style="margin: 0;border:none;border-top:1px solid #ccc;">
   </ion-content>
 </ion-view>

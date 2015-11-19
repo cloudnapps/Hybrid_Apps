@@ -150,3 +150,23 @@ $white-color: #fff;
     }
   }
 }
+
+/* setting style */
+.sex-choose {
+  display: block;
+  width: 50%;
+  text-align: center;
+  border: none;
+  padding: 0;
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 47px;
+  border-top: 1px solid #b2b2b2;
+}
+
+.set-gender {
+  background-color: $red-color;
+  color: #fff;
+  border-color: $red-color;
+}

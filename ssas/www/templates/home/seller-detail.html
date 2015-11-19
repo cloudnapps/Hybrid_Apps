@@ -11,7 +11,7 @@
         <div class="col col-67 col-center" style="padding: 0;text-align: right;">
           <button class="button button-assertive" style="min-width: 90px;min-height: 33px;line-height: 33px;"
                   ng-click="addFavorite()"
-                  ng-disabled="item.once.seller_has_fav">{{item.favTitle}}
+                  ng-class="{'collected': item.once.seller_has_fav === true}">{{item.favTitle}}
           </button>
         </div>
       </div>
