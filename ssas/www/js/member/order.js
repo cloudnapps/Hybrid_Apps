@@ -182,14 +182,27 @@
       };
 
       $scope.confirmOrder = function () {
-        OrderApi.receiveOrder($scope.item.order_title.order_id, function (result) {
-          if (result.status === 1) {
-            toastService.setToast(result.msg);
-          }
-          else {
-            toastService.setToast(result.msg);
-            $state.go('.', {}, {reload: true});
-          }
+        $ionicPopup.show({
+          title: '确认收货',
+          template: '您确定已收货吗？',
+          buttons: [
+            {text: '取消'},
+            {
+              text: '<b>确定</b>',
+              type: 'button-positive',
+              onTap: function () {
+                OrderApi.receiveOrder($scope.item.order_title.order_id, function (result) {
+                  if (result.status === 1) {
+                    toastService.setToast(result.msg);
+                  }
+                  else {
+                    toastService.setToast(result.msg);
+                    $state.go('.', {}, {reload: true});
+                  }
+                });
+              }
+            }
+          ]
         });
       };
 
@@ -233,7 +246,8 @@
             if (response.data.status !== 0) {
               $ionicPopup.alert({
                 title: '未能获取支付信息',
-                template: response.data.msg
+                template: response.data.msg,
+                okText: '确定' // String (默认: 'OK')。OK按钮的文字。
               });
 
               return $q.reject();

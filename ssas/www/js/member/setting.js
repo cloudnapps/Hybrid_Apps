@@ -195,7 +195,8 @@
         if ($scope.pwdInfo.new !== $scope.pwdInfo.confirm) {
           var errorPopup = $ionicPopup.alert({
             title: '修改密码',
-            template: '两次输入的密码不一致'
+            template: '请输入一样的密码',
+            okText: '确定' // String (默认: 'OK')。OK按钮的文字。
           });
 
           return errorPopup.then(function (res) {
@@ -212,7 +213,8 @@
         SettingApi.modifyMemberPassword(data, function (result) {
           var alertPopup = $ionicPopup.alert({
             title: '修改密码',
-            template: result.msg
+            template: result.msg,
+            okText: '确定' // String (默认: 'OK')。OK按钮的文字。
           });
 
           return alertPopup.then(function (res) {

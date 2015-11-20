@@ -50,7 +50,7 @@
       };
     })
 
-    .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, toastService,
+    .controller('ReceiverAddCtrl', function ($scope, $state, $stateParams, toastService, $ionicPopup,
                                              $ionicModal, ReceiverApi) {
       if ($stateParams.addrInfo) {
         $scope.addrInfo = JSON.parse($stateParams.addrInfo);
@@ -62,6 +62,8 @@
         $scope.addrInfo.checked = true;
         $scope.title = '新建收货地址';
       }
+
+      $scope.showIntroduction = false;
 
       $scope.loadCardList = function () {
         ReceiverApi.getReceiverList(1, function (result) {
@@ -86,9 +88,18 @@
         });
       };
 
+      $scope.showHelp = function () {
+        $ionicPopup.alert({
+          title: '为什么需要实名认证',
+          template: '<p>① 因各保税区政策不同，购买部分保税区商品需要对收货人身份证信息进行认证，错误信息可能导致无法正常清关</p> ' +
+          '<p>② 您的身份证信息将做加密保管，我们保证信息安全，绝不对外泄露</p> ',
+          okText: '确定' // String (默认: 'OK')。OK按钮的文字。
+        });
+      };
+
       $scope.selectIdCard = function () {
-        angular.forEach($scope.cardList, function(item){
-          if(item.number === $scope.addrInfo.number) {
+        angular.forEach($scope.cardList, function (item) {
+          if (item.number === $scope.addrInfo.number) {
             $scope.addrInfo.name = item.full_name;
           }
         })

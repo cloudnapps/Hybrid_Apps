@@ -1,7 +1,7 @@
 (function () {
   angular.module('home', ['seller', 'point'])
     .controller('HomeController', function ($scope, $ionicSlideBoxDelegate, $ionicLoading, toastService,
-                                            $rootScope, barcode, $cordovaInAppBrowser, userService, $ionicPopup,
+                                            $rootScope, barcode, $cordovaInAppBrowser, userService,
                                             $state, $ionicPopover, $window, $interval, $ionicScrollDelegate, $timeout,
                                             HomeApi, SellerApi, $http, shopApi) {
       $scope.homeInfo = {};
@@ -154,7 +154,7 @@
             //alert(result.location);
             acIP = result.location.split('/')[2];
             params = parseQueryString(result.location);
-            alert(JSON.stringify(params));
+            //alert(JSON.stringify(params));
 
             if (!acIP || !params) {
               toastService.setToast('一键上网失败');

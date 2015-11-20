@@ -12,7 +12,8 @@
         else {
           var alertPopup = $ionicPopup.alert({
             title: '申请售后',
-            template: result.msg
+            template: result.msg,
+            okText: '确定' // String (默认: 'OK')。OK按钮的文字。
           });
           alertPopup.then(function (res) {
             console.log(res);

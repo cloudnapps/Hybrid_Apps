@@ -6,33 +6,45 @@
     <div class="list">
       <div class="item item-input"
            style="background-color: #fff;">
-        <div class="col col-80" style="padding: 0px">
-          <input type="text" ng-model="addrInfo.number" placeholder="请输入身份证号">
+        <div class="col col-75" style="padding: 0px">
+          <input type="text" ng-model="addrInfo.number" placeholder="身份证号码（将加密处理）">
         </div>
-        <div class="col col-20" style="padding: 0px;" ng-show="cardList && cardList.length > 0">
-          <span ng-click="showSpecModal()" style="font-size: 14px;line-height: 36px;text-align: right;display: block; margin-right: 10px">选择</span>
+        <div class="col col-10" style="padding: 0px;" ng-click="showHelp()">
+          <i class="icon ion-ios-help-outline assertive"></i>
+        </div>
+        <div class="col col-center" style="width: 15%; padding: 0px;" ng-show="cardList && cardList.length > 0">
+          <span ng-click="showSpecModal()"
+                style="font-size: 14px;line-height: 36px;text-align: right;display: block; margin-right: 10px">选择</span>
         </div>
       </div>
 
       <label class="item item-input" style="background-color: #fff;">
-        <input type="text" ng-model="addrInfo.name" placeholder="请输入姓名">
+        <input type="text" ng-model="addrInfo.name" placeholder="收件人姓名" ng-focus="showIntroduction = true"
+               ng-blur="showIntroduction = false">
       </label>
 
+      <div class="prdt-tax" style="padding: 6px 0 5px 16px;" ng-show="!!showIntroduction">
+        <div class="declare">
+          <span style="color: #bd252c;">收件人请使用和身份证号对应的真实姓名</span>
+        </div>
+      </div>
+
       <label class="item item-input" style="background-color: #fff;">
-        <input type="number" ng-model="addrInfo.mobile" placeholder="请输入手机号码">
+        <input type="number" ng-model="addrInfo.mobile" placeholder="手机号码">
       </label>
       <label class="item item-input" style="background-color: #fff;">
-        <input type="text" ng-model="addrInfo.zipcode" placeholder="请输入邮政编码">
+        <input type="text" ng-model="addrInfo.zipcode" placeholder="邮政编码">
       </label>
 
 
       <label class="item item-input" style="">
-        <ionic-city-picker placeholder="请选择省市区" tag="/" backdrop=true backdrop-click-to-close=false ok-text="确定" citydata="addrInfo" datasource="provinces"></ionic-city-picker>
+        <ionic-city-picker placeholder="所在地区" tag="/" backdrop=true backdrop-click-to-close=false ok-text="确定"
+                           citydata="addrInfo" datasource="provinces"></ionic-city-picker>
 
       </label>
 
       <label class="item item-input" style="background-color: #fff;">
-        <input type="text" ng-model="addrInfo.addr" placeholder="请输入街道等具体地址">
+        <input type="text" ng-model="addrInfo.addr" placeholder="详细地址">
       </label>
 
       <label class="item item-toggle" style="font-size: 14px;">
@@ -45,11 +57,13 @@
           </div>
         </label>
       </label>
-      <div class="prdt-tax" style="padding: 6px 0 5px 16px;">
+
+      <div class="prdt-tax" style="padding: 6px 0 5px 16px;" ng-show="false">
         <div class="declare">
           <p>身份证说明：</p>
+
           <p>由于法规要求，跨境购物需要您填写收件人身份证信息。<span style="color: #bd252c;">收件人请使用和身份证号对应的真实姓名</span>，否则您购买的物品将无法通过海关检查!</p>
-      </div>
+        </div>
       </div>
     </div>
 

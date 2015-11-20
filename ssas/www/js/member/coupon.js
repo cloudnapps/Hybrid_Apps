@@ -1,7 +1,7 @@
 (function () {
   angular.module('coupon', ['starter.services'])
 
-    .controller('CouponsCtrl', function ($scope, $state, $ionicPopup, $ionicLoading, CouponApi) {
+    .controller('CouponsCtrl', function ($scope, $state, $ionicLoading, CouponApi) {
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;
