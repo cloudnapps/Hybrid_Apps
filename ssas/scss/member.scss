@@ -1,26 +1,19 @@
 $text-color: #4a4a4a;
 $red-color: #bd252c;
 $white-color: #fff;
-.hr-line-0 {
-  @include hr-divide-line(0, $white-color);
-}
+.hr-line-0 { @include hr-divide-line(0, $white-color); }
 
-.hr-line-1 {
-  @include hr-divide-line(1px, #c8c8c8);
-}
+.hr-line-1 { @include hr-divide-line(1px, #c8c8c8); }
 
-.hr-line-2 {
-  @include hr-divide-line(1px, #f1f1f1);
-}
+.hr-line-2 { @include hr-divide-line(1px, #f1f1f1); }
 
-.hr-line-10 {
-  @include hr-divide-line(10px, #f6f6f6);
-}
+.hr-line-10 { @include hr-divide-line(10px, #f6f6f6); }
 
 .member-bar {
+  padding:0;
+
   height: 40px;
   line-height: 40px;
-  padding:0;
 
   .member-bar-line {
     padding: 0;
@@ -43,15 +36,18 @@ $white-color: #fff;
         position: absolute;
         right: -13px;
         top: -7px;
+
         width: 15px;
         height: 15px;
-        background: $red-color;
-        overflow: hidden;
-        @include border-radius(50%);
-        color: $white-color;
+
         text-align: center;
         line-height: 16px;
         font-size: 10px;
+        color: $white-color;
+
+        overflow: hidden;
+        background-color: $red-color;
+        @include border-radius(50%);
       }
     }
   }
@@ -101,10 +97,11 @@ $white-color: #fff;
     }
 
     .colt-text {
-      line-height: 49px;
       display: block;
-      font-size:16px;
       padding: 0;
+
+      font-size:16px;
+      line-height: 49px;
       text-decoration: none;
       color: $white-color;
       font-weight: 500;
@@ -113,22 +110,24 @@ $white-color: #fff;
 }
 
 .member-header-bgm {
+  position: relative;
+
   padding: 0;
+  width: 100%;
+  height:190px;
+
   background-color: $white-color;
   background-image: url('../img/me.jpg');
   background-position: 5% 50%;
   background-repeat: no-repeat;
   background-size: cover;
   background-origin:content-box;
-  width: 100%;
-  height:190px;
-  position: relative;
 
   .mem-user-info {
-    padding: 0;
     position:absolute;
     top: 33px;
-    padding-left: 16px;
+
+    padding: 0 0 0 16px;
     margin-top: 2px;
 
     .user-info-logo {
@@ -153,20 +152,92 @@ $white-color: #fff;
 
 /* setting style */
 .sex-choose {
+  padding: 0;
+
   display: block;
   width: 50%;
-  text-align: center;
-  border: none;
-  padding: 0;
-  color: #000;
+ 
   font-size: 16px;
   font-weight: 500;
+  color: #000;
   line-height: 47px;
+  text-align: center;
+
+  border: none;
   border-top: 1px solid #b2b2b2;
 }
 
 .set-gender {
+  color: $white-color;
   background-color: $red-color;
-  color: #fff;
   border-color: $red-color;
+}
+
+/* my coin and points */
+.gold-wrap,
+.points-wrap {
+  .alt-text {
+    padding: 15px 15px;
+
+    p {
+      margin-bottom: 5px;
+      font-size: 16px;
+      color: $text-color;
+    }
+
+    .num {
+      margin: 0;
+      color: $red-color;
+      font-weight: 400;
+    }
+  }
+
+  .source-gold,
+  .source-points {
+    padding: 0 15px;
+    font-size: 18px;
+    background-color: $red-color;
+
+    .num-text {
+      display: block;
+      height: 42px;
+      
+      line-height: 42px;
+      color: $white-color;
+    }
+    .arrow-dirt {
+      padding: 0;
+      color: $white-color;
+      text-align: right;
+    }
+  }
+  .gold-list,
+  .points-list {
+    padding: 10px 15px;
+
+    .gold-item,
+    .points-item {
+      padding: 0;
+
+      .source-info {
+        font-size: 16px;
+        color: $text-color;
+        margin-bottom: 10px;
+      }
+
+      .source-date {
+        font-size: 14px;
+        font-weight: 300;
+      }
+    }
+    .source-num {
+      padding: 0;
+      text-align: right;
+
+      .nums {
+        font-size: 20px;
+        color: $red-color;
+      }
+    }
+  }
 }
