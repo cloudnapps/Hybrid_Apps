@@ -244,7 +244,7 @@
 
         $scope.productId = $stateParams.productId;
         $scope.product = {};
-        $scope.product.favTitle = $scope.product.good_has_fav ? '已收藏': '收藏';
+        $scope.product.favTitle = $scope.product.good_has_fav ? '已收藏' : '收藏';
         $scope.html = '';
         $scope.showSpecModal = showSpecModal;
         $scope.getProductGoodsSpec = getProductGoodsSpec;
@@ -258,7 +258,7 @@
           if (responseData.status === 0) {
             $scope.point = responseData.data.point || {};
             $scope.product = responseData.data.product;
-            $scope.product.favTitle = $scope.product.good_has_fav ? '已收藏': '收藏';
+            $scope.product.favTitle = $scope.product.good_has_fav ? '已收藏' : '收藏';
             $scope.slideimgs = $scope.product.urls;
             $scope.comment = (responseData.data.comment || [])[0];
 
@@ -300,7 +300,8 @@
 
         function showSpecModal() {
           $ionicModal.fromTemplateUrl('templates/shop/shop-product-spec.html', {
-            scope: $scope
+            scope: $scope,
+            backdropClickToClose: true
           }).then(function (modal) {
             $scope.modal = modal;
             $scope.modal.show();
