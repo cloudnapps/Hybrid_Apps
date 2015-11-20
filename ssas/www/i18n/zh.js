@@ -90,7 +90,7 @@ var translations_zh = {
   return_newbtn: '我要售后',
   complaint_title: '投诉与建议',
   complaint_addbtn: '提交',
-  complaint_newbtn: '新建投诉与建议',
+  complaint_newbtn: '我要投诉',
   submit_comment: '发表评论',
 
   reship: '退货退款',

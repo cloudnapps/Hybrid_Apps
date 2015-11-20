@@ -325,6 +325,15 @@ angular.module('starter')
           }
         }
       })
+      .state('feedbacks', {
+        url: '/feedbacks',
+        views: {
+          'main-view': {
+            templateUrl: 'templates/member/feedback-index.html',
+            controller: 'FeedbacksCtrl'
+          }
+        }
+      })
       // 投诉管理
       .state('complaint-orders', {
         url: '/complaint_orders',

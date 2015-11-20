@@ -1,0 +1,73 @@
+<div class="bar bar-subheader" style="background-color: #f4f4f4;">
+  <div class="row" style="padding: 0 0px;height: 40px;line-height: 40px;">
+    <div class="col col-50"
+         style="padding: 0px;text-align: center;height: 40px;color: #4a4a4a;"
+         ng-click="switchFeedbacks('returns')">
+      <a style="font-size: 16px;" ng-class="{'selt':feedbackState === 1}">我的售后</a>
+    </div>
+    <div class="col" style="padding: 0;text-align: center;opacity: 0.4;">
+      |
+    </div>
+    <div class="col col-50"
+         style="padding: 0px;text-align: center;height: 40px;color: #4a4a4a;"
+         ng-click="switchFeedbacks('complaints')">
+      <a style="font-size: 16px;" ng-class="{'selt':feedbackState === 2}">我的投诉</a>
+    </div>
+  </div>
+</div>
+<ion-view view-title="售后与投诉" hide-tabs="true">
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div style="height: 44px"></div>
+    <ion-list ng-show="type === 'returns'">
+      <ion-item class="item-remove-animate item-icon-right ret-order"
+                ng-repeat="item in items" type="item-text-wrap"
+                ui-sref="return-detail({returnId: item.return_id})">
+        <p class="ret-order-item">时间：{{item.time}}</p>
+
+        <p class="ret-order-item">订单号：{{item.order_id}}</p>
+
+        <p class="ret-order-item">状态：{{item.status}}</p>
+        <a>
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
+      </ion-item>
+    </ion-list>
+    <ion-list ng-show="type === 'complaints'">
+      <ion-item class="item-remove-animate item-avatar item-icon-right"
+                ng-repeat="item in items" type="item-text-wrap"
+                style="padding: 10px 40px 15px 20px;" ng-click="goDetail(item)">
+        <h2 style="font-size: 18px;color: #4c4b4d;">{{item.time}}</h2>
+
+        <h2 style="font-size: 18px;margin-top: 10px;color: #4c4b4d;">{{item.complaints_type}}</h2>
+        <a>
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll
+      ng-if="hasMore"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
+    <div class="button-bar" ng-show="type === 'returns'">
+      <button class="button button-positive"
+              style="font-size: 18px;"
+              ui-sref="return-orders">
+        {{'return_newbtn'|translate}}
+      </button>
+    </div>
+    <div class="button-bar" ng-show="type === 'complaints'">
+      <button class="button button-positive"
+              style="font-size: 18px;"
+              ui-sref="complaint-orders">
+        {{'complaint_newbtn'|translate}}
+      </button>
+    </div>
+  </ion-footer-bar>
+</ion-view>
+
