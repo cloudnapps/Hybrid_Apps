@@ -4,8 +4,8 @@
 
   .prdt-name {
     color: #4a4a4a;
-    font-weight: 300;
-    font-size: 14px;
+    font-weight: 700;
+    font-size: 16px;
   }
 
   .post-type {
@@ -158,23 +158,23 @@
   a:hover,.active {
     background:url(../img/star.png) left top repeat-x;
   }
-  .s1 { 
+  .s1 {
     width: 20%;
     z-index: 9;
   }
-  .s2 { 
+  .s2 {
     width: 40%;
     z-index: 8;
   }
-  .s3 { 
+  .s3 {
     width: 60%;
     z-index: 7;
   }
-  .s4 { 
+  .s4 {
     width: 80%;
     z-index: 6;
   }
-  .s5 { 
+  .s5 {
     width:100%;
     z-index :5;
   }
@@ -202,9 +202,9 @@
         width: 100%;
         max-width: 150px;
         max-height: 150px;
-        min-height: 150px; 
+        min-height: 150px;
       }
-      
+
       .sell-type {
         text-align: right;
         min-height: 20px;
@@ -212,7 +212,7 @@
         height: 20px;
         border-radius: 50%;
       }
-      
+
       .bg-color {
         background-color: #f8f8f8;
         padding: 5px 3px 0;
@@ -231,7 +231,7 @@
         color: #333;
         line-height: 14px;
         height: 28px;
-      } 
+      }
       .pri-pri {
         text-align: left;
         display: block;
