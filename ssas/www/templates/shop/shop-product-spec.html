@@ -2,22 +2,22 @@
   <ion-header-bar class="bar bar-header bar-positive" style="height: 44px;">
     <h1 class="title" style="margin-top: 0;">选择规格</h1>
   </ion-header-bar>
-  <ion-content>
+  <ion-content style="top:44px;">
     <div class="row" style="margin:0;padding: 10px;border-bottom: 1px solid #c8c8c8;">
       <div class="col col-20" style="padding-left: 0;">
         <img class="pic" style="border: 1px solid #c8c8c8;" ng-src="{{goodsSpec.product_info.url}}">
       </div>
       <div class="col col-80" style="padding: 0;">
         <p style="padding: 0px;margin-bottom: 1px;color: #4a4a4a;margin-top: 5px;">{{goodsSpec.product_info.name}}</p>
-        <p style="clear: both;">
+        <p style="clear: both;margin-top: 20px;">
           <span style="float: left;color: #4a4a4a;">{{goodsSpec.product_info.price | currency:'￥'}}</span>
           <span style="float: right;color: #4a4a4a;">库存：{{goodsSpec.product_info.store}}</span>
         </p>
       </div>
     </div>
 
-    <div class="padding">
-      <div ng-repeat="spec in goodsSpec.spec">
+    <div>
+      <div ng-repeat="spec in goodsSpec.spec" class="padding">
         <h5>{{spec.type}}</h5>
 
         <div class="row" style="flex-wrap:wrap;">

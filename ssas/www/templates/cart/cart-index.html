@@ -54,8 +54,7 @@
             <ion-item class="good item" ng-repeat="good in seller.goods_list">
               <div class="item-checkbox" ng-class="{'cart-disabled': good.store === 0}">
                 <label class="checkbox" ng-show='!seller.seller_info.isEdited'>
-                  <input type="checkbox" class="selt-prdt" ng-model="good.selected"
-                         ng-change="toggleGood(good)">
+                  <input type="checkbox" class="selt-prdt" ng-model="good.selected" ng-change="toggleGood(good)">
                 </label>
 
                 <div class="row row-no-padding">
@@ -79,7 +78,7 @@
               <ion-option-button class="button-assertive" ng-click="removeGood(good)">
                 {{'remove' | translate}}
               </ion-option-button>
-              <ion-delete-button class="ion-minus-circled" ng-click="removeGood(good)"></ion-delete-button>
+              <ion-delete-button class="ion-minus-circled" style="font-size: 24px;" ng-click="removeGood(good)"></ion-delete-button>
             </ion-item>
           </ion-list>
         </div>
