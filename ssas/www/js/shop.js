@@ -239,8 +239,8 @@
      * ProductDetailController
      */
     .controller('ProductDetailController',
-    ['$scope', '$interval', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading', 'shopApi', 'cartApi', 'toastService', 'userService',
-      function ($scope, $interval, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading, shopApi, cartApi, toastService, userService) {
+    ['$scope', '$state', '$interval', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading', 'shopApi', 'cartApi', 'toastService', 'userService',
+      function ($scope, $state, $interval, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading, shopApi, cartApi, toastService, userService) {
 
         $scope.productId = $stateParams.productId;
         $scope.product = {};
@@ -353,6 +353,28 @@
             }
           });
         };
+
+        $scope.showPictures = function () {
+          $state.go('pictures', {productId: $scope.productId}, {reload: true});
+        }
+      }]) // end of ProductDetailController
+
+    .controller('ProductImagesController',
+    ['$scope', '$stateParams', '$ionicLoading', 'shopApi',
+      function ($scope, $stateParams, $ionicLoading, shopApi) {
+
+        $scope.productId = $stateParams.productId;
+        $scope.product = {};
+
+        shopApi.getProduct($scope.productId).success(function (responseData) {
+          if (responseData.status === 0) {
+            $scope.product = responseData.data.product;
+            $scope.slideimgs = $scope.product.urls;
+
+            console.log('getProduct', responseData);
+          }
+        });
+
 
       }]) // end of ProductDetailController
 

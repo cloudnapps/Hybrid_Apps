@@ -8,7 +8,7 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="row" style="padding: 0px;margin: 0;width: 100%;">
-      <div class="col col-center" style="padding: 0px; width: 100%;">
+      <div class="col col-center" style="padding: 0px; width: 100%;" on-double-tap="showPictures()">
         <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox" ng-if="slideimgs.length"
                        auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
           <ion-slide ng-repeat="item in slideimgs" style="width: 100%;">

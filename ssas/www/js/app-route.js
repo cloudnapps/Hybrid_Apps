@@ -20,7 +20,7 @@ angular.module('starter')
               $scope.tabStateGo = tabStateService.go;
             }
           }
-        },
+        }
       })
       // 会员首页
       .state('tab.member', {
@@ -79,6 +79,16 @@ angular.module('starter')
           'main-view': {
             templateUrl: 'templates/shop/product-detail.html',
             controller: 'ProductDetailController'
+          }
+        }
+      })
+      // 商品图片页
+      .state('pictures', {
+        url: '/pictures/:productId',
+        views: {
+          'main-view': {
+            templateUrl: 'templates/shop/product-images.html',
+            controller: 'ProductImagesController'
           }
         }
       })
