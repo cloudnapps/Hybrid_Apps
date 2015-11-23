@@ -2,7 +2,7 @@
   angular.module('member', ['starter.services', 'login'])
     .controller('MemberCtrl',
     function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService, $ionicActionSheet,
-              orderStateService, favoriteStateService) {
+              orderStateService, favoriteStateService, $ionicPopup) {
       $scope.currentUser = {};
 
       $scope.goOrders = function (type) {
@@ -71,9 +71,22 @@
         $state.go('tab.home');
       };
 
-      $scope.callService = function() {
-        phonedialer.dial("400-1398888", function(err) {
-          console.log(err);
+      $scope.callService = function () {
+        $ionicPopup.show({
+          title: '联系客服',
+          template: '请拨打客服热线400-1398888',
+          buttons: [
+            {text: '取消'},
+            {
+              text: '<b>确定</b>',
+              type: 'button-positive',
+              onTap: function () {
+                phonedialer.dial("400-1398888", function (err) {
+                  console.log(err);
+                });
+              }
+            }
+          ]
         });
       }
     });
