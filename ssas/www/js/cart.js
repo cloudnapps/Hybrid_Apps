@@ -1,14 +1,27 @@
 angular.module('cart', ['components'])
 
   .controller('CartController', function ($scope, $state, $stateParams, $ionicHistory, $ionicListDelegate,
-                                          $ionicLoading, cartApi, tabStateService, userService) {
+                                          $ionicLoading, cartApi) {
 
     $scope.$on('$ionicView.beforeEnter', function () {
       $scope.load();
     });
 
-    $scope.isEdit = false;
-    $scope.headerBtnTitle = '编辑';
+    function initStatus() {
+      if ($scope.cart.natureCart && $scope.cart.natureCart.bond) {
+        angular.forEach($scope.cart.natureCart.bond.aSelCart, function (seller) {
+          seller.seller_info.isEdited = false;
+          seller.seller_info.headerBtnTitle = '编辑';
+        })
+      }
+
+      if ($scope.cart.natureCart && $scope.cart.natureCart.direct_mail) {
+        angular.forEach($scope.cart.natureCart.direct_mail.aSelCart, function (seller) {
+          seller.seller_info.isEdited = false;
+          seller.seller_info.headerBtnTitle = '编辑';
+        })
+      }
+    }
 
     $scope.load = function () {
       $ionicLoading.show();
@@ -16,6 +29,8 @@ angular.module('cart', ['components'])
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
+
+          initStatus();
 
           if ($stateParams.productId && $stateParams.nature) {
             if (!$ionicHistory.forwardView()) {
@@ -46,6 +61,8 @@ angular.module('cart', ['components'])
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
+
+          initStatus();
         }
       })
         .finally(function () {
@@ -88,6 +105,8 @@ angular.module('cart', ['components'])
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
+
+          initStatus();
         }
       })
         .finally(function () {
@@ -101,6 +120,8 @@ angular.module('cart', ['components'])
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
+
+          initStatus();
         }
       })
         .finally(function () {
@@ -108,28 +129,21 @@ angular.module('cart', ['components'])
         });
     };
 
-    $scope.editNature = function (nature) {
-      $scope.isEdit = !$scope.isEdit;
-      console.log(nature);
-      $scope.headerBtnTitle = $scope.isEdit ? '完成' : '编辑';
+    $scope.editSeller = function (seller) {
+      seller.seller_info.isEdited = !seller.seller_info.isEdited;
+      seller.seller_info.headerBtnTitle = seller.seller_info.isEdited ? '完成' : '编辑';
     };
 
     $scope.removeNature = function (nature) {
-      if ($scope.isEdit) {
-        var goods = [];
-        angular.forEach(nature.aSelCart, function (seller) {
-          angular.forEach(seller.goods_list, function (item) {
-            if (item.selected) {
-              goods.push(item);
-            }
-          });
+      var goods = [];
+      angular.forEach(nature.aSelCart, function (seller) {
+        angular.forEach(seller.goods_list, function (item) {
+          if (item.selected) {
+            goods.push(item);
+          }
         });
-        $scope.removeGoods(goods);
-
-        $scope.isEdit = false;
-      }
-
-      $scope.headerBtnTitle = $scope.isEdit ? '完成' : '编辑';
+      });
+      $scope.removeGoods(goods);
     };
 
     $scope.removeSeller = function (seller) {
@@ -169,7 +183,8 @@ angular.module('cart', ['components'])
       $state.go('tab.cart-checkout', {nature: natureKey}, {reload: true});
     };
   }) // end of CartController
-  .controller('CartCheckoutController', function ($rootScope, $scope, toastService, $state, $stateParams, $ionicModal, $ionicLoading, cartApi) {
+  .
+  controller('CartCheckoutController', function ($rootScope, $scope, toastService, $state, $stateParams, $ionicModal, $ionicLoading, cartApi) {
     $scope.checkout = function () {
       $ionicLoading.show();
       cartApi.checkout($scope.cart, $stateParams.nature).success(function (responseData) {

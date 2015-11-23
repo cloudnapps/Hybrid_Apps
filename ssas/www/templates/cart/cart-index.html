@@ -1,7 +1,7 @@
 <ion-view class="cart" view-title="{{'cart'|translate}}">
-  <ion-nav-buttons side="right">
-    <span ng-click="editNature()" style="font-size: 14px;line-height: 36px;text-align: right;display: block;">{{headerBtnTitle}}</span>
-  </ion-nav-buttons>
+  <!--  <ion-nav-buttons side="right">
+      <span ng-click="editNature()" style="font-size: 14px;line-height: 36px;text-align: right;display: block;">{{headerBtnTitle}}</span>
+    </ion-nav-buttons>-->
   <ion-nav-buttons side="left">
     <back-button></back-button>
   </ion-nav-buttons>
@@ -27,21 +27,33 @@
 
         <div ng-repeat="seller in nature.aSelCart">
           <ion-item class="seller item">
-            <div class="item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="seller.seller_info.selected" ng-change="toggleSeller(seller)">
-              </label>
+            <div class="row" style="padding: 0 0 0 0px;">
+              <div class="item-checkbox col col-80 col-center">
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="seller.seller_info.selected" ng-change="toggleSeller(seller)">
+                </label>
 
-              <div style="color: #4a4a4a;">{{seller.seller_info.seller_name}}</div>
+                <div style="color: #4a4a4a;">{{seller.seller_info.seller_name}}</div>
+              </div>
+              <!--<div class="col col-20">
+                &lt;!&ndash;<ion-option-button class="button-assertive" ng-click="removeSeller(seller)">
+                  {{'remove' | translate}}
+                </ion-option-button>&ndash;&gt;
+                <span ng-click="editNature()" class="button-positive"
+                      style="font-size: 14px;line-height: 36px;text-align: right;display: block;">
+                  {{headerBtnTitle}}
+                </span>
+              </div>-->
+              <button class="col-20 button button-full button-positive" ng-click="editSeller(seller)"
+                      style="margin:0; padding: 0; font-size: 14px;line-height: 24px; min-height: 0px">
+                {{seller.seller_info.headerBtnTitle}}
+              </button>
             </div>
-            <ion-option-button class="button-assertive" ng-click="removeSeller(seller)">
-              {{'remove' | translate}}
-            </ion-option-button>
           </ion-item>
-          <ion-list>
+          <ion-list show-delete="!!seller.seller_info.isEdited">
             <ion-item class="good item" ng-repeat="good in seller.goods_list">
               <div class="item-checkbox" ng-class="{'cart-disabled': good.store === 0}">
-                <label class="checkbox">
+                <label class="checkbox" ng-show='!seller.seller_info.isEdited'>
                   <input type="checkbox" class="selt-prdt" ng-model="good.selected"
                          ng-change="toggleGood(good)">
                 </label>
@@ -67,7 +79,7 @@
               <ion-option-button class="button-assertive" ng-click="removeGood(good)">
                 {{'remove' | translate}}
               </ion-option-button>
-              <ion-delete-button class="ion-minus-circled"></ion-delete-button>
+              <ion-delete-button class="ion-minus-circled" ng-click="removeGood(good)"></ion-delete-button>
             </ion-item>
           </ion-list>
         </div>
@@ -86,7 +98,7 @@
             </div>
           </div>
         </ion-item>
-        <ion-item class="item item-complex" ng-show="!isEdit">
+        <ion-item class="item item-complex">
           <div class="row row-no-padding">
             <div class="col car-tol-price">
               <div class="item-content car-cont">
@@ -95,19 +107,10 @@
                 <span style="margin-top: 2px;">共计: {{nature.total_item_amount |currency:'￥'}} (不含运费)</span>
               </div>
             </div>
-            <button class="col-30 button button-full button-positive" style="margin:0;" ui-sref="tab.cart-checkout({nature: natureKey})" ng-disabled="nature.item_amount<0.01 || nature.lock_btn">
-              {{'cart_checkout'|translate}}({{nature.cart_num}})
-            </button>
-          </div>
-        </ion-item>
-        <ion-item class="item item-complex" ng-show="isEdit">
-          <div class="row row-no-padding">
-            <div class="col car-tol-price">
-            </div>
             <button class="col-30 button button-full button-positive" style="margin:0;"
-                    ng-disabled="nature.item_amount<0.01"
-                    ng-click="removeNature(nature)">
-              {{'remove'|translate}}
+                    ui-sref="tab.cart-checkout({nature: natureKey})"
+                    ng-disabled="nature.item_amount<0.01 || nature.lock_btn">
+              {{'cart_checkout'|translate}}({{nature.cart_num}})
             </button>
           </div>
         </ion-item>
