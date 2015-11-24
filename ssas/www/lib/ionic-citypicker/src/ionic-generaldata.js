@@ -2,7 +2,8 @@ var app = angular.module('ionic-generaldata', ['ionic']);
 app.service('GeneralPickerService', function () {
   this.sourceData = [{
     key: 'ReturnType',
-    values: [,
+    values: [
+      '仅退款',
       '退货退款'
     ]
   }, {
