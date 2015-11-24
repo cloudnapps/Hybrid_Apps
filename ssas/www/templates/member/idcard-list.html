@@ -2,48 +2,38 @@
   <ion-nav-buttons side="left">
     <back-button></back-button>
   </ion-nav-buttons>
-  <ion-content>
+  <ion-content class="idcard-list">
     <div class="row">
-      <h4 style="padding-left: 12px;font-size: 16px;font-weight: normal;color: #4a4b4d;">默认身份证号</h4>
+      <div class="col col-center">
+        <h4 class="def-card-tip">默认身份证号</h4>
+      </div>
     </div>
 
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items"
-                ng-if="!!item && !!item.is_default"
-                type="item-text-wrap" ng-click="setDefault(item)"
-                style="border-bottom: none; border-top-style: dashed;padding: 10px 5px 10px 15px;">
-        <div class="row" style="padding: 0;">
+      <ion-item class="item-remove-animate item-icon-right def-card-info" ng-repeat="item in items" ng-if="!!item && !!item.is_default" type="item-text-wrap" ng-click="setDefault(item)">
+        <div class="row">
           <div class="col col-90">
-            <h2 style="margin-bottom: 13px;color: #4a4b4d;">姓名：{{item.full_name}}</h2>
-
-            <h2 style="color: #4a4b4d;">身份证号：{{item.number}}</h2>
+            <h2 class="def-card-name">姓名：{{item.full_name}}</h2>
+            <h2>身份证号：{{item.number}}</h2>
           </div>
           <div class="col col-10">
-            <a href="" title="">
-              <i class="icon ion-chevron-right icon-accessory"></i>
-            </a>
+            <i class="icon ion-chevron-right icon-accessory"></i>
           </div>
         </div>
       </ion-item>
     </ion-list>
 
-    <hr style="margin:5px 0;height:1px;border:none;border-top:10px solid #f1f1f1;"/>
+    <hr class="hr-line-f1-10" />
 
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="item in items"
-                ng-if="!!item && !item.is_default"
-                type="item-text-wrap" ng-click="setDefault(item)"
-                style="padding: 10px 5px 10px 15px;border-top: none;border-bottom-color: #ddd;border-bottom-style: solid;margin-bottom: 2px;">
-        <div class="row" style="padding: 0;">
+      <ion-item class="item-remove-animate item-icon-right idcard-all" ng-repeat="item in items" ng-if="!!item && !item.is_default" type="item-text-wrap" ng-click="setDefault(item)">
+        <div class="row">
           <div class="col col-90">
-            <h2 style="margin-bottom: 13px;color: #4a4b4d;">姓名：{{item.full_name}}</h2>
-
-            <h2 style="color: #4a4b4d;">身份证号：{{item.number}}</h2>
+            <h2>姓名：{{item.full_name}}</h2>
+            <h2>身份证号：{{item.number}}</h2>
           </div>
           <div class="col col-10">
-            <a href="" title="">
-              <i class="icon ion-chevron-right icon-accessory"></i>
-            </a>
+            <i class="icon ion-chevron-right icon-accessory"></i>
           </div>
         </div>
       </ion-item>
