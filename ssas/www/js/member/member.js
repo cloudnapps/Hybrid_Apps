@@ -90,5 +90,7 @@
       }
     })
     .controller('MemberItemController', function ($scope) {
+    })
+    .controller('MemberHelpController', function ($scope) {
     });
 })();

@@ -275,6 +275,16 @@ angular.module('starter')
           }
         }
       })
+      //会员帮助
+      .state('memberhelp', {
+        url: '/memberhelp',
+        views: {
+          'main-view': {
+            templateUrl: 'templates/member/member-help.html',
+            controller: 'MemberHelpController'
+          }
+        }
+      })
       // 优惠券管理
       .state('coupons', {
         url: '/coupons',

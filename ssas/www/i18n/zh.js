@@ -44,6 +44,7 @@ var translations_zh = {
 
   //member
   member_title: '会员条款',
+  member_help: '帮助与反馈',
 
   //order
   ord_alltitle: '全部',

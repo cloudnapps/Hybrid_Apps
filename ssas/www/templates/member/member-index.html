@@ -10,10 +10,11 @@
         </div>
         <div class="col col-67 user-info-msg">
           <p>{{currentUser.login_name}}</p>
+
           <p>会员等级：{{currentUser.lv_name}}</p>
         </div>
       </div>
-      <hr class="hr-line-0" />
+      <hr class="hr-line-0"/>
       <div class="row member-collect">
         <div class="col col-50 colt-item" ng-click="goFavorites('sellers')">
           <a class="colt-text" href="">收藏的店铺</a>
@@ -24,7 +25,7 @@
       </div>
     </div>
 
-    <hr class="hr-line-0" />
+    <hr class="hr-line-0"/>
 
     <div class="row member-bar">
       <div class="col col-20 member-bar-item" ng-click="goOrders('nopay')">
@@ -48,7 +49,7 @@
       </div>
     </div>
 
-    <hr class="hr-line-1" />
+    <hr class="hr-line-1"/>
 
     <div class="row main-fun" ng-click="goOrders('all')">
       <div class="col col-90 fun-item">
@@ -59,7 +60,7 @@
       </div>
     </div>
 
-    <hr class="hr-line-10" />
+    <hr class="hr-line-10"/>
 
     <div class="row main-fun" ui-sref="points">
       <div class="col col-80 fun-item">
@@ -71,7 +72,7 @@
       </div>
     </div>
 
-    <hr class="hr-line-2" />
+    <hr class="hr-line-2"/>
 
     <div class="row main-fun" ui-sref="golds">
       <div class="col col-80 fun-item">
@@ -83,7 +84,7 @@
       </div>
     </div>
 
-    <hr class="hr-line-2" />
+    <hr class="hr-line-2"/>
 
     <div class="row main-fun" ui-sref="coupons">
       <div class="col col-80 fun-item">
@@ -95,7 +96,7 @@
       </div>
     </div>
 
-    <hr class="hr-line-10" />
+    <hr class="hr-line-10"/>
 
     <div class="row main-fun" ui-sref="receivers">
       <div class="col col-90 fun-item">
@@ -106,7 +107,7 @@
       </div>
     </div>
 
-    <hr class="hr-line-2" />
+    <hr class="hr-line-2"/>
 
     <div class="row main-fun" ui-sref="idcards">
       <div class="col col-90 fun-item">
@@ -117,7 +118,7 @@
       </div>
     </div>
 
-    <hr class="hr-line-10" />
+    <hr class="hr-line-10"/>
 
     <div class="row main-fun" ui-sref="memberitems">
       <div class="col col-90 fun-item">
@@ -128,13 +129,13 @@
       </div>
     </div>
 
-    <hr class="hr-line-2" />
+    <hr class="hr-line-2"/>
 
-    <div class="row main-fun">
+    <div class="row main-fun" ui-sref="memberhelp">
       <div class="col col-90 fun-item">
-        <a class="fun-item-text">客服电话: 400-1398888</a>
+        <a class="fun-item-text">帮助与反馈</a>
       </div>
-      <div class="col col-10 fun-item-arrow" ng-click="callService()">
+      <div class="col col-10 fun-item-arrow">
         <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
     </div>
