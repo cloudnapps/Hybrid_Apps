@@ -24,6 +24,19 @@
 
     <hr style="margin: 0;height:10px;border:none;border-top:10px solid #f4f4f4;"/>
 
+    <div class="row"
+         style="padding:10px;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #f2f2f2;">
+      <div class="col col-75" style="height: 100%; padding: 0px">
+        <p style="padding: 0px; height: 100%;color: #4a4a4a;">订单号：{{orderInfo.order_title.order_id}}</p>
+      </div>
+
+      <div class="col col-25" style="height: 100%; padding: 0px" align="right">
+        <p style="padding: 0px; height: 100%;color: #4a4a4a;">{{orderInfo.order_info.time.substr(0, 10)}}</p>
+      </div>
+    </div>
+
+    <hr style="margin: 0;height:10px;border:none;border-top:10px solid #f4f4f4;"/>
+
     <div class="user-order-track">
       <ul class="user-track-ul">
         <li ng-repeat="item in items">
