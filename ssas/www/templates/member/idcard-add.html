@@ -3,26 +3,23 @@
     <back-button></back-button>
   </ion-nav-buttons>
   <ion-content>
-    <div class="list">
+    <div class="list idcard-add">
       <label class="item item-input">
-        <input type="text" placeholder="姓名" ng-model="idCardInfo.full_name" ng-disabled="idCardInfo.card_id" style="background-color: #fff">
+        <input type="text" placeholder="姓名" ng-model="idCardInfo.full_name" ng-disabled="idCardInfo.card_id" class="bg-color"/>
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="身份证号" ng-model="idCardInfo.number" ng-disabled="idCardInfo.card_id" style="background-color: #fff">
+        <input type="text" placeholder="身份证号" ng-model="idCardInfo.number" ng-disabled="idCardInfo.card_id" class="bg-color" />
       </label>
-      <label class="item item-toggle" style="font-size: 14px;">
+      <label class="item item-toggle idcard-choose">
         设置为默认身份证
         <label class="toggle">
           <input type="checkbox" ng-model="idCardInfo.is_default">
-
           <div class="track">
             <div class="handle"></div>
           </div>
         </label>
       </label>
-
-      <p style="padding: 10px 5px;text-align: center;font-size: 12px;margin: 0;color: #4a4a4a;">身份证填写后将无法进行更改或删除,
-        请确认信息的正确</p>
+      <p class="idcard-comment">身份证填写后将无法进行更改或删除,请确认信息的正确</p>
     </div>
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">

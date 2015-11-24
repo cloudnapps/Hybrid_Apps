@@ -9,6 +9,8 @@ $white-color: #fff;
 
 .hr-line-10 { @include hr-divide-line(10px, #f6f6f6); }
 
+.hr-line-f1-10 { @include hr-divide-line(10px, #f1f1f1); }
+
 .member-bar {
   padding:0;
 
@@ -239,5 +241,50 @@ $white-color: #fff;
         color: $red-color;
       }
     }
+  }
+}
+
+/* idcard style */
+.idcard-list {
+  .def-card-tip {
+    margin: 5px 0;
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: normal;
+    color: $text-color;
+  }
+  .def-card-info {
+    padding: 5px 0 5px 10px;
+    border-bottom: none;
+    border-top-style: dashed;
+  }
+  .idcard-all {
+    margin: 0;
+    padding: 5px 0 5px 10px;
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+  }
+  h2 {
+    color: $text-color;
+  }
+  .def-card-name {
+    margin-bottom: 13px;
+  }
+}
+/* idcard add */
+.idcard-add {
+  .bg-color {
+    color: $text-color;
+    background-color: #fff;
+  }
+  .idcard-choose {
+    font-size: 14px;
+  }
+  .idcard-comment {
+    margin: 0;
+    padding: 10px 5px;
+    text-align: center;
+    font-size: 12px;
+    color: $text-color;
   }
 }
