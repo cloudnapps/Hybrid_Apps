@@ -1,13 +1,24 @@
 <ion-view view-title="{{'gold_title'|translate}}" hide-tabs="true">
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
   <ion-content class="gold-wrap">
     <div class="row alt-text">
       <div class="col col-center">
         <p>可用金币:</p>
+
         <h1 class="num">{{goldInfo.total}}</h1>
       </div>
     </div>
-    
+
+    <div class="prdt-tax" style="padding: 6px 0 5px 16px;">
+      <div class="declare">
+        <p>金币说明：</p>
+
+        <p>嘿,和我们一起”fun”享金币吧.每天您有一次签到领取金币的机会,同时评论商品也能获得金币哟.金币将帮助您获得精美奖赏及专属体验活动！还等什么,一起”fun”起来吧~~</p>
+      </div>
+    </div>
+
     <div class="row source-gold" ng-click="showHistory()">
       <div class="col col-90 col-center">
         <span class="num-text">金币账单</span>
@@ -19,10 +30,12 @@
     </div>
 
     <ion-list ng-show="goldInfo.isShow">
-      <ion-item class="item-remove-animate item-icon-right gold-list" ng-repeat="item in goldInfo.items" type="item-text-wrap">
+      <ion-item class="item-remove-animate item-icon-right gold-list" ng-repeat="item in goldInfo.items"
+                type="item-text-wrap">
         <div class="row">
           <div class="col col-67 col-center gold-item">
             <p class="source-info">{{item.behavior}}</p>
+
             <p class="source-date">{{item.time}}</p>
           </div>
           <div class="col col-33 col-center source-num">
