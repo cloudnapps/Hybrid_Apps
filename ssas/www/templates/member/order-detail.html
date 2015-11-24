@@ -3,15 +3,24 @@
     <back-button></back-button>
   </ion-nav-buttons>
   <ion-content>
-    <div class="row" style="padding: 10px 5px 10px 15px;">
+    <div class="row" style="padding: 10px 5px 0;">
       <div class="col" style="color: #4a4b4d;">
-        {{item.order_title.status}}
+        订单状态：{{item.order_title.status}}
+      </div>
+    </div>
+    <div class="row" style="padding:0 10px 10px;border-bottom: 1px solid #f2f2f2;">
+      <div class="col col-75" style="padding: 0px">
+        <p style="margin: 0px;color: #4a4a4a;">订单号：{{item.order_title.order_id}}</p>
+      </div>
+
+      <div class="col col-25" style="padding: 0px" align="right">
+        <p style="margin: 0px;color: #4a4a4a;">{{item.order_info.time.substr(0, 10)}}</p>
       </div>
     </div>
 
     <hr style="margin: 0;height:1px;border:none;border-top:10px solid #f2f2f2;"/>
 
-    <div class="row" style="padding: 10px 5px 10px 15px;">
+    <div class="row" style="padding: 10px 5px;">
       <div class="col">
         <p style="margin-bottom: 13px;color: #4a4b4d;">收件人：{{item.consignee.name}}
           <span style="float: right;" ng-if="!!item.consignee.mobile">电话：{{item.consignee.mobile}}</span>
@@ -21,23 +30,10 @@
           <div>
             <span style="max-width: 5em;font-size: 14px;color: #4a4b4d;">收件地址：</span>
           </div>
-          <div class="col col-center" style="word-break: break-all;max-width: 18em;white-space: normal;padding: 0;">
+          <div class="col col-center" style="word-break: break-all;white-space: normal;padding: 0;">
             <span style="font-size: 14px;color: #4a4b4d;">{{item.consignee.addr}}</span>
           </div>
         </div>
-      </div>
-    </div>
-
-    <hr style="margin: 0;height:1px;border:none;border-top:10px solid #f2f2f2;"/>
-    
-    <div class="row"
-         style="padding:10px;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #f2f2f2;">
-      <div class="col col-75" style="height: 100%; padding: 0px">
-        <p style="padding: 0px; height: 100%;color: #4a4a4a;">订单号：{{item.order_title.order_id}}</p>
-      </div>
-
-      <div class="col col-25" style="height: 100%; padding: 0px" align="right">
-        <p style="padding: 0px; height: 100%;color: #4a4a4a;">{{item.order_info.time.substr(0, 10)}}</p>
       </div>
     </div>
 
