@@ -42,6 +42,9 @@ var translations_zh = {
   //signin
   signin_title: '签个到',
 
+  //member
+  member_title: '会员条款',
+
   //order
   ord_alltitle: '全部',
   ord_nopaytitle: '待付款',

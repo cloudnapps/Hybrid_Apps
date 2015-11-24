@@ -1,8 +1,7 @@
 (function () {
   angular.module('member', ['starter.services', 'login'])
-    .controller('MemberCtrl',
-    function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService, $ionicActionSheet,
-              orderStateService, favoriteStateService, $ionicPopup) {
+    .controller('MemberCtrl', function ($scope, $ionicPopover, $state, $ionicHistory, SettingApi, userService, $ionicActionSheet,
+                                        orderStateService, favoriteStateService, $ionicPopup) {
       $scope.currentUser = {};
 
       $scope.goOrders = function (type) {
@@ -89,5 +88,7 @@
           ]
         });
       }
+    })
+    .controller('MemberItemController', function ($scope) {
     });
 })();
