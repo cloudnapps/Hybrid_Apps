@@ -374,15 +374,6 @@ angular.module('starter')
           }
         }
       })
-      .state('complaints', {
-        url: '/complaints',
-        views: {
-          'main-view': {
-            templateUrl: 'templates/member/complaint-list.html',
-            controller: 'ComplaintListCtrl'
-          }
-        }
-      })
       .state('complaint-detail', {
         url: '/complaint/:oId',
         views: {
@@ -398,15 +389,6 @@ angular.module('starter')
           'main-view': {
             templateUrl: 'templates/member/return-request.html',
             controller: 'ReturnRequestCtrl'
-          }
-        }
-      })
-      .state('returns', {
-        url: '/returns',
-        views: {
-          'main-view': {
-            templateUrl: 'templates/member/return-list.html',
-            controller: 'ReturnListCtrl'
           }
         }
       })

@@ -31,39 +31,6 @@
       };
     })
 
-    .controller('ComplaintListCtrl', function ($scope, ComplaintApi) {
-      $scope.init = function () {
-        $scope.items = [];
-        $scope.page = 1;
-        $scope.hasMore = false;
-        $scope.filter = '';
-      };
-
-      $scope.getComplaintList = function () {
-        ComplaintApi.getComplaintList(null, null, function (result) {
-          if (result.status === 1) {
-            $scope.hasMore = false;
-          }
-          else {
-            $scope.hasMore = true;
-            $scope.items = $scope.items.concat(result.data);
-          }
-
-          $scope.$broadcast('scroll.infiniteScrollComplete');
-        });
-      };
-
-      $scope.$on('$ionicView.beforeEnter', function () {
-        $scope.init();
-        $scope.getComplaintList();
-      });
-
-      $scope.loadMore = function () {
-        $scope.page++;
-        $scope.getComplaintList();
-      };
-    })
-
     .controller('ComplaintDetailCtrl', function ($scope, $stateParams, ComplaintApi) {
       ComplaintApi.getComplaintDetail($stateParams.oId, function (result) {
         if (result.status === 0) {

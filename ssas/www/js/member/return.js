@@ -55,39 +55,6 @@
       };
     })
 
-    .controller('ReturnListCtrl', function ($scope, ReturnApi) {
-      $scope.init = function () {
-        $scope.items = [];
-        $scope.page = 1;
-        $scope.hasMore = false;
-        $scope.filter = '';
-      };
-
-      $scope.getReturnList = function () {
-        ReturnApi.getReturnList($scope.page, $scope.filter, function (result) {
-          if (result.status === 1) {
-            $scope.hasMore = false;
-          }
-          else {
-            $scope.hasMore = true;
-            $scope.items = $scope.items.concat(result.data);
-          }
-
-          $scope.$broadcast('scroll.infiniteScrollComplete');
-        });
-      };
-
-      $scope.$on('$ionicView.beforeEnter', function () {
-        $scope.init();
-        $scope.getReturnList();
-      });
-
-      $scope.loadMore = function () {
-        $scope.page++;
-        $scope.getReturnList();
-      };
-    })
-
     .controller('ReturnDetailCtrl', function ($scope, $stateParams, ReturnApi) {
       ReturnApi.getReturnDetail($stateParams.returnId, function (result) {
         if (result.status === 0) {
