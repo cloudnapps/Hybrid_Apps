@@ -28,10 +28,10 @@
     <form ng-submit="search()" style="background:#fff; border-radius: 7px;margin-top: 8px;">
       <div class="row" style="padding:0;line-height: 30px;">
         <span style="min-width: 4em;max-width: 4em;color:#000; display: inline-block;font-size: 14px">
-          <select
-            style="-webkit-appearance:none;-moz-appearance:none;appearance:none; border:none; background:none;padding-right: 0;">
-            <option>商品</option>
-            <option>商户</option>
+          <select ng-model="keywords.kind"
+                  style="-webkit-appearance:none;-moz-appearance:none;appearance:none; border:none; background:none;padding-right: 0;">
+            <option value="0">商品</option>
+            <option value="1">商户</option>
           </select>
           <i class="icon ion-arrow-down-b"></i>&nbsp;
         </span>
@@ -108,7 +108,7 @@
                 <div class="prdt-descb">{{activityInfo.product_info[0].name}}</div>
 
                 <div class="row" style="padding: 0">
-                  <div class="col col-50"  align="left" style="padding: 0">
+                  <div class="col col-50" align="left" style="padding: 0">
                     <span class="pri-pri">{{activityInfo.product_info[0].activity_price | currency: '￥'}}</span>
                   </div>
                   <div class="col col-50" align="right" style="padding: 0">

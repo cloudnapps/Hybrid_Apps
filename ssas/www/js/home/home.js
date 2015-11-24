@@ -15,6 +15,8 @@
 
       $scope.keywords = {};
 
+      $scope.keywords.kind = '0';
+
       $rootScope.barcodeScan = barcode.scan;
 
       $ionicPopover.fromTemplateUrl('shopPopover.html', {
@@ -47,18 +49,21 @@
 
       $scope.changeSearchKind = function (kind) {
         $scope.popover.hide();
-        $scope.kind = kind;
+        $scope.keywords.kind = kind;
       };
 
       $scope.search = function () {
-        if (!$scope.kind) {
+        if ($scope.keywords.kind === '0') {
           return $state.go('products', {keywords: $scope.keywords.value});
         }
-        return $state.go('sellers', {keywords: $scope.keywords.value});
+        else {
+          return $state.go('sellers', {keywords: $scope.keywords.value});
+        }
       };
 
       $scope.clearSearch = function (event) {
         $scope.keywords.value = '';
+        $scope.keywords.kind = '0';
         event.stopPropagation();
       };
 
