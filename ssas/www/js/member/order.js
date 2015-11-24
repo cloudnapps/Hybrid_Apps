@@ -26,7 +26,6 @@
         });
       };
 
-
       $scope.switchOrder = function (type) {
         $scope.init();
 
@@ -344,91 +343,75 @@
       };
     })
 
-    .controller('OrderReturnCtrl', function ($scope, $state, OrderApi) {
-      $scope.items = [];
-
-      $scope.filter = {
-        return_value: '1'
-      };
-
+    .controller('OrderReturnCtrl', function ($scope, $state, $ionicLoading, OrderApi) {
       $scope.init = function () {
-        if ($scope.items.length === 0) {
-          $scope.items = [];
-          $scope.page = 0;
-          $scope.hasMore = true;
-        }
+        $scope.items = [];
+        $scope.page = 1;
+        $scope.hasMore = false;
+        $scope.filter = {
+          return_value: '1'
+        };
       };
 
-      $scope.loadMore = function () {
-        OrderApi.getOrderList($scope.page + 1, $scope.filter, function (result) {
+      $scope.getReturnOrders = function () {
+        $ionicLoading.show();
+        OrderApi.getOrderList($scope.page, $scope.filter, function (result) {
           if (result.status === 1) {
             $scope.hasMore = false;
           }
           else {
+            $scope.hasMore = true;
             $scope.items = $scope.items.concat(result.data);
-            $scope.page += 1;
-            $scope.$broadcast('scroll.infiniteScrollComplete');
           }
+          $ionicLoading.hide();
+          $scope.$broadcast('scroll.infiniteScrollComplete');
         });
       };
 
+      $scope.loadMore = function () {
+        $scope.page++;
+        $scope.getReturnOrders();
+      };
+
       $scope.$on('$ionicView.enter', function () {
-        $scope.isActive = true;
         $scope.init();
-      });
-
-      $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.isActive = false;
-      });
-
-      $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActive) {
-          $scope.loadMore();
-        }
+        $scope.getReturnOrders();
       });
     })
 
-    .controller('OrderComplaintCtrl', function ($scope, $state, OrderApi) {
-      $scope.items = [];
-
-      $scope.filter = {
-        is_complaint: true
-      };
-
+    .controller('OrderComplaintCtrl', function ($scope, $state, $ionicLoading, OrderApi) {
       $scope.init = function () {
-        if ($scope.items.length === 0) {
-          $scope.items = [];
-          $scope.page = 0;
-          $scope.hasMore = true;
-        }
+        $scope.items = [];
+        $scope.page = 1;
+        $scope.hasMore = false;
+        $scope.filter = {
+          is_complaint: true
+        };
       };
 
-      $scope.loadMore = function () {
-        OrderApi.getOrderList($scope.page + 1, $scope.filter, function (result) {
+      $scope.getComplaintOrders = function () {
+        $ionicLoading.show();
+        OrderApi.getOrderList($scope.page, $scope.filter, function (result) {
           if (result.status === 1) {
             $scope.hasMore = false;
           }
           else {
+            $scope.hasMore = true;
             $scope.items = $scope.items.concat(result.data);
-            $scope.page += 1;
-            $scope.$broadcast('scroll.infiniteScrollComplete');
           }
+          $ionicLoading.hide();
+          $scope.$broadcast('scroll.infiniteScrollComplete');
         });
       };
 
+      $scope.loadMore = function () {
+        $scope.page++;
+        $scope.getComplaintOrders();
+      };
+
       $scope.$on('$ionicView.enter', function () {
-        $scope.isActive = true;
         $scope.init();
-      });
-
-      $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.isActive = false;
-      });
-
-      $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActive) {
-          $scope.loadMore();
-        }
+        $scope.getComplaintOrders();
       });
 
       $scope.requestComplaint = function (item) {

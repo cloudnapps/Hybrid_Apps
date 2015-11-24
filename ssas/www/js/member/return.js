@@ -1,7 +1,7 @@
 (function () {
   angular.module('return', ['starter.services'])
 
-    .controller('ReturnRequestCtrl', function ($scope, $stateParams, $ionicPopup, $state, ReturnApi, toastService) {
+    .controller('ReturnRequestCtrl', function ($scope, $stateParams, $ionicPopup, ReturnApi, toastService) {
       $scope.returnInfo = {};
       $scope.returnInfo.product = {};
 
@@ -55,7 +55,7 @@
       };
     })
 
-    .controller('ReturnListCtrl', function ($scope, $state, ReturnApi) {
+    .controller('ReturnListCtrl', function ($scope, ReturnApi) {
       $scope.init = function () {
         $scope.items = [];
         $scope.page = 1;

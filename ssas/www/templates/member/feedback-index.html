@@ -36,9 +36,9 @@
       </ion-item>
     </ion-list>
     <ion-list ng-show="type === 'complaints'">
-      <ion-item class="item-remove-animate item-avatar item-icon-right"
+      <ion-item class="item-remove-animate item-icon-right ret-order"
                 ng-repeat="item in items" type="item-text-wrap"
-                style="padding: 10px 40px 15px 20px;" ng-click="goDetail(item)">
+                style="padding: 10px 40px 15px 20px;" ui-sref="complaint-detail({oId: item.oid})">
         <h2 style="font-size: 18px;color: #4c4b4d;">{{item.time}}</h2>
 
         <h2 style="font-size: 18px;margin-top: 10px;color: #4c4b4d;">{{item.complaints_type}}</h2>

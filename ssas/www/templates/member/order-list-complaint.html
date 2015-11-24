@@ -41,10 +41,10 @@
         </div>
         <hr style="margin: 0;height:1px;border:none;border-top:3px solid #f2f2f2;"/>
         <div class="row" style="padding:10px;">
-          <div style="width: 100%;">
-            <button class="button button-energized"
-                    style="font-size:12px;float:right;margin: 0 2px;min-height: 27px;line-height: 30px;padding: 0 18px;"
-                    ng-click="requestComplaint(item)">我要投诉
+          <div style="width: 100%;" ui-sref="complaint-request({orderId: item.order_id})">
+            <button class="button button-positive"
+                    style="font-size:14px;border-color:#bd252c;float:right;margin: 0 2px;min-height: 27px;line-height: 30px;">
+              我要投诉
             </button>
           </div>
         </div>

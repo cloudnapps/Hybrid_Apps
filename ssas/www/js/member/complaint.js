@@ -1,64 +1,66 @@
 (function () {
-  angular.module('complaint', ['starter.services'])    
-    .controller('ComplaintRequestCtrl', function ($scope, $stateParams, $state, ReturnApi) {
+  angular.module('complaint', ['starter.services'])
+    .controller('ComplaintRequestCtrl', function ($scope, $stateParams, toastService, OrderApi, ComplaintApi) {
       $scope.complaintInfo = {};
 
-      ReturnApi.getReturnIndex($stateParams.orderId, function (result) {
-        if (result.status === 0) {
-          $scope.orderInfo = result.data;
-        }
+      OrderApi.getOrderDetail($stateParams.orderId, function (result) {
+        $scope.orderInfo = result.data;
       });
 
-      $scope.select = function (item) {
-        item.selected = true;
-      };
-
+      $scope.clicked = false;
       $scope.submitRequest = function () {
-        if ($scope.returnInfo.isShip) {
-          $scope.returnInfo.returnType = 'reship';
-        }
-        else {
-          $scope.returnInfo.returnType = 'refund';
-        }
+        $scope.clicked = true;
 
-        var i;
-        for (i in $scope.orderInfo.product) {
-          if ($scope.orderInfo.product[i].selected) {
-            $scope.returnInfo.product.id = $scope.orderInfo.products[i].product_id;
-            $scope.returnInfo.product.num = $scope.orderInfo.products[i].num;
+        var oId;
+        for (i in $scope.orderInfo.products) {
+          if ($scope.orderInfo.products[i].selected) {
+            oId = $scope.orderInfo.products[i].oid;
           }
         }
 
-        $scope.returnInfo.products = [
-          {
-            product_id: '542',
-            num: '1'
-          }
-        ];
-
-        ReturnApi.addReturnRequest($scope.orderInfo.order_id, $scope.returnInfo.returnType,
-          $scope.returnInfo.title, $scope.returnInfo.content, $scope.returnInfo.products,
+        ComplaintApi.addComplaintRequest(oId, $scope.complaintInfo.title,
+          $scope.complaintInfo.contact, $scope.complaintInfo.content,
           function (result) {
+            $scope.clicked = false;
+            toastService.setToast(result.msg);
+
             if (result.status === 0) {
-              $state.go('return-list', {}, {reload: true});
+              $scope.back(-2);
             }
           });
       };
     })
 
-    .controller('ComplaintListCtrl', function ($scope, $state, ComplaintApi) {
-      $scope.items = [];
-
-      ComplaintApi.getComplaintList(null, null, function (result) {
-        $scope.items = result.data;
-      });
-
-      $scope.goDetail = function (item) {
-        $state.go('tab.feedbacks.complaint_detail', {oId: item.oid}, {reload: true});
+    .controller('ComplaintListCtrl', function ($scope, ComplaintApi) {
+      $scope.init = function () {
+        $scope.items = [];
+        $scope.page = 1;
+        $scope.hasMore = false;
+        $scope.filter = '';
       };
 
-      $scope.request = function () {
-        $state.go('tab.complaint_orders', {}, {reload: true});
+      $scope.getComplaintList = function () {
+        ComplaintApi.getComplaintList(null, null, function (result) {
+          if (result.status === 1) {
+            $scope.hasMore = false;
+          }
+          else {
+            $scope.hasMore = true;
+            $scope.items = $scope.items.concat(result.data);
+          }
+
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
+      };
+
+      $scope.$on('$ionicView.beforeEnter', function () {
+        $scope.init();
+        $scope.getComplaintList();
+      });
+
+      $scope.loadMore = function () {
+        $scope.page++;
+        $scope.getComplaintList();
       };
     })
 

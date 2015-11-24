@@ -1,62 +1,61 @@
 <ion-view view-title="{{'complaint_title'|translate}}">
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
-  <ion-nav-buttons side="right">
-    <div class="row-center">
-      <a class="button button-light" href="#/complaints/list">
-        我的投诉
-      </a>
-    </div>
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
   </ion-nav-buttons>
   <ion-content>
-    <div class="list card">
-      <div class="item item-body" style="padding-left: 5px">
-        <div class="row">
-          <div class="col col-33">
-            标题：
-          </div>
-          <div class="col col-70">
-            <input type="text" placeholder="请输入标题" ng-model="complaintInfo.title">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col col-33">
-            内容：
-          </div>
-          <div class="col col-70">
-            <textarea placeholder="请输入内容" ng-model="complaintInfo.content"></textarea>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col col-33">
-            联系方式：
-          </div>
-          <div class="col col-70">
-            <input type="text" placeholder="请输入联系方式" ng-model="complaintInfo.contact">
-          </div>
+    <div class="list" style="margin-bottom: 0;">
+      <div class="row" style="padding: 10px 20px;border-bottom: 1px solid #c8c8c8;">
+        <span style="font-size: 16px;min-width: 5em;display: block;line-height: 34px;color: #4a4a4a;">投诉标题：</span>
+
+        <div class="col" style="padding: 0">
+          <input type="text" ng-model="complaintInfo.title"
+                 style="width: 100%;padding: 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
         </div>
       </div>
 
-      <div class="row" ng-repeat="item in orderInfo.product">
-        <div class="col col-10">
-          <input type="radio" name="good" ng-model="item.selected">
-        </div>
-        <div class="col col-80">
-          <p>{{item.name}}</p>
+      <div class="row" style="padding: 10px 20px;border-bottom: 1px solid #c8c8c8;">
+        <span style="font-size: 16px;min-width: 5em;display: block;line-height: 34px;color: #4a4a4a;">投诉内容：</span>
 
-          <p>数量:{{item.num}}</p>
+        <div class="col" style="padding: 0">
+              <textarea placeholder="请输入内容" ng-model="complaintInfo.content"
+                        style="width: 100%;padding: 0;font-size: 14px;color: #4a4a4a;background-color: #fff;"></textarea>
         </div>
-        <div class="col col-10">
-          <input type="text" placeholder="{{item.num}}" ng-model="item.requestNum">
+      </div>
+
+      <div class="row" style="padding: 10px 20px;border-bottom: 1px solid #c8c8c8;">
+        <span style="font-size: 16px;min-width: 5em;display: block;line-height: 34px;color: #4a4a4a;">联系方式：</span>
+
+        <div class="col" style="padding: 0">
+          <input type="text" ng-model="complaintInfo.contact"
+                 style="width: 100%;padding: 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
         </div>
       </div>
     </div>
-  </ion-content>
-  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
+
+    <div class="row" style="padding: 10px;font-size: 16px;color: #4a4a4a;">
+      选择相关商品
+    </div>
+    <ion-item class="good item" style="border-top: none;" ng-repeat="item in orderInfo.products">
+      <div class="item-checkbox">
+        <label class="checkbox">
+          <input type="checkbox" class="selt-prdt" ng-model="item.selected">
+        </label>
+
+        <div class="row row-no-padding">
+          <div class="good-info col">
+            <h2 style="color:#4a4a4a;font-size:14px;">{{item.name}}</h2>
+          </div>
+        </div>
+      </div>
+    </ion-item>
+
     <div class="button-bar">
-      <button class="button button-positive" style="font-size: 18px;"
-              ng-click="submitRequest()">
+      <button class="button button-positive"
+              style="font-size: 18px;"
+              ng-click="clicked || submitRequest()"
+              ng-disabled="clicked">
         {{'return_addbtn'|translate}}
       </button>
     </div>
-  </ion-footer-bar>
+  </ion-content>
 </ion-view>
