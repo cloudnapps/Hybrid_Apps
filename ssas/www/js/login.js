@@ -61,14 +61,8 @@
           if (result.status === 1 && result.msg === '请填写正确的手机号码') {
             $scope.reSendCodeTime = 0;
           }
-          var alertPopup = $ionicPopup.alert({
-            title: '获取验证码',
-            template: result.msg,
-            okText: '确定' // String (默认: 'OK')。OK按钮的文字。
-          });
-          alertPopup.then(function (res) {
-            console.log(res);
-          });
+
+          toastService.setToast(data.msg);
         });
       };
 

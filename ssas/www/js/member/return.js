@@ -8,6 +8,13 @@
       ReturnApi.getReturnIndex($stateParams.orderId, function (result) {
         if (result.status === 0) {
           $scope.orderInfo = result.data;
+
+          if ($scope.orderInfo.return_type === 'reship') {
+            $scope.returnInfo.typeDesc = '退货退款';
+          }
+          else if ($scope.orderInfo.return_type === 'refund') {
+            $scope.returnInfo.typeDesc = '仅退款';
+          }
         }
         else {
           var alertPopup = $ionicPopup.alert({
@@ -25,12 +32,7 @@
       $scope.submitRequest = function () {
         $scope.clicked = true;
 
-        if ($scope.returnInfo.typeDesc === '退货退款') {
-          $scope.returnInfo.type = 'reship';
-        }
-        else if ($scope.returnInfo.typeDesc === '仅退款') {
-          $scope.returnInfo.type = 'refund';
-        }
+        $scope.returnInfo.type = $scope.orderInfo.return_type;
 
         var i;
         for (i in $scope.orderInfo.product) {
