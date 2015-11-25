@@ -91,13 +91,6 @@ public class MapActivity
         super.onCreate(savedInstanceState);
         setContentView(getResources().getIdentifier("activity_map", "layout", getPackageName()));
 
-        TYMapEnvironment.initMapEnvironment();
-        String mapRootDir = Environment.getExternalStorageDirectory()
-                + "/MapDemo/MapFiles";
-        TYMapEnvironment.setRootDirectoryForMapFiles(mapRootDir);
-
-        copyMapFiles();
-
         initParams();
 
         mapView = (TYMapView) findViewById(getResources().getIdentifier("map", "id", getPackageName()));
@@ -183,13 +176,6 @@ public class MapActivity
 
         hintLayer = new GraphicsLayer();
         mapView.addLayer(hintLayer);
-    }
-
-    void copyMapFiles() {
-        String sourcePath = "MapResource";
-        String targetPath = TYMapEnvironment.getRootDirectoryForMapFiles();
-        FileHelper.deleteFile(new File(targetPath));
-        FileHelper.copyFolderFromAsset(this, sourcePath, targetPath);
     }
 
     @Override
