@@ -21,7 +21,7 @@
   </ion-nav-buttons>
   <ion-content>
     <div style="height: 44px"></div>
-    <ion-list ng-show="type === 'returns'">
+    <ion-list ng-if="type === 'returns'">
       <ion-item class="item-remove-animate item-icon-right ret-order"
                 ng-repeat="item in items" type="item-text-wrap"
                 ui-sref="return-detail({returnId: item.return_id})">
@@ -35,13 +35,15 @@
         </a>
       </ion-item>
     </ion-list>
-    <ion-list ng-show="type === 'complaints'">
+    <ion-list ng-if="type === 'complaints'">
       <ion-item class="item-remove-animate item-icon-right ret-order"
                 ng-repeat="item in items" type="item-text-wrap"
-                style="padding: 10px 40px 15px 20px;" ui-sref="complaint-detail({oId: item.oid})">
-        <h2 style="font-size: 18px;color: #4c4b4d;">{{item.time}}</h2>
+                ui-sref="complaint-detail({oId: item.oid})">
+        <p class="ret-order-item">投诉时间：{{item.time}}</p>
 
-        <h2 style="font-size: 18px;margin-top: 10px;color: #4c4b4d;">{{item.complaints_type}}</h2>
+        <p class="ret-order-item">投诉订单号：{{item.order_id}}</p>
+
+        <p class="ret-order-item">投诉标题：{{item.complaints_type}}</p>
         <a>
           <i class="icon ion-chevron-right icon-accessory"></i>
         </a>
