@@ -36,7 +36,7 @@ $white-color: #fff;
 
       .content-num {
         position: absolute;
-        right: -13px;
+        right: -11px;
         top: -7px;
 
         width: 15px;
@@ -286,5 +286,23 @@ $white-color: #fff;
     text-align: center;
     font-size: 12px;
     color: $text-color;
+  }
+}
+
+/* member-help */
+.member-items, .member-help {
+  padding: 3px;
+
+  h4 {
+    color: #bd252c;
+  }
+
+  p {
+    font-size: 14px;
+    color: $text-color;
+  }
+  .emsize {
+    font-size: 16px;
+    color: #000;
   }
 }
