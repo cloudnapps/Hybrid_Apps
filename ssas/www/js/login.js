@@ -103,7 +103,7 @@
         wechat.auth(scope, function (cb_success) {
             $scope.clicked = false;
             LoginApi.getOpenId(cb_success.code, function (result) {
-              LoginApi.loginByWechatId(result.openid, result.access_token, function (result) {
+              LoginApi.loginByWechatId(result.openid, result.access_token, result.unionid, function (result) {
                 if (result.status === 1) {
                   toastService.setToast(result.msg);
                 }
@@ -322,11 +322,12 @@
         );
       };
 
-      var loginByWechatId = function (openId, accessToken, callback) {
+      var loginByWechatId = function (openId, accessToken, unionId, callback) {
         var url = apiEndpoint.url + '/passport-wx_login.html';
         var data = {
           wx_id: openId,
-          access_token: accessToken
+          access_token: accessToken,
+          unionid: unionId
         };
         sendRequest(url, data, callback);
       };
