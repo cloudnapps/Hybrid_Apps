@@ -27,8 +27,7 @@
       <config-file target="AndroidManifest.xml" parent="/manifest/application">
         <activity android:name="com.cloudnapps.plugins.map.MapActivity"
                   android:screenOrientation="sensorPortrait"
-                  android:parentActivityName=".MainActivity"
-                  android:launchMode="singleTop">
+                  android:parentActivityName=".MainActivity">
           <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivity" />
