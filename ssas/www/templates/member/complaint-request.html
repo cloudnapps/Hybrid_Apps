@@ -1,10 +1,10 @@
-<ion-view view-title="{{'complaint_title'|translate}}">
+<ion-view class="cart" view-title="{{'complaint_title'|translate}}" hide-tabs="true">
   <ion-nav-buttons side="left">
     <back-button></back-button>
   </ion-nav-buttons>
   <ion-content>
     <div class="list" style="margin-bottom: 0;">
-      <div class="row" style="padding: 10px 20px;border-bottom: 1px solid #c8c8c8;">
+      <div class="row" style="padding: 10px;border-bottom: 1px solid #c8c8c8;">
         <span style="font-size: 16px;min-width: 5em;display: block;line-height: 34px;color: #4a4a4a;">投诉标题：</span>
 
         <div class="col" style="padding: 0">
@@ -12,21 +12,21 @@
                  style="width: 100%;padding: 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
         </div>
       </div>
-
-      <div class="row" style="padding: 10px 20px;border-bottom: 1px solid #c8c8c8;">
-        <span style="font-size: 16px;min-width: 5em;display: block;line-height: 34px;color: #4a4a4a;">投诉内容：</span>
+      
+      <div class="row" style="padding: 10px;border-bottom: 1px solid #c8c8c8;">
+        <span style="font-size: 16px;min-width: 5em;display: block;color: #4a4a4a;">投诉内容：</span>
 
         <div class="col" style="padding: 0">
-              <textarea placeholder="请输入内容" ng-model="complaintInfo.content"
-                        style="width: 100%;padding: 0;font-size: 14px;color: #4a4a4a;background-color: #fff;"></textarea>
+              <textarea placeholder="请输入内容" rows="3" ng-model="complaintInfo.content" style="margin-top: 2px;width: 100%;padding: 0;font-size: 14px;color: #4a4a4a;background-color: #fff;"></textarea>
         </div>
       </div>
 
-      <div class="row" style="padding: 10px 20px;border-bottom: 1px solid #c8c8c8;">
+
+      <div class="row" style="padding: 10px;border-bottom: 1px solid #c8c8c8;">
         <span style="font-size: 16px;min-width: 5em;display: block;line-height: 34px;color: #4a4a4a;">联系方式：</span>
 
         <div class="col" style="padding: 0">
-          <input type="text" ng-model="complaintInfo.contact"
+          <input type="tel" ng-model="complaintInfo.contact"
                  style="width: 100%;padding: 0;font-size: 16px;color: #4a4a4a;background-color: #fff;">
         </div>
       </div>
@@ -42,14 +42,24 @@
         </label>
 
         <div class="row row-no-padding">
+          <!-- <a class="good-thumbnail-test">
+            <img class="vertical-align-middle" ng-src="{{item.image}}">
+          </a> -->
+
           <div class="good-info col">
             <h2 style="color:#4a4a4a;font-size:14px;">{{item.name}}</h2>
+
+            <!-- <span class="sub-title" style="line-height: 14px;height: 14px;">{{item.spec}}</span> -->
+
+            <!-- <p style="clear: both;">
+              <span style="float: left;" class="price">{{item.price | currency:'￥'}}</span>
+              <span style="float: right;">x{{item.num}}</span>
+            </p> -->
           </div>
         </div>
       </div>
     </ion-item>
-
-    <div class="button-bar">
+    <div class="button-bar" style="margin-top: 50px;">
       <button class="button button-positive"
               style="font-size: 18px;"
               ng-click="clicked || submitRequest()"
