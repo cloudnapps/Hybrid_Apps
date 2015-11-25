@@ -25,18 +25,22 @@
         $scope.index = index;
       }
       $scope.subCategories = [];
-      var category = $scope.categoryObj[categoryId];
-      if (category.lv2 !== undefined) {
-        var cateListObj = category.lv2;
-        for (var name in cateListObj) {
-          $scope.subCategories.push(cateListObj[name]);
-          var lv3Obj = cateListObj[name].lv3;
-          cateListObj[name].lv3Arr = [];
-          for (var i in lv3Obj) {
-            cateListObj[name].lv3Arr.push(lv3Obj[i]);
+
+      angular.forEach($scope.categoryObj, function (cate) {
+        if (cate.cat_id === categoryId) {
+          if (cate.lv2 !== undefined) {
+            var cateListObj = cate.lv2;
+            for (var name in cateListObj) {
+              $scope.subCategories.push(cateListObj[name]);
+              var lv3Obj = cateListObj[name].lv3;
+              cateListObj[name].lv3Arr = [];
+              for (var i in lv3Obj) {
+                cateListObj[name].lv3Arr.push(lv3Obj[i]);
+              }
+            }
           }
         }
-      }
+      });
     };
 
     $scope.navToProductList = function (categoryId) {
