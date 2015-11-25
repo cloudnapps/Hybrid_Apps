@@ -2,7 +2,10 @@ package com.cloudnapps.plugins.map;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.widget.Toast;
+
+import com.ty.mapsdk.TYMapEnvironment;
 
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CordovaPlugin;
@@ -12,6 +15,8 @@ import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
 
 public class MapNavigator extends CordovaPlugin {
 
@@ -50,6 +55,22 @@ public class MapNavigator extends CordovaPlugin {
             mLicense = this.preferences.getString("licenseID", "");
             mBeaconUUID = this.preferences.getString("beaconUUID", "");
         }
+
+        TYMapEnvironment.initMapEnvironment();
+        String mapRootDir = Environment.getExternalStorageDirectory()
+                + "/MapDemo/MapFiles";
+        TYMapEnvironment.setRootDirectoryForMapFiles(mapRootDir);
+
+        copyMapFiles();
+    }
+
+    void copyMapFiles() {
+        String sourcePath = "MapResource";
+        String targetPath = TYMapEnvironment.getRootDirectoryForMapFiles();
+//        if (!new File(targetPath).exists()) {
+//            FileHelper.deleteFile(new File(targetPath));
+            FileHelper.copyFolderFromAsset(mContext, sourcePath, targetPath);
+//        }
     }
 
     /**
