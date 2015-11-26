@@ -125,7 +125,7 @@
         if (item.type === 'seller') {
           $state.go('tab.seller_detail', {sellerId: item.id}, {reload: true});
         }
-        else if (item.type === 'url') {
+        else if (item.type === 'url' && item.outurl) {
           $window.location.href = item.outurl;
         }
         else if (item.type === 'product') {
