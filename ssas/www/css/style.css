@@ -55,11 +55,11 @@ hr {
 }
 
 .product-spec .spec {
-  font-size: 12px; 
-  margin: 0 2px; 
+  font-size: 12px;
+  margin: 0 2px;
   min-height: 27px;
   line-height: 30px;
-  padding: 0 18px; 
+  padding: 0 18px;
   border: 1px solid #4A4A4A;
   color: #4A4A4A;
   border-radius: 5pt;
@@ -316,3 +316,14 @@ input[readonly]:not(.cloned-text-input) {
 .button-icon .icon:before, .button-icon.icon:before{
   font-size: 24px;
 }
+
+.pop-fixed {
+  position: fixed;
+  top: 80%;
+  left: 0;
+  background:#555555;
+  z-index: 10;
+  opacity: 0.5;
+}
+
+

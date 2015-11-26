@@ -6,6 +6,11 @@
     <a class="button icon-left icon-btn-2 button-clear" ng-click="userService.checkLogin('tab.cart')"></a>
     </div>
   </ion-nav-buttons>
+  <div class="pop-fixed" style="width: 100%; height: 8%; padding-top: 4%" ng-if="product.store === 0">
+    <div class="col col-center" style="padding: 0px;text-align:center;">
+      <a class="button-clear" style="font-size:16px; color:#fff;">商品暂无库存，请看看其他商品吧~</a>
+    </div>
+  </div>
   <ion-content>
     <div class="row" style="padding: 0px;margin: 0;width: 100%;">
       <div class="col col-center" style="padding: 0px; width: 100%;" on-double-tap="showPictures()">
@@ -41,7 +46,9 @@
     <div class="prdt-tax">
       <div class="declare">
         <p>税费说明:</p>
+
         <p>①中华人民共和国进境物品完税价格表，本商品适用税率为{{product.tax_rate * 100}}%</p>
+
         <p>②根据 海关总署公告2010年第43号 公告规定，个人物品申报，应征进口税税额在人民币50元（含50元）以下的，海关予以免征。</p>
       </div>
     </div>
@@ -72,7 +79,10 @@
     <div class="row" ui-sref="comments({id:product.goods_id})">
       <div class="col col-90 col-center">
         <p style="margin-bottom: 1px;color: #9b9b9b;font-size: 10px;">{{comment.name || '暂无评论'}}</p>
-        <p style="margin: 0;color: #9b9b9b;font-size: 10px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" ng-show="comment.name">{{comment.content}}</p>
+
+        <p
+          style="margin: 0;color: #9b9b9b;font-size: 10px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+          ng-show="comment.name">{{comment.content}}</p>
       </div>
       <div class="col col-10 col-center" style="text-align: right;">
         <i class="icon ion-chevron-right icon-right"></i>
@@ -81,7 +91,8 @@
 
     <hr style="margin: 0;border:none;border-top:10px solid #f6f6f6;"/>
     <div class="row" style="padding: 10px;">
-      <div class="col col-center" style="width: 80px;height: 80px;padding: 0;background-color: #fff;overflow: hidden;max-width: 80px;background-image: url({{point.url}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;">
+      <div class="col col-center"
+           style="width: 80px;height: 80px;padding: 0;background-color: #fff;overflow: hidden;max-width: 80px;background-image: url({{point.url}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;">
       </div>
       <div class="col col-center" style="padding: 0 0 0 10px;">
         <div style="font-size: 14px; padding: 0 0 7px;color: #4a4a4a;">{{point.name}}</div>
@@ -103,6 +114,6 @@
     </ion-infinite-scroll>
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
-    <div add-to-cart="product" show-spec-modal="showSpecModal" ></div>
+    <div add-to-cart="product" show-spec-modal="showSpecModal"></div>
   </ion-footer-bar>
 </ion-view>
