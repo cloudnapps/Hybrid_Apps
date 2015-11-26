@@ -12,7 +12,7 @@
       </div>
       <div class="sel-collect-wrap" style="top: 118px;" ng-class="{'sel-stated': item.once.seller_has_fav === true}">
         <!-- <i class="icon ion-ios-star col-ion-start"></i> -->
-        <span class="col-state" ng-click="addFavorite()" style="margin-top: 11px;">{{item.favTitle}}
+        <span class="col-state" ng-click=" item.once.seller_has_fav? null : addFavorite()" style="margin-top: 11px;">{{item.favTitle}}
         </span>
       </div>
     </div>
@@ -48,7 +48,8 @@
         <div class="row" style="padding: 0;" ng-repeat="product in products" ng-if="$index % 2 === 0">
           <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
             <div class="new-prdt">
-              <a ui-sref="product({productId:products[$index].product_id})"> <img class="prdt-img" ng-src="{{products[$index].image}}">
+              <a ui-sref="product({productId:products[$index].product_id})"> <img class="prdt-img"
+                                                                                  ng-src="{{products[$index].image}}">
                 <!-- <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div> -->
                 <div class="bg-color">
                   <div class="prdt-descb">{{products[$index].name}}</div>
@@ -70,7 +71,8 @@
                   <div class="prdt-descb">{{products[$index+1].name}}</div>
                   <div class="row" style="padding: 5px 0;">
                     <span class="col pri-pri" style="padding: 0;">{{products[$index+1].price | currency: '￥'}}</span>
-                    <img class="sell-type" ng-if="products[$index+1].nature !== 'normal'" ng-src="img/{{products[$index+1].nature}}.png">
+                    <img class="sell-type" ng-if="products[$index+1].nature !== 'normal'"
+                         ng-src="img/{{products[$index+1].nature}}.png">
                   </div>
                 </div>
               </a>
