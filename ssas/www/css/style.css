@@ -319,11 +319,11 @@ input[readonly]:not(.cloned-text-input) {
 
 .pop-fixed {
   position: fixed;
-  top: 80%;
+  bottom: 44px;
   left: 0;
   background:#555555;
   z-index: 10;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 
