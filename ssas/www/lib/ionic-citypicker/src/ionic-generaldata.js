@@ -19,7 +19,6 @@ app.service('GeneralPickerService', function () {
       '订单商品选择有误',
       '支付方式选择有误',
       '收货信息填写有误',
-      '支付方式选择有误',
       '发票信息填写有误',
       '其他原因'
     ]
