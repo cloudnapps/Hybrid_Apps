@@ -34,6 +34,36 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "login";
 @import "return";
 
+@-webkit-keyframes slideInLeft2 {
+  from {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-5%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInLeft2 {
+  from {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-5%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInLeft2 {
+  -webkit-animation-name: slideInLeft2;
+  animation-name: slideInLeft2;
+}
 
 body>ion-nav-view {  
   &[nav-view-direction="exit"] {
@@ -47,13 +77,16 @@ body>ion-nav-view {
         opacity: 0!important;
       }
     }    
-  }
+  }  
 
   &[nav-view-direction="enter"]{
     >ion-tabs.pane {
       &[nav-view="active"] {
       	/* 从其他跳回tab */
-        @include animation(slideInLeft 250ms ease);
+        @include animation(slideInLeft2 250ms ease);
+      }
+      &[nav-view="stage"] {
+        opacity: 0!important;
       }
     }
   }
