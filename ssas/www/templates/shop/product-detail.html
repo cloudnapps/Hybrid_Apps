@@ -26,7 +26,8 @@
     </div>
     <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
     <section class="prdt-detail">
-      <h5 class="prdt-name">{{product.name}} {{product.brief}}</h5>
+      <h5 class="prdt-name">{{product.name}} </h5>
+      <p class="prdt-brief">{{product.brief}}</p>
 
       <div class="post-type">{{product.nature === 'bond' ? '保税仓（深圳前海）' : '香港直邮'}}</div>
       <label class="now-price">{{product.price|currency:'￥'}}</label>
