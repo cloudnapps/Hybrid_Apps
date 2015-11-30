@@ -9,7 +9,7 @@ var app = angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.transla
   'member', 'order', 'receiver', 'favorite', 'feedback', 'return', 'setting', 'login', 'point', 'seller', 'complaint', 'coupon',
   'ngIOS9UIWebViewPatch', 'ionic-generaldata', 'ionic-citypicker', 'ionic-generalpicker'])
   //For the real endpoint, we'd use this
-  .run(function ($ionicPlatform, $translate, userService, $rootScope, barcode, $ionicHistory) {
+  .run(function ($ionicPlatform, $translate, userService, $rootScope, barcode, $ionicHistory, $ionicModal) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -38,6 +38,23 @@ var app = angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.transla
       $ionicHistory.goBack.apply($ionicHistory, arguments);
     };
     $rootScope.checkLogin = userService.checkLogin;
+
+    var firstLaunch = localStorage.getItem("firstLaunchFinish");
+    // startup slideshow
+    if (!firstLaunch) {
+      $ionicModal.fromTemplateUrl('templates/startup.html', {
+          scope: $rootScope //,
+          // animation: 'fade-in'
+        }).then(function (modal) {
+          $rootScope.startup = modal;
+          $rootScope.startup.show();
+          localStorage.setItem("firstLaunchFinish", true);
+          $rootScope.hideStartup = function () {
+            $rootScope.startup.hide();
+            $rootScope.startup.remove();
+          };
+        });
+    }      
   }) // end of run
 
   .config(function ($translateProvider, $ionicConfigProvider) {
