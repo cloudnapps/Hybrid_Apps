@@ -40,6 +40,7 @@ var app = angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.transla
     $rootScope.checkLogin = userService.checkLogin;
 
     var firstLaunch = localStorage.getItem("firstLaunchFinish");
+    firstLaunch = true;
     // startup slideshow
     if (!firstLaunch) {
       $ionicModal.fromTemplateUrl('templates/startup.html', {
@@ -54,7 +55,7 @@ var app = angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.transla
             $rootScope.startup.remove();
           };
         });
-    }      
+    }
   }) // end of run
 
   .config(function ($translateProvider, $ionicConfigProvider) {

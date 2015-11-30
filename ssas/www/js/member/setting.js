@@ -237,7 +237,6 @@
       };
 
       $scope.getIdCards = function () {
-        $ionicLoading.show();
         SettingApi.getIdCardList($scope.page, function (result) {
           if (result.status === 1) {
             $scope.hasMore = false;
@@ -247,7 +246,6 @@
             $scope.items = $scope.items.concat(result.data);
           }
 
-          $ionicLoading.hide();
           $scope.$broadcast('scroll.infiniteScrollComplete');
         });
       };

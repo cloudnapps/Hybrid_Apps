@@ -198,6 +198,7 @@ angular.module('starter')
       // 收货地址管理
       .state('receivers', {
         url: '/receivers',
+        cache: false,
         views: {
           'main-view': {
             templateUrl: 'templates/member/receiver-index.html',
@@ -218,6 +219,7 @@ angular.module('starter')
       // 身份证管理
       .state('idcards', {
         url: '/idcards',
+        cache: false,
         views: {
           'main-view': {
             templateUrl: 'templates/member/idcard-list.html',
