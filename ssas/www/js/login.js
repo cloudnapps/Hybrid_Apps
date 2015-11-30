@@ -50,7 +50,7 @@
           return;
         }
 
-        $scope.reSendCodeTime = 30;
+        $scope.reSendCodeTime = 60;
         timer = $interval(function () {
           $scope.reSendCodeTime--;
           if ($scope.reSendCodeTime <= 0) {
@@ -163,7 +163,7 @@
           toastService.setToast('请填写手机号');
           return;
         }
-        $scope.reSendCodeTime = 30;
+        $scope.reSendCodeTime = 60;
         timer = $interval(function () {
           $scope.reSendCodeTime--;
           if ($scope.reSendCodeTime === 0) {
