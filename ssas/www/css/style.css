@@ -29,11 +29,9 @@ hr {
 }
 
 .col-style {
-  text-align: center;
-  margin-top: 1em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-align: left;
+  word-break: break-all;
+
 }
 
 .click-assertive {
