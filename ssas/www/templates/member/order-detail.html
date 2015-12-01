@@ -68,7 +68,7 @@
             </p>
 
             <p class="col" style="padding: 0; font-size: .8em">适用税率：{{product.taxRate}}% &nbsp;
-              税金：{{product.tax_price|currency:'￥'}}</p>
+              <span ng-class="{'no-spend': product.tax_price < 50}">税金：{{product.tax_price|currency:'￥'}}</span></p>
           </div>
         </div>
       </ion-item>
@@ -99,8 +99,8 @@
         货款总计：{{item.order_info.item_amount | currency:'￥'}}
       </div>
     </div>
-    <div class="row">
-      <div class="col" style="color: #4a4b4d;">
+    <div class="row" style="color: #4a4b4d;">
+      <div class="col" ng-class="{'no-spend': item.order_info.taxation_amount < 50}">
         税费总计：{{item.order_info.taxation_amount | currency:'￥'}}
       </div>
     </div>

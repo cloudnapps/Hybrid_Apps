@@ -102,7 +102,7 @@
             <div class="col car-tol-price">
               <div class="item-content car-cont">
                 <span>货款总计: {{nature.item_amount |currency:'￥'}}</span>
-                <span>税费总计: {{nature.total_taxation_amount |currency:'￥'}}</span>
+                <span ng-class="{'no-spend': nature.total_taxation_amount < 50}">税费总计: {{nature.total_taxation_amount |currency:'￥'}}</span>
                 <span style="margin-top: 2px;">共计: {{nature.total_item_amount |currency:'￥'}} (不含运费)</span>
               </div>
             </div>

@@ -215,6 +215,10 @@
   }
 }
 
+.no-spend {
+  color: #bd252c;
+  text-decoration: line-through;
+}
 .cart-disabled {
   @include opacity(0.4);
   cursor: default !important;

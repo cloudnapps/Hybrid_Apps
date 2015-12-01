@@ -47,15 +47,14 @@
             <div class="col col-40" style="padding: 0;text-align: right;">x{{good.quantity}}</div>
           </div>
           <div class="col" style="padding: 0; font-size: .8em">适用税率：{{good.taxRate}}% &nbsp;
-            税金：{{good.tax_price|currency:'￥'}}
+            <span ng-class="{'no-spend': good.tax_price < 50}">税金：{{good.tax_price|currency:'￥'}}</span>
           </div>
         </ion-item>
         <ion-item class="item" style="padding: 10px 0;border-bottom: 0;">
           <div class="row" style="padding: 0 10px 10px;font-size: 14px;">
             <div class="col col-50 col-center" style="padding: 0;">运费: <span style="color: #bd252c;">{{seller.def_shipping.price |currency:'￥'}}</span>
             </div>
-            <div class="col col-50 col-center" style="float:right;padding: 0;text-align: right;">小计: <span
-              style="color: #bd252c;">{{seller.total_amount |currency:'￥'}}</span></div>
+            <div class="col col-50 col-center" style="float:right;padding: 0;text-align: right;">小计: <span style="color: #bd252c;">{{seller.total_amount |currency:'￥'}}</span></div>
           </div>
           <div class="row item-input" style="margin: 0;">
             <label class="item-input-wrapper text-stable" style="background-color: #fff;border: 1px solid #e5e5e5;">
@@ -83,7 +82,7 @@
       </div>
       <ion-item class="item item-complex summary" style="padding:10px;">
         <div>货款总计：{{cart.total_item_amount |currency:'￥'}}</div>
-        <div>税费总计：{{cart.total_taxation_amount |currency:'￥'}}</div>
+        <div ng-class="{'no-spend': cart.total_taxation_amount < 50}">税费总计：{{cart.total_taxation_amount |currency:'￥'}}</div>
         <div class="row row-no-padding">
           <div class="col">
             <div>运费总计：{{cart.total_freight |currency:'￥'}}</div>
