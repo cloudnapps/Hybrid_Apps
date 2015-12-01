@@ -7,23 +7,37 @@
       <span class="description">价格区间(元)</span>
       <input type="number" ng-model="priceSection.min">
       <span class="separator">－</span>
-      <input type="number" ng-model="priceSection.max">      
+      <input type="number" ng-model="priceSection.max">
     </div>
-    <div>
+    <div ng-if="galleryFilter.brand && galleryFilter.brand.length > 0">
       <h4>品牌</h4>
+
       <div class="row" style="flex-wrap:wrap">
-        <div class="col col-33 text-center" ng-repeat="brand in galleryFilter.brand" ng-click="setBrandId(brand.brand_id)">
+        <div class="col col-33 text-center" ng-repeat="brand in galleryFilter.brand"
+             ng-click="setBrandId(brand.brand_id)">
           <div class="prop" ng-class="{active: brand.brand_id === brandId}">{{brand.brand_name}}</div>
         </div>
       </div>
     </div>
     <div ng-repeat="props in galleryFilter.props">
       <h4>{{props.prop_name}}</h4>
+
       <div class="row" style="flex-wrap:wrap">
-        <div class="col col-33 text-center" ng-repeat="propValue in props.prop_value" ng-click="setPropIndex(propValue.prop_index)">        
+        <div class="col col-33 text-center" ng-repeat="propValue in props.prop_value"
+             ng-click="setPropIndex(propValue.prop_index)">
           <div class="prop" ng-class="{active: propValue.prop_index === propIndex}">
-          {{propValue.prop_value_name}}
-          </div>        
+            {{propValue.prop_value_name}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-if="galleryFilter.cat_list && galleryFilter.cat_list.length > 0">
+      <h4>分类</h4>
+
+      <div class="row" style="flex-wrap:wrap">
+        <div class="col col-33 text-center" ng-repeat="category in galleryFilter.cat_list"
+             ng-click="setCategoryId(category.cat_id)">
+          <div class="prop" ng-class="{active: cates.indexOf(category.cat_id) !== -1}">{{category.cat_name}}</div>
         </div>
       </div>
     </div>

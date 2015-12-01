@@ -59,11 +59,11 @@
 
       $scope.products = [];
       $scope.page = 1;
-      $scope.categoryId = $stateParams.categoryId;
+      $scope.cates = [];
       $scope.brandId = $stateParams.brand;
       $scope.keywords = {value: ''};
       $scope.filter = {};
-      $scope.filter.cat_id = $scope.categoryId;
+      $scope.filter.cat_id = $stateParams.categoryId;
       $scope.filter.brand = $scope.brandId;
       $scope.hasMore = false;
       $scope.isShowGalleryFilter = false;
@@ -176,6 +176,16 @@
         $scope.propIndex = propIndex;
       };
 
+      $scope.setCategoryId = function (cateId) {
+        var index = $scope.cates.indexOf(cateId);
+        if (index === -1) {
+          $scope.cates = $scope.cates.concat(cateId);
+        }
+        else {
+          $scope.cates.splice(index, 1);
+        }
+      };
+
       $scope.galleryFilterSave = function (isClear) {
         $scope.isShowGalleryFilter = false;
         $scope.hideModal();
@@ -197,6 +207,9 @@
         else {
           delete $scope.filter.max_price;
         }
+
+        $scope.filter.cat_id = $scope.cates;
+
         clearData();
         return $scope.getProducts();
       };
@@ -205,11 +218,15 @@
         if (isClearModel) {
           $scope.brandId = '';
           $scope.propIndex = '';
+          delete $scope.filter.cat_id;
           delete $scope.filter.brand;
           delete $scope.filter.prop_index;
           delete $scope.filter.min_price;
           delete $scope.filter.max_price;
           $scope.priceSection = {};
+          if($stateParams.categoryId) {
+            $scope.filter.cat_id = $stateParams.categoryId;
+          }
         }
         $scope.isSearch = false;
         $scope.page = 1;
