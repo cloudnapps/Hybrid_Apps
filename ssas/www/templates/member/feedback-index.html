@@ -20,6 +20,11 @@
     <back-button></back-button>
   </ion-nav-buttons>
   <ion-content>
+    <div ng-if="!items || !items.length">
+      <div style="text-align: center; margin-top: 64px; font-size: 16px">
+        您没有相关的申请
+      </div>
+    </div>
     <div style="height: 44px"></div>
     <ion-list ng-if="type === 'returns'">
       <ion-item class="item-remove-animate item-icon-right ret-order"
