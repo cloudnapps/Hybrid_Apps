@@ -52,14 +52,12 @@
         <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
           <div class="new-prdt">
             <a ui-sref="product({productId:products[$index].product_id})">
-              <div style="height:150px;">
+              <div style="height:150px;position: relative;">
                 <img class="prdt-img" ng-src="{{products[$index].image}}">
                 <img ng-src="img/sellout.jpg"
-                     style="z-index: 11;position: relative; top: -100px;left: 0; width: 75px; height: 75px"
+                     style="position: absolute;z-index: 11;bottom: 10px;right: 10px; width: 75px; height: 75px"
                      ng-if="products[$index].store === '0'">
               </div>
-
-              <!-- <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div> -->
 
               <div class="bg-color">
                 <div class="prdt-descb">{{products[$index].name}}</div>
@@ -77,10 +75,10 @@
           <div class="new-prdt">
             <a ui-sref="product({productId:products[$index+1].product_id})">
 
-              <div style="height:150px;">
+              <div style="height:150px;position: relative">
                 <img class="prdt-img" ng-src="{{products[$index+1].image}}">
                 <img ng-src="img/sellout.jpg"
-                     style="z-index: 11;position: relative; top: -100px;left: 0; width: 75px; height: 75px"
+                     style="position: absolute;z-index: 11;bottom: 10px;right: 10px; width: 75px; height: 75px"
                      ng-if="products[$index+1].store === '0'">
               </div>
               <!-- <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index+1].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div> -->
