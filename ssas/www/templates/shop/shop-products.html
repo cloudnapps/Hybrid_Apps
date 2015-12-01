@@ -1,19 +1,25 @@
 <div class="bar bar-subheader">
   <div class="row" style="padding: 0 0px;height: 40px;line-height: 40px;">
     <div class="col col-25"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 16px;" ng-click="changeOrder()" ng-class="{'selt':orderState === 1}">
+         style="padding: 0px;text-align: center;height: 40px;font-size: 16px;" ng-click="changeOrder()"
+         ng-class="{'selt':orderState === 1}">
       <a>综合</a>
     </div>
     <div class="col col-25"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 16px;" ng-class="{'ion-arrow-up-c': orderBy === 'buy_count asc', 'ion-arrow-down-c': orderBy === 'buy_count desc', 'selt':orderState === 2}" ng-click="changeOrder('buy_count')">
+         style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
+         ng-class="{'ion-arrow-up-c': orderBy === 'buy_count asc', 'ion-arrow-down-c': orderBy === 'buy_count desc', 'selt':orderState === 2}"
+         ng-click="changeOrder('buy_count')">
       <a>销量</a>
     </div>
     <div class="col col-25"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 16px;" ng-class="{'ion-arrow-up-c': orderBy === 'price asc', 'ion-arrow-down-c': orderBy === 'price desc', 'selt':orderState === 3}" ng-click="changeOrder('price')">
+         style="padding: 0px;text-align: center;height: 40px;font-size: 16px;"
+         ng-class="{'ion-arrow-up-c': orderBy === 'price asc', 'ion-arrow-down-c': orderBy === 'price desc', 'selt':orderState === 3}"
+         ng-click="changeOrder('price')">
       <a>价格</a>
     </div>
     <div class="col col-25"
-         style="padding: 0px;text-align: center;height: 40px;font-size: 16px;" ng-click="showSpecModal()" ng-class="{'selt':orderState === 4}">
+         style="padding: 0px;text-align: center;height: 40px;font-size: 16px;" ng-click="showSpecModal()"
+         ng-class="{'selt':orderState === 4}">
       <a>筛选</a>
     </div>
   </div>
@@ -46,13 +52,21 @@
         <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
           <div class="new-prdt">
             <a ui-sref="product({productId:products[$index].product_id})">
-              <img class="prdt-img" ng-src="{{products[$index].image}}">
+              <div style="height:150px;">
+                <img class="prdt-img" ng-src="{{products[$index].image}}">
+                <img ng-src="img/sellout.jpg"
+                     style="z-index: 11;position: relative; top: -100px;left: 0; width: 75px; height: 75px"
+                     ng-if="products[$index].store === '0'">
+              </div>
+
               <!-- <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div> -->
+
               <div class="bg-color">
                 <div class="prdt-descb">{{products[$index].name}}</div>
                 <div class="row" style="padding: 5px 0;">
                   <span class="col pri-pri" style="padding: 0;">{{products[$index].price | currency: '￥'}}</span>
-                  <img class="sell-type" ng-if="products[$index].nature !== 'normal'" ng-src="img/{{products[$index].nature}}.png">
+                  <img class="sell-type" ng-if="products[$index].nature !== 'normal'"
+                       ng-src="img/{{products[$index].nature}}.png">
                 </div>
               </div>
             </a>
@@ -63,14 +77,20 @@
           <div class="new-prdt">
             <a ui-sref="product({productId:products[$index+1].product_id})">
 
-              <img class="prdt-img" ng-src="{{products[$index+1].image}}">
+              <div style="height:150px;">
+                <img class="prdt-img" ng-src="{{products[$index+1].image}}">
+                <img ng-src="img/sellout.jpg"
+                     style="z-index: 11;position: relative; top: -100px;left: 0; width: 75px; height: 75px"
+                     ng-if="products[$index+1].store === '0'">
+              </div>
               <!-- <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{products[$index+1].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div> -->
 
               <div class="bg-color">
                 <div class="prdt-descb">{{products[$index+1].name}}</div>
                 <div class="row" style="padding: 5px 0;">
                   <span class="col pri-pri" style="padding: 0;">{{products[$index+1].price | currency: '￥'}}</span>
-                  <img class="sell-type" ng-if="products[$index+1].nature !== 'normal'" ng-src="img/{{products[$index+1].nature}}.png">
+                  <img class="sell-type" ng-if="products[$index+1].nature !== 'normal'"
+                       ng-src="img/{{products[$index+1].nature}}.png">
                 </div>
               </div>
             </a>
