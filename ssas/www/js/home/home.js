@@ -240,7 +240,7 @@
       });
     }) // end of ActivityController
 
-    .controller('SigninController', function ($scope, toastService, $cordovaGeolocation, PointApi) {
+    .controller('SigninController', function ($scope, toastService, userService, $cordovaGeolocation, PointApi) {
       /*      var lat_constant = 31,
        long_constant = 121;
 
@@ -263,6 +263,14 @@
        }*/
 
       $scope.signedIn = function () {
+        var state = {
+          success: success
+        };
+
+        userService.checkLogin(state);
+      };
+
+      var success = function (caller, args) {
         PointApi.addGold(10, '签到送金币', function (result) {
           if (result.status === 0) {
             var msg = '签到成功，恭喜您获得' + result.data.gold_num + '个金币，请到会员中心查看';
@@ -272,28 +280,6 @@
             toastService.setToast(result.msg);
           }
         });
-
-        /*navigator.geolocation.getCurrentPosition(function (response) {
-         //alert(JSON.stringify(response));
-         var distantce = getDistance(response.coords.latitude, response.coords.longitude,
-         lat_constant, long_constant);
-         //alert(distantce);
-         PointApi.addGold(10, '签到送金币', function (result) {
-         if (result.status === 0) {
-         toastService.setToast('恭喜你获得10个金币，请到会员中心查看');
-         }
-         else {
-         toastService.setToast(result.msg);
-         }
-         });
-         }, function (err) {
-         console.log(JSON.stringify(err));
-         },
-         {
-         enableHighAccuracy: false,
-         timeout: 60 * 1000,
-         maximumAge: 1000 * 60 * 10
-         });*/
       };
     }) // end of SigninController
 
@@ -346,4 +332,5 @@
         };
       } // end of anonymous function
     ]);
-})();
+})
+();
