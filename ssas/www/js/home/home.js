@@ -202,7 +202,7 @@
           clearcache: 'yes',
           toolbar: 'no'
         };
-        $cordovaInAppBrowser.open('http://map.baidu.com/mobile/webapp/search/search/qt=s&wd=深圳前海自贸区临海大道59号&vt=map', '_self', options)
+        $cordovaInAppBrowser.open('http://f.amap.com/04EPxY', '_self', options)
           .then(function (event) {
             // success
           })

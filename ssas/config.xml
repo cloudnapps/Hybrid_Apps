@@ -26,7 +26,7 @@
   <preference name="buildingID" value="07550002"/>
   <preference name="userID" value="ty4e13f85911a44a75"/>
   <preference name="licenseID" value="f2dd57111c0g31di60dcanffdddb2c32"/>
-  <preference name="beaconMajor" value="1"/>
+  <preference name="beaconMajor" value="100"/>
   <preference name="android_appKey" value="5647580b821ffd323a9141c7"/>
   <preference name="android_appSecret" value="93522031-80b1-4aff-828f-d2bf2795400f"/>
   <preference name="android_notification_icon" value="icon"/>
