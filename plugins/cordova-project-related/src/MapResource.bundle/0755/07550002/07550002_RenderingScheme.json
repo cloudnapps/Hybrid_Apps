@@ -150,11 +150,85 @@
                        }
                        ,
                        {
-                       "colorID": 8,
-                       "fillColor": "#FFBED2FF",
-                       "outlineColor": "#FFBED2FF",
+                       "colorID": 50,
+                       "fillColor": "#FF87CEEB",
+                       "outlineColor": "#FFFFFFFF",
                        "lineWidth": 1
                        }
+                       ,
+                       {
+                       "colorID": 51,
+                       "fillColor": "#FFDE8282",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 52,
+                       "fillColor": "#FFFFFF64",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 53,
+                       "fillColor": "#FFE6B4FF",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 54,
+                       "fillColor": "#FFFABE64",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 55,
+                       "fillColor": "#FFE6E7E9",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 56,
+                       "fillColor": "#FF000000",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 57,
+                       "fillColor": "#FF8CF08C",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 58,
+                       "fillColor": "#FF587593",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 59,
+                       "fillColor": "#FFCCCCCC",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 100,
+                       "fillColor": "#FFFFFFFF",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 200,
+                       "fillColor": "#FFCCCCCC",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       },
+                       {
+                       "colorID": 600,
+                       "fillColor": "#FF828282",
+                       "outlineColor": "#FFFFFFFF",
+                       "lineWidth": 1
+                       }
+                       
                        
                        ],
         
