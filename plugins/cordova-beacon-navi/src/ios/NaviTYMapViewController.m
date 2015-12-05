@@ -2,7 +2,7 @@
 //  NaviTYMapViewController.m
 //  MallSolution
 //
-//  Created by Leon Fu on 7/27/15.
+//  Created by Leon Fu on 11/27/15.
 //  Copyright (c) 2015 Cloudnapps. All rights reserved.
 //
 
@@ -57,6 +57,7 @@
     
     BOOL isRouting;
     BOOL isMyRouting;
+    
 }
 
 @property (nonatomic, strong) TYCity *currentCity;
@@ -77,6 +78,7 @@
     
     startFloor = endFloor = 0;
     startPoi = endPoi = nil;
+    
     // Do any additional setup after loading the view.
     
     _currentCity = [TYCityManager parseCity:_cityID];
@@ -93,7 +95,8 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"关闭", nil) style:UIBarButtonItemStylePlain target:self action:@selector(close)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"带我去", nil) style:UIBarButtonItemStylePlain target:self action:@selector(routeAction)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"我在哪", nil) style:UIBarButtonItemStylePlain target:self action:@selector(routeAction)];
+    
     self.navigationItem.rightBarButtonItem.enabled = NO;
     
     _menu = [[DropDownListView alloc] initWithFrame:CGRectMake(0, 0, 100, 64) dataSource:self delegate:self withTextColor:THEME_FOREGROUND_COLOR withBackgroundColor:[UIColor clearColor]];
@@ -137,7 +140,20 @@
 
 - (void) close
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if(isMyRouting || isRouting)
+    {
+        startLocalPoint = nil;
+        endLocalPoint = nil;
+        startPoi = endPoi = nil;
+        [self.mapView resetRouteLayer];
+        [self.mapView clearSelection];
+        isMyRouting = NO;
+        isRouting = NO;
+        self.navigationItem.leftBarButtonItem.title = NSLocalizedString(@"关闭", nil);
+        self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"我在哪", nil);
+    }
+    else
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (TYLocalPoint*) getPoiCenter:(TYPoi*) _poi withFloor:(int)floor
@@ -214,17 +230,28 @@
 
 - (void) routeAction
 {
-    isMyRouting = YES;
-    startLocalPoint = nil;
-    startPoi = nil;
-    [self.mapView resetRouteLayer];
-    [self.mapView clearSelection];
-    [self highlightStartAndEndPoi];
-    [self route];
+    if(self.mapView.currentMapInfo.floorNumber != myFloor)
+    {
+        TYMapInfo* mapInfo = [TYMapInfo searchMapInfoFromArray:_allMapInfos Floor: myFloor];
+        [_menu setTitle:mapInfo.floorName inSection:0];
+        [self changeMapInfo:mapInfo];
+        return;
+    }
+    else //same floor
+    {
+        isMyRouting = YES;
+        startLocalPoint = nil;
+        startPoi = nil;
+        [self.mapView resetRouteLayer];
+        [self.mapView clearSelection];
+        [self highlightStartAndEndPoi];
+        [self route];
+    }
 }
 
 - (void) route
 {
+    self.navigationItem.leftBarButtonItem.title = NSLocalizedString(@"取消", nil);
     if(startLocalPoint == nil)
     {
         startLocalPoint = myLocalPoint;
@@ -334,9 +361,12 @@
     myLocalPoint = newLocation;
     myFloor = newLocation.floor;
     
+    self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"我在哪", nil);
     if(newLocation.floor == self.mapView.currentMapInfo.floorNumber)
     {
         [self.mapView showLocation:newLocation];
+        if(endPoi)
+            self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"带我去", nil);
     }
     
     if(isMyRouting && isRouting)
@@ -350,7 +380,8 @@
         {
             UIAlertView* alert = [[UIAlertView alloc]initWithTitle:nil message:@"恭喜你到达目的地！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            endLocalPoint = nil;
+            startLocalPoint = endLocalPoint = nil;
+            startPoi = endPoi = nil;
             [self.mapView resetRouteLayer];
             [self.mapView clearSelection];
             isMyRouting = NO;
