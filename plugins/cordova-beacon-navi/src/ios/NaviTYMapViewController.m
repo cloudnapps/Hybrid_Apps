@@ -58,6 +58,8 @@
     BOOL isRouting;
     BOOL isMyRouting;
     
+    BOOL firstLaunch;
+    
 }
 
 @property (nonatomic, strong) TYCity *currentCity;
@@ -76,9 +78,9 @@
     _mapView = [[TYMapView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_mapView];
     
-    startFloor = endFloor = 0;
+    myFloor = startFloor = endFloor = 0;
     startPoi = endPoi = nil;
-    
+    firstLaunch = YES;
     // Do any additional setup after loading the view.
     
     _currentCity = [TYCityManager parseCity:_cityID];
@@ -207,7 +209,8 @@
     [self.mapView setFloorWithInfo:mapInfo];
     [self.mapView zoomToResolution:res/0.9f animated:YES];
     [self performSelector:@selector(zoomOut:) withObject:@(res) afterDelay:0.5];
-    [routeManager requestRouteWithStart:startLocalPoint End:endLocalPoint];
+    if(startLocalPoint && endLocalPoint)
+       [routeManager requestRouteWithStart:startLocalPoint End:endLocalPoint];
     [self highlightStartAndEndPoi];
     
     if(isMyRouting)
@@ -235,24 +238,13 @@
         TYMapInfo* mapInfo = [TYMapInfo searchMapInfoFromArray:_allMapInfos Floor: myFloor];
         [_menu setTitle:mapInfo.floorName inSection:0];
         [self changeMapInfo:mapInfo];
-        return;
-    }
-    else //same floor
-    {
-        isMyRouting = YES;
-        startLocalPoint = nil;
-        startPoi = nil;
-        [self.mapView resetRouteLayer];
-        [self.mapView clearSelection];
-        [self highlightStartAndEndPoi];
-        [self route];
     }
 }
 
 - (void) route
 {
     self.navigationItem.leftBarButtonItem.title = NSLocalizedString(@"取消", nil);
-    if(startLocalPoint == nil)
+    if(startLocalPoint == nil && myLocalPoint)
     {
         startLocalPoint = myLocalPoint;
         startFloor = myFloor;
@@ -312,6 +304,8 @@
     // 将beacon参数传递给定位引擎
     [locationManager setBeaconRegion:beaconRegion];
     
+    
+    
 }
 
 - (void) initRouteSettings
@@ -353,10 +347,7 @@
 //实时更新位置
 - (void)TYLocationManager:(TYLocationManager *)manager didUpdateLocation:(TYLocalPoint *)newLocation
 {
-    if(endPoi)
-        self.navigationItem.rightBarButtonItem.enabled = YES;
-    else
-        self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     
     myLocalPoint = newLocation;
     myFloor = newLocation.floor;
@@ -365,9 +356,12 @@
     if(newLocation.floor == self.mapView.currentMapInfo.floorNumber)
     {
         [self.mapView showLocation:newLocation];
-        if(endPoi)
-            self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"带我去", nil);
     }
+    if(firstLaunch)
+    {
+        [self routeAction];//find my floor
+    }
+    firstLaunch = NO;
     
     if(isMyRouting && isRouting)
     {
@@ -388,19 +382,23 @@
             isRouting = NO;
             return;
         }
-        if(newLocation.floor != self.mapView.currentMapInfo.floorNumber)
+        if(myFloor == self.mapView.currentMapInfo.floorNumber) //request route for same floor
         {
-            [self.mapView setFloorWithInfo:[TYMapInfo searchMapInfoFromArray:self.allMapInfos Floor:newLocation.floor]];
+            if(startLocalPoint && endLocalPoint)
+                [routeManager requestRouteWithStart:startLocalPoint End:endLocalPoint];
         }
-        [routeManager requestRouteWithStart:startLocalPoint End:endLocalPoint];
+        else //change floor and request route for diff. floor
+        {
+            [self routeAction];
+        }
     }
 }
 
 - (void)TYLocationManagerdidFailUpdateLocation:(TYLocationManager *)manager
 {
     [self.mapView removeLocation];
-    if(endPoi == nil || startPoi == nil)
-        self.navigationItem.rightBarButtonItem.enabled = NO;
+    myLocalPoint = nil;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 - (void)TYLocationManager:(TYLocationManager *)manager didUpdateDeviceHeading:(double)newHeading
@@ -425,6 +423,11 @@
 
 - (void)TYMapView:(TYMapView *)mapView didClickAtPoint:(CGPoint)screen mapPoint:(TYPoint *)mappoint
 {
+    if(isRouting || isMyRouting)
+    {
+        [self highlightStartAndEndPoi];
+        return;
+    }
     TYLocalPoint* pt = [TYLocalPoint pointWithX:mappoint.x Y:mappoint.y Floor:self.mapView.currentMapInfo.floorNumber];
     TYPoi* p = nil;
     mapPoint = mappoint;
@@ -484,17 +487,16 @@
         //endLocalPoint = [self getPoiCenter:endPoi withFloor:endFloor];
         [self.mapView setRouteEndSymbol:endSymbol];
         [self.mapView showRouteEndSymbolOnCurrentFloor:endLocalPoint];
-        if(isMyRouting)
-        {
-            startLocalPoint = nil;
-            [self.mapView resetRouteLayer];
-            isMyRouting = NO;
-            return;
-        }
-        
     }
     [self highlightStartAndEndPoi];
-    if(startPoi && endPoi)
+    if(startPoi == nil && myLocalPoint && endPoi) //onsite navi
+    {
+        isMyRouting = YES;
+        isRouting = YES;
+        startLocalPoint = nil;
+        [self route];
+    }
+    if(startPoi && endPoi) //offsite navi
     {
         isMyRouting = NO;
         isRouting = YES;
