@@ -45,6 +45,8 @@
 
       $scope.doRefresh = function () {
         $scope.getHomeInfo();
+
+
       };
 
       $scope.changeSearchKind = function (kind) {
@@ -74,23 +76,31 @@
       });
 
       var timer = null;
-      $scope.slideHasChanged = function(index){
+      $scope.slideHasChanged = function (index) {
         $timeout.cancel(timer);
-        if(index > 0 && index === $scope.slideimgs.length - 1) {
-          timer = $timeout(function(){
+        if (index > 0 && index === $scope.slideimgs.length - 1) {
+          timer = $timeout(function () {
             $ionicSlideBoxDelegate.$getByHandle('slideimgs').slide(0);
           }, 4000);
         }
-      }
+      };
 
+      $scope.slideimgs = [];
       $scope.getHomeInfo = function () {
         HomeApi.getHomeContent().then(function (result) {
           $scope.homeInfo = result.data.data;
 
-          $scope.slideimgs = [];
-          $timeout(function () {
-            $scope.slideimgs = $scope.homeInfo.once;
-          }, 0);
+          if (!$scope.slideimgs || $scope.slideimgs.length === 0) {
+            $timeout(function () {
+              $scope.slideimgs = $scope.homeInfo.once;
+            }, 0);
+          }
+          else {
+            $timeout(function () {
+              $scope.slideimgs = $scope.homeInfo.once;
+            }, 2000);
+          }
+
           $scope.activityInfo = $scope.homeInfo.act_info;
 
           $scope.getProducts = function () {
@@ -142,7 +152,6 @@
           $state.go('product', {productId: item.id});
         }
       };
-
 
       $scope.loginPortal = function () {
         var state = {

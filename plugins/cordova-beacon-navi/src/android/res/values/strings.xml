@@ -1,6 +1,7 @@
 <resources>
 
     <string name="app_name">TYMapDemoProject-Android</string>
-    <string name="navi">带我去</string>
+    <string name="navi">我在哪</string>
+    <string name="cancelroute">取消</string>
 
 </resources>

@@ -86,6 +86,8 @@ public class MapActivity
     private ActionBar mActionBar;
     private FloorAdapter mActionBarFloorAdapter;
 
+    private boolean mUserSelectFloor = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -193,6 +195,7 @@ public class MapActivity
         if (list.size() > 0) {
             TYPoi poi = list.get(0);
             mRouteTargetPoint = getPoiCenter(poi);
+            requestRoute();
         }
     }
 
@@ -245,7 +248,7 @@ public class MapActivity
     @Override
     public void didUpdateLocation(TYLocationManager tyLocationManager, TYLocalPoint tyLocalPoint) {
         // 判断地图当前显示楼层是否与定位结果一致，若不一致则切换到定位结果所在楼层（楼层自动切换）
-        if (mIsRouting) {
+        if (!mUserSelectFloor) {
             if (mapView.getCurrentMapInfo().getFloorNumber() != tyLocalPoint.getFloor()) {
                 TYMapInfo targetMapInfo = TYMapInfo.searchMapInfoFromArray(
                         allMapInfos, tyLocalPoint.getFloor());
@@ -318,13 +321,37 @@ public class MapActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int navi = getResources().getIdentifier("navi", "id", getPackageName());
+        int cancelroute = getResources().getIdentifier("cancelroute", "id", getPackageName());
         if (item.getItemId() == navi) {
-          requestRoute();
+          showCurrentPosition();
+          return true;
+        }
+        else if (item.getItemId() == cancelroute) {
+          cancelRoute();
           return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void cancelRoute(){
+        mapView.resetRouteLayer();
+
+        mRouteResult = null;
+        mIsRouting = false;
+
+    }
+
+    private void showCurrentPosition(){
+        // 判断地图当前显示楼层是否与定位结果一致，若不一致则切换到定位结果所在楼层（楼层自动切换）
+        if ((mRouteBeginPoint != null) && (mapView.getCurrentMapInfo().getFloorNumber() != mRouteBeginPoint.getFloor())) {
+            //TYMapInfo targetMapInfo = TYMapInfo.searchMapInfoFromArray(
+            //        allMapInfos, mRouteBeginPoint.getFloor());
+            //mapView.setFloor(targetMapInfo);
+            mActionBar.setSelectedNavigationItem(mRouteBeginPoint.getFloor()-1);
+        }
+
+        mUserSelectFloor = false;
     }
 
     private void requestRoute() {
@@ -332,7 +359,6 @@ public class MapActivity
             // TODO: adding tip to warn user choose two points
             return;
         }
-
 
         mapView.resetRouteLayer();
 
@@ -349,6 +375,7 @@ public class MapActivity
     public boolean onNavigationItemSelected(int itemPosition, long itemId) {
         currentMapInfo = allMapInfos.get(itemPosition);
         mapView.setFloor(currentMapInfo);
+        mUserSelectFloor = true;
         return true;
     }
 
