@@ -197,6 +197,7 @@
       };
 
       $scope.openWeb = function () {
+        $ionicLoading.show();
         var options = {
           location: 'no',
           clearcache: 'yes',
@@ -204,10 +205,10 @@
         };
         $cordovaInAppBrowser.open('http://f.amap.com/04EPxY', '_self', options)
           .then(function (event) {
-            // success
+            $ionicLoading.hide();
           })
           .catch(function (event) {
-            // error
+            $ionicLoading.hide();
           });
         //$cordovaInAppBrowser.close();
       };
