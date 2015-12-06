@@ -311,14 +311,11 @@
   padding: 0;
 }
 
-// ion-tabs.tabs-color-active-positive .tab-item {
-//   color: #fff;
-//   font-weight: 700;
-//   background-color: #d0101b;
-//   opacity: 1;
-// }
+ion-tabs.tabs-color-active-positive .tab-item {
+  color: #000;
+  font-weight: 700;
+}
 ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
   color: #bd252c;
   font-weight: 700;
-  // background-color: #bd252c;
 }
