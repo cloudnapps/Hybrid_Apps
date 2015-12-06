@@ -222,7 +222,7 @@
           clearcache: 'yes',
           toolbar: 'no'
         };
-        $cordovaInAppBrowser.open('http://f.amap.com/04EPxY', '_self', options)
+        $cordovaInAppBrowser.open('http://map.baidu.com/mobile/webapp/search/search/qt=s&wd=深圳前海港货中心&vt=map', '_self', options)
           .then(function (event) {
             $ionicLoading.hide();
           })
