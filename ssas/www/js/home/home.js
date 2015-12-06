@@ -202,16 +202,16 @@
                       toastService.setToast('一键上网成功');
                       //alert('step3' + JSON.stringify(response));
                     }, function errorCallback(response) {
-                      //alert('step3' + JSON.stringify(response));
+                      toastService.setToast('一键上网失败');
                     });
                 },
                 function errorCallback(response) {
-                  //alert('step2' + JSON.stringify(response));
+                  toastService.setToast('一键上网失败');
                 });
             }
           },
           function (error) {
-            //alert(JSON.stringify(error));
+            toastService.setToast('一键上网失败');
           });
       };
 
