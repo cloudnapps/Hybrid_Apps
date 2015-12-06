@@ -18,7 +18,6 @@
 #import "TYMarkerSymbol.h"
 #import "TYPictureMarkerSymbol.h"
 #import "TYRouteResult.h"
-
 #import "TYDirectionalHint.h"
 
 #import <TYMapData/TYMapData.h>
@@ -128,6 +127,9 @@ typedef enum {
  *  当前建筑的当前楼层信息
  */
 @property (nonatomic, readonly) TYMapInfo *currentMapInfo;
+
+//@property (nonatomic, readonly) TYParkingLayer *parkingLayer;
+//- (NSArray *)getParkingSpacesOnCurrentFloor;
 
 /**
  *  在POI被点选时是否高亮显示，默认为NO
@@ -257,6 +259,15 @@ typedef enum {
  */
 - (void)showRouteResultOnCurrentFloor;
 
+
+/**
+ *  在地图上显示当前楼层目标位置已经过的路径和未经过的剩余路径
+ *
+ *  @param lp 目标位置
+ */
+- (void)showPassedAndRemainingRouteResultOnCurrentFloor:(TYLocalPoint *)lp;
+
+
 /**
  *  在地图显示当前楼层当前位置的剩余路径，结合定位结果，移除已经经过的路径部分
  *
@@ -364,6 +375,57 @@ typedef enum {
  *  @return ROOM POI
  */
 - (TYPoi *)extractRoomPoiOnCurrentFloorWithX:(double)x Y:(double)y;
+
+/**
+ *  设置是否启用路线修正功能，需要添加额外的路线数据
+ *
+ *  @param enabled 是否启用
+ */
+- (void)setPathCalibrationEnabled:(BOOL)enabled;
+
+/**
+ *  设置路线修正的缓冲宽度
+ *
+ *  @param bufferWidth 缓冲宽度
+ */
+- (void)setPathCalibrationBuffer:(double)bufferWidth;
+
+/**
+ *  获取路径修正点。
+ *  若目标点落在路径缓冲区之外，则返回目标点。
+ *
+ *  @param point 目标点
+ *
+ *  @return 修正点
+ */
+- (AGSPoint *)getCalibratedPoint:(AGSPoint *)point;
+
+/**
+ *  设置被占用车位颜色
+ *
+ *  @param color 被占用车位颜色
+ */
+- (void)setOccupiedParkingColor:(UIColor *)color;
+
+/**
+ *  设置空车位颜色
+ *
+ *  @param color 空车位颜色
+ */
+- (void)setAvailableParkingColor:(UIColor *)color;
+
+/**
+ *  显示车位状态
+ *
+ *  @param occupiedArray  被占用车位poiID数组
+ *  @param availableArray 空车位poiID数组
+ */
+- (void)showOccupiedParkingSpaces:(NSArray *)occupiedArray AvailableParkingSpaces:(NSArray *)availableArray;
+
+/**
+ *  隐藏车位状态
+ */
+- (void)hideParkingSpaces;
 
 @end
 
