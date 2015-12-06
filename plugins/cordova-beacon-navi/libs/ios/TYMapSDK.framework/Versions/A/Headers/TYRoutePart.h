@@ -25,6 +25,8 @@
  */
 - (id)initWithRouteLine:(AGSPolyline *)route MapInfo:(TYMapInfo *)mapInfo;
 
+@property (nonatomic, assign) int partIndex;
+
 /**
  *  当前段的几何数据
  */
