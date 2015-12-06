@@ -73,9 +73,11 @@
         }
       });
 
+      var timer = null;
       $scope.slideHasChanged = function(index){
+        $timeout.cancel(timer);
         if(index > 0 && index === $scope.slideimgs.length - 1) {
-          $timeout(function(){
+          timer = $timeout(function(){
             $ionicSlideBoxDelegate.$getByHandle('slideimgs').slide(0);
           }, 4000);
         }
