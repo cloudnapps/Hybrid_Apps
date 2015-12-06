@@ -60,10 +60,9 @@
       on-refresh="doRefresh()">
     </ion-refresher>
     <!--广告轮播图-->
-    <div class="row" ng-if="slideimgs.length" style="padding: 0px;margin: 0 auto;width: 100%;">
+    <div class="row" style="padding: 0px;margin: 0 auto;width: 100%;">
       <div class="col col-center" style="padding: 0px; width: 100%;;">
         <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox" style="width: 100%;"
-                       ng-if="slideimgs.length"
                        auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
           <ion-slide ng-repeat="item in slideimgs" style="width: 100%;" ng-click="openItem(item)">
             <a style="display: block;text-align: center;width: 100%;">

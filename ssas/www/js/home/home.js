@@ -73,6 +73,14 @@
         }
       });
 
+      $scope.slideHasChanged = function(index){
+        if(index > 0 && index === $scope.slideimgs.length - 1) {
+          $timeout(function(){
+            $ionicSlideBoxDelegate.$getByHandle('slideimgs').slide(0);
+          }, 4000);
+        }
+      }
+
       $scope.getHomeInfo = function () {
         HomeApi.getHomeContent().then(function (result) {
           $scope.homeInfo = result.data.data;
