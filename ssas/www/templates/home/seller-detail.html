@@ -32,8 +32,8 @@
       <div class="col col-center" style="padding: 0px; width: 100%;;">
         <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox" style="width: 100%;"
                        auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
-          <ion-slide ng-repeat="item in slideimgs" style="width: 100%;" ng-click="openItem(item)">
-            <a href="#" style="display: block;text-align: center;width: 100%;">
+          <ion-slide ng-repeat="item in slideimgs" style="width: 100%;">
+            <a style="display: block;text-align: center;width: 100%;">
               <img style="width: 100%;" ng-src="{{item.image}}">
             </a>
           </ion-slide>
