@@ -67,6 +67,16 @@
         $scope.item.favTitle = '收藏店铺';
       };
 
+      var timer = null;
+      $scope.slideHasChanged = function (index) {
+        $timeout.cancel(timer);
+        if (index > 0 && index === $scope.slideimgs.length - 1) {
+          timer = $timeout(function () {
+            $ionicSlideBoxDelegate.$getByHandle('slideimgs').slide(0);
+          }, 4000);
+        }
+      };
+
       $scope.getSeller = function () {
         SellerApi.getSellerDetail($scope.sellerId, function (result) {
           $scope.item = result.data;

@@ -260,8 +260,8 @@
      * ProductDetailController
      */
     .controller('ProductDetailController',
-    ['$scope', '$state', '$interval', '$stateParams', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading', 'shopApi', 'cartApi', 'toastService', 'userService',
-      function ($scope, $state, $interval, $stateParams, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading, shopApi, cartApi, toastService, userService) {
+    ['$scope', '$state', '$interval', '$stateParams', '$timeout', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading', 'shopApi', 'cartApi', 'toastService', 'userService',
+      function ($scope, $state, $interval, $stateParams, $timeout, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading, shopApi, cartApi, toastService, userService) {
 
         $scope.productId = $stateParams.productId;
         $scope.product = {};
@@ -273,6 +273,16 @@
         getProductGoodsSpec($scope.productId);
         $scope.good = {
           quantity: 1
+        };
+
+        var timer = null;
+        $scope.slideHasChanged = function (index) {
+          $timeout.cancel(timer);
+          if (index > 0 && index === $scope.slideimgs.length - 1) {
+            timer = $timeout(function () {
+              $ionicSlideBoxDelegate.$getByHandle('slideimgs').slide(0);
+            }, 4000);
+          }
         };
 
         shopApi.getProduct($scope.productId).success(function (responseData) {
