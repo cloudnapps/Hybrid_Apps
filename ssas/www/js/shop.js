@@ -208,7 +208,9 @@
           delete $scope.filter.max_price;
         }
 
-        $scope.filter.cat_id = $scope.cates;
+        if($scope.cates && $scope.cates.length > 0) {
+          $scope.filter.cat_id = $scope.cates;
+        }
 
         clearData();
         return $scope.getProducts();

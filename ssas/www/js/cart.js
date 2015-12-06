@@ -248,7 +248,7 @@ angular.module('cart', ['components'])
 
     $scope.$on('$ionicView.beforeEnter', $scope.init);
 
-    $scope.back = function () {
+   /* $scope.back = function () {
       // var confirmPopup = $ionicPopup.confirm({
       //   title: '订单支付',
       //   template: '您确认要放弃付款?',
@@ -261,7 +261,7 @@ angular.module('cart', ['components'])
       //     status: 'failed'
       //   });
       // });
-    };
+    };*/
 
     $scope.pay = function (/*payment*/) {
       $ionicLoading.show();
