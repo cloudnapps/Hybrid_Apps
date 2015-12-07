@@ -174,43 +174,57 @@
       var success = function (caller, args) {
         var acIP;
         var params = {};
+        $ionicLoading.show();
         hoko.checkConnection("http://www.baidu.com", function (result) {
-            //alert(result.location);
-            acIP = result.location.split('/')[2];
-            params = parseQueryString(result.location);
-            //alert(JSON.stringify(params));
-
-            if (!acIP || !params) {
+            if (!result.location) {
+              $ionicLoading.hide();
               toastService.setToast('一键上网失败');
             }
             else {
-              var url = 'http://' + acIP + '/quickauth.do?isapp=1&wlanacname=' + params.wlanacname +
-                '&wlanuserip=' + params.ip + '&userid=' + userService.get('mobile');
-              //alert(url);
-              $http({
-                method: 'GET',
-                url: url
-              })
-                .then(function successCallback(response) {
-                  //alert('step2' + JSON.stringify(response));
-                  $http({
-                    method: 'GET',
-                    url: 'https://securelogin.arubanetworks.com/auth/index.html/u?password=8888&username='
-                    + userService.get('mobile')
-                  })
-                    .then(function successCallback(response) {
-                      toastService.setToast('一键上网成功');
-                      //alert('step3' + JSON.stringify(response));
-                    }, function errorCallback(response) {
-                      toastService.setToast('一键上网失败');
-                    });
-                },
-                function errorCallback(response) {
-                  toastService.setToast('一键上网失败');
-                });
+              acIP = result.location.split('/')[2];
+              params = parseQueryString(result.location);
+              //alert(JSON.stringify(params));
+
+              if (!acIP || !params) {
+                $ionicLoading.hide();
+                toastService.setToast('一键上网失败');
+              }
+              else {
+                var url = 'http://' + acIP + '/quickauth.do?isapp=1&wlanacname=' + params.wlanacname +
+                  '&wlanuserip=' + params.ip + '&userid=' + userService.get('mobile');
+                //alert(url);
+                $http({
+                  method: 'GET',
+                  url: url
+                })
+                  .then(function successCallback(response) {
+                    //alert('step2' + JSON.stringify(response));
+                    $http({
+                      method: 'GET',
+                      url: 'https://securelogin.arubanetworks.com/auth/index.html/u?password=8888&username='
+                      + userService.get('mobile')
+                    })
+                      .then(function successCallback(response) {
+                        $ionicLoading.hide();
+                        toastService.setToast('一键上网成功');
+                        //alert('step3' + JSON.stringify(response));
+                      }, function errorCallback(response) {
+                        $ionicLoading.hide();
+                        //alert('step3 error' + JSON.stringify(response));
+                        toastService.setToast('一键上网失败');
+                      });
+                  },
+                  function errorCallback(response) {
+                    //alert('step2 error' + JSON.stringify(response));
+                    $ionicLoading.hide();
+                    toastService.setToast('一键上网失败');
+                  });
+              }
             }
           },
           function (error) {
+            //alert('step1 error' + JSON.stringify(error));
+            $ionicLoading.hide();
             toastService.setToast('一键上网失败');
           });
       };
