@@ -474,6 +474,7 @@ angular.module('starter')
       })
       .state('iframe', {
         url: '/iframe',
+        cache: false,
         views: {
           'main-view': {
             templateUrl: 'templates/cart/cart-iframe.html',
