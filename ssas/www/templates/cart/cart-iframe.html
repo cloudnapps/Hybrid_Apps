@@ -7,5 +7,10 @@
       </div>
     </div>
   </ion-nav-buttons>
-  <my-iframe ng-if="!!html" html="html" class="has-header scroll-content"></my-iframe>
+  <ion-content scroll="false">
+    <div style="position:fixed; top: 0; right:0; bottom:0; left:0; -webkit-overflow-scrolling: touch;
+      overflow-y: scroll;">
+      <my-iframe ng-if="!!html" html="html" class="has-header scroll-content"></my-iframe>
+    </div>
+  </ion-content>
 </ion-view>
