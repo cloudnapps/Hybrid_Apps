@@ -4,7 +4,7 @@
                                        $interval, userService, LoginApi, toastService, SettingApi) {
       $scope.userInfo = {};
       $scope.userInfo.isWechat = false;
-      $scope.userInfo.isShowWechat = true;
+      $scope.userInfo.isShowWechat = false;
       $scope.userInfo.remembered = true;
 
       if (userService.isLogin()) {
@@ -16,7 +16,7 @@
           $scope.userInfo.isShowWechat = result.data.is_open_wxlogin;
         }
         else {
-          $scope.userInfo.isShowWechat = true;
+          $scope.userInfo.isShowWechat = false;
         }
       });
 
