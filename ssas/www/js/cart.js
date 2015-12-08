@@ -8,14 +8,14 @@ angular.module('cart', ['components'])
     });
 
     function initStatus() {
-      if ($scope.cart.natureCart && $scope.cart.natureCart.bond) {
+      if ($scope.cart && $scope.cart.natureCart && $scope.cart.natureCart.bond) {
         angular.forEach($scope.cart.natureCart.bond.aSelCart, function (seller) {
           seller.seller_info.isEdited = false;
           seller.seller_info.headerBtnTitle = '编辑';
         })
       }
 
-      if ($scope.cart.natureCart && $scope.cart.natureCart.direct_mail) {
+      if ($scope.cart && $scope.cart.natureCart && $scope.cart.natureCart.direct_mail) {
         angular.forEach($scope.cart.natureCart.direct_mail.aSelCart, function (seller) {
           seller.seller_info.isEdited = false;
           seller.seller_info.headerBtnTitle = '编辑';
@@ -283,7 +283,7 @@ angular.module('cart', ['components'])
           return orderApi.getPayInfo(order)
             .then(function (response) {
               console.log(order, order.pay_app_id);
-              if (order.pay_app_id === 'micbcpay') {
+              if (order.pay_app_id === 'micbcpay' || order.pay_app_id === 'pospay') {
                 console.log(response);
                 $rootScope.micbcpayData = response.data;
                 $state.go('iframe');

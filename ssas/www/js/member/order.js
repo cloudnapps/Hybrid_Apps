@@ -236,7 +236,7 @@
         orderApi.getPayInfo(order)
           .then(function (response) {
             console.log(order, order.pay_app_id);
-            if (order.pay_app_id === 'micbcpay') {
+            if (order.pay_app_id === 'micbcpay' || order.pay_app_id === 'pospay') {
               console.log(response);
               $rootScope.micbcpayData = response.data;
               $state.go('iframe');

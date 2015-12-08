@@ -4,11 +4,21 @@
                                        $interval, userService, LoginApi, toastService, SettingApi) {
       $scope.userInfo = {};
       $scope.userInfo.isWechat = false;
+      $scope.userInfo.isShowWechat = true;
       $scope.userInfo.remembered = true;
 
       if (userService.isLogin()) {
         $scope.back();
       }
+
+      LoginApi.isShowWechat(function (result) {
+        if (result.status === 0 && result.data) {
+          $scope.userInfo.isShowWechat = result.data.is_open_wxlogin;
+        }
+        else {
+          $scope.userInfo.isShowWechat = true;
+        }
+      });
 
       // 会员登录成功
       $scope.saveInfo = function (result) {
@@ -322,6 +332,22 @@
         );
       };
 
+      var isShowWechat = function (callback) {
+        var url = 'http://www.ctfhoko.com/index.php/openapi/sysuser_webservice/is_open_wxlogin';
+
+        var request = $http({
+          method: 'get',
+          url: url
+        });
+
+        request.success(
+          function (result) {
+            console.log(result);
+            callback(result);
+          }
+        );
+      };
+
       var loginByWechatId = function (openId, accessToken, unionId, callback) {
         var url = apiEndpoint.url + '/passport-wx_login.html';
         var data = {
@@ -340,7 +366,8 @@
         loginUser: loginUser,
         sendCode: sendCode,
         getOpenId: getOpenId,
-        loginByWechatId: loginByWechatId
+        loginByWechatId: loginByWechatId,
+        isShowWechat: isShowWechat
       };
     });
 })();

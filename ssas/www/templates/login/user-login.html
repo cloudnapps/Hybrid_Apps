@@ -1,5 +1,7 @@
 <ion-view view-title="{{'login_title'|translate}}">
-  <ion-nav-buttons side="left"><back-button></back-button></ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
 
   <ion-content>
 
@@ -13,17 +15,18 @@
 
         <div class="list" style="margin-top:30px;">
           <div style="border-radius: 10px;border: 1px solid #cecece;">
-
             <!-- 用户名 -->
             <div class="row" style="border-bottom: 1px solid #cecece;margin-top: 5px;">
               <i class="col col-20 col-center ion-person"></i>
-              <input class="col col-80 col-center" type="number" ng-model="userInfo.name" style="padding: 0;" placeholder="请输入用户名（手机号）">
+              <input class="col col-80 col-center" type="number" ng-model="userInfo.name" style="padding: 0;"
+                     placeholder="请输入用户名（手机号）">
             </div>
 
             <!-- 密码 -->
             <div class="row" style="margin-top:6px;">
               <i class="col col-20 col-center ion-locked"></i>
-              <input class="col col-80 col-center" style="padding: 0;" type="password" ng-model="userInfo.password" placeholder="请输入密码">
+              <input class="col col-80 col-center" style="padding: 0;" type="password" ng-model="userInfo.password"
+                     placeholder="请输入密码">
             </div>
           </div>
 
@@ -43,17 +46,22 @@
 
           <!-- 登录按钮 -->
           <div class="row" style="padding: 0;margin-top: 20px;">
-              <button class="button button-positive" style="width: 100%;border-radius: 6px;min-height: 36px;line-height: 38px;font-weight: 700;" ng-click="clicked || login()" ng-disabled="clicked">账号登录</button>
+            <button class="button button-positive"
+                    style="width: 100%;border-radius: 6px;min-height: 36px;line-height: 38px;font-weight: 700;"
+                    ng-click="clicked || login()" ng-disabled="clicked">账号登录
+            </button>
           </div>
 
 
           <div class="row" style="margin-top: 5px;padding: 0;font-size: 14px;">
             <!-- 微信登录 -->
-            <div class="col col-50 col-center"></div>
-            <!-- <div class="col col-50 col-center" style="padding: 0;text-align: left;" ng-click="clicked || logonByWechat()" ng-disabled="clicked">
+            <div class="col col-50 col-center" ng-if="!userInfo.isShowWechat"></div>
+
+            <div class="col col-50 col-center" style="padding: 0;text-align: left;" ng-if="userInfo.isShowWechat"
+                 ng-click="clicked || logonByWechat()" ng-disabled="clicked">
               <img style="vertical-align: top;width:23%;" src="img/wechat.png">
               <a href="" style="text-decoration: none;color: #666;">微信登录</a>
-            </div> -->
+            </div>
 
             <!-- 注册 -->
             <div class="col col-50 col-center" style="text-align: right;">
@@ -61,6 +69,7 @@
             </div>
           </div>
 
+        </div>
       </div>
     </div>
   </ion-content>
