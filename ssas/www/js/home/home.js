@@ -247,20 +247,23 @@
       };
 
       $scope.showMap = function () {
-        $ionicPopup.alert({
+        var confirmPopup = $ionicPopup.confirm({
           title: '提示',
-          template: '请确保您的蓝牙设备已经开启',
+          template: '请确保您的蓝牙设备已经开启?',
+          cancelText: '取消', // String (默认: 'Cancel')。一个取消按钮的文字。
           okText: '确定' // String (默认: 'OK')。OK按钮的文字。
         });
 
-        $ionicLoading.show();
-        navi.showMapNavigator("", "1",
-          function () {
-            $ionicLoading.hide();
-          },
-          function () {
-            $ionicLoading.hide();
-          });
+        confirmPopup.then(function (res) {
+          $ionicLoading.show();
+          navi.showMapNavigator("", "1",
+            function () {
+              $ionicLoading.hide();
+            },
+            function () {
+              $ionicLoading.hide();
+            });
+        })
       };
 
       $scope.shake = function () {
