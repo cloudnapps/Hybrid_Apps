@@ -247,6 +247,12 @@
       };
 
       $scope.showMap = function () {
+        $ionicPopup.alert({
+          title: '提示',
+          template: '请确保您的蓝牙设备已经开启',
+          okText: '确定' // String (默认: 'OK')。OK按钮的文字。
+        });
+
         $ionicLoading.show();
         navi.showMapNavigator("", "1",
           function () {
