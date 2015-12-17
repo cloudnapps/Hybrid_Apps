@@ -11,7 +11,7 @@
       </header>
       <div class="city-picker-inner has-header">
         <div class="row ">
-          <div class="col col-100">
+          <div class="col col-100" style="text-align: center">
             <ion-scroll delegate-handle={{vm.handle}} on-scroll="vm.getData()" scrollbar-y=false>
               <ul>
                 <li ng-repeat="item in vm.values">{{item}}</li>
