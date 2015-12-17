@@ -324,4 +324,6 @@ input[readonly]:not(.cloned-text-input) {
   opacity: 0.8;
 }
 
-
+.button.button-positive {
+  border-color: #bd252c;
+}
