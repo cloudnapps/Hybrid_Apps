@@ -1,5 +1,5 @@
 (function () {
-  angular.module('point', ['starter.services'])    
+  angular.module('point', ['starter.services'])
     .controller('PointsCtrl', function ($scope, PointApi) {
       $scope.pointInfo = {};
 
@@ -8,43 +8,36 @@
       $scope.pointInfo.items = [];
 
       $scope.init = function () {
-        if ($scope.pointInfo.items.length === 0) {
-          $scope.pointInfo.items = [];
-          $scope.pointInfo.page = 0;
-          $scope.pointInfo.hasMore = true;
-        }
+        $scope.pointInfo.items = [];
+        $scope.pointInfo.page = 1;
+        $scope.pointInfo.hasMore = false;
+        $scope.pointInfo.isShow = false;
       };
 
-      $scope.loadMore = function () {
-        PointApi.getPointInfo($scope.page + 1, 'point', function (result) {
+      $scope.getPointInfo = function () {
+        PointApi.getPointInfo($scope.pointInfo.page, 'point', function (result) {
           if (result.status === 1) {
-            $scope.hasMore = false;
+            $scope.pointInfo.hasMore = false;
           }
           else {
+            $scope.pointInfo.hasMore = true;
             $scope.pointInfo.total = result.data.total;
             $scope.pointInfo.items = $scope.pointInfo.items.concat(result.data.log);
-            $scope.pointInfo.page += 1;
+
             $scope.$broadcast('scroll.infiniteScrollComplete');
           }
         });
       };
 
-      $scope.$on('$ionicView.enter', function () {
-        $scope.isActive = true;
+      $scope.$on('$ionicView.beforeEnter', function () {
         $scope.init();
+        $scope.getPointInfo();
       });
 
-      $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.isActive = false;
-      });
-
-      $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActive) {
-          $scope.loadMore();
-        }
-      });
-
-      $scope.loadMore();
+      $scope.loadMore = function () {
+        $scope.pointInfo.page++;
+        $scope.getPointInfo();
+      };
 
       $scope.showHistory = function () {
         $scope.pointInfo.isShow = !$scope.pointInfo.isShow;
@@ -58,43 +51,36 @@
       $scope.goldInfo.items = [];
 
       $scope.init = function () {
-        if ($scope.goldInfo.items.length === 0) {
-          $scope.goldInfo.items = [];
-          $scope.goldInfo.page = 0;
-          $scope.goldInfo.hasMore = true;
-        }
+        $scope.goldInfo.items = [];
+        $scope.goldInfo.page = 1;
+        $scope.goldInfo.hasMore = false;
+        $scope.goldInfo.isShow = false;
       };
 
-      $scope.loadMore = function () {
-        PointApi.getPointInfo($scope.page + 1, 'gold', function (result) {
+      $scope.getPointInfo = function () {
+        PointApi.getPointInfo($scope.goldInfo.page, 'gold', function (result) {
           if (result.status === 1) {
-            $scope.hasMore = false;
+            $scope.goldInfo.hasMore = false;
           }
           else {
+            $scope.goldInfo.hasMore = true;
             $scope.goldInfo.total = result.data.total;
             $scope.goldInfo.items = $scope.goldInfo.items.concat(result.data.log);
-            $scope.goldInfo.page += 1;
+
             $scope.$broadcast('scroll.infiniteScrollComplete');
           }
         });
       };
 
-      $scope.$on('$ionicView.enter', function () {
-        $scope.isActive = true;
+      $scope.$on('$ionicView.beforeEnter', function () {
         $scope.init();
+        $scope.getPointInfo();
       });
 
-      $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.isActive = false;
-      });
-
-      $scope.$on('$stateChangeSuccess', function () {
-        if ($scope.isActive) {
-          $scope.loadMore();
-        }
-      });
-
-      $scope.loadMore();
+      $scope.loadMore = function () {
+        $scope.goldInfo.page++;
+        $scope.getPointInfo();
+      };
 
       $scope.showHistory = function () {
         $scope.goldInfo.isShow = !$scope.goldInfo.isShow;
