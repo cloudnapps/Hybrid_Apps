@@ -2,7 +2,7 @@
   angular.module('home', ['seller', 'point'])
     .controller('HomeController', function ($scope, $ionicSlideBoxDelegate, $ionicLoading, toastService,
                                             $rootScope, barcode, $cordovaInAppBrowser, userService,
-                                            $state, $ionicPopover, $window, $interval, $ionicScrollDelegate, $timeout,
+                                            $state, $ionicPopover, $ionicPopup, $window, $interval, $ionicScrollDelegate, $timeout,
                                             HomeApi, SellerApi, $http, shopApi) {
       $scope.homeInfo = {};
       $scope.sellerInfo = {};
