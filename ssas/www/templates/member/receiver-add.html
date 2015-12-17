@@ -44,8 +44,15 @@
       </label>
 
       <label class="item item-input" style="background-color: #fff;">
-        <input type="text" ng-model="addrInfo.addr" placeholder="详细地址">
+        <input type="text" ng-model="addrInfo.addr" placeholder="详细地址" ng-focus="showIntroduction2 = true"
+               ng-blur="showIntroduction2 = false">
       </label>
+
+      <div class="prdt-tax" style="padding: 6px 0 5px 16px;" ng-show="!!showIntroduction2">
+        <div class="declare">
+          <span style="color: #bd252c;">请直接填写路名和小区</span>
+        </div>
+      </div>
 
       <label class="item item-toggle" style="font-size: 14px;">
         设置为默认地址

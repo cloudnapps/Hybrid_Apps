@@ -73,6 +73,8 @@
         });
       };
 
+      $scope.showIntroduction2 = false;
+
       $scope.loadCardList();
 
       $scope.showSpecModal = function () {
