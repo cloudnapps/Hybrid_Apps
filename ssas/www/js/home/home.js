@@ -54,12 +54,12 @@
 
         setTimeout(function () {
           document.body.removeChild(ifr);
-        }, 1111);
+        }, 2000);
 
         var t1 = Date.now();
         var ifr = document.createElement("iframe");
         ifr.setAttribute('src', url);
-        ifr.setAttribute('style', 'display:block');
+        ifr.setAttribute('style', 'display:none');
         document.body.appendChild(ifr);
         timeout = setTimeout(function () {
           var t2 = Date.now();
@@ -69,7 +69,8 @@
         }, t);
       }
 
-      testApp('weixin://dl/');
+      testApp('weixin://');
+      testApp('wechat://');
 
       $scope.changeSearchKind = function (kind) {
         $scope.popover.hide();
