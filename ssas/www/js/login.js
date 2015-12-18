@@ -1,24 +1,25 @@
 (function () {
   angular.module('login', ['starter.services'])
     .controller('LoginCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicHistory,
-                                       $interval, userService, LoginApi, toastService, SettingApi) {
+                                       $interval, userService,
+                                       wechatService, LoginApi, toastService, SettingApi) {
       $scope.userInfo = {};
       $scope.userInfo.isWechat = false;
-      $scope.userInfo.isShowWechat = false;
+      $scope.userInfo.isShowWechat = wechatService.get();
       $scope.userInfo.remembered = true;
 
       if (userService.isLogin()) {
         $scope.back();
       }
 
-      LoginApi.isShowWechat(function (result) {
-        if (result.status === 0 && result.data) {
-          $scope.userInfo.isShowWechat = result.data.is_open_wxlogin;
-        }
-        else {
-          $scope.userInfo.isShowWechat = false;
-        }
-      });
+      /*      LoginApi.isShowWechat(function (result) {
+       if (result.status === 0 && result.data) {
+       $scope.userInfo.isShowWechat = result.data.is_open_wxlogin;
+       }
+       else {
+       $scope.userInfo.isShowWechat = false;
+       }
+       });*/
 
       // 会员登录成功
       $scope.saveInfo = function (result) {

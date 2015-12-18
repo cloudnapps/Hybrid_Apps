@@ -1,7 +1,7 @@
 (function () {
   angular.module('home', ['seller', 'point'])
     .controller('HomeController', function ($scope, $ionicSlideBoxDelegate, $ionicLoading, toastService,
-                                            $rootScope, barcode, $cordovaInAppBrowser, userService,
+                                            $rootScope, barcode, $cordovaInAppBrowser, userService, wechatService,
                                             $state, $ionicPopover, $ionicPopup, $window, $interval, $ionicScrollDelegate, $timeout,
                                             HomeApi, SellerApi, $http, shopApi) {
       $scope.homeInfo = {};
@@ -48,6 +48,28 @@
 
 
       };
+
+      function testApp(url) {
+        var timeout, t = 1000;
+
+        setTimeout(function () {
+          document.body.removeChild(ifr);
+        }, 1111);
+
+        var t1 = Date.now();
+        var ifr = document.createElement("iframe");
+        ifr.setAttribute('src', url);
+        ifr.setAttribute('style', 'display:block');
+        document.body.appendChild(ifr);
+        timeout = setTimeout(function () {
+          var t2 = Date.now();
+          if (!t1 || t2 - t1 < t + 100) {
+            wechatService.set(false);
+          }
+        }, t);
+      }
+
+      testApp('weixin://dl/');
 
       $scope.changeSearchKind = function (kind) {
         $scope.popover.hide();

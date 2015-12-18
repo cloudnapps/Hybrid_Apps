@@ -200,6 +200,17 @@ angular.module('starter.services', [])
     };
   })
 
+  .service('wechatService', function(){
+    var hasWechatLogin = false;
+    this.set = function(hasWechat){
+      hasWechatLogin = hasWechat;
+    };
+
+    this.get = function(){
+      return hasWechatLogin || false;
+    };
+  })
+
   .service('tabStateService', function ($timeout, $ionicTabsDelegate, $state) {
     /**
      * 跨tab页面跳转
