@@ -1,11 +1,17 @@
 (function () {
   angular.module('login', ['starter.services'])
     .controller('LoginCtrl', function ($scope, $state, $stateParams, $ionicPopup, $ionicHistory,
-                                       $interval, userService,
-                                       wechatService, LoginApi, toastService, SettingApi) {
+                                       $interval, userService, LoginApi, toastService, SettingApi) {
       $scope.userInfo = {};
       $scope.userInfo.isWechat = false;
-      $scope.userInfo.isShowWechat = wechatService.get();
+      $scope.userInfo.isShowWechat = false;
+      wechat.isInstalled(function (cb_success) {
+          $scope.userInfo.isShowWechat = true;
+        },
+        function (cb_failure) {
+          $scope.userInfo.isShowWechat = false;
+        }
+      );
       $scope.userInfo.remembered = true;
 
       if (userService.isLogin()) {
