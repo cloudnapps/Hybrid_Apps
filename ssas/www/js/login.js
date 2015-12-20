@@ -6,10 +6,9 @@
       $scope.userInfo.isWechat = false;
       $scope.userInfo.isShowWechat = false;
       wechat.isInstalled(function (cb_success) {
-          $scope.userInfo.isShowWechat = true;
+          $scope.userInfo.isShowWechat = cb_success;
         },
         function (cb_failure) {
-          $scope.userInfo.isShowWechat = false;
         }
       );
       $scope.userInfo.remembered = true;
