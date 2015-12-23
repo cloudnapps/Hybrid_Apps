@@ -1,3 +1,4 @@
+<div ng-show="!!isShow.show" style="position: absolute;top:0;left: 0;right:0;bottom: 0;background-color: #000;opacity: .3;z-index: 9999;"></div>
 <div class="bar bar-subheader">
   <div class="row" style="padding: 0 0px;height: 40px;line-height: 40px;">
     <div class="col col-25"
@@ -32,7 +33,7 @@
     <form ng-submit="search()">
       <label class="item item-input" style="margin: 7px 0;padding: 0 0 0 6px;border-radius: 7px;border: none;">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="search" placeholder="" ng-model="keywords.value" style="height: 28px;">
+        <input focus="isShow" type="search" placeholder="" ng-model="keywords.value" style="height: 28px;">
       </label>
       <i class="clear-search icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"></i>
     </form>

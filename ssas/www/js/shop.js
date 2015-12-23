@@ -262,6 +262,10 @@
       else {
         $scope.getProducts();
       }
+
+      // 和遮罩层有关
+      $scope.isShow = {};
+
     }) // end of ShopController
 
     /*

@@ -19,6 +19,9 @@
 
       $rootScope.barcodeScan = barcode.scan;
 
+      // 和遮罩层有关
+      $scope.isShow = {};
+
       $ionicPopover.fromTemplateUrl('shopPopover.html', {
         scope: $scope
       }).then(function (popover) {

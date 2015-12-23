@@ -37,7 +37,7 @@
         </span>
 
         <span class="col col-center" style="padding: 0;">
-          <input type="search" ng-model="keywords.value" style="border:none; backgroud: transparent;width: 100%;max-height: 30px;
+          <input type="search" focus="isShow" ng-model="keywords.value" style="border:none; backgroud: transparent;width: 100%;max-height: 30px;
     padding: 0px;"/>
         </span>
         <i class="icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"
@@ -52,6 +52,9 @@
       <button class="col button button-clear" ng-click="openBtns()" style="font-size: 14px;">发现</button>
     </div>
   </ion-nav-buttons>
+  
+  <!-- 遮罩层 -->
+  <div ng-show="!!isShow.show" style="position: absolute;top:0;left: 0;right:0;bottom: 0;background-color: #000;opacity: .3;z-index: 9999;"></div>
 
   <!-- body -->
   <ion-content style="background-color: #fff;">
