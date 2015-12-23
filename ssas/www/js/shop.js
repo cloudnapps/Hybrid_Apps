@@ -48,7 +48,7 @@
     };
   }) // end of CategoryController
 
-    .controller('ShopController', function ($scope, $state, $stateParams, $ionicModal, shopApi) {
+    .controller('ShopController', function ($scope, $state, $stateParams, $document, $ionicModal, shopApi) {
       // With the new view caching in Ionic, Controllers are only called
       // when they are recreated or on app start, instead of every page change.
       // To listen for when this page is active (for example, to refresh data),
@@ -96,6 +96,12 @@
       };
 
       $scope.search = function () {
+        angular.forEach($document.find('input'), function (node) {
+          if (node.type === 'search') {
+            node.blur();
+          }
+        });
+
         $scope.filter = {
           cat_id: $scope.filter.cat_id
         };
@@ -208,7 +214,7 @@
           delete $scope.filter.max_price;
         }
 
-        if($scope.cates && $scope.cates.length > 0) {
+        if ($scope.cates && $scope.cates.length > 0) {
           $scope.filter.cat_id = $scope.cates;
         }
 
@@ -226,7 +232,7 @@
           delete $scope.filter.min_price;
           delete $scope.filter.max_price;
           $scope.priceSection = {};
-          if($stateParams.categoryId) {
+          if ($stateParams.categoryId) {
             $scope.filter.cat_id = $stateParams.categoryId;
           }
         }
