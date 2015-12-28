@@ -288,6 +288,16 @@ angular.module('starter')
           }
         }
       })
+      //商品税率
+      .state('membertax', {
+        url: '/membertax',
+        views: {
+          'main-view': {
+            templateUrl: 'templates/member/member-tax.html',
+            controller: 'MemberTaxController'
+          }
+        }
+      })
       // 优惠券管理
       .state('coupons', {
         url: '/coupons',

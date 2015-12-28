@@ -341,6 +341,24 @@
           }
         };
 
+        $scope.showDescModel = function () {
+          $ionicModal.fromTemplateUrl('templates/shop/product-tax-description.html', {
+            scope: $scope
+          }).then(function (modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+            $scope.hideModal = function () {
+              $scope.modal.hide();
+              $scope.modal.remove();
+            };
+          });
+        };
+
+        $scope.showTax = function () {
+          $state.go('membertax');
+        };
+
+
         function showSpecModal() {
           $ionicModal.fromTemplateUrl('templates/shop/shop-product-spec.html', {
             scope: $scope,

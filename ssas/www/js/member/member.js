@@ -92,5 +92,7 @@
     .controller('MemberItemController', function ($scope) {
     })
     .controller('MemberHelpController', function ($scope) {
+    })
+    .controller('MemberTaxController', function ($scope) {
     });
 })();

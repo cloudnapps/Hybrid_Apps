@@ -27,6 +27,7 @@
     <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
     <section class="prdt-detail">
       <h5 class="prdt-name">{{product.name}} </h5>
+
       <p class="prdt-brief">{{product.brief}}</p>
 
       <div class="post-type">{{product.nature === 'bond' ? '保税仓（深圳前海）' : '香港直邮'}}</div>
@@ -46,7 +47,13 @@
     <div class="prdt-tax">税金: <label class="tax-pri">{{product.tax_price|currency:'￥'}}</label></div>
     <div class="prdt-tax">
       <div class="declare">
-        <p>税费说明:</p>
+        <div class="row" style="margin-right: 0px; margin-left: 0px; padding: 0px">
+          <p class="col col-center" style="padding: 0px">税费说明：</p>
+
+          <div div class="col col-20 col-center" style="padding:0px; text-align: right;" ng-click="showDescModel()">
+            <i class="icon ion-chevron-right icon-accessory"></i>
+          </div>
+        </div>
 
         <p>①中华人民共和国进境物品完税价格表，本商品适用税率为{{product.tax_rate * 100}}%</p>
 

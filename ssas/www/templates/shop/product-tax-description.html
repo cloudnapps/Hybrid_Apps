@@ -1,0 +1,21 @@
+<ion-modal-view class="product-spec">
+  <ion-header-bar class="bar bar-header bar-positive" style="height: 44px;">
+    <h1 class="title" style="margin-top: 0;">关税规则说明</h1>
+  </ion-header-bar>
+  <ion-content>
+    <p class="emsize">关税：如产生关税，请与客服联系。</p>
+
+    <p>关税=购买单价 * 件数 * 商品税率 </p>
+
+    <p>若您购买香港直邮商品，海关会随机抽查缴税，需您自行前往当地海关缴纳。</p>
+
+    <div class="col col-100 col-center" style="padding: 0px;"><p>注：不同品类商品的税率不同</p></div>
+    <div ng-click="hideModal(); showTax()"><p><strong><a>点击了解税率</a></strong></p></div>
+
+  </ion-content>
+  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
+    <div class="button-bar">
+      <button class="col col-100 button button-positive" ng-click="hideModal()">确认</button>
+    </div>
+  </ion-footer-bar>
+</ion-modal-view>
