@@ -1,129 +1,158 @@
 <ion-view view-title="{{'product_detail'|translate}}" class="product">
-  <ion-nav-buttons side="left">
-    <back-button></back-button>
-  </ion-nav-buttons>
-  <ion-nav-buttons side="right">
-    <a class="button icon-left icon-btn-2 button-clear" ng-click="userService.checkLogin('tab.cart')"></a>
+    <ion-nav-buttons side="left">
+        <back-button></back-button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <a class="button icon-left icon-btn-2 button-clear" ng-click="userService.checkLogin('tab.cart')"></a>
+        </div>
+    </ion-nav-buttons>
+    <div class="pop-fixed" style="width: 100%; height: 8%; padding-top: 4%" ng-if="product.store === 0">
+        <div class="col col-center" style="padding: 0px;text-align:center;">
+            <a class="button-clear" style="font-size:16px; color:#fff;">商品暂无库存，请看看其他商品吧~</a>
+        </div>
     </div>
-  </ion-nav-buttons>
-  <div class="pop-fixed" style="width: 100%; height: 8%; padding-top: 4%" ng-if="product.store === 0">
-    <div class="col col-center" style="padding: 0px;text-align:center;">
-      <a class="button-clear" style="font-size:16px; color:#fff;">商品暂无库存，请看看其他商品吧~</a>
-    </div>
-  </div>
-  <ion-content>
-    <div class="row" style="padding: 0px;margin: 0;width: 100%;">
-      <div class="col col-center" style="padding: 0px; width: 100%;" on-double-tap="showPictures()">
-        <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox"
-                       auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
-          <ion-slide ng-repeat="item in slideimgs" style="width: 100%;">
-            <a>
-              <img ng-src="{{item}}"/>
-            </a>
-          </ion-slide>
-        </ion-slide-box>
-      </div>
-    </div>
-    <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
-    <section class="prdt-detail">
-      <h5 class="prdt-name">{{product.name}} </h5>
+    <ion-content>
+        <div class="row" style="padding: 0px;margin: 0;width: 100%;">
+            <div class="col col-center" style="padding: 0px; width: 100%;" on-double-tap="showPictures()">
+                <ion-slide-box on-slide-changed="slideHasChanged($index)" class="slidebox"
+                               auto-play="true" slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
+                    <ion-slide ng-repeat="item in slideimgs" style="width: 100%;">
+                        <a>
+                            <img ng-src="{{item}}"/>
+                        </a>
+                    </ion-slide>
+                </ion-slide-box>
+            </div>
+        </div>
+        <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
+        <section class="prdt-detail">
+            <h5 class="prdt-name">{{product.name}} </h5>
 
-      <p class="prdt-brief">{{product.brief}}</p>
+            <p class="prdt-brief">{{product.brief}}</p>
 
-      <div class="post-type">{{product.nature === 'bond' ? '保税仓（深圳前海）' : '香港直邮'}}</div>
-      <label class="now-price">{{product.price|currency:'￥'}}</label>
-      <label class="ori-price">
-        <span>{{'mkt_price'|translate}}:{{product.mktprice|currency:'￥'}}</span>
-      </label>
+            <div class="post-type">{{product.nature === 'bond' ? '保税仓（深圳前海）' : '香港直邮'}}</div>
+            <label class="now-price">{{product.price|currency:'￥'}}</label>
+            <label class="ori-price">
+                <span>{{'mkt_price'|translate}}:{{product.mktprice|currency:'￥'}}</span>
+            </label>
 
-      <div class="amount">
-        <label style="padding-right: 2em">月销&nbsp;{{product.count}}</label>
-        <label style="color: #bd252c;">库存&nbsp;{{product.store}}</label>
-      </div>
-    </section>
+            <div class="amount">
+                <label style="padding-right: 2em">月销&nbsp;{{product.count}}</label>
+                <label style="color: #bd252c;">库存&nbsp;{{product.store}}</label>
+            </div>
+        </section>
 
-    <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
-    <div class="prdt-tax">税率: <label class="tax-pri">{{product.tax_rate * 100}}%</label></div>
-    <div class="prdt-tax">税金: <label class="tax-pri">{{product.tax_price|currency:'￥'}}</label></div>
-    <div class="prdt-tax">
-      <div class="declare">
-        <div class="row" style="margin-right: 0px; margin-left: 0px; padding: 0px">
-          <p class="col col-center" style="padding: 0px">税费说明：</p>
+        <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
+        <div class="prdt-tax">税率: <label class="tax-pri">{{product.tax_rate * 100}}%</label></div>
+        <div class="prdt-tax">税金: <label class="tax-pri">{{product.tax_price|currency:'￥'}}</label></div>
+        <div class="prdt-tax">
+            <div class="declare">
+                <div class="row" style="margin-right: 0px; margin-left: 0px; padding: 0px">
+                    <p class="col col-center" style="padding: 0px">税费说明：</p>
 
-          <div div class="col col-20 col-center" style="padding:0px; text-align: right;" ng-click="showDescModel()">
-            <i class="icon ion-chevron-right icon-accessory"></i>
-          </div>
+                    <div div class="col col-20 col-center" style="padding:0px; text-align: right;"
+                         ng-click="showDescModel()">
+                        <i class="icon ion-chevron-right icon-accessory"></i>
+                    </div>
+                </div>
+
+                <p>①中华人民共和国进境物品完税价格表，本商品适用税率为{{product.tax_rate * 100}}%</p>
+
+                <p>②根据 海关总署公告2010年第43号 公告规定，个人物品申报，应征进口税税额在人民币50元（含50元）以下的，海关予以免征。</p>
+
+                <p>③若您购买香港直邮商品，海关会随机抽查缴税，需您自行前往当地海关缴纳。</p>
+            </div>
+        </div>
+        <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
+        <!-- <div class="button button-clear button-full button-small icon ion-chevron-right icon-right prdt-std" >
+          <a style="color: #4c4c4c;">选择规格</a>
+        </div> -->
+
+        <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ng-click="showSpecModal()">
+            <div class="col col-80 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
+                <a style="color: #333333;text-decoration: none;">选择规格</a>
+            </div>
+            <div class="col col-20 col-center" style="padding: 0px;height: 40px;text-align: right;">
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
         </div>
 
-        <p>①中华人民共和国进境物品完税价格表，本商品适用税率为{{product.tax_rate * 100}}%</p>
+        <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
 
-        <p>②根据 海关总署公告2010年第43号 公告规定，个人物品申报，应征进口税税额在人民币50元（含50元）以下的，海关予以免征。</p>
-
-        <p>③若您购买香港直邮商品，海关会随机抽查缴税，需您自行前往当地海关缴纳。</p>
-      </div>
-    </div>
-    <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
-    <!-- <div class="button button-clear button-full button-small icon ion-chevron-right icon-right prdt-std" >
-      <a style="color: #4c4c4c;">选择规格</a>
-    </div> -->
-
-    <div class="row" style="padding: 0 10px;height: 40px;line-height: 40px;" ng-click="showSpecModal()">
-      <div class="col col-80 col-center" style="padding: 0px;height: 40px;font-size: 14px;">
-        <a style="color: #333333;text-decoration: none;">选择规格</a>
-      </div>
-      <div class="col col-20 col-center" style="padding: 0px;height: 40px;text-align: right;">
-        <i class="icon ion-chevron-right icon-accessory"></i>
-      </div>
-    </div>
-
-    <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
-
-    <div class="row" style="color: #4c4c4c;">
-      <div class="col col-33 col-center">
-        {{'comment'|translate}}
-      </div>
-      <div class="col col-67 col-center" style="text-align: right;font-size: 9pt;">
-        好评{{product.high_point}}% 已有{{product.count}}人购买
-      </div>
-    </div>
-    <div class="row" ui-sref="comments({id:product.goods_id})">
-      <div class="col col-90 col-center">
-        <p style="margin-bottom: 1px;color: #9b9b9b;font-size: 10px;">{{comment.name || '暂无评论'}}</p>
-
-        <p
-          style="margin: 0;color: #9b9b9b;font-size: 10px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
-          ng-show="comment.name">{{comment.content}}</p>
-      </div>
-      <div class="col col-10 col-center" style="text-align: right;">
-        <i class="icon ion-chevron-right icon-right"></i>
-      </div>
-    </div>
-
-    <hr style="margin: 0;border:none;border-top:10px solid #f6f6f6;"/>
-    <div class="row" style="padding: 10px;">
-      <div class="col col-center"
-           style="width: 80px;height: 80px;padding: 0;background-color: #fff;overflow: hidden;max-width: 80px;background-image: url({{point.url}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;">
-      </div>
-      <div class="col col-center" style="padding: 0 0 0 10px;">
-        <div style="font-size: 14px; padding: 0 0 7px;color: #4a4a4a;">{{point.name}}</div>
-        <div style="font-size: 10px; color: #4a4a4a;" ng-repeat="value in point.value">{{value.type_name}} &nbsp;{{value.point}}
+        <div class="row" style="color: #4c4c4c;">
+            <div class="col col-33 col-center">
+                {{'comment'|translate}}
+            </div>
+            <div class="col col-67 col-center" style="text-align: right;font-size: 9pt;">
+                好评{{product.high_point}}% 已有{{product.count}}人购买
+            </div>
         </div>
-      </div>
-    </div>
+        <div class="row" ui-sref="comments({id:product.goods_id})">
+            <div class="col col-90 col-center">
+                <p style="margin-bottom: 1px;color: #9b9b9b;font-size: 10px;">{{comment.name || '暂无评论'}}</p>
 
-    <hr style="margin: 0;border:none;border-top:10px solid #f6f6f6;">
+                <p
+                        style="margin: 0;color: #9b9b9b;font-size: 10px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"
+                        ng-show="comment.name">{{comment.content}}</p>
+            </div>
+            <div class="col col-10 col-center" style="text-align: right;">
+                <i class="icon ion-chevron-right icon-right"></i>
+            </div>
+        </div>
 
-    <div style="text-align: center; color: #4a4a4a;margin: 10px;font-size: 14px;">向上拖动，查看图文详情</div>
+        <hr style="margin: 0;border:none;border-top:10px solid #f6f6f6;"/>
+        <div class="row" style="padding: 10px;">
+            <div class="col col-center"
+                 style="width: 80px;height: 80px;padding: 0;background-color: #fff;overflow: hidden;max-width: 80px;background-image: url({{point.url}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;">
+            </div>
+            <div class="col col-center" style="padding: 0 0 0 10px;">
+                <div style="font-size: 14px; padding: 0 0 7px;color: #4a4a4a;">{{point.name}}</div>
+                <div style="font-size: 10px; color: #4a4a4a;" ng-repeat="value in point.value">{{value.type_name}}
+                    &nbsp;{{value.point}}
+                </div>
+            </div>
+        </div>
 
-    <div ng-bind-html="html" class="product-intro"></div>
+        <hr style="margin: 0;border:none;border-top:10px solid #f6f6f6;">
 
-    <ion-infinite-scroll
-      ng-if="hasMore"
-      on-infinite="loadMore()"
-      distance="1%">
-    </ion-infinite-scroll>
-  </ion-content>
-  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
-    <div add-to-cart="product" show-spec-modal="showSpecModal"></div>
-  </ion-footer-bar>
+        <div style="text-align: center; color: #4a4a4a;margin: 10px;font-size: 14px;">向上拖动，查看图文详情</div>
+
+        <div ng-bind-html="html" class="product-intro"></div>
+
+        <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
+        <div class="prdt-tax" style="font-weight: 700">顾客须知</div>
+        <div class="prdt-tax">
+            <div class="declare">
+                <p class="emsize"><strong>1. 发货及到货时间</strong></p>
+
+                <p>不同仓库商品发货、到货时间略有差异，正常情况下：</p>
+
+                <p> （1）保税仓发货商品，24小时内发货（周末及国家法定节假日除外），4-6个工作日到货。</p>
+
+                <p> （2）香港直邮商品，1-3个工作日内发货（周末及国家法定节假日除外），3-7个工作日清关完毕（视海关清关速度有所影响），一般7-15个工作日到货。</p>
+
+                <p>若遇到活动期订单量大或者特殊突发情况，发货会稍有延迟，还请您耐心等待。如您对物流时效要求较高或是有急需物品，请慎重下单。</p>
+
+                <p class="emsize"><strong>2. 关于税费</strong></p>
+
+                <p>
+                    消费者购买跨境贸易电子商务进口商品，以“个人自用、合理数量”为原则，参照《海关总署公告2010年第43号（关于调整进出境个人邮递物品管理措施有关事宜）》要求，每次限值为1000元人民币，超出规定限值的，应按照货物规定办理通关手续。但单次购买仅有一件商品且不可分割的，虽超出规定限值，经海关审核确属个人自用的，可以按照个人物品规定办理通关手续。对于违反规定，超出个人自用合理数量购买的，系统将予以退单，情节严重的，将追究个人法律责任。</p>
+
+                <p>税费=商品价格*商品数量*商品税率。</p>
+
+                <p> （1）若您购买保税仓商品：一笔订单税费小于等于50元，不用缴纳关税；若一笔订单税费大于50元，则需向海关缴纳行邮税，您是通过委托CTFHOKO代缴，无需自己再到相应的海关部门单独缴纳；</p>
+
+                <p> （2）若您购买香港直邮商品：海关是随机抽查缴税，需要顾客前往海关缴税。如产生税费，请与客服联系。</p>
+            </div>
+        </div>
+
+        <ion-infinite-scroll
+                ng-if="hasMore"
+                on-infinite="loadMore()"
+                distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+    <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">
+        <div add-to-cart="product" show-spec-modal="showSpecModal"></div>
+    </ion-footer-bar>
 </ion-view>
