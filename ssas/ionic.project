@@ -4,7 +4,7 @@
   "proxies": [
       {
         "path": "/m",
-        "proxyUrl": "http://zdf.jooau.com/index.php/m"
+        "proxyUrl": "http://www.ctfhoko.com/index.php/m"
       }
     ],
   "gulpStartupTasks": [

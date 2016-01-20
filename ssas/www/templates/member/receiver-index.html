@@ -17,7 +17,7 @@
 
             <p style="margin-bottom: 3px;color: #4a4b4d;" ng-if="!!item.mobile">手机号码：{{item.mobile}}</p>
 
-            <p style="margin-bottom: 3px;color: #4a4b4d;">身份证号：{{item.number}}</p>
+            <p style="margin-bottom: 3px;color: #4a4b4d;">身份证号：{{item.number | idtransform}}</p>
 
             <div class="row" style="padding: 0;">
               <div>
@@ -53,7 +53,7 @@
 
             <p style="margin-bottom: 3px;color: #4a4b4d;" ng-if="!!item.mobile">手机号码：{{item.mobile}}</p>
 
-            <p style="margin-bottom: 3px;color: #4a4b4d;">身份证号：{{item.number}}</p>
+            <p style="margin-bottom: 3px;color: #4a4b4d;">身份证号：{{item.number | idtransform}}</p>
 
             <div class="row" style="padding: 0;">
               <div>
