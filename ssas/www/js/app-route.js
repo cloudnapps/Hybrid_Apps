@@ -426,7 +426,7 @@ angular.module('starter')
       })
       // 购物车首页
       .state('tab.cart', {
-        url: '/cart?productId&nature',
+        url: '/cart?productId&nature&num',
         views: {
           'tab-cart': {
             templateUrl: 'templates/cart/cart-index.html',

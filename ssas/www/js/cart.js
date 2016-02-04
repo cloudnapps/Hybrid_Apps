@@ -35,10 +35,10 @@ angular.module('cart', ['components'])
           if ($stateParams.productId && $stateParams.nature) {
             if (!$ionicHistory.forwardView()) {
               if ($stateParams.nature === 'bond') {
-                directCheckout($scope.cart.natureCart.bond, $stateParams.productId, $stateParams.nature);
+                directCheckout($scope.cart.natureCart.bond, $stateParams.productId, $stateParams.nature, $stateParams.num);
               }
               else if ($stateParams.nature === 'direct_mail') {
-                directCheckout($scope.cart.natureCart.direct_mail, $stateParams.productId, $stateParams.nature);
+                directCheckout($scope.cart.natureCart.direct_mail, $stateParams.productId, $stateParams.nature, $stateParams.num);
               }
             }
             else {
@@ -157,7 +157,7 @@ angular.module('cart', ['components'])
       $scope.removeGoods([good]);
     };
 
-    var directCheckout = function (nature, productId, natureKey) {
+    var directCheckout = function (nature, productId, natureKey, num) {
       angular.forEach(nature.aSelCart, function (seller) {
           angular.forEach(seller.goods_list, function (good) {
             var pId = '' + good.product_id;
@@ -168,7 +168,7 @@ angular.module('cart', ['components'])
               }
 
               if (good.quantity !== 1) {
-                good.quantity = 1;
+                good.quantity = parseInt(num);
                 $scope.updateGoodQuantity(good);
               }
             }
@@ -248,20 +248,20 @@ angular.module('cart', ['components'])
 
     $scope.$on('$ionicView.beforeEnter', $scope.init);
 
-   /* $scope.back = function () {
-      // var confirmPopup = $ionicPopup.confirm({
-      //   title: '订单支付',
-      //   template: '您确认要放弃付款?',
-      //   cancelText: '取消', // String (默认: 'Cancel')。一个取消按钮的文字。
-      //   okText: '确定' // String (默认: 'OK')。OK按钮的文字。
-      // });
+    /* $scope.back = function () {
+     // var confirmPopup = $ionicPopup.confirm({
+     //   title: '订单支付',
+     //   template: '您确认要放弃付款?',
+     //   cancelText: '取消', // String (默认: 'Cancel')。一个取消按钮的文字。
+     //   okText: '确定' // String (默认: 'OK')。OK按钮的文字。
+     // });
 
-      // confirmPopup.then(function (res) {
-      //   $state.go('tab.order-payed', {
-      //     status: 'failed'
-      //   });
-      // });
-    };*/
+     // confirmPopup.then(function (res) {
+     //   $state.go('tab.order-payed', {
+     //     status: 'failed'
+     //   });
+     // });
+     };*/
 
     $scope.pay = function (/*payment*/) {
       $ionicLoading.show();

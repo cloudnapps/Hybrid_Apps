@@ -272,8 +272,8 @@
      * ProductDetailController
      */
     .controller('ProductDetailController',
-    ['$scope', '$state', '$interval', '$stateParams', '$timeout', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading', 'shopApi', 'cartApi', 'toastService', 'userService',
-      function ($scope, $state, $interval, $stateParams, $timeout, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading, shopApi, cartApi, toastService, userService) {
+    ['$scope', '$state', '$interval', '$stateParams', '$timeout', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading', 'shopApi', 'cartApi', 'toastService', 'userService', 'tabStateService',
+      function ($scope, $state, $interval, $stateParams, $timeout, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading, shopApi, cartApi, toastService, userService, tabStateService) {
 
         $scope.productId = $stateParams.productId;
         $scope.product = {};
@@ -281,6 +281,10 @@
         $scope.html = '';
         $scope.showSpecModal = showSpecModal;
         $scope.getProductGoodsSpec = getProductGoodsSpec;
+
+        // 跨tab之间的跳转
+        $scope.tabIndex = tabStateService.tabIndex;
+        $scope.tabStateGo = tabStateService.go;
 
         getProductGoodsSpec($scope.productId);
         $scope.good = {
@@ -358,7 +362,6 @@
           $state.go('membertax');
         };
 
-
         function showSpecModal() {
           $ionicModal.fromTemplateUrl('templates/shop/shop-product-spec.html', {
             scope: $scope,
@@ -372,6 +375,20 @@
             };
           });
         }
+
+        $scope.showDirectModal = function () {
+          $ionicModal.fromTemplateUrl('templates/shop/shop-product-directgo.html', {
+            scope: $scope,
+            backdropClickToClose: true
+          }).then(function (modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+            $scope.hideModal = function () {
+              $scope.modal.hide();
+              $scope.modal.remove();
+            };
+          });
+        };
 
         function getProductGoodsSpec(productId /*, isSpecState*/) {
           $ionicLoading.show();
@@ -410,6 +427,34 @@
                 .catch(function (e) {
                   console.log(e);
                   toastService.setToast('加入失败');
+                });
+            }
+          });
+        };
+
+        $scope.goToCart = function () {
+          if (!userService.isLogin()) {
+            $scope.hideModal();
+          }
+
+          userService.checkLogin({
+            success: function () {
+              $scope.product.num = $scope.good.quantity;
+
+              cartApi
+                .addToCart($scope.product)
+                .then(function (data) {
+                  if (data && data.data && data.data.status === 1) {
+                    toastService.setToast(data.data.msg)
+                  }
+                  else if (data && data.data && data.data.status === 0) {
+                    $scope.hideModal();
+                    $scope.tabStateGo(tabStateService.tabIndex.cart, 'tab.cart',
+                      {productId: $scope.product.product_id, nature: $scope.product.nature, num: $scope.product.num},
+                      {reload: true});
+                  }
+                })
+                .catch(function () {
                 });
             }
           });

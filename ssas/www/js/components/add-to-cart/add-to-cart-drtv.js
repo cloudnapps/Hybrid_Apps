@@ -6,14 +6,11 @@ angular
       templateUrl: 'templates/cart/add-to-cart.tpl.html',
       scope: {
         product: '=addToCart',
-        showSpecModal: '=showSpecModal'
+        showSpecModal: '=showSpecModal',
+        showDirectModal: '=showDirectModal'
       },
       replace: true,
-      controller: function ($scope, $state, cartApi, FavoriteApi, toastService, tabStateService, userService) {
-        // 跨tab之间的跳转
-        $scope.tabIndex = tabStateService.tabIndex;
-        $scope.tabStateGo = tabStateService.go;
-
+      controller: function ($scope, $state, cartApi, FavoriteApi, toastService, userService) {
         $scope.addGoodsFavorite = function () {
           userService.checkLogin({
             success: function () {
@@ -32,30 +29,14 @@ angular
           });
 
         };
+
         $scope.addToCart = function () {
           return $scope.showSpecModal();
         };
 
         $scope.goToCart = function () {
-          userService.checkLogin({
-            success: function () {
-              cartApi
-                .addToCart($scope.product)
-                .then(function (data) {
-                  if (data && data.data && data.data.status === 1) {
-                    toastService.setToast(data.data.msg)
-                  }
-                  else if (data && data.data && data.data.status === 0) {
-                    $scope.tabStateGo(tabStateService.tabIndex.cart, 'tab.cart',
-                      {productId: $scope.product.product_id, nature: $scope.product.nature},
-                      {reload: true});
-                  }
-                })
-                .catch(function () {
-                });
-            }
-          });
+          return $scope.showDirectModal();
         };
       }
-    };
+    }
   });
