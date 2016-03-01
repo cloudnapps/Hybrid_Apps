@@ -65,7 +65,11 @@
         $scope.item = {};
         $scope.item.title = '商户详情';
         $scope.item.favTitle = '收藏店铺';
+        $scope.keywords = {value: ''};
       };
+
+      // 和遮罩层有关
+      $scope.isShow = {};
 
       var timer = null;
       $scope.slideHasChanged = function (index) {
@@ -171,6 +175,15 @@
         else if (item.type === 'product') {
           $state.go('product', {productId: item.id});
         }
+      };
+
+      $scope.search = function () {
+        return $state.go('products', {keywords: $scope.keywords.value, sellerId: $scope.sellerId});
+      };
+
+      $scope.clearSearch = function (event) {
+        $scope.keywords.value = '';
+        event.stopPropagation();
       };
 
       $scope.$on('$ionicView.beforeEnter', function () {

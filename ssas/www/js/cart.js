@@ -12,14 +12,14 @@ angular.module('cart', ['components'])
         angular.forEach($scope.cart.natureCart.bond.aSelCart, function (seller) {
           seller.seller_info.isEdited = false;
           seller.seller_info.headerBtnTitle = '编辑';
-        })
+        });
       }
 
       if ($scope.cart && $scope.cart.natureCart && $scope.cart.natureCart.direct_mail) {
         angular.forEach($scope.cart.natureCart.direct_mail.aSelCart, function (seller) {
           seller.seller_info.isEdited = false;
           seller.seller_info.headerBtnTitle = '编辑';
-        })
+        });
       }
     }
 
