@@ -65,6 +65,7 @@
       $scope.filter = {};
       $scope.filter.cat_id = $stateParams.categoryId;
       $scope.filter.brand = $scope.brandId;
+      $scope.filter.seller_id = $stateParams.sellerId;
       $scope.hasMore = false;
       $scope.isShowGalleryFilter = false;
       $scope.priceSection = {};
@@ -103,7 +104,8 @@
         });
 
         $scope.filter = {
-          cat_id: $scope.filter.cat_id
+          cat_id: $scope.filter.cat_id,
+          seller_id: $scope.filter.seller_id
         };
         $scope.filter.keywords = $scope.keywords.value;
         clearData(true);
@@ -113,7 +115,8 @@
 
       $scope.clearSearch = function (event) {
         $scope.filter = {
-          cat_id: $scope.filter.cat_id
+          cat_id: $scope.filter.cat_id,
+          seller_id: $scope.filter.seller_id
         };
         $scope.filter.keywords = '';
         $scope.keywords.value = '';
@@ -482,7 +485,7 @@
         });
 
 
-      }]) // end of ProductDetailController
+      }]) // end of ProductImagesController
 
     .controller('ProductCommentController', function ($scope, $stateParams, shopApi) {
       $scope.page = 0;
