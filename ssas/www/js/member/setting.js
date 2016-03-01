@@ -33,6 +33,10 @@
 
                 SettingApi.getMemberSetting(function (result) {
                     $scope.item = result.data;
+                    //如果有昵称，login_name 就会返回昵称，没昵称就返回用户名或者手机号
+                    if($scope.item.name.trim()==""){
+                      $scope.item.name = $scope.item.login_name;
+                    }
 
                     var userBirthday = ($scope.birthday || '1980-1-1').split('-');
                     $scope.birthdayInfo.selectedYear = userBirthday[0];
