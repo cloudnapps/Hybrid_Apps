@@ -114,7 +114,12 @@
       height: 82px;
       width: 82px;
       border: 1px solid #c8c8c8;
-
+      text-decoration: none;
+      p {
+      color:#bd252c;
+      margin-top:-6px;
+      font-size: 6px;
+      }
       img {
         width: 100%;
         height: 100%;
@@ -134,7 +139,7 @@
       display: inline-block;
       padding: 0px 0px 0px 10px;
       font-size: 14px;
-      
+
       .sub-title {
         display: block;
         font-size: 12px;
