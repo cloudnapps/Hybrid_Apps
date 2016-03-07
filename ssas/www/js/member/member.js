@@ -54,7 +54,7 @@
         }
       };
 
-      $scope.$on('$ionicView.beforeEnter', function () {
+      $scope.$on('$ionicView.afterEnter', function () {
         $scope.getUserInfo();
       });
 
