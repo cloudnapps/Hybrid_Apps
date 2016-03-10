@@ -73,6 +73,17 @@ angular.module('starter')
           }
         }
       })
+      // 活动详情页面(限时促销商品一览)
+      .state('activity', {
+        url: '/activity/:actId',
+        cache: false,
+        views: {
+          'main-view': {
+            templateUrl: 'templates/home/activity-info.html',
+            controller: 'ActivityInfoController'
+          }
+        }
+      })
       // 商品详情页
       .state('product', {
         url: '/products/:productId',
