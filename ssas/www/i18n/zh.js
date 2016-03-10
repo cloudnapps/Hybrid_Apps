@@ -118,5 +118,8 @@ var translations_zh = {
 
   cart_payment: '选择支付方式',
   order_payed: '订单支付成功',
-  order_payed_failed: '订单支付失败'
+  order_payed_failed: '订单支付失败',
+
+  //限时折扣优惠商品页
+  activity_title: '优惠商品'
 };

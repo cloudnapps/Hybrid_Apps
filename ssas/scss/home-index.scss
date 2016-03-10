@@ -85,18 +85,20 @@
     font-size: 14px;
    }
   }
-  .camp-title-right {
+  .camp-title-right{
     padding: 0;
     margin: 0;
+    text-align: right;
 
-    span {
-      font-size: 12px;
-    }
+    a {
+      cursor: pointer;
+      margin-right: 20px;
+      text-decoration: none;
+      color: #666c70;
 
-    .end-time {
-      color: #FF0000;
-      font-size: 16px;
-      font-weight: 300;
+      span {
+        margin-left: 5px;
+      }
     }
   }
 }

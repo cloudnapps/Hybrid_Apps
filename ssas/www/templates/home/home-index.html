@@ -52,7 +52,7 @@
       <button class="col button button-clear" ng-click="openBtns()" style="font-size: 14px;">发现</button>
     </div>
   </ion-nav-buttons>
-  
+
   <!-- 遮罩层 -->
   <div ng-show="!!isShow.show" style="position: absolute;top:0;left: 0;right:0;bottom: 0;background-color: #000;opacity: .3;z-index: 9999;"></div>
 
@@ -94,6 +94,9 @@
           <span class="bar-name">{{activityInfo.act_name}}</span>
         </div>
         <!-- <img src="img/bar-1.png" style="height: 27px;"> -->
+      </div>
+      <div class="col col-70 col-center camp-title-right">
+        <a ui-sref="activity({actId:activityInfo.act_id})">更多<span>>></span></a>
       </div>
     </div>
 
