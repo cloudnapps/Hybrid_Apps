@@ -1,2 +1,6 @@
 ssas/platforms
 plugins/cordova-beacon-navi/libs/ios/ArcGIS.framework
+
+plugins/cordova-beacon-navi/libs/ios/libgeos.a
+
+ssas/plugins
