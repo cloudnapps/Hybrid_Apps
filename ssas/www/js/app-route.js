@@ -52,6 +52,16 @@ angular.module('starter')
           }
         }
       })
+      // 检索页面
+      .state('search', {
+        url: '/search?kind',
+        views: {
+          'main-view': {
+            templateUrl: 'templates/home/home-search.html',
+            controller: 'SearchController'
+          }
+        }
+      })
       // 商品分类
       .state('tab.categories', {
         url: '/categories',

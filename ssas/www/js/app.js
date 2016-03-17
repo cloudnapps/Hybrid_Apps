@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic', 'ngCordova', 'pascalprecht.translate', 'home', 'shop', 'cart',
   'member', 'order', 'receiver', 'favorite', 'feedback', 'return', 'setting', 'login', 'point', 'seller', 'complaint', 'coupon',
-  'ngIOS9UIWebViewPatch', 'ionic-generaldata', 'ionic-citypicker', 'ionic-generalpicker', 'activity'])
+  'ngIOS9UIWebViewPatch', 'ionic-generaldata', 'ionic-citypicker', 'ionic-generalpicker', 'activity', 'search'])
   //For the real endpoint, we'd use this
   .run(function ($ionicPlatform, $translate, userService, $rootScope, barcode, $ionicHistory, $ionicModal) {
     $ionicPlatform.ready(function () {

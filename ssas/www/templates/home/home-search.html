@@ -1,0 +1,56 @@
+<ion-view view-title="" hide-tabs="true">
+  <ion-nav-buttons>
+    <back-button></back-button>
+  </ion-nav-buttons>
+  <!-- search -->
+  <ion-nav-title>
+    <form ng-submit="search()" style="background:#fff; border-radius: 7px;margin-top: 8px;">
+      <div class="row" style="padding:0;line-height: 30px;">
+        <span style="min-width: 4em;max-width: 4em;color:#000; display: inline-block;font-size: 14px">
+          <select ng-model="keywords.kind"
+                  style="-webkit-appearance:none;-moz-appearance:none;appearance:none; border:none; background:none;padding-right: 0;">
+            <option value="0">商品</option>
+            <option value="1">商户</option>
+          </select>
+          <i class="icon ion-arrow-down-b"></i>&nbsp;
+        </span>
+
+        <span class="col col-center" style="padding: 0;">
+          <input type="search" focus="isShow" ng-click="doSearch()" ng-model="keywords.value" style="border:none; backgroud: transparent;width: 100%;max-height: 30px;
+    padding: 0px;"/>
+        </span>
+        <i class="icon ion-ios-close-empty placeholder-icon" ng-click="clearSearch($event)"
+           style="padding: 0 5px;min-width: 1.2em;max-width: 1.2em;"></i>
+      </div>
+    </form>
+  </ion-nav-title>
+
+  <!-- discovery -->
+  <ion-nav-buttons side="right">
+    <div class="row row-center">
+      <button class="col button button-clear" ng-click="search(keywords.value)" style="font-size: 14px;">搜索</button>
+    </div>
+  </ion-nav-buttons>
+
+  <!-- 遮罩层 -->
+  <div ng-show="!!isShow.show"
+       style="position: absolute;top:0;left: 0;right:0;bottom: 0;background-color: #000;opacity: .3;z-index: 9999;"></div>
+  <ion-content>
+    <div class="row" style="padding: 5px;margin: 0;border-bottom: 1px solid #eee;border-top:10px solid #eee;" >
+      <div class="col">
+        <p style="margin: 0;overflow: hidden;font-size: 16px;font-weight:bold;">历史搜索</p>
+      </div>
+    </div>
+    <div class="row" style="padding: 10px;margin: 0;border-bottom: 1px solid #eee;" ng-repeat="keyword in historyKeywords"  ng-click="search(keyword)">
+      <div class="col">
+        <p style="margin: 0;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;color: #000;font-size: 14px;font-weight: 400;">{{keyword}}</p>
+      </div>
+    </div>
+    <ion-infinite-scroll
+      ng-if="hasMore"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>
+

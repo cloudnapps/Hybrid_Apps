@@ -68,6 +68,10 @@
         }
       };
 
+      $scope.doSearch = function () {
+        $state.go('search', {kind : $scope.keywords.kind});
+      };
+
       $scope.clearSearch = function (event) {
         $scope.keywords.value = '';
         $scope.keywords.kind = '0';
