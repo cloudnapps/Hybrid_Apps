@@ -29,8 +29,10 @@
             <h5 class="prdt-name">{{product.name}} </h5>
 
             <p class="prdt-brief">{{product.brief}}</p>
-
-            <div class="post-type">{{product.nature === 'bond' ? '保税仓（深圳前海）' : '香港直邮'}}</div>
+            <div class="row" style="padding: 0px;margin: 0px;">
+              <div class="col post-type">{{product.nature === 'bond' ? '保税仓（深圳前海）' : '香港直邮'}}</div>
+              <div class="col"><label style="">原产国家:&nbsp;{{product.country}}</label></div>
+            </div>
             <label class="now-price">{{product.price|currency:'￥'}}</label>
             <label class="ori-price">
                 <span>{{'mkt_price'|translate}}:{{product.mktprice|currency:'￥'}}</span>
