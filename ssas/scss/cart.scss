@@ -203,6 +203,9 @@
   }
 }
 .cart-payment {
+  bottom: 0;
+  top: 20%;
+  min-height: auto;
   .item {
     padding-left: 90px;
   }

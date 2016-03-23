@@ -236,8 +236,18 @@ angular.module('cart', ['components'])
     };
 
     $scope.confirm = function () {
-      $rootScope.confirmedCart = $scope.cart;
-      $state.go('tab.cart-payment');
+      //$rootScope.confirmedCart = $scope.cart;
+      //$state.go('tab.cart-payment');
+      $ionicModal.fromTemplateUrl('templates/cart/cart-payment.html', {
+        scope: $scope
+      }).then(function (modal) {
+        modal.show();
+        modal.scope.hideModal = function (){
+          modal.hide();
+          modal.remove();
+        };
+
+      });
     };
   })
   .controller('CartPaymentController', function ($rootScope, $scope, $state, $ionicModal, $ionicPopup, $ionicLoading, cartApi, orderApi, paymentApi, $q) {
