@@ -6,7 +6,7 @@
         <h2 style="text-align: center;color: #4a4a4a;">对不起, 本商品暂无评论 !</h2>
       </ion-item>
       <ion-item class="comment" ng-repeat="comment in comments" type="item-text-wrap">
-        <h2 style="color: #4a4a4a;">{{comment.name}}</h2>
+        <h2 style="color: #4a4a4a;">{{comment.name | limitTo : 1}}***{{comment.name | limitTo : -1}}</h2>
         <p style="color: #4a4a4a;">{{comment.content}}</p>
         <div ng-repeat="reply in comment.reply" class="padding" style="background-color: #c8c8c8;">
           <p style="color: #4a4a4a;">{{reply.op_name}}: {{reply.content}}</p>
