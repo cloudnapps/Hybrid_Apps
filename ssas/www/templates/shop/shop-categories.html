@@ -27,13 +27,13 @@
           <h5 ng-click="false && navToProductList(sub.cat_id)" class="sub-categories">{{sub.cat_name}}</h5>
 
           <div class="row" ng-repeat="sub3 in sub.lv3Arr" ng-if="$index % 3 === 0">
-            <div class="col col-33 col-style" ui-sref="products({categoryId: sub.lv3Arr[$index].cat_id})">
+            <div class="col col-33 col-style" ui-sref="products({categoryId: sub.lv3Arr[$index].cat_id})" ng-if="!!sub.lv3Arr[$index]">
               {{sub.lv3Arr[$index].cat_name}}
             </div>
-            <div class="col col-33 col-style" ui-sref="products({categoryId: sub.lv3Arr[$index+1].cat_id})">
+            <div class="col col-33 col-style" ui-sref="products({categoryId: sub.lv3Arr[$index+1].cat_id})" ng-if="!!sub.lv3Arr[$index+1]">
               {{sub.lv3Arr[$index+1].cat_name}}
             </div>
-            <div class="col col-33 col-style" ui-sref="products({categoryId: sub.lv3Arr[$index+2].cat_id})">
+            <div class="col col-33 col-style" ui-sref="products({categoryId: sub.lv3Arr[$index+2].cat_id})" ng-if="!!sub.lv3Arr[$index+2]">
               {{sub.lv3Arr[$index+2].cat_name}}
             </div>
           </div>
