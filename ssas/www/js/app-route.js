@@ -75,7 +75,7 @@ angular.module('starter')
       // 商品列表
       .state('products', {
         url: '/products?categoryId&keywords&brand&sellerId',
-        cache: false,
+        cache: true,
         views: {
           'main-view': {
             templateUrl: 'templates/shop/shop-products.html',
@@ -86,7 +86,7 @@ angular.module('starter')
       // 活动详情页面(限时促销商品一览)
       .state('activity', {
         url: '/activity/:actId',
-        cache: false,
+        cache: true,
         views: {
           'main-view': {
             templateUrl: 'templates/home/activity-info.html',
