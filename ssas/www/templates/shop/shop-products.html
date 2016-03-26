@@ -42,6 +42,10 @@
     <a class="button icon-left icon-btn-4 button-clear" ui-sref="tab.home"></a>
   </ion-nav-buttons>
   <ion-content class="has-subheader">
+    <ion-refresher
+      pulling-text="下拉刷新"
+      on-refresh="doRefresh()">
+    </ion-refresher>
     <div ng-show="isSearch && (!products || !products.length)">
       <div style="text-align: center; margin-top: 20px; font-size: 16px">
         抱歉,没有找到商品

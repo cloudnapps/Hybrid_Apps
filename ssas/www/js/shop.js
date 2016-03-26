@@ -96,6 +96,22 @@
         $scope.getProducts();
       };
 
+      $scope.doRefresh = function () {
+        $scope.products = [];
+        $scope.page = 1;
+        $scope.hasMore = false;
+
+        if ($stateParams.keywords) {
+          $scope.keywords.value = $stateParams.keywords;
+          $scope.search();
+        }
+        else {
+          $scope.getProducts();
+        }
+
+        $scope.$broadcast('scroll.refreshComplete');
+      };
+
       $scope.search = function () {
         angular.forEach($document.find('input'), function (node) {
           if (node.type === 'search') {

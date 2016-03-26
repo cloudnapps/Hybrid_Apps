@@ -38,6 +38,14 @@
         $scope.getProducts();
       };
 
+      $scope.doRefresh = function () {
+        $scope.products = [];
+        $scope.page = 1;
+        $scope.hasMore = false;
+        $scope.getProducts();
+        $scope.$broadcast('scroll.refreshComplete');
+      };
+
       $scope.getProducts();
     }) // end of ActivityController
 

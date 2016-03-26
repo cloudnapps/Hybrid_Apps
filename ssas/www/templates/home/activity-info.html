@@ -1,6 +1,10 @@
 <ion-view view-title="{{'activity_title'|translate}}" hide-tabs="true">
   <ion-nav-buttons><back-button></back-button></ion-nav-buttons>
   <ion-content>
+    <ion-refresher
+      pulling-text="下拉刷新"
+      on-refresh="doRefresh()">
+    </ion-refresher>
     <div class="list-prdt-cont">
       <div class="row" style="padding: 0;" ng-repeat="product in products" ng-if="$index % 2 === 0">
         <div class="col col-50 col-center pad-5" ng-if="$index < products.length">
