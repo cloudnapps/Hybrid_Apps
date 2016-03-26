@@ -69,6 +69,7 @@
       $scope.hasMore = false;
       $scope.isShowGalleryFilter = false;
       $scope.priceSection = {};
+      $scope.searchEnd = false;
 
       $scope.getProducts = function () {
         var query = {
@@ -87,6 +88,7 @@
           } else {
             $scope.hasMore = false;
           }
+          $scope.searchEnd = true;
           $scope.$broadcast('scroll.infiniteScrollComplete');
         });
       };
@@ -100,6 +102,7 @@
         $scope.products = [];
         $scope.page = 1;
         $scope.hasMore = false;
+        $scope.searchEnd = false;
 
         if ($stateParams.keywords) {
           $scope.keywords.value = $stateParams.keywords;
@@ -113,6 +116,8 @@
       };
 
       $scope.search = function () {
+        $scope.searchEnd = false;
+
         angular.forEach($document.find('input'), function (node) {
           if (node.type === 'search') {
             node.blur();

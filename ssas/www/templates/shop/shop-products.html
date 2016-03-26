@@ -46,7 +46,7 @@
       pulling-text="下拉刷新"
       on-refresh="doRefresh()">
     </ion-refresher>
-    <div ng-show="isSearch && (!products || !products.length)">
+    <div ng-show="isSearch && searchEnd && (!products || !products.length)">
       <div style="text-align: center; margin-top: 20px; font-size: 16px">
         抱歉,没有找到商品
       </div>
