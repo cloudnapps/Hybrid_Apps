@@ -34,6 +34,15 @@
         <p style="margin: 0px;color: #4a4a4a;">{{orderInfo.order_info.time.substr(0, 10)}}</p>
       </div>
     </div>
+    <div class="row"
+         style="padding:10px;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #f2f2f2;">
+      <div class="col col-50" style="padding: 0px">
+        <p style="margin: 0px;color: #4a4a4a;">物流公司：{{orderInfo.order_info.logi_name}}</p>
+      </div>
+      <div class="col col-50" style=" padding: 0px" align="right">
+        <p style="margin: 0px;color: #4a4a4a;">运单号码：<b><a href="http://www.kuaidi100.com/" target="_blank">{{orderInfo.order_info.logi_no}}</a></b></p>
+      </div>
+    </div>
 
     <div class="user-order-track">
       <ul class="user-track-ul">
