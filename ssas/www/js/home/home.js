@@ -152,7 +152,7 @@
 
       $scope.openItem = function (item) {
         if (item.type === 'seller') {
-          $state.go('tab.seller_detail', {sellerId: item.id}, {reload: true});
+          $state.go('seller-detail', {sellerId: item.id}, {reload: true});
         }
         else if (item.type === 'url' && item.outurl) {
           $window.location.href = item.outurl;
