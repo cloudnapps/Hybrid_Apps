@@ -155,7 +155,7 @@
           $state.go('seller-detail', {sellerId: item.id}, {reload: true});
         }
         else if (item.type === 'url' && item.outurl) {
-          $window.location.href = item.outurl;
+          $window.open(item.outurl, '_blank', 'location=no');
         }
         else if (item.type === 'product') {
           $state.go('product', {productId: item.id});
