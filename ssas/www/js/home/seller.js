@@ -52,7 +52,7 @@
       };
     }) // end of SellersListController
 
-    .controller('SellerDetailController', function ($scope, $state, $stateParams, $timeout, $ionicSlideBoxDelegate,
+    .controller('SellerDetailController', function ($scope, $state, $stateParams, $timeout, $ionicSlideBoxDelegate, $window,
                                                     SellerApi, shopApi, FavoriteApi, userService, toastService,
                                                     $interval) {
       $scope.init = function () {
@@ -167,10 +167,10 @@
 
       $scope.openItem = function (item) {
         if (item.type === 'seller') {
-          $state.go('tab.seller_detail', {sellerId: item.id}, {reload: true});
+          $state.go('seller-detail', {sellerId: item.id}, {reload: true});
         }
         else if (item.type === 'url' && item.outurl) {
-          $window.location.href = item.outurl;
+          $window.open(item.outurl, '_blank', 'location=no');
         }
         else if (item.type === 'product') {
           $state.go('product', {productId: item.id});
