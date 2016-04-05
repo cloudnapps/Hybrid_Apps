@@ -5,12 +5,14 @@
       $scope.userInfo = {};
       $scope.userInfo.isWechat = false;
       $scope.userInfo.isShowWechat = false;
-      wechat.isInstalled(function (cb_success) {
-          $scope.userInfo.isShowWechat = cb_success;
-        },
-        function (cb_failure) {
-        }
-      );
+      if (typeof wechat !== 'undefined') {
+        wechat.isInstalled(function (cb_success) {
+            $scope.userInfo.isShowWechat = cb_success;
+          },
+          function (cb_failure) {
+          }
+        );
+      }
       $scope.userInfo.remembered = true;
 
       if (userService.isLogin()) {
