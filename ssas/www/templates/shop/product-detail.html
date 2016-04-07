@@ -43,10 +43,15 @@
         </section>
 
         <hr style="margin: 0;border:none;border-top:1px solid #c8c8c8;"/>
-        <div class="prdt-tax" ng-if="product.nature === 'direct_mail'">税率: <label class="tax-pri">{{product.tax_rate * 100}}%</label></div>
-        <div class="prdt-tax" ng-if="product.nature === 'bond'">税率: 本商品适用消费税率为<label class="tax-pri">{{product.saleRate * 100}}%</label>，
-          增值税率为<label class="tax-pri">{{product.addvalueRate * 100}}%</label></div>
-        <div class="prdt-tax">税金: <label class="tax-pri">{{product.tax_price|currency:'￥'}}</label></div>
+        <div ng-if="product.nature === 'direct_mail'">
+            <div class="prdt-tax">税率: <label class="tax-pri">{{product.tax_rate * 100}}%</label></div>
+            <div class="prdt-tax">税金: <label class="tax-pri">{{product.tax_price|currency:'￥'}}</label></div>
+        </div>
+        <div ng-if="product.nature === 'bond'">
+            <div class="prdt-tax">税率: 本商品适用消费税率为<label class="tax-pri">{{product.saleRate * 100}}%</label>，
+                增值税率为<label class="tax-pri">{{product.addvalueRate * 100}}%</label></div>
+            <div class="prdt-tax">税金: <label class="tax-pri">{{product.price * (product.saleRate + product.addvalueRate)/(1 - product.saleRate) * 0.7|currency:'￥'}}</label></div>
+        </div>
         <div class="prdt-tax">
             <div class="declare">
                 <div class="row" style="margin-right: 0px; margin-left: 0px; padding: 0px">
@@ -139,7 +144,7 @@
 
                 <p style="text-indent:2em;">根据2016年3月24日财政部、海关总署、国家税务总局发布的《关于跨境电子商务零售进口税收政策的通知》，自4月8日起实施跨境电子商务零售进口税改政策并调整行邮税政策。</p>
 
-                <p> （1）跨境电子商务零售进口商品的单次交易限值为人民币2000元，个人年度交易限值为人民币20000元</p>
+                <p> （1）跨境电子商务零售进口商品的单次交易限值为人民币2000元，个人年度交易限值为人民币20000元。</p>
 
                 <p> （2）在限值以内进口的跨境电子商务零售进口商品，关税税率暂设为0%；进口环节增值税、消费税取消免征税额，暂按法定应纳税额的70%征收。</p>
 
