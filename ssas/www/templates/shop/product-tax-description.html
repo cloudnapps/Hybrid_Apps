@@ -1,16 +1,23 @@
 <ion-modal-view class="product-spec">
   <ion-header-bar class="bar bar-header bar-positive" style="height: 44px;">
-    <h1 class="title" style="margin-top: 0;">关税规则说明</h1>
+    <h1 class="title" style="margin-top: 0;">税费说明</h1>
   </ion-header-bar>
-  <ion-content>
-    <p class="emsize">关税：如产生关税，请与客服联系。</p>
+  <ion-content class="prdt-tax-descrip emsize">
 
-    <p>关税=购买单价 * 件数 * 商品税率 </p>
+    <p><b>保税商品：</b></p>
+    <div class="div-con">
+      <p><b>商品税费</b> = 购买单价 * 件数 * 综合税率</p>
+      <p><b>综合税率</b> =（消费税率+增值税率）/（1-消费税率）×0.7</p>
+      <p>各类商品的增值税率消费税率，<a ng-click="hideModal(); showTax()">请参考<label class="lbl-link">商品税率表<label>。</a></p>
+    </div>
 
-    <p>若您购买香港直邮商品，海关会随机抽查缴税，需您自行前往当地海关缴纳。</p>
-
-    <div class="col col-100 col-center" style="padding: 0px;"><p>注：不同品类商品的税率不同</p></div>
-    <div ng-click="hideModal(); showTax()"><p><strong><a>点击了解税率</a></strong></p></div>
+    <p><b>直邮商品：</b></p>
+    <div class="div-con">
+      <p>1. 关税：如产生关税，请与客服联系；</p>
+      <p>2. 关税 = 购买单价*件数*商品税率；</p>
+      <p>3. 若您购买直邮商品，海关会随机抽查缴税，需您自行前往当地海关缴纳。</p>
+      <p>4. 个人行邮税商品税率为15%、30%、60%。</p>
+    </div>
 
   </ion-content>
   <ion-footer-bar align-title="center" class="bar-stable" style="padding: 0px;">

@@ -296,8 +296,8 @@
      * ProductDetailController
      */
     .controller('ProductDetailController',
-    ['$scope', '$state', '$interval', '$stateParams', '$timeout', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading', 'shopApi', 'cartApi', 'toastService', 'userService', 'tabStateService',
-      function ($scope, $state, $interval, $stateParams, $timeout, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading, shopApi, cartApi, toastService, userService, tabStateService) {
+    ['$scope', '$state', '$interval', '$stateParams', '$timeout', '$window', '$ionicSlideBoxDelegate', '$ionicModal', '$ionicLoading', 'shopApi', 'cartApi', 'toastService', 'userService', 'tabStateService',
+      function ($scope, $state, $interval, $stateParams, $timeout, $window, $ionicSlideBoxDelegate, $ionicModal, $ionicLoading, shopApi, cartApi, toastService, userService, tabStateService) {
 
         $scope.productId = $stateParams.productId;
         $scope.product = {};

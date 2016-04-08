@@ -46,7 +46,10 @@
             <div class="col col-60" style="padding: 0;color: #bd252c;">{{good.buy_price|currency:'￥'}}</div>
             <div class="col col-40" style="padding: 0;text-align: right;">x{{good.quantity}}</div>
           </div>
-          <div class="col" style="padding: 0; font-size: .8em">适用税率：{{good.taxRate}}% &nbsp;税金：{{good.tax_price|currency:'￥'}}
+          <div class="col" style="padding: 0; font-size: .8em" ng-if="cart.nature === 'direct_mail'">适用税率：{{good.taxRate}}% &nbsp;税金：{{good.tax_price|currency:'￥'}}
+          </div>
+          <div class="col" style="padding: 0; font-size: .8em" ng-if="cart.nature === 'bond'">适用税率：{{(good.saleRate + good.addvalueRate)/(1 - good.saleRate) * 0.7 | number:1}}%
+            &nbsp;税金：{{good.buy_price * good.quantity * (good.saleRate + good.addvalueRate)/(1 - good.saleRate) * 0.7 / 100|currency:'￥'}}
           </div>
         </ion-item>
         <ion-item class="item" style="padding: 10px 0;border-bottom: 0;">
@@ -81,7 +84,7 @@
       </div>
       <ion-item class="item item-complex summary" style="padding:10px;">
         <div>货款总计：{{cart.total_item_amount |currency:'￥'}}</div>
-        <div ng-class="{'no-spend': cart.total_taxation_amount < 50}">税费总计：{{cart.total_taxation_amount |currency:'￥'}}</div>
+        <div>税费总计：{{cart.total_taxation_amount |currency:'￥'}}</div>
         <div class="row row-no-padding">
           <div class="col">
             <div>运费总计：{{cart.total_freight |currency:'￥'}}</div>
@@ -93,9 +96,9 @@
       <ion-item class="padding">
         <div class="declare">
           <p>税费说明:</p>
-          <p>根据 海关总署公告2010年第43号 公告规定，个人物品申报，应征进口税税额在人民币50元（含50元）以下的，海关予以免征。</p>
-          <p>发票说明:</p>
-          <p>CTFHOKO全球购商品不支持开发票</p>
+          <p>1. 保税商品关税税率为0%，增值税、消费税按法定应纳税额的70%征收。</p>
+          <p>2. 若您购买直邮商品，海关会随机抽查缴税，需您自行前往当地海关缴纳。</p>
+          <p>3. CTFHOKO跨境电商商品不支持开发票。</p>
         </div>
       </ion-item>
     </ion-list>
