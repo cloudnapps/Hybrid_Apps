@@ -365,10 +365,6 @@
           $state.go('membertax');
         };
 
-        $scope.showTaxPage = function () {
-          $window.open("http://www.ctfhoko.com/wap/content-info.html?article_id=40", '_blank', 'location=no');
-        };
-
         function showSpecModal() {
           $ionicModal.fromTemplateUrl('templates/shop/shop-product-spec.html', {
             scope: $scope,
