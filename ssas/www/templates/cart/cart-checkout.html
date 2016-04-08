@@ -48,7 +48,8 @@
           </div>
           <div class="col" style="padding: 0; font-size: .8em" ng-if="cart.nature === 'direct_mail'">适用税率：{{good.taxRate}}% &nbsp;税金：{{good.tax_price|currency:'￥'}}
           </div>
-          <div class="col" style="padding: 0; font-size: .8em" ng-if="cart.nature === 'bond'">适用消费税率：{{good.saleRate}}%，增值税率：{{good.addvalueRate}}%
+          <div class="col" style="padding: 0; font-size: .8em" ng-if="cart.nature === 'bond'">适用税率：{{(good.saleRate + good.addvalueRate)/(1 - good.saleRate) * 0.7 | number:1}}%
+            &nbsp;税金：{{good.buy_price * (good.saleRate + good.addvalueRate)/(1 - good.saleRate) * 0.7 / 100|currency:'￥'}}
           </div>
         </ion-item>
         <ion-item class="item" style="padding: 10px 0;border-bottom: 0;">

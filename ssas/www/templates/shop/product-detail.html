@@ -48,8 +48,7 @@
             <div class="prdt-tax">税金: <label class="tax-pri">{{product.tax_price|currency:'￥'}}</label></div>
         </div>
         <div ng-if="product.nature === 'bond'">
-            <div class="prdt-tax">税率: 本商品适用消费税率为<label class="tax-pri">{{product.saleRate * 100}}%</label>，
-                增值税率为<label class="tax-pri">{{product.addvalueRate * 100}}%</label></div>
+            <div class="prdt-tax">税率: <label class="tax-comment">本商品适用税率为</label><label class="tax-pri">{{(product.saleRate + product.addvalueRate)/(1 - product.saleRate) * 0.7 * 100|number:1}}%</label></div>
             <div class="prdt-tax">税金: <label class="tax-pri">{{product.price * (product.saleRate + product.addvalueRate)/(1 - product.saleRate) * 0.7|currency:'￥'}}</label></div>
         </div>
         <div class="prdt-tax">
