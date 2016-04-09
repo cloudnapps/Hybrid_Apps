@@ -72,7 +72,7 @@
                     <p class="price">{{good.buy_price|currency:'￥'}}</p>
 
                     <p ng-if="natureKey === 'direct_mail'" style="padding: 0; font-size: 12px;">适用税率：{{good.taxRate || 0}}%</p>
-                    <p ng-if="natureKey === 'bond'" style="padding: 0; font-size: 12px;">适用税率：{{(good.saleRate + good.addvalueRate)/(1 - good.saleRate) * 0.7 | number:1}}%</p>
+                    <p ng-if="natureKey === 'bond'" style="padding: 0; font-size: 12px;">适用税率：{{(good.saleRate + good.addvalueRate)/(100 - good.saleRate) * 0.7 * 100 | number:1}}%</p>
                     <quantity-input ng-model="good.quantity" ng-change="updateGoodQuantity(good)"></quantity-input>
                   </div>
                 </div>
