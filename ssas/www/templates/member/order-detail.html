@@ -67,7 +67,7 @@
               <span style="float: right;">x{{product.num}}</span>
             </p>
 
-            <p class="col" style="padding: 0; font-size: .8em">适用税率：{{product.taxRate}}% &nbsp;税金：{{product.tax_price|currency:'￥'}}</p>
+            <p class="col" style="padding: 0; font-size: .8em">适用税率：{{(product.saleRate + product.addvalueRate)/(1 - product.saleRate) * 0.7 * 100|number:1}}% &nbsp;税金：{{product.price * (product.saleRate + product.addvalueRate)/(1 - product.saleRate) * 0.7|currency:'￥'}}</p>
           </div>
         </div>
       </ion-item>
