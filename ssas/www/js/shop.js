@@ -376,10 +376,10 @@
           shopApi
             .getTaxDesp()
             .success(function (result) {
-              $scope.taxInfo = result && result.data && result.data.tax_info || '';
+              $scope.taxInfo = result && result.data && result.data.tax_info || {};
             })
             .error(function (e) {
-              $scope.taxInfo = '';
+              $scope.taxInfo = {};
             });
         };
         $scope.getTaxDescroption();
