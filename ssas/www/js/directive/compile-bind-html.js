@@ -1,6 +1,6 @@
 angular.module('starter')
 
-  .directive('compileBindHtml', function ($compile){
+  .directive('compileBindHtml', ['$compile', function ($compile){
      var directive = {
          restrict: 'AE',
          link:linkFunc
@@ -16,4 +16,4 @@ angular.module('starter')
              $compile(elements.contents())(scope);
          })
      }
-   })
+  }]);
