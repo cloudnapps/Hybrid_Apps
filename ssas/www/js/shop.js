@@ -305,6 +305,7 @@
         $scope.html = '';
         $scope.showSpecModal = showSpecModal;
         $scope.getProductGoodsSpec = getProductGoodsSpec;
+        $scope.taxInfo = {};
 
         // 跨tab之间的跳转
         $scope.tabIndex = tabStateService.tabIndex;
@@ -342,6 +343,7 @@
             });
 
             console.log('getProduct', responseData);
+            console.log(angular.toJson(responseData));
           }
 
           $scope.hasMore = true;
@@ -354,6 +356,7 @@
             .getProductIntro(goodsId)
             .success(function (result) {
               $scope.html = result && result.data && result.data.html || '';
+              console.log(angular.toJson(result));
             })
             .error(function (e) {
               $scope.html = '';
@@ -368,6 +371,18 @@
             $scope.hasMore = false;
           }
         };
+
+        $scope.getTaxDescroption = function () {
+          shopApi
+            .getTaxDesp()
+            .success(function (result) {
+              $scope.taxInfo = result && result.data && result.data.tax_info || '';
+            })
+            .error(function (e) {
+              $scope.taxInfo = '';
+            });
+        };
+        $scope.getTaxDescroption();
 
         $scope.showDescModel = function () {
           $ionicModal.fromTemplateUrl('templates/shop/product-tax-description.html', {
@@ -421,6 +436,7 @@
             .success(function (responseData) {
               $ionicLoading.hide();
               $scope.goodsSpec = responseData && responseData.data || {};
+              console.log(angular.toJson(responseData));
               // // 非 选择规格框中的数据, 即商品详情页的数据
               // if (!isSpecState) {
               //   $scope.specs = $scope.goodsSpec.spec || [];
@@ -567,6 +583,7 @@
           });
 
           return request.success(function (result) {
+            console.log('got data:' + result);
             return result;
           });
         };
@@ -640,6 +657,18 @@
           return request;
         };
 
+        var getTaxDesp = function () {
+          var data = {};
+          var request = $http({
+            method: 'post',
+            url: apiEndpoint.url + '/tax-description.html',
+            transformRequest: transformRequestAsFormPost,
+            data: data,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          });
+          return request;
+        };
+
         var getProductIdByBarcode = function (barcode) {
           var data = {'value': barcode};
           var request = $http({
@@ -659,6 +688,7 @@
           getGallery: getGallery,
           getCategories: getCategories,
           getProduct: getProduct,
+          getTaxDesp: getTaxDesp,
           getProductGoodsSpec: getProductGoodsSpec,
           getProductIdByBarcode: getProductIdByBarcode
         };

@@ -1,7 +1,8 @@
 (function(){
   angular.module('components', ['starter.services'])
     //.constant('apiEndpoint', {url: '/m'})
-    .constant('apiEndpoint', {url:'http://www.ctfhoko.com/index.php/m'})
+    .constant('apiEndpoint', {url: 'http://10.0.1.47:3000/m'})
+    //.constant('apiEndpoint', {url:'http://www.ctfhoko.com/index.php/m'})
     .constant('tabIndex', {
     	home: 0,
     	shop: 1,

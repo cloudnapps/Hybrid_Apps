@@ -4,12 +4,7 @@
   </ion-header-bar>
   <ion-content class="prdt-tax-descrip emsize">
 
-    <p><b>保税商品：</b></p>
-    <div class="div-con">
-      <p><b>商品税费</b> = 购买单价 * 件数 * 综合税率</p>
-      <p><b>综合税率</b> =（消费税率+增值税率）/（1-消费税率）×0.7</p>
-      <p>各类商品的增值税率消费税率，<a ng-click="hideModal(); showTax()">请参考<label class="lbl-link">商品税率表<label>。</a></p>
-    </div>
+    <div compile-bind-html="taxInfo.desp2"></div>
 
     <p><b>直邮商品：</b></p>
     <div class="div-con">
