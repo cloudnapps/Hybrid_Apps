@@ -1,203 +1,102 @@
 package xu.li.cordova.wechat;
 
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
+import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
-
-import junit.framework.Assert;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 public class Util {
 
-	private static final String TAG = "SDK_Sample.Util";
+    /**
+     * Read bytes from InputStream
+     *
+     * @link http://stackoverflow.com/questions/2436385/android-getting-from-a-uri-to-an-inputstream-to-a-byte-array
+     * @param inputStream
+     * @return
+     * @throws IOException
+     */
+    public static byte[] readBytes(InputStream inputStream) throws IOException {
+        // this dynamically extends to take the bytes you read
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
 
-	public static byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		bmp.compress(CompressFormat.PNG, 100, output);
-		if (needRecycle) {
-			bmp.recycle();
-		}
-		
-		byte[] result = output.toByteArray();
-		try {
-			output.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
-	
-	public static byte[] getHtmlByteArray(final String url) {
-		 URL htmlUrl = null;     
-		 InputStream inStream = null;     
-		 try {         
-			 htmlUrl = new URL(url);         
-			 URLConnection connection = htmlUrl.openConnection();         
-			 HttpURLConnection httpConnection = (HttpURLConnection)connection;         
-			 int responseCode = httpConnection.getResponseCode();         
-			 if(responseCode == HttpURLConnection.HTTP_OK){             
-				 inStream = httpConnection.getInputStream();         
-			  }     
-			 } catch (MalformedURLException e) {               
-				 e.printStackTrace();     
-			 } catch (IOException e) {              
-				e.printStackTrace();    
-		  } 
-		byte[] data = inputStreamToByte(inStream);
+        // this is storage overwritten on each iteration with bytes
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
 
-		return data;
-	}
-	
-	public static byte[] inputStreamToByte(InputStream is) {
-		try{
-			ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
-			int ch;
-			while ((ch = is.read()) != -1) {
-				bytestream.write(ch);
-			}
-			byte imgdata[] = bytestream.toByteArray();
-			bytestream.close();
-			return imgdata;
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-	
-	public static byte[] readFromFile(String fileName, int offset, int len) {
-		if (fileName == null) {
-			return null;
-		}
+        // we need to know how may bytes were read to write them to the byteBuffer
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
 
-		File file = new File(fileName);
-		if (!file.exists()) {
-			Log.i(TAG, "readFromFile: file not found");
-			return null;
-		}
+        // and then we can return your byte array.
+        return byteBuffer.toByteArray();
+    }
 
-		if (len == -1) {
-			len = (int) file.length();
-		}
+    public static File getCacheFolder(Context context) {
+        File cacheDir = null;
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            cacheDir = new File(Environment.getExternalStorageDirectory(), "cache");
+            if (!cacheDir.isDirectory()) {
+                cacheDir.mkdirs();
+            }
+        }
 
-		Log.d(TAG, "readFromFile : offset = " + offset + " len = " + len + " offset + len = " + (offset + len));
+        if(!cacheDir.isDirectory()) {
+            cacheDir = context.getCacheDir(); //get system cache folder
+        }
 
-		if(offset <0){
-			Log.e(TAG, "readFromFile invalid offset:" + offset);
-			return null;
-		}
-		if(len <=0 ){
-			Log.e(TAG, "readFromFile invalid len:" + len);
-			return null;
-		}
-		if(offset + len > (int) file.length()){
-			Log.e(TAG, "readFromFile invalid file len:" + file.length());
-			return null;
-		}
+        return cacheDir;
+    }
 
-		byte[] b = null;
-		try {
-			RandomAccessFile in = new RandomAccessFile(fileName, "r");
-			b = new byte[len]; // 创建合适文件大小的数组
-			in.seek(offset);
-			in.readFully(b);
-			in.close();
+    public static File downloadAndCacheFile(Context context, String url) {
+        URL fileURL = null;
+        try {
+            fileURL = new URL(url);
 
-		} catch (Exception e) {
-			Log.e(TAG, "readFromFile : errMsg = " + e.getMessage());
-			e.printStackTrace();
-		}
-		return b;
-	}
-	
-	private static final int MAX_DECODE_PICTURE_SIZE = 1920 * 1440;
-	public static Bitmap extractThumbNail(final String path, final int height, final int width, final boolean crop) {
-		Assert.assertTrue(path != null && !path.equals("") && height > 0 && width > 0);
+            Log.d(Wechat.TAG, String.format("Start downloading file at %s.", url));
 
-		BitmapFactory.Options options = new BitmapFactory.Options();
+            HttpURLConnection connection = (HttpURLConnection) fileURL.openConnection();
+            connection.connect();
 
-		try {
-			options.inJustDecodeBounds = true;
-			Bitmap tmp = BitmapFactory.decodeFile(path, options);
-			if (tmp != null) {
-				tmp.recycle();
-				tmp = null;
-			}
+            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                Log.e(Wechat.TAG, String.format("Failed to download file from %s, response code: %d.", url, connection.getResponseCode()));
+                return null;
+            }
 
-			Log.d(TAG, "extractThumbNail: round=" + width + "x" + height + ", crop=" + crop);
-			final double beY = options.outHeight * 1.0 / height;
-			final double beX = options.outWidth * 1.0 / width;
-			Log.d(TAG, "extractThumbNail: extract beX = " + beX + ", beY = " + beY);
-			options.inSampleSize = (int) (crop ? (beY > beX ? beX : beY) : (beY < beX ? beX : beY));
-			if (options.inSampleSize <= 1) {
-				options.inSampleSize = 1;
-			}
+            InputStream inputStream = connection.getInputStream();
 
-			// NOTE: out of memory error
-			while (options.outHeight * options.outWidth / options.inSampleSize > MAX_DECODE_PICTURE_SIZE) {
-				options.inSampleSize++;
-			}
+            File cacheDir = getCacheFolder(context);
+            File cacheFile = new File(cacheDir, url.substring(url.lastIndexOf("/") + 1));
+            FileOutputStream outputStream = new FileOutputStream(cacheFile);
 
-			int newHeight = height;
-			int newWidth = width;
-			if (crop) {
-				if (beY > beX) {
-					newHeight = (int) (newWidth * 1.0 * options.outHeight / options.outWidth);
-				} else {
-					newWidth = (int) (newHeight * 1.0 * options.outWidth / options.outHeight);
-				}
-			} else {
-				if (beY < beX) {
-					newHeight = (int) (newWidth * 1.0 * options.outHeight / options.outWidth);
-				} else {
-					newWidth = (int) (newHeight * 1.0 * options.outWidth / options.outHeight);
-				}
-			}
+            byte buffer[] = new byte[4096];
+            int dataSize;
+            while ((dataSize = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, dataSize);
+            }
+            outputStream.close();
 
-			options.inJustDecodeBounds = false;
+            Log.d(Wechat.TAG, String.format("File was downloaded and saved at %s.", cacheFile.getAbsolutePath()));
 
-			Log.i(TAG, "bitmap required size=" + newWidth + "x" + newHeight + ", orig=" + options.outWidth + "x" + options.outHeight + ", sample=" + options.inSampleSize);
-			Bitmap bm = BitmapFactory.decodeFile(path, options);
-			if (bm == null) {
-				Log.e(TAG, "bitmap decode failed");
-				return null;
-			}
+            return cacheFile;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-			Log.i(TAG, "bitmap decoded size=" + bm.getWidth() + "x" + bm.getHeight());
-			final Bitmap scale = Bitmap.createScaledBitmap(bm, newWidth, newHeight, true);
-			if (scale != null) {
-				bm.recycle();
-				bm = scale;
-			}
-
-			if (crop) {
-				final Bitmap cropped = Bitmap.createBitmap(bm, (bm.getWidth() - width) >> 1, (bm.getHeight() - height) >> 1, width, height);
-				if (cropped == null) {
-					return bm;
-				}
-
-				bm.recycle();
-				bm = cropped;
-				Log.i(TAG, "bitmap croped size=" + bm.getWidth() + "x" + bm.getHeight());
-			}
-			return bm;
-
-		} catch (final OutOfMemoryError e) {
-			Log.e(TAG, "decode bitmap failed: " + e.getMessage());
-			options = null;
-		}
-
-		return null;
-	}
+        return null;
+    }
 }

@@ -3,44 +3,54 @@ package xu.li.cordova.wechat;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.webkit.URLUtil;
 
 import com.tencent.mm.sdk.modelmsg.SendAuth;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.sdk.modelmsg.WXAppExtendObject;
+import com.tencent.mm.sdk.modelmsg.WXEmojiObject;
+import com.tencent.mm.sdk.modelmsg.WXFileObject;
 import com.tencent.mm.sdk.modelmsg.WXImageObject;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.sdk.modelmsg.WXMusicObject;
 import com.tencent.mm.sdk.modelmsg.WXTextObject;
+import com.tencent.mm.sdk.modelmsg.WXVideoObject;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaArgs;
 import org.apache.cordova.CordovaPlugin;
-import org.json.JSONArray;
+import org.apache.cordova.PluginResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class Wechat extends CordovaPlugin {
 
     public static final String TAG = "Cordova.Plugin.Wechat";
 
-    public static final String WXAPPID_PROPERTY_KEY = "wechat_app_id";
+    public static final String WXAPPID_PROPERTY_KEY = "wechatappid";
 
     public static final String ERROR_WECHAT_NOT_INSTALLED = "未安装微信";
-    public static final String ERROR_INVALID_PARAMETERS = "参数错误";
-    public static final String ERROR_USER_CANCEL = "用户点击取消并返回";
-    public static final String ERROR_AUTH_DENIED = "授权失败";
-    public static final String ERROR_SENT_FAILED = "发送失败";
-    public static final String ERROR_UNSUPPORT = "微信不支持";
-    public static final String ERROR_COMMON = "普通错误类型";
-    public static final String ERROR_UNKNOWN = "未知错误";
+    public static final String ERROR_INVALID_PARAMETERS = "参数格式错误";
+    public static final String ERROR_SEND_REQUEST_FAILED = "发送请求失败";
+    public static final String ERROR_WECHAT_RESPONSE_COMMON = "普通错误";
+    public static final String ERROR_WECHAT_RESPONSE_USER_CANCEL = "用户点击取消并返回";
+    public static final String ERROR_WECHAT_RESPONSE_SENT_FAILED = "发送失败";
+    public static final String ERROR_WECHAT_RESPONSE_AUTH_DENIED = "授权失败";
+    public static final String ERROR_WECHAT_RESPONSE_UNSUPPORT = "微信不支持";
+    public static final String ERROR_WECHAT_RESPONSE_UNKNOWN = "未知错误";
 
     public static final String EXTERNAL_STORAGE_IMAGE_PREFIX = "external://";
 
@@ -55,23 +65,33 @@ public class Wechat extends CordovaPlugin {
     public static final String KEY_ARG_MESSAGE_MEDIA_WEBPAGEURL = "webpageUrl";
     public static final String KEY_ARG_MESSAGE_MEDIA_IMAGE = "image";
     public static final String KEY_ARG_MESSAGE_MEDIA_TEXT = "text";
+    public static final String KEY_ARG_MESSAGE_MEDIA_MUSICURL = "musicUrl";
+    public static final String KEY_ARG_MESSAGE_MEDIA_MUSICDATAURL = "musicDataUrl";
+    public static final String KEY_ARG_MESSAGE_MEDIA_VIDEOURL = "videoUrl";
+    public static final String KEY_ARG_MESSAGE_MEDIA_FILE = "file";
+    public static final String KEY_ARG_MESSAGE_MEDIA_EMOTION = "emotion";
+    public static final String KEY_ARG_MESSAGE_MEDIA_EXTINFO = "extInfo";
+    public static final String KEY_ARG_MESSAGE_MEDIA_URL = "url";
 
-    public static final int TYPE_WX_SHARING_APP = 1;
-    public static final int TYPE_WX_SHARING_EMOTION = 2;
-    public static final int TYPE_WX_SHARING_FILE = 3;
-    public static final int TYPE_WX_SHARING_IMAGE = 4;
-    public static final int TYPE_WX_SHARING_MUSIC = 5;
-    public static final int TYPE_WX_SHARING_VIDEO = 6;
-    public static final int TYPE_WX_SHARING_WEBPAGE = 7;
-    public static final int TYPE_WX_SHARING_TEXT = 8;
+    public static final int TYPE_WECHAT_SHARING_APP = 1;
+    public static final int TYPE_WECHAT_SHARING_EMOTION = 2;
+    public static final int TYPE_WECHAT_SHARING_FILE = 3;
+    public static final int TYPE_WECHAT_SHARING_IMAGE = 4;
+    public static final int TYPE_WECHAT_SHARING_MUSIC = 5;
+    public static final int TYPE_WECHAT_SHARING_VIDEO = 6;
+    public static final int TYPE_WECHAT_SHARING_WEBPAGE = 7;
+    public static final int TYPE_WECHAT_SHARING_TEXT = 8;
 
     public static final int SCENE_SESSION = 0;
     public static final int SCENE_TIMELINE = 1;
     public static final int SCENE_FAVORITE = 2;
 
-    public static IWXAPI wxAPI;
-    public static CallbackContext currentCallbackContext;
+    public static final int MAX_THUMBNAIL_SIZE = 320;
 
+    public static Wechat instance = null;
+
+    protected CallbackContext currentCallbackContext;
+    protected IWXAPI wxAPI;
     protected String appId;
 
     @Override
@@ -79,18 +99,33 @@ public class Wechat extends CordovaPlugin {
 
         super.pluginInitialize();
 
-        if (wxAPI == null) {
-            wxAPI = WXAPIFactory.createWXAPI(webView.getContext(), getAppId(), true);
-        }
+        instance = this;
 
-        wxAPI.registerApp(webView.getPreferences().getString(WXAPPID_PROPERTY_KEY, ""));
+        initWXAPI();
+
+        Log.d(TAG, "plugin initialized.");
+    }
+
+    protected void initWXAPI() {
+        if (wxAPI == null) {
+            String appId = getAppId();
+
+            wxAPI = WXAPIFactory.createWXAPI(webView.getContext(), appId, true);
+            wxAPI.registerApp(appId);
+        }
+    }
+
+    public IWXAPI getWxAPI() {
+        return wxAPI;
+    }
+
+    public CallbackContext getCurrentCallbackContext() {
+        return currentCallbackContext;
     }
 
     @Override
-    public boolean execute(String action, JSONArray args,
-                           CallbackContext callbackContext) throws JSONException {
-
-        Log.d(TAG, action + " is called.");
+    public boolean execute(String action, CordovaArgs args, CallbackContext callbackContext) throws JSONException {
+        Log.d(TAG, String.format("%s is called. Callback ID: %s.", action, callbackContext.getCallbackId()));
 
         if (action.equals("share")) {
             return share(args, callbackContext);
@@ -102,12 +137,12 @@ public class Wechat extends CordovaPlugin {
             return isInstalled(callbackContext);
         }
 
-        return super.execute(action, args, callbackContext);
+        return false;
     }
 
-    protected boolean share(JSONArray args, CallbackContext callbackContext)
+    protected boolean share(CordovaArgs args, final CallbackContext callbackContext)
             throws JSONException {
-        final IWXAPI api = getWXAPI(true);
+        final IWXAPI api = getWXAPI();
 
         // check if installed
         if (!api.isWXAppInstalled()) {
@@ -116,18 +151,19 @@ public class Wechat extends CordovaPlugin {
         }
 
         // check if # of arguments is correct
-        if (args.length() != 1) {
+        final JSONObject params;
+        try {
+            params = args.getJSONObject(0);
+        } catch (JSONException e) {
             callbackContext.error(ERROR_INVALID_PARAMETERS);
             return true;
         }
 
-        final JSONObject params = args.getJSONObject(0);
         final SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction();
 
         if (params.has(KEY_ARG_SCENE)) {
-            int scene = params.getInt(KEY_ARG_SCENE);
-            switch (scene) {
+            switch (params.getInt(KEY_ARG_SCENE)) {
                 case SCENE_FAVORITE:
                     req.scene = SendMessageToWX.Req.WXSceneFavorite;
                     break;
@@ -137,6 +173,8 @@ public class Wechat extends CordovaPlugin {
                 case SCENE_SESSION:
                     req.scene = SendMessageToWX.Req.WXSceneSession;
                     break;
+                default:
+                    req.scene = SendMessageToWX.Req.WXSceneTimeline;
             }
         } else {
             req.scene = SendMessageToWX.Req.WXSceneTimeline;
@@ -150,54 +188,73 @@ public class Wechat extends CordovaPlugin {
                 try {
                     req.message = buildSharingMessage(params);
                 } catch (JSONException e) {
-                    Log.e(TAG, "Failed to build message." + e);
+                    Log.e(TAG, "Failed to build sharing message.", e);
+
+                    // clear callback context
+                    currentCallbackContext = null;
+
+                    // send json exception error
+                    callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
                 }
 
-                api.sendReq(req);
-                Log.d(TAG, "Message sent.");
+                if (api.sendReq(req)) {
+                    Log.i(TAG, "Message has been sent successfully.");
+                } else {
+                    Log.i(TAG, "Message has been sent unsuccessfully.");
+
+                    // clear callback context
+                    currentCallbackContext = null;
+
+                    // send error
+                    callbackContext.error(ERROR_SEND_REQUEST_FAILED);
+                }
             }
         });
 
-        // save the current callback context
-        currentCallbackContext = callbackContext;
+        // send no result
+        sendNoResultPluginResult(callbackContext);
 
         return true;
     }
 
-    protected boolean sendAuthRequest(JSONArray args, CallbackContext callbackContext) {
-        final IWXAPI api = getWXAPI(true);
+    protected boolean sendAuthRequest(CordovaArgs args, CallbackContext callbackContext) {
+        final IWXAPI api = getWXAPI();
 
-        int length = args.length();
         final SendAuth.Req req = new SendAuth.Req();
         try {
-            if (length == 1) {
-                req.scope = args.getString(0);
-            } else if (length == 2) {
-                req.scope = args.getString(0);
-                req.state = args.getString(1);
-            } else {
-                req.scope = "snsapi_userinfo";
-                req.state = "wechat";
-            }
-        } catch (Exception e) {
+            req.scope = args.getString(0);
+            req.state = args.getString(1);
+        } catch (JSONException e) {
+            Log.e(TAG, e.getMessage());
+
             req.scope = "snsapi_userinfo";
             req.state = "wechat";
-
-            Log.e(TAG, e.getMessage());
         }
 
-        api.sendReq(req);
-        currentCallbackContext = callbackContext;
+        if (api.sendReq(req)) {
+            Log.i(TAG, "Auth request has been sent successfully.");
+
+            // send no result
+            sendNoResultPluginResult(callbackContext);
+        } else {
+            Log.i(TAG, "Auth request has been sent unsuccessfully.");
+
+            // send error
+            callbackContext.error(ERROR_SEND_REQUEST_FAILED);
+        }
 
         return true;
     }
 
-    protected boolean sendPaymentRequest(JSONArray args, CallbackContext callbackContext) {
+    protected boolean sendPaymentRequest(CordovaArgs args, CallbackContext callbackContext) {
 
-        final IWXAPI api = getWXAPI(true);
+        final IWXAPI api = getWXAPI();
 
         // check if # of arguments is correct
-        if (args.length() != 1) {
+        final JSONObject params;
+        try {
+            params = args.getJSONObject(0);
+        } catch (JSONException e) {
             callbackContext.error(ERROR_INVALID_PARAMETERS);
             return true;
         }
@@ -205,12 +262,10 @@ public class Wechat extends CordovaPlugin {
         PayReq req = new PayReq();
 
         try {
-            final JSONObject params = args.getJSONObject(0);
-
             req.appId = getAppId();
-            req.partnerId = params.getString("mch_id");
-            req.prepayId = params.getString("prepay_id");
-            req.nonceStr = params.getString("nonce");
+            req.partnerId = params.has("mch_id") ? params.getString("mch_id") : params.getString("partnerid");
+            req.prepayId = params.has("prepay_id") ? params.getString("prepay_id") : params.getString("prepayid");
+            req.nonceStr = params.has("nonce") ? params.getString("nonce") : params.getString("noncestr");
             req.timeStamp = params.getString("timestamp");
             req.sign = params.getString("sign");
             req.packageValue = "Sign=WXPay";
@@ -221,20 +276,30 @@ public class Wechat extends CordovaPlugin {
             return true;
         }
 
-        api.sendReq(req);
-        currentCallbackContext = callbackContext;
+        if (api.sendReq(req)) {
+            Log.i(TAG, "Payment request has been sent successfully.");
+
+            // send no result
+            sendNoResultPluginResult(callbackContext);
+        } else {
+            Log.i(TAG, "Payment request has been sent unsuccessfully.");
+
+            // send error
+            callbackContext.error(ERROR_SEND_REQUEST_FAILED);
+        }
 
         return true;
     }
 
     protected boolean isInstalled(CallbackContext callbackContext) {
-        final IWXAPI api = getWXAPI(true);
+        final IWXAPI api = getWXAPI();
 
         if (!api.isWXAppInstalled()) {
             callbackContext.success(0);
         } else {
             callbackContext.success(1);
         }
+
         return true;
     }
 
@@ -256,41 +321,68 @@ public class Wechat extends CordovaPlugin {
             JSONObject media = message.getJSONObject(KEY_ARG_MESSAGE_MEDIA);
 
             wxMediaMessage.title = message.getString(KEY_ARG_MESSAGE_TITLE);
-            wxMediaMessage.description = message
-                    .getString(KEY_ARG_MESSAGE_DESCRIPTION);
+            wxMediaMessage.description = message.getString(KEY_ARG_MESSAGE_DESCRIPTION);
 
             // thumbnail
-            Bitmap thumbnail = getBitmap(message, KEY_ARG_MESSAGE_THUMB);
+            Bitmap thumbnail = getThumbnail(message, KEY_ARG_MESSAGE_THUMB);
             if (thumbnail != null) {
                 wxMediaMessage.setThumbImage(thumbnail);
+                thumbnail.recycle();
             }
 
             // check types
             int type = media.has(KEY_ARG_MESSAGE_MEDIA_TYPE) ? media
-                    .getInt(KEY_ARG_MESSAGE_MEDIA_TYPE) : TYPE_WX_SHARING_WEBPAGE;
+                    .getInt(KEY_ARG_MESSAGE_MEDIA_TYPE) : TYPE_WECHAT_SHARING_WEBPAGE;
 
             switch (type) {
-                case TYPE_WX_SHARING_APP:
+                case TYPE_WECHAT_SHARING_APP:
+                    WXAppExtendObject appObject = new WXAppExtendObject();
+                    appObject.extInfo = media.getString(KEY_ARG_MESSAGE_MEDIA_EXTINFO);
+                    appObject.filePath = media.getString(KEY_ARG_MESSAGE_MEDIA_URL);
+                    mediaObject = appObject;
                     break;
 
-                case TYPE_WX_SHARING_EMOTION:
+                case TYPE_WECHAT_SHARING_EMOTION:
+                    WXEmojiObject emoObject = new WXEmojiObject();
+                    InputStream emoji = getFileInputStream(media.getString(KEY_ARG_MESSAGE_MEDIA_EMOTION));
+                    if (emoji != null) {
+                        try {
+                            emoObject.emojiData = Util.readBytes(emoji);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    mediaObject = emoObject;
                     break;
 
-                case TYPE_WX_SHARING_FILE:
+                case TYPE_WECHAT_SHARING_FILE:
+                    WXFileObject fileObject = new WXFileObject();
+                    fileObject.filePath = media.getString(KEY_ARG_MESSAGE_MEDIA_FILE);
+                    mediaObject = fileObject;
                     break;
 
-                case TYPE_WX_SHARING_IMAGE:
-                    mediaObject = new WXImageObject(getBitmap(message.getJSONObject(KEY_ARG_MESSAGE_MEDIA), KEY_ARG_MESSAGE_MEDIA_IMAGE));
-                case TYPE_WX_SHARING_MUSIC:
+                case TYPE_WECHAT_SHARING_IMAGE:
+                    Bitmap image = getBitmap(message.getJSONObject(KEY_ARG_MESSAGE_MEDIA), KEY_ARG_MESSAGE_MEDIA_IMAGE, 0);
+                    mediaObject = new WXImageObject(image);
+                    image.recycle();
                     break;
 
-                case TYPE_WX_SHARING_VIDEO:
+                case TYPE_WECHAT_SHARING_MUSIC:
+                    WXMusicObject musicObject = new WXMusicObject();
+                    musicObject.musicUrl = media.getString(KEY_ARG_MESSAGE_MEDIA_MUSICURL);
+                    musicObject.musicDataUrl = media.getString(KEY_ARG_MESSAGE_MEDIA_MUSICDATAURL);
+                    mediaObject = musicObject;
                     break;
 
-                case TYPE_WX_SHARING_WEBPAGE:
+                case TYPE_WECHAT_SHARING_VIDEO:
+                    WXVideoObject videoObject = new WXVideoObject();
+                    videoObject.videoUrl = media.getString(KEY_ARG_MESSAGE_MEDIA_VIDEOURL);
+                    mediaObject = videoObject;
+                    break;
+
+                case TYPE_WECHAT_SHARING_WEBPAGE:
                 default:
-                    mediaObject = new WXWebpageObject(media
-                            .getString(KEY_ARG_MESSAGE_MEDIA_WEBPAGEURL));
+                    mediaObject = new WXWebpageObject(media.getString(KEY_ARG_MESSAGE_MEDIA_WEBPAGEURL));
             }
         }
 
@@ -300,20 +392,6 @@ public class Wechat extends CordovaPlugin {
     }
 
     protected IWXAPI getWXAPI() {
-        return getWXAPI(true);
-    }
-
-    protected IWXAPI getWXAPI(boolean register) {
-        String appId = getAppId();
-
-        if (wxAPI == null) {
-            wxAPI = WXAPIFactory.createWXAPI(webView.getContext(), appId, true);
-        }
-
-        if (register) {
-            wxAPI.registerApp(appId);
-        }
-
         return wxAPI;
     }
 
@@ -325,41 +403,131 @@ public class Wechat extends CordovaPlugin {
         return type + System.currentTimeMillis();
     }
 
-    protected Bitmap getBitmap(JSONObject message, String key) {
-        HttpURLConnection conn = null;
-        InputStream is = null;
+    protected Bitmap getThumbnail(JSONObject message, String key) {
+        return getBitmap(message, key, MAX_THUMBNAIL_SIZE);
+    }
+
+    protected Bitmap getBitmap(JSONObject message, String key, int maxSize) {
         Bitmap bmp = null;
         String url = null;
 
         try {
+            if (!message.has(key)) {
+                return null;
+            }
+
             url = message.getString(key);
 
-            if (URLUtil.isHttpUrl(url) || URLUtil.isHttpsUrl(url)) {
-                conn = (HttpURLConnection)new URL(url).openConnection();
-                is = conn.getInputStream();
-            } else {
-                if (url.startsWith(EXTERNAL_STORAGE_IMAGE_PREFIX)) { // external path
-                    url = Environment.getExternalStorageDirectory().getAbsolutePath() + url.substring(EXTERNAL_STORAGE_IMAGE_PREFIX.length());
-                    is = new FileInputStream(url);
-                } else if (!url.startsWith("/")) { // relative path
-                    is = cordova.getActivity().getApplicationContext().getAssets().open(url);
-                } else {
-                    is = new FileInputStream(url);
-                }
+            // get input stream
+            InputStream inputStream = getFileInputStream(url);
+            if (inputStream == null) {
+                return null;
             }
 
-            bmp = BitmapFactory.decodeStream(is);
-            is.close();
-        } catch (Exception e) {
-            Log.e(TAG, "Failed to decode image at " + url, e);
-            bmp = null;
-        } finally {
-            if (conn != null) {
-                conn.disconnect();
+            // decode it
+            // @TODO make sure the image is not too big, or it will cause out of memory
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            bmp = BitmapFactory.decodeStream(inputStream, null, options);
+
+            // scale
+            if (maxSize > 0 && (options.outWidth > maxSize || options.outHeight > maxSize)) {
+
+                Log.d(TAG, String.format("Bitmap was decoded, dimension: %d x %d, max allowed size: %d.",
+                        options.outWidth, options.outHeight, maxSize));
+
+                int width = 0;
+                int height = 0;
+
+                if (options.outWidth > options.outHeight) {
+                    width = maxSize;
+                    height = width * options.outHeight / options.outWidth;
+                } else {
+                    height = maxSize;
+                    width = height * options.outWidth / options.outHeight;
+                }
+
+                Bitmap scaled = Bitmap.createScaledBitmap(bmp, width, height, true);
+                bmp.recycle();
+
+                bmp = scaled;
             }
+
+            inputStream.close();
+
+        } catch (JSONException e) {
+            bmp = null;
+            e.printStackTrace();
+        } catch (IOException e) {
+            bmp = null;
+            e.printStackTrace();
         }
 
         return bmp;
+    }
+
+    /**
+     * Get input stream from a url
+     *
+     * @param url
+     * @return
+     */
+    protected InputStream getFileInputStream(String url) {
+        try {
+
+            InputStream inputStream = null;
+
+            if (URLUtil.isHttpUrl(url) || URLUtil.isHttpsUrl(url)) {
+
+                File file = Util.downloadAndCacheFile(webView.getContext(), url);
+
+                if (file == null) {
+                    Log.d(TAG, String.format("File could not be downloaded from %s.", url));
+                    return null;
+                }
+
+                url = file.getAbsolutePath();
+                inputStream = new FileInputStream(file);
+
+                Log.d(TAG, String.format("File was downloaded and cached to %s.", url));
+
+            } else if (url.startsWith("data:image")) {  // base64 image
+
+                String imageDataBytes = url.substring(url.indexOf(",") + 1);
+                byte imageBytes[] = Base64.decode(imageDataBytes.getBytes(), Base64.DEFAULT);
+                inputStream = new ByteArrayInputStream(imageBytes);
+
+                Log.d(TAG, "Image is in base64 format.");
+
+            } else if (url.startsWith(EXTERNAL_STORAGE_IMAGE_PREFIX)) { // external path
+
+                url = Environment.getExternalStorageDirectory().getAbsolutePath() + url.substring(EXTERNAL_STORAGE_IMAGE_PREFIX.length());
+                inputStream = new FileInputStream(url);
+
+                Log.d(TAG, String.format("File is located on external storage at %s.", url));
+
+            } else if (!url.startsWith("/")) { // relative path
+
+                inputStream = cordova.getActivity().getApplicationContext().getAssets().open(url);
+
+                Log.d(TAG, String.format("File is located in assets folder at %s.", url));
+
+            } else {
+
+                inputStream = new FileInputStream(url);
+
+                Log.d(TAG, String.format("File is located at %s.", url));
+
+            }
+
+            return inputStream;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     protected String getAppId() {
@@ -368,5 +536,15 @@ public class Wechat extends CordovaPlugin {
         }
 
         return this.appId;
+    }
+
+    private void sendNoResultPluginResult(CallbackContext callbackContext) {
+        // save current callback context
+        currentCallbackContext = callbackContext;
+
+        // send no result and keep callback
+        PluginResult result = new PluginResult(PluginResult.Status.NO_RESULT);
+        result.setKeepCallback(true);
+        callbackContext.sendPluginResult(result);
     }
 }

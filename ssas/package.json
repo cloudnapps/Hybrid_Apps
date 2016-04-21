@@ -33,7 +33,7 @@
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
-    "com.ionic.keyboard",
+    "ionic-plugin-keyboard",
     "cordova-plugin-globalization",
     "cordova-plugin-inappbrowser",
     {
@@ -66,7 +66,7 @@
     "cordova-plugin-crosswalk-webview",
     "cordova-plugin-datepicker",
     {
-      "locator": "../plugins/cordova-plugin-wechat",
+      "locator": "../plugins/cordova-plugin-wechat --variable wechatappid=wx169f5e5b9d07599c",
       "id": "com.cloudnapps.plugins.wechat"
     },
     {

@@ -4,10 +4,22 @@
     xmlns:rim="http://www.blackberry.com/ns/widgets"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.cloudnapps.plugins.wechat"
-    version="0.9.0">
+    version="1.1.3">
 
     <name>Wechat</name>
- 
+    <description>A cordova plugin, a JS version of Wechat SDK</description>
+    <license>MIT</license>
+    <keywords>cordova,wechat,weixin,share</keywords>
+    <repo>https://github.com/xu-li/cordova-plugin-wechat.git</repo>
+    <issue>https://github.com/xu-li/cordova-plugin-wechat/issues</issue>
+
+    <!-- add this to your config.xml -->
+    <!-- <preference name="WECHATAPPID" value="YOUR_WECHAT_APP_ID_HERE" /> -->
+    <preference name="WECHATAPPID" />
+    <!--require cordova version -->
+    <engines>
+        <engine name="cordova" version=">=3.5.0" />
+    </engines>
     <!-- js module-->
     <js-module src="www/wechat.js" name="wechat">
         <clobbers target="wechat" />
@@ -20,6 +32,7 @@
                 <param name="ios-package" value="CDVWechat"/>
                 <param name="onload" value="true" />
             </feature>
+            <preference name="WECHATAPPID" value="$WECHATAPPID"/>
         </config-file>
 
         <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
@@ -34,6 +47,20 @@
                 <key>NSAllowsArbitraryLoads</key>
                 <true/>
             </dict>
+        </config-file>
+        
+
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+                <dict>
+                    <key>CFBundleURLName</key>
+                    <string>weixin</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>$WECHATAPPID</string>
+                    </array>
+                </dict>
+            </array>
         </config-file>
 
         <!-- Plugin source code -->
@@ -66,6 +93,14 @@
                 <param name="android-package" value="xu.li.cordova.wechat.Wechat"/>
             </feature>
             <preference name="WECHATAPPID" value="$WECHATAPPID"/>
+        </config-file>
+        
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">

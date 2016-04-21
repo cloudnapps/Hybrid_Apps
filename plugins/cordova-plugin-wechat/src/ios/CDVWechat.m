@@ -8,15 +8,16 @@
 
 #import "CDVWechat.h"
 
+static int const MAX_THUMBNAIL_SIZE = 320;
+
 @implementation CDVWechat
 
 #pragma mark "API"
 - (void)pluginInitialize {
-    NSString* appId = [[self.commandDelegate settings] objectForKey:@"wechat_app_id"];
+    NSString* appId = [[self.commandDelegate settings] objectForKey:@"wechatappid"];
     if(appId){
         self.wechatAppId = appId;
-        if (![WXApi isWXAppInstalled]) 
-            [WXApi registerApp: appId];
+        [WXApi registerApp: appId];
     }   
 }
 
@@ -71,7 +72,7 @@
             req.message = [self buildSharingMessage:message];
             if (![WXApi sendReq:req])
             {
-                [self failWithCallbackID:command.callbackId withMessage:@"参数错误"];
+                [self failWithCallbackID:command.callbackId withMessage:@"发送请求失败"];
                 self.currentCallbackId = nil;
             }
         }];
@@ -83,7 +84,7 @@
         
         if (![WXApi sendReq:req])
         {
-            [self failWithCallbackID:command.callbackId withMessage:@"参数错误"];
+            [self failWithCallbackID:command.callbackId withMessage:@"发送请求失败"];
             self.currentCallbackId = nil;
         }
     }
@@ -116,7 +117,7 @@
     }
     else
     {
-        [self failWithCallbackID:command.callbackId withMessage:@"参数错误"];
+        [self failWithCallbackID:command.callbackId withMessage:@"发送请求失败"];
     }
 }
 
@@ -131,7 +132,17 @@
     }
     
     // check required parameters
-    for (NSString *key in @[@"mch_id", @"prepay_id", @"timestamp", @"nonce", @"sign"])
+    NSArray *requiredParams;
+    if ([params objectForKey:@"mch_id"])
+    {
+        requiredParams = @[@"mch_id", @"prepay_id", @"timestamp", @"nonce", @"sign"];
+    }
+    else
+    {
+        requiredParams = @[@"partnerid", @"prepayid", @"timestamp", @"noncestr", @"sign"];
+    }
+    
+    for (NSString *key in requiredParams)
     {
         if (![params objectForKey:key])
         {
@@ -141,12 +152,12 @@
     }
     
     PayReq *req = [[PayReq alloc] init];
-    req.partnerId = params[@"mch_id"];
-    req.prepayId = params[@"prepay_id"];
-    req.timeStamp = [params[@"timestamp"] intValue];
-    req.nonceStr = params[@"nonce"];
+    req.partnerId = [params objectForKey:requiredParams[0]];
+    req.prepayId = [params objectForKey:requiredParams[1]];
+    req.timeStamp = [[params objectForKey:requiredParams[2]] intValue];
+    req.nonceStr = [params objectForKey:requiredParams[3]];
     req.package = @"Sign=WXPay";
-    req.sign = params[@"sign"];
+    req.sign = [params objectForKey:requiredParams[4]];
 
     if ([WXApi sendReq:req])
     {
@@ -155,7 +166,7 @@
     }
     else
     {
-        [self failWithCallbackID:command.callbackId withMessage:@"参数错误"];
+        [self failWithCallbackID:command.callbackId withMessage:@"发送请求失败"];
     }
 }
 
@@ -182,7 +193,7 @@
             break;
             
         case WXErrCodeCommon:
-            message = @"普通错误类型";
+            message = @"普通错误";
             break;
             
         case WXErrCodeUserCancel:
@@ -200,6 +211,9 @@
         case WXErrCodeUnsupport:
             message = @"微信不支持";
             break;
+
+        default:
+            message = @"未知错误";
     }
     
     if (success)
@@ -317,6 +331,12 @@
     {
         data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     }
+    else if ([url hasPrefix:@"data:image"])
+    {
+        // a base 64 string
+        NSURL *base64URL = [NSURL URLWithString:url];
+        data = [NSData dataWithContentsOfURL:base64URL];
+    }
     else if ([url rangeOfString:@"temp:"].length != 0)
     {
         url =  [NSTemporaryDirectory() stringByAppendingPathComponent:[url componentsSeparatedByString:@"temp:"][1]];
@@ -335,7 +355,35 @@
 - (UIImage *)getUIImageFromURL:(NSString *)url
 {
     NSData *data = [self getNSDataFromURL:url];
-    return [UIImage imageWithData:data];
+    UIImage *image = [UIImage imageWithData:data];
+    
+    if (image.size.width > MAX_THUMBNAIL_SIZE || image.size.height > MAX_THUMBNAIL_SIZE)
+    {
+        CGFloat width = 0;
+        CGFloat height = 0;
+        
+        // calculate size
+        if (image.size.width > image.size.height)
+        {
+            width = MAX_THUMBNAIL_SIZE;
+            height = width * image.size.height / image.size.width;
+        }
+        else
+        {
+            height = MAX_THUMBNAIL_SIZE;
+            width = height * image.size.width / image.size.height;
+        }
+        
+        // scale it
+        UIGraphicsBeginImageContext(CGSizeMake(width, height));
+        [image drawInRect:CGRectMake(0, 0, width, height)];
+        UIImage *scaled = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return scaled;
+    }
+    
+    return image;
 }
 
 - (void)successWithCallbackID:(NSString *)callbackID

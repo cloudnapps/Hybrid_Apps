@@ -12,7 +12,7 @@ See [cordova-plugin-wechat-example](https://github.com/xu-li/cordova-plugin-wech
 
 # Install
 
-1. ```cordova plugin add https://github.com/xu-li/cordova-plugin-wechat  --variable wechatappid=YOUR_WECHAT_APPID```, or using [plugman](https://npmjs.org/package/plugman), [phonegap](https://npmjs.org/package/phonegap), [ionic](http://ionicframework.com/)
+1. ```cordova plugin add cordova-plugin-wechat  --variable wechatappid=YOUR_WECHAT_APPID```, or using [plugman](https://npmjs.org/package/plugman), [phonegap](https://npmjs.org/package/phonegap), [ionic](http://ionicframework.com/)
 
 2. ```cordova build ios``` or ```cordova build android```
 
@@ -31,8 +31,9 @@ Wechat.isInstalled(function (installed) {
 
 ## Authenticate using Wechat
 ```Javascript
-var scope = "snsapi_userinfo";
-Wechat.auth(scope, function (response) {
+var scope = "snsapi_userinfo",
+    state = "_" + (+new Date());
+Wechat.auth(scope, state, function (response) {
     // you may use response.code to get the access token.
     alert(JSON.stringify(response));
 }, function (reason) {
@@ -78,7 +79,7 @@ Wechat.share({
     message: {
         ...
         media: {
-            type: Wechat.Type.LINK,
+            type: Wechat.Type.WEBPAGE,
             webpageUrl: "http://tech.qq.com/zt2012/tmtdecode/252.htm"
         }
     },
@@ -94,9 +95,9 @@ Wechat.share({
 ```Javascript
 // See https://github.com/xu-li/cordova-plugin-wechat-example/blob/master/server/payment_demo.php for php demo
 var params = {
-    mch_id: '10000100', // merchant id
-    prepay_id: 'wx201411101639507cbf6ffd8b0779950874', // prepay id
-    nonce: '1add1a30ac87aa2db72f57a2375d8fec', // nonce
+    partnerid: '10000100', // merchant id
+    prepayid: 'wx201411101639507cbf6ffd8b0779950874', // prepay id
+    noncestr: '1add1a30ac87aa2db72f57a2375d8fec', // nonce
     timestamp: '1439531364', // timestamp
     sign: '0CB01533B8C1EF103065174F50BCA001', // signed string
 };
@@ -110,27 +111,7 @@ Wechat.sendPaymentRequest(params, function () {
 
 # FAQ
 
-Q: After sharing in wechat, it will not get back to my app.
-
-A: (iOS)Please make sure the URL Type is correct. (Android) Your [app signature](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419318060&token=&lang=zh_CN) is correct.
-
-Q: Rejected by Apple app store claiming we should provide ways to allow people to authenticate/login with WeChat for people without installing the WeChat app.
-
-A: You can hide the Wechat Login button if the wechat app is not installed.
-
-```Javascript
-$scope.showWechatLogin = false;
-if (typeof Wechat !== 'undefined') {
-    Wechat.isInstalled(function (installed) {
-        if (installed) {
-             // Only show wechat login button if the Wechat App was detected
-            $scope.showWechatLogin = true;
-        }
-    }, function (reason) {
-    });
-}
-```
-(Thanks @winsonchan and @Jeff-Tian)
+See [FAQ](https://github.com/xu-li/cordova-plugin-wechat/wiki/FAQ).
 
 # TODO
 
@@ -140,7 +121,7 @@ if (typeof Wechat !== 'undefined') {
 
 3. ~~Add other media types, including music etc.~~
 
-4. Other APIs
+4. ~~Other APIs~~
 
 5. ~~Android Version update~~
 
