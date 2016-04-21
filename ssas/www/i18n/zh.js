@@ -82,6 +82,8 @@ var translations_zh = {
   gold_title: '我的金币',
   gold_list: '金币记录',
   coupon_title: '我的优惠券',
+  invitation_title: '邀请好友,立刻赚钱',
+  invitation_button: '邀请好友,立刻赚钱',
 
   //setting
   settng_title: '个人资料',

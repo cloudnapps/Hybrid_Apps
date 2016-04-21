@@ -329,6 +329,16 @@ angular.module('starter')
           }
         }
       })
+      // 优惠券管理
+      .state('invitation', {
+        url: '/invitation',
+        views: {
+          'main-view': {
+            templateUrl: 'templates/member/invitation-index.html',
+            controller: 'InvitationCtrl'
+          }
+        }
+      })
       // 订单管理
       .state('orders', {
         url: '/orders?type',

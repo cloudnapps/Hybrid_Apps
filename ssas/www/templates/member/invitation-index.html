@@ -1,0 +1,45 @@
+<ion-view view-title="{{'invitation_title'|translate}}" hide-tabs="true">
+  <ion-nav-buttons side="left">
+    <back-button></back-button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate" ng-repeat="item in items"
+                type="item-text-wrap"
+                style="border-bottom: 1px dashed #c8c8c8;border-top: none;padding: 5px 10px;margin: 0;">
+        <h2 style="margin:0 0 5px 90px;color: #4a4a4a;font-size: 20px;">{{item.name}}</h2>
+
+        <div class="row" style="margin:0;padding: 0;">
+          <div style="width: 80px;">
+            <img style="width: 100%;" src="img/coupon.jpg">
+          </div>
+          <div class="col col-center" style="padding: 0 0 0 10px;line-height: 39px;">
+            <h3 style="color: #989898;line-height: 17px;font-size: 12px;">序列号: {{item.coupon_code}}</h3>
+
+            <h3 style="color: #989898;line-height: 17px;font-size: 12px;margin-bottom: 1px;">状态: {{item.status}}</h3>
+          </div>
+        </div>
+        <h2 style="margin:0 0 0 90px;padding-top: 5px;font-size: 12px;color: #989898;">有效期：{{item.time}}</h2>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll
+      ng-if="hasMore"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+  <ion-footer-bar align-title="center" class="bar-stable" style="padding: 5px 10px 5px 10px;">
+    <div class="button-bar">
+      <button class="button button-positive" style="font-size: 18px;"
+              ng-click="shareToTimeline()">
+        {{'invitation_button'|translate}}shareToTimeline
+      </button>
+    </div>
+    <div class="button-bar">
+      <button class="button button-positive" style="font-size: 18px;"
+              ng-click="shareToFriend()">
+        1{{'invitation_button'|translate}}shareToFriend
+      </button>
+    </div>
+  </ion-footer-bar>
+</ion-view>
