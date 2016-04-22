@@ -123,7 +123,7 @@ var translations_zh = {
   order_payed_failed: '订单支付失败',
 
   //限时折扣优惠商品页
-  activity_title: '优惠商品'
+  activity_title: '优惠商品',
 
   //会员狂欢节
   event_title:'会员狂欢节'
