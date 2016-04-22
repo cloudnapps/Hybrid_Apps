@@ -79,6 +79,7 @@
       };
 
       SellerApi.getSellerList(null, null, null, function (result) {
+         console.log('seller-seller_list.html******' + angular.toJson(result));
         if (result.status === 0) {
           $scope.sellerInfo.items = result.data;
         }
@@ -122,6 +123,7 @@
             };
 
             shopApi.getGallery(query).then(function (result) {
+               console.log('gallery.html******' + angular.toJson(result));
               $scope.goodsInfo = result.data.data;
             });
           };
@@ -324,6 +326,7 @@
 
       var success = function (caller, args) {
         PointApi.addGold(10, '签到送金币', function (result) {
+           console.log('member-add_gold.html******' + angular.toJson(result));
           if (result.status === 0) {
             var msg = '签到成功，恭喜您获得' + result.data.gold_num + '个金币，请到会员中心查看';
             toastService.setToast(msg);
@@ -349,6 +352,7 @@
           });
 
           return request.success(function (result) {
+            console.log('home.html******' + angular.toJson(result));
             console.log('got data:' + result);
             return result;
           });
@@ -374,7 +378,7 @@
           });
 
           return request.success(function (result) {
-            console.log('got data:' + result);
+            console.log('activity-gallery.html******' + angular.toJson(result));
             return result;
           });
         };

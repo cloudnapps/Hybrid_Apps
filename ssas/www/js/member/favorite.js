@@ -12,6 +12,7 @@
 
       $scope.getFavorities = function () {
         FavoriteApi.getFavoriteList($scope.page, $scope.filter, function (result) {
+           console.log('member-favorite.html******' + angular.toJson(result));
           if (result.status === 1) {
             $scope.hasMore = false;
           }
@@ -61,6 +62,7 @@
           if (res) {
             if ($scope.filter === 'sellers') {
               FavoriteApi.deleteSellerFavorite(item.seller_id, function (result) {
+                 console.log('member-del_seller_fav.html******' + angular.toJson(result));
                 if (result.status === 1) {
                   toastService.setToast(result.msg);
                 }
@@ -72,6 +74,7 @@
             }
             else {
               FavoriteApi.deleteGoodsFavorite(item.goods_id, function (result) {
+                 console.log('member-ajax_del_fav.html******' + angular.toJson(result));
                 if (result.status === 1) {
                   toastService.setToast(result.msg);
                 }

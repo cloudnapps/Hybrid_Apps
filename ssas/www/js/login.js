@@ -51,6 +51,7 @@
       $scope.login = function () {
         $scope.clicked = true;
         LoginApi.loginUser($scope.userInfo.name, $scope.userInfo.password, function (result) {
+           console.log('passport-login.html******' + angular.toJson(result));
           $scope.clicked = false;
           if (result.status === 1) {
             toastService.setToast(result.msg);
@@ -76,6 +77,7 @@
           }
         }, 1000);
         LoginApi.sendCode($scope.userInfo.mobile, 'signup', function (result) {
+           console.log('passport-send_code.html******' + angular.toJson(result));
           if (result.status === 1 && result.msg === '请填写正确的手机号码') {
             $scope.reSendCodeTime = 0;
           }
@@ -86,6 +88,7 @@
 
       $scope.checkUser = function () {
         LoginApi.validateUser($scope.userInfo.mobile, function (result) {
+           console.log('passport-register_valide.html******' + angular.toJson(result));
           var alertPopup = $ionicPopup.alert({
             title: '用户名检查',
             template: result.msg,
@@ -104,6 +107,7 @@
         $scope.clicked = true;
         LoginApi.submitUser($scope.userInfo.mobile, $scope.userInfo.password,
           $scope.userInfo.mobile, $scope.userInfo.signCode, function (result) {
+             console.log('passport-create.html******' + angular.toJson(result));
             $scope.clicked = false;
             if (result.status === 1) {
               toastService.setToast(result.msg);
@@ -122,6 +126,7 @@
             $scope.clicked = false;
             LoginApi.getOpenId(cb_success.code, function (result) {
               LoginApi.loginByWechatId(result.openid, result.access_token, result.unionid, function (result) {
+                 console.log('passport-wx_login.html******' + angular.toJson(result));
                 if (result.status === 1) {
                   toastService.setToast(result.msg);
                 }
@@ -190,6 +195,7 @@
         }, 1000);
         LoginApi
           .sendCode($scope.userInfo.mobile, 'lost', function (data) {
+             console.log('passport-send_code.html******' + angular.toJson(data));
             if (data.status === 1 && data.msg === '请填写正确的手机号码') {
               $scope.reSendCodeTime = 0;
             }
@@ -206,6 +212,7 @@
         }
         LoginApi
           .mobileValide($scope.userInfo.mobile, $scope.userInfo.mobile, $scope.userInfo.signCode, function (data) {
+             console.log('passport-mobile_valide.html******' + angular.toJson(data));
             if (data && data.status === 0) {
               $scope.verified = true;
             }
@@ -219,6 +226,7 @@
         LoginApi
           .lostPasswd($scope.userInfo.mobile, $scope.userInfo.password, $scope.userInfo.confirmPwd, function (data) {
             // 密码修改成功
+            console.log('passport-lost_passwd.html******' + angular.toJson(data));
             if (data && data.status === 0) {
               toastService.setToast(data && data.msg || '修改成功');
               $scope.back();

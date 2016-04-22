@@ -11,6 +11,7 @@
       $scope.getCoupons = function () {
         $ionicLoading.show();
         CouponApi.getCouponList($scope.page, function (result) {
+           console.log('member-coupon_list.html******'+ angular.toJson(result));
           $ionicLoading.hide();
 
           if (result.status === 1) {

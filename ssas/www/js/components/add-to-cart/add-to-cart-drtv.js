@@ -15,6 +15,7 @@ angular
           userService.checkLogin({
             success: function () {
               FavoriteApi.addGoodsFavorite([$scope.product.goods_id], function (data) {
+                 console.log('member-add_favorite.html******' + angular.toJson(data));
                 if (data.status === 0) {
                   toastService.setToast(data.msg);
                   $scope.product.good_has_fav = true;

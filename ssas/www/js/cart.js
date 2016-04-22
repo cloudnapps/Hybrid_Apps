@@ -26,6 +26,7 @@ angular.module('cart', ['components'])
     $scope.load = function () {
       $ionicLoading.show();
       cartApi.getCart().success(function (responseData) {
+         console.log("cart.html******" + angular.toJson(responseData));
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
@@ -58,6 +59,7 @@ angular.module('cart', ['components'])
     $scope.toggleGoods = function (goods) {
       $ionicLoading.show();
       cartApi.nocheck(goods).success(function (responseData) {
+         console.log('cart-nocheck.html******' + angular.toJson(responseData));
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
@@ -102,6 +104,7 @@ angular.module('cart', ['components'])
     $scope.updateGoodQuantity = function (good) {
       $ionicLoading.show();
       cartApi.updateCart(good).success(function (responseData) {
+         console.log('cart-updateCart.html******' + angular.toJson(responseData));
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
@@ -117,6 +120,7 @@ angular.module('cart', ['components'])
     $scope.removeGoods = function (goods) {
       $ionicLoading.show();
       cartApi.remove(goods).success(function (responseData) {
+         console.log('cart-remove_cart.html******' + angular.toJson(responseData));
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
@@ -188,6 +192,7 @@ angular.module('cart', ['components'])
     $scope.checkout = function () {
       $ionicLoading.show();
       cartApi.checkout($scope.cart, $stateParams.nature).success(function (responseData) {
+         console.log('cart-checkout.html******' + angular.toJson(responseData));
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
@@ -209,6 +214,7 @@ angular.module('cart', ['components'])
 
       $ionicLoading.show();
       cartApi.checkout($scope.cart, $stateParams.nature).success(function (responseData) {
+         console.log('cart-checkout.html******' + angular.toJson(responseData));
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
@@ -277,6 +283,7 @@ angular.module('cart', ['components'])
       $ionicLoading.show();
       cartApi.createOrder($scope.cart)
         .then(function (response) {
+           console.log('order-create.html******' + angular.toJson(responseData));
           if (response.data.status !== 0) {
             $ionicPopup.alert({
               title: '未能创建订单',
@@ -292,6 +299,7 @@ angular.module('cart', ['components'])
 
           return orderApi.getPayInfo(order)
             .then(function (response) {
+               console.log('paycenter-dopayment.html******' + angular.toJson(response));
               console.log(order, order.pay_app_id);
               if (order.pay_app_id === 'micbcpay' || order.pay_app_id === 'pospay') {
                 console.log(response);
@@ -386,6 +394,7 @@ angular.module('cart', ['components'])
           };
 
           shopApi.getGallery(query).then(function (result) {
+             console.log('gallery.html******' + angular.toJson(result));
             $scope.goodsInfo = result.data.data;
           });
         };

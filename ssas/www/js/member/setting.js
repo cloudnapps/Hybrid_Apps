@@ -32,6 +32,7 @@
                 setDays();
 
                 SettingApi.getMemberSetting(function (result) {
+                   console.log('member-setting.html******' + angular.toJson(result));
                     $scope.item = result.data;
                     //如果有昵称，login_name 就会返回昵称，没昵称就返回用户名或者手机号
                     if($scope.item.name.trim()==""){
@@ -177,7 +178,7 @@
                 }
                 else {
                     SettingApi.modifyMemberSetting($scope.item, function (result) {
-                        console.log(result);
+                        console.log('member-save_setting.html******' + angular.toJson(result));
                     });
                 }
             };
@@ -215,6 +216,7 @@
                 };
 
                 SettingApi.modifyMemberPassword(data, function (result) {
+                   console.log('member-security.html******' + angular.toJson(result));
                     var alertPopup = $ionicPopup.alert({
                         title: '修改密码',
                         template: result.msg,
@@ -242,6 +244,7 @@
 
             $scope.getIdCards = function () {
                 SettingApi.getIdCardList($scope.page, function (result) {
+                   console.log('member-idcard_list.html******' + angular.toJson(result));
                     if (result.status === 1) {
                         $scope.hasMore = false;
                     }
@@ -295,6 +298,7 @@
                 }
 
                 SettingApi.addIdCard(data, function (result) {
+                   console.log('member-add_idcart.html******' + angular.toJson(result));
                     $scope.clicked = false;
 
                     toastService.setToast(result.msg);

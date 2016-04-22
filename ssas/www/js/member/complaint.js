@@ -4,6 +4,7 @@
       $scope.complaintInfo = {};
 
       OrderApi.getOrderDetail($stateParams.orderId, function (result) {
+         console.log('member-orderdetail.html******' + angular.toJson(result));
         $scope.orderInfo = result.data;
       });
 
@@ -21,6 +22,7 @@
         ComplaintApi.addComplaintRequest(oId, $scope.complaintInfo.title,
           $scope.complaintInfo.contact, $scope.complaintInfo.content,
           function (result) {
+             console.log('member-complaints.html******' + angular.toJson(result));
             $scope.clicked = false;
             toastService.setToast(result.msg);
 
@@ -33,6 +35,7 @@
 
     .controller('ComplaintDetailCtrl', function ($scope, $stateParams, ComplaintApi) {
       ComplaintApi.getComplaintDetail($stateParams.oId, function (result) {
+         console.log('member-complaints_index.html******' + angular.toJson(result));
         if (result.status === 0) {
           $scope.item = result.data;
         }
@@ -79,7 +82,7 @@
       };
 
       var getComplaintList = function (page, filter, callback) {
-        var url = apiEndpoint.url + '/member-complaints_list.html  ';
+        var url = apiEndpoint.url + '/member-complaints_list.html';
         var data = userService.getMember();
 
         if (page) {

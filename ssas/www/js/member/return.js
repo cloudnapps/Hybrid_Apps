@@ -6,6 +6,7 @@
       $scope.returnInfo.product = {};
 
       ReturnApi.getReturnIndex($stateParams.orderId, function (result) {
+         console.log('member-return_index.html******' + angular.toJson(result));
         if (result.status === 0) {
           $scope.orderInfo = result.data;
 
@@ -45,6 +46,7 @@
         ReturnApi.addReturnRequest($scope.orderInfo.order_id, $scope.returnInfo.type,
           $scope.returnInfo.title, $scope.returnInfo.content, $scope.returnInfo.product,
           function (result) {
+             console.log('member-return_save.html******' + angular.toJson(result));
             $scope.clicked = false;
             toastService.setToast(result.msg);
 
@@ -57,6 +59,7 @@
 
     .controller('ReturnDetailCtrl', function ($scope, $stateParams, ReturnApi) {
       ReturnApi.getReturnDetail($stateParams.returnId, function (result) {
+         console.log('member-return_info.html******'+ angular.toJson(result));
         if (result.status === 0) {
           $scope.item = result.data;
         }

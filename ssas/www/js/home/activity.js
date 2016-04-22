@@ -62,7 +62,7 @@
           });
 
           return request.success(function (result) {
-            console.log('got data:' + result);
+            console.log('activity-gallery.html******' + angular.toJson(result));
             console.log(result);
             return result;
           });

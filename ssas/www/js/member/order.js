@@ -14,6 +14,7 @@
       $scope.getOrders = function () {
         $ionicLoading.show();
         OrderApi.getOrderList($scope.page, $scope.filter, function (result) {
+           console.log('member-orders.html******' + angular.toJson(result));
           if (result.status === 1) {
             $scope.hasMore = false;
           }
@@ -93,6 +94,7 @@
               type: 'button-positive',
               onTap: function () {
                 OrderApi.deleteOrder(item.order_id, function (result) {
+                   console.log('member-cancelorder.html******' + angular.toJson(result));
                   if (result.status === 1) {
                     toastService.setToast(result.msg);
                   }
@@ -118,6 +120,7 @@
               type: 'button-positive',
               onTap: function () {
                 OrderApi.receiveOrder(item.order_id, function (result) {
+                   console.log('member-orderReceives.html******' + angular.toJson(result));
                   if (result.status === 1) {
                     toastService.setToast(result.msg);
                   }
@@ -146,6 +149,7 @@
       $scope.getOrder = function () {
         $ionicLoading.show();
         OrderApi.getOrderDetail($stateParams.orderId, function (result) {
+           console.log('member-orderdetail.html******' + angular.toJson(result));
           $scope.item = result.data;
           $ionicLoading.hide();
         });
@@ -166,6 +170,7 @@
               type: 'button-positive',
               onTap: function () {
                 OrderApi.deleteOrder($scope.item.order_title.order_id, function (result) {
+                   console.log('member-cancelorder.html******' + angular.toJson(result));
                   if (result.status === 1) {
                     toastService.setToast(result.msg);
                   }
@@ -191,6 +196,7 @@
               type: 'button-positive',
               onTap: function () {
                 OrderApi.receiveOrder($scope.item.order_title.order_id, function (result) {
+                   console.log('member-orderReceives.html******' + angular.toJson(result));
                   if (result.status === 1) {
                     toastService.setToast(result.msg);
                   }
@@ -220,6 +226,7 @@
       $scope.orderId = $stateParams.orderId;
 
       OrderApi.getPayInfo($scope.orderId, function (result) {
+         console.log('member-get_payinfo.html******' + angular.toJson(result));
         if (result.status === 0 && result.data) {
           $scope.cart.payments = result.data.payments;
         }
@@ -235,6 +242,7 @@
 
         orderApi.getPayInfo(order)
           .then(function (response) {
+             console.log('paycenter-dopayment.html******' + angular.toJson(response));
             console.log(order, order.pay_app_id);
             if (order.pay_app_id === 'micbcpay' || order.pay_app_id === 'pospay') {
               console.log(response);
@@ -268,10 +276,12 @@
 
     .controller('OrderTrackCtrl', function ($scope, $stateParams, OrderApi) {
       OrderApi.getOrderDetail($stateParams.orderId, function (result) {
+         console.log('member-orderdetail.html******' + angular.toJson(result));
         $scope.orderInfo = result.data;
       });
 
       OrderApi.getOrderTrack($stateParams.orderId, function (result) {
+         console.log('member-getOrderTrack.html******' + angular.toJson(result));
         $scope.items = result.data;
       });
     })
@@ -287,6 +297,7 @@
       $scope.commentInfo.seller_point = [];
 
       OrderApi.getMemberRate($stateParams.orderId, function (result) {
+         console.log('member-member_rate.html******' + angular.toJson(result));
         if (result.status === 0) {
           $scope.item = result.data;
           $scope.commentInfo.order_id = $stateParams.orderId;
@@ -333,6 +344,7 @@
         $scope.clicked = true;
 
         OrderApi.saveMemberRate($scope.commentInfo, function (result) {
+          console.log('member-member_rate.html******' + angular.toJson(result));
           $scope.clicked = false;
 
           toastService.setToast(result.msg);
@@ -356,6 +368,7 @@
       $scope.getReturnOrders = function () {
         $ionicLoading.show();
         OrderApi.getOrderList($scope.page, $scope.filter, function (result) {
+           console.log('member-orders.html******' + angular.toJson(result));
           if (result.status === 1) {
             $scope.hasMore = false;
           }
@@ -392,6 +405,7 @@
       $scope.getComplaintOrders = function () {
         $ionicLoading.show();
         OrderApi.getOrderList($scope.page, $scope.filter, function (result) {
+           console.log('member-orders.html******' + angular.toJson(result));
           if (result.status === 1) {
             $scope.hasMore = false;
           }

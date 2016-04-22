@@ -13,6 +13,7 @@
 
       $scope.getSellers = function () {
         SellerApi.getSellerList($scope.page, null, $scope.filter, function (result) {
+           console.log('seller-seller_list.html******' + angular.toJson(result));
           if (result.status === 1) {
             $scope.hasMore = false;
           }
@@ -83,6 +84,7 @@
 
       $scope.getSeller = function () {
         SellerApi.getSellerDetail($scope.sellerId, function (result) {
+           console.log('seller.html******' + angular.toJson(result));
           $scope.item = result.data;
           $scope.item.title = $scope.item.once.name;
           $scope.item.favTitle = $scope.item.once.seller_has_fav ? '已收藏' : '收藏店铺';
@@ -110,6 +112,7 @@
           query.orderBy = $scope.orderBy;
         }
         shopApi.getGallery(query).then(function (result) {
+           console.log('gallery.html******' + angular.toJson(result));
           if (result.data.data !== undefined && result.data.data.length > 0) {
             for (var i = 0; i < result.data.data.length; i++) {
               $scope.allProducts.push(result.data.data[i]);
@@ -139,6 +142,7 @@
 
       var success = function (caller, args) {
         FavoriteApi.addSellerFavorite($scope.sellerId, function (data) {
+           console.log('member-seller_fav.html******'+ angular.toJson(data));
           if (data) {
             toastService.setToast(data.msg);
             $scope.item.once.seller_has_fav = true;

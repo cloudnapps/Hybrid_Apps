@@ -20,6 +20,7 @@ angular.module('starter')
           if (!result.cancelled && result.text !== undefined && result.text !== null) {
             shopApi.getProductIdByBarcode(result.text).success(
               function (response) {
+                 console.log('product-get_productId.html******' + angular.toJson(response));
                 var result = response.data;
                 var status = response.status;
                 if (status === 0) {

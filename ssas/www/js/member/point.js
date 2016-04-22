@@ -16,6 +16,7 @@
 
       $scope.getPointInfo = function () {
         PointApi.getPointInfo($scope.pointInfo.page, 'point', function (result) {
+           console.log('member-point_log.html******' + angular.toJson(result));
           if (result.status === 1) {
             $scope.pointInfo.hasMore = false;
           }
@@ -59,6 +60,7 @@
 
       $scope.getPointInfo = function () {
         PointApi.getPointInfo($scope.goldInfo.page, 'gold', function (result) {
+           console.log('member-point_log.html******' + angular.toJson(result));
           if (result.status === 1) {
             $scope.goldInfo.hasMore = false;
           }

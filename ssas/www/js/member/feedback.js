@@ -12,6 +12,7 @@
 
       $scope.getReturnList = function () {
         ReturnApi.getReturnList($scope.page, $scope.filter, function (result) {
+           console.log('member-return_list.html******'+ angular.toJson(result));
           if (result.status === 1) {
             $scope.hasMore = false;
           }
@@ -26,6 +27,7 @@
 
       $scope.getComplaints = function () {
         ComplaintApi.getComplaintList($scope.page, $scope.filter, function (result) {
+           console.log('member-complaints_list.html******' + angular.toJson(result));
           if (result.status === 1) {
             $scope.hasMore = false;
           }

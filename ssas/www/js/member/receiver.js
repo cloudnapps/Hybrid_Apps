@@ -10,6 +10,7 @@
       $scope.getReceivers = function () {
         $ionicLoading.show();
         ReceiverApi.getReceiverList($scope.page, function (result) {
+           console.log('member-receiver.html******' + angular.toJson(result));
           if (result.data && result.data.addrlist) {
             $scope.items = $scope.items.concat(result.data.addrlist);
           }
@@ -37,6 +38,7 @@
         confirmPopup.then(function (res) {
           if (res) {
             ReceiverApi.deleteReceiver(item.addr_id, function (result) {
+               console.log('member-del_receiver.html******' + angular.toJson(result));
               if (result.status === 1) {
                 toastService.setToast(result.msg);
               }
@@ -67,6 +69,7 @@
 
       $scope.loadCardList = function () {
         ReceiverApi.getReceiverList(1, function (result) {
+           console.log('member-receiver.html******' + angular.toJson(result));
           if (result.data && result.data.cardlist) {
             $scope.cardList = result.data.cardlist;
           }
@@ -124,6 +127,7 @@
         };
 
         ReceiverApi.addReceiver(addrInfo, function (result) {
+           console.log('member-save_rec.html******' + angular.toJson(result));
           $scope.clicked = false;
 
           toastService.setToast(result.msg);
@@ -157,6 +161,7 @@
 
       var getRegionInfo = function (callback) {
         RegionApi.initRegion('02f09323e533c375e2270e0dbf5736ae', function (result) {
+           console.log('init-region.html******' + angular.toJson(result));
           $http.get(result.data.link)
             .success(function (data) {
               callback(data);

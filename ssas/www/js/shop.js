@@ -8,6 +8,7 @@
     $scope.subCategories = [];
 
     shopApi.getCategories().then(function (result) {
+      console.log('gallery-cat_list.html******' + angular.toJson(result));
       $scope.categories = [];
       $scope.categoryObj = result.data.data;
       var firstLvName;
@@ -80,6 +81,7 @@
           query.orderBy = $scope.orderBy;
         }
         shopApi.getGallery(query).then(function (result) {
+           console.log('gallery.html******' + angular.toJson(result));
           if (result.data.data !== undefined && result.data.data.length > 0) {
             for (var i = 0; i < result.data.data.length; i++) {
               $scope.products.push(result.data.data[i]);
@@ -269,6 +271,7 @@
         shopApi
           .getGalleryFilter($scope.filter.cat_id)
           .then(function (data) {
+             console.log('gallery-filter.html******' + angular.toJson(data));
             $scope.galleryFilter = (data && data.data && data.data.data) || [];
             console.log($scope.galleryFilter);
           })
@@ -327,6 +330,7 @@
         };
 
         shopApi.getProduct($scope.productId).success(function (responseData) {
+           console.log('product.html******' + angular.toJson(responseData));
           if (responseData.status === 0) {
             $scope.point = responseData.data.point || {};
             $scope.product = responseData.data.product;
@@ -341,9 +345,6 @@
             $scope.$on('$destroy', function () {
               $interval.cancel(promise);
             });
-
-            console.log('getProduct', responseData);
-            console.log(angular.toJson(responseData));
           }
 
           $scope.hasMore = true;
@@ -355,8 +356,8 @@
           shopApi
             .getProductIntro(goodsId)
             .success(function (result) {
+               console.log('product-intro.html******' + angular.toJson(result));
               $scope.html = result && result.data && result.data.html || '';
-              console.log(angular.toJson(result));
             })
             .error(function (e) {
               $scope.html = '';
@@ -434,9 +435,9 @@
           shopApi
             .getProductGoodsSpec(productId)
             .success(function (responseData) {
+               console.log('product-goods_spec.html******' + angular.toJson(responseData));
               $ionicLoading.hide();
               $scope.goodsSpec = responseData && responseData.data || {};
-              console.log(angular.toJson(responseData));
               // // 非 选择规格框中的数据, 即商品详情页的数据
               // if (!isSpecState) {
               //   $scope.specs = $scope.goodsSpec.spec || [];
@@ -458,6 +459,7 @@
               cartApi
                 .addToCart(product)
                 .then(function (data) {
+                   console.log("cart-addToCart.html******" + angular.toJson(data));
                   if (data && data.data && data.data.status === 0) {
                     $scope.hideModal();
                     return toastService.setToast(data.data.msg);
@@ -486,6 +488,7 @@
                 .then(function (data) {
                   if (data && data.data && data.data.status === 1) {
                     toastService.setToast(data.data.msg)
+                    console.log("cart-addToCart.html******" + angular.toJson(data));
                   }
                   else if (data && data.data && data.data.status === 0) {
                     $scope.hideModal();
@@ -517,7 +520,7 @@
             $scope.product = responseData.data.product;
             $scope.slideimgs = $scope.product.urls;
 
-            console.log('getProduct', responseData);
+            console.log('product.html******', angular.toJson(responseData));
           }
         });
 
@@ -538,7 +541,7 @@
         shopApi
           .getProductComment(goodsId, $scope.page)
           .success(function (data) {
-            console.log(data);
+            console.log('product-comment.html******' + angular.toJson(data));
             var comments = data && data.data || [];
             if (!comments.length) {
               $scope.hasMore = false;
