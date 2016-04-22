@@ -1,0 +1,146 @@
+<ion-view view-title="{{'event_title'|translate}}" hide-tabs="true">
+  <ion-header-bar id="ionHeader">
+    <div class="bar bar-subheader" style="background-color: #F05C5C;">
+      <div class="row" style="padding: 0 0px;width:100%;height: 40px;line-height: 40px;">
+          <span class="typeSpan" style="width: 95%;overflow: auto;">
+            <ul class="typeUl" style="">
+              <li id='typeLi-1' name="typeLi" style="width:150px;display:table-cell;padding-left:26px;padding-right:26px;" ng-click="doJumpToTop()">
+                <span id='typeLiSpan-1' class="typeLiSpan" style="background-color:#FFFFFF">全部</span>
+              </li>
+              <li id='typeLi{{$index}}' name="typeLi" style="width:150px;display:table-cell;padding-left:26px;padding-right:26px;"
+                  ng-repeat="activityInfo in activityInfos"
+                  ng-click="doJump('anchor{{$index}}')">
+                <span id='typeLiSpan{{$index}}' class="typeLiSpan" style="padding: 5px;">{{activityInfo.cat_name}}</span>
+              </li>
+            </ul>
+          </span>
+          <span>
+            <a style="text-align: center" ng-click="openBtns2()">▲</a>
+          </span>
+      </div>
+    </div>
+  </ion-header-bar>
+  <ion-nav-buttons><back-button></back-button></ion-nav-buttons>
+  <!-- discovery -->
+  <ion-nav-buttons side="right">
+    <div class="row row-center">
+      <button class="col button button-clear" ng-click="openBtns1()" style="font-size: 14px;">・・・</button>
+    </div>
+  </ion-nav-buttons>
+  <ion-content id="anchor-1" class="padding scroll-content ionic-scroll has-subheader" delegate-handle="contentScroll" on-scroll="onScroll()">
+    <div class="bigBanner">
+      <img src="http://img.ctfhoko.com/public/images/ab/13/a2/bdb09cd1f345954890380fcc24cb0fb0559da4d2.jpg" alt="" style="width: 100%;border: 0;vertical-align: top;">
+    </div>
+
+    <div ng-repeat="activityInfo in activityInfos" class="list-prdt-cont">
+      <h5 class="anchor" id="anchor{{$index}}" name="anchor" style="background: #ff8eb5">{{activityInfo.cat_explanation}}</h5>
+      <div class="row" style="padding: 0;" ng-repeat="product in activityInfo.product_info" ng-if="$index % 2 === 0">
+        <div class="col col-50 col-center pad-5" ng-if="$index < activityInfo.product_info.length">
+          <div class="new-prdt">
+            <a ui-sref="product({productId:activityInfo.product_info[$index].product_id})">
+              <div style="height:150px;position: relative;">
+                <img class="prdt-img" ng-src="{{activityInfo.product_info[$index].image}}">
+                <img ng-src="img/sellout.jpg"
+                     style="position: absolute;z-index: 11;bottom: 10px;right: 10px; width: 75px; height: 75px"
+                     ng-if="activityInfo.product_info[$index].store === '0'">
+              </div>
+
+              <div class="bg-color">
+                <div class="prdt-descb">{{activityInfo.product_info[$index].name}}</div>
+                <div class="row" style="padding: 5px 0;">
+                  <!--<span class="col pri-pri" style="padding: 0;">{{activityInfo.product_info[$index].activity_price | currency: '￥'}}</span>-->
+                  <span class="col pri-pri" style="padding: 0;">{{activityInfo.product_info[$index].price | currency: '￥'}}</span>
+                  <img class="sell-type" ng-if="activityInfo.product_info[$index].nature !== 'normal'"
+                       ng-src="img/{{activityInfo.product_info[$index].nature}}.png">
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col col-50 col-center pad-5" ng-if="$index+1 < activityInfo.product_info.length">
+          <div class="new-prdt">
+            <a ui-sref="product({productId:activityInfo.product_info[$index+1].product_id})">
+
+              <div style="height:150px;position: relative">
+                <img class="prdt-img" ng-src="{{activityInfo.product_info[$index+1].image}}">
+                <img ng-src="img/sellout.jpg"
+                     style="position: absolute;z-index: 11;bottom: 10px;right: 10px; width: 75px; height: 75px"
+                     ng-if="activityInfo.product_info[$index+1].store === '0'">
+              </div>
+              <!-- <div style="width: 150px;height: 150px;padding: 0;background-color: #fff;overflow: hidden;background-image: url({{activityInfo.product_info[$index+1].image}});background-size: 100% auto;background-repeat: no-repeat;background-position: 0 50%;"></div> -->
+
+              <div class="bg-color">
+                <div class="prdt-descb">{{activityInfo.product_info[$index+1].name}}</div>
+                <div class="row" style="padding: 5px 0;">
+                  <!--<span class="col pri-pri" style="padding: 0;">{{activityInfo.product_info[$index+1].activity_price | currency: '￥'}}</span>-->
+                  <span class="col pri-pri" style="padding: 0;">{{activityInfo.product_info[$index+1].price | currency: '￥'}}</span>
+                  <img class="sell-type" ng-if="activityInfo.product_info[$index+1].nature !== 'normal'"
+                       ng-src="img/{{activityInfo.product_info[$index+1].nature}}.png">
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<ion-infinite-scroll-->
+      <!--ng-if="hasMore"-->
+      <!--on-infinite="loadMore()"-->
+      <!--distance="5%">-->
+    <!--</ion-infinite-scroll>-->
+
+  </ion-content>
+  <div class="row find-nav-bar has-header" ng-show="showBtns1">
+    <div class="col col-20 col-center find-item" ng-click="showMap()">
+      <a>
+        <img src="img/home/icon1.png"/>
+        <span>AAA1</span>
+      </a>
+    </div>
+    <div class="col col-20 col-center find-item"
+         ui-sref="signin">
+      <a>
+        <img src="img/home/icon2.png"/>
+        <span>BBB1</span>
+      </a>
+    </div>
+    <div class="col col-20 col-center find-item" ng-click="shake()">
+      <a>
+        <img src="img/home/icon3.png"/>
+        <span>CCC1</span>
+      </a>
+    </div>
+    <div class="col col-20 col-center find-item" ng-click="loginPortal()">
+      <a>
+        <img src="img/home/icon4.png"/>
+        <span>DDD1</span>
+      </a>
+    </div>
+    <div class="col col-20 col-center find-item" ng-click="openWeb()">
+      <a>
+        <img src="img/home/icon5.png"/>
+        <span>EEE1</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="row find-nav-bar has-header" ng-show="showBtns2" style="background-color: #F05C5C;">
+    <div class="row" style="padding: 0 0px;width:100%;line-height: 40px;">
+      <span style="width:95%;">
+        <ul style="width:100%;text-align: center;">
+          <il id='typeLi2-1' name="typeLi2" style="width:25%;float:left;" ng-click="doJumpToTop()">
+            <span id='typeLi2Span-1' class="typeLi2Span" style="background-color:#FFFFFF">全部</span>
+          </il>
+          <il id='typeLi2{{$index}}' name="typeLi2" style="width:25%;float:left;" ng-repeat="activityInfo in activityInfos" ng-click="doJump('anchor{{$index}}')">
+            <span id='typeLi2Span{{$index}}' class="typeLi2Span" style="padding: 5px;">{{activityInfo.cat_name}}</span>
+          </il>
+        </ul>
+      </span>
+      <span>
+        <a style="text-align: center" ng-click="openBtns2()">▼</a>
+      </span>
+    </div>
+  </div>
+</ion-view>

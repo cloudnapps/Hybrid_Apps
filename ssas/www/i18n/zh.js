@@ -124,4 +124,7 @@ var translations_zh = {
 
   //限时折扣优惠商品页
   activity_title: '优惠商品'
+
+  //会员狂欢节
+  event_title:'会员狂欢节'
 };

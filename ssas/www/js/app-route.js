@@ -94,6 +94,17 @@ angular.module('starter')
           }
         }
       })
+      // 会员狂欢节
+      .state('event', {
+        url: '/event/:actId',
+        cache: true,
+        views: {
+          'main-view': {
+            templateUrl: 'templates/home/event.html',
+            controller: 'EventController'
+          }
+        }
+      })
       // 商品详情页
       .state('product', {
         url: '/products/:productId',
