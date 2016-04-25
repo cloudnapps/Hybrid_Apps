@@ -26,7 +26,7 @@ angular.module('cart', ['components'])
     $scope.load = function () {
       $ionicLoading.show();
       cartApi.getCart().success(function (responseData) {
-         console.log("cart.html******" + angular.toJson(responseData));
+         console.log('cart.html******' + angular.toJson(responseData));
         var dataStatus = responseData.status;
         if (dataStatus === 0) {
           $scope.cart = responseData.data;
@@ -283,7 +283,7 @@ angular.module('cart', ['components'])
       $ionicLoading.show();
       cartApi.createOrder($scope.cart)
         .then(function (response) {
-           console.log('order-create.html******' + angular.toJson(responseData));
+           console.log('order-create.html******' + angular.toJson(response));
           if (response.data.status !== 0) {
             $ionicPopup.alert({
               title: '未能创建订单',
