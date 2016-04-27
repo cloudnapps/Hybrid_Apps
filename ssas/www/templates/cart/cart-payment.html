@@ -1,10 +1,10 @@
-<ion-modal-view class="cart-payment">
+<ion-modal-view class="cart-payment" ng-controller="CartPaymentController">
   <ion-header-bar class="bar bar-header bar-positive">
     <h1 class="title">{{'cart_payment'|translate}}</h1>
   </ion-header-bar>
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-left item-icon-right" ng-repeat="payment in cart.payments" ng-click="cart.def_payment = payment; pay(payment);">
+      <ion-item class="item-remove-animate item-icon-left item-icon-right" ng-repeat="payment in cart.payments" ng-click="hideModal();cart.def_payment = payment; pay(payment);">
         <img class="icon" ng-src="{{payment.image}}">
         <h2>{{payment.payment_name}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
